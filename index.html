@@ -25,7 +25,7 @@
   <!-- Custom Files headBegin begin-->
   
   <!-- Custom Files headBegin end-->
-  <link rel="preload" href="/css/style.4092b4df.css" as="style">
+  <link rel="preload" href="/css/style.c5d88ccf.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1649552113628/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1649552113628/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
@@ -834,6 +834,71 @@ button {
   .cover-wrapper.dock .menu {
     background: rgba(255,255,255,0.5);
     backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.cover-wrapper #parallax-window {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.parallax-mirror {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -1829,8 +1894,8 @@ ul.list-v >li>a:hover {
 }
 
   </style>
-  <link rel="stylesheet" href="/css/style.4092b4df.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="/css/style.4092b4df.css"></noscript>
+  <link rel="stylesheet" href="/css/style.c5d88ccf.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.c5d88ccf.css"></noscript>
     <script>
       let userColorScheme=localStorage.getItem("color-scheme")
       if(userColorScheme){
@@ -1908,9 +1973,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   volantis.GLOBAL_CONFIG ={
     debug: false,
-    cdn: {"js":{"app":"/js/app.e546c981.js","parallax":"/js/plugins/parallax.8bf0ab10.js","rightMenu":"/js/plugins/rightMenu.d9437285.js","rightMenus":"/js/plugins/rightMenus.cd02aa19.js","sites":"/js/plugins/tags/sites.76bf19b8.js","friends":"/js/plugins/tags/friends.f372da57.js","contributors":"/js/plugins/tags/contributors.aec80453.js","search":"/js/search/hexo.0e52f222.js"},"css":{"style":"/css/style.4092b4df.css"}},
+    cdn: {"js":{"app":"/js/app.e546c981.js","parallax":"/js/plugins/parallax.8bf0ab10.js","rightMenu":"/js/plugins/rightMenu.d9437285.js","rightMenus":"/js/plugins/rightMenus.cd02aa19.js","sites":"/js/plugins/tags/sites.76bf19b8.js","friends":"/js/plugins/tags/friends.f372da57.js","contributors":"/js/plugins/tags/contributors.aec80453.js","search":"/js/search/hexo.0e52f222.js"},"css":{"style":"/css/style.c5d88ccf.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1649552113628/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1649552113628/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1649552113628/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1649552113628/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1654569079609),
+    lastupdate: new Date(1654611282917),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -1930,7 +1995,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       fancybox: {"css":"https://unpkg.com/volantis-static@0.0.1649552113628/libs/@fancyapps/ui/dist/fancybox.css","js":"https://unpkg.com/volantis-static@0.0.1649552113628/libs/@fancyapps/ui/dist/fancybox.umd.js"},
       aplayer: {
         id: 3175833810,
-        enable:null
+        enable:true
       },
       rightmenu: {
         faicon: "fa",
@@ -1938,7 +2003,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         music_alwaysShow: true,
         customPicUrl: {"enable":false,"old":null,"new":null}
       },
-      rightmenus: {"enable":true,"order":["plugins.navigation","hr","plugins.inputBox","plugins.seletctText","plugins.elementCheck","plugins.elementImage","menus.link","hr","menus.darkMode","plugins.articlePage","music"],"options":{"iconPrefix":"fa-solid","articleShowLink":false,"musicAlwaysShow":false},"plugins":{"navigation":[{"id":"left","name":"转到上一页","icon":"fa-solid fa-arrow-left","event":"history.back()","group":"navigation"},{"id":"right","name":"转到下一页","icon":"fa-solid fa-arrow-right","event":"history.forward()","group":"navigation"},{"id":"redo","name":"刷新当前页面","icon":"fa-solid fa-redo","event":"window.location.reload()","group":"navigation"},{"id":"up","name":"回到顶部","icon":"fa-solid fa-arrow-up","event":"VolantisApp.scrolltoElement(volantis.dom.bodyAnchor)","group":"navigation"}],"inputBox":[{"id":"copyPaste","name":"粘贴文本","icon":"fa-solid fa-paste","event":"copyPaste","group":"inputBox"},{"id":"copyAll","name":"全选文本","icon":"fa-solid fa-object-ungroup","event":"copyAll","group":"inputBox"},{"id":"copyCut","name":"剪切文本","icon":"fa-solid fa-cut","event":"copyCut","group":"inputBox"}],"seletctText":[{"id":"copyText","name":"复制文本","icon":"fa-solid fa-copy","event":"copyText","group":"seletctText"},{"id":"searchWord","name":"站内搜索","icon":"fa-solid fa-search","event":"OpenSearch(__text__)","group":"seletctText"},{"id":"bingSearch","name":"必应搜索","icon":"fa-solid fa-search","event":"window.open(`https://cn.bing.com/search?q=${__text__}`)","group":"seletctText"}],"elementCheck":[{"id":"openTab","name":"新标签页打开","icon":"fa-solid fa-external-link-square-alt","event":"window.open(__link__)","group":"elementCheck"},{"id":"copyLink","name":"复制链接地址","icon":"fa-solid fa-link","event":"copyLink","group":"elementCheck"}],"elementImage":[{"id":"copyImg","name":"复制图片","icon":"fa-solid fa-image","event":"copyImg","group":"elementImage"},{"id":"googleImg","name":"谷歌识图","icon":"fa-solid fa-images","event":"window.open(`https://www.google.com.hk/searchbyimage?image_url=${__link__}`)","group":"elementImage"}],"articlePage":[{"id":"printMode","name":"打印页面","icon":"fa-solid fa-print","event":"printMode","group":"articlePage"},{"id":"readMode","name":"阅读模式","icon":"fa-solid fa-book-open","event":"readMode","group":"articlePage"}]},"menus":{"link":[{"id":"help","name":"常见问题","icon":"fa-solid fa-question","link":"https://volantis.js.org/faqs/","group":"link"},{"id":"examples","name":"示例博客","icon":"fa-solid fa-rss","link":"https://volantis.js.org/examples/","group":"link"},{"id":"contributors","name":"加入社区","icon":"fa-solid fa-fan","link":"https://volantis.js.org/contributors/","group":"link"},"hr",{"id":"source_docs","name":"本站源码","icon":"fa-solid fa-code-branch","link":"https://github.com/volantis-x/volantis-docs/","group":"link"},{"id":"source_theme","name":"主题源码","icon":"fa-solid fa-code-branch","link":"https://github.com/volantis-x/hexo-theme-volantis/","group":"link"}],"darkMode":[{"id":"darkMode","name":"暗黑模式","icon":"fa-solid fa-moon","event":"volantis.dark.toggle()","group":"darkMode"}]}}
+      rightmenus: {"enable":true,"order":["plugins.navigation","hr","plugins.inputBox","plugins.seletctText","plugins.elementCheck","plugins.elementImage","hr","menus.link","menus.darkMode","plugins.articlePage","music"],"options":{"iconPrefix":"fa-solid","articleShowLink":true,"musicAlwaysShow":true},"plugins":{"navigation":[{"id":"left","name":"转到上一页","icon":"fa-solid fa-arrow-left","event":"history.back()","group":"navigation"},{"id":"right","name":"转到下一页","icon":"fa-solid fa-arrow-right","event":"history.forward()","group":"navigation"},{"id":"redo","name":"刷新当前页面","icon":"fa-solid fa-redo","event":"window.location.reload()","group":"navigation"},{"id":"up","name":"回到顶部","icon":"fa-solid fa-arrow-up","event":"VolantisApp.scrolltoElement(volantis.dom.bodyAnchor)","group":"navigation"},{"id":"home","name":"回到首页","icon":"fa-solid fa-home","link":"/","group":"navigation"}],"inputBox":[{"id":"copyPaste","name":"粘贴文本","icon":"fa-solid fa-paste","event":"copyPaste","group":"inputBox"},{"id":"copyAll","name":"全选文本","icon":"fa-solid fa-object-ungroup","event":"copyAll","group":"inputBox"},{"id":"copyCut","name":"剪切文本","icon":"fa-solid fa-cut","event":"copyCut","group":"inputBox"}],"seletctText":[{"id":"copyText","name":"复制文本","icon":"fa-solid fa-copy","event":"copyText","group":"seletctText"},{"id":"searchWord","name":"站内搜索","icon":"fa-solid fa-search","event":"OpenSearch(__text__)","group":"seletctText"},{"id":"bingSearch","name":"必应搜索","icon":"fa-solid fa-search","event":"window.open(`https://cn.bing.com/search?q=${__text__}`)","group":"seletctText"}],"elementCheck":[{"id":"openTab","name":"新标签页打开","icon":"fa-solid fa-external-link-square-alt","event":"window.open(__link__)","group":"elementCheck"},{"id":"copyLink","name":"复制链接地址","icon":"fa-solid fa-link","event":"copyLink","group":"elementCheck"}],"elementImage":[{"id":"copyImg","name":"复制图片","icon":"fa-solid fa-image","event":"copyImg","group":"elementImage"},{"id":"googleImg","name":"谷歌识图","icon":"fa-solid fa-images","event":"window.open(`https://www.google.com.hk/searchbyimage?image_url=${__link__}`)","group":"elementImage"}],"articlePage":[{"id":"printMode","name":"打印页面","icon":"fa-solid fa-print","event":"printMode","group":"articlePage"},{"id":"readMode","name":"阅读模式","icon":"fa-solid fa-book-open","event":"readMode","group":"articlePage"}]},"menus":{"link":["hr",{"id":"openTab","name":"新标签页打开","icon":"fa-solid fa-external-link-square-alt","event":"window.open(__link__)","group":"elementCheck"},{"id":"copyLink","name":"复制链接地址","icon":"fa-solid fa-link","event":"copyLink","group":"elementCheck"},{"id":"searchWord","name":"站内搜索","icon":"fa-solid fa-search","event":"OpenSearch(__text__)","group":"seletctText"}],"darkMode":[{"id":"darkMode","name":"暗黑模式","icon":"fa-solid fa-moon","event":"volantis.dark.toggle()","group":"darkMode"}]}}
     }
   }
 
@@ -2369,13 +2434,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover"
-                href="/" title="博客"
+                href="/" title="主页"
                   
                   
                   
                     active-action="action-home"
                   >
-                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                  <i class='fa-solid fa-rss fa-fw'></i>主页
                 </a>
                 
               </li>
@@ -2490,13 +2555,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover"
-                href="/" title="博客"
+                href="/" title="主页"
                   
                   
                   
                     active-action="action-home"
                   >
-                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                  <i class='fa-solid fa-rss fa-fw'></i>主页
                 </a>
                 
               </li>
@@ -2607,14 +2672,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
       <div id="full" class='cover-wrapper  dock' style="display: ;">
         
-  <div class='cover-bg lazyload placeholder' data-bg=""></div>
+  <div id="parallax-window"></div>
 
 <div class='cover-body'>
   <div class='top'>
     
     
-      <p class="title">Volantis</p>
+      <p class="title">YCX's Blog</p>
     
+    
+      <p class="subtitle">见过绚烂，不甘平凡</p>
     
   </div>
   <div class='bottom'>
@@ -2626,7 +2693,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
               
               active-action="action-home">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f4f0.svg'><p>博客</p>
+              <i class='fa-solid fa-rss fa-fw'></i><p>主页</p>
             </a>
           
             <a href="/categories/"
@@ -2664,48 +2731,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               <i class='fa-solid fa-info-circle fa-fw'></i><p>关于</p>
             </a>
           
-            <a href="/v4/getting-started/"
-              
-              
-              active-action="action-v4getting-started">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f5c3.svg'><p>文档</p>
-            </a>
-          
-            <a href="/faqs/"
-              
-              
-              active-action="action-faqs">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f516.svg'><p>帮助</p>
-            </a>
-          
-            <a href="/examples/"
-              
-              
-              active-action="action-examples">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f396.svg'><p>示例</p>
-            </a>
-          
-            <a href="/contributors/"
-              
-              
-              active-action="action-contributors">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f389.svg'><p>社区</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              active-action="action-archives">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f4f0.svg'><p>博客</p>
-            </a>
-          
-            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
-              
-              
-              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://unpkg.com/volantis-static@0.0.1649552113628/media/twemoji/assets/svg/1f9ec.svg'><p>源码</p>
-            </a>
-          
         
       </div>
     </div>
@@ -2726,6 +2751,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <section class="post-list">
     
       
+        
+          
         
           
         
@@ -2962,6 +2989,22 @@ Qu...
         <div class="aplayer-container">
           
 
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
 
         </div>
       
@@ -2994,12 +3037,15 @@ Qu...
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/5.3.2" target="_blank" class="codename">Volantis</a>
-        作为主题
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
       
     
       
         <div class='copyright'>
-        <p><a href="/">Copyright © since 2022 XXX</a></p>
+        <p><a href="/">Copyright © since 2022 YCX</a></p>
 
         </div>
       
@@ -3032,6 +3078,10 @@ Qu...
   volantis.css("https://unpkg.com/volantis-static@0.0.1649552113628/libs/@fortawesome/fontawesome-free/css/all.min.css");
   
   
+  volantis.css("https://unpkg.com/volantis-static@0.0.1649552113628/libs/font-awesome-animation/font-awesome-animation.min.css");
+  
+  
+  volantis.css("https://unpkg.com/volantis-static@0.0.1649552113628/libs/node-waves/dist/waves.min.css");
   
 </script>
 
@@ -3079,6 +3129,10 @@ Qu...
 
 
     <a class="nav icon-only fix-cursor-default" onclick="VolantisApp.scrolltoElement(volantis.dom.bodyAnchor)"><i class="fa-solid fa-arrow-up fa-fw"></i></a>
+
+
+
+    <a class="nav icon-only fix-cursor-default" href="/"><i class="fa-solid fa-home fa-fw"></i></a>
 
 
   </li>
@@ -3178,30 +3232,7 @@ Qu...
 
 
 
-  <li class="menuLoad-Content">
-    <a class="vlts-menu fix-cursor-default" id="help" target="_blank" rel="noopener" href="https://volantis.js.org/faqs/" data-group="link">
-      <i class="fa-solid fa-question fa-fw"></i>
-      常见问题
-    </a>
-  </li>
-
-
-
-  <li class="menuLoad-Content">
-    <a class="vlts-menu fix-cursor-default" id="examples" target="_blank" rel="noopener" href="https://volantis.js.org/examples/" data-group="link">
-      <i class="fa-solid fa-rss fa-fw"></i>
-      示例博客
-    </a>
-  </li>
-
-
-
-  <li class="menuLoad-Content">
-    <a class="vlts-menu fix-cursor-default" id="contributors" target="_blank" rel="noopener" href="https://volantis.js.org/contributors/" data-group="link">
-      <i class="fa-solid fa-fan fa-fw"></i>
-      加入社区
-    </a>
-  </li>
+    <hr class="menuLoad-Content" >
 
 
 
@@ -3210,24 +3241,29 @@ Qu...
 
 
   <li class="menuLoad-Content">
-    <a class="vlts-menu fix-cursor-default" id="source_docs" target="_blank" rel="noopener" href="https://github.com/volantis-x/volantis-docs/" data-group="link">
-      <i class="fa-solid fa-code-branch fa-fw"></i>
-      本站源码
-    </a>
+    <span class="vlts-menu fix-cursor-default event" id="openTab" data-event="window.open(__link__)" data-group="elementCheck">
+      <i class="fa-solid fa-external-link-square-alt fa-fw"></i>
+      新标签页打开
+    </span>
   </li>
 
 
 
   <li class="menuLoad-Content">
-    <a class="vlts-menu fix-cursor-default" id="source_theme" target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/" data-group="link">
-      <i class="fa-solid fa-code-branch fa-fw"></i>
-      主题源码
-    </a>
+    <span class="vlts-menu fix-cursor-default event" id="copyLink" data-event="copyLink" data-group="elementCheck">
+      <i class="fa-solid fa-link fa-fw"></i>
+      复制链接地址
+    </span>
   </li>
 
 
 
-    <hr class="menuLoad-Content" >
+  <li class="menuLoad-Content">
+    <span class="vlts-menu fix-cursor-default event" id="searchWord" data-event="OpenSearch(__text__)" data-group="seletctText">
+      <i class="fa-solid fa-search fa-fw"></i>
+      站内搜索
+    </span>
+  </li>
 
 
 
@@ -3291,6 +3327,8 @@ Qu...
 <script>
   const RightMenusFunction = {};
   
+
+
 
 
 
@@ -3367,11 +3405,19 @@ Qu...
 
 
 
+  RightMenusFunction['openTab'] = (__link__) => {window.open(__link__)}
 
 
 
 
 
+  <!-- RightMenusFunction['copyLink'] = (fun) => {fun()} -->
+
+
+
+
+
+  RightMenusFunction['searchWord'] = (__text__) => {OpenSearch(__text__)}
 
 
 
@@ -3624,6 +3670,82 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 
 
 
+  <script>
+  volantis.css("https://unpkg.com/volantis-static@0.0.1649552113628/libs/aplayer/dist/APlayer.min.css");
+  (async () => {
+    // APlayer 需要在  MetingJS 之前加载
+    await volantis.js("https://unpkg.com/volantis-static@0.0.1649552113628/libs/aplayer/dist/APlayer.min.js")
+    await volantis.js("https://unpkg.com/volantis-static@0.0.1649552113628/libs/meting/dist/Meting.min.js")
+  
+    // 右键 music 需要在 APlayer  MetingJS 之后加载
+    await volantis.js('/js/plugins/aplayer.dbe5eea9.js')
+  
+  })();
+
+  function SetAPlayerPlugin(){
+    let Metings = document.querySelectorAll('meting-js');
+    if (Metings.length === 0) {return;};
+    if (Metings[0].aplayer && Metings[0].aplayer.on) {
+      // improve the accessibility https://web.dev/button-name/
+      document.querySelectorAll(".aplayer-icon-menu").forEach(e=>{
+        e.setAttribute("aria-label","Aplayer Menu")
+      })
+      // message see: /layout/_plugins/message/script.ejs
+      
+        try {
+          setTimeout(() => {
+            Metings.forEach((item, index) => {
+              const aplayerItem = item.aplayer; if(!aplayerItem) return;
+              const rightAplayerCheck = 'true' === 'true'
+                && item.meta.id === '3175833810';
+              if(rightAplayerCheck) RightMenuAplayer.checkAPlayer();
+              if(aplayerItem.events.events.play.every(item => {return item.name !== 'messagePlay'})) {
+                aplayerItem.on('play', function messagePlay() {
+                  let index = aplayerItem.list.index;
+                  let title = aplayerItem.list.audios[index].title;
+                  let artist = aplayerItem.list.audios[index].artist;
+                  setTimeout(() => {
+                    VolantisApp.message('音乐通知', title + ' - ' + artist, {
+                      icon: 'fa-solid fa-play',
+                      transitionIn: 'flipInX',
+                      transitionOut: 'flipOutX'
+                    });
+                  }, 100)
+                });
+              }
+              if(aplayerItem.events.events.pause.every(item => {return item.name !== 'messagePause'})) {
+                aplayerItem.on('pause', function messagePause() {
+                  let index = aplayerItem.list.index;
+                  let title = aplayerItem.list.audios[index].title;
+                  let artist = aplayerItem.list.audios[index].artist;
+                  setTimeout(() => {
+                    // 歌曲播放结束也会触发 pause 事件，为了避免错误提示，等待一会儿
+                    if(aplayerItem.paused) {
+                      VolantisApp.message('音乐通知', title + ' - ' + artist, {
+                        icon: 'fa-solid fa-pause',
+                        transitionIn: 'flipInX',
+                        transitionOut: 'flipOutX'
+                      });
+                    }
+                  }, 100)
+                });
+              }
+            });
+          }, 500)
+        } catch (error) { console.error(error); }
+      
+    }else{
+      volantis.requestAnimationFrame(SetAPlayerPlugin)
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    SetAPlayerPlugin();
+  });
+  volantis.pjax.push(SetAPlayerPlugin);
+</script>
+
+
 
 
       <script>
@@ -3644,7 +3766,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
   function pjax_giscus() {
     const HEAD = check_giscus();
     if (!HEAD) return;
-    let cfg = Object.assign({"theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
+    let cfg = Object.assign({"repo":"YCX81/SelfBlog","repo-id":"R_kgDOHdMLhg","category":"General","category-id":"DIC_kwDOHdMLhs4CPhMq","mapping":"pathname","eactions-enabled":"1","emit-metadata":"0","lang":"zh-CN","theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
     const script = document.createElement('script');
     script.setAttribute('src', 'https://giscus.app/client.js');
     Object.keys(cfg).forEach(k=>{
@@ -3678,6 +3800,8 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 
 
 
+
+  <script defer src="https://unpkg.com/volantis-static@0.0.1649552113628/libs/busuanzi/js/busuanzi.pure.mini.js" data-pjax></script>
 
 
 <!-- optional -->
@@ -3735,6 +3859,25 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 
 
 
+  
+<script src="https://unpkg.com/volantis-static@0.0.1649552113628/libs/node-waves/dist/waves.min.js"></script>
+
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+  Waves.attach('.flat-btn', ['waves-button']);
+  Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+  Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+  Waves.attach('.flat-box', ['waves-block']);
+  Waves.attach('.float-box', ['waves-block', 'waves-float']);
+  Waves.attach('.waves-image');
+  Waves.init();
+});
+</script>
+
+
+
+  
+<script src="https://unpkg.com/volantis-static@0.0.1649552113628/libs/comment_typing/comment_typing.js"></script>
 
 
 
@@ -3762,6 +3905,61 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 
 
 
+
+
+  <script>
+  let imgs = ["https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/003.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/001.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/004.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/039.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1649552113628/media/wallpaper/minimalist/2020/042.webp"];
+  let index = 0;
+  let IntervalParallax = null;
+
+  function parallax(){
+    let ParallaxWindow = document.querySelector("#parallax-window");
+    
+    Parallax.window = ParallaxWindow;
+    Parallax.options.fade = 1500;
+    Parallax.cache = 1;
+    next_parallax();
+    Parallax.init();
+    if (imgs.length>1) {
+      IntervalParallax = setInterval(function () {
+        next_parallax();
+      }, '10000');
+    }
+  }
+
+  function next_parallax() {
+    if (typeof Parallax == "undefined") {
+      return
+    }
+    
+      if (!document.querySelector("#full")&&!document.querySelector("#half")) {
+        return
+      }
+    
+    if (imgs.length>=1) {
+      Parallax.options.src = imgs[index % imgs.length];
+      Parallax.start();
+      index++;
+      if (Parallax.cache) {
+        fetch(imgs[index % imgs.length] +"?t=" + new Date().getTime());
+        if (index == imgs.length) {
+          Parallax.cache = 0;
+        }
+      }
+    }
+  }
+  var runningOnBrowser = typeof window !== "undefined";
+  var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent);
+  if (!isBot) {
+    volantis.js('/js/plugins/parallax.8bf0ab10.js').then(()=>{
+      parallax()
+    })
+    volantis.pjax.send(()=>{
+      clearInterval(IntervalParallax)
+    },"clearIntervalParallax");
+    volantis.pjax.push(parallax);
+  }
+</script>
 
 
 
