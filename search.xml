@@ -33,4 +33,139 @@
         <tag>吃</tag>
       </tags>
   </entry>
+  <entry>
+    <title>hexo常用命令</title>
+    <url>/2023/01/23/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>0x00 前言</p>
+<p>根据日常的hexo使用情况，总结一些hexo常用命令，方便及时查询。</p>
+<span id="more"></span>
+
+<p>Hexo 是一个流行的静态网站生成器，用于创建和维护博客和静态网站。以下是一些常用的 Hexo 命令：</p>
+<ol>
+<li><p>**hexo init &lt;folder&gt;**：</p>
+<ul>
+<li>初始化一个新的 Hexo 站点，将站点文件结构创建在指定的文件夹中。</li>
+</ul>
+</li>
+<li><p>**hexo new &lt;title&gt;**：</p>
+<ul>
+<li>创建一篇新的博客文章，指定文章的标题。Hexo 会根据配置生成一个 Markdown 文件，供您编写内容。</li>
+</ul>
+</li>
+<li><p><strong>hexo generate</strong> 或 <strong>hexo g</strong>：</p>
+<ul>
+<li>生成静态网站文件。这会将 Markdown 文件编译成 HTML 并生成静态页面。</li>
+</ul>
+</li>
+<li><p><strong>hexo server</strong> 或 <strong>hexo s</strong>：</p>
+<ul>
+<li>启动一个本地服务器，用于在本地预览您的博客。默认情况下，访问地址为 <a href="http://localhost:4000/">http://localhost:4000</a> 。</li>
+</ul>
+</li>
+<li><p><strong>hexo deploy</strong>：</p>
+<ul>
+<li>部署生成的静态网站到托管平台，如 GitHub Pages 或自定义的服务器。您需要配置部署信息。</li>
+</ul>
+</li>
+<li><p><strong>hexo clean</strong>：</p>
+<ul>
+<li>清除 Hexo 生成的临时文件和缓存，通常在出现问题或需要重新生成时使用。</li>
+</ul>
+</li>
+<li><p>**hexo new page &lt;name&gt;**：</p>
+<ul>
+<li>创建一个新的页面，可以是关于页面、联系页面等。类似于创建文章，但它们被存储在 source 目录的 <code>_pages</code> 子目录中。</li>
+</ul>
+</li>
+<li><p><strong>hexo list</strong>：</p>
+<ul>
+<li>列出所有已创建的文章和页面。</li>
+</ul>
+</li>
+<li><p>**hexo publish &lt;title&gt;**：</p>
+<ul>
+<li>发布一篇草稿。您可以指定文章标题，Hexo 会将草稿文件移动到 <code>_posts</code> 目录。</li>
+</ul>
+</li>
+<li><p>**hexo draft &lt;title&gt;**：</p>
+<ul>
+<li>创建一篇草稿文章。Hexo 会在 <code>_drafts</code> 目录中创建一个 Markdown 文件，供以后编辑和发布。</li>
+</ul>
+</li>
+<li><p>**hexo new draft &lt;title&gt;**：</p>
+<ul>
+<li>创建并同时发布一篇草稿文章。Hexo 会创建 Markdown 文件并将其移动到 <code>_posts</code> 目录。</li>
+</ul>
+</li>
+<li><p><strong>hexo server -d</strong> 或 <strong>hexo s -d</strong>：</p>
+<ul>
+<li>启动本地服务器并监听文件变化，当文件变化时自动重新生成网站。</li>
+</ul>
+</li>
+<li><p><strong>hexo generate –watch</strong> 或 <strong>hexo g –watch</strong>：</p>
+<ul>
+<li>生成静态网站并监听文件变化，当文件变化时自动重新生成网站。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么是127.0.0.1</title>
+    <url>/2023/08/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF127-0-0-1/</url>
+    <content><![CDATA[<p>0x00 前言</p>
+<p>刚学习网络时，总看到书上配置的ip地址总是127.0.0.1，遂查找网络进行扫盲。</p>
+<span id="more"></span>
+
+<p>IP地址 127.0.0.1 是一个特殊的地址，通常被称为”本地主机”或”回环地址”（Loopback Address）。这个地址是为了在计算机上进行自我测试和本地通信而设计的，具有以下重要特点：</p>
+<ol>
+<li><p><strong>只在本地使用</strong>：IP地址 127.0.0.1 只能在同一台计算机内部使用，不能被用于跨计算机的网络通信。这是因为它被用于回送到计算机本身的网络数据。</p>
+</li>
+<li><p><strong>自我测试</strong>：开发人员可以在本地主机上测试网络应用程序，而无需连接到外部网络或依赖外部服务器。这有助于确保应用程序在没有网络连接的情况下也能正常工作。</p>
+</li>
+<li><p><strong>无需网络硬件</strong>：使用回环地址，您可以在没有网络连接的情况下测试应用程序，因为数据不会离开计算机。</p>
+</li>
+<li><p><strong>简单的配置</strong>：回环地址不需要任何特殊配置或硬件支持。它通常在任何支持TCP&#x2F;IP协议的计算机上都可用。</p>
+</li>
+<li><p><strong>标准化</strong>：回环地址 127.0.0.1 是一个标准化的IPv4回环地址。IPv6的回环地址是 “::1”。</p>
+</li>
+<li><p><strong>用途广泛</strong>：回环地址在本地开发、测试网络应用程序、诊断网络问题等方面被广泛使用。它也在系统中的某些本地服务中使用，以便这些服务可以在不涉及网络的情况下与其他应用程序通信。</p>
+</li>
+</ol>
+<p>总之，IP地址 127.0.0.1 是为了在计算机上进行本地测试和通信而设计的，它允许应用程序在不需要外部网络连接的情况下进行自我测试和开发。它在开发和调试网络应用程序时非常有用。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易网盘项目00</title>
+    <url>/2023/07/27/%E7%AE%80%E6%98%93%E7%BD%91%E7%9B%98%E9%A1%B9%E7%9B%AE00/</url>
+    <content><![CDATA[<p><img src="/../images/v2-770576ab3a108d44200a78910080cc5e_1440w.jpg" alt="v2-770576ab3a108d44200a78910080cc5e_1440w"></p>
+<p>0x00 前言</p>
+<p>此项目准备用于应付近期的面试，作为一种简易的Web Server项目，可能需要4-5期迭代开发。本项目将尽可能还原市面上主流的网盘所具有的功能。</p>
+<span id="more"></span>
+
+<h2 id="0x01-第一期开发总纲"><a href="#0x01-第一期开发总纲" class="headerlink" title="0x01 第一期开发总纲"></a>0x01 第一期开发总纲</h2><p>第一期主要需要实现的功能有服务器端实现命令解析，可能涉及的命令包括：</p>
+<ol>
+<li>cd							    进入服务器对应目录</li>
+<li>ls				  			   列出当前路径下的所有文件</li>
+<li>pwd					   	  显示当前所处路径</li>
+<li>puts filename		     上传本地文件到服务器</li>
+<li>get filename				下载服务器文件到本地</li>
+<li>rm filename			   删除服务器上的某文件</li>
+<li>mkdir dirname		   创建文件夹</li>
+<li>非法命令            			不响应</li>
+</ol>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2>]]></content>
+  </entry>
 </search>
