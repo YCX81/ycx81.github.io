@@ -36,8 +36,7 @@
   <entry>
     <title>Redis简易手册</title>
     <url>/2023/08/23/Redis%E7%AE%80%E6%98%93%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>&#x2F;&#x2F;首页文章展示缩略图</p>
-<p><img src="/../images/download.png" alt="download"></p>
+    <content><![CDATA[<p><img src="/../images/download.png" alt="download"></p>
 <p>0x00 前言</p>
 <p>近期在B站看到一个1小时教学Redis，全程没有废话，粗略过了一遍，并对其主要知识点进行总结。</p>
 <p>【【GeekHour】一小时Redis教程-哔哩哔哩】 <a href="https://b23.tv/MzEWwWh">https://b23.tv/MzEWwWh</a></p>
@@ -169,80 +168,60 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo常用命令</title>
-    <url>/2023/01/23/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>0x00 前言</p>
-<p>根据日常的hexo使用情况，总结一些hexo常用命令，方便及时查询。</p>
+    <title>简易网盘项目00</title>
+    <url>/2023/07/27/%E7%AE%80%E6%98%93%E7%BD%91%E7%9B%98%E9%A1%B9%E7%9B%AE00/</url>
+    <content><![CDATA[<p><img src="/../images/v2-770576ab3a108d44200a78910080cc5e_1440w.jpg" alt="v2-770576ab3a108d44200a78910080cc5e_1440w"></p>
+<p>0x00 前言</p>
+<p>此项目准备用于应付近期的面试，作为一种简易的Web Server项目，可能需要4-5期迭代开发。本项目将尽可能还原市面上主流的网盘所具有的功能。</p>
 <span id="more"></span>
 
-<p>Hexo 是一个流行的静态网站生成器，用于创建和维护博客和静态网站。以下是一些常用的 Hexo 命令：</p>
+<h2 id="0x01-第一期开发总纲"><a href="#0x01-第一期开发总纲" class="headerlink" title="0x01 第一期开发总纲"></a>0x01 第一期开发总纲</h2><p>第一期主要需要实现的功能有服务器端实现命令解析，可能涉及的命令包括：</p>
 <ol>
-<li><p>**hexo init &lt;folder&gt;**：</p>
-<ul>
-<li>初始化一个新的 Hexo 站点，将站点文件结构创建在指定的文件夹中。</li>
-</ul>
-</li>
-<li><p>**hexo new &lt;title&gt;**：</p>
-<ul>
-<li>创建一篇新的博客文章，指定文章的标题。Hexo 会根据配置生成一个 Markdown 文件，供您编写内容。</li>
-</ul>
-</li>
-<li><p><strong>hexo generate</strong> 或 <strong>hexo g</strong>：</p>
-<ul>
-<li>生成静态网站文件。这会将 Markdown 文件编译成 HTML 并生成静态页面。</li>
-</ul>
-</li>
-<li><p><strong>hexo server</strong> 或 <strong>hexo s</strong>：</p>
-<ul>
-<li>启动一个本地服务器，用于在本地预览您的博客。默认情况下，访问地址为 <a href="http://localhost:4000/">http://localhost:4000</a> 。</li>
-</ul>
-</li>
-<li><p><strong>hexo deploy</strong>：</p>
-<ul>
-<li>部署生成的静态网站到托管平台，如 GitHub Pages 或自定义的服务器。您需要配置部署信息。</li>
-</ul>
-</li>
-<li><p><strong>hexo clean</strong>：</p>
-<ul>
-<li>清除 Hexo 生成的临时文件和缓存，通常在出现问题或需要重新生成时使用。</li>
-</ul>
-</li>
-<li><p>**hexo new page &lt;name&gt;**：</p>
-<ul>
-<li>创建一个新的页面，可以是关于页面、联系页面等。类似于创建文章，但它们被存储在 source 目录的 <code>_pages</code> 子目录中。</li>
-</ul>
-</li>
-<li><p><strong>hexo list</strong>：</p>
-<ul>
-<li>列出所有已创建的文章和页面。</li>
-</ul>
-</li>
-<li><p>**hexo publish &lt;title&gt;**：</p>
-<ul>
-<li>发布一篇草稿。您可以指定文章标题，Hexo 会将草稿文件移动到 <code>_posts</code> 目录。</li>
-</ul>
-</li>
-<li><p>**hexo draft &lt;title&gt;**：</p>
-<ul>
-<li>创建一篇草稿文章。Hexo 会在 <code>_drafts</code> 目录中创建一个 Markdown 文件，供以后编辑和发布。</li>
-</ul>
-</li>
-<li><p>**hexo new draft &lt;title&gt;**：</p>
-<ul>
-<li>创建并同时发布一篇草稿文章。Hexo 会创建 Markdown 文件并将其移动到 <code>_posts</code> 目录。</li>
-</ul>
-</li>
-<li><p><strong>hexo server -d</strong> 或 <strong>hexo s -d</strong>：</p>
-<ul>
-<li>启动本地服务器并监听文件变化，当文件变化时自动重新生成网站。</li>
-</ul>
-</li>
-<li><p><strong>hexo generate –watch</strong> 或 <strong>hexo g –watch</strong>：</p>
-<ul>
-<li>生成静态网站并监听文件变化，当文件变化时自动重新生成网站。</li>
-</ul>
-</li>
+<li>cd							    进入服务器对应目录</li>
+<li>ls				  			   列出当前路径下的所有文件</li>
+<li>pwd					   	  显示当前所处路径</li>
+<li>puts filename		     上传本地文件到服务器</li>
+<li>get filename				下载服务器文件到本地</li>
+<li>rm filename			   删除服务器上的某文件</li>
+<li>mkdir dirname		   创建文件夹</li>
+<li>非法命令            			不响应</li>
 </ol>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2>]]></content>
+  </entry>
+  <entry>
+    <title>hexo常用命令</title>
+    <url>/2023/01/23/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p><img src="/../images/download-2776003.png" alt="download-2776003"></p>
+<h1 id="Hexo-常用命令手册"><a href="#Hexo-常用命令手册" class="headerlink" title="Hexo 常用命令手册"></a>Hexo 常用命令手册</h1><p>本功能手册提供了Hexo静态网站生成器的常用命令列表，以及它们的功能和用法说明。</p>
+<span id="more"></span>
+
+<h2 id="1-hexo-init-lt-folder-gt"><a href="#1-hexo-init-lt-folder-gt" class="headerlink" title="1. hexo init &lt;folder&gt;"></a>1. hexo init &lt;folder&gt;</h2><p><strong>功能：</strong> 初始化新的Hexo站点。</p>
+<p><strong>用法：</strong> 初始化Hexo站点时，需指定一个文件夹名称作为参数。此命令会在指定文件夹内生成站点文件结构和配置。</p>
+<h2 id="2-hexo-new-lt-title-gt"><a href="#2-hexo-new-lt-title-gt" class="headerlink" title="2. hexo new &lt;title&gt;"></a>2. hexo new &lt;title&gt;</h2><p><strong>功能：</strong> 创建新的博客文章。</p>
+<p><strong>用法：</strong> 使用此命令创建博客文章，需提供文章标题作为参数。Hexo会自动生成对应的Markdown文件，供编写文章内容。</p>
+<h2 id="3-hexo-generate-或-hexo-g"><a href="#3-hexo-generate-或-hexo-g" class="headerlink" title="3. hexo generate 或 hexo g"></a>3. hexo generate 或 hexo g</h2><p><strong>功能：</strong> 生成静态网站文件。</p>
+<p><strong>用法：</strong> 使用此命令将source文件夹中的Markdown文件转化成HTML，生成静态页面。生成的文件存储在public文件夹中。</p>
+<h2 id="4-hexo-server-或-hexo-s"><a href="#4-hexo-server-或-hexo-s" class="headerlink" title="4. hexo server 或 hexo s"></a>4. hexo server 或 hexo s</h2><p><strong>功能：</strong> 启动本地服务器，以便本地预览博客。</p>
+<p><strong>用法：</strong> 默认情况下，此命令在本地启动服务器，可通过浏览器访问<a href="http://localhost:4000查看生成的网站。">http://localhost:4000查看生成的网站。</a></p>
+<h2 id="5-hexo-deploy"><a href="#5-hexo-deploy" class="headerlink" title="5. hexo deploy"></a>5. hexo deploy</h2><p><strong>功能：</strong> 部署生成的静态网站到托管平台。</p>
+<p><strong>用法：</strong> 在Hexo配置文件中设置部署信息，使用此命令将网站内容上传至托管平台，如GitHub Pages或自定义服务器。</p>
+<h2 id="6-hexo-clean"><a href="#6-hexo-clean" class="headerlink" title="6. hexo clean"></a>6. hexo clean</h2><p><strong>功能：</strong> 清除Hexo生成的临时文件和缓存。</p>
+<p><strong>用法：</strong> 通常用于解决问题或重新生成整个网站。清理后，可再次运行<code>hexo generate</code>重新生成网站。</p>
+<h2 id="7-hexo-new-page-lt-name-gt"><a href="#7-hexo-new-page-lt-name-gt" class="headerlink" title="7. hexo new page &lt;name&gt;"></a>7. hexo new page &lt;name&gt;</h2><p><strong>功能：</strong> 创建新的页面。</p>
+<p><strong>用法：</strong> 类似于创建文章，但页面通常用于静态内容，如“关于”或“联系”页面。它们存储在<code>source/_pages</code>目录中。</p>
+<h2 id="8-hexo-list"><a href="#8-hexo-list" class="headerlink" title="8. hexo list"></a>8. hexo list</h2><p><strong>功能：</strong> 列出所有已创建的文章和页面。</p>
+<p><strong>用法：</strong> 可查看当前站点的所有内容。</p>
+<h2 id="9-hexo-publish-lt-title-gt"><a href="#9-hexo-publish-lt-title-gt" class="headerlink" title="9. hexo publish &lt;title&gt;"></a>9. hexo publish &lt;title&gt;</h2><p><strong>功能：</strong> 发布一篇草稿。</p>
+<p><strong>用法：</strong> 提供文章标题作为参数，Hexo将草稿文件从<code>source/_drafts</code>移动到<code>source/_posts</code>目录，发布文章。</p>
+<h2 id="10-hexo-draft-lt-title-gt"><a href="#10-hexo-draft-lt-title-gt" class="headerlink" title="10. hexo draft &lt;title&gt;"></a>10. hexo draft &lt;title&gt;</h2><p><strong>功能：</strong> 创建新的草稿文章。</p>
+<p><strong>用法：</strong> 草稿是未发布的文章，存储在<code>source/_drafts</code>目录中，以后可使用<code>hexo publish</code>命令发布。</p>
+<h2 id="11-hexo-new-draft-lt-title-gt"><a href="#11-hexo-new-draft-lt-title-gt" class="headerlink" title="11. hexo new draft &lt;title&gt;"></a>11. hexo new draft &lt;title&gt;</h2><p><strong>功能：</strong> 创建并同时发布一篇草稿文章。</p>
+<p><strong>用法：</strong> 与上述命令不同，此命令创建文章后将其移动到<code>source/_posts</code>目录，即发布状态。</p>
+<h2 id="12-hexo-server-d-或-hexo-s-d"><a href="#12-hexo-server-d-或-hexo-s-d" class="headerlink" title="12. hexo server -d 或 hexo s -d"></a>12. hexo server -d 或 hexo s -d</h2><p><strong>功能：</strong> 启动本地服务器并监听文件变化。</p>
+<p><strong>用法：</strong> 编辑博客内容时，Hexo检测文件更改，并自动重新生成网站，可实时预览修改。</p>
+<h2 id="13-hexo-generate-–watch-或-hexo-g-–watch"><a href="#13-hexo-generate-–watch-或-hexo-g-–watch" class="headerlink" title="13. hexo generate –watch 或 hexo g –watch"></a>13. hexo generate –watch 或 hexo g –watch</h2><p><strong>功能：</strong> 生成静态网站并监听文件变化。</p>
+<p><strong>用法：</strong> 类似于上一个命令，但只生成网站，不启动服务器。适用于生成后手动刷新预览的情况。</p>
+<p>这些是Hexo静态网站生成器的常用命令，用于创建、管理和部署静态博客网站。根据需求，可进一步探索Hexo文档以获取关于配置和高级命令的信息。</p>
 ]]></content>
       <categories>
         <category>编程</category>
@@ -281,26 +260,5 @@
       <tags>
         <tag>网络</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>简易网盘项目00</title>
-    <url>/2023/07/27/%E7%AE%80%E6%98%93%E7%BD%91%E7%9B%98%E9%A1%B9%E7%9B%AE00/</url>
-    <content><![CDATA[<p><img src="/../images/v2-770576ab3a108d44200a78910080cc5e_1440w.jpg" alt="v2-770576ab3a108d44200a78910080cc5e_1440w"></p>
-<p>0x00 前言</p>
-<p>此项目准备用于应付近期的面试，作为一种简易的Web Server项目，可能需要4-5期迭代开发。本项目将尽可能还原市面上主流的网盘所具有的功能。</p>
-<span id="more"></span>
-
-<h2 id="0x01-第一期开发总纲"><a href="#0x01-第一期开发总纲" class="headerlink" title="0x01 第一期开发总纲"></a>0x01 第一期开发总纲</h2><p>第一期主要需要实现的功能有服务器端实现命令解析，可能涉及的命令包括：</p>
-<ol>
-<li>cd							    进入服务器对应目录</li>
-<li>ls				  			   列出当前路径下的所有文件</li>
-<li>pwd					   	  显示当前所处路径</li>
-<li>puts filename		     上传本地文件到服务器</li>
-<li>get filename				下载服务器文件到本地</li>
-<li>rm filename			   删除服务器上的某文件</li>
-<li>mkdir dirname		   创建文件夹</li>
-<li>非法命令            			不响应</li>
-</ol>
-<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2>]]></content>
   </entry>
 </search>
