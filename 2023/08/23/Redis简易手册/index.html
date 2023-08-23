@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="&#x2F;&#x2F;首页文章展示缩略图  0x00 前言 近期在B站看到一个1小时教学Redis，全程没有废话，粗略过了一遍，并对其主要知识点进行总结。 【【GeekHour】一小时Redis教程-哔哩哔哩】 https:&#x2F;&#x2F;b23.tv&#x2F;MzEWwWh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis简易手册">
+<meta property="og:url" content="http://ycx81.github.io/2023/08/23/Redis%E7%AE%80%E6%98%93%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="&#x2F;&#x2F;首页文章展示缩略图  0x00 前言 近期在B站看到一个1小时教学Redis，全程没有废话，粗略过了一遍，并对其主要知识点进行总结。 【【GeekHour】一小时Redis教程-哔哩哔哩】 https:&#x2F;&#x2F;b23.tv&#x2F;MzEWwWh">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ycx81.github.io/images/download.png">
+<meta property="article:published_time" content="2023-08-23T06:46:13.000Z">
+<meta property="article:modified_time" content="2023-08-23T07:00:46.659Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ycx81.github.io/images/download.png">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2023/08/23/Redis%E7%AE%80%E6%98%93%E6%89%8B%E5%86%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2023/08/23/Redis%E7%AE%80%E6%98%93%E6%89%8B%E5%86%8C/","path":"2023/08/23/Redis简易手册/","title":"Redis简易手册"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis简易手册 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">连接与配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">键操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">列表操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">集合操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">哈希操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">有序集合操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E4%B8%8E%E8%AE%A2%E9%98%85"><span class="nav-number">7.</span> <span class="nav-text">发布与订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8E%92%E5%90%8D"><span class="nav-number">8.</span> <span class="nav-text">排序和排名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="nav-number">9.</span> <span class="nav-text">模式匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">10.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93"><span class="nav-number">11.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%BB%9F%E8%AE%A1"><span class="nav-number">12.</span> <span class="nav-text">信息统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="nav-number">13.</span> <span class="nav-text">备份和恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">14.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4"><span class="nav-number">15.</span> <span class="nav-text">集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">16.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Redis"><span class="nav-number">17.</span> <span class="nav-text">在C++中使用Redis</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2023/08/23/Redis%E7%AE%80%E6%98%93%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis简易手册 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis简易手册
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-23 14:46:13 / 修改时间：15:00:46" itemprop="dateCreated datePublished" datetime="2023-08-23T14:46:13+08:00">2023-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&#x2F;&#x2F;首页文章展示缩略图</p>
+<p><img src="/../images/download.png" alt="download"></p>
+<p>0x00 前言</p>
+<p>近期在B站看到一个1小时教学Redis，全程没有废话，粗略过了一遍，并对其主要知识点进行总结。</p>
+<p>【【GeekHour】一小时Redis教程-哔哩哔哩】 <a target="_blank" rel="noopener" href="https://b23.tv/MzEWwWh">https://b23.tv/MzEWwWh</a></p>
+<span id="more"></span>
+
+<p>以下是一些常用的Redis命令，使用Markdown语法进行总结：</p>
+<h3 id="连接与配置"><a href="#连接与配置" class="headerlink" title="连接与配置"></a>连接与配置</h3><ul>
+<li>连接到Redis服务器：<code>redis-cli</code></li>
+<li>显示Redis服务器信息：<code>INFO</code></li>
+<li>查看配置文件的路径：<code>CONFIG GET dir</code></li>
+<li>修改配置项：<code>CONFIG SET &lt;config-name&gt; &lt;value&gt;</code></li>
+<li>查看Redis版本：<code>redis-server -v</code></li>
+</ul>
+<h3 id="键操作"><a href="#键操作" class="headerlink" title="键操作"></a>键操作</h3><ul>
+<li>设置键值对：<code>SET &lt;key&gt; &lt;value&gt;</code></li>
+<li>获取键对应的值：<code>GET &lt;key&gt;</code></li>
+<li>删除键值对：<code>DEL &lt;key&gt;</code></li>
+<li>检查键是否存在：<code>EXISTS &lt;key&gt;</code></li>
+<li>设置键的过期时间（秒）：<code>EXPIRE &lt;key&gt; &lt;seconds&gt;</code></li>
+<li>移除键的过期时间：<code>PERSIST &lt;key&gt;</code></li>
+<li>查看键的剩余过期时间（秒）：<code>TTL &lt;key&gt;</code></li>
+</ul>
+<h3 id="列表操作"><a href="#列表操作" class="headerlink" title="列表操作"></a>列表操作</h3><ul>
+<li>向列表头部添加元素：<code>LPUSH &lt;key&gt; &lt;value&gt;</code></li>
+<li>向列表尾部添加元素：<code>RPUSH &lt;key&gt; &lt;value&gt;</code></li>
+<li>获取列表长度：<code>LLEN &lt;key&gt;</code></li>
+<li>获取列表指定范围的元素：<code>LRANGE &lt;key&gt; &lt;start&gt; &lt;end&gt;</code></li>
+<li>弹出并返回列表头部元素：<code>LPOP &lt;key&gt;</code></li>
+<li>弹出并返回列表尾部元素：<code>RPOP &lt;key&gt;</code></li>
+</ul>
+<h3 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h3><ul>
+<li>向集合添加一个元素：<code>SADD &lt;key&gt; &lt;member&gt;</code></li>
+<li>获取集合的所有成员：<code>SMEMBERS &lt;key&gt;</code></li>
+<li>检查元素是否是集合的成员：<code>SISMEMBER &lt;key&gt; &lt;member&gt;</code></li>
+<li>移除集合中的一个元素：<code>SREM &lt;key&gt; &lt;member&gt;</code></li>
+<li>计算集合的交集、并集或差集：<code>SINTER</code>, <code>SUNION</code>, <code>SDIFF</code></li>
+</ul>
+<h3 id="哈希操作"><a href="#哈希操作" class="headerlink" title="哈希操作"></a>哈希操作</h3><ul>
+<li>设置哈希字段值：<code>HSET &lt;key&gt; &lt;field&gt; &lt;value&gt;</code></li>
+<li>获取哈希字段值：<code>HGET &lt;key&gt; &lt;field&gt;</code></li>
+<li>获取哈希所有字段和值：<code>HGETALL &lt;key&gt;</code></li>
+<li>删除哈希字段：<code>HDEL &lt;key&gt; &lt;field&gt;</code></li>
+<li>查看哈希字段数量：<code>HLEN &lt;key&gt;</code></li>
+</ul>
+<h3 id="有序集合操作"><a href="#有序集合操作" class="headerlink" title="有序集合操作"></a>有序集合操作</h3><ul>
+<li>向有序集合添加成员及分数：<code>ZADD &lt;key&gt; &lt;score&gt; &lt;member&gt;</code></li>
+<li>获取有序集合的成员列表：<code>ZRANGE &lt;key&gt; &lt;start&gt; &lt;end&gt;</code></li>
+<li>根据分数范围获取有序集合的成员：<code>ZRANGEBYSCORE &lt;key&gt; &lt;min&gt; &lt;max&gt;</code></li>
+<li>获取有序集合的成员数量：<code>ZCARD &lt;key&gt;</code></li>
+<li>移除有序集合中的成员：<code>ZREM &lt;key&gt; &lt;member&gt;</code></li>
+</ul>
+<h3 id="发布与订阅"><a href="#发布与订阅" class="headerlink" title="发布与订阅"></a>发布与订阅</h3><ul>
+<li>订阅频道：<code>SUBSCRIBE &lt;channel&gt;</code></li>
+<li>取消订阅频道：<code>UNSUBSCRIBE &lt;channel&gt;</code></li>
+<li>发布消息到频道：<code>PUBLISH &lt;channel&gt; &lt;message&gt;</code></li>
+</ul>
+<h3 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h3><ul>
+<li>按分数升序排列有序集合的成员：<code>ZREVRANGE &lt;key&gt; &lt;start&gt; &lt;end&gt;</code></li>
+<li>获取有序集合中成员的排名：<code>ZRANK &lt;key&gt; &lt;member&gt;</code></li>
+<li>获取有序集合中成员的分数：<code>ZSCORE &lt;key&gt; &lt;member&gt;</code></li>
+</ul>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><ul>
+<li>使用通配符查找键名：<code>KEYS &lt;pattern&gt;</code></li>
+<li>批量删除符合条件的键：<code>DEL &lt;pattern&gt;</code></li>
+<li>列出匹配的键名：<code>SCAN &lt;cursor&gt; MATCH &lt;pattern&gt; COUNT &lt;count&gt;</code></li>
+</ul>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><ul>
+<li>开启事务：<code>MULTI</code></li>
+<li>执行事务：<code>EXEC</code></li>
+<li>取消事务：<code>DISCARD</code></li>
+</ul>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><ul>
+<li>使用管道执行多个命令：可以通过一次网络往返执行多个命令以提高性能，使用<code>PIPELINE</code></li>
+</ul>
+<h3 id="信息统计"><a href="#信息统计" class="headerlink" title="信息统计"></a>信息统计</h3><ul>
+<li>查看内存使用情况：<code>MEMORY STATS</code></li>
+<li>查看服务器状态：<code>INFO SERVER</code></li>
+<li>查看客户端列表：<code>CLIENT LIST</code></li>
+</ul>
+<h3 id="备份和恢复"><a href="#备份和恢复" class="headerlink" title="备份和恢复"></a>备份和恢复</h3><ul>
+<li>创建数据快照：<code>SAVE</code></li>
+<li>在后台创建数据快照：<code>BGSAVE</code></li>
+<li>恢复数据：将快照文件复制到Redis数据目录并重启服务器</li>
+</ul>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><ul>
+<li>设置访问密码：<code>CONFIG SET requirepass &lt;password&gt;</code></li>
+<li>验证密码：<code>AUTH &lt;password&gt;</code></li>
+</ul>
+<h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><ul>
+<li>创建Redis集群：使用Redis Cluster</li>
+<li>查看集群节点信息：<code>CLUSTER NODES</code></li>
+<li>手动切换主节点：<code>CLUSTER FAILOVER</code></li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>发送一个即时命令到服务器以查看性能统计信息：<code>INFO COMMANDSTATS</code></li>
+<li>监视键的变化：<code>MONITOR</code></li>
+<li>配置Redis服务器以接受远程连接：修改<code>redis.conf</code>文件中的<code>bind</code>选项</li>
+</ul>
+<h3 id="在C-中使用Redis"><a href="#在C-中使用Redis" class="headerlink" title="在C++中使用Redis"></a>在C++中使用Redis</h3><p>在C++中使用Redis通常需要使用Redis C++客户端库，其中最常用的是hiredis和cpp_redis。以下是在C++中使用Redis的基本步骤以及一些常见操作：</p>
+<p><strong>步骤1：安装Redis C++客户端库</strong></p>
+<p>首先安装Redis C++客户端库，最常见的选择是hiredis和cpp_redis。您可以使用包管理器（如apt、brew、vcpkg）来安装这些库，或者从官方GitHub存储库手动构建它们。</p>
+<p><strong>步骤2：包含头文件</strong></p>
+<p>在您的C++代码中，包含适当的Redis客户端库头文件。例如使用cpp_redis则需要包含以下头文件：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cpp_redis/cpp_redis&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤3：建立与Redis的连接</strong></p>
+<p>在代码中，使用客户端库提供的函数来建立与Redis服务器的连接。这通常涉及创建一个客户端对象并配置连接参数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cpp_redis::client client;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置连接参数</span></span><br><span class="line">client.<span class="built_in">connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="number">6379</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤4：执行Redis命令</strong></p>
+<p>使用客户端库提供的函数执行Redis命令。以下是一些常见的示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置键值对</span></span><br><span class="line">client.<span class="built_in">set</span>(<span class="string">&quot;my_key&quot;</span>, <span class="string">&quot;my_value&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取键的值</span></span><br><span class="line">client.<span class="built_in">get</span>(<span class="string">&quot;my_key&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行哈希操作</span></span><br><span class="line">client.<span class="built_in">hset</span>(<span class="string">&quot;my_hash&quot;</span>, <span class="string">&quot;field1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">client.<span class="built_in">hget</span>(<span class="string">&quot;my_hash&quot;</span>, <span class="string">&quot;field1&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤5：提交命令和处理响应</strong></p>
+<p>提交Redis命令并处理响应。可以使用回调函数或阻塞方式等不同的方法来处理响应：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 提交命令</span></span><br><span class="line">client.<span class="built_in">sync_commit</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理响应（回调方式）</span></span><br><span class="line">client.<span class="built_in">get</span>(<span class="string">&quot;my_key&quot;</span>, [](cpp_redis::reply&amp; reply) &#123;</span><br><span class="line">    <span class="keyword">if</span> (reply.<span class="built_in">is_string</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Value: &quot;</span> &lt;&lt; reply.<span class="built_in">as_string</span>() &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理响应（阻塞方式）</span></span><br><span class="line">cpp_redis::reply reply = client.<span class="built_in">sync_commit</span>();</span><br><span class="line"><span class="keyword">if</span> (reply.<span class="built_in">is_string</span>()) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Value: &quot;</span> &lt;&lt; reply.<span class="built_in">as_string</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤6：关闭连接</strong></p>
+<p>在使用完Redis之后，确保关闭与Redis服务器的连接以释放资源：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">client.<span class="built_in">disconnect</span>();</span><br></pre></td></tr></table></figure>
+
+<p>要了解更多详细信息和示例，请查阅Redis C++客户端库的文档。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"># redis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/27/%E7%AE%80%E6%98%93%E7%BD%91%E7%9B%98%E9%A1%B9%E7%9B%AE00/" rel="prev" title="简易网盘项目00">
+                  <i class="fa fa-chevron-left"></i> 简易网盘项目00
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">3k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
