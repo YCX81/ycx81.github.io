@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt开发常用控件详解(1)">
+<meta property="og:url" content="http://ycx81.github.io/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-1/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/XYZ1234.png">
+<meta property="og:image" content="https://i.imgur.com/ABC5678.png">
+<meta property="og:image" content="https://i.imgur.com/DEF91011.png">
+<meta property="og:image" content="https://i.imgur.com/GHI1213.png">
+<meta property="og:image" content="https://i.imgur.com/JKL1415.png">
+<meta property="og:image" content="https://i.imgur.com/MNO1617.png">
+<meta property="og:image" content="https://i.imgur.com/PQR1819.png">
+<meta property="og:image" content="https://i.imgur.com/STU2021.png">
+<meta property="og:image" content="https://i.imgur.com/VWX2223.png">
+<meta property="og:image" content="https://i.imgur.com/YZA2425.png">
+<meta property="og:image" content="https://i.imgur.com/UVW2526.png">
+<meta property="og:image" content="https://i.imgur.com/XYZ2829.png">
+<meta property="og:image" content="https://i.imgur.com/BCD3031.png">
+<meta property="og:image" content="https://i.imgur.com/EFG3242.png">
+<meta property="og:image" content="https://i.imgur.com/HJK3434.png">
+<meta property="og:image" content="https://i.imgur.com/IJK4545.png">
+<meta property="og:image" content="https://i.imgur.com/JKL5656.png">
+<meta property="article:published_time" content="2024-12-26T13:32:52.000Z">
+<meta property="article:modified_time" content="2024-12-26T13:33:34.156Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="　&#39;blog&#39;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/XYZ1234.png">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-1/","path":"2024/12/26/Qt开发常用控件详解-1/","title":"Qt开发常用控件详解(1)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Qt开发常用控件详解(1) | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">Qt开发常用控件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Layouts-amp-Spacers"><span class="nav-number">2.1.</span> <span class="nav-text">1. Layouts &amp; Spacers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88Layouts%EF%BC%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 布局管理器（Layouts）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Spacer%EF%BC%88%E7%A9%BA%E7%99%BD%E6%8E%A7%E4%BB%B6%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 Spacer（空白控件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8%E5%92%8C%E9%97%B4%E9%9A%94%E6%8E%A7%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%95%8C%E9%9D%A2"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 示例：使用布局管理器和间隔控件设计界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">2.1.4.</span> <span class="nav-text">1.4 布局管理器的最佳实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Buttons-amp-Containers"><span class="nav-number">2.2.</span> <span class="nav-text">2. Buttons &amp; Containers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%8C%89%E9%92%AE%E6%8E%A7%E4%BB%B6%EF%BC%88Buttons%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 按钮控件（Buttons）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%AE%B9%E5%99%A8%E6%8E%A7%E4%BB%B6%EF%BC%88Containers%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 容器控件（Containers）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QPushButton%E5%92%8CQGroupBox%E6%9E%84%E5%BB%BA%E7%95%8C%E9%9D%A2"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 示例：使用QPushButton和QGroupBox构建界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-QPushButton%E7%9A%84%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4 QPushButton的高级功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-QGroupBox%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.5 QGroupBox的高级应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E6%8E%A7%E4%BB%B6%E7%9A%84%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.6.</span> <span class="nav-text">2.6 布局管理器与容器控件的结合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E5%B0%8F%E7%BB%93"><span class="nav-number">2.2.7.</span> <span class="nav-text">2.7 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Item-Views"><span class="nav-number">2.3.</span> <span class="nav-text">3. Item Views</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A7%86%E5%9B%BE%E6%8E%A7%E4%BB%B6"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 基于模型的视图控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QListView%E5%B1%95%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2 示例：使用QListView展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QTableView%E5%B1%95%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3 示例：使用QTableView展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QTreeView%E5%B1%95%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.4.</span> <span class="nav-text">3.4 示例：使用QTreeView展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E6%A8%A1%E5%9E%8B%E8%A7%86%E5%9B%BE%E6%9E%B6%E6%9E%84%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">2.3.5.</span> <span class="nav-text">3.5 模型视图架构的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E5%B0%8F%E7%BB%93"><span class="nav-number">2.3.6.</span> <span class="nav-text">3.6 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Item-Widgets"><span class="nav-number">2.4.</span> <span class="nav-text">4. Item Widgets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%9F%BA%E4%BA%8E%E9%A1%B9%E7%9A%84%E8%A7%86%E5%9B%BE%E6%8E%A7%E4%BB%B6"><span class="nav-number">2.4.1.</span> <span class="nav-text">4.1 基于项的视图控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QListWidget%E5%B1%95%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.2.</span> <span class="nav-text">4.2 示例：使用QListWidget展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QTreeWidget%E5%B1%95%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.3.</span> <span class="nav-text">4.3 示例：使用QTreeWidget展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QTableWidget%E5%B1%95%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.4.</span> <span class="nav-text">4.4 示例：使用QTableWidget展示数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-QTableWidget%E7%9A%84%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD"><span class="nav-number">2.4.5.</span> <span class="nav-text">4.5 QTableWidget的高级功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E5%B0%8F%E7%BB%93"><span class="nav-number">2.4.6.</span> <span class="nav-text">4.6 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Input-Widgets"><span class="nav-number">2.5.</span> <span class="nav-text">5. Input Widgets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E8%BE%93%E5%85%A5%E6%8E%A7%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="nav-number">2.5.1.</span> <span class="nav-text">5.1 输入控件概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%B8%B8%E7%94%A8%E8%BE%93%E5%85%A5%E6%8E%A7%E4%BB%B6"><span class="nav-number">2.5.2.</span> <span class="nav-text">5.2 常用输入控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QLineEdit%E5%92%8CQPushButton%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="nav-number">2.5.3.</span> <span class="nav-text">5.3 示例：使用QLineEdit和QPushButton获取用户输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QSpinBox%E5%92%8CQSlider%E8%BE%93%E5%85%A5%E6%95%B0%E5%80%BC"><span class="nav-number">2.5.4.</span> <span class="nav-text">5.4 示例：使用QSpinBox和QSlider输入数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-QComboBox%E7%9A%84%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="nav-number">2.5.5.</span> <span class="nav-text">5.5 QComboBox的高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-%E5%B0%8F%E7%BB%93"><span class="nav-number">2.5.6.</span> <span class="nav-text">5.6 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Display-Widgets"><span class="nav-number">2.6.</span> <span class="nav-text">6. Display Widgets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="nav-number">2.6.1.</span> <span class="nav-text">6.1 显示控件概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%B8%B8%E7%94%A8%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6"><span class="nav-number">2.6.2.</span> <span class="nav-text">6.2 常用显示控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QLabel%E6%98%BE%E7%A4%BA%E6%96%87%E6%9C%AC%E5%92%8C%E5%9B%BE%E5%83%8F"><span class="nav-number">2.6.3.</span> <span class="nav-text">6.3 示例：使用QLabel显示文本和图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QProgressBar%E6%98%BE%E7%A4%BA%E4%BB%BB%E5%8A%A1%E8%BF%9B%E5%BA%A6"><span class="nav-number">2.6.4.</span> <span class="nav-text">6.4 示例：使用QProgressBar显示任务进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QLCDNumber%E6%98%BE%E7%A4%BA%E5%8A%A8%E6%80%81%E6%95%B0%E5%AD%97"><span class="nav-number">2.6.5.</span> <span class="nav-text">6.5 示例：使用QLCDNumber显示动态数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-QProgressBar%E4%B8%8EQLCDNumber%E7%9A%84%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-number">2.6.6.</span> <span class="nav-text">6.6 QProgressBar与QLCDNumber的结合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-%E5%B0%8F%E7%BB%93"><span class="nav-number">2.6.7.</span> <span class="nav-text">6.7 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E5%8F%8A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.7.</span> <span class="nav-text">7. 常用算法及正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-Qt%E4%B8%AD%E6%8F%90%E4%BE%9B%E7%9A%84%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95"><span class="nav-number">2.7.1.</span> <span class="nav-text">7.1 Qt中提供的常用算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8Qt%E7%AE%97%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E5%92%8C%E6%9F%A5%E6%89%BE"><span class="nav-number">2.7.2.</span> <span class="nav-text">7.2 示例：使用Qt算法进行排序和查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-Qt%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%94%AF%E6%8C%81"><span class="nav-number">2.7.3.</span> <span class="nav-text">7.3 Qt中的正则表达式支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QRegularExpression%E8%BF%9B%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="nav-number">2.7.4.</span> <span class="nav-text">7.4 示例：使用QRegularExpression进行模式匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8QString-replace%E4%B8%8EQRegularExpression%E8%BF%9B%E8%A1%8C%E5%A4%8D%E6%9D%82%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.7.5.</span> <span class="nav-text">7.5 示例：使用QString::replace与QRegularExpression进行复杂替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-%E5%B0%8F%E7%BB%93"><span class="nav-number">2.7.6.</span> <span class="nav-text">7.6 小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9%E5%9B%9E%E9%A1%BE%EF%BC%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">主要内容回顾：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%AD%A6%E4%B9%A0%E5%BB%BA%E8%AE%AE%EF%BC%9A"><span class="nav-number">3.0.2.</span> <span class="nav-text">下一步学习建议：</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-2/" rel="bookmark">
+        <time class="popular-posts-time">2024-12-26</time>
+        <br>
+      Qt开发常用控件详解(2)
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Qt开发常用控件详解(1) | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Qt开发常用控件详解(1)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-26 21:32:52" itemprop="dateCreated datePublished" datetime="2024-12-26T21:32:52+08:00">2024-12-26</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>31 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><span id="more"></span>
+
+<h1 id="Qt开发常用控件详解"><a href="#Qt开发常用控件详解" class="headerlink" title="Qt开发常用控件详解"></a>Qt开发常用控件详解</h1><p>在Qt框架中，控件（Widgets）是构建图形用户界面的基石。Qt提供了丰富的控件库，涵盖了布局管理、按钮、容器、视图、输入和显示等各个方面，满足不同应用场景的需求。掌握这些常用控件的使用方法和最佳实践，是高效开发Qt应用程序的关键。本文将详细介绍Qt开发中常用的控件类别，包括布局管理器和空白控件、按钮与容器控件、基于模型的视图控件、基于项的视图控件、输入控件以及显示控件。同时，我们还将探讨Qt中常用的算法和正则表达式支持，展示如何在项目中应用这些功能。</p>
+<hr>
+<h2 id="1-Layouts-amp-Spacers"><a href="#1-Layouts-amp-Spacers" class="headerlink" title="1. Layouts &amp; Spacers"></a>1. Layouts &amp; Spacers</h2><h3 id="1-1-布局管理器（Layouts）"><a href="#1-1-布局管理器（Layouts）" class="headerlink" title="1.1 布局管理器（Layouts）"></a>1.1 布局管理器（Layouts）</h3><p>布局管理器是Qt中用于自动排列和调整控件大小的工具。使用布局管理器可以确保用户界面在不同分辨率和窗口大小下都能保持良好的布局。Qt提供了几种常用的布局管理器：</p>
+<ul>
+<li><strong>QHBoxLayout</strong>：水平布局管理器，按水平方向排列控件。</li>
+<li><strong>QVBoxLayout</strong>：垂直布局管理器，按垂直方向排列控件。</li>
+<li><strong>QGridLayout</strong>：网格布局管理器，按行和列排列控件。</li>
+<li><strong>QFormLayout</strong>：表单布局管理器，适用于表单输入界面。</li>
+</ul>
+<h3 id="1-2-Spacer（空白控件）"><a href="#1-2-Spacer（空白控件）" class="headerlink" title="1.2 Spacer（空白控件）"></a>1.2 Spacer（空白控件）</h3><p>Spacer（间隔控件）用于在布局中添加弹性空间，帮助控件之间保持适当的间距或将控件推向布局的一侧。Qt提供了两种主要的间隔控件：</p>
+<ul>
+<li><strong>QSpacerItem</strong>：通用的间隔项，可用于任何布局中。</li>
+<li><strong>QSpacerWidget</strong>：基于QWidget的间隔控件，已在Qt 5中弃用，推荐使用QSpacerItem。</li>
+</ul>
+<h3 id="1-3-示例：使用布局管理器和间隔控件设计界面"><a href="#1-3-示例：使用布局管理器和间隔控件设计界面" class="headerlink" title="1.3 示例：使用布局管理器和间隔控件设计界面"></a>1.3 示例：使用布局管理器和间隔控件设计界面</h3><p>以下示例展示了如何使用QVBoxLayout和QHBoxLayout结合间隔控件来设计一个简洁美观的用户界面。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QHBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QSpacerItem&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;布局管理器与间隔控件示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建按钮</span></span><br><span class="line">    QPushButton *button1 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;按钮1&quot;</span>);</span><br><span class="line">    QPushButton *button2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;按钮2&quot;</span>);</span><br><span class="line">    QPushButton *button3 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;按钮3&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建水平布局管理器</span></span><br><span class="line">    QHBoxLayout *hLayout = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    hLayout-&gt;<span class="built_in">addWidget</span>(button1);</span><br><span class="line">    hLayout-&gt;<span class="built_in">addWidget</span>(button2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加间隔控件，将button3推向右侧</span></span><br><span class="line">    QSpacerItem *spacer = <span class="keyword">new</span> <span class="built_in">QSpacerItem</span>(<span class="number">40</span>, <span class="number">20</span>, QSizePolicy::Expanding, QSizePolicy::Minimum);</span><br><span class="line">    hLayout-&gt;<span class="built_in">addItem</span>(spacer);</span><br><span class="line">    hLayout-&gt;<span class="built_in">addWidget</span>(button3);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建垂直布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addLayout</span>(hLayout);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">400</span>, <span class="number">200</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/XYZ1234.png" alt="布局管理器与间隔控件示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QHBoxLayout</strong>用于水平排列按钮1和按钮2。</li>
+<li><strong>QSpacerItem</strong>被添加到水平布局中，起到弹性空间的作用，将按钮3推向布局的右侧。</li>
+<li><strong>QVBoxLayout</strong>将水平布局嵌套在垂直布局中，确保界面在垂直方向上的灵活性。</li>
+</ul>
+<h3 id="1-4-布局管理器的最佳实践"><a href="#1-4-布局管理器的最佳实践" class="headerlink" title="1.4 布局管理器的最佳实践"></a>1.4 布局管理器的最佳实践</h3><ol>
+<li><strong>避免在控件之间使用固定大小</strong>：尽量使用布局管理器自动调整控件大小，以适应不同的窗口尺寸。</li>
+<li><strong>合理使用嵌套布局</strong>：通过嵌套使用QHBoxLayout和QVBoxLayout，可以设计复杂且灵活的界面。</li>
+<li><strong>使用间隔控件优化布局</strong>：适当添加间隔控件，确保控件之间的间距合理，提升界面的美观性。</li>
+</ol>
+<hr>
+<h2 id="2-Buttons-amp-Containers"><a href="#2-Buttons-amp-Containers" class="headerlink" title="2. Buttons &amp; Containers"></a>2. Buttons &amp; Containers</h2><h3 id="2-1-按钮控件（Buttons）"><a href="#2-1-按钮控件（Buttons）" class="headerlink" title="2.1 按钮控件（Buttons）"></a>2.1 按钮控件（Buttons）</h3><p>按钮是用户界面中最常用的控件之一，用于触发各种操作和事件。Qt提供了多种按钮控件，满足不同的需求：</p>
+<ul>
+<li><strong>QPushButton</strong>：标准按钮，用于执行命令。</li>
+<li><strong>QToolButton</strong>：工具按钮，通常用于工具栏中，支持图标显示。</li>
+<li><strong>QRadioButton</strong>：单选按钮，用于在多个选项中选择一个。</li>
+<li><strong>QCheckBox</strong>：复选框，用于选择或取消选择多个选项。</li>
+<li><strong>QCommandLinkButton</strong>：命令链接按钮，带有描述文本，类似于Windows Vista中的链接按钮。</li>
+</ul>
+<h3 id="2-2-容器控件（Containers）"><a href="#2-2-容器控件（Containers）" class="headerlink" title="2.2 容器控件（Containers）"></a>2.2 容器控件（Containers）</h3><p>容器控件用于组织和管理其他控件，提供分组和结构化界面的能力。常用的容器控件包括：</p>
+<ul>
+<li><strong>QGroupBox</strong>：分组框，用于在视觉上分组相关的控件。</li>
+<li><strong>QFrame</strong>：框架控件，提供多种边框样式。</li>
+<li><strong>QScrollArea</strong>：滚动区域控件，允许在有限的空间内显示超出视图范围的内容。</li>
+</ul>
+<h3 id="2-3-示例：使用QPushButton和QGroupBox构建界面"><a href="#2-3-示例：使用QPushButton和QGroupBox构建界面" class="headerlink" title="2.3 示例：使用QPushButton和QGroupBox构建界面"></a>2.3 示例：使用QPushButton和QGroupBox构建界面</h3><p>以下示例展示了如何使用QPushButton和QGroupBox来创建一个分组按钮的用户界面。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QGroupBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QHBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;按钮与容器控件示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QGroupBox</span></span><br><span class="line">    QGroupBox *groupBox = <span class="keyword">new</span> <span class="built_in">QGroupBox</span>(<span class="string">&quot;操作选项&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建按钮</span></span><br><span class="line">    QPushButton *btnStart = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;开始&quot;</span>);</span><br><span class="line">    QPushButton *btnStop = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;停止&quot;</span>);</span><br><span class="line">    QPushButton *btnPause = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;暂停&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接按钮信号到槽</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(btnStart, &amp;QPushButton::clicked, []()&#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;开始按钮被点击&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    QObject::<span class="built_in">connect</span>(btnStop, &amp;QPushButton::clicked, []()&#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;停止按钮被点击&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    QObject::<span class="built_in">connect</span>(btnPause, &amp;QPushButton::clicked, []()&#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;暂停按钮被点击&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QHBoxLayout *hLayout = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    hLayout-&gt;<span class="built_in">addWidget</span>(btnStart);</span><br><span class="line">    hLayout-&gt;<span class="built_in">addWidget</span>(btnStop);</span><br><span class="line">    hLayout-&gt;<span class="built_in">addWidget</span>(btnPause);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置QGroupBox的布局</span></span><br><span class="line">    groupBox-&gt;<span class="built_in">setLayout</span>(hLayout);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主布局</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(groupBox);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">300</span>, <span class="number">150</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/ABC5678.png" alt="按钮与容器控件示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QGroupBox</strong>用于视觉上分组“开始”、“停止”和“暂停”按钮。</li>
+<li>按钮的点击信号通过<code>QObject::connect</code>连接到lambda槽函数，打印相应的调试信息。</li>
+<li><strong>QHBoxLayout</strong>在<code>QGroupBox</code>内部水平排列按钮，确保界面整洁有序。</li>
+</ul>
+<h3 id="2-4-QPushButton的高级功能"><a href="#2-4-QPushButton的高级功能" class="headerlink" title="2.4 QPushButton的高级功能"></a>2.4 QPushButton的高级功能</h3><p><strong>设置图标和快捷键：</strong></p>
+<p>可以为QPushButton设置图标和快捷键，提升用户体验。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QPushButton *btnSave = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;保存&quot;</span>, <span class="keyword">this</span>);</span><br><span class="line">btnSave-&gt;<span class="built_in">setIcon</span>(<span class="built_in">QIcon</span>(<span class="string">&quot;:/icons/save.png&quot;</span>)); <span class="comment">// 设置图标</span></span><br><span class="line">btnSave-&gt;<span class="built_in">setShortcut</span>(<span class="built_in">QKeySequence</span>(Qt::CTRL + Qt::Key_S)); <span class="comment">// 设置快捷键</span></span><br><span class="line"><span class="built_in">connect</span>(btnSave, &amp;QPushButton::clicked, <span class="keyword">this</span>, &amp;MainWindow::saveData);</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li><code>setIcon</code>方法为按钮设置图标，提升界面的视觉效果。</li>
+<li><code>setShortcut</code>方法为按钮设置快捷键，允许用户通过键盘快速触发按钮操作。</li>
+</ul>
+<h3 id="2-5-QGroupBox的高级应用"><a href="#2-5-QGroupBox的高级应用" class="headerlink" title="2.5 QGroupBox的高级应用"></a>2.5 QGroupBox的高级应用</h3><p><strong>示例：嵌套使用QGroupBox</strong></p>
+<p>通过嵌套使用多个QGroupBox，可以创建更复杂的界面布局。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QGroupBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QHBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;嵌套QGroupBox示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建第一个QGroupBox</span></span><br><span class="line">    QGroupBox *groupBox1 = <span class="keyword">new</span> <span class="built_in">QGroupBox</span>(<span class="string">&quot;文件操作&quot;</span>);</span><br><span class="line">    QPushButton *btnOpen = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;打开&quot;</span>);</span><br><span class="line">    QPushButton *btnClose = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;关闭&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QHBoxLayout *hLayout1 = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    hLayout1-&gt;<span class="built_in">addWidget</span>(btnOpen);</span><br><span class="line">    hLayout1-&gt;<span class="built_in">addWidget</span>(btnClose);</span><br><span class="line">    groupBox1-&gt;<span class="built_in">setLayout</span>(hLayout1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建第二个QGroupBox</span></span><br><span class="line">    QGroupBox *groupBox2 = <span class="keyword">new</span> <span class="built_in">QGroupBox</span>(<span class="string">&quot;编辑操作&quot;</span>);</span><br><span class="line">    QPushButton *btnCut = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;剪切&quot;</span>);</span><br><span class="line">    QPushButton *btnCopy = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;复制&quot;</span>);</span><br><span class="line">    QPushButton *btnPaste = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;粘贴&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QHBoxLayout *hLayout2 = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    hLayout2-&gt;<span class="built_in">addWidget</span>(btnCut);</span><br><span class="line">    hLayout2-&gt;<span class="built_in">addWidget</span>(btnCopy);</span><br><span class="line">    hLayout2-&gt;<span class="built_in">addWidget</span>(btnPaste);</span><br><span class="line">    groupBox2-&gt;<span class="built_in">setLayout</span>(hLayout2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主布局</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(groupBox1);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(groupBox2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">400</span>, <span class="number">200</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/DEF91011.png" alt="嵌套QGroupBox示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li>创建了两个QGroupBox，分别用于“文件操作”和“编辑操作”。</li>
+<li>每个QGroupBox内部使用QHBoxLayout水平排列相关按钮，增强界面的组织性和可读性。</li>
+</ul>
+<h3 id="2-6-布局管理器与容器控件的结合使用"><a href="#2-6-布局管理器与容器控件的结合使用" class="headerlink" title="2.6 布局管理器与容器控件的结合使用"></a>2.6 布局管理器与容器控件的结合使用</h3><p>通过将布局管理器与容器控件结合使用，可以设计出更加复杂和灵活的用户界面。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QGroupBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QHBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QGridLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;布局与容器结合示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QGroupBox1</span></span><br><span class="line">    QGroupBox *groupBox1 = <span class="keyword">new</span> <span class="built_in">QGroupBox</span>(<span class="string">&quot;基本操作&quot;</span>);</span><br><span class="line">    QPushButton *btnAdd = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;添加&quot;</span>);</span><br><span class="line">    QPushButton *btnDelete = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;删除&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QHBoxLayout *hLayout1 = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    hLayout1-&gt;<span class="built_in">addWidget</span>(btnAdd);</span><br><span class="line">    hLayout1-&gt;<span class="built_in">addWidget</span>(btnDelete);</span><br><span class="line">    groupBox1-&gt;<span class="built_in">setLayout</span>(hLayout1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QGroupBox2</span></span><br><span class="line">    QGroupBox *groupBox2 = <span class="keyword">new</span> <span class="built_in">QGroupBox</span>(<span class="string">&quot;高级操作&quot;</span>);</span><br><span class="line">    QPushButton *btnEdit = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;编辑&quot;</span>);</span><br><span class="line">    QPushButton *btnSearch = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;搜索&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QHBoxLayout *hLayout2 = <span class="keyword">new</span> QHBoxLayout;</span><br><span class="line">    hLayout2-&gt;<span class="built_in">addWidget</span>(btnEdit);</span><br><span class="line">    hLayout2-&gt;<span class="built_in">addWidget</span>(btnSearch);</span><br><span class="line">    groupBox2-&gt;<span class="built_in">setLayout</span>(hLayout2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建网格布局</span></span><br><span class="line">    QGridLayout *gridLayout = <span class="keyword">new</span> QGridLayout;</span><br><span class="line">    gridLayout-&gt;<span class="built_in">addWidget</span>(groupBox1, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    gridLayout-&gt;<span class="built_in">addWidget</span>(groupBox2, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主布局</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addLayout</span>(gridLayout);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">500</span>, <span class="number">300</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/GHI1213.png" alt="布局与容器结合示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li>使用QGridLayout将两个QGroupBox放置在网格的不同位置。</li>
+<li>每个QGroupBox内部使用QHBoxLayout水平排列按钮，实现复杂的界面布局。</li>
+</ul>
+<h3 id="2-7-小结"><a href="#2-7-小结" class="headerlink" title="2.7 小结"></a>2.7 小结</h3><p>布局管理器和容器控件是构建美观且响应式用户界面的重要工具。通过合理使用布局管理器和容器控件，可以确保应用程序在不同屏幕尺寸和分辨率下都能保持良好的用户体验。同时，结合按钮控件的使用，能够创建功能齐全且易于操作的用户界面。</p>
+<hr>
+<h2 id="3-Item-Views"><a href="#3-Item-Views" class="headerlink" title="3. Item Views"></a>3. Item Views</h2><h3 id="3-1-基于模型的视图控件"><a href="#3-1-基于模型的视图控件" class="headerlink" title="3.1 基于模型的视图控件"></a>3.1 基于模型的视图控件</h3><p>Qt的模型视图架构（Model-View Architecture）提供了一种高效的数据管理和显示方式。基于模型的视图控件将数据存储在模型中，视图负责展示数据，控制器处理用户交互。这种架构促进了数据与视图的分离，提高了代码的可维护性和复用性。</p>
+<p>常见的基于模型的视图控件包括：</p>
+<ul>
+<li><strong>QListView</strong>：列表视图，用于显示线性列表数据。</li>
+<li><strong>QTableView</strong>：表格视图，用于显示二维表格数据。</li>
+<li><strong>QTreeView</strong>：树形视图，用于显示层次结构数据。</li>
+</ul>
+<h3 id="3-2-示例：使用QListView展示数据"><a href="#3-2-示例：使用QListView展示数据" class="headerlink" title="3.2 示例：使用QListView展示数据"></a>3.2 示例：使用QListView展示数据</h3><p>以下示例展示了如何使用QListView结合QStringListModel来展示简单的列表数据。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QListView&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStringListModel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QListView</span></span><br><span class="line">    QListView listView;</span><br><span class="line">    listView.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QListView 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QStringListModel</span></span><br><span class="line">    QStringList data;</span><br><span class="line">    data &lt;&lt; <span class="string">&quot;Apple&quot;</span> &lt;&lt; <span class="string">&quot;Banana&quot;</span> &lt;&lt; <span class="string">&quot;Cherry&quot;</span> &lt;&lt; <span class="string">&quot;Date&quot;</span> &lt;&lt; <span class="string">&quot;Elderberry&quot;</span>;</span><br><span class="line">    QStringListModel *model = <span class="keyword">new</span> <span class="built_in">QStringListModel</span>(data, &amp;listView);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置模型到视图</span></span><br><span class="line">    listView.<span class="built_in">setModel</span>(model);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示视图</span></span><br><span class="line">    listView.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/JKL1415.png" alt="QListView 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QListView</strong>作为视图控件，负责展示数据。</li>
+<li><strong>QStringListModel</strong>作为模型，存储并管理字符串列表数据。</li>
+<li>使用<code>setModel</code>方法将模型关联到视图，视图自动更新显示数据。</li>
+</ul>
+<h3 id="3-3-示例：使用QTableView展示数据"><a href="#3-3-示例：使用QTableView展示数据" class="headerlink" title="3.3 示例：使用QTableView展示数据"></a>3.3 示例：使用QTableView展示数据</h3><p>以下示例展示了如何使用QTableView结合QStandardItemModel来展示二维表格数据。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTableView&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardItemModel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardItem&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QTableView</span></span><br><span class="line">    QTableView tableView;</span><br><span class="line">    tableView.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QTableView 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QStandardItemModel</span></span><br><span class="line">    <span class="function">QStandardItemModel <span class="title">model</span><span class="params">(<span class="number">3</span>, <span class="number">2</span>)</span></span>; <span class="comment">// 3行2列</span></span><br><span class="line">    model.<span class="built_in">setHeaderData</span>(<span class="number">0</span>, Qt::Horizontal, <span class="string">&quot;姓名&quot;</span>);</span><br><span class="line">    model.<span class="built_in">setHeaderData</span>(<span class="number">1</span>, Qt::Horizontal, <span class="string">&quot;年龄&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充数据</span></span><br><span class="line">    QList&lt;QStandardItem *&gt; row1;</span><br><span class="line">    row1 &lt;&lt; <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;Alice&quot;</span>) &lt;&lt; <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;30&quot;</span>);</span><br><span class="line">    QList&lt;QStandardItem *&gt; row2;</span><br><span class="line">    row2 &lt;&lt; <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;Bob&quot;</span>) &lt;&lt; <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;25&quot;</span>);</span><br><span class="line">    QList&lt;QStandardItem *&gt; row3;</span><br><span class="line">    row3 &lt;&lt; <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;Charlie&quot;</span>) &lt;&lt; <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;35&quot;</span>);</span><br><span class="line"></span><br><span class="line">    model.<span class="built_in">appendRow</span>(row1);</span><br><span class="line">    model.<span class="built_in">appendRow</span>(row2);</span><br><span class="line">    model.<span class="built_in">appendRow</span>(row3);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置模型到视图</span></span><br><span class="line">    tableView.<span class="built_in">setModel</span>(&amp;model);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示视图</span></span><br><span class="line">    tableView.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/MNO1617.png" alt="QTableView 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QTableView</strong>作为视图控件，负责展示二维表格数据。</li>
+<li><strong>QStandardItemModel</strong>作为模型，存储并管理表格数据，包括行和列。</li>
+<li>使用<code>setHeaderData</code>设置表头信息，使用<code>appendRow</code>添加数据行。</li>
+<li>视图自动显示模型中的数据。</li>
+</ul>
+<h3 id="3-4-示例：使用QTreeView展示数据"><a href="#3-4-示例：使用QTreeView展示数据" class="headerlink" title="3.4 示例：使用QTreeView展示数据"></a>3.4 示例：使用QTreeView展示数据</h3><p>以下示例展示了如何使用QTreeView结合QStandardItemModel来展示层次结构数据。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTreeView&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardItemModel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardItem&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QTreeView</span></span><br><span class="line">    QTreeView treeView;</span><br><span class="line">    treeView.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QTreeView 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QStandardItemModel</span></span><br><span class="line">    QStandardItemModel model;</span><br><span class="line">    model.<span class="built_in">setHorizontalHeaderLabels</span>(&#123;<span class="string">&quot;名称&quot;</span>, <span class="string">&quot;描述&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建根节点</span></span><br><span class="line">    QStandardItem *rootItem = model.<span class="built_in">invisibleRootItem</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一级节点</span></span><br><span class="line">    QStandardItem *parent1 = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;文件&quot;</span>);</span><br><span class="line">    QStandardItem *parent1Desc = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;文件操作&quot;</span>);</span><br><span class="line">    rootItem-&gt;<span class="built_in">appendRow</span>(&#123;parent1, parent1Desc&#125;);</span><br><span class="line"></span><br><span class="line">    QStandardItem *parent2 = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;编辑&quot;</span>);</span><br><span class="line">    QStandardItem *parent2Desc = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;编辑操作&quot;</span>);</span><br><span class="line">    rootItem-&gt;<span class="built_in">appendRow</span>(&#123;parent2, parent2Desc&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建二级节点</span></span><br><span class="line">    QStandardItem *child1 = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;新建&quot;</span>);</span><br><span class="line">    QStandardItem *child1Desc = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;创建新文件&quot;</span>);</span><br><span class="line">    parent1-&gt;<span class="built_in">appendRow</span>(&#123;child1, child1Desc&#125;);</span><br><span class="line"></span><br><span class="line">    QStandardItem *child2 = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;打开&quot;</span>);</span><br><span class="line">    QStandardItem *child2Desc = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;打开现有文件&quot;</span>);</span><br><span class="line">    parent1-&gt;<span class="built_in">appendRow</span>(&#123;child2, child2Desc&#125;);</span><br><span class="line"></span><br><span class="line">    QStandardItem *child3 = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;复制&quot;</span>);</span><br><span class="line">    QStandardItem *child3Desc = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;复制选中内容&quot;</span>);</span><br><span class="line">    parent2-&gt;<span class="built_in">appendRow</span>(&#123;child3, child3Desc&#125;);</span><br><span class="line"></span><br><span class="line">    QStandardItem *child4 = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;粘贴&quot;</span>);</span><br><span class="line">    QStandardItem *child4Desc = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="string">&quot;粘贴内容&quot;</span>);</span><br><span class="line">    parent2-&gt;<span class="built_in">appendRow</span>(&#123;child4, child4Desc&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置模型到视图</span></span><br><span class="line">    treeView.<span class="built_in">setModel</span>(&amp;model);</span><br><span class="line">    treeView.<span class="built_in">expandAll</span>(); <span class="comment">// 展开所有节点</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示视图</span></span><br><span class="line">    treeView.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/PQR1819.png" alt="QTreeView 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QTreeView</strong>作为视图控件，负责展示层次结构数据。</li>
+<li><strong>QStandardItemModel</strong>作为模型，存储并管理树形数据结构。</li>
+<li>通过<code>appendRow</code>方法添加父节点和子节点，构建树形结构。</li>
+<li>使用<code>expandAll</code>方法展开所有节点，便于查看数据。</li>
+</ul>
+<h3 id="3-5-模型视图架构的优势"><a href="#3-5-模型视图架构的优势" class="headerlink" title="3.5 模型视图架构的优势"></a>3.5 模型视图架构的优势</h3><ul>
+<li><strong>数据与视图分离</strong>：模型负责数据管理，视图负责数据展示，提高了代码的模块化和可维护性。</li>
+<li><strong>灵活的数据展示</strong>：同一个模型可以被多个视图使用，如一个模型可以同时被QListView和QTableView展示。</li>
+<li><strong>高效的数据操作</strong>：模型视图架构优化了大规模数据的处理和展示，提升了应用程序的性能。</li>
+</ul>
+<h3 id="3-6-小结"><a href="#3-6-小结" class="headerlink" title="3.6 小结"></a>3.6 小结</h3><p>基于模型的视图控件是Qt中处理和展示复杂数据的重要工具。通过理解和应用模型视图架构，开发者可以构建高效、灵活且可维护的用户界面，满足不同的数据展示需求。</p>
+<hr>
+<h2 id="4-Item-Widgets"><a href="#4-Item-Widgets" class="headerlink" title="4. Item Widgets"></a>4. Item Widgets</h2><h3 id="4-1-基于项的视图控件"><a href="#4-1-基于项的视图控件" class="headerlink" title="4.1 基于项的视图控件"></a>4.1 基于项的视图控件</h3><p>除了基于模型的视图控件，Qt还提供了基于项的视图控件，这些控件更加直观和易于使用，适用于简单的数据展示场景。常见的基于项的视图控件包括：</p>
+<ul>
+<li><strong>QListWidget</strong>：列表项视图，继承自QListView，提供简化的API。</li>
+<li><strong>QTreeWidget</strong>：树形项视图，继承自QTreeView，提供简化的API。</li>
+<li><strong>QTableWidget</strong>：表格项视图，继承自QTableView，提供简化的API。</li>
+</ul>
+<h3 id="4-2-示例：使用QListWidget展示数据"><a href="#4-2-示例：使用QListWidget展示数据" class="headerlink" title="4.2 示例：使用QListWidget展示数据"></a>4.2 示例：使用QListWidget展示数据</h3><p>以下示例展示了如何使用QListWidget来展示和管理简单的列表数据。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QListWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QListWidget</span></span><br><span class="line">    QListWidget listWidget;</span><br><span class="line">    listWidget.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QListWidget 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加列表项</span></span><br><span class="line">    listWidget.<span class="built_in">addItem</span>(<span class="string">&quot;Item 1&quot;</span>);</span><br><span class="line">    listWidget.<span class="built_in">addItem</span>(<span class="string">&quot;Item 2&quot;</span>);</span><br><span class="line">    listWidget.<span class="built_in">addItem</span>(<span class="string">&quot;Item 3&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加带有图标的列表项</span></span><br><span class="line">    QListWidgetItem *item4 = <span class="keyword">new</span> <span class="built_in">QListWidgetItem</span>(<span class="built_in">QIcon</span>(<span class="string">&quot;:/icons/icon.png&quot;</span>), <span class="string">&quot;Item 4&quot;</span>);</span><br><span class="line">    listWidget.<span class="built_in">addItem</span>(item4);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 响应列表项点击信号</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;listWidget, &amp;QListWidget::itemClicked, [&amp;](QListWidgetItem *item)&#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;点击了：&quot;</span> &lt;&lt; item-&gt;<span class="built_in">text</span>();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示列表</span></span><br><span class="line">    listWidget.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/STU2021.png" alt="QListWidget 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QListWidget</strong>提供了一个简单的接口来管理列表项，无需手动创建模型。</li>
+<li>使用<code>addItem</code>方法添加文本项或带有图标的项。</li>
+<li>通过<code>itemClicked</code>信号连接到槽函数，响应用户的点击操作。</li>
+</ul>
+<h3 id="4-3-示例：使用QTreeWidget展示数据"><a href="#4-3-示例：使用QTreeWidget展示数据" class="headerlink" title="4.3 示例：使用QTreeWidget展示数据"></a>4.3 示例：使用QTreeWidget展示数据</h3><p>以下示例展示了如何使用QTreeWidget来展示和管理树形数据。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTreeWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTreeWidgetItem&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QTreeWidget</span></span><br><span class="line">    QTreeWidget treeWidget;</span><br><span class="line">    treeWidget.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QTreeWidget 示例&quot;</span>);</span><br><span class="line">    treeWidget.<span class="built_in">setColumnCount</span>(<span class="number">2</span>);</span><br><span class="line">    treeWidget.<span class="built_in">setHeaderLabels</span>(&#123;<span class="string">&quot;名称&quot;</span>, <span class="string">&quot;描述&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建根节点</span></span><br><span class="line">    QTreeWidgetItem *root = <span class="keyword">new</span> <span class="built_in">QTreeWidgetItem</span>(&amp;treeWidget);</span><br><span class="line">    root-&gt;<span class="built_in">setText</span>(<span class="number">0</span>, <span class="string">&quot;文件&quot;</span>);</span><br><span class="line">    root-&gt;<span class="built_in">setText</span>(<span class="number">1</span>, <span class="string">&quot;文件操作&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建子节点</span></span><br><span class="line">    QTreeWidgetItem *child1 = <span class="keyword">new</span> <span class="built_in">QTreeWidgetItem</span>(root);</span><br><span class="line">    child1-&gt;<span class="built_in">setText</span>(<span class="number">0</span>, <span class="string">&quot;新建&quot;</span>);</span><br><span class="line">    child1-&gt;<span class="built_in">setText</span>(<span class="number">1</span>, <span class="string">&quot;创建新文件&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QTreeWidgetItem *child2 = <span class="keyword">new</span> <span class="built_in">QTreeWidgetItem</span>(root);</span><br><span class="line">    child2-&gt;<span class="built_in">setText</span>(<span class="number">0</span>, <span class="string">&quot;打开&quot;</span>);</span><br><span class="line">    child2-&gt;<span class="built_in">setText</span>(<span class="number">1</span>, <span class="string">&quot;打开现有文件&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 展开所有节点</span></span><br><span class="line">    treeWidget.<span class="built_in">expandAll</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 响应节点点击信号</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;treeWidget, &amp;QTreeWidget::itemClicked, [&amp;](QTreeWidgetItem *item, <span class="type">int</span> column)&#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;点击了：&quot;</span> &lt;&lt; item-&gt;<span class="built_in">text</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot; - &quot;</span> &lt;&lt; item-&gt;<span class="built_in">text</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示树形视图</span></span><br><span class="line">    treeWidget.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/VWX2223.png" alt="QTreeWidget 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QTreeWidget</strong>提供了一个简化的接口来管理树形数据，无需手动创建模型。</li>
+<li>使用<code>QTreeWidgetItem</code>创建根节点和子节点，并设置其文本内容。</li>
+<li>通过<code>itemClicked</code>信号连接到槽函数，响应用户的点击操作。</li>
+</ul>
+<h3 id="4-4-示例：使用QTableWidget展示数据"><a href="#4-4-示例：使用QTableWidget展示数据" class="headerlink" title="4.4 示例：使用QTableWidget展示数据"></a>4.4 示例：使用QTableWidget展示数据</h3><p>以下示例展示了如何使用QTableWidget来展示和管理表格数据。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTableWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTableWidgetItem&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QTableWidget</span></span><br><span class="line">    QTableWidget tableWidget;</span><br><span class="line">    tableWidget.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QTableWidget 示例&quot;</span>);</span><br><span class="line">    tableWidget.<span class="built_in">setRowCount</span>(<span class="number">3</span>);</span><br><span class="line">    tableWidget.<span class="built_in">setColumnCount</span>(<span class="number">2</span>);</span><br><span class="line">    tableWidget.<span class="built_in">setHorizontalHeaderLabels</span>(&#123;<span class="string">&quot;姓名&quot;</span>, <span class="string">&quot;年龄&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充数据</span></span><br><span class="line">    tableWidget.<span class="built_in">setItem</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;Alice&quot;</span>));</span><br><span class="line">    tableWidget.<span class="built_in">setItem</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;30&quot;</span>));</span><br><span class="line"></span><br><span class="line">    tableWidget.<span class="built_in">setItem</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;Bob&quot;</span>));</span><br><span class="line">    tableWidget.<span class="built_in">setItem</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;25&quot;</span>));</span><br><span class="line"></span><br><span class="line">    tableWidget.<span class="built_in">setItem</span>(<span class="number">2</span>, <span class="number">0</span>, <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;Charlie&quot;</span>));</span><br><span class="line">    tableWidget.<span class="built_in">setItem</span>(<span class="number">2</span>, <span class="number">1</span>, <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;35&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 响应单元格点击信号</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;tableWidget, &amp;QTableWidget::cellClicked, [&amp;](<span class="type">int</span> row, <span class="type">int</span> column)&#123;</span><br><span class="line">        QString name = tableWidget.<span class="built_in">item</span>(row, <span class="number">0</span>)-&gt;<span class="built_in">text</span>();</span><br><span class="line">        QString age = tableWidget.<span class="built_in">item</span>(row, <span class="number">1</span>)-&gt;<span class="built_in">text</span>();</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;点击了：&quot;</span> &lt;&lt; name &lt;&lt; <span class="string">&quot; - &quot;</span> &lt;&lt; age;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示表格</span></span><br><span class="line">    tableWidget.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/YZA2425.png" alt="QTableWidget 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QTableWidget</strong>提供了一个简化的接口来管理表格数据，无需手动创建模型。</li>
+<li>使用<code>setItem</code>方法填充表格单元格数据。</li>
+<li>通过<code>cellClicked</code>信号连接到槽函数，响应用户的点击操作。</li>
+</ul>
+<h3 id="4-5-QTableWidget的高级功能"><a href="#4-5-QTableWidget的高级功能" class="headerlink" title="4.5 QTableWidget的高级功能"></a>4.5 QTableWidget的高级功能</h3><p><strong>设置单元格编辑属性：</strong></p>
+<p>可以控制单元格的编辑行为，如只读、可编辑等。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QTableWidgetItem *item = <span class="keyword">new</span> <span class="built_in">QTableWidgetItem</span>(<span class="string">&quot;Read-Only&quot;</span>);</span><br><span class="line">item-&gt;<span class="built_in">setFlags</span>(item-&gt;<span class="built_in">flags</span>() &amp; ~Qt::ItemIsEditable); <span class="comment">// 设置为只读</span></span><br><span class="line">tableWidget.<span class="built_in">setItem</span>(<span class="number">0</span>, <span class="number">0</span>, item);</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>使用<code>setFlags</code>方法修改单元格的标志，取消<code>Qt::ItemIsEditable</code>标志，将单元格设置为只读。</li>
+</ul>
+<h3 id="4-6-小结"><a href="#4-6-小结" class="headerlink" title="4.6 小结"></a>4.6 小结</h3><p>基于项的视图控件如QListWidget、QTreeWidget和QTableWidget提供了简化的数据展示和管理接口，适用于简单或中等复杂度的数据展示场景。它们易于使用，适合快速开发，但在处理大规模数据或需要高度定制化的场景时，基于模型的视图控件更为合适。</p>
+<hr>
+<h2 id="5-Input-Widgets"><a href="#5-Input-Widgets" class="headerlink" title="5. Input Widgets"></a>5. Input Widgets</h2><h3 id="5-1-输入控件概述"><a href="#5-1-输入控件概述" class="headerlink" title="5.1 输入控件概述"></a>5.1 输入控件概述</h3><p>输入控件用于获取用户的输入信息，是用户与应用程序交互的主要方式。Qt提供了多种输入控件，支持文本输入、数值输入、选择输入等多种形式。</p>
+<h3 id="5-2-常用输入控件"><a href="#5-2-常用输入控件" class="headerlink" title="5.2 常用输入控件"></a>5.2 常用输入控件</h3><ul>
+<li><strong>QLineEdit</strong>：单行文本输入框，用于接收用户的文本输入。</li>
+<li><strong>QTextEdit</strong>：多行文本编辑器，用于接收和显示大量文本。</li>
+<li><strong>QSpinBox</strong>：数值输入框，允许用户通过点击按钮或键盘输入整数值。</li>
+<li><strong>QDoubleSpinBox</strong>：数值输入框，允许用户输入浮点数值。</li>
+<li><strong>QComboBox</strong>：下拉列表框，允许用户从预定义选项中选择一项。</li>
+<li><strong>QCheckBox</strong>：复选框，允许用户选择或取消选择某个选项。</li>
+<li><strong>QRadioButton</strong>：单选按钮，允许用户在一组互斥的选项中选择一项。</li>
+<li><strong>QSlider</strong>：滑块控件，允许用户通过拖动滑块选择一个范围内的数值。</li>
+<li><strong>QDateEdit</strong>：日期输入框，允许用户选择日期。</li>
+<li><strong>QTimeEdit</strong>：时间输入框，允许用户选择时间。</li>
+</ul>
+<h3 id="5-3-示例：使用QLineEdit和QPushButton获取用户输入"><a href="#5-3-示例：使用QLineEdit和QPushButton获取用户输入" class="headerlink" title="5.3 示例：使用QLineEdit和QPushButton获取用户输入"></a>5.3 示例：使用QLineEdit和QPushButton获取用户输入</h3><p>以下示例展示了如何使用QLineEdit获取用户的文本输入，并通过QPushButton触发操作。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLineEdit&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLabel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;输入控件示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLineEdit</span></span><br><span class="line">    QLineEdit *lineEdit = <span class="keyword">new</span> QLineEdit;</span><br><span class="line">    lineEdit-&gt;<span class="built_in">setPlaceholderText</span>(<span class="string">&quot;请输入您的姓名&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QPushButton</span></span><br><span class="line">    QPushButton *btnSubmit = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;提交&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLabel显示结果</span></span><br><span class="line">    QLabel *label = <span class="keyword">new</span> <span class="built_in">QLabel</span>(<span class="string">&quot;等待输入...&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接按钮信号到槽</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(btnSubmit, &amp;QPushButton::clicked, [&amp;]()&#123;</span><br><span class="line">        QString name = lineEdit-&gt;<span class="built_in">text</span>();</span><br><span class="line">        <span class="keyword">if</span>(!name.<span class="built_in">isEmpty</span>()) &#123;</span><br><span class="line">            label-&gt;<span class="built_in">setText</span>(<span class="string">&quot;您好, &quot;</span> + name + <span class="string">&quot;!&quot;</span>);</span><br><span class="line">            <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;用户输入：&quot;</span> &lt;&lt; name;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            label-&gt;<span class="built_in">setText</span>(<span class="string">&quot;请输入您的姓名。&quot;</span>);</span><br><span class="line">            <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;用户未输入姓名。&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(lineEdit);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(btnSubmit);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(label);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">300</span>, <span class="number">150</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/UVW2526.png" alt="输入控件示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QLineEdit</strong>用于获取用户的文本输入，设置了占位符提示“请输入您的姓名”。</li>
+<li><strong>QPushButton</strong>用于触发提交操作，当用户点击按钮时，获取QLineEdit中的文本并更新QLabel显示。</li>
+<li>通过<code>QObject::connect</code>将按钮的<code>clicked</code>信号连接到一个lambda槽函数，实现动态响应用户输入。</li>
+</ul>
+<h3 id="5-4-示例：使用QSpinBox和QSlider输入数值"><a href="#5-4-示例：使用QSpinBox和QSlider输入数值" class="headerlink" title="5.4 示例：使用QSpinBox和QSlider输入数值"></a>5.4 示例：使用QSpinBox和QSlider输入数值</h3><p>以下示例展示了如何使用QSpinBox和QSlider来获取和展示用户的数值输入。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QSpinBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QSlider&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLabel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;数值输入控件示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QSpinBox</span></span><br><span class="line">    QSpinBox *spinBox = <span class="keyword">new</span> QSpinBox;</span><br><span class="line">    spinBox-&gt;<span class="built_in">setRange</span>(<span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">    spinBox-&gt;<span class="built_in">setValue</span>(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QSlider</span></span><br><span class="line">    QSlider *slider = <span class="keyword">new</span> <span class="built_in">QSlider</span>(Qt::Horizontal);</span><br><span class="line">    slider-&gt;<span class="built_in">setRange</span>(<span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">    slider-&gt;<span class="built_in">setValue</span>(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLabel显示数值</span></span><br><span class="line">    QLabel *label = <span class="keyword">new</span> <span class="built_in">QLabel</span>(<span class="string">&quot;当前值: 50&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接SpinBox和Slider的值变化信号到槽</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(spinBox, QOverload&lt;<span class="type">int</span>&gt;::<span class="built_in">of</span>(&amp;QSpinBox::valueChanged), [&amp;](<span class="type">int</span> value)&#123;</span><br><span class="line">        slider-&gt;<span class="built_in">setValue</span>(value);</span><br><span class="line">        label-&gt;<span class="built_in">setText</span>(<span class="string">&quot;当前值: &quot;</span> + QString::<span class="built_in">number</span>(value));</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;SpinBox值变化:&quot;</span> &lt;&lt; value;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    QObject::<span class="built_in">connect</span>(slider, &amp;QSlider::valueChanged, [&amp;](<span class="type">int</span> value)&#123;</span><br><span class="line">        spinBox-&gt;<span class="built_in">setValue</span>(value);</span><br><span class="line">        label-&gt;<span class="built_in">setText</span>(<span class="string">&quot;当前值: &quot;</span> + QString::<span class="built_in">number</span>(value));</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Slider值变化:&quot;</span> &lt;&lt; value;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(spinBox);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(slider);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(label);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">300</span>, <span class="number">200</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/XYZ2829.png" alt="数值输入控件示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QSpinBox</strong>和<strong>QSlider</strong>都用于获取用户的数值输入，范围设置为0到100，初始值为50。</li>
+<li>当用户在SpinBox或Slider中改变数值时，通过信号与槽机制同步更新对方的值，并在QLabel中显示当前值。</li>
+<li>通过<code>QOverload&lt;int&gt;::of</code>语法解决了信号重载的问题，确保信号与槽的正确连接。</li>
+</ul>
+<h3 id="5-5-QComboBox的高级用法"><a href="#5-5-QComboBox的高级用法" class="headerlink" title="5.5 QComboBox的高级用法"></a>5.5 QComboBox的高级用法</h3><p><strong>添加可编辑项和自定义绘制：</strong></p>
+<p>可以设置QComboBox为可编辑状态，并自定义每个项的显示内容。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QComboBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QComboBox</span></span><br><span class="line">    QComboBox comboBox;</span><br><span class="line">    comboBox.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QComboBox 示例&quot;</span>);</span><br><span class="line">    comboBox.<span class="built_in">setEditable</span>(<span class="literal">true</span>); <span class="comment">// 设置为可编辑</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加项</span></span><br><span class="line">    comboBox.<span class="built_in">addItem</span>(<span class="string">&quot;Option 1&quot;</span>);</span><br><span class="line">    comboBox.<span class="built_in">addItem</span>(<span class="string">&quot;Option 2&quot;</span>);</span><br><span class="line">    comboBox.<span class="built_in">addItem</span>(<span class="string">&quot;Option 3&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加带有用户数据的项</span></span><br><span class="line">    comboBox.<span class="built_in">addItem</span>(<span class="string">&quot;Option 4&quot;</span>, <span class="built_in">QVariant</span>(<span class="number">42</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接信号到槽</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;comboBox, QOverload&lt;<span class="type">int</span>&gt;::<span class="built_in">of</span>(&amp;QComboBox::currentIndexChanged), [&amp;](<span class="type">int</span> index)&#123;</span><br><span class="line">        QString text = comboBox.<span class="built_in">currentText</span>();</span><br><span class="line">        QVariant data = comboBox.<span class="built_in">itemData</span>(index);</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;当前选中项：&quot;</span> &lt;&lt; text &lt;&lt; <span class="string">&quot;, 数据：&quot;</span> &lt;&lt; data.<span class="built_in">toInt</span>();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示QComboBox</span></span><br><span class="line">    comboBox.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/BCD3031.png" alt="QComboBox 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QComboBox</strong>设置为可编辑，允许用户输入自定义文本。</li>
+<li>使用<code>addItem</code>方法添加带有用户数据的项，通过<code>itemData</code>方法获取关联的数据。</li>
+<li>通过<code>currentIndexChanged</code>信号连接到槽函数，实时响应用户的选择变化。</li>
+</ul>
+<h3 id="5-6-小结"><a href="#5-6-小结" class="headerlink" title="5.6 小结"></a>5.6 小结</h3><p>输入控件是用户与应用程序交互的桥梁，Qt提供了丰富的输入控件来满足不同的输入需求。通过合理选择和配置输入控件，可以提升用户体验，确保应用程序的易用性和功能性。</p>
+<hr>
+<h2 id="6-Display-Widgets"><a href="#6-Display-Widgets" class="headerlink" title="6. Display Widgets"></a>6. Display Widgets</h2><h3 id="6-1-显示控件概述"><a href="#6-1-显示控件概述" class="headerlink" title="6.1 显示控件概述"></a>6.1 显示控件概述</h3><p>显示控件用于展示信息和数据，是用户界面中不可或缺的一部分。Qt提供了多种显示控件，支持文本显示、图像显示、进度显示等多种形式。</p>
+<h3 id="6-2-常用显示控件"><a href="#6-2-常用显示控件" class="headerlink" title="6.2 常用显示控件"></a>6.2 常用显示控件</h3><ul>
+<li><strong>QLabel</strong>：标签控件，用于显示文本或图像。</li>
+<li><strong>QTextBrowser</strong>：文本浏览器，用于显示富文本内容，支持超链接。</li>
+<li><strong>QProgressBar</strong>：进度条控件，用于显示任务的完成进度。</li>
+<li><strong>QLCDNumber</strong>：LCD数字显示控件，用于显示数字信息。</li>
+<li><strong>QDial</strong>：旋钮控件，类似于音量调节器。</li>
+<li><strong>QLCDNumber</strong>：LCD样式的数字显示控件。</li>
+<li><strong>QToolTip</strong>：提示工具，用于显示悬停提示信息。</li>
+</ul>
+<h3 id="6-3-示例：使用QLabel显示文本和图像"><a href="#6-3-示例：使用QLabel显示文本和图像" class="headerlink" title="6.3 示例：使用QLabel显示文本和图像"></a>6.3 示例：使用QLabel显示文本和图像</h3><p>以下示例展示了如何使用QLabel来显示文本和图像。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLabel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPixmap&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QLabel 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLabel用于显示文本</span></span><br><span class="line">    QLabel *textLabel = <span class="keyword">new</span> <span class="built_in">QLabel</span>(<span class="string">&quot;欢迎使用Qt！&quot;</span>);</span><br><span class="line">    textLabel-&gt;<span class="built_in">setAlignment</span>(Qt::AlignCenter);</span><br><span class="line">    textLabel-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;QLabel &#123; font-size: 24px; color: blue; &#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLabel用于显示图像</span></span><br><span class="line">    QLabel *imageLabel = <span class="keyword">new</span> QLabel;</span><br><span class="line">    <span class="function">QPixmap <span class="title">pixmap</span><span class="params">(<span class="string">&quot;:/images/logo.png&quot;</span>)</span></span>; <span class="comment">// 确保资源文件中有此图像</span></span><br><span class="line">    imageLabel-&gt;<span class="built_in">setPixmap</span>(pixmap.<span class="built_in">scaled</span>(<span class="number">200</span>, <span class="number">200</span>, Qt::KeepAspectRatio));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(textLabel);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(imageLabel);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">300</span>, <span class="number">400</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/EFG3242.png" alt="QLabel 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QLabel</strong>用于显示居中的文本，设置了自定义的字体大小和颜色。</li>
+<li><strong>QLabel</strong>还可以用于显示图像，通过设置QPixmap实现。</li>
+<li>使用<code>scaled</code>方法调整图像大小，保持纵横比不变。</li>
+</ul>
+<h3 id="6-4-示例：使用QProgressBar显示任务进度"><a href="#6-4-示例：使用QProgressBar显示任务进度" class="headerlink" title="6.4 示例：使用QProgressBar显示任务进度"></a>6.4 示例：使用QProgressBar显示任务进度</h3><p>以下示例展示了如何使用QProgressBar来显示任务的完成进度，并通过按钮控制进度条的更新。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QProgressBar&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTimer&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QProgressBar 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QProgressBar</span></span><br><span class="line">    QProgressBar *progressBar = <span class="keyword">new</span> QProgressBar;</span><br><span class="line">    progressBar-&gt;<span class="built_in">setRange</span>(<span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">    progressBar-&gt;<span class="built_in">setValue</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QPushButton</span></span><br><span class="line">    QPushButton *btnStart = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;开始任务&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(progressBar);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(btnStart);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">300</span>, <span class="number">150</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建计时器</span></span><br><span class="line">    QTimer timer;</span><br><span class="line">    timer.<span class="built_in">setInterval</span>(<span class="number">100</span>); <span class="comment">// 每100毫秒更新一次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> progress = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接按钮信号到槽函数</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(btnStart, &amp;QPushButton::clicked, [&amp;]()&#123;</span><br><span class="line">        progress = <span class="number">0</span>;</span><br><span class="line">        progressBar-&gt;<span class="built_in">setValue</span>(progress);</span><br><span class="line">        timer.<span class="built_in">start</span>();</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;任务开始&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接计时器信号到槽函数</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;timer, &amp;QTimer::timeout, [&amp;]()&#123;</span><br><span class="line">        progress += <span class="number">1</span>;</span><br><span class="line">        progressBar-&gt;<span class="built_in">setValue</span>(progress);</span><br><span class="line">        <span class="keyword">if</span>(progress &gt;= <span class="number">100</span>) &#123;</span><br><span class="line">            timer.<span class="built_in">stop</span>();</span><br><span class="line">            <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;任务完成&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/HJK3434.png" alt="QProgressBar 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QProgressBar</strong>设置了范围从0到100，初始值为0。</li>
+<li><strong>QPushButton</strong>用于启动任务，当按钮被点击时，进度条开始自动更新。</li>
+<li><strong>QTimer</strong>用于模拟任务进度的逐步完成，通过<code>timeout</code>信号更新进度条的值。</li>
+<li>当进度达到100时，停止计时器并打印任务完成的信息。</li>
+</ul>
+<h3 id="6-5-示例：使用QLCDNumber显示动态数字"><a href="#6-5-示例：使用QLCDNumber显示动态数字" class="headerlink" title="6.5 示例：使用QLCDNumber显示动态数字"></a>6.5 示例：使用QLCDNumber显示动态数字</h3><p>以下示例展示了如何使用QLCDNumber动态显示数字，并通过QTimer更新显示内容。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLCDNumber&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTimer&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;QLCDNumber 示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLCDNumber</span></span><br><span class="line">    QLCDNumber *lcd = <span class="keyword">new</span> QLCDNumber;</span><br><span class="line">    lcd-&gt;<span class="built_in">setDigitCount</span>(<span class="number">5</span>);</span><br><span class="line">    lcd-&gt;<span class="built_in">display</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(lcd);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">200</span>, <span class="number">100</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建计时器</span></span><br><span class="line">    QTimer timer;</span><br><span class="line">    timer.<span class="built_in">setInterval</span>(<span class="number">1000</span>); <span class="comment">// 每秒更新一次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接计时器信号到槽函数</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;timer, &amp;QTimer::timeout, [&amp;]()&#123;</span><br><span class="line">        count++;</span><br><span class="line">        lcd-&gt;<span class="built_in">display</span>(count);</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;当前计数:&quot;</span> &lt;&lt; count;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    timer.<span class="built_in">start</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/IJK4545.png" alt="QLCDNumber 示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QLCDNumber</strong>设置了5位数字显示，初始值为0。</li>
+<li><strong>QTimer</strong>每秒触发一次，通过<code>timeout</code>信号更新显示的数字，实现动态计数效果。</li>
+<li>通过<code>lcd-&gt;display(count)</code>方法更新显示内容，实时反映计数变化。</li>
+</ul>
+<h3 id="6-6-QProgressBar与QLCDNumber的结合使用"><a href="#6-6-QProgressBar与QLCDNumber的结合使用" class="headerlink" title="6.6 QProgressBar与QLCDNumber的结合使用"></a>6.6 QProgressBar与QLCDNumber的结合使用</h3><p>可以将QProgressBar和QLCDNumber结合使用，实时显示任务的进度和完成度。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QProgressBar&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLCDNumber&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPushButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVBoxLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTimer&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主窗口</span></span><br><span class="line">    QWidget window;</span><br><span class="line">    window.<span class="built_in">setWindowTitle</span>(<span class="string">&quot;进度与数字显示示例&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QProgressBar</span></span><br><span class="line">    QProgressBar *progressBar = <span class="keyword">new</span> QProgressBar;</span><br><span class="line">    progressBar-&gt;<span class="built_in">setRange</span>(<span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">    progressBar-&gt;<span class="built_in">setValue</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QLCDNumber</span></span><br><span class="line">    QLCDNumber *lcd = <span class="keyword">new</span> QLCDNumber;</span><br><span class="line">    lcd-&gt;<span class="built_in">setDigitCount</span>(<span class="number">3</span>);</span><br><span class="line">    lcd-&gt;<span class="built_in">display</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建QPushButton</span></span><br><span class="line">    QPushButton *btnStart = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;开始任务&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建布局管理器</span></span><br><span class="line">    QVBoxLayout *vLayout = <span class="keyword">new</span> QVBoxLayout;</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(progressBar);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(lcd);</span><br><span class="line">    vLayout-&gt;<span class="built_in">addWidget</span>(btnStart);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置主窗口的布局</span></span><br><span class="line">    window.<span class="built_in">setLayout</span>(vLayout);</span><br><span class="line">    window.<span class="built_in">resize</span>(<span class="number">300</span>, <span class="number">200</span>);</span><br><span class="line">    window.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建计时器</span></span><br><span class="line">    QTimer timer;</span><br><span class="line">    timer.<span class="built_in">setInterval</span>(<span class="number">100</span>); <span class="comment">// 每100毫秒更新一次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> progress = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接按钮信号到槽函数</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(btnStart, &amp;QPushButton::clicked, [&amp;]()&#123;</span><br><span class="line">        progress = <span class="number">0</span>;</span><br><span class="line">        progressBar-&gt;<span class="built_in">setValue</span>(progress);</span><br><span class="line">        lcd-&gt;<span class="built_in">display</span>(progress);</span><br><span class="line">        timer.<span class="built_in">start</span>();</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;任务开始&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接计时器信号到槽函数</span></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;timer, &amp;QTimer::timeout, [&amp;]()&#123;</span><br><span class="line">        progress += <span class="number">1</span>;</span><br><span class="line">        progressBar-&gt;<span class="built_in">setValue</span>(progress);</span><br><span class="line">        lcd-&gt;<span class="built_in">display</span>(progress);</span><br><span class="line">        <span class="keyword">if</span>(progress &gt;= <span class="number">100</span>) &#123;</span><br><span class="line">            timer.<span class="built_in">stop</span>();</span><br><span class="line">            <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;任务完成&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><img src="https://i.imgur.com/JKL5656.png" alt="进度与数字显示示例"></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li><strong>QProgressBar</strong>和<strong>QLCDNumber</strong>分别显示任务的进度和当前进度值。</li>
+<li>当用户点击“开始任务”按钮时，计时器开始，每100毫秒更新一次进度条和数字显示。</li>
+<li>当进度达到100时，停止计时器并打印任务完成的信息。</li>
+</ul>
+<h3 id="6-7-小结"><a href="#6-7-小结" class="headerlink" title="6.7 小结"></a>6.7 小结</h3><p>显示控件在用户界面中用于展示各种信息和数据。通过合理使用QLabel、QProgressBar、QLCDNumber等显示控件，可以有效地传达应用程序的状态和反馈，提升用户体验。同时，结合布局管理器和其他控件，能够创建功能丰富且美观的用户界面。</p>
+<hr>
+<h2 id="7-常用算法及正则表达式"><a href="#7-常用算法及正则表达式" class="headerlink" title="7. 常用算法及正则表达式"></a>7. 常用算法及正则表达式</h2><h3 id="7-1-Qt中提供的常用算法"><a href="#7-1-Qt中提供的常用算法" class="headerlink" title="7.1 Qt中提供的常用算法"></a>7.1 Qt中提供的常用算法</h3><p>Qt提供了一系列与标准C++库类似的算法，主要集中在<code>QtAlgorithms</code>模块。这些算法包括排序、查找、遍历等，帮助开发者高效地处理数据。</p>
+<h3 id="7-2-示例：使用Qt算法进行排序和查找"><a href="#7-2-示例：使用Qt算法进行排序和查找" class="headerlink" title="7.2 示例：使用Qt算法进行排序和查找"></a>7.2 示例：使用Qt算法进行排序和查找</h3><p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QVector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QVector&lt;<span class="type">int</span>&gt; numbers = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;排序前:&quot;</span> &lt;&lt; numbers;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用std::sort进行升序排序</span></span><br><span class="line">    std::<span class="built_in">sort</span>(numbers.<span class="built_in">begin</span>(), numbers.<span class="built_in">end</span>());</span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;排序后:&quot;</span> &lt;&lt; numbers;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用std::binary_search查找元素</span></span><br><span class="line">    <span class="type">bool</span> found = std::<span class="built_in">binary_search</span>(numbers.<span class="built_in">begin</span>(), numbers.<span class="built_in">end</span>(), <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;是否找到5:&quot;</span> &lt;&lt; found;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">排序前: QVector(5, 2, 9, 1, 5, 6)</span><br><span class="line">排序后: QVector(1, 2, 5, 5, 6, 9)</span><br><span class="line">是否找到5: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>使用<code>std::sort</code>对QVector中的整数进行升序排序。</li>
+<li>使用<code>std::binary_search</code>在排序后的QVector中查找特定元素。</li>
+</ul>
+<h3 id="7-3-Qt中的正则表达式支持"><a href="#7-3-Qt中的正则表达式支持" class="headerlink" title="7.3 Qt中的正则表达式支持"></a>7.3 Qt中的正则表达式支持</h3><p>Qt提供了强大的正则表达式支持，通过<code>QRegularExpression</code>类实现复杂的文本匹配和处理功能。</p>
+<h3 id="7-4-示例：使用QRegularExpression进行模式匹配"><a href="#7-4-示例：使用QRegularExpression进行模式匹配" class="headerlink" title="7.4 示例：使用QRegularExpression进行模式匹配"></a>7.4 示例：使用QRegularExpression进行模式匹配</h3><p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QString&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QRegularExpression&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QString text = <span class="string">&quot;Contact us at support@example.com or sales@example.org.&quot;</span>;</span><br><span class="line">    <span class="function">QRegularExpression <span class="title">emailRegex</span><span class="params">(<span class="string">R&quot;((\w+@\w+\.\w+))&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    QRegularExpressionMatchIterator i = emailRegex.<span class="built_in">globalMatch</span>(text);</span><br><span class="line">    <span class="keyword">while</span> (i.<span class="built_in">hasNext</span>()) &#123;</span><br><span class="line">        QRegularExpressionMatch match = i.<span class="built_in">next</span>();</span><br><span class="line">        QString email = match.<span class="built_in">captured</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;找到邮箱:&quot;</span> &lt;&lt; email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">找到邮箱: &quot;support@example.com&quot;</span><br><span class="line">找到邮箱: &quot;sales@example.org&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>使用<code>QRegularExpression</code>定义一个匹配邮箱地址的正则表达式。</li>
+<li>使用<code>globalMatch</code>方法获取所有匹配项，并通过迭代器遍历匹配结果。</li>
+</ul>
+<h3 id="7-5-示例：使用QString-replace与QRegularExpression进行复杂替换"><a href="#7-5-示例：使用QString-replace与QRegularExpression进行复杂替换" class="headerlink" title="7.5 示例：使用QString::replace与QRegularExpression进行复杂替换"></a>7.5 示例：使用QString::replace与QRegularExpression进行复杂替换</h3><p><strong>示例代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QString&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QRegularExpression&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QString text = <span class="string">&quot;The quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">    <span class="function">QRegularExpression <span class="title">regex</span><span class="params">(<span class="string">R&quot;(quick\s+brown\s+fox)&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    QString replacedText = text.<span class="built_in">replace</span>(regex, <span class="string">&quot;swift red fox&quot;</span>);</span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;替换后:&quot;</span> &lt;&lt; replacedText;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">替换后: &quot;The swift red fox jumps over the lazy dog.&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>使用正则表达式匹配“quick brown fox”模式。</li>
+<li>使用<code>replace</code>方法将匹配的部分替换为“swift red fox”。</li>
+</ul>
+<h3 id="7-6-小结"><a href="#7-6-小结" class="headerlink" title="7.6 小结"></a>7.6 小结</h3><p>Qt中的常用算法和正则表达式支持为数据处理和文本匹配提供了强大的工具。通过合理使用这些功能，开发者可以实现高效且复杂的数据操作和文本处理逻辑，提升应用程序的功能性和用户体验。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文详细介绍了Qt开发中常用的控件类别，包括布局管理器与间隔控件、按钮与容器控件、基于模型的视图控件、基于项的视图控件、输入控件以及显示控件。同时，探讨了Qt中常用的算法和正则表达式支持，展示了如何在实际项目中应用这些功能。</p>
+<h3 id="主要内容回顾："><a href="#主要内容回顾：" class="headerlink" title="主要内容回顾："></a>主要内容回顾：</h3><ol>
+<li><p><strong>Layouts &amp; Spacers</strong>：</p>
+<ul>
+<li>讲解了不同类型的布局管理器（QHBoxLayout、QVBoxLayout、QGridLayout、QFormLayout）及其应用。</li>
+<li>介绍了QSpacerItem的使用，帮助优化控件间的间距和布局。</li>
+</ul>
+</li>
+<li><p><strong>Buttons &amp; Containers</strong>：</p>
+<ul>
+<li>介绍了各种按钮控件（QPushButton、QToolButton、QRadioButton、QCheckBox、QCommandLinkButton）的使用方法和应用场景。</li>
+<li>探讨了容器控件（QGroupBox、QFrame、QScrollArea）的功能和使用技巧。</li>
+</ul>
+</li>
+<li><p><strong>Item Views</strong>：</p>
+<ul>
+<li>说明了基于模型的视图控件（QListView、QTableView、QTreeView）的使用方法及其在数据展示中的优势。</li>
+<li>通过示例展示了如何结合模型类（QStringListModel、QStandardItemModel）使用视图控件。</li>
+</ul>
+</li>
+<li><p><strong>Item Widgets</strong>：</p>
+<ul>
+<li>介绍了基于项的视图控件（QListWidget、QTreeWidget、QTableWidget）的简化接口和使用方法。</li>
+<li>通过示例展示了如何快速创建和管理项视图控件。</li>
+</ul>
+</li>
+<li><p><strong>Input Widgets</strong>：</p>
+<ul>
+<li>讲解了常用的输入控件（QLineEdit、QTextEdit、QSpinBox、QDoubleSpinBox、QComboBox、QCheckBox、QRadioButton、QSlider、QDateEdit、QTimeEdit）的功能和使用场景。</li>
+<li>通过示例展示了如何获取和处理用户输入。</li>
+</ul>
+</li>
+<li><p><strong>Display Widgets</strong>：</p>
+<ul>
+<li>介绍了常用的显示控件（QLabel、QTextBrowser、QProgressBar、QLCDNumber、QDial、QToolTip）的使用方法和应用场景。</li>
+<li>通过示例展示了如何动态更新和展示信息。</li>
+</ul>
+</li>
+<li><p><strong>常用算法及正则表达式</strong>：</p>
+<ul>
+<li>探讨了Qt提供的常用算法函数，如排序、查找和遍历。</li>
+<li>介绍了Qt中强大的正则表达式支持，通过QRegularExpression实现复杂的文本匹配和处理。</li>
+</ul>
+</li>
+</ol>
+<h3 id="下一步学习建议："><a href="#下一步学习建议：" class="headerlink" title="下一步学习建议："></a>下一步学习建议：</h3><p>掌握了Qt开发常用控件的使用方法后，建议继续深入学习以下高级内容，以全面提升Qt C++编程能力：</p>
+<ul>
+<li><p><strong>类型特性检测：<code>type_traits</code>库的应用</strong>：</p>
+<ul>
+<li>学习如何使用<code>std::is_integral</code>、<code>std::is_rvalue_reference</code>、<code>std::is_arithmetic</code>、<code>std::is_volatile</code>、<code>std::is_class</code>等进行类型判断，辅助模板元编程。</li>
+</ul>
+</li>
+<li><p><strong>变量模板与内联变量（C++14）</strong>：</p>
+<ul>
+<li>探索C++14中的变量模板和<code>inline</code>变量的概念，了解它们在实际编程中的应用。</li>
+</ul>
+</li>
+<li><p><strong>多线程编程的高级工具</strong>：</p>
+<ul>
+<li>深入了解线程局部存储、锁的优化策略、线程池等高级多线程编程工具，提升并发编程的能力。</li>
+</ul>
+</li>
+<li><p><strong>模板编程的高级技巧</strong>：</p>
+<ul>
+<li>掌握模板元编程、SFINAE（替换失败不是错误）等高级模板编程技术，提升代码的泛化和复用能力。</li>
+</ul>
+</li>
+<li><p><strong>Qt框架的核心概念与高级功能</strong>：</p>
+<ul>
+<li>深入学习Qt的信号与槽机制、事件处理、模型-视图架构、Qt Quick等高级功能，构建更复杂和功能丰富的应用程序。</li>
+</ul>
+</li>
+<li><p><strong>数据库集成与操作</strong>：</p>
+<ul>
+<li>学习Qt的数据库模块，了解如何集成和操作不同类型的数据库，进行数据持久化管理。</li>
+</ul>
+</li>
+<li><p><strong>网络编程</strong>：</p>
+<ul>
+<li>探索Qt的网络模块，掌握TCP&#x2F;IP通信、HTTP请求处理等网络编程技能。</li>
+</ul>
+</li>
+<li><p><strong>图形用户界面设计</strong>：</p>
+<ul>
+<li>学习Qt Designer的高级使用技巧，设计复杂的用户界面，并结合动画和样式表提升界面体验。</li>
+</ul>
+</li>
+<li><p><strong>资源管理与多语言支持</strong>：</p>
+<ul>
+<li>掌握Qt的资源系统，管理应用程序资源，了解如何实现多语言支持，提升应用的国际化能力。</li>
+</ul>
+</li>
+</ul>
+<p>通过持续学习和实践，结合本文所介绍的基础知识，您将能够更加高效地利用Qt框架进行C++开发，构建出功能丰富、性能优异且用户友好的应用程序。</p>
+<hr>
+<p><em>感谢您的阅读与支持！如果您对本文内容有任何疑问或建议，欢迎在评论区留言与我们交流。请继续关注我们的系列文章，深入了解Qt C++开发的更多高级特性和实战技巧。</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/26/Qt-C-%E8%AF%AD%E8%A8%80%E6%96%B0%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" rel="prev" title="Qt C++语言新特性详解">
+                  <i class="fa fa-chevron-left"></i> Qt C++语言新特性详解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-2/" rel="next" title="Qt开发常用控件详解(2)">
+                  Qt开发常用控件详解(2) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:13</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

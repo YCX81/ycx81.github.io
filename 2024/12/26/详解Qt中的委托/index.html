@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言在 Qt 框架中，委托（Delegate） 是模型-视图（Model-View）架构中的核心组件，负责管理和控制数据在视图中的显示和编辑方式。委托允许开发者自定义数据的呈现和编辑控件，从而实现灵活且丰富的用户界面。本文将深入探讨 Qt 中的委托，结合具体的代码示例，详细说明其工作原理、使用方法以及如何创建自定义委托。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解Qt中的委托">
+<meta property="og:url" content="http://ycx81.github.io/2024/12/26/%E8%AF%A6%E8%A7%A3Qt%E4%B8%AD%E7%9A%84%E5%A7%94%E6%89%98/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="前言在 Qt 框架中，委托（Delegate） 是模型-视图（Model-View）架构中的核心组件，负责管理和控制数据在视图中的显示和编辑方式。委托允许开发者自定义数据的呈现和编辑控件，从而实现灵活且丰富的用户界面。本文将深入探讨 Qt 中的委托，结合具体的代码示例，详细说明其工作原理、使用方法以及如何创建自定义委托。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-26T13:24:18.000Z">
+<meta property="article:modified_time" content="2024-12-26T13:28:55.355Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="　&#39;blog&#39;">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2024/12/26/%E8%AF%A6%E8%A7%A3Qt%E4%B8%AD%E7%9A%84%E5%A7%94%E6%89%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2024/12/26/%E8%AF%A6%E8%A7%A3Qt%E4%B8%AD%E7%9A%84%E5%A7%94%E6%89%98/","path":"2024/12/26/详解Qt中的委托/","title":"详解Qt中的委托"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>详解Qt中的委托 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Qt-%E7%9A%84%E6%A8%A1%E5%9E%8B-%E8%A7%86%E5%9B%BE%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Qt 的模型-视图架构简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%81%8C%E8%B4%A3"><span class="nav-number">1.2.</span> <span class="nav-text">委托的基本概念与职责</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">委托的主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qt-%E6%8F%90%E4%BE%9B%E7%9A%84%E9%BB%98%E8%AE%A4%E5%A7%94%E6%89%98"><span class="nav-number">1.3.</span> <span class="nav-text">Qt 提供的默认委托</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QStyledItemDelegate"><span class="nav-number">1.3.1.</span> <span class="nav-text">QStyledItemDelegate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QItemDelegate"><span class="nav-number">1.3.2.</span> <span class="nav-text">QItemDelegate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">自定义委托的创建与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%80%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%A7%94%E6%89%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">示例一：自定义进度条委托</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98%E7%B1%BB"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">1. 创建自定义委托类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8%E8%A7%86%E5%9B%BE%E4%B8%AD%E5%BA%94%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">2. 在视图中应用自定义委托</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">3. 运行效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BA%8C%EF%BC%9A%E5%B8%A6%E6%9C%89%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E7%9A%84%E5%A7%94%E6%89%98"><span class="nav-number">1.4.2.</span> <span class="nav-text">示例二：带有下拉菜单的委托</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98%E7%B1%BB-1"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">1. 创建自定义委托类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8%E8%A7%86%E5%9B%BE%E4%B8%AD%E5%BA%94%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98-1"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">2. 在视图中应用自定义委托</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C-1"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">3. 运行效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%89%EF%BC%9A%E5%A4%8D%E9%80%89%E6%A1%86%E5%A7%94%E6%89%98"><span class="nav-number">1.4.3.</span> <span class="nav-text">示例三：复选框委托</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98%E7%B1%BB-2"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">1. 创建自定义委托类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8%E8%A7%86%E5%9B%BE%E4%B8%AD%E5%BA%94%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A7%94%E6%89%98-2"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">2. 在视图中应用自定义委托</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C-2"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">3. 运行效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">委托的高级用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%A7%94%E6%89%98%E5%BA%94%E7%94%A8"><span class="nav-number">1.5.1.</span> <span class="nav-text">多委托应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%92%8C%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E5%A7%94%E6%89%98"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">示例：混合使用进度条和下拉菜单委托</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"><span class="nav-number">1.5.2.</span> <span class="nav-text">委托与数据验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%B8%A6%E6%9C%89%E8%BE%93%E5%85%A5%E9%AA%8C%E8%AF%81%E7%9A%84%E5%A7%94%E6%89%98"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">示例：带有输入验证的委托</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">委托的性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2024/12/26/%E8%AF%A6%E8%A7%A3Qt%E4%B8%AD%E7%9A%84%E5%A7%94%E6%89%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="详解Qt中的委托 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          详解Qt中的委托
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-26 21:24:18" itemprop="dateCreated datePublished" datetime="2024-12-26T21:24:18+08:00">2024-12-26</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在 Qt 框架中，<strong>委托（Delegate）</strong> 是模型-视图（Model-View）架构中的核心组件，负责管理和控制数据在视图中的显示和编辑方式。委托允许开发者自定义数据的呈现和编辑控件，从而实现灵活且丰富的用户界面。本文将深入探讨 Qt 中的委托，结合具体的代码示例，详细说明其工作原理、使用方法以及如何创建自定义委托。</p>
+<span id="more"></span>
+
+<h2 id="Qt-的模型-视图架构简介"><a href="#Qt-的模型-视图架构简介" class="headerlink" title="Qt 的模型-视图架构简介"></a>Qt 的模型-视图架构简介</h2><p>Qt 的模型-视图架构将数据（模型）与用户界面（视图）分离，允许开发者以更模块化和可维护的方式构建应用程序。架构中的主要组件包括：</p>
+<ul>
+<li><strong>模型（Model）</strong>：负责管理和存储数据，如 <code>QStandardItemModel</code>、<code>QAbstractTableModel</code> 等。</li>
+<li><strong>视图（View）</strong>：负责呈现数据，如 <code>QListView</code>、<code>QTableView</code>、<code>QTreeView</code> 等。</li>
+<li><strong>委托（Delegate）</strong>：负责管理数据在视图中的显示和编辑方式。</li>
+</ul>
+<p>![img](..&#x2F;..&#x2F;..&#x2F;Downloads&#x2F;技术博客 2&#x2F;assets&#x2F;modelview-overview.png)</p>
+<h2 id="委托的基本概念与职责"><a href="#委托的基本概念与职责" class="headerlink" title="委托的基本概念与职责"></a>委托的基本概念与职责</h2><p>委托主要有两个核心职责：</p>
+<ol>
+<li><strong>绘制（Rendering）</strong>：决定如何在视图中绘制每一个数据项，包括文本、图标、背景等。</li>
+<li><strong>编辑（Editing）</strong>：提供合适的编辑控件，允许用户修改数据，并将修改后的数据保存回模型。</li>
+</ol>
+<p>通过委托，开发者可以自定义数据的展示形式和编辑方式，实现复杂的用户界面需求。</p>
+<h3 id="委托的主要方法"><a href="#委托的主要方法" class="headerlink" title="委托的主要方法"></a>委托的主要方法</h3><ul>
+<li><code>paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</code>：负责绘制数据项。</li>
+<li><code>createEditor(QWidget *parent, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</code>：创建用于编辑的控件。</li>
+<li><code>setEditorData(QWidget *editor, const QModelIndex &amp;index) const</code>：将模型数据设置到编辑控件中。</li>
+<li><code>setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &amp;index) const</code>：将编辑控件中的数据保存回模型。</li>
+<li><code>updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</code>：更新编辑控件的几何位置。</li>
+</ul>
+<h2 id="Qt-提供的默认委托"><a href="#Qt-提供的默认委托" class="headerlink" title="Qt 提供的默认委托"></a>Qt 提供的默认委托</h2><p>Qt 提供了几个默认的委托类，满足大多数常见的需求：</p>
+<h3 id="QStyledItemDelegate"><a href="#QStyledItemDelegate" class="headerlink" title="QStyledItemDelegate"></a>QStyledItemDelegate</h3><p><code>QStyledItemDelegate</code> 是 Qt 提供的默认委托类，支持现代样式和样式表。它基于 <code>QItemDelegate</code>，并增加了对样式的更好支持。大多数情况下，使用 <code>QStyledItemDelegate</code> 已经足够。</p>
+<h3 id="QItemDelegate"><a href="#QItemDelegate" class="headerlink" title="QItemDelegate"></a>QItemDelegate</h3><p><code>QItemDelegate</code> 是较早的委托类，功能类似于 <code>QStyledItemDelegate</code>，但不支持某些现代样式和特性。一般推荐使用 <code>QStyledItemDelegate</code>，除非有特定需求。</p>
+<h2 id="自定义委托的创建与使用"><a href="#自定义委托的创建与使用" class="headerlink" title="自定义委托的创建与使用"></a>自定义委托的创建与使用</h2><p>在某些情况下，默认的委托无法满足特定的需求，例如需要在视图中显示自定义控件或特定的绘制效果。这时，可以通过继承 <code>QStyledItemDelegate</code> 或 <code>QItemDelegate</code> 来创建自定义委托。</p>
+<h3 id="示例一：自定义进度条委托"><a href="#示例一：自定义进度条委托" class="headerlink" title="示例一：自定义进度条委托"></a>示例一：自定义进度条委托</h3><p>假设我们需要在 <code>QTableView</code> 的某一列中显示一个进度条，表示某个任务的完成度。以下是创建和使用自定义进度条委托的步骤：</p>
+<h4 id="1-创建自定义委托类"><a href="#1-创建自定义委托类" class="headerlink" title="1. 创建自定义委托类"></a>1. 创建自定义委托类</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ProgressBarDelegate.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> PROGRESSBARDELEGATE_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PROGRESSBARDELEGATE_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStyledItemDelegate&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProgressBarDelegate</span> : <span class="keyword">public</span> QStyledItemDelegate &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">ProgressBarDelegate</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写绘制方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">paint</span><span class="params">(QPainter *painter, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">               <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写编辑控件创建方法（如果需要编辑）</span></span><br><span class="line">    <span class="function">QWidget *<span class="title">createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                          <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写设置编辑控件数据方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setEditorData</span><span class="params">(QWidget *editor, <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写保存编辑控件数据方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setModelData</span><span class="params">(QWidget *editor, QAbstractItemModel *model,</span></span></span><br><span class="line"><span class="params"><span class="function">                      <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// PROGRESSBARDELEGATE_H</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ProgressBarDelegate.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ProgressBarDelegate.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPainter&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QProgressBar&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStyleOptionProgressBar&gt;</span></span></span><br><span class="line"></span><br><span class="line">ProgressBarDelegate::<span class="built_in">ProgressBarDelegate</span>(QObject *parent)</span><br><span class="line">    : <span class="built_in">QStyledItemDelegate</span>(parent) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ProgressBarDelegate::paint</span><span class="params">(QPainter *painter, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                                <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取进度值</span></span><br><span class="line">    <span class="type">int</span> progress = index.<span class="built_in">data</span>(Qt::DisplayRole).<span class="built_in">toInt</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置进度条选项</span></span><br><span class="line">    QStyleOptionProgressBar progressBarOption;</span><br><span class="line">    progressBarOption.rect = option.rect;</span><br><span class="line">    progressBarOption.minimum = <span class="number">0</span>;</span><br><span class="line">    progressBarOption.maximum = <span class="number">100</span>;</span><br><span class="line">    progressBarOption.progress = progress;</span><br><span class="line">    progressBarOption.text = QString::<span class="built_in">number</span>(progress) + <span class="string">&quot;%&quot;</span>;</span><br><span class="line">    progressBarOption.textVisible = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用应用程序的样式绘制进度条</span></span><br><span class="line">    QApplication::<span class="built_in">style</span>()-&gt;<span class="built_in">drawControl</span>(QStyle::CE_ProgressBar, &amp;progressBarOption, painter);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">QWidget *<span class="title">ProgressBarDelegate::createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                                          <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用 QSlider 作为编辑控件</span></span><br><span class="line">    QSlider *editor = <span class="keyword">new</span> <span class="built_in">QSlider</span>(parent);</span><br><span class="line">    editor-&gt;<span class="built_in">setOrientation</span>(Qt::Horizontal);</span><br><span class="line">    editor-&gt;<span class="built_in">setMinimum</span>(<span class="number">0</span>);</span><br><span class="line">    editor-&gt;<span class="built_in">setMaximum</span>(<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">return</span> editor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ProgressBarDelegate::setEditorData</span><span class="params">(QWidget *editor, <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> value = index.<span class="built_in">data</span>(Qt::DisplayRole).<span class="built_in">toInt</span>();</span><br><span class="line">    QSlider *slider = <span class="built_in">qobject_cast</span>&lt;QSlider*&gt;(editor);</span><br><span class="line">    <span class="keyword">if</span> (slider) &#123;</span><br><span class="line">        slider-&gt;<span class="built_in">setValue</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ProgressBarDelegate::setModelData</span><span class="params">(QWidget *editor, QAbstractItemModel *model,</span></span></span><br><span class="line"><span class="params"><span class="function">                                      <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    QSlider *slider = <span class="built_in">qobject_cast</span>&lt;QSlider*&gt;(editor);</span><br><span class="line">    <span class="keyword">if</span> (slider) &#123;</span><br><span class="line">        <span class="type">int</span> value = slider-&gt;<span class="built_in">value</span>();</span><br><span class="line">        model-&gt;<span class="built_in">setData</span>(index, value, Qt::EditRole);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-在视图中应用自定义委托"><a href="#2-在视图中应用自定义委托" class="headerlink" title="2. 在视图中应用自定义委托"></a>2. 在视图中应用自定义委托</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTableView&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardItemModel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ProgressBarDelegate.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建模型</span></span><br><span class="line">    <span class="function">QStandardItemModel <span class="title">model</span><span class="params">(<span class="number">5</span>, <span class="number">2</span>)</span></span>; <span class="comment">// 5 行 2 列</span></span><br><span class="line">    model.<span class="built_in">setHorizontalHeaderLabels</span>(<span class="built_in">QStringList</span>() &lt;&lt; <span class="string">&quot;任务&quot;</span> &lt;&lt; <span class="string">&quot;进度&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充模型数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> row = <span class="number">0</span>; row &lt; <span class="number">5</span>; ++row) &#123;</span><br><span class="line">        QStandardItem *taskItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="built_in">QString</span>(<span class="string">&quot;任务 %1&quot;</span>).<span class="built_in">arg</span>(row + <span class="number">1</span>));</span><br><span class="line">        QStandardItem *progressItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(QString::<span class="built_in">number</span>((row + <span class="number">1</span>) * <span class="number">20</span>));</span><br><span class="line">        progressItem-&gt;<span class="built_in">setData</span>((row + <span class="number">1</span>) * <span class="number">20</span>, Qt::DisplayRole);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">0</span>, taskItem);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">1</span>, progressItem);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建视图</span></span><br><span class="line">    QTableView tableView;</span><br><span class="line">    tableView.<span class="built_in">setModel</span>(&amp;model);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用自定义委托到第二列（进度列）</span></span><br><span class="line">    ProgressBarDelegate *delegate = <span class="keyword">new</span> <span class="built_in">ProgressBarDelegate</span>(&amp;tableView);</span><br><span class="line">    tableView.<span class="built_in">setItemDelegateForColumn</span>(<span class="number">1</span>, delegate);</span><br><span class="line"></span><br><span class="line">    tableView.<span class="built_in">show</span>();</span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-运行效果"><a href="#3-运行效果" class="headerlink" title="3. 运行效果"></a>3. 运行效果</h4><p>运行上述代码后，<code>QTableView</code> 的第二列将显示进度条，表示每个任务的完成度。用户可以点击进度条区域进行编辑，使用滑块 (<code>QSlider</code>) 来调整进度值。</p>
+<h3 id="示例二：带有下拉菜单的委托"><a href="#示例二：带有下拉菜单的委托" class="headerlink" title="示例二：带有下拉菜单的委托"></a>示例二：带有下拉菜单的委托</h3><p>假设我们需要在视图中为某一列提供一个下拉菜单，允许用户从预定义的选项中选择一个值。</p>
+<h4 id="1-创建自定义委托类-1"><a href="#1-创建自定义委托类-1" class="headerlink" title="1. 创建自定义委托类"></a>1. 创建自定义委托类</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ComboBoxDelegate.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> COMBOBOXDELEGATE_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> COMBOBOXDELEGATE_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStyledItemDelegate&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ComboBoxDelegate</span> : <span class="keyword">public</span> QStyledItemDelegate &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">ComboBoxDelegate</span><span class="params">(<span class="type">const</span> QStringList &amp;items, QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写编辑控件创建方法</span></span><br><span class="line">    <span class="function">QWidget *<span class="title">createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                          <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写设置编辑控件数据方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setEditorData</span><span class="params">(QWidget *editor, <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写保存编辑控件数据方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setModelData</span><span class="params">(QWidget *editor, QAbstractItemModel *model,</span></span></span><br><span class="line"><span class="params"><span class="function">                      <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QStringList m_items;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// COMBOBOXDELEGATE_H</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ComboBoxDelegate.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ComboBoxDelegate.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QComboBox&gt;</span></span></span><br><span class="line"></span><br><span class="line">ComboBoxDelegate::<span class="built_in">ComboBoxDelegate</span>(<span class="type">const</span> QStringList &amp;items, QObject *parent)</span><br><span class="line">    : <span class="built_in">QStyledItemDelegate</span>(parent), <span class="built_in">m_items</span>(items) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">QWidget *<span class="title">ComboBoxDelegate::createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    QComboBox *comboBox = <span class="keyword">new</span> <span class="built_in">QComboBox</span>(parent);</span><br><span class="line">    comboBox-&gt;<span class="built_in">addItems</span>(m_items);</span><br><span class="line">    <span class="keyword">return</span> comboBox;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ComboBoxDelegate::setEditorData</span><span class="params">(QWidget *editor, <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    QString currentText = index.<span class="built_in">data</span>(Qt::DisplayRole).<span class="built_in">toString</span>();</span><br><span class="line">    QComboBox *comboBox = <span class="built_in">qobject_cast</span>&lt;QComboBox*&gt;(editor);</span><br><span class="line">    <span class="keyword">if</span> (comboBox) &#123;</span><br><span class="line">        <span class="type">int</span> idx = comboBox-&gt;<span class="built_in">findText</span>(currentText);</span><br><span class="line">        <span class="keyword">if</span> (idx &gt;= <span class="number">0</span>)</span><br><span class="line">            comboBox-&gt;<span class="built_in">setCurrentIndex</span>(idx);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ComboBoxDelegate::setModelData</span><span class="params">(QWidget *editor, QAbstractItemModel *model,</span></span></span><br><span class="line"><span class="params"><span class="function">                                    <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    QComboBox *comboBox = <span class="built_in">qobject_cast</span>&lt;QComboBox*&gt;(editor);</span><br><span class="line">    <span class="keyword">if</span> (comboBox) &#123;</span><br><span class="line">        QString selected = comboBox-&gt;<span class="built_in">currentText</span>();</span><br><span class="line">        model-&gt;<span class="built_in">setData</span>(index, selected, Qt::EditRole);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-在视图中应用自定义委托-1"><a href="#2-在视图中应用自定义委托-1" class="headerlink" title="2. 在视图中应用自定义委托"></a>2. 在视图中应用自定义委托</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp (续)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ComboBoxDelegate.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ... 之前的代码</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建模型</span></span><br><span class="line">    <span class="function">QStandardItemModel <span class="title">model</span><span class="params">(<span class="number">5</span>, <span class="number">2</span>)</span></span>; <span class="comment">// 5 行 2 列</span></span><br><span class="line">    model.<span class="built_in">setHorizontalHeaderLabels</span>(<span class="built_in">QStringList</span>() &lt;&lt; <span class="string">&quot;任务&quot;</span> &lt;&lt; <span class="string">&quot;状态&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充模型数据</span></span><br><span class="line">    QStringList statuses = &#123;<span class="string">&quot;未开始&quot;</span>, <span class="string">&quot;进行中&quot;</span>, <span class="string">&quot;已完成&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> row = <span class="number">0</span>; row &lt; <span class="number">5</span>; ++row) &#123;</span><br><span class="line">        QStandardItem *taskItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="built_in">QString</span>(<span class="string">&quot;任务 %1&quot;</span>).<span class="built_in">arg</span>(row + <span class="number">1</span>));</span><br><span class="line">        QStandardItem *statusItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(statuses.<span class="built_in">at</span>(row % statuses.<span class="built_in">size</span>()));</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">0</span>, taskItem);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">1</span>, statusItem);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建视图</span></span><br><span class="line">    QTableView tableView;</span><br><span class="line">    tableView.<span class="built_in">setModel</span>(&amp;model);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用自定义委托到第二列（状态列）</span></span><br><span class="line">    ComboBoxDelegate *comboDelegate = <span class="keyword">new</span> <span class="built_in">ComboBoxDelegate</span>(statuses, &amp;tableView);</span><br><span class="line">    tableView.<span class="built_in">setItemDelegateForColumn</span>(<span class="number">1</span>, comboDelegate);</span><br><span class="line"></span><br><span class="line">    tableView.<span class="built_in">show</span>();</span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-运行效果-1"><a href="#3-运行效果-1" class="headerlink" title="3. 运行效果"></a>3. 运行效果</h4><p>运行上述代码后，<code>QTableView</code> 的第二列将显示任务的状态。用户可以点击任意单元格，弹出下拉菜单，选择“未开始”、“进行中”或“已完成”来修改任务状态。</p>
+<h3 id="示例三：复选框委托"><a href="#示例三：复选框委托" class="headerlink" title="示例三：复选框委托"></a>示例三：复选框委托</h3><p>有时需要在视图中显示复选框，允许用户选择或取消选择某项。</p>
+<h4 id="1-创建自定义委托类-2"><a href="#1-创建自定义委托类-2" class="headerlink" title="1. 创建自定义委托类"></a>1. 创建自定义委托类</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CheckBoxDelegate.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CHECKBOXDELEGATE_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CHECKBOXDELEGATE_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStyledItemDelegate&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CheckBoxDelegate</span> : <span class="keyword">public</span> QStyledItemDelegate &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">CheckBoxDelegate</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写绘制方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">paint</span><span class="params">(QPainter *painter, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">               <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写编辑控件创建方法</span></span><br><span class="line">    <span class="function">QWidget *<span class="title">createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                          <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写设置编辑控件数据方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setEditorData</span><span class="params">(QWidget *editor, <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写保存编辑控件数据方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setModelData</span><span class="params">(QWidget *editor, QAbstractItemModel *model,</span></span></span><br><span class="line"><span class="params"><span class="function">                      <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写更新编辑控件几何位置方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">updateEditorGeometry</span><span class="params">(QWidget *editor, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                              <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// CHECKBOXDELEGATE_H</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CheckBoxDelegate.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CheckBoxDelegate.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPainter&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QCheckBox&gt;</span></span></span><br><span class="line"></span><br><span class="line">CheckBoxDelegate::<span class="built_in">CheckBoxDelegate</span>(QObject *parent)</span><br><span class="line">    : <span class="built_in">QStyledItemDelegate</span>(parent) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CheckBoxDelegate::paint</span><span class="params">(QPainter *painter, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="type">bool</span> checked = index.<span class="built_in">data</span>(Qt::CheckStateRole).<span class="built_in">toBool</span>();</span><br><span class="line"></span><br><span class="line">    QStyleOptionButton checkboxOption;</span><br><span class="line">    checkboxOption.state |= QStyle::State_Enabled;</span><br><span class="line">    <span class="keyword">if</span> (checked)</span><br><span class="line">        checkboxOption.state |= QStyle::State_On;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        checkboxOption.state |= QStyle::State_Off;</span><br><span class="line">    checkboxOption.rect = option.rect.<span class="built_in">adjusted</span>(<span class="number">4</span>, <span class="number">4</span>, <span class="number">-4</span>, <span class="number">-4</span>);</span><br><span class="line"></span><br><span class="line">    QApplication::<span class="built_in">style</span>()-&gt;<span class="built_in">drawControl</span>(QStyle::CE_CheckBox, &amp;checkboxOption, painter);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">QWidget *<span class="title">CheckBoxDelegate::createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                                       <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 不需要编辑控件，因为复选框直接点击即可</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CheckBoxDelegate::setEditorData</span><span class="params">(QWidget *editor, <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 无需实现</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CheckBoxDelegate::setModelData</span><span class="params">(QWidget *editor, QAbstractItemModel *model,</span></span></span><br><span class="line"><span class="params"><span class="function">                                   <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 无需实现</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CheckBoxDelegate::updateEditorGeometry</span><span class="params">(QWidget *editor, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                                           <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 无需实现</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-在视图中应用自定义委托-2"><a href="#2-在视图中应用自定义委托-2" class="headerlink" title="2. 在视图中应用自定义委托"></a>2. 在视图中应用自定义委托</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp (续)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CheckBoxDelegate.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ... 之前的代码</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建模型</span></span><br><span class="line">    <span class="function">QStandardItemModel <span class="title">model</span><span class="params">(<span class="number">5</span>, <span class="number">2</span>)</span></span>; <span class="comment">// 5 行 2 列</span></span><br><span class="line">    model.<span class="built_in">setHorizontalHeaderLabels</span>(<span class="built_in">QStringList</span>() &lt;&lt; <span class="string">&quot;任务&quot;</span> &lt;&lt; <span class="string">&quot;完成&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充模型数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> row = <span class="number">0</span>; row &lt; <span class="number">5</span>; ++row) &#123;</span><br><span class="line">        QStandardItem *taskItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="built_in">QString</span>(<span class="string">&quot;任务 %1&quot;</span>).<span class="built_in">arg</span>(row + <span class="number">1</span>));</span><br><span class="line">        QStandardItem *doneItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>();</span><br><span class="line">        doneItem-&gt;<span class="built_in">setCheckable</span>(<span class="literal">true</span>);</span><br><span class="line">        doneItem-&gt;<span class="built_in">setCheckState</span>((row % <span class="number">2</span> == <span class="number">0</span>) ? Qt::Checked : Qt::Unchecked);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">0</span>, taskItem);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">1</span>, doneItem);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建视图</span></span><br><span class="line">    QTableView tableView;</span><br><span class="line">    tableView.<span class="built_in">setModel</span>(&amp;model);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用自定义复选框委托到第二列（完成列）</span></span><br><span class="line">    CheckBoxDelegate *checkBoxDelegate = <span class="keyword">new</span> <span class="built_in">CheckBoxDelegate</span>(&amp;tableView);</span><br><span class="line">    tableView.<span class="built_in">setItemDelegateForColumn</span>(<span class="number">1</span>, checkBoxDelegate);</span><br><span class="line"></span><br><span class="line">    tableView.<span class="built_in">show</span>();</span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-运行效果-2"><a href="#3-运行效果-2" class="headerlink" title="3. 运行效果"></a>3. 运行效果</h4><p>运行上述代码后，<code>QTableView</code> 的第二列将显示复选框，表示任务是否完成。用户可以直接点击复选框来切换状态。</p>
+<h2 id="委托的高级用法"><a href="#委托的高级用法" class="headerlink" title="委托的高级用法"></a>委托的高级用法</h2><h3 id="多委托应用"><a href="#多委托应用" class="headerlink" title="多委托应用"></a>多委托应用</h3><p>在一个视图中，可以为不同的列或特定的单元格应用不同的委托，以满足不同的数据展示和编辑需求。</p>
+<h4 id="示例：混合使用进度条和下拉菜单委托"><a href="#示例：混合使用进度条和下拉菜单委托" class="headerlink" title="示例：混合使用进度条和下拉菜单委托"></a>示例：混合使用进度条和下拉菜单委托</h4><p>假设一个 <code>QTableView</code> 包含任务名称、进度和状态三列，我们希望：</p>
+<ul>
+<li>第二列显示进度条。</li>
+<li>第三列显示下拉菜单。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp (续)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ProgressBarDelegate.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ComboBoxDelegate.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ... 之前的代码</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建模型</span></span><br><span class="line">    <span class="function">QStandardItemModel <span class="title">model</span><span class="params">(<span class="number">5</span>, <span class="number">3</span>)</span></span>; <span class="comment">// 5 行 3 列</span></span><br><span class="line">    model.<span class="built_in">setHorizontalHeaderLabels</span>(<span class="built_in">QStringList</span>() &lt;&lt; <span class="string">&quot;任务&quot;</span> &lt;&lt; <span class="string">&quot;进度&quot;</span> &lt;&lt; <span class="string">&quot;状态&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充模型数据</span></span><br><span class="line">    QStringList statuses = &#123;<span class="string">&quot;未开始&quot;</span>, <span class="string">&quot;进行中&quot;</span>, <span class="string">&quot;已完成&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> row = <span class="number">0</span>; row &lt; <span class="number">5</span>; ++row) &#123;</span><br><span class="line">        QStandardItem *taskItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(<span class="built_in">QString</span>(<span class="string">&quot;任务 %1&quot;</span>).<span class="built_in">arg</span>(row + <span class="number">1</span>));</span><br><span class="line">        QStandardItem *progressItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(QString::<span class="built_in">number</span>((row + <span class="number">1</span>) * <span class="number">20</span>));</span><br><span class="line">        progressItem-&gt;<span class="built_in">setData</span>((row + <span class="number">1</span>) * <span class="number">20</span>, Qt::DisplayRole);</span><br><span class="line">        QStandardItem *statusItem = <span class="keyword">new</span> <span class="built_in">QStandardItem</span>(statuses.<span class="built_in">at</span>(row % statuses.<span class="built_in">size</span>()));</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">0</span>, taskItem);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">1</span>, progressItem);</span><br><span class="line">        model.<span class="built_in">setItem</span>(row, <span class="number">2</span>, statusItem);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建视图</span></span><br><span class="line">    QTableView tableView;</span><br><span class="line">    tableView.<span class="built_in">setModel</span>(&amp;model);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用自定义委托到第二列（进度列）</span></span><br><span class="line">    ProgressBarDelegate *progressDelegate = <span class="keyword">new</span> <span class="built_in">ProgressBarDelegate</span>(&amp;tableView);</span><br><span class="line">    tableView.<span class="built_in">setItemDelegateForColumn</span>(<span class="number">1</span>, progressDelegate);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用自定义委托到第三列（状态列）</span></span><br><span class="line">    ComboBoxDelegate *comboDelegate = <span class="keyword">new</span> <span class="built_in">ComboBoxDelegate</span>(statuses, &amp;tableView);</span><br><span class="line">    tableView.<span class="built_in">setItemDelegateForColumn</span>(<span class="number">2</span>, comboDelegate);</span><br><span class="line"></span><br><span class="line">    tableView.<span class="built_in">show</span>();</span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="委托与数据验证"><a href="#委托与数据验证" class="headerlink" title="委托与数据验证"></a>委托与数据验证</h3><p>在编辑数据时，委托不仅负责提供编辑控件，还可以进行数据验证。例如，在编辑数字时，可以限制输入范围或格式。</p>
+<h4 id="示例：带有输入验证的委托"><a href="#示例：带有输入验证的委托" class="headerlink" title="示例：带有输入验证的委托"></a>示例：带有输入验证的委托</h4><p>假设我们需要编辑进度值时，确保输入的值在 0 到 100 之间。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ProgressBarDelegate.cpp (修改)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ProgressBarDelegate.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QSpinBox&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ... 之前的代码</span></span><br><span class="line"></span><br><span class="line"><span class="function">QWidget *<span class="title">ProgressBarDelegate::createEditor</span><span class="params">(QWidget *parent, <span class="type">const</span> QStyleOptionViewItem &amp;option,</span></span></span><br><span class="line"><span class="params"><span class="function">                                          <span class="type">const</span> QModelIndex &amp;index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用 QSpinBox 作为编辑控件</span></span><br><span class="line">    QSpinBox *editor = <span class="keyword">new</span> <span class="built_in">QSpinBox</span>(parent);</span><br><span class="line">    editor-&gt;<span class="built_in">setMinimum</span>(<span class="number">0</span>);</span><br><span class="line">    editor-&gt;<span class="built_in">setMaximum</span>(<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">return</span> editor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过使用 <code>QSpinBox</code>，用户只能输入 0 到 100 之间的整数，避免了无效输入。</p>
+<h2 id="委托的性能优化"><a href="#委托的性能优化" class="headerlink" title="委托的性能优化"></a>委托的性能优化</h2><p>当视图中包含大量数据项时，委托的性能可能成为瓶颈。以下是一些优化建议：</p>
+<ol>
+<li><strong>避免复杂的绘制操作</strong>：在 <code>paint</code> 方法中尽量使用简单的绘制操作，避免耗时的计算或复杂的图形处理。</li>
+<li><strong>缓存重复计算的值</strong>：如果某些计算可以复用，考虑将其缓存起来，减少重复计算。</li>
+<li><strong>最小化委托的数量</strong>：尽量复用同一个委托实例，避免为每个单元格创建独立的委托。</li>
+<li><strong>使用高效的数据结构</strong>：确保模型的数据结构高效，减少数据访问的时间。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>委托是 Qt 模型-视图架构中强大的组件，允许开发者高度定制数据在视图中的展示和编辑方式。通过继承 <code>QStyledItemDelegate</code>，可以轻松创建自定义委托，实现进度条、下拉菜单、复选框等多种复杂的界面元素。合理使用委托不仅可以提升用户体验，还能增强应用程序的灵活性和可维护性。在实际开发中，结合具体需求，灵活应用委托将极大地丰富 Qt 应用的界面表现力。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/01/2024%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/" rel="prev" title="2024新年快乐">
+                  <i class="fa fa-chevron-left"></i> 2024新年快乐
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/26/%E4%BB%8EQTableView%E7%9C%8B%E6%A8%A1%E5%9E%8B-%E8%A7%86%E5%9B%BE-%E4%BB%A3%E7%90%86%EF%BC%88Model-View-Delegate%EF%BC%89%E6%9E%B6%E6%9E%84/" rel="next" title="从QTableView看模型-视图-代理（Model-View-Delegate）架构">
+                  从QTableView看模型-视图-代理（Model-View-Delegate）架构 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:13</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
