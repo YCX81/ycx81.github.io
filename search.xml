@@ -1930,7 +1930,7 @@
 <li><p><strong>访问官方网站</strong>：<br>前往<a href="https://visualstudio.microsoft.com/">Visual Studio官网</a>。</p>
 </li>
 <li><p><strong>选择版本</strong>：<br>Visual Studio提供多个版本，包括Community（免费）、Professional和Enterprise。对于个人学习和开源项目，Community版已足够。</p>
-<img src="../images/image-20241031160551024.png" alt="image-20241031160551024" style="zoom:50%;" />
+<p><img src="/../images/image-20241031160551024.png" alt="image-20241031160551024"></p>
 </li>
 <li><p><strong>下载安装程序</strong>：<br>点击“下载”按钮，下载Visual Studio Installer。</p>
 </li>
@@ -2781,7 +2781,7 @@
   </entry>
   <entry>
     <title>Qt开发基础体系详解</title>
-    <url>/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/</url>
+    <url>/2024/01/10/Qt%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><span id="more"></span>
 
 <h1 id="Qt开发基础体系详解"><a href="#Qt开发基础体系详解" class="headerlink" title="Qt开发基础体系详解"></a>Qt开发基础体系详解</h1><p>Qt作为一个跨平台的C++应用程序开发框架，以其丰富的功能和高效的开发工具广受开发者青睐。无论您是初学者还是有经验的开发者，掌握Qt的基础安装、开发环境配置、工具使用以及核心机制如信号与槽，都是高效开发Qt应用的关键。本篇文章将详细介绍Qt的下载与安装配置，分别针对Windows和Linux系统的环境安装，深入讲解Qt Creator工具的使用，并探讨Qt独有的信号与槽机制以及Qt中的字符串、数据类型和容器类的应用。</p>
@@ -3645,8 +3645,6 @@
 <li>使用<code>split</code>函数按匹配的分隔符分割字符串，并使用<code>trimmed()</code>去除多余的空格。</li>
 </ul>
 <h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>通过系统地学习Qt开发基础体系，您已经掌握了Qt框架的核心组件和技术。这些知识将为您在实际项目中高效开发和维护Qt应用程序提供坚实的基础。继续深入学习和实践，结合高级功能和最佳实践，您将能够构建出功能丰富、性能优异且用户友好的Qt应用程序。</p>
-<hr>
-<p><em>感谢您的阅读与支持！如果您对本文内容有任何疑问或建议，欢迎在评论区留言与我们交流。请继续关注我们的系列文章，深入了解Qt C++开发的更多高级特性和实战技巧。</em></p>
 ]]></content>
   </entry>
   <entry>
