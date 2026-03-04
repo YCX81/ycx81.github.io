@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文以 pmsm_2312s_init() 中 2312S 电机参数为例，逐一解释每个参数的含义、实际获取方法，以及在 FOC 控制中的用途。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOC 电机参数详解：从获取到实际应用">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/04/foc-motor-parameters/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="本文以 pmsm_2312s_init() 中 2312S 电机参数为例，逐一解释每个参数的含义、实际获取方法，以及在 FOC 控制中的用途。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-04T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-04T07:21:27.579Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="电机控制">
+<meta property="article:tag" content="FOC">
+<meta property="article:tag" content="PMSM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/04/foc-motor-parameters/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/04/foc-motor-parameters/","path":"2026/03/04/foc-motor-parameters/","title":"FOC 电机参数详解：从获取到实际应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FOC 电机参数详解：从获取到实际应用 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8F%82%E6%95%B0%E6%80%BB%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">一、参数总览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%9C%BA%E7%94%B5%E6%B0%94%E5%8F%82%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">电机电气参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%9C%BA%E6%9C%BA%E6%A2%B0%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">电机机械参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6-x2F-%E4%BC%A0%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">控制&#x2F;传动参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%AE%A1%E7%AE%97%E5%B8%B8%E9%87%8F%EF%BC%88%E9%81%BF%E5%85%8D%E5%AE%9E%E6%97%B6%E9%99%A4%E6%B3%95%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">预计算常量（避免实时除法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">运动控制参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%92%E5%BA%A6%E5%81%8F%E7%A7%BB%EF%BC%88%E6%A0%87%E5%AE%9A%E7%BB%93%E6%9E%9C%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">角度偏移（标定结果）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%9E%E9%99%85%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">二、参数的实际获取方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9E%81%E5%AF%B9%E6%95%B0-pn"><span class="nav-number">2.1.</span> <span class="nav-text">1. 极对数 pn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%9B%B8%E7%94%B5%E9%98%BB-Rs"><span class="nav-number">2.2.</span> <span class="nav-text">2. 相电阻 Rs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%94%B5%E6%84%9F-Ld%E3%80%81Lq%E3%80%81Ls"><span class="nav-number">2.3.</span> <span class="nav-text">3. 电感 Ld、Lq、Ls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%A3%81%E9%93%BE-flux"><span class="nav-number">2.4.</span> <span class="nav-text">4. 磁链 flux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BD%AC%E5%8A%A8%E6%83%AF%E9%87%8F-Js-%E5%92%8C%E6%91%A9%E6%93%A6%E7%B3%BB%E6%95%B0-B"><span class="nav-number">2.5.</span> <span class="nav-text">5. 转动惯量 Js 和摩擦系数 B</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%A7%92%E5%BA%A6%E5%81%8F%E7%A7%BB-e-off%E3%80%81r-off"><span class="nav-number">2.6.</span> <span class="nav-text">6. 角度偏移 e_off、r_off</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BF%99%E4%BA%9B%E5%8F%82%E6%95%B0%E5%9C%A8-FOC-%E6%8E%A7%E5%88%B6%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">三、这些参数在 FOC 控制中有什么用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%B5%E6%B5%81%E7%8E%AF%EF%BC%88%E6%9C%80%E5%86%85%E5%B1%82%EF%BC%8C-20kHz%EF%BC%89%E2%80%94%E2%80%94-%E9%9C%80%E8%A6%81-Rs%E3%80%81Ld%E3%80%81Lq%E3%80%81flux"><span class="nav-number">3.1.</span> <span class="nav-text">1. 电流环（最内层，~20kHz）—— 需要 Rs、Ld、Lq、flux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%9F%E5%BA%A6%E7%8E%AF%EF%BC%88%E4%B8%AD%E9%97%B4%E5%B1%82%EF%BC%8C-1kHz%EF%BC%89%E2%80%94%E2%80%94-%E9%9C%80%E8%A6%81-Js%E3%80%81B%E3%80%81Kt"><span class="nav-number">3.2.</span> <span class="nav-text">2. 速度环（中间层，~1kHz）—— 需要 Js、B、Kt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%A7%92%E5%BA%A6-x2F-%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91-%E2%80%94%E2%80%94-%E9%9C%80%E8%A6%81-pn%E3%80%81e-off%E3%80%81r-off"><span class="nav-number">3.3.</span> <span class="nav-text">3. 角度&#x2F;磁场定向 —— 需要 pn、e_off、r_off</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%97%A0%E6%84%9F%E8%A7%82%E6%B5%8B%E5%99%A8-%E2%80%94%E2%80%94-%E9%9C%80%E8%A6%81-Rs%E3%80%81Ls%E3%80%81flux%E3%80%81Ldif"><span class="nav-number">3.4.</span> <span class="nav-text">4. 无感观测器 —— 需要 Rs、Ls、flux、Ldif</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-V-x2F-F-%E6%A8%A1%E5%BC%8F-%E2%80%94%E2%80%94-%E5%8F%82%E6%95%B0%E8%A6%81%E6%B1%82%E6%9C%80%E4%BD%8E"><span class="nav-number">3.5.</span> <span class="nav-text">5. V&#x2F;F 模式 —— 参数要求最低</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E5%8F%82%E6%95%B0-%E2%86%92-%E5%8A%9F%E8%83%BD%E6%98%A0%E5%B0%84"><span class="nav-number">3.6.</span> <span class="nav-text">总结：参数 → 功能映射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%85%B8%E5%9E%8B%E5%8F%82%E6%95%B0%E8%BE%A8%E8%AF%86%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">四、典型参数辨识流程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/04/foc-motor-parameters/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FOC 电机参数详解：从获取到实际应用 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FOC 电机参数详解：从获取到实际应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-04 10:00:00" itemprop="dateCreated datePublished" datetime="2026-03-04T10:00:00+08:00">2026-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">嵌入式开发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>本文以 <code>pmsm_2312s_init()</code> 中 2312S 电机参数为例，逐一解释每个参数的含义、实际获取方法，以及在 FOC 控制中的用途。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="一、参数总览"><a href="#一、参数总览" class="headerlink" title="一、参数总览"></a>一、参数总览</h2><h3 id="电机电气参数"><a href="#电机电气参数" class="headerlink" title="电机电气参数"></a>电机电气参数</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pn = 7</code></td>
+<td>7</td>
+<td>极对数，电角度 &#x3D; 机械角度 × 7</td>
+</tr>
+<tr>
+<td><code>Rs = 0.203</code></td>
+<td>Ω</td>
+<td>定子相电阻，影响铜耗和电流环</td>
+</tr>
+<tr>
+<td><code>Ld = 108.8</code></td>
+<td>μH</td>
+<td>d 轴电感（直轴，磁场方向）</td>
+</tr>
+<tr>
+<td><code>Lq = 112.4</code></td>
+<td>μH</td>
+<td>q 轴电感（交轴，出力方向）</td>
+</tr>
+<tr>
+<td><code>Ls = 110.6</code></td>
+<td>μH</td>
+<td>平均电感 (Ld+Lq)&#x2F;2，用于简化模型</td>
+</tr>
+<tr>
+<td><code>Ldif = 3.64</code></td>
+<td>μH</td>
+<td>电感差 (Lq-Ld)&#x2F;2，凸极性，高频注入用</td>
+</tr>
+<tr>
+<td><code>flux = 6.488</code></td>
+<td>mWb</td>
+<td>永磁磁链，反电动势常数的核心</td>
+</tr>
+</tbody></table>
+<h3 id="电机机械参数"><a href="#电机机械参数" class="headerlink" title="电机机械参数"></a>电机机械参数</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>B = 1.88e-4</code></td>
+<td>N·m·s&#x2F;rad</td>
+<td>粘滞摩擦系数，速度相关阻力</td>
+</tr>
+<tr>
+<td><code>Js = 9.09e-5</code></td>
+<td>kg·m²</td>
+<td>转动惯量（约 90 g·cm²），影响加减速响应</td>
+</tr>
+</tbody></table>
+<h3 id="控制-x2F-传动参数"><a href="#控制-x2F-传动参数" class="headerlink" title="控制&#x2F;传动参数"></a>控制&#x2F;传动参数</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Gr = 1.0</code></td>
+<td>—</td>
+<td>减速比，1.0 &#x3D; 直驱无减速</td>
+</tr>
+<tr>
+<td><code>ibw = 1000.0</code></td>
+<td>Hz</td>
+<td>电流环期望带宽，用于自动整定 PI 参数</td>
+</tr>
+<tr>
+<td><code>delta = 4.0</code></td>
+<td>—</td>
+<td>阻尼比系数，电流环相位裕度&#x2F;阻尼参数</td>
+</tr>
+</tbody></table>
+<h3 id="预计算常量（避免实时除法）"><a href="#预计算常量（避免实时除法）" class="headerlink" title="预计算常量（避免实时除法）"></a>预计算常量（避免实时除法）</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>计算</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>div_pn</code></td>
+<td>1&#x2F;7</td>
+<td>极对数倒数，电角速度 → 机械角速度</td>
+</tr>
+<tr>
+<td><code>pnd_2pi</code></td>
+<td>7&#x2F;2π</td>
+<td>机械圈数 → 电圈数换算</td>
+</tr>
+<tr>
+<td><code>div_Gr</code></td>
+<td>1.0</td>
+<td>减速比倒数</td>
+</tr>
+<tr>
+<td><code>Kt</code></td>
+<td>1.5×7×0.006488 ≈ 0.0681 N·m&#x2F;A</td>
+<td>转矩常数，iq 电流 → 电磁转矩</td>
+</tr>
+<tr>
+<td><code>div_Kt</code></td>
+<td>≈ 14.68</td>
+<td>转矩常数倒数，转矩 → 电流换算</td>
+</tr>
+</tbody></table>
+<h3 id="运动控制参数"><a href="#运动控制参数" class="headerlink" title="运动控制参数"></a>运动控制参数</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>wm_acc = 200</code></td>
+<td>rad&#x2F;s²</td>
+<td>加速度，速度上升斜率限制</td>
+</tr>
+<tr>
+<td><code>wm_dec = 200</code></td>
+<td>rad&#x2F;s²</td>
+<td>减速度，速度下降斜率限制</td>
+</tr>
+</tbody></table>
+<h3 id="角度偏移（标定结果）"><a href="#角度偏移（标定结果）" class="headerlink" title="角度偏移（标定结果）"></a>角度偏移（标定结果）</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>值 (rad)</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>e_off = 2.344</code></td>
+<td>≈ 134.2°</td>
+<td>编码器电角度偏移</td>
+</tr>
+<tr>
+<td><code>r_off = 2.130</code></td>
+<td>≈ 122.1°</td>
+<td>转子机械角度偏移</td>
+</tr>
+<tr>
+<td><code>m_off = 0.0</code></td>
+<td>0°</td>
+<td>附加偏移，预留校正量</td>
+</tr>
+</tbody></table>
+<p>这三个偏移角通过编码器标定获得，确保 Park 变换的角度与实际转子磁极位置对齐，是 FOC 正确运行的前提。</p>
+<hr>
+<h2 id="二、参数的实际获取方法"><a href="#二、参数的实际获取方法" class="headerlink" title="二、参数的实际获取方法"></a>二、参数的实际获取方法</h2><h3 id="1-极对数-pn"><a href="#1-极对数-pn" class="headerlink" title="1. 极对数 pn"></a>1. 极对数 pn</h3><p>最简单的参数，三种方法：</p>
+<ul>
+<li><strong>查数据手册</strong>：电机厂商直接提供</li>
+<li><strong>手动法</strong>：缓慢转动转子一圈，用示波器数反电动势的波形周期数</li>
+<li><strong>驱动法</strong>：给定开环电压缓慢旋转，观察电角度转了几圈 ÷ 机械转一圈 &#x3D; 极对数</li>
+</ul>
+<h3 id="2-相电阻-Rs"><a href="#2-相电阻-Rs" class="headerlink" title="2. 相电阻 Rs"></a>2. 相电阻 Rs</h3><p><strong>方法一：万用表直测</strong></p>
+<ul>
+<li>测量任意两相线间电阻，除以 2 &#x3D; 单相电阻</li>
+<li>精度一般，受接触电阻和温度影响</li>
+</ul>
+<p><strong>方法二：直流注入法（推荐，可软件自动化）</strong></p>
+<ul>
+<li>给 d 轴注入恒定小电流 Id，q 轴电流为 0</li>
+<li>电机静止不动时：<code>Vd = Id × Rs</code></li>
+<li>直接计算：<code>Rs = Vd / Id</code></li>
+</ul>
+<h3 id="3-电感-Ld、Lq、Ls"><a href="#3-电感-Ld、Lq、Ls" class="headerlink" title="3. 电感 Ld、Lq、Ls"></a>3. 电感 Ld、Lq、Ls</h3><p><strong>方法一：LCR 表直测</strong></p>
+<ul>
+<li>锁定转子在 d 轴和 q 轴位置分别测量</li>
+<li>缺点：测试频率与实际运行频率不同，结果有偏差</li>
+</ul>
+<p><strong>方法二：高频注入法（推荐）</strong></p>
+<ul>
+<li>在 d 轴或 q 轴注入高频小信号电压（如 1kHz 方波）</li>
+<li>根据电流响应的上升斜率计算：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V = L × (dI/dt)  →  L = V × dt / dI</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>方法三：阶跃响应法</strong></p>
+<ul>
+<li>注入 d 轴阶跃电压，记录电流上升曲线</li>
+<li>拟合一阶系统：<code>τ = L/R</code>，已知 Rs 即可算出 L</li>
+<li>这是最常用的工程做法</li>
+</ul>
+<blockquote>
+<p><code>Ls = (Ld + Lq) / 2</code>，<code>Ldif = (Lq - Ld) / 2</code>，辨识出 Ld&#x2F;Lq 后直接计算。</p>
+</blockquote>
+<h3 id="4-磁链-flux"><a href="#4-磁链-flux" class="headerlink" title="4. 磁链 flux"></a>4. 磁链 flux</h3><p><strong>方法一：反电动势法（最常用）</strong></p>
+<ul>
+<li>用另一台电机拖动待测电机匀速旋转</li>
+<li>示波器测量线反电动势峰值 <code>Vll_peak</code></li>
+<li>计算：<code>flux = Vll_peak / (√3 × ω_e)</code></li>
+</ul>
+<p><strong>方法二：软件辨识（开环拖动法）</strong></p>
+<ul>
+<li>开环 V&#x2F;F 拖动电机到稳定转速</li>
+<li>空载时 Iq ≈ 0，所以：<code>flux ≈ Vq / ω_e</code></li>
+<li>正是 <code>drag_vf</code> 模式能做的事</li>
+</ul>
+<p><strong>方法三：闭环静态法</strong></p>
+<ul>
+<li>d 轴通入已知电流 Id，q 轴电流为 0，电机静止</li>
+<li>逐步增大 Id，记录不同 Id 下磁链变化</li>
+<li>适用于精确建模、考虑磁饱和的场景</li>
+</ul>
+<h3 id="5-转动惯量-Js-和摩擦系数-B"><a href="#5-转动惯量-Js-和摩擦系数-B" class="headerlink" title="5. 转动惯量 Js 和摩擦系数 B"></a>5. 转动惯量 Js 和摩擦系数 B</h3><p><strong>方法一：自由减速法（最实用）</strong></p>
+<ol>
+<li>电机加速到已知转速 ω₀</li>
+<li>突然断电，记录速度衰减曲线 ω(t)</li>
+<li>拟合：<code>ω(t) = ω₀ × e^(-B/J × t)</code></li>
+<li>通过斜率求解 J 和 B</li>
+</ol>
+<p><strong>方法二：加速度法</strong></p>
+<ol>
+<li>施加已知转矩 Te（通过 <code>Iq × Kt</code> 计算）</li>
+<li>空载加速，测量角加速度 <code>α = dω/dt</code></li>
+<li><code>J = Te / α</code>（忽略摩擦时）</li>
+<li>稳态时：<code>B = Te / ω</code></li>
+</ol>
+<p><strong>方法三：阶跃响应辨识</strong></p>
+<ul>
+<li>施加阶跃转矩，记录速度响应曲线</li>
+<li>机械系统为一阶模型：<code>τ_m = J/B</code></li>
+<li>拟合曲线即可同时获得 J 和 B</li>
+</ul>
+<h3 id="6-角度偏移-e-off、r-off"><a href="#6-角度偏移-e-off、r-off" class="headerlink" title="6. 角度偏移 e_off、r_off"></a>6. 角度偏移 e_off、r_off</h3><p>这是<strong>标定（Calibration）过程</strong>，不是电机固有参数，每台电机+编码器组合都不同。</p>
+<p>标准做法：</p>
+<ol>
+<li>给 d 轴注入固定电流（如 Id&#x3D;1A，Iq&#x3D;0），电角度 θ&#x3D;0</li>
+<li>转子自动对齐到 d 轴方向并锁定</li>
+<li>读取编码器角度值 <code>θ_encoder</code></li>
+<li><code>e_off = θ_encoder × pn (mod 2π)</code></li>
+<li><code>r_off = θ_encoder</code></li>
+</ol>
+<hr>
+<h2 id="三、这些参数在-FOC-控制中有什么用"><a href="#三、这些参数在-FOC-控制中有什么用" class="headerlink" title="三、这些参数在 FOC 控制中有什么用"></a>三、这些参数在 FOC 控制中有什么用</h2><p><strong>一句话概括：FOC 的本质是数学模型控制电机，模型越准，控制越好。每个参数都是模型中的一个变量。</strong></p>
+<h3 id="1-电流环（最内层，-20kHz）——-需要-Rs、Ld、Lq、flux"><a href="#1-电流环（最内层，-20kHz）——-需要-Rs、Ld、Lq、flux" class="headerlink" title="1. 电流环（最内层，~20kHz）—— 需要 Rs、Ld、Lq、flux"></a>1. 电流环（最内层，~20kHz）—— 需要 Rs、Ld、Lq、flux</h3><p>电流环 PI 参数的自动整定公式（带宽法）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Kp = Ls × ibw × 2π   // 比例增益 = 电感 × 带宽</span><br><span class="line">Ki = Rs × ibw × 2π   // 积分增益 = 电阻 × 带宽</span><br></pre></td></tr></table></figure>
+
+<p>这就是 <code>ibw = 1000</code> 和 <code>delta = 4.0</code> 存在的意义——<strong>不需要手动调 PI，给定带宽就能自动算出来</strong>。</p>
+<p>电流环还需要前馈解耦：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vd_ff = -ω_e × Lq × Iq        // d 轴前馈，需要 Lq</span><br><span class="line">Vq_ff = +ω_e × Ld × Id + ω_e × flux  // q 轴前馈，需要 Ld 和 flux</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用在哪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Rs</code></td>
+<td>PI 积分增益 + 电压补偿</td>
+</tr>
+<tr>
+<td><code>Ld</code></td>
+<td>d 轴 PI 比例增益 + q 轴解耦前馈</td>
+</tr>
+<tr>
+<td><code>Lq</code></td>
+<td>q 轴 PI 比例增益 + d 轴解耦前馈</td>
+</tr>
+<tr>
+<td><code>flux</code></td>
+<td>q 轴反电动势前馈补偿</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 如果 Rs&#x2F;Ls 不准 → PI 参数不匹配 → 电流响应振荡或迟钝</p>
+</blockquote>
+<h3 id="2-速度环（中间层，-1kHz）——-需要-Js、B、Kt"><a href="#2-速度环（中间层，-1kHz）——-需要-Js、B、Kt" class="headerlink" title="2. 速度环（中间层，~1kHz）—— 需要 Js、B、Kt"></a>2. 速度环（中间层，~1kHz）—— 需要 Js、B、Kt</h3><p>速度环控制的是转矩（通过 Iq），转矩与转速的关系：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Te - B×ω = J × dω/dt</span><br><span class="line">即：Kt×Iq - B×ω = J × dω/dt</span><br></pre></td></tr></table></figure>
+
+<p>速度环 PI 整定：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Kp = J × 速度环带宽   // 惯量越大，需要越大的比例增益</span><br><span class="line">Ki 与 B（摩擦）相关   // 摩擦越大，积分需要越强来消除稳态误差</span><br></pre></td></tr></table></figure>
+
+<p>转矩指令到电流指令的转换：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iq_ref = T_ref / Kt   // 这就是 div_Kt 预计算的原因</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用在哪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Js</code></td>
+<td>速度环 PI 整定，前馈加速度补偿</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>摩擦补偿，稳态误差消除</td>
+</tr>
+<tr>
+<td><code>Kt</code></td>
+<td>转矩 → 电流换算（最关键的桥梁）</td>
+</tr>
+<tr>
+<td><code>wm_acc/dec</code></td>
+<td>S 曲线&#x2F;梯形速度规划的加减速限制</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 如果 Js 不准 → 速度环增益不匹配 → 加减速超调或响应慢<br>⚠️ 如果 Kt 不准 → 转矩输出与期望不符 → 力控模式不准</p>
+</blockquote>
+<h3 id="3-角度-x2F-磁场定向-——-需要-pn、e-off、r-off"><a href="#3-角度-x2F-磁场定向-——-需要-pn、e-off、r-off" class="headerlink" title="3. 角度&#x2F;磁场定向 —— 需要 pn、e_off、r_off"></a>3. 角度&#x2F;磁场定向 —— 需要 pn、e_off、r_off</h3><p>FOC 的核心是 Park 变换，必须知道转子磁极的精确位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">θ_电角度 = θ_编码器 × pn - e_off</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用在哪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pn</code></td>
+<td>机械角度 → 电角度换算</td>
+</tr>
+<tr>
+<td><code>e_off</code></td>
+<td>编码器零点与电角度零点的偏差补偿</td>
+</tr>
+<tr>
+<td><code>r_off</code></td>
+<td>编码器零点与机械零点的偏差补偿</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 如果 e_off 偏了几度 → Park 变换角度错误 → d&#x2F;q 轴耦合 → 出力下降、效率变差、电流振荡<br><strong>这是 FOC 调试中最常见的问题：标定角度不准，一切白搭。</strong></p>
+</blockquote>
+<h3 id="4-无感观测器-——-需要-Rs、Ls、flux、Ldif"><a href="#4-无感观测器-——-需要-Rs、Ls、flux、Ldif" class="headerlink" title="4. 无感观测器 —— 需要 Rs、Ls、flux、Ldif"></a>4. 无感观测器 —— 需要 Rs、Ls、flux、Ldif</h3><p>无感算法（NLOB、ALOB、SMO、ESMO）本质上都在做同一件事——用电机数学模型反推转子位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// PMSM 电压方程（静止坐标系）</span><br><span class="line">Vα = Rs×Iα + Ls×dIα/dt - ω_e×flux×sin(θ)</span><br><span class="line">Vβ = Rs×Iβ + Ls×dIβ/dt + ω_e×flux×cos(θ)</span><br></pre></td></tr></table></figure>
+
+<p>观测器已知 V 和 I，用 Rs、Ls 算出反电动势，再从反电动势提取 θ 和 ω：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eα = Vα - Rs×Iα - Ls×dIα/dt = -ω_e × flux × sin(θ)</span><br><span class="line">eβ = Vβ - Rs×Iβ - Ls×dIβ/dt = +ω_e × flux × cos(θ)</span><br><span class="line">θ  = atan2(-eα, eβ)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用在哪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Rs</code></td>
+<td>从电压中扣除电阻压降</td>
+</tr>
+<tr>
+<td><code>Ls</code></td>
+<td>从电压中扣除电感压降</td>
+</tr>
+<tr>
+<td><code>flux</code></td>
+<td>反电动势幅值的归一化</td>
+</tr>
+<tr>
+<td><code>Ldif</code></td>
+<td>高频注入法（HFI），利用 Ld≠Lq 的凸极效应估计低速位置</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 如果 Rs 偏了 20% → 观测器反电动势估计错误 → 位置偏差 → 失步</p>
+</blockquote>
+<h3 id="5-V-x2F-F-模式-——-参数要求最低"><a href="#5-V-x2F-F-模式-——-参数要求最低" class="headerlink" title="5. V&#x2F;F 模式 —— 参数要求最低"></a>5. V&#x2F;F 模式 —— 参数要求最低</h3><p>开环 <code>force_volt_mode</code> 实际只用到 <code>pn</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pm-&gt;ctrl.we_set = pm-&gt;ctrl.wr_set * pm-&gt;para.pn;  <span class="comment">// 只用了 pn</span></span><br><span class="line">foc_volt(pm, vd_set, vq_set, drag_pe);             <span class="comment">// 给定电压直接输出</span></span><br></pre></td></tr></table></figure>
+
+<p>V&#x2F;F 模式不依赖 Rs、Ls、flux 等参数，这正是它的优势——用于：</p>
+<ul>
+<li>初始验证硬件是否正常</li>
+<li>拖动电机辨识 flux（反电动势法）</li>
+<li>编码器标定前的基础旋转</li>
+</ul>
+<h3 id="总结：参数-→-功能映射"><a href="#总结：参数-→-功能映射" class="headerlink" title="总结：参数 → 功能映射"></a>总结：参数 → 功能映射</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pn, e_off      →  角度计算    ← 没有这个，FOC 根本跑不起来</span><br><span class="line">                      ↓</span><br><span class="line">Rs, Ld, Lq, flux → 电流环     ← 参数不准 → 电流振荡/响应差</span><br><span class="line">ibw, delta     →  (PI 自整定)</span><br><span class="line">                      ↓</span><br><span class="line">Js, B, Kt      →  速度环      ← 参数不准 → 速度超调/跟踪差</span><br><span class="line">wm_acc/dec     →  (轨迹规划)</span><br><span class="line">                      ↓</span><br><span class="line">Rs, Ls, flux, Ldif → 无感观测器 ← 参数不准 → 失步/无法启动</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数是 FOC 数学模型的”灵魂”，参数准确度直接决定控制性能上限。</strong></p>
+<hr>
+<h2 id="四、典型参数辨识流程"><a href="#四、典型参数辨识流程" class="headerlink" title="四、典型参数辨识流程"></a>四、典型参数辨识流程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Step 1: 查手册获取 pn（极对数）</span><br><span class="line">         ↓</span><br><span class="line">Step 2: 万用表粗测 Rs，软件辨识精确 Rs</span><br><span class="line">         ↓</span><br><span class="line">Step 3: 高频/阶跃注入辨识 Ld、Lq</span><br><span class="line">         ↓</span><br><span class="line">Step 4: 开环拖动或反电动势法获取 flux</span><br><span class="line">         （drag_vf 模式就是为此设计的）</span><br><span class="line">         ↓</span><br><span class="line">Step 5: 编码器标定获取 e_off、r_off</span><br><span class="line">         ↓</span><br><span class="line">Step 6: 自由减速法获取 Js、B</span><br><span class="line">         ↓</span><br><span class="line">Step 7: 根据 Rs、Ls、flux 自动整定 PID 参数</span><br><span class="line">         （ibw 和 delta 是自动整定的设计指标）</span><br><span class="line">         ↓</span><br><span class="line">Step 8: 闭环验证，微调优化</span><br></pre></td></tr></table></figure>
+
+<p>很多 FOC 方案（包括本项目架构）支持<strong>上电自动辨识</strong>：依次执行 Rs → Ls → flux → 编码器标定，把结果写入 Flash，量产时只需跑一次标定程序即可。这就是 <code>calibrat_mode</code> 和 <code>idpm_t</code>（参数辨识结构体）的设计目的。</p>
+<hr>
+<blockquote>
+<p>参数辨识的精度直接决定了 FOC 控制器的性能上限。工程中通常先用粗略参数跑起来，再通过在线辨识或离线精测迭代优化。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" rel="tag"># 电机控制</a>
+              <a href="/tags/FOC/" rel="tag"># FOC</a>
+              <a href="/tags/PMSM/" rel="tag"># PMSM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/26/Qt%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E8%AF%A6%E8%A7%A3-2/" rel="prev" title="Qt开发常用控件详解(2)">
+                  <i class="fa fa-chevron-left"></i> Qt开发常用控件详解(2)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">89k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:22</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
