@@ -20,21 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析 从磁场定向控制原理到工程机械操纵杆的力触觉方案落地——一篇文章讲透 FOC 在力反馈领域的应用。   目录 FOC 磁场定向控制：如何实现精确力矩控制 虚拟力触觉效果的实现：弹簧、阻尼、棘轮与更多 五种进阶触觉效果的详细实现 低转速高精度控制的工程挑战 堵转问题：虚拟墙与反向力矩的热管理 柄端力反馈的功率与力矩需求分析 24VDC 工程机械供电">
+    <meta name="description" content="FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析 从磁场定向控制原理到工程机械操纵杆的力触觉方案落地——一篇文章讲透 FOC 在力反馈领域的应用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析">
 <meta property="og:url" content="http://ycx81.github.io/2026/03/10/FOC_Force_Feedback_Blog/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析 从磁场定向控制原理到工程机械操纵杆的力触觉方案落地——一篇文章讲透 FOC 在力反馈领域的应用。   目录 FOC 磁场定向控制：如何实现精确力矩控制 虚拟力触觉效果的实现：弹簧、阻尼、棘轮与更多 五种进阶触觉效果的详细实现 低转速高精度控制的工程挑战 堵转问题：虚拟墙与反向力矩的热管理 柄端力反馈的功率与力矩需求分析 24VDC 工程机械供电">
+<meta property="og:description" content="FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析 从磁场定向控制原理到工程机械操纵杆的力触觉方案落地——一篇文章讲透 FOC 在力反馈领域的应用。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ycx81.github.io/images/image-20260310163203059.png">
+<meta property="og:image" content="http://ycx81.github.io/images/image-20260310163323635.png">
+<meta property="og:image" content="http://ycx81.github.io/images/image-20260310163515333.png">
+<meta property="og:image" content="http://ycx81.github.io/images/image-20260310163356235.png">
+<meta property="og:image" content="http://ycx81.github.io/images/image-20260310163732509.png">
+<meta property="og:image" content="http://ycx81.github.io/images/image-20260310163445344.png">
 <meta property="article:published_time" content="2026-03-10T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-17T06:56:55.009Z">
+<meta property="article:modified_time" content="2026-03-17T07:02:47.582Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="电机控制">
 <meta property="article:tag" content="FOC">
 <meta property="article:tag" content="力反馈">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ycx81.github.io/images/image-20260310163203059.png">
 
 
 <link rel="canonical" href="http://ycx81.github.io/2026/03/10/FOC_Force_Feedback_Blog/">
@@ -270,6 +277,7 @@
 <p>从磁场定向控制原理到工程机械操纵杆的力触觉方案落地——一篇文章讲透 FOC 在力反馈领域的应用。</p>
 </blockquote>
 <hr>
+<span id="more"></span>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
 <li><a href="#%E4%B8%80foc-%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91%E6%8E%A7%E5%88%B6%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B2%BE%E7%A1%AE%E5%8A%9B%E7%9F%A9%E6%8E%A7%E5%88%B6">FOC 磁场定向控制：如何实现精确力矩控制</a></li>
 <li><a href="#%E4%BA%8C%E8%99%9A%E6%8B%9F%E5%8A%9B%E8%A7%A6%E8%A7%89%E6%95%88%E6%9E%9C%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%BC%B9%E7%B0%A7%E9%98%BB%E5%B0%BC%E6%A3%98%E8%BD%AE%E4%B8%8E%E6%9B%B4%E5%A4%9A">虚拟力触觉效果的实现：弹簧、阻尼、棘轮与更多</a></li>
@@ -931,8 +939,7 @@
 <td>~4.14 N·m&#x2F;rad</td>
 </tr>
 </tbody></table>
-
-
+<p><img src="/../images/image-20260310163203059.png" alt="弹簧配置数据表"></p>
 <h4 id="摩擦保持配置（Friction-Hold）"><a href="#摩擦保持配置（Friction-Hold）" class="headerlink" title="摩擦保持配置（Friction Hold）"></a>摩擦保持配置（Friction Hold）</h4><table>
 <thead>
 <tr>
@@ -961,18 +968,13 @@
 <td>±5°</td>
 </tr>
 </tbody></table>
-
-
-
-
+<p><img src="/../images/image-20260310163323635.png" alt="F1 &amp; F2 摩擦保持参数"></p>
+<p><img src="/../images/image-20260310163515333.png" alt="F3 摩擦保持参数"></p>
 <h4 id="力矩曲线特征"><a href="#力矩曲线特征" class="headerlink" title="力矩曲线特征"></a>力矩曲线特征</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">力矩</span><br><span class="line"> ↑</span><br><span class="line">2.59 ─────────────────────── ╱</span><br><span class="line">     │                     ╱</span><br><span class="line">1.71 ─────────────────── ╱</span><br><span class="line">     │                 ╱</span><br><span class="line">     │               ╱</span><br><span class="line">1.05 ─────────── ·╱    ← 破出点</span><br><span class="line">0.65 ─ ─ ─ ─ ·  │</span><br><span class="line">     │        │  │</span><br><span class="line">   0 ┼────────┼──┼──────→ 角度</span><br><span class="line">     0    死区  破出  满行程(20°)</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
+<p><img src="/../images/image-20260310163356235.png" alt="F1 1.5Nm 中棘爪弹簧力矩曲线"></p>
+<p><img src="/../images/image-20260310163732509.png" alt="F2 1.5Nm 重棘爪弹簧力矩曲线"></p>
+<p><img src="/../images/image-20260310163445344.png" alt="F3 2.5Nm 重棘爪弹簧力矩曲线"></p>
 <h3 id="9-3-弹簧力矩模拟代码"><a href="#9-3-弹簧力矩模拟代码" class="headerlink" title="9.3 弹簧力矩模拟代码"></a>9.3 弹簧力矩模拟代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> <span class="title function_">joystick_spring_emulation</span><span class="params">(<span class="type">float</span> θ, <span class="type">float</span> ω, SpringConfig *cfg)</span> &#123;</span><br><span class="line">    <span class="type">float</span> abs_θ = <span class="built_in">fabs</span>(θ);</span><br><span class="line">    <span class="type">float</span> T = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段1：死区</span></span><br><span class="line">    <span class="keyword">if</span> (abs_θ &lt; cfg-&gt;deadzone) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段2：破出力矩（平滑预紧跳变）</span></span><br><span class="line">    <span class="type">float</span> effective_θ = abs_θ - cfg-&gt;deadzone;</span><br><span class="line">    T = cfg-&gt;breakout_torque;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段3：线性弹簧段</span></span><br><span class="line">    <span class="type">float</span> spring_range = cfg-&gt;full_deflection_angle - cfg-&gt;deadzone;</span><br><span class="line">    <span class="type">float</span> K = (cfg-&gt;full_deflection_torque - cfg-&gt;breakout_torque) / spring_range;</span><br><span class="line">    T += K * effective_θ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段4：满行程硬限位</span></span><br><span class="line">    <span class="keyword">if</span> (abs_θ &gt; cfg-&gt;full_deflection_angle) &#123;</span><br><span class="line">        T += cfg-&gt;endstop_stiffness * (abs_θ - cfg-&gt;full_deflection_angle);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    T = -copysign(T, θ);               <span class="comment">// 方向：始终指向中位</span></span><br><span class="line">    T += -cfg-&gt;damping * ω;            <span class="comment">// 阻尼项</span></span><br><span class="line">    <span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>各配置参数：</p>
@@ -1207,8 +1209,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/03/09/CAN-Bus--CANopen--J1939-%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AF%A6%E8%A7%A3/" rel="prev" title="CAN Bus、CANopen、J1939 面试知识点详解">
-                  <i class="fa fa-chevron-left"></i> CAN Bus、CANopen、J1939 面试知识点详解
+                <a href="/2026/03/10/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/" rel="prev" title="嵌入式软件开发 — FOC 面试题全集与详解">
+                  <i class="fa fa-chevron-left"></i> 嵌入式软件开发 — FOC 面试题全集与详解
                 </a>
             </div>
             <div class="post-nav-item">

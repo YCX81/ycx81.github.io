@@ -5136,13 +5136,9 @@
   </entry>
   <entry>
     <title>CAN Bus、CANopen、J1939 面试知识点详解</title>
-    <url>/2026/03/09/CAN-Bus--CANopen--J1939-%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<p>针对CAN Bus、CAN Open、 J1939给出详细的面试相关知识点</p>
-<p>09:15</p>
-<p>整合CAN总线协议的深层面试知识点。</p>
-<p>Let me provide comprehensive interview knowledge points for CAN Bus, CANopen, and J1939.</p>
-<p>Done</p>
-<h1 id="CAN-Bus-x2F-CANopen-x2F-J1939-面试知识点详解"><a href="#CAN-Bus-x2F-CANopen-x2F-J1939-面试知识点详解" class="headerlink" title="CAN Bus &#x2F; CANopen &#x2F; J1939 面试知识点详解"></a>CAN Bus &#x2F; CANopen &#x2F; J1939 面试知识点详解</h1><hr>
+    <url>/2026/02/24/CAN-Bus--CANopen--J1939-%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="CAN-Bus-x2F-CANopen-x2F-J1939-面试知识点详解"><a href="#CAN-Bus-x2F-CANopen-x2F-J1939-面试知识点详解" class="headerlink" title="CAN Bus &#x2F; CANopen &#x2F; J1939 面试知识点详解"></a>CAN Bus &#x2F; CANopen &#x2F; J1939 面试知识点详解</h1><hr>
+<span id="more"></span>
 <h2 id="一、CAN-Bus-基础"><a href="#一、CAN-Bus-基础" class="headerlink" title="一、CAN Bus 基础"></a>一、CAN Bus 基础</h2><h3 id="1-物理层"><a href="#1-物理层" class="headerlink" title="1. 物理层"></a>1. 物理层</h3><p><strong>电气特性</strong></p>
 <ul>
 <li>差分信号传输：CAN_H 和 CAN_L 两根线</li>
@@ -6754,6 +6750,7 @@
 <p>从磁场定向控制原理到工程机械操纵杆的力触觉方案落地——一篇文章讲透 FOC 在力反馈领域的应用。</p>
 </blockquote>
 <hr>
+<span id="more"></span>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
 <li><a href="#%E4%B8%80foc-%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91%E6%8E%A7%E5%88%B6%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B2%BE%E7%A1%AE%E5%8A%9B%E7%9F%A9%E6%8E%A7%E5%88%B6">FOC 磁场定向控制：如何实现精确力矩控制</a></li>
 <li><a href="#%E4%BA%8C%E8%99%9A%E6%8B%9F%E5%8A%9B%E8%A7%A6%E8%A7%89%E6%95%88%E6%9E%9C%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%BC%B9%E7%B0%A7%E9%98%BB%E5%B0%BC%E6%A3%98%E8%BD%AE%E4%B8%8E%E6%9B%B4%E5%A4%9A">虚拟力触觉效果的实现：弹簧、阻尼、棘轮与更多</a></li>
@@ -7415,8 +7412,7 @@
 <td>~4.14 N·m&#x2F;rad</td>
 </tr>
 </tbody></table>
-
-
+<p><img src="/../images/image-20260310163203059.png" alt="弹簧配置数据表"></p>
 <h4 id="摩擦保持配置（Friction-Hold）"><a href="#摩擦保持配置（Friction-Hold）" class="headerlink" title="摩擦保持配置（Friction Hold）"></a>摩擦保持配置（Friction Hold）</h4><table>
 <thead>
 <tr>
@@ -7445,18 +7441,13 @@
 <td>±5°</td>
 </tr>
 </tbody></table>
-
-
-
-
+<p><img src="/../images/image-20260310163323635.png" alt="F1 &amp; F2 摩擦保持参数"></p>
+<p><img src="/../images/image-20260310163515333.png" alt="F3 摩擦保持参数"></p>
 <h4 id="力矩曲线特征"><a href="#力矩曲线特征" class="headerlink" title="力矩曲线特征"></a>力矩曲线特征</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">力矩</span><br><span class="line"> ↑</span><br><span class="line">2.59 ─────────────────────── ╱</span><br><span class="line">     │                     ╱</span><br><span class="line">1.71 ─────────────────── ╱</span><br><span class="line">     │                 ╱</span><br><span class="line">     │               ╱</span><br><span class="line">1.05 ─────────── ·╱    ← 破出点</span><br><span class="line">0.65 ─ ─ ─ ─ ·  │</span><br><span class="line">     │        │  │</span><br><span class="line">   0 ┼────────┼──┼──────→ 角度</span><br><span class="line">     0    死区  破出  满行程(20°)</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
+<p><img src="/../images/image-20260310163356235.png" alt="F1 1.5Nm 中棘爪弹簧力矩曲线"></p>
+<p><img src="/../images/image-20260310163732509.png" alt="F2 1.5Nm 重棘爪弹簧力矩曲线"></p>
+<p><img src="/../images/image-20260310163445344.png" alt="F3 2.5Nm 重棘爪弹簧力矩曲线"></p>
 <h3 id="9-3-弹簧力矩模拟代码"><a href="#9-3-弹簧力矩模拟代码" class="headerlink" title="9.3 弹簧力矩模拟代码"></a>9.3 弹簧力矩模拟代码</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> <span class="title function_">joystick_spring_emulation</span><span class="params">(<span class="type">float</span> θ, <span class="type">float</span> ω, SpringConfig *cfg)</span> &#123;</span><br><span class="line">    <span class="type">float</span> abs_θ = <span class="built_in">fabs</span>(θ);</span><br><span class="line">    <span class="type">float</span> T = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段1：死区</span></span><br><span class="line">    <span class="keyword">if</span> (abs_θ &lt; cfg-&gt;deadzone) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段2：破出力矩（平滑预紧跳变）</span></span><br><span class="line">    <span class="type">float</span> effective_θ = abs_θ - cfg-&gt;deadzone;</span><br><span class="line">    T = cfg-&gt;breakout_torque;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段3：线性弹簧段</span></span><br><span class="line">    <span class="type">float</span> spring_range = cfg-&gt;full_deflection_angle - cfg-&gt;deadzone;</span><br><span class="line">    <span class="type">float</span> K = (cfg-&gt;full_deflection_torque - cfg-&gt;breakout_torque) / spring_range;</span><br><span class="line">    T += K * effective_θ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阶段4：满行程硬限位</span></span><br><span class="line">    <span class="keyword">if</span> (abs_θ &gt; cfg-&gt;full_deflection_angle) &#123;</span><br><span class="line">        T += cfg-&gt;endstop_stiffness * (abs_θ - cfg-&gt;full_deflection_angle);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    T = -copysign(T, θ);               <span class="comment">// 方向：始终指向中位</span></span><br><span class="line">    T += -cfg-&gt;damping * ω;            <span class="comment">// 阻尼项</span></span><br><span class="line">    <span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>各配置参数：</p>
@@ -7685,8 +7676,9 @@
   </entry>
   <entry>
     <title>嵌入式软件开发 — FOC 面试题全集与详解</title>
-    <url>/2026/03/08/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/</url>
+    <url>/2026/03/10/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="嵌入式软件开发-—-FOC（磁场定向控制）面试题全集与详解"><a href="#嵌入式软件开发-—-FOC（磁场定向控制）面试题全集与详解" class="headerlink" title="嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解"></a>嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解</h1><hr>
+<span id="more"></span>
 <h2 id="第一部分：FOC-基础理论"><a href="#第一部分：FOC-基础理论" class="headerlink" title="第一部分：FOC 基础理论"></a>第一部分：FOC 基础理论</h2><h3 id="Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？"><a href="#Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？" class="headerlink" title="Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？"></a>Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？</h3><p><strong>答：</strong></p>
 <p>FOC（Field-Oriented Control），即磁场定向控制，也称为矢量控制（Vector Control）。其核心思想是通过坐标变换，将三相交流电机的定子电流分解为两个正交分量——产生磁通的励磁电流分量（Id）和产生转矩的转矩电流分量（Iq），从而实现对电机转矩和磁通的独立（解耦）控制，使交流电机获得类似直流电机的优良控制性能。</p>
 <p><strong>与传统控制方式的对比：</strong></p>
@@ -9798,8 +9790,9 @@
   </entry>
   <entry>
     <title>FreeRTOS 深度分析教程：从源码到底层运行机制</title>
-    <url>/2026/03/05/FreeRTOS%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="FreeRTOS深度分析教程：从源码到底层运行机制"><a href="#FreeRTOS深度分析教程：从源码到底层运行机制" class="headerlink" title="FreeRTOS深度分析教程：从源码到底层运行机制"></a>FreeRTOS深度分析教程：从源码到底层运行机制</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+    <url>/2025/08/08/FreeRTOS%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="FreeRTOS深度分析教程：从源码到底层运行机制"><a href="#FreeRTOS深度分析教程：从源码到底层运行机制" class="headerlink" title="FreeRTOS深度分析教程：从源码到底层运行机制"></a>FreeRTOS深度分析教程：从源码到底层运行机制</h1><span id="more"></span>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
 <li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%A6%82%E8%A7%88">项目结构概览</a></li>
 <li><a href="#freertos%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84">FreeRTOS核心架构</a></li>
 <li><a href="#%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F">任务管理系统</a></li>
@@ -10018,9 +10011,10 @@
   </entry>
   <entry>
     <title>嵌入式系统高级面试深度指南（完整版）</title>
-    <url>/2026/03/07/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E9%AB%98%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%B7%B1%E5%BA%A6%E6%8C%87%E5%8D%97_%E5%AE%8C%E6%95%B4%E7%89%88/</url>
+    <url>/2025/07/31/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E9%AB%98%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%B7%B1%E5%BA%A6%E6%8C%87%E5%8D%97_%E5%AE%8C%E6%95%B4%E7%89%88/</url>
     <content><![CDATA[<h1 id="嵌入式系统高级面试深度指南"><a href="#嵌入式系统高级面试深度指南" class="headerlink" title="嵌入式系统高级面试深度指南"></a>嵌入式系统高级面试深度指南</h1><hr>
 <h1 id="第一章：C-x2F-C-编程基础与编程实操"><a href="#第一章：C-x2F-C-编程基础与编程实操" class="headerlink" title="第一章：C&#x2F;C++ 编程基础与编程实操"></a>第一章：C&#x2F;C++ 编程基础与编程实操</h1><hr>
+<span id="more"></span>
 <h2 id="1-1-volatile-关键字在嵌入式开发中的典型使用场景"><a href="#1-1-volatile-关键字在嵌入式开发中的典型使用场景" class="headerlink" title="1.1 volatile 关键字在嵌入式开发中的典型使用场景"></a>1.1 volatile 关键字在嵌入式开发中的典型使用场景</h2><h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><p><code>volatile</code> 告诉编译器：<strong>该变量的值可能在程序控制流之外被改变</strong>，编译器不得对其进行优化（如缓存到寄存器、消除”冗余”读取、重排序等）。</p>
 <h3 id="典型使用场景"><a href="#典型使用场景" class="headerlink" title="典型使用场景"></a>典型使用场景</h3><p><strong>场景一：硬件寄存器访问</strong></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义外设寄存器指针</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOA_ODR  (*(volatile uint32_t *)0x40020014)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 每次写入都必须真正到达硬件</span></span><br><span class="line">GPIOA_ODR = <span class="number">0x01</span>;  <span class="comment">// 点亮LED</span></span><br><span class="line">GPIOA_ODR = <span class="number">0x00</span>;  <span class="comment">// 熄灭LED</span></span><br></pre></td></tr></table></figure>
@@ -11494,11 +11488,12 @@
   </entry>
   <entry>
     <title>FreeRTOS 与 ARM Cortex-M4F 完全解析教程</title>
-    <url>/2026/03/06/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/</url>
+    <url>/2025/10/15/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="FreeRTOS-与-ARM-Cortex-M4F-完全解析教程"><a href="#FreeRTOS-与-ARM-Cortex-M4F-完全解析教程" class="headerlink" title="FreeRTOS 与 ARM Cortex-M4F 完全解析教程"></a>FreeRTOS 与 ARM Cortex-M4F 完全解析教程</h1><blockquote>
 <p><strong>从源码到硬件的全方位深度分析</strong></p>
 <p>基于 STM32F407 实际硬件平台，涵盖 FreeRTOS 内核原理、ARM 底层实现、性能优化与实战应用的完整教程</p>
 </blockquote>
+<span id="more"></span>
 <h2 id="🎯-教程特色"><a href="#🎯-教程特色" class="headerlink" title="🎯 教程特色"></a>🎯 教程特色</h2><ul>
 <li><strong>📚 理论与实践并重</strong>: 源码分析 + 硬件底层 + 实际应用</li>
 <li><strong>🔬 汇编级深度解析</strong>: 逐行分析关键汇编代码和寄存器操作</li>

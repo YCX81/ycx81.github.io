@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="FreeRTOS 与 ARM Cortex-M4F 完全解析教程 从源码到硬件的全方位深度分析 基于 STM32F407 实际硬件平台，涵盖 FreeRTOS 内核原理、ARM 底层实现、性能优化与实战应用的完整教程  🎯 教程特色 📚 理论与实践并重: 源码分析 + 硬件底层 + 实际应用 🔬 汇编级深度解析: 逐行分析关键汇编代码和寄存器操作 ⚡ 性能优化指导: 基于硬件特性的优化策略和">
+    <meta name="description" content="FreeRTOS 与 ARM Cortex-M4F 完全解析教程 从源码到硬件的全方位深度分析 基于 STM32F407 实际硬件平台，涵盖 FreeRTOS 内核原理、ARM 底层实现、性能优化与实战应用的完整教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FreeRTOS 与 ARM Cortex-M4F 完全解析教程">
-<meta property="og:url" content="http://ycx81.github.io/2026/03/06/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:url" content="http://ycx81.github.io/2025/10/15/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="FreeRTOS 与 ARM Cortex-M4F 完全解析教程 从源码到硬件的全方位深度分析 基于 STM32F407 实际硬件平台，涵盖 FreeRTOS 内核原理、ARM 底层实现、性能优化与实战应用的完整教程  🎯 教程特色 📚 理论与实践并重: 源码分析 + 硬件底层 + 实际应用 🔬 汇编级深度解析: 逐行分析关键汇编代码和寄存器操作 ⚡ 性能优化指导: 基于硬件特性的优化策略和">
+<meta property="og:description" content="FreeRTOS 与 ARM Cortex-M4F 完全解析教程 从源码到硬件的全方位深度分析 基于 STM32F407 实际硬件平台，涵盖 FreeRTOS 内核原理、ARM 底层实现、性能优化与实战应用的完整教程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-06T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-17T06:56:55.011Z">
+<meta property="article:published_time" content="2025-10-15T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-17T07:03:22.656Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="FreeRTOS">
@@ -37,11 +37,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://ycx81.github.io/2026/03/06/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/">
+<link rel="canonical" href="http://ycx81.github.io/2025/10/15/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/06/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/","path":"2026/03/06/FreeRTOS_ARM_Cortex_M4F_深度分析教程/","title":"FreeRTOS 与 ARM Cortex-M4F 完全解析教程"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2025/10/15/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/","path":"2025/10/15/FreeRTOS_ARM_Cortex_M4F_深度分析教程/","title":"FreeRTOS 与 ARM Cortex-M4F 完全解析教程"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>FreeRTOS 与 ARM Cortex-M4F 完全解析教程 | YCX-Blog</title>
@@ -201,7 +201,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/06/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2025/10/15/FreeRTOS_ARM_Cortex_M4F_%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
@@ -230,7 +230,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-03-06 10:00:00" itemprop="dateCreated datePublished" datetime="2026-03-06T10:00:00+08:00">2026-03-06</time>
+      <time title="创建时间：2025-10-15 10:00:00" itemprop="dateCreated datePublished" datetime="2025-10-15T10:00:00+08:00">2025-10-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,6 +270,7 @@
 <p><strong>从源码到硬件的全方位深度分析</strong></p>
 <p>基于 STM32F407 实际硬件平台，涵盖 FreeRTOS 内核原理、ARM 底层实现、性能优化与实战应用的完整教程</p>
 </blockquote>
+<span id="more"></span>
 <h2 id="🎯-教程特色"><a href="#🎯-教程特色" class="headerlink" title="🎯 教程特色"></a>🎯 教程特色</h2><ul>
 <li><strong>📚 理论与实践并重</strong>: 源码分析 + 硬件底层 + 实际应用</li>
 <li><strong>🔬 汇编级深度解析</strong>: 逐行分析关键汇编代码和寄存器操作</li>
@@ -814,13 +815,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/03/05/FreeRTOS%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/" rel="prev" title="FreeRTOS 深度分析教程：从源码到底层运行机制">
+                <a href="/2025/08/08/FreeRTOS%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B/" rel="prev" title="FreeRTOS 深度分析教程：从源码到底层运行机制">
                   <i class="fa fa-chevron-left"></i> FreeRTOS 深度分析教程：从源码到底层运行机制
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/03/07/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E9%AB%98%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%B7%B1%E5%BA%A6%E6%8C%87%E5%8D%97_%E5%AE%8C%E6%95%B4%E7%89%88/" rel="next" title="嵌入式系统高级面试深度指南（完整版）">
-                  嵌入式系统高级面试深度指南（完整版） <i class="fa fa-chevron-right"></i>
+                <a href="/2026/02/24/CAN-Bus--CANopen--J1939-%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AF%A6%E8%A7%A3/" rel="next" title="CAN Bus、CANopen、J1939 面试知识点详解">
+                  CAN Bus、CANopen、J1939 面试知识点详解 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

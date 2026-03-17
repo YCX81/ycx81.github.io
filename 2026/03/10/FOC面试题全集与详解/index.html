@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解 第一部分：FOC 基础理论Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？答： FOC（Field-Oriented Control），即磁场定向控制，也称为矢量控制（Vector Control）。其核心思想是通过坐标变换，将三相交流电机的定子电流分解为两个正交分量——产生磁通的励磁电流分量（Id）和产生">
+    <meta name="description" content="嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="嵌入式软件开发 — FOC 面试题全集与详解">
-<meta property="og:url" content="http://ycx81.github.io/2026/03/08/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/10/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解 第一部分：FOC 基础理论Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？答： FOC（Field-Oriented Control），即磁场定向控制，也称为矢量控制（Vector Control）。其核心思想是通过坐标变换，将三相交流电机的定子电流分解为两个正交分量——产生磁通的励磁电流分量（Id）和产生">
+<meta property="og:description" content="嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-08T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-17T06:56:55.009Z">
+<meta property="article:published_time" content="2026-03-10T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-17T07:02:47.584Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="嵌入式">
@@ -36,11 +36,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://ycx81.github.io/2026/03/08/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/">
+<link rel="canonical" href="http://ycx81.github.io/2026/03/10/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/08/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/","path":"2026/03/08/FOC面试题全集与详解/","title":"嵌入式软件开发 — FOC 面试题全集与详解"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/10/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/","path":"2026/03/10/FOC面试题全集与详解/","title":"嵌入式软件开发 — FOC 面试题全集与详解"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>嵌入式软件开发 — FOC 面试题全集与详解 | YCX-Blog</title>
@@ -200,7 +200,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/08/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/10/FOC%E9%9D%A2%E8%AF%95%E9%A2%98%E5%85%A8%E9%9B%86%E4%B8%8E%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
@@ -229,7 +229,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-03-08 10:00:00" itemprop="dateCreated datePublished" datetime="2026-03-08T10:00:00+08:00">2026-03-08</time>
+      <time title="创建时间：2026-03-10 10:00:00" itemprop="dateCreated datePublished" datetime="2026-03-10T10:00:00+08:00">2026-03-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,6 +266,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="嵌入式软件开发-—-FOC（磁场定向控制）面试题全集与详解"><a href="#嵌入式软件开发-—-FOC（磁场定向控制）面试题全集与详解" class="headerlink" title="嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解"></a>嵌入式软件开发 — FOC（磁场定向控制）面试题全集与详解</h1><hr>
+<span id="more"></span>
 <h2 id="第一部分：FOC-基础理论"><a href="#第一部分：FOC-基础理论" class="headerlink" title="第一部分：FOC 基础理论"></a>第一部分：FOC 基础理论</h2><h3 id="Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？"><a href="#Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？" class="headerlink" title="Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？"></a>Q1：什么是FOC？它与传统控制方式（如方波控制、BLDC六步换向）有什么区别？</h3><p><strong>答：</strong></p>
 <p>FOC（Field-Oriented Control），即磁场定向控制，也称为矢量控制（Vector Control）。其核心思想是通过坐标变换，将三相交流电机的定子电流分解为两个正交分量——产生磁通的励磁电流分量（Id）和产生转矩的转矩电流分量（Iq），从而实现对电机转矩和磁通的独立（解耦）控制，使交流电机获得类似直流电机的优良控制性能。</p>
 <p><strong>与传统控制方式的对比：</strong></p>
@@ -2383,13 +2384,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/03/07/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E9%AB%98%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%B7%B1%E5%BA%A6%E6%8C%87%E5%8D%97_%E5%AE%8C%E6%95%B4%E7%89%88/" rel="prev" title="嵌入式系统高级面试深度指南（完整版）">
-                  <i class="fa fa-chevron-left"></i> 嵌入式系统高级面试深度指南（完整版）
+                <a href="/2026/03/04/foc-motor-parameters/" rel="prev" title="FOC 电机参数详解：从获取到实际应用">
+                  <i class="fa fa-chevron-left"></i> FOC 电机参数详解：从获取到实际应用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/03/09/CAN-Bus--CANopen--J1939-%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AF%A6%E8%A7%A3/" rel="next" title="CAN Bus、CANopen、J1939 面试知识点详解">
-                  CAN Bus、CANopen、J1939 面试知识点详解 <i class="fa fa-chevron-right"></i>
+                <a href="/2026/03/10/FOC_Force_Feedback_Blog/" rel="next" title="FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析">
+                  FOC 力矩控制与工程机械操纵杆力反馈系统设计全解析 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
