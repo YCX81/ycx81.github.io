@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/03/23/embedded-firmware-interview-60-questions/
 http://ycx81.github.io/2026/03/20/embedded-firmware-interview-complete-guide/
 http://ycx81.github.io/2026/03/22/daily-study-2026-03-22/
 http://ycx81.github.io/2026/03/19/CyberGear-FOC-Production-Guide/
@@ -71,6 +72,11 @@ http://ycx81.github.io/tags/I2C/
 http://ycx81.github.io/tags/DMA/
 http://ycx81.github.io/tags/USB-CDC/
 http://ycx81.github.io/tags/%E5%8A%9F%E8%83%BD%E5%AE%89%E5%85%A8/
+http://ycx81.github.io/tags/%E6%8C%87%E9%92%88/
+http://ycx81.github.io/tags/ISR/
+http://ycx81.github.io/tags/%E4%B8%AD%E6%96%AD/
+http://ycx81.github.io/tags/UART/
+http://ycx81.github.io/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/

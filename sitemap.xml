@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ycx81.github.io/2026/03/23/embedded-firmware-interview-60-questions/</loc>
+    
+    <lastmod>2026-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://ycx81.github.io/2026/03/20/embedded-firmware-interview-complete-guide/</loc>
     
     <lastmod>2026-03-22</lastmod>
@@ -581,6 +590,41 @@
   
   <url>
     <loc>http://ycx81.github.io/tags/%E5%8A%9F%E8%83%BD%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E6%8C%87%E9%92%88/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/ISR/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E4%B8%AD%E6%96%AD/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/UART/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/</loc>
     <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
