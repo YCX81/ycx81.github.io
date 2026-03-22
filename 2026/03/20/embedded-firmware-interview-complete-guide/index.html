@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="覆盖 C&#x2F;C++ 基础、ARM Cortex-M 架构、RTOS、外设驱动、FOC 电机控制、通信协议、固件架构和项目实战的嵌入式固件工程师面试全面复习指南。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式固件工程师面试完全指南">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/20/embedded-firmware-interview-complete-guide/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="覆盖 C&#x2F;C++ 基础、ARM Cortex-M 架构、RTOS、外设驱动、FOC 电机控制、通信协议、固件架构和项目实战的嵌入式固件工程师面试全面复习指南。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-20T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-22T08:49:20.462Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="FOC">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="电机控制">
+<meta property="article:tag" content="CAN">
+<meta property="article:tag" content="J1939">
+<meta property="article:tag" content="CANopen">
+<meta property="article:tag" content="FreeRTOS">
+<meta property="article:tag" content="RTOS">
+<meta property="article:tag" content="ARM">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="固件">
+<meta property="article:tag" content="Cortex-M">
+<meta property="article:tag" content="ThreadX">
+<meta property="article:tag" content="BLE">
+<meta property="article:tag" content="SPI">
+<meta property="article:tag" content="I2C">
+<meta property="article:tag" content="DMA">
+<meta property="article:tag" content="USB CDC">
+<meta property="article:tag" content="功能安全">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/20/embedded-firmware-interview-complete-guide/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/20/embedded-firmware-interview-complete-guide/","path":"2026/03/20/embedded-firmware-interview-complete-guide/","title":"嵌入式固件工程师面试完全指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>嵌入式固件工程师面试完全指南 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81C-x2F-C-%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">一、C&#x2F;C++ 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 数据类型与大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-volatile"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%8C%87%E9%92%88"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 结构体与内存对齐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-attribute-%E9%80%9F%E8%AE%B0%E8%A1%A8"><span class="nav-number">2.5.</span> <span class="nav-text">1.5 __attribute__ 速记表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-static-x2F-extern-x2F-const"><span class="nav-number">2.6.</span> <span class="nav-text">1.6 static &#x2F; extern &#x2F; const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E4%BD%8D%E6%93%8D%E4%BD%9C%EF%BC%88%E5%AF%84%E5%AD%98%E5%99%A8%E9%85%8D%E7%BD%AE%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD%EF%BC%89"><span class="nav-number">2.7.</span> <span class="nav-text">1.7 位操作（寄存器配置核心技能）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-%E5%B8%B8%E8%A7%81%E9%99%B7%E9%98%B1"><span class="nav-number">2.8.</span> <span class="nav-text">1.8 常见陷阱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81ARM-Cortex-M-%E6%9E%B6%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">二、ARM Cortex-M 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%AD%E6%96%AD%EF%BC%88ISR%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 中断（ISR）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-PendSV-%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 PendSV 与上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8A%E7%94%B5%E6%B5%81%E7%A8%8B%EF%BC%88Reset-Handler-%E5%88%B0-main%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 上电流程（Reset_Handler 到 main）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E4%BD%8E%E5%8A%9F%E8%80%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 低功耗设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-CCM-RAM-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 CCM RAM 深度解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E6%80%BB%E7%BA%BF%E6%9E%B6%E6%9E%84%EF%BC%88STM32F407%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">2.6 总线架构（STM32F407）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81RTOS"><span class="nav-number">4.</span> <span class="nav-text">三、RTOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-FreeRTOS-Tickless-%E4%BD%8E%E5%8A%9F%E8%80%97"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 FreeRTOS Tickless 低功耗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-FreeRTOS-%E6%A0%88%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 FreeRTOS 栈溢出检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-ThreadX-%E7%BA%BF%E7%A8%8B%E6%A0%88%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 ThreadX 线程栈详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-RTOS-%E4%BB%BB%E5%8A%A1%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 RTOS 任务设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8"><span class="nav-number">5.</span> <span class="nav-text">四、外设驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-SPI"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 SPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-I2C"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 I2C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-DMA"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 DMA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-ADC-%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%BC%8F%EF%BC%88FOC-%E7%94%B5%E6%B5%81%E9%87%87%E6%A0%B7%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 ADC 注入模式（FOC 电流采样）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-USB-CDC-%E5%9C%A8-ISR-%E4%B8%AD%E5%8F%91%E9%80%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 USB CDC 在 ISR 中发送的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81FOC-%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">五、FOC 电机控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-FOC-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 FOC 基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-FOC-%E5%89%8D%E9%A6%88%E8%A1%A5%E5%81%BF%E5%A4%A7%E5%85%A8"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 FOC 前馈补偿大全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E6%AD%BB%E5%8C%BA%E8%A1%A5%E5%81%BF%E8%AF%A6%E8%A7%A3"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 死区补偿详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E5%A0%B5%E8%BD%AC%E7%83%AD%E7%AE%A1%E7%90%86"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 堵转热管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E7%94%B5%E6%B5%81%E7%8E%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%98%E5%85%88%E4%BA%8E%E7%94%B5%E5%8E%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 电流环为什么优先于电压模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.</span> <span class="nav-text">六、通信协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-BLE-%E9%9D%A2%E8%AF%95%E7%AA%81%E5%87%BB"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 BLE 面试突击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-CAN-x2F-J1939-x2F-CANopen"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 CAN &#x2F; J1939 &#x2F; CANopen</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">8.</span> <span class="nav-text">七、固件架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 分层架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E5%9B%9E%E8%B0%83%E3%80%81%E4%BE%9D%E8%B5%96%E5%8F%8D%E8%BD%AC%E3%80%81%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 回调、依赖反转、依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 发布订阅模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-Mock-%E5%B9%B3%E5%8F%B0-CI-x2F-CD"><span class="nav-number">8.4.</span> <span class="nav-text">7.4 Mock 平台 + CI&#x2F;CD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-%E7%8A%B6%E6%80%81%E6%9C%BA%E8%AE%BE%E8%AE%A1"><span class="nav-number">8.5.</span> <span class="nav-text">7.5 状态机设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">八、项目面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-JC-%E7%B3%BB%E5%88%97%E5%B7%A5%E4%B8%9A%E6%91%87%E6%9D%86%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 JC 系列工业摇杆控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-TKX-ThreadX-%E5%8A%9F%E8%83%BD%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 TKX_ThreadX 功能安全框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-%E7%BB%BC%E5%90%88%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98%E9%80%9F%E6%9F%A5"><span class="nav-number">9.3.</span> <span class="nav-text">8.3 综合面试模拟题速查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-%E9%9D%A2%E8%AF%95%E7%AD%96%E7%95%A5%E6%80%BB%E7%BB%93"><span class="nav-number">9.4.</span> <span class="nav-text">8.4 面试策略总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%EF%BC%9A%E8%8B%B1%E6%96%87%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D%E6%A8%A1%E6%9D%BF"><span class="nav-number">10.</span> <span class="nav-text">附：英文自我介绍模板</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/20/embedded-firmware-interview-complete-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="嵌入式固件工程师面试完全指南 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          嵌入式固件工程师面试完全指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-20 10:00:00" itemprop="dateCreated datePublished" datetime="2026-03-20T10:00:00+08:00">2026-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">面试复习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>36 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>覆盖 C/C++ 基础、ARM Cortex-M 架构、RTOS、外设驱动、FOC 电机控制、通信协议、固件架构和项目实战的嵌入式固件工程师面试全面复习指南。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#%E4%B8%80cc-%E5%9F%BA%E7%A1%80">C/C++ 基础</a></li>
+<li><a href="#%E4%BA%8Carm-cortex-m-%E6%9E%B6%E6%9E%84">ARM Cortex-M 架构</a></li>
+<li><a href="#%E4%B8%89rtos">RTOS</a></li>
+<li><a href="#%E5%9B%9B%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8">外设驱动</a></li>
+<li><a href="#%E4%BA%94foc-%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6">FOC 电机控制</a></li>
+<li><a href="#%E5%85%AD%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE">通信协议（BLE / CAN）</a></li>
+<li><a href="#%E4%B8%83%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">固件架构设计</a></li>
+<li><a href="#%E5%85%AB%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E9%A2%98">项目面试题</a></li>
+</ol>
+<hr>
+<h2 id="一、C-x2F-C-基础"><a href="#一、C-x2F-C-基础" class="headerlink" title="一、C/C++ 基础"></a>一、C/C++ 基础</h2><h3 id="1-1-数据类型与大小"><a href="#1-1-数据类型与大小" class="headerlink" title="1.1 数据类型与大小"></a>1.1 数据类型与大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">类型              大小(32位MCU)    范围                    嵌入式常用场景</span><br><span class="line">──────────────────────────────────────────────────────────────────────</span><br><span class="line">char              1字节           -128~127                字符、小数据</span><br><span class="line">uint8_t           1字节           0~255                   寄存器值、标志位</span><br><span class="line">int16_t           2字节           -32768~32767            ADC原始值</span><br><span class="line">uint16_t          2字节           0~65535                 编码器值、PWM</span><br><span class="line">int32_t           4字节           -21亿~21亿              计数器、累加器</span><br><span class="line">uint32_t          4字节           0~42亿                  地址、时间戳</span><br><span class="line">float             4字节           ±3.4×10³⁸(精度6~7位)    FOC计算</span><br><span class="line">double            8字节           ±1.7×10³⁰⁸(精度15位)    嵌入式一般不用（慢）</span><br></pre></td></tr></table></figure>
+
+<p><strong>面试必知：sizeof</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 32位 ARM Cortex-M</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">char</span>)    = <span class="number">1</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">short</span>)   = <span class="number">2</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">int</span>)     = <span class="number">4</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">long</span>)    = <span class="number">4</span>    <span class="comment">// 注意！ARM 32位下 long 也是 4 字节</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">float</span>)   = <span class="number">4</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">double</span>)  = <span class="number">8</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="type">void</span> *)  = <span class="number">4</span>    <span class="comment">// 32位地址</span></span><br></pre></td></tr></table></figure>
+
+<p>嵌入式必须用 <code>stdint.h</code> 的精确宽度类型（<code>uint8_t</code> 而不是 <code>unsigned char</code>），保证跨平台一致性。</p>
+<hr>
+<h3 id="1-2-volatile"><a href="#1-2-volatile" class="headerlink" title="1.2 volatile"></a>1.2 volatile</h3><p><strong>告诉编译器：这个变量可能在你不知道的时候被改变，不要优化掉读取操作。</strong></p>
+<p>三个典型场景：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 场景1：硬件寄存器</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOA_IDR  (*(volatile uint32_t *)0x40020010)</span></span><br><span class="line"><span class="comment">// 每次读都必须真的去读寄存器，不能用缓存值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 场景2：中断共享变量</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">TIM_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    flag = <span class="literal">true</span>;  <span class="comment">// 中断里设置</span></span><br><span class="line">}</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="keyword">while</span> (!flag) {</span><br><span class="line">        <span class="comment">// 如果没有 volatile，编译器可能优化为死循环</span></span><br><span class="line">        <span class="comment">// 有 volatile → 每次循环都真的去内存读 flag</span></span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 场景3：DMA 缓冲区</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">uint16_t</span> adc_buf[<span class="number">4</span>];  <span class="comment">// DMA 随时会改这里的值</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-3-指针"><a href="#1-3-指针" class="headerlink" title="1.3 指针"></a>1.3 指针</h3><p><strong>函数指针（嵌入式最常用的指针类型）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*EventHandler_t)</span><span class="params">(<span class="type">uint8_t</span> event)</span>;</span><br><span class="line">EventHandler_t callback = my_handler;</span><br><span class="line">callback(<span class="number">0x01</span>);  <span class="comment">// 调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数指针数组（命令分发表）</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*CmdHandler_t)</span><span class="params">(<span class="type">uint8_t</span> *data, <span class="type">uint8_t</span> len)</span>;</span><br><span class="line">CmdHandler_t cmd_table[<span class="number">256</span>];</span><br><span class="line">cmd_table[<span class="number">0x01</span>] = handle_start;</span><br><span class="line">cmd_table[<span class="number">0x02</span>] = handle_stop;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">dispatch</span><span class="params">(<span class="type">uint8_t</span> cmd, <span class="type">uint8_t</span> *data, <span class="type">uint8_t</span> len)</span> {</span><br><span class="line">    <span class="keyword">if</span> (cmd_table[cmd] != <span class="literal">NULL</span>) {</span><br><span class="line">        cmd_table[cmd](data, len);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>const 与指针的四种组合：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> *p1 = &amp;a;     <span class="comment">// 指向const：不能通过p1改值，p1可以指别的</span></span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> p2 = &amp;a;     <span class="comment">// const指针：p2不能指别的，可以通过p2改值</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3 = &amp;a;  <span class="comment">// 都不能改</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 记忆口诀：const 在 * 左边→值不可改，const 在 * 右边→指针不可改</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-4-结构体与内存对齐"><a href="#1-4-结构体与内存对齐" class="headerlink" title="1.4 结构体与内存对齐"></a>1.4 结构体与内存对齐</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内存对齐陷阱</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Bad</span> {</span></span><br><span class="line">    <span class="type">uint8_t</span>  a;    <span class="comment">// offset 0（后有3字节填充）</span></span><br><span class="line">    <span class="type">uint32_t</span> b;    <span class="comment">// offset 4</span></span><br><span class="line">    <span class="type">uint8_t</span>  c;    <span class="comment">// offset 8（后有3字节填充）</span></span><br><span class="line">};</span><br><span class="line"><span class="comment">// sizeof = 12（浪费6字节）</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Good</span> {</span>      <span class="comment">// 按大小从大到小排列</span></span><br><span class="line">    <span class="type">uint32_t</span> b;    <span class="comment">// offset 0</span></span><br><span class="line">    <span class="type">uint8_t</span>  a;    <span class="comment">// offset 4</span></span><br><span class="line">    <span class="type">uint8_t</span>  c;    <span class="comment">// offset 5（后有2字节填充）</span></span><br><span class="line">};</span><br><span class="line"><span class="comment">// sizeof = 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// packed 取消对齐（协议帧解析用）</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span>((<span class="title">packed</span>)) <span class="title">CANFrame</span> {</span></span><br><span class="line">    <span class="type">uint32_t</span> id;     <span class="comment">// offset 0</span></span><br><span class="line">    <span class="type">uint8_t</span>  data[<span class="number">8</span>];<span class="comment">// offset 4</span></span><br><span class="line">    <span class="type">uint8_t</span>  len;    <span class="comment">// offset 12</span></span><br><span class="line">};</span><br><span class="line"><span class="comment">// sizeof = 13（紧凑排列，无填充）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>位域（J1939 协议解析神器）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span> {</span></span><br><span class="line">    <span class="type">uint32_t</span> raw;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">        <span class="type">uint32_t</span> source_addr : <span class="number">8</span>;   <span class="comment">// bit 0~7</span></span><br><span class="line">        <span class="type">uint32_t</span> pdu_specific: <span class="number">8</span>;   <span class="comment">// bit 8~15</span></span><br><span class="line">        <span class="type">uint32_t</span> pdu_format  : <span class="number">8</span>;   <span class="comment">// bit 16~23</span></span><br><span class="line">        <span class="type">uint32_t</span> data_page   : <span class="number">1</span>;   <span class="comment">// bit 24</span></span><br><span class="line">        <span class="type">uint32_t</span> ext_data_page:<span class="number">1</span>;   <span class="comment">// bit 25</span></span><br><span class="line">        <span class="type">uint32_t</span> priority    : <span class="number">3</span>;   <span class="comment">// bit 26~28</span></span><br><span class="line">        <span class="type">uint32_t</span> reserved    : <span class="number">3</span>;   <span class="comment">// bit 29~31</span></span><br><span class="line">    } fields;</span><br><span class="line">} J1939_ID_t;</span><br><span class="line"></span><br><span class="line">J1939_ID_t id;</span><br><span class="line">id.raw = can_frame.id;               <span class="comment">// 从CAN帧取29位ID</span></span><br><span class="line"><span class="type">uint8_t</span> src = id.fields.source_addr; <span class="comment">// 直接按字段访问，无需手动移位</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-5-attribute-速记表"><a href="#1-5-attribute-速记表" class="headerlink" title="1.5 __attribute__ 速记表"></a>1.5 <code>__attribute__</code> 速记表</h3><table>
+<thead>
+<tr>
+<th>attribute</th>
+<th>作用</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>weak</code></td>
+<td>弱符号，可被同名强符号覆盖</td>
+<td>HAL 回调函数</td>
+</tr>
+<tr>
+<td><code>packed</code></td>
+<td>取消结构体填充</td>
+<td>协议帧解析、寄存器映射</td>
+</tr>
+<tr>
+<td><code>aligned(n)</code></td>
+<td>指定对齐</td>
+<td>DMA 缓冲区、向量表</td>
+</tr>
+<tr>
+<td><code>section("x")</code></td>
+<td>放到指定段</td>
+<td>Flash 参数区、RAM 执行函数</td>
+</tr>
+<tr>
+<td><code>used</code></td>
+<td>防止被优化删除</td>
+<td>版本号字符串</td>
+</tr>
+<tr>
+<td><code>noreturn</code></td>
+<td>标记不返回的函数</td>
+<td>错误处理、死循环</td>
+</tr>
+<tr>
+<td><code>constructor</code></td>
+<td>main 之前执行</td>
+<td>早期初始化</td>
+</tr>
+<tr>
+<td><code>deprecated</code></td>
+<td>标记废弃，使用时警告</td>
+<td>API 迭代</td>
+</tr>
+<tr>
+<td><code>optimize("O0")</code></td>
+<td>单个函数禁优化</td>
+<td>调试特定函数</td>
+</tr>
+<tr>
+<td><code>interrupt</code></td>
+<td>标记为中断处理函数</td>
+<td>部分非 ARM 平台</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>面试能说出 <strong>packed + aligned + section + weak</strong> 的实际场景基本够了。</p>
+</blockquote>
+<p><strong><code>aligned</code> 陷阱——向量表重定位：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SCB-&gt;VTOR 要求向量表至少对齐到向量表大小的下一个2的幂次</span></span><br><span class="line"><span class="comment">// STM32F407，中断数约 90，向量表约 374 字节，需对齐 512 字节边界</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误示例（用了 256 字节对齐）：</span></span><br><span class="line"><span class="type">uint32_t</span> __attribute__((aligned(<span class="number">256</span>))) vector_table_ram[<span class="number">374</span>];</span><br><span class="line"><span class="comment">// 地址不对齐，写入 VTOR 后实际地址被截断→中断跳转到错误地址→HardFault</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确做法：</span></span><br><span class="line"><span class="type">uint32_t</span> __attribute__((aligned(<span class="number">512</span>))) vector_table_ram[<span class="number">374</span>];</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-6-static-x2F-extern-x2F-const"><a href="#1-6-static-x2F-extern-x2F-const" class="headerlink" title="1.6 static / extern / const"></a>1.6 static / extern / const</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// static 的三种含义</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 函数内：生命周期=整个程序，作用域=函数内</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">counter</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> count = <span class="number">0</span>;  <span class="comment">// 只初始化一次，函数退出后值保留</span></span><br><span class="line">    count++;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 文件级：只在本文件可见（私有）</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> tx_buffer[<span class="number">64</span>];    <span class="comment">// 别的文件看不到</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">can_hw_reset</span><span class="params">(<span class="type">void</span>)</span> { }</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. extern：声明"这个变量在别的文件里定义的"</span></span><br><span class="line"><span class="comment">// config.c: uint32_t system_clock = 168000000;  // 定义</span></span><br><span class="line"><span class="comment">// main.c:   extern uint32_t system_clock;         // 引用</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-7-位操作（寄存器配置核心技能）"><a href="#1-7-位操作（寄存器配置核心技能）" class="headerlink" title="1.7 位操作（寄存器配置核心技能）"></a>1.7 位操作（寄存器配置核心技能）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> BIT(n)           (1U &lt;&lt; (n))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SET_BIT(reg, n)  ((reg) |= BIT(n))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CLR_BIT(reg, n)  ((reg) &amp;= ~BIT(n))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GET_BIT(reg, n)  (((reg) &gt;&gt; (n)) &amp; 1U)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置 PA5 为输出模式（MODER 每2位控制一个引脚）</span></span><br><span class="line">GPIOA-&gt;MODER &amp;= ~(<span class="number">0x3</span> &lt;&lt; (<span class="number">5</span>*<span class="number">2</span>));   <span class="comment">// 先清除</span></span><br><span class="line">GPIOA-&gt;MODER |=  (<span class="number">0x1</span> &lt;&lt; (<span class="number">5</span>*<span class="number">2</span>));   <span class="comment">// 再设置为01（输出）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从字节数组组装（不依赖字节序）</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">bytes_to_u16_le</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *p)</span> { <span class="keyword">return</span> p[<span class="number">0</span>] | (p[<span class="number">1</span>] &lt;&lt; <span class="number">8</span>); }</span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">bytes_to_u16_be</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *p)</span> { <span class="keyword">return</span> (p[<span class="number">0</span>] &lt;&lt; <span class="number">8</span>) | p[<span class="number">1</span>]; }</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-8-常见陷阱"><a href="#1-8-常见陷阱" class="headerlink" title="1.8 常见陷阱"></a>1.8 常见陷阱</h3><p><strong>有符号 vs 无符号比较：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">-1</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (a &lt; b) {</span><br><span class="line">    <span class="comment">// 不会进来！a 被隐式转换为 unsigned → 4294967295 &gt; 1</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>浮点比较：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> a = <span class="number">0.1f</span> + <span class="number">0.2f</span>;</span><br><span class="line"><span class="comment">// a == 0.3f 为 false！浮点有精度误差</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FLOAT_EQUAL(a, b) (fabsf((a) - (b)) &lt; 1e-6f)</span></span><br><span class="line"><span class="keyword">if</span> (FLOAT_EQUAL(a, <span class="number">0.3f</span>)) { <span class="comment">/* OK */</span> }</span><br></pre></td></tr></table></figure>
+
+<p><strong>宏的副作用：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b) ((a) &gt; (b) ? (a) : (b))</span></span><br><span class="line"><span class="type">int</span> z = MAX(x++, y);  <span class="comment">// x 可能被 ++ 两次！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用 inline 函数代替</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">max_int</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> { <span class="keyword">return</span> a &gt; b ? a : b; }</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、ARM-Cortex-M-架构"><a href="#二、ARM-Cortex-M-架构" class="headerlink" title="二、ARM Cortex-M 架构"></a>二、ARM Cortex-M 架构</h2><h3 id="2-1-中断（ISR）"><a href="#2-1-中断（ISR）" class="headerlink" title="2.1 中断（ISR）"></a>2.1 中断（ISR）</h3><p><strong>中断的硬件流程（ARM Cortex-M）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">外设产生中断 → NVIC 仲裁（优先级高才能抢占）</span><br><span class="line">  → CPU 硬件自动保存 8 个寄存器（xPSR, PC, LR, R12, R3~R0）</span><br><span class="line">  → 从向量表读取 ISR 地址</span><br><span class="line">  → 跳转到 ISR，切换 PSP → MSP</span><br><span class="line">  → 执行 ISR 代码</span><br><span class="line">  → ISR 返回，硬件自动弹出 8 个寄存器，恢复 PC</span><br><span class="line"></span><br><span class="line">整个保存/恢复：12 个时钟周期（Cortex-M4，168MHz ≈ 71ns）</span><br><span class="line">有 FPU 惰性保存：还可能多保存 S0~S15 + FPSCR（17个寄存器）</span><br></pre></td></tr></table></figure>
+
+<p><strong>优先级规则（数字越小优先级越高！）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>ISR</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>HardFault</td>
+<td>系统崩溃必须最高</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ADC 注入完成</td>
+<td>FOC 电流采样必须及时</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TIM1 更新</td>
+<td>FOC 主循环</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SPI 编码器</td>
+<td>编码器读取</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CAN 接收</td>
+<td>通信重要但不如 FOC</td>
+</tr>
+<tr>
+<td>8</td>
+<td>UART</td>
+<td>调试串口</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>PendSV / SysTick</strong></td>
+<td><strong>RTOS 调度必须最低</strong></td>
+</tr>
+</tbody></table>
+<p><strong>ISR 编写铁律：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确：ISR 只做最少的事</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">CAN_RX_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    read_frame(&amp;frame);</span><br><span class="line">    ring_push(&amp;can_rx_buf, &amp;frame);  <span class="comment">// 存到缓冲区（几μs）</span></span><br><span class="line">    <span class="comment">// 或释放信号量通知 RTOS 任务</span></span><br><span class="line">    xSemaphoreGiveFromISR(can_sem, &amp;woken);</span><br><span class="line">    portYIELD_FROM_ISR(woken);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绝不在 ISR 里做：delay_ms / printf / malloc / 阻塞等待</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-2-PendSV-与上下文切换"><a href="#2-2-PendSV-与上下文切换" class="headerlink" title="2.2 PendSV 与上下文切换"></a>2.2 PendSV 与上下文切换</h3><p><strong>PendSV 是 Cortex-M 专为 RTOS 上下文切换设计的异常，优先级设为最低。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为什么需要 PendSV？</span><br><span class="line"></span><br><span class="line">错误做法：在 SysTick 中断里直接切换</span><br><span class="line">  → SysTick 可能打断外设中断 → 实时性受损</span><br><span class="line"></span><br><span class="line">正确做法：</span><br><span class="line">  SysTick：tick+1 → 标记需要切换（挂起 PendSV）</span><br><span class="line">  PendSV（最低优先级）：所有其他中断处理完后才轮到它 → 上下文切换</span><br><span class="line">  → 保证切换时没有中断嵌套 → 栈状态干净</span><br></pre></td></tr></table></figure>
+
+<p><strong>PendSV 汇编（上下文切换核心）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">PendSV_Handler:</span><br><span class="line">    ; 进入时硬件已自动保存：xPSR,PC,LR,R12,R3~R0 到当前PSP</span><br><span class="line"></span><br><span class="line">    MRS     R0, PSP              ; 获取当前线程的 PSP</span><br><span class="line">    TST     LR, #0x10            ; 检查是否用了 FPU</span><br><span class="line">    IT      EQ</span><br><span class="line">    VSTMDBEQ R0!, {S16-S31}     ; 保存 FPU 寄存器</span><br><span class="line">    STMDB   R0!, {R4-R11}       ; 保存 R4~R11</span><br><span class="line"></span><br><span class="line">    LDR     R1, =pxCurrentTCB</span><br><span class="line">    LDR     R1, [R1]</span><br><span class="line">    STR     R0, [R1]             ; 保存 PSP 到当前 TCB</span><br><span class="line"></span><br><span class="line">    BL      vTaskSwitchContext   ; 调度器选下一个线程</span><br><span class="line"></span><br><span class="line">    LDR     R1, =pxCurrentTCB</span><br><span class="line">    LDR     R1, [R1]</span><br><span class="line">    LDR     R0, [R1]             ; 加载新线程的 PSP</span><br><span class="line"></span><br><span class="line">    LDMIA   R0!, {R4-R11}       ; 恢复 R4~R11</span><br><span class="line">    TST     LR, #0x10</span><br><span class="line">    IT      EQ</span><br><span class="line">    VLDMIAEQ R0!, {S16-S31}     ; 恢复 FPU 寄存器</span><br><span class="line"></span><br><span class="line">    MSR     PSP, R0              ; 更新 PSP 到新线程</span><br><span class="line">    BX      LR                   ; 返回，硬件自动弹出 R0~R3,R12,LR,PC,xPSR</span><br></pre></td></tr></table></figure>
+
+<p>上下文切换耗时：无 FPU ~1μs（16个寄存器），有 FPU ~3μs（49个寄存器）。</p>
+<hr>
+<h3 id="2-3-上电流程（Reset-Handler-到-main）"><a href="#2-3-上电流程（Reset-Handler-到-main）" class="headerlink" title="2.3 上电流程（Reset_Handler 到 main）"></a>2.3 上电流程（Reset_Handler 到 main）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">电源上电 → POR 复位 → CPU 读向量表</span><br><span class="line">  → MSP = *(0x08000000)（栈顶）</span><br><span class="line">  → PC  = *(0x08000004)（Reset_Handler）</span><br><span class="line"></span><br><span class="line">Reset_Handler（汇编）：</span><br><span class="line">  1. 使能 FPU（CPACR |= 0xF&lt;&lt;20）</span><br><span class="line">  2. 拷贝 .data 段（Flash → SRAM，已初始化全局变量）</span><br><span class="line">  3. 清零 .bss 段（未初始化全局变量）</span><br><span class="line">  4. 调用 SystemInit（Flash等待周期配置）</span><br><span class="line">  5. 调用 __libc_init_array（C++ 全局构造函数）</span><br><span class="line">  6. 跳转到 main()</span><br><span class="line"></span><br><span class="line">main()：</span><br><span class="line">  7. HAL_Init()（SysTick 1ms, NVIC 优先级分组）</span><br><span class="line">  8. SystemClock_Config()（HSI 16MHz → PLL 168MHz）</span><br><span class="line">  9. 外设初始化（GPIO/DMA/ADC/TIM/SPI/CAN）</span><br><span class="line">  10. 应用初始化（FOC/安全模块）</span><br><span class="line">  11. 创建 RTOS 线程</span><br><span class="line">  12. vTaskStartScheduler() / tx_kernel_enter()（永不返回）</span><br><span class="line"></span><br><span class="line">调度器启动：</span><br><span class="line">  → SVC 中断启动第一个线程</span><br><span class="line">  → 之后所有切换走 PendSV</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-4-低功耗设计"><a href="#2-4-低功耗设计" class="headerlink" title="2.4 低功耗设计"></a>2.4 低功耗设计</h3><p><strong>Cortex-M 低功耗模式（以 STM32 为例）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">模式          电流          进入方式         退出方式</span><br><span class="line">──────────────────────────────────────────────────────</span><br><span class="line">Run          ~30mA(170MHz)  -               -</span><br><span class="line">Sleep        ~10mA          __WFI()         任意中断</span><br><span class="line">Stop         ~10μA          HAL_PWR_Enter.. 特定中断（EXTI,LPTIM）</span><br><span class="line">Standby      ~2μA           HAL_PWR_Enter.. WKUP引脚/RTC</span><br><span class="line">Shutdown     ~0.1μA         HAL_PWR_Enter.. WKUP引脚</span><br></pre></td></tr></table></figure>
+
+<p><strong>低功耗三板斧：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一板斧：降频</span></span><br><span class="line">RCC-&gt;CFGR &amp;= ~RCC_CFGR_SW;   <span class="comment">// 切到 HSI (8~16MHz)</span></span><br><span class="line">RCC-&gt;CR &amp;= ~RCC_CR_PLLON;     <span class="comment">// 关 PLL → 功耗从 30mA 降到 ~3mA</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二板斧：关外设时钟</span></span><br><span class="line">__HAL_RCC_SPI2_CLK_DISABLE();</span><br><span class="line">__HAL_RCC_USART3_CLK_DISABLE();</span><br><span class="line">__HAL_RCC_ADC_CLK_DISABLE();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三板斧：管好 GPIO（未使用引脚设为模拟输入）</span></span><br><span class="line">GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;</span><br><span class="line">GPIO_InitStruct.Pull = GPIO_NOPULL;</span><br><span class="line">HAL_GPIO_Init(GPIOB, &amp;GPIO_InitStruct);</span><br><span class="line"><span class="comment">// 悬空引脚因噪声反复翻转会浪费电！</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常见坑：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 坑1：Stop 模式唤醒后时钟丢了（PLL 被关了）</span></span><br><span class="line">HAL_PWR_EnterSTOPMode(...);</span><br><span class="line">SystemClock_Config();  <span class="comment">// 唤醒后必须重新配置时钟！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 坑2：ADC 不关会持续耗电</span></span><br><span class="line">HAL_ADC_Stop(&amp;hadc1);</span><br><span class="line">__HAL_RCC_ADC_CLK_DISABLE();  <span class="comment">// 关时钟才是真的关</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 坑3：串口没发完就睡了</span></span><br><span class="line"><span class="keyword">while</span> (__HAL_UART_GET_FLAG(&amp;huart1, UART_FLAG_TC) == RESET);</span><br><span class="line">__WFI();  <span class="comment">// 等发完再睡</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-5-CCM-RAM-深度解析"><a href="#2-5-CCM-RAM-深度解析" class="headerlink" title="2.5 CCM RAM 深度解析"></a>2.5 CCM RAM 深度解析</h3><p><strong>CCM = Core Coupled Memory，直接连在 CPU 的 D-Bus 上。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">STM32F407 内存布局：</span><br><span class="line"></span><br><span class="line">0x1000_0000 ┌──────────────────┐</span><br><span class="line">            │ CCM RAM (64KB)    │ ← CPU 直连，DMA 不可访问</span><br><span class="line">0x1001_0000 └──────────────────┘</span><br><span class="line"></span><br><span class="line">0x2000_0000 ┌──────────────────┐</span><br><span class="line">            │ SRAM1 (112KB)     │ ← DMA 可访问，与 CPU 共享 AHB</span><br><span class="line">0x2002_0000 └──────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>CCM vs SRAM 性能对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SRAM</th>
+<th>CCM RAM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总线连接</td>
+<td>AHB 总线矩阵</td>
+<td>CPU D-Bus 直连</td>
+</tr>
+<tr>
+<td>CPU 访问速度</td>
+<td>零等待（无竞争时）</td>
+<td><strong>零等待（永远）</strong></td>
+</tr>
+<tr>
+<td>DMA 竞争</td>
+<td>有，DMA 和 CPU 抢总线</td>
+<td><strong>无，DMA 访问不了</strong></td>
+</tr>
+<tr>
+<td>DMA 可访问</td>
+<td>可以</td>
+<td><strong>不可以</strong></td>
+</tr>
+<tr>
+<td>可执行代码</td>
+<td>可以</td>
+<td>不可以（F4）</td>
+</tr>
+</tbody></table>
+<p><strong>实测数据（STM32F407，168MHz，FOC 20kHz 中断，同时 ADC+SPI DMA）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">栈在 SRAM：平均 12.3μs，最大 15.2μs，jitter ±1.8μs</span><br><span class="line">栈在 CCM： 平均 11.1μs，最大 11.8μs，jitter ±0.3μs</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么 CCM 存线程栈（三大理由）：</strong></p>
+<ol>
+<li><strong>性能确定性</strong> — CPU 通过专用 D-Bus 访问 CCM，不受 DMA 竞争影响，FOC jitter 从 1.8μs 降到 0.3μs</li>
+<li><strong>硬件隔离</strong> — DMA 不可访问 CCM，从硬件层面消除”DMA 配置错误踩栈”故障（FMEA 中可直接排除）</li>
+<li><strong>MPU 精细保护</strong> — 安全监控线程栈设为仅特权模式可访问，应用线程溢出也踩不到</li>
+</ol>
+<p><strong>注意事项：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DMA 缓冲区绝对不能放 CCM！</span></span><br><span class="line"><span class="comment">// 放了会静默失败（数据没写进去）或触发 Bus Fault</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint8_t</span> CCM_STACK foc_stack[<span class="number">4096</span>];   <span class="comment">// OK：线程栈放 CCM</span></span><br><span class="line"><span class="type">uint8_t</span> __attribute__((section(<span class="string">".bss"</span>))) adc_dma_buf[<span class="number">32</span>];  <span class="comment">// OK：DMA缓冲放 SRAM</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 哪些 STM32 有 CCM：F3xx, F405/407/427/429（64KB），H7（DTCM/ITCM）</span></span><br><span class="line"><span class="comment">// 没有 CCM：F1xx, G4xx（G4的CCM SRAM在AHB上，DMA可访问，不是真正隔离）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>链接脚本配置：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MEMORY {</span><br><span class="line">    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 1024K</span><br><span class="line">    CCM   (rw)  : ORIGIN = 0x10000000, LENGTH = 64K</span><br><span class="line">    SRAM1 (rw)  : ORIGIN = 0x20000000, LENGTH = 112K</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.ccm_stacks (NOLOAD) : {</span><br><span class="line">    . = ALIGN(8);</span><br><span class="line">    *(.ccm_stack*)</span><br><span class="line">} &gt; CCM</span><br></pre></td></tr></table></figure>
+
+<p><strong>MPU Guard Page 配置（栈溢出硬件检测）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每个线程栈底放 32 字节 MPU NO_ACCESS 区域</span></span><br><span class="line">mpu.Number = MPU_REGION_NUMBER5;</span><br><span class="line">mpu.BaseAddress = (<span class="type">uint32_t</span>)foc_thread_stack;  <span class="comment">// 栈底</span></span><br><span class="line">mpu.Size = MPU_REGION_SIZE_32B;</span><br><span class="line">mpu.AccessPermission = MPU_REGION_NO_ACCESS;   <span class="comment">// 任何访问都 Fault</span></span><br><span class="line">HAL_MPU_ConfigRegion(&amp;mpu);</span><br><span class="line"><span class="comment">// 栈溢出时碰到 Guard → MemManage Fault，立即响应</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>MemManage Fault 处理：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">MemManage_Handler</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="type">uint32_t</span> fault_addr = SCB-&gt;MMFAR;</span><br><span class="line">    <span class="keyword">if</span> (fault_addr &gt;= (<span class="type">uint32_t</span>)foc_thread_stack &amp;&amp;</span><br><span class="line">        fault_addr &lt; (<span class="type">uint32_t</span>)foc_thread_stack + <span class="number">32</span>) {</span><br><span class="line">        safety_shutdown(FAULT_STACK_OVERFLOW_FOC);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-6-总线架构（STM32F407）"><a href="#2-6-总线架构（STM32F407）" class="headerlink" title="2.6 总线架构（STM32F407）"></a>2.6 总线架构（STM32F407）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">┌────────────────────────────────────────────┐</span><br><span class="line">│              Cortex-M4                      │</span><br><span class="line">│  I-Bus（取指） D-Bus（数据）  S-Bus（系统）  │</span><br><span class="line">└─────┬──────────────┬──────────────────────┘</span><br><span class="line">      │              │  D-Bus 直连</span><br><span class="line">      │              ▼</span><br><span class="line">      │         ┌──────────┐</span><br><span class="line">      │         │ CCM RAM  │ ← DMA 不可达</span><br><span class="line">      │         │  64KB    │</span><br><span class="line">      │         └──────────┘</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">┌────────────────────────────────────────────┐</span><br><span class="line">│           AHB 总线矩阵（多主机共享）          │</span><br><span class="line">│  主机：CPU, DMA1, DMA2, Ethernet, USB HS   │</span><br><span class="line">│  从机：Flash, SRAM1, SRAM2, AHB外设桥       │</span><br><span class="line">│  → APB1（≤42MHz）: CAN/I2C/TIM2~7/UART    │</span><br><span class="line">│  → APB2（≤84MHz）: ADC/SPI1/TIM1/USART1  │</span><br><span class="line">└────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、RTOS"><a href="#三、RTOS" class="headerlink" title="三、RTOS"></a>三、RTOS</h2><h3 id="3-1-FreeRTOS-Tickless-低功耗"><a href="#3-1-FreeRTOS-Tickless-低功耗" class="headerlink" title="3.1 FreeRTOS Tickless 低功耗"></a>3.1 FreeRTOS Tickless 低功耗</h3><p><strong>核心思路：所有任务都睡了 → 算出下一个唤醒时刻 → 关 SysTick → 进深度休眠 → 低功耗定时器到点唤醒 → 补偿跳过的 tick 数。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FreeRTOSConfig.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TICKLESS_IDLE    2    <span class="comment">// 2 = 用户自定义实现</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configEXPECTED_IDLE_TIME_BEFORE_SLEEP  2  <span class="comment">// 至少空闲2个tick才休眠</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>内核如何知道该睡多久：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">FreeRTOS 维护"延时列表"，所有 vTaskDelay/xQueueReceive(timeout) 的任务</span><br><span class="line">按唤醒时刻排序：</span><br><span class="line"></span><br><span class="line">当前 xTickCount = 5000</span><br><span class="line">  [5100: 任务A] → [5200: 任务C] → [5500: 任务B]</span><br><span class="line"></span><br><span class="line">xNextTaskUnblockTime = 5100（最早的）</span><br><span class="line">xExpectedIdleTime = 5100 - 5000 = 100 ticks = 100ms</span><br><span class="line"></span><br><span class="line">→ FreeRTOS 告诉 port 层："你最多可以睡 100ms"</span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义 Stop 模式实现（LPTIM + LSE）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vPortSuppressTicksAndSleep</span><span class="params">(TickType_t xExpectedIdleTime)</span> {</span><br><span class="line">    <span class="comment">// 1. 计算 LPTIM 计数值（LSE 32.768kHz，1ms≈32.768 counts）</span></span><br><span class="line">    <span class="comment">// 用 X256 定点数避免累积误差</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> LPTIM_COUNTS_PER_TICK_X256  (32768 * 256 / 1000)  <span class="comment">// = 8388</span></span></span><br><span class="line">    <span class="type">uint32_t</span> lptim_counts = (xExpectedIdleTime * LPTIM_COUNTS_PER_TICK_X256) &gt;&gt; <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">    __disable_irq();</span><br><span class="line">    <span class="keyword">if</span> (eTaskConfirmSleepModeStatus() == eAbortSleep) {</span><br><span class="line">        __enable_irq(); <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 启动 LPTIM（Stop 模式下 LSE 仍运行）</span></span><br><span class="line">    LPTIM1-&gt;ARR = lptim_counts;</span><br><span class="line">    LPTIM1-&gt;CR |= LPTIM_CR_SNGSTRT;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 关 SysTick，进 Stop 模式</span></span><br><span class="line">    SysTick-&gt;CTRL &amp;= ~SysTick_CTRL_ENABLE_Msk;</span><br><span class="line">    HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 唤醒后：恢复时钟 → 计算实际睡了多久 → 补偿 tick</span></span><br><span class="line">    SystemClock_Config();</span><br><span class="line">    <span class="type">uint32_t</span> actual_ticks = (lptim_elapsed_counts &lt;&lt; <span class="number">8</span>) / LPTIM_COUNTS_PER_TICK_X256;</span><br><span class="line">    vTaskStepTick(actual_ticks);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 重启 SysTick</span></span><br><span class="line">    SysTick-&gt;VAL = <span class="number">0</span>;</span><br><span class="line">    SysTick-&gt;CTRL |= SysTick_CTRL_ENABLE_Msk;</span><br><span class="line">    __enable_irq();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>功耗对比：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">不开 Tickless：每 1ms 醒一次      ~5mA</span><br><span class="line">开 Tickless（WFI Sleep）         ~2mA</span><br><span class="line">自定义 Tickless（Stop 模式）      ~10μA</span><br><span class="line">+ 关外设 + 事件驱动架构           ~3μA（平均）</span><br></pre></td></tr></table></figure>
+
+<p><strong>常见坑：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 坑1：vTaskDelay(1) 不够，至少 vTaskDelay(2) 才能进休眠</span></span><br><span class="line"><span class="comment">// 坑2：FreeRTOS 软件定时器频繁触发会阻止深度休眠，改用 LPTIM/RTC 唤醒</span></span><br><span class="line"><span class="comment">// 坑3：Stop 唤醒后时钟变 HSI，串口/SPI 波特率全乱，必须 SystemClock_Config()</span></span><br><span class="line"><span class="comment">// 坑4：DMA 传输未完成就进 Stop → DMA 停止 → 数据不完整</span></span><br><span class="line"><span class="keyword">while</span> (HAL_DMA_GetState(&amp;hdma_uart_tx) == HAL_DMA_STATE_BUSY); <span class="comment">// 等 DMA 完成</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-2-FreeRTOS-栈溢出检测"><a href="#3-2-FreeRTOS-栈溢出检测" class="headerlink" title="3.2 FreeRTOS 栈溢出检测"></a>3.2 FreeRTOS 栈溢出检测</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FreeRTOSConfig.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configCHECK_FOR_STACK_OVERFLOW  2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 模式2：创建任务时填充 0xA5A5A5A5，每次上下文切换检查栈底是否被覆盖</span></span><br><span class="line"><span class="comment">// 溢出回调（必须实现）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">vApplicationStackOverflowHook</span><span class="params">(TaskHandle_t xTask, <span class="type">char</span> *pcTaskName)</span> {</span><br><span class="line">    __disable_irq();</span><br><span class="line">    <span class="comment">// 记录故障信息</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询剩余栈空间（运行时）</span></span><br><span class="line">UBaseType_t remaining = uxTaskGetStackHighWaterMark(task_handle);</span><br><span class="line"><span class="comment">// 返回历史最小剩余栈空间（单位：字 = 4字节）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 监控任务中定期检查</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">monitor_task</span><span class="params">(<span class="type">void</span> *arg)</span> {</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) {</span><br><span class="line">        UBaseType_t foc_remain = uxTaskGetStackHighWaterMark(foc_handle);</span><br><span class="line">        <span class="keyword">if</span> (foc_remain &lt; <span class="number">64</span>) {  <span class="comment">// 不到 256 字节</span></span><br><span class="line">            <span class="comment">// 报警：FOC 栈快满了</span></span><br><span class="line">        }</span><br><span class="line">        vTaskDelay(pdMS_TO_TICKS(<span class="number">1000</span>));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>三重栈溢出防护（TKX 项目实践）：</strong></p>
+<ol>
+<li><strong>MPU Guard Page</strong>（硬件，溢出瞬间 MemManage Fault，零延迟）</li>
+<li>**FreeRTOS <code>configCHECK = 2</code>**（每次上下文切换检查）</li>
+<li><strong>监控任务定期查水印</strong>（提前预警，还没溢出就报警）</li>
+</ol>
+<hr>
+<h3 id="3-3-ThreadX-线程栈详解"><a href="#3-3-ThreadX-线程栈详解" class="headerlink" title="3.3 ThreadX 线程栈详解"></a>3.3 ThreadX 线程栈详解</h3><p><strong>每个线程的私有栈保存：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">函数调用链的返回地址   main → funcA → funcB → 现在在funcC</span><br><span class="line">局部变量              int a = 5; float buf[10];</span><br><span class="line">函数参数              foo(x, y, z) 的 x/y/z</span><br><span class="line">CPU 寄存器保存        R0~R12、LR、PC、PSR</span><br><span class="line">FPU 寄存器            S0~S31（如果用了浮点）</span><br></pre></td></tr></table></figure>
+
+<p><strong>ThreadX 创建线程时的初始栈帧：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ThreadX 在栈顶构造"假的"初始上下文</span></span><br><span class="line"><span class="comment">// 第一次调度到该线程时，PendSV 弹出这个栈帧，CPU 跳到入口函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> CCM_STACK foc_thread_stack[<span class="number">4096</span>];</span><br><span class="line">tx_thread_create(</span><br><span class="line">    &amp;foc_thread, <span class="string">"foc_control"</span>, foc_control_entry, <span class="number">0</span>,</span><br><span class="line">    foc_thread_stack, <span class="keyword">sizeof</span>(foc_thread_stack),</span><br><span class="line">    <span class="number">1</span>,  <span class="comment">// 优先级</span></span><br><span class="line">    <span class="number">1</span>, TX_NO_TIME_SLICE, TX_AUTO_START</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>栈大小估算：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">简单任务（LED闪烁、状态机）：     512~1024 字节</span><br><span class="line">通信处理（CAN/UART 协议解析）：  1024~2048 字节</span><br><span class="line">算法密集（FOC 浮点运算）：       2048~4096 字节</span><br><span class="line">带 printf 的调试任务：            4096+ 字节</span><br><span class="line"></span><br><span class="line">GCC 查栈用量：</span><br><span class="line">arm-none-eabi-gcc -fstack-usage -Wstack-usage=512</span><br><span class="line"># 生成 .su 文件，列出每个函数的栈帧大小</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-4-RTOS-任务设计"><a href="#3-4-RTOS-任务设计" class="headerlink" title="3.4 RTOS 任务设计"></a>3.4 RTOS 任务设计</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">优先级   线程            周期        职责</span><br><span class="line">──────────────────────────────────────────────</span><br><span class="line">0(最高)  安全监控线程    10ms       看门狗喂狗、栈检测、CRC 校验</span><br><span class="line">1        FOC控制线程     50μs       电流环（中断驱动）</span><br><span class="line">2        通信线程        1ms        CAN收发、协议解析</span><br><span class="line">3        应用线程        10ms       状态机、校准、用户逻辑</span><br><span class="line">4(最低)  空闲线程        -          低功耗/统计</span><br></pre></td></tr></table></figure>
+
+<p><strong>信号量 / 互斥锁 / 队列使用场景：</strong></p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二值信号量</td>
+<td>ISR 通知任务（CAN 收到帧 → 释放信号量 → 任务处理）</td>
+</tr>
+<tr>
+<td>计数信号量</td>
+<td>资源计数</td>
+</tr>
+<tr>
+<td>互斥锁</td>
+<td>共享资源保护（含优先级继承，防优先级反转）</td>
+</tr>
+<tr>
+<td>队列</td>
+<td>任务间传数据（主循环写、任务读）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、外设驱动"><a href="#四、外设驱动" class="headerlink" title="四、外设驱动"></a>四、外设驱动</h2><h3 id="4-1-SPI"><a href="#4-1-SPI" class="headerlink" title="4.1 SPI"></a>4.1 SPI</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">4根线，全双工，主从结构：</span><br><span class="line">  SCK：时钟（主机产生）</span><br><span class="line">  MOSI：主→从 数据</span><br><span class="line">  MISO：从→主 数据</span><br><span class="line">  CS：片选（低有效）</span><br><span class="line"></span><br><span class="line">四种模式：</span><br><span class="line">  Mode 0 (CPOL=0, CPHA=0)：空闲低，上升沿采样  ← 最常用</span><br><span class="line">  Mode 1 (CPOL=0, CPHA=1)：空闲低，下降沿采样  ← AS5047P 磁编码器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读 AS5047P 磁编码器（Mode 1，16位）</span></span><br><span class="line">hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;   <span class="comment">// CPOL=0</span></span><br><span class="line">hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;       <span class="comment">// CPHA=1 → Mode 1</span></span><br><span class="line">hspi1.Init.DataSize = SPI_DATASIZE_16BIT;</span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">spi_read_encoder</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="type">uint16_t</span> rx;</span><br><span class="line">    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);</span><br><span class="line">    HAL_SPI_TransmitReceive(&amp;hspi1, &amp;tx_cmd, &amp;rx, <span class="number">1</span>, <span class="number">10</span>);</span><br><span class="line">    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);</span><br><span class="line">    <span class="keyword">return</span> rx &amp; <span class="number">0x3FFF</span>;  <span class="comment">// 14位有效数据</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-2-I2C"><a href="#4-2-I2C" class="headerlink" title="4.2 I2C"></a>4.2 I2C</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2根线，半双工，多从机：</span><br><span class="line">  SCL：时钟</span><br><span class="line">  SDA：数据（开漏，需要上拉电阻）</span><br><span class="line"></span><br><span class="line">特点：7bit 地址，每字节 ACK 应答，速率 100k/400k/3.4MHz</span><br><span class="line"></span><br><span class="line">写操作：[S][地址+W][ACK][寄存器][ACK][数据][ACK][P]</span><br><span class="line">读操作：[S][地址+W][ACK][寄存器][ACK][Sr][地址+R][ACK][数据][NACK][P]</span><br></pre></td></tr></table></figure>
+
+<p><strong>SPI vs I2C 选型：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>SPI</th>
+<th>I2C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>线数</td>
+<td>4+（每从机+1 CS）</td>
+<td>2（共用）</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>1~50 MHz</td>
+<td>100k~3.4MHz</td>
+</tr>
+<tr>
+<td>双工</td>
+<td>全双工</td>
+<td>半双工</td>
+</tr>
+<tr>
+<td>寻址</td>
+<td>CS 硬件选择</td>
+<td>7/10bit 地址</td>
+</tr>
+<tr>
+<td>应答</td>
+<td>无</td>
+<td>每字节 ACK</td>
+</tr>
+<tr>
+<td>选型</td>
+<td>编码器/Flash/ADC</td>
+<td>温度传感器/EEPROM</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-3-DMA"><a href="#4-3-DMA" class="headerlink" title="4.3 DMA"></a>4.3 DMA</h3><p><strong>DMA 的价值：数据搬运不占 CPU 时间。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ADC 转换完成 → DMA 自动搬到 SRAM → CPU 完全不参与</span><br><span class="line">CPU 此时正在跑 FOC 算法，完全不被打断</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ADC + DMA 循环模式（电流采样）</span></span><br><span class="line">hdma_adc1.Init.Direction = DMA_PERIPH_TO_MEMORY;</span><br><span class="line">hdma_adc1.Init.Mode = DMA_CIRCULAR;         <span class="comment">// 循环模式，永不停</span></span><br><span class="line">hdma_adc1.Init.Priority = DMA_PRIORITY_HIGH;</span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> adc_buf[<span class="number">2</span>] __attribute__((section(<span class="string">".bss"</span>)));  <span class="comment">// 必须在 SRAM！</span></span><br><span class="line">HAL_ADC_Start_DMA(&amp;hadc1, (<span class="type">uint32_t</span> *)adc_buf, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>DMA 与总线竞争：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DMA 和 CPU 共享 AHB 总线，同时访问 SRAM 时会竞争</span><br><span class="line">DMA 突发传输时 CPU 必须等到突发结束</span><br><span class="line"></span><br><span class="line">这就是为什么 FOC 变量放 CCM 有价值：</span><br><span class="line">  CPU 访问 CCM → D-Bus（不经 AHB），跟 DMA 零冲突</span><br></pre></td></tr></table></figure>
+
+<p><strong>DMA 缓冲区必须在 SRAM（CCM 不可！），否则静默失败。</strong></p>
+<hr>
+<h3 id="4-4-ADC-注入模式（FOC-电流采样）"><a href="#4-4-ADC-注入模式（FOC-电流采样）" class="headerlink" title="4.4 ADC 注入模式（FOC 电流采样）"></a>4.4 ADC 注入模式（FOC 电流采样）</h3><p><strong>FOC 推荐用注入模式，不用 DMA：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TIM1 更新事件精确触发 ADC 注入组</span></span><br><span class="line"><span class="comment">// ADC 转换完成 → 结果存在 ADC 自己的 JDR 寄存器</span></span><br><span class="line"><span class="comment">// CPU 在中断里直接读寄存器，不经过 SRAM，不受 DMA 竞争</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ADC_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="type">int16_t</span> adc1_raw = ADC1-&gt;JDR1;  <span class="comment">// 直接读 ADC 内部寄存器</span></span><br><span class="line">    <span class="type">int16_t</span> adc2_raw = ADC2-&gt;JDR1;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存到 CCM 中的 FOC 变量（不再访问 SRAM）</span></span><br><span class="line">    foc_state.ia = (adc1_raw - offset) * scale;</span><br><span class="line">    foc_state.ib = (adc2_raw - offset) * scale;</span><br><span class="line">    foc_loop();  <span class="comment">// 后续 FOC 计算全在 CCM</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据流（零总线竞争）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ADC JDR1 → CPU 读（APB2总线）→ CCM 中的 foc_state</span><br><span class="line">TIM1      → CPU 写（APB2总线）→ PWM 占空比</span><br><span class="line">整个 FOC 核心运算全在 CCM（D-Bus），与 DMA 零交互</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-5-USB-CDC-在-ISR-中发送的问题"><a href="#4-5-USB-CDC-在-ISR-中发送的问题" class="headerlink" title="4.5 USB CDC 在 ISR 中发送的问题"></a>4.5 USB CDC 在 ISR 中发送的问题</h3><p><strong>结论：ISR 里不能调 <code>CDC_Transmit_FS()</code>，否则大概率卡死。</strong></p>
+<p>原因：</p>
+<ol>
+<li><code>CDC_Transmit</code> 非原子操作，主循环和 ISR 同时调用会竞争覆盖缓冲区指针</li>
+<li>USB 中断回调负责清 <code>TxState</code>，若 ISR 优先级 ≥ USB 中断 → <code>TxState</code> 永远不清零 → 永远返回 <code>BUSY</code></li>
+</ol>
+<p><strong>正确做法（ISR 写缓冲区，主循环发送）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ISR 里只往环形缓冲区写（几个时钟周期）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">FOC_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="comment">// ... FOC 计算 ...</span></span><br><span class="line">    <span class="keyword">if</span> (++decimation_cnt &gt;= <span class="number">4</span>) {  <span class="comment">// 每4次发一次（降采样）</span></span><br><span class="line">        decimation_cnt = <span class="number">0</span>;</span><br><span class="line">        ring_push(&amp;cdc_tx_ring, debug_data, <span class="number">8</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主循环里发送</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) {</span><br><span class="line">        <span class="type">uint16_t</span> available = ring_available(&amp;cdc_tx_ring);</span><br><span class="line">        <span class="keyword">if</span> (available &gt; <span class="number">0</span> &amp;&amp; cdc_tx_ready()) {</span><br><span class="line">            <span class="type">uint8_t</span> tmp[<span class="number">64</span>];</span><br><span class="line">            <span class="type">uint16_t</span> len = MIN(available, <span class="number">64</span>);</span><br><span class="line">            ring_pop(&amp;cdc_tx_ring, tmp, len);</span><br><span class="line">            CDC_Transmit_FS(tmp, len);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">cdc_tx_ready</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    USBD_CDC_HandleTypeDef *hcdc =</span><br><span class="line">        (USBD_CDC_HandleTypeDef *)hUsbDeviceFS.pClassData;</span><br><span class="line">    <span class="keyword">return</span> (hcdc-&gt;TxState == <span class="number">0</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>USB FS 吞吐量上限：</strong> 64 bytes/ms = 64 KB/s。FOC 20kHz 每次发 8 字节 = 160 KB/s → 超了，必须降采样（每 4 次发一次）。</p>
+<hr>
+<h2 id="五、FOC-电机控制"><a href="#五、FOC-电机控制" class="headerlink" title="五、FOC 电机控制"></a>五、FOC 电机控制</h2><h3 id="5-1-FOC-基本原理"><a href="#5-1-FOC-基本原理" class="headerlink" title="5.1 FOC 基本原理"></a>5.1 FOC 基本原理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">三相电流（ia, ib）</span><br><span class="line">  → Clark 变换（3相→2相，αβ坐标系）</span><br><span class="line">  → Park 变换（αβ→dq，需要电角度 θe，旋转坐标系）</span><br><span class="line">  → PI 控制器（分别控制 id 和 iq）</span><br><span class="line">  → 逆 Park 变换（dq→αβ）</span><br><span class="line">  → SVPWM（αβ→三相 PWM 占空比）</span><br><span class="line">  → 三相逆变器</span><br><span class="line"></span><br><span class="line">核心：交流电机控制转化为类似直流电机的解耦控制</span><br><span class="line">  id = 0：只有 iq 产生力矩（Te = 3/2 × p × ψf × iq）</span><br><span class="line">  iq = 目标力矩对应的电流</span><br></pre></td></tr></table></figure>
+
+<p><strong>电流采样时机——为什么在 PWM 中心采样：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PWM 中心时，所有下管导通（零矢量），无开关噪声，电流最稳定。</span><br><span class="line">TIM1 更新事件在 PWM 中心时触发 ADC，保证采样精度。</span><br></pre></td></tr></table></figure>
+
+<p><strong>SVPWM 比 SPWM 的优势：</strong></p>
+<ul>
+<li>电压利用率高 15.5%（Vdc/√3 vs Vdc/2）</li>
+<li>开关损耗更低</li>
+<li>电流谐波更小</li>
+</ul>
+<hr>
+<h3 id="5-2-FOC-前馈补偿大全"><a href="#5-2-FOC-前馈补偿大全" class="headerlink" title="5.2 FOC 前馈补偿大全"></a>5.2 FOC 前馈补偿大全</h3><p><strong>前馈的本质：不等误差出现，把已知的扰动提前算出来补上。</strong></p>
+<p><strong>1. 交叉耦合 + 反电动势前馈（最核心）：</strong></p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -4.176ex;" xmlns="http://www.w3.org/2000/svg" width="27.379ex" height="7.276ex" role="img" focusable="false" viewBox="0 -1370 12101.5 3215.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="mi" transform="translate(616,-150) scale(0.707)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g><g data-mml-node="mo" transform="translate(1311.5,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(2367.3,0)"><g data-mml-node="mi"><path data-c="1D445" d="M230 637Q203 637 198 638T193 649Q193 676 204 682Q206 683 378 683Q550 682 564 680Q620 672 658 652T712 606T733 563T739 529Q739 484 710 445T643 385T576 351T538 338L545 333Q612 295 612 223Q612 212 607 162T602 80V71Q602 53 603 43T614 25T640 16Q668 16 686 38T712 85Q717 99 720 102T735 105Q755 105 755 93Q755 75 731 36Q693 -21 641 -21H632Q571 -21 531 4T487 82Q487 109 502 166T517 239Q517 290 474 313Q459 320 449 321T378 323H309L277 193Q244 61 244 59Q244 55 245 54T252 50T269 48T302 46H333Q339 38 339 37T336 19Q332 6 326 0H311Q275 2 180 2Q146 2 117 2T71 2T50 1Q33 1 33 10Q33 12 36 24Q41 43 46 45Q50 46 61 46H67Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628Q287 635 230 637ZM630 554Q630 586 609 608T523 636Q521 636 500 636T462 637H440Q393 637 386 627Q385 624 352 494T319 361Q319 360 388 360Q466 361 492 367Q556 377 592 426Q608 449 619 486T630 554Z"></path></g><g data-mml-node="mi" transform="translate(792,-150) scale(0.707)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g><g data-mml-node="msub" transform="translate(3540.9,0)"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(378,-150) scale(0.707)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g><g data-mml-node="mo" transform="translate(4558.8,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msub" transform="translate(5559,0)"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(714,-150) scale(0.707)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g><g data-mml-node="mfrac" transform="translate(6690.7,0)"><g data-mml-node="mrow" transform="translate(220,676)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="msub" transform="translate(520,0)"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(378,-150) scale(0.707)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g><g data-mml-node="mrow" transform="translate(437.3,-686)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g><rect width="1515.7" height="60" x="120" y="220"></rect></g><g data-mml-node="munder" transform="translate(8446.4,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="OP"><g data-mml-node="munder"><g data-mml-node="mrow"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msub" transform="translate(778,0)"><g data-mml-node="mi"><path data-c="1D714" d="M495 384Q495 406 514 424T555 443Q574 443 589 425T604 364Q604 334 592 278T555 155T483 38T377 -11Q297 -11 267 66Q266 68 260 61Q201 -11 125 -11Q15 -11 15 139Q15 230 56 325T123 434Q135 441 147 436Q160 429 160 418Q160 406 140 379T94 306T62 208Q61 202 61 187Q61 124 85 100T143 76Q201 76 245 129L253 137V156Q258 297 317 297Q348 297 348 261Q348 243 338 213T318 158L308 135Q309 133 310 129T318 115T334 97T358 83T393 76Q456 76 501 148T546 274Q546 305 533 325T508 357T495 384Z"></path></g><g data-mml-node="mi" transform="translate(655,-150) scale(0.707)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g><g data-mml-node="msub" transform="translate(1812.5,0)"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(714,-150) scale(0.707)"><path data-c="1D45E" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g><g data-mml-node="msub" transform="translate(2901.8,0)"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(378,-150) scale(0.707)"><path data-c="1D45E" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g><g data-mml-node="mo" transform="translate(0,-712.2)"><path data-c="E152" d="M-24 327L-18 333H-1Q11 333 15 333T22 329T27 322T35 308T54 284Q115 203 225 162T441 120Q454 120 457 117T460 95V60V28Q460 8 457 4T442 0Q355 0 260 36Q75 118 -16 278L-24 292V327Z"></path><path data-c="E153" d="M-10 60V95Q-10 113 -7 116T9 120Q151 120 250 171T396 284Q404 293 412 305T424 324T431 331Q433 333 451 333H468L474 327V292L466 278Q375 118 190 36Q95 0 8 0Q-5 0 -7 3T-10 24V60Z" transform="translate(3205,0)"></path><g data-c="E156" transform="translate(1377.5,0)"><path data-c="E151" d="M-10 60Q-10 104 -10 111T-5 118Q-1 120 10 120Q96 120 190 84Q375 2 466 -158L474 -172V-207L468 -213H451H447Q437 -213 434 -213T428 -209T423 -202T414 -187T396 -163Q331 -82 224 -41T9 0Q-4 0 -7 3T-10 25V60Z"></path><path data-c="E150" d="M-18 -213L-24 -207V-172L-16 -158Q75 2 260 84Q334 113 415 119Q418 119 427 119T440 120Q454 120 457 117T460 98V60V25Q460 7 457 4T441 0Q308 0 193 -55T25 -205Q21 -211 18 -212T-1 -213H-18Z" transform="translate(450,0)"></path></g><svg width="1127.5" height="720" x="350" y="-300" viewBox="281.9 -300 1127.5 720"><path data-c="E154" d="M-10 0V120H410V0H-10Z" transform="scale(4.228,1)"></path></svg><svg width="1127.5" height="720" x="2177.5" y="-300" viewBox="281.9 -300 1127.5 720"><path data-c="E154" d="M-10 0V120H410V0H-10Z" transform="scale(4.228,1)"></path></svg></g></g></g><g data-mml-node="TeXAtom" transform="translate(413.3,-1604.5) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mtext"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">交</text><text data-variant="normal" transform="translate(1000,0) scale(1,-1)" font-size="884px" font-family="serif">叉</text><text data-variant="normal" transform="translate(2000,0) scale(1,-1)" font-size="884px" font-family="serif">耦</text><text data-variant="normal" transform="translate(3000,0) scale(1,-1)" font-size="884px" font-family="serif">合</text></g></g></g></g></g></svg></mjx-container></p>
+<p>$$V_q = R_s i_q + L_q \frac{di_q}{dt} + \underbrace{\omega_e L_d i_d}<em>{\text{交叉耦合}} + \underbrace{\omega_e \psi_f}</em>{\text{反电动势}}$$</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PI 只处理 Rs·i 和 L·di/dt，其余项前馈补偿</span></span><br><span class="line"><span class="type">float</span> vd_ff = -omega_e * Lq * iq;                    <span class="comment">// 交叉耦合</span></span><br><span class="line"><span class="type">float</span> vq_ff =  omega_e * Ld * id + omega_e * psi_f;  <span class="comment">// 交叉耦合 + 反电动势</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> vd = vd_pi + vd_ff;</span><br><span class="line"><span class="type">float</span> vq = vq_pi + vq_ff;</span><br></pre></td></tr></table></figure>
+
+<p>没有前馈：高速时 PI 输出全用来抵消反电动势，没余量控制电流。<br>有前馈：PI 只处理模型误差，输出小、响应快、不饱和。</p>
+<p><strong>2. 死区前馈补偿：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> dt_comp = DEAD_TIME_NS * <span class="number">1e-9</span>f * PWM_FREQ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 电流&gt;0 → 实际电压偏低 → 加补偿</span></span><br><span class="line"><span class="comment">// 电流&lt;0 → 实际电压偏高 → 减补偿</span></span><br><span class="line"><span class="keyword">if</span> (ia &gt; THRESHOLD)       duty_a += dt_comp;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (ia &lt; -THRESHOLD) duty_a -= dt_comp;</span><br><span class="line"><span class="comment">// 过零区设阈值不补偿，避免方向频繁翻转产生噪声</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 齿槽力矩前馈（低速力控必须做）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 产线标定：慢速匀速旋转记录每个角度补偿值</span></span><br><span class="line"><span class="type">float</span> cogging_table[<span class="number">4096</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行时查表前馈（力反馈低速时齿槽力矩占比大）</span></span><br><span class="line"><span class="type">float</span> cogging_comp = cogging_table[encoder_pos &amp; <span class="number">0xFFF</span>];</span><br><span class="line">iq_ref_total = iq_ref + cogging_comp / Kt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. Stribeck 摩擦力前馈：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静摩擦 &gt; 动摩擦，速度过零时方向突变</span></span><br><span class="line"><span class="type">float</span> <span class="title function_">stribeck_ff</span><span class="params">(<span class="type">float</span> omega)</span> {</span><br><span class="line">    <span class="type">float</span> mu_c = <span class="number">0.05f</span>, mu_s = <span class="number">0.08f</span>, omega_s = <span class="number">1.0f</span>, Bv = <span class="number">0.002f</span>;</span><br><span class="line">    <span class="type">float</span> friction = mu_c + (mu_s - mu_c) * expf(-(omega/omega_s)*(omega/omega_s));</span><br><span class="line">    <span class="keyword">return</span> friction * tanhf(<span class="number">20.0f</span> * omega) + Bv * omega;</span><br><span class="line">}</span><br><span class="line"><span class="comment">// tanh 平滑过零，避免跳变</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 母线电压前馈（电池供电必做）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 电池放电电压变化 → 直接归一化</span></span><br><span class="line"><span class="type">float</span> duty = voltage_cmd / v_bus_measured;</span><br><span class="line"><span class="comment">// Vbus 变了 duty 自动调整，PI 不需要动</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>前馈速查表：</strong></p>
+<table>
+<thead>
+<tr>
+<th>前馈类型</th>
+<th>补偿什么</th>
+<th>需要什么信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>交叉耦合</td>
+<td>dq 轴互相干扰</td>
+<td>ω, L, i</td>
+</tr>
+<tr>
+<td>反电动势</td>
+<td>转速产生的电压</td>
+<td>ω, ψf</td>
+</tr>
+<tr>
+<td>死区</td>
+<td>PWM 开关失真</td>
+<td>电流方向, 死区时间</td>
+</tr>
+<tr>
+<td>齿槽力矩</td>
+<td>电机结构性波动</td>
+<td>角度-力矩标定表</td>
+</tr>
+<tr>
+<td>摩擦力</td>
+<td>轴承/减速器摩擦</td>
+<td>速度方向, 摩擦系数</td>
+</tr>
+<tr>
+<td>重力</td>
+<td>重力分量</td>
+<td>姿态角, 质量, 臂长</td>
+</tr>
+<tr>
+<td>惯性</td>
+<td>加速度需要的力矩</td>
+<td>目标加速度, J</td>
+</tr>
+<tr>
+<td>母线电压</td>
+<td>供电电压波动</td>
+<td>实测 Vbus</td>
+</tr>
+<tr>
+<td>温度</td>
+<td>电阻随温度变化</td>
+<td>电机温度</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="5-3-死区补偿详解"><a href="#5-3-死区补偿详解" class="headerlink" title="5.3 死区补偿详解"></a>5.3 死区补偿详解</h3><p><strong>死区导致的问题：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">死区期间两管都关，桥臂中点电压由电流方向决定（体二极管续流）：</span><br><span class="line">  电流 &gt; 0 → 中点 = 0V → 实际输出电压比期望值低 ΔV = Vdc × Td / Ts</span><br><span class="line">  电流 &lt; 0 → 中点 = Vdc → 实际输出电压比期望值高 ΔV</span><br><span class="line"></span><br><span class="line">量化（24V/20kHz/500ns 死区）：</span><br><span class="line">  ΔV = 24 × 500ns / 50μs = 0.24V（相电压的 1.7%）</span><br><span class="line">  → 电流过零点"平顶"畸变 → 6次转矩脉动 → 力反馈"颗粒感"</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法1：电流极性前馈（量产首选）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">deadtime_compensate</span><span class="params">(<span class="type">float</span> ia, <span class="type">float</span> ib, <span class="type">float</span> ic,</span></span><br><span class="line"><span class="params">                         <span class="type">float</span> *duty_a, <span class="type">float</span> *duty_b, <span class="type">float</span> *duty_c)</span> {</span><br><span class="line">    <span class="type">float</span> comp = DEAD_TIME_NS * <span class="number">1e-9</span>f * PWM_FREQ;</span><br><span class="line">    <span class="keyword">if</span> (ia &gt; THRESHOLD)       *duty_a += comp;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (ia &lt; -THRESHOLD) *duty_a -= comp;</span><br><span class="line">    <span class="comment">// ib, ic 类似</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">// THRESHOLD 取额定电流的 2~5%（GIM3505-8 额定 2.4A → 约 0.1A）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法2：dq 域补偿：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 dq 域直接补偿，Clark+Park 变换到 dq 域后叠加</span></span><br><span class="line"><span class="type">float</span> dv = DEAD_TIME_NS * <span class="number">1e-9</span>f * PWM_FREQ * V_BUS;</span><br><span class="line"><span class="comment">// 从 dq 电流反算三相方向 → Clark/Park 到 dq → 叠加到 PI 输出</span></span><br><span class="line">ud_total = ud_pi + ud_ff + ud_deadtime_comp;</span><br><span class="line">uq_total = uq_pi + uq_ff + uq_deadtime_comp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法3：硬件自适应死区（最理想）：</strong></p>
+<p>6EDL7141 / DRV8323 等智能驱动芯片实时监测 MOSFET VDS，检测上管关断后立刻开下管，死区时间自动缩到最小安全值（&lt; 100ns）。</p>
+<hr>
+<h3 id="5-4-堵转热管理"><a href="#5-4-堵转热管理" class="headerlink" title="5.4 堵转热管理"></a>5.4 堵转热管理</h3><p><strong>力反馈的特殊性：</strong> 用户推着虚拟墙不松手 → 电机静止 → 同一组绕组持续发热 → 无旋转风冷 → 温升极快。</p>
+<p><strong>四层防护方案：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第1层：热模型在线估算（ms 级）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">thermal_update</span><span class="params">(ThermalModel_t *tm, <span class="type">float</span> iq, <span class="type">float</span> Rs, <span class="type">float</span> dt)</span> {</span><br><span class="line">    <span class="type">float</span> P_loss = <span class="number">1.5f</span> * iq * iq * Rs;             <span class="comment">// 铜损</span></span><br><span class="line">    <span class="type">float</span> P_cool = (tm-&gt;T_winding - tm-&gt;T_ambient) / tm-&gt;R_thermal;</span><br><span class="line">    tm-&gt;T_winding += (P_loss - P_cool) / tm-&gt;C_thermal * dt;</span><br><span class="line">}</span><br><span class="line"><span class="type">float</span> <span class="title function_">thermal_current_limit</span><span class="params">(ThermalModel_t *tm)</span> {</span><br><span class="line">    <span class="keyword">if</span> (tm-&gt;T_winding &lt; <span class="number">70.0f</span>) <span class="keyword">return</span> I_MAX;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (tm-&gt;T_winding &lt; <span class="number">100.0f</span>)</span><br><span class="line">        <span class="keyword">return</span> I_MAX * (<span class="number">100.0f</span> - tm-&gt;T_winding) / <span class="number">30.0f</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第2层：I²t 积分保护（秒级）</span></span><br><span class="line">I2T_Status_t <span class="title function_">i2t_update</span><span class="params">(I2T_t *prot, <span class="type">float</span> i, <span class="type">float</span> dt)</span> {</span><br><span class="line">    <span class="keyword">if</span> (i*i &gt; prot-&gt;i_rated_sq) prot-&gt;accumulator += (i*i - prot-&gt;i_rated_sq) * dt;</span><br><span class="line">    <span class="keyword">else</span> prot-&gt;accumulator -= prot-&gt;cooling_rate * dt;</span><br><span class="line">    <span class="keyword">if</span> (prot-&gt;accumulator &lt; <span class="number">0</span>) prot-&gt;accumulator = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (prot-&gt;accumulator &gt; prot-&gt;threshold) <span class="keyword">return</span> I2T_TRIPPED;</span><br><span class="line">    <span class="keyword">return</span> I2T_OK;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第3层：Dithering 微幅振荡（分散热量）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">apply_dither</span><span class="params">(<span class="type">float</span> *theta_e, <span class="type">uint32_t</span> stall_ms)</span> {</span><br><span class="line">    <span class="keyword">if</span> (stall_ms &gt; <span class="number">500</span>) {</span><br><span class="line">        <span class="comment">// 200Hz、0.05rad 的正弦抖动，用户感知不到</span></span><br><span class="line">        *theta_e += <span class="number">0.05f</span> * sinf(<span class="number">2</span>*<span class="number">3.14159f</span>*<span class="number">200</span> * stall_ms*<span class="number">0.001f</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第4层：硬件比较器（μs 级）</span></span><br><span class="line"><span class="comment">// STM32G474 内置比较器 + DAC 设置阈值</span></span><br><span class="line"><span class="comment">// 电流采样电压 &gt; 阈值 → 硬件直接触发 TIM1_BRK → 关断所有 PWM</span></span><br><span class="line"><span class="comment">// 整个过程 &lt; 1μs，不经 MCU 软件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>虚拟墙”先硬后软”策略（减少电机热负荷）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> <span class="title function_">virtual_wall</span><span class="params">(<span class="type">float</span> theta, <span class="type">float</span> omega)</span> {</span><br><span class="line">    <span class="type">float</span> delta = theta - WALL_POSITION;</span><br><span class="line">    <span class="keyword">if</span> (delta &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (delta &lt; deg2rad(<span class="number">2.0f</span>)) {</span><br><span class="line">        <span class="keyword">return</span> -K_HARD * delta - B_DAMP * omega;  <span class="comment">// 前2°高刚度</span></span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">// 2°后降低刚度+限流</span></span><br><span class="line">        <span class="type">float</span> T = -K_HARD*deg2rad(<span class="number">2.0f</span>) - K_SOFT*(delta-deg2rad(<span class="number">2.0f</span>)) - B_DAMP*omega;</span><br><span class="line">        <span class="type">float</span> T_max = I_CONTINUOUS * Kt * GEAR_RATIO;</span><br><span class="line">        <span class="keyword">return</span> fmaxf(T, -T_max);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-5-电流环为什么优先于电压模式"><a href="#5-5-电流环为什么优先于电压模式" class="headerlink" title="5.5 电流环为什么优先于电压模式"></a>5.5 电流环为什么优先于电压模式</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>电压模式</th>
+<th>电流环</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>门槛</td>
+<td>低（无需采样电阻+运放）</td>
+<td>高（需同步 ADC+运放）</td>
+</tr>
+<tr>
+<td>低速精度</td>
+<td>V≈Rs·I 近似线性，够用</td>
+<td>真正闭环，更准</td>
+</tr>
+<tr>
+<td>高速精度</td>
+<td>反电动势补偿复杂</td>
+<td>自然闭环处理</td>
+</tr>
+<tr>
+<td>温度影响</td>
+<td>Rs 随温度变化±50%+</td>
+<td>闭环补偿</td>
+</tr>
+<tr>
+<td>安全限流</td>
+<td>需要额外保护</td>
+<td>闭环限流，固有安全</td>
+</tr>
+<tr>
+<td>功能安全</td>
+<td>难以满足 SIL 2</td>
+<td>可满足</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>开源项目用电压模式（硬件门槛低），工业量产用电流环（安全+精度）。</p>
+</blockquote>
+<hr>
+<h2 id="六、通信协议"><a href="#六、通信协议" class="headerlink" title="六、通信协议"></a>六、通信协议</h2><h3 id="6-1-BLE-面试突击"><a href="#6-1-BLE-面试突击" class="headerlink" title="6.1 BLE 面试突击"></a>6.1 BLE 面试突击</h3><p><strong>协议栈分层：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────┐</span><br><span class="line">│  应用层（你写的代码）             │</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│  GAP（连接管理：广播/扫描/连接）  │</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│  GATT（数据组织）                │</span><br><span class="line">│  Service → Characteristic → CCCD│</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│  ATT（Read/Write/Notify/Indicate）│</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│  L2CAP（逻辑通道）               │</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│  LL（链路层：37/38/39广播信道）   │</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│  PHY（2.4GHz，1M/2M/Coded）     │</span><br><span class="line">└─────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>四种数据交互：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>方向</th>
+<th>应答</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read</td>
+<td>主机→从机请求</td>
+<td>有</td>
+<td>读配置</td>
+</tr>
+<tr>
+<td>Write</td>
+<td>主机→从机</td>
+<td>有</td>
+<td>发控制指令</td>
+</tr>
+<tr>
+<td>Notify</td>
+<td>从机→主机</td>
+<td><strong>无</strong></td>
+<td>周期性状态上报</td>
+</tr>
+<tr>
+<td>Indicate</td>
+<td>从机→主机</td>
+<td><strong>有</strong></td>
+<td>重要事件</td>
+</tr>
+</tbody></table>
+<p><strong>低功耗三参数：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">有效通信间隔 = Connection Interval × (1 + Slave Latency)</span><br><span class="line"></span><br><span class="line">例：连接间隔 100ms，从机延迟 4</span><br><span class="line">  有效间隔 = 100ms × (1+4) = 500ms</span><br><span class="line">  从机 99.6% 时间在睡觉</span><br><span class="line">  BLE 传感器平均功耗可做到 35μA</span><br></pre></td></tr></table></figure>
+
+<p><strong>BLE 与 MCU 联动省电：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">ble_evt_handler</span><span class="params">(<span class="type">ble_evt_t</span> *evt)</span> {</span><br><span class="line">    <span class="keyword">switch</span> (evt-&gt;header.evt_id) {</span><br><span class="line">        <span class="keyword">case</span> BLE_GAP_EVT_DISCONNECTED:</span><br><span class="line">            set_adv_interval(<span class="number">1000</span>);  <span class="comment">// 1s 广播间隔（省电）</span></span><br><span class="line">            enter_stop_mode();       <span class="comment">// MCU 进 Stop</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> BLE_GATTS_EVT_WRITE:</span><br><span class="line">            process_command(evt-&gt;data);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">if</span> (no_pending_task()) __WFI();  <span class="comment">// BLE 协议栈会在需要时唤醒</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>nRF52840 + Zephyr GATT Service 代码（关键片段）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Notify 推送电机状态</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">motor_status_notify</span><span class="params">(<span class="type">float</span> pos, <span class="type">float</span> vel, <span class="type">float</span> cur)</span> {</span><br><span class="line">    <span class="type">uint8_t</span> data[<span class="number">12</span>];</span><br><span class="line">    <span class="built_in">memcpy</span>(&amp;data[<span class="number">0</span>], &amp;pos, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(&amp;data[<span class="number">4</span>], &amp;vel, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(&amp;data[<span class="number">8</span>], &amp;cur, <span class="number">4</span>);</span><br><span class="line">    bt_gatt_notify(<span class="literal">NULL</span>, &amp;motor_svc.attrs[<span class="number">2</span>], data, <span class="keyword">sizeof</span>(data));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>双芯片架构（nRF52840 + STM32）的理由：</strong></p>
+<blockquote>
+<p>BLE 射频时序和 FOC 中断时序（20kHz）互相干扰。分两颗芯片，nRF 专心跑 BLE，STM32 专心跑 FOC，通过 SPI 解耦。SPI 1MHz，每次 16 字节，延迟 &lt; 20μs，不影响控制实时性。</p>
+</blockquote>
+<p><strong>BLE 高频追问：</strong></p>
+<ul>
+<li><strong>Q: 数据可靠性怎么保证？</strong> Notify 无 ACK 可能丢包，关键指令用 Write with Response（有 ACK）+ 应用层序列号检测 + 重要参数写后 Read-back 验证。</li>
+<li><strong>Q: MTU 是什么？</strong> 默认 23 字节（有效 20），可协商到 247 字节，减少分包次数提高吞吐量。</li>
+<li><strong>Q: OTA 怎么做？</strong> MCUboot + SMP，手机 BLE 传固件分包，写备用分区，校验后重启切换。</li>
+</ul>
+<hr>
+<h3 id="6-2-CAN-x2F-J1939-x2F-CANopen"><a href="#6-2-CAN-x2F-J1939-x2F-CANopen" class="headerlink" title="6.2 CAN / J1939 / CANopen"></a>6.2 CAN / J1939 / CANopen</h3><p><strong>J1939 29 位扩展 ID 结构：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bit28~26: Priority (3bit, 0~7)</span><br><span class="line">bit25~24: EDP + DP</span><br><span class="line">bit23~16: PF (PDU Format)</span><br><span class="line">bit15~8:  PS (PDU Specific)</span><br><span class="line">bit7~0:   SA (Source Address)</span><br><span class="line"></span><br><span class="line">PF &lt; 240: PDU1 格式（点对点，PS=目标地址DA）</span><br><span class="line">PF &gt;= 240: PDU2 格式（广播，PS=组扩展GE）</span><br><span class="line"></span><br><span class="line">PGN = DP×65536 + PF×256 + PS（PDU2）</span><br></pre></td></tr></table></figure>
+
+<p><strong>DM1 诊断消息实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PGN 65226 (0xFECA)，1秒周期广播</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">uint32_t</span> spn;        <span class="comment">// 故障参数号（19bit）</span></span><br><span class="line">    <span class="type">uint8_t</span>  fmi;        <span class="comment">// 故障模式（5bit）</span></span><br><span class="line">    <span class="type">uint8_t</span>  count;      <span class="comment">// 出现次数（0~126）</span></span><br><span class="line">    <span class="type">uint32_t</span> first_seen;</span><br><span class="line">    <span class="type">bool</span>     active;</span><br><span class="line">} DTC_Entry_t;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">dm1_broadcast</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="type">uint8_t</span> data[<span class="number">8</span>] = {<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>};</span><br><span class="line">    DTC_Entry_t *dtc = dtc_get_first_active();</span><br><span class="line">    <span class="keyword">if</span> (dtc) {</span><br><span class="line">        data[<span class="number">0</span>] = lamp_status;</span><br><span class="line">        data[<span class="number">2</span>] = dtc-&gt;spn &amp; <span class="number">0xFF</span>;</span><br><span class="line">        data[<span class="number">3</span>] = (dtc-&gt;spn &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xFF</span>;</span><br><span class="line">        data[<span class="number">4</span>] = ((dtc-&gt;spn &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0x07</span>) | (dtc-&gt;fmi &lt;&lt; <span class="number">3</span>);</span><br><span class="line">        data[<span class="number">5</span>] = dtc-&gt;count;</span><br><span class="line">    }</span><br><span class="line">    can_send(PGN_DM1, data, <span class="number">8</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>J1939 协议栈实现清单：</strong></p>
+<ul>
+<li>地址声明（Address Claim）：上电广播 NAME，冲突时按 NAME 优先级仲裁</li>
+<li>BJM/EJM 消息：10ms 周期广播摇杆角度数据</li>
+<li>DM1 / DM2 / DM11：活动故障 / 历史故障 / 清除故障</li>
+<li>传输协议（TP/BAM）：超过 8 字节的多帧传输</li>
+</ul>
+<hr>
+<h2 id="七、固件架构设计"><a href="#七、固件架构设计" class="headerlink" title="七、固件架构设计"></a>七、固件架构设计</h2><h3 id="7-1-分层架构"><a href="#7-1-分层架构" class="headerlink" title="7.1 分层架构"></a>7.1 分层架构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────┐</span><br><span class="line">│ 应用层 — J1939/CANopen、校准、状态机 │</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│ 安全层 — 自检、看门狗、程序流监控   │ ← 功能安全专有层（独立于应用）</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│ 服务层 — CAN调度器、ADC管理器      │</span><br><span class="line">├─────────────────────────────────┤</span><br><span class="line">│ 驱动层（HAL 抽象）— 封装硬件差异   │</span><br><span class="line">└─────────────────────────────────┘</span><br><span class="line"></span><br><span class="line">核心规则：上层调下层，下层不调上层</span><br><span class="line">层间通过接口（函数指针）通信</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="7-2-回调、依赖反转、依赖注入"><a href="#7-2-回调、依赖反转、依赖注入" class="headerlink" title="7.2 回调、依赖反转、依赖注入"></a>7.2 回调、依赖反转、依赖注入</h3><p><strong>反面教材（直接依赖）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// motor_controller.c 直接 #include "stm32f4xx_hal.h"</span></span><br><span class="line"><span class="comment">// 换 MCU 就要全改</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">motor_set_pwm</span><span class="params">(<span class="type">float</span> da, <span class="type">float</span> db, <span class="type">float</span> dc)</span> {</span><br><span class="line">    TIM1-&gt;CCR1 = (<span class="type">uint32_t</span>)(da * TIM1-&gt;ARR);  <span class="comment">// 直接操作寄存器</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>正面教材（依赖反转 + 依赖注入）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ========== 抽象层（接口定义）==========</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">void</span> (*set_duty)(<span class="type">float</span> a, <span class="type">float</span> b, <span class="type">float</span> c);</span><br><span class="line">    <span class="type">void</span> (*enable)(<span class="type">void</span>);</span><br><span class="line">    <span class="type">void</span> (*disable)(<span class="type">void</span>);</span><br><span class="line">} PWM_Interface_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 高层业务（只依赖接口）==========</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">const</span> PWM_Interface_t         *pwm;</span><br><span class="line">    <span class="type">const</span> CurrentSensor_Interface_t *current;</span><br><span class="line">    <span class="type">const</span> Encoder_Interface_t     *encoder;</span><br><span class="line">} FOC_Controller_t;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">foc_loop</span><span class="params">(FOC_Controller_t *foc)</span> {</span><br><span class="line">    <span class="type">float</span> ia, ib;</span><br><span class="line">    foc-&gt;current-&gt;read(&amp;ia, &amp;ib);   <span class="comment">// 通过接口调用</span></span><br><span class="line">    <span class="type">float</span> theta = foc-&gt;encoder-&gt;get_angle();</span><br><span class="line">    <span class="comment">// ... FOC 计算 ...</span></span><br><span class="line">    foc-&gt;pwm-&gt;set_duty(da, db, dc); <span class="comment">// 通过接口调用</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 低层实现（STM32 平台）==========</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">stm32_set_duty</span><span class="params">(<span class="type">float</span> a, <span class="type">float</span> b, <span class="type">float</span> c)</span> {</span><br><span class="line">    TIM1-&gt;CCR1 = (<span class="type">uint32_t</span>)(a * TIM1-&gt;ARR);</span><br><span class="line">    TIM1-&gt;CCR2 = (<span class="type">uint32_t</span>)(b * TIM1-&gt;ARR);</span><br><span class="line">    TIM1-&gt;CCR3 = (<span class="type">uint32_t</span>)(c * TIM1-&gt;ARR);</span><br><span class="line">}</span><br><span class="line"><span class="type">const</span> PWM_Interface_t stm32_pwm = { .set_duty = stm32_set_duty, ... };</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 依赖注入（初始化时注入）==========</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">platform_init</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    foc_x = foc_create(&amp;stm32_pwm, &amp;stm32_current, &amp;as5047p_enc);</span><br><span class="line">    <span class="comment">// 换 GD32 只改这里，FOC 算法一行不动</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>依赖注入的杀手级应用——PC 上单元测试：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Mock 实现（测试时注入）</span></span><br><span class="line"><span class="type">static</span> <span class="type">float</span> mock_ia = <span class="number">0</span>, mock_ib = <span class="number">0</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">mock_read_current</span><span class="params">(<span class="type">float</span> *ia, <span class="type">float</span> *ib)</span> { *ia = mock_ia; *ib = mock_ib; }</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> CurrentSensor_Interface_t mock_current = { .read = mock_read_current };</span><br><span class="line"></span><br><span class="line"><span class="comment">// PC 上测试 FOC 算法，不需要任何硬件</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">test_foc_current_tracking</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    FOC_Controller_t foc;</span><br><span class="line">    foc.pwm = &amp;mock_pwm;</span><br><span class="line">    foc.current = &amp;mock_current;</span><br><span class="line">    mock_ia = <span class="number">1.0f</span>; mock_ib = <span class="number">-0.5f</span>;</span><br><span class="line">    foc_loop(&amp;foc);</span><br><span class="line">    assert(mock_duties[<span class="number">0</span>] &gt; <span class="number">0.4f</span> &amp;&amp; mock_duties[<span class="number">0</span>] &lt; <span class="number">0.6f</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="7-3-发布订阅模式"><a href="#7-3-发布订阅模式" class="headerlink" title="7.3 发布订阅模式"></a>7.3 发布订阅模式</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ========== event_bus.h ==========</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> {</span></span><br><span class="line">    EVT_CAN_RX, EVT_ADC_COMPLETE, EVT_FAULT_DETECTED,</span><br><span class="line">    EVT_FAULT_CLEARED, EVT_TIMER_1S, EVT_COUNT</span><br><span class="line">} EventId_t;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*EventHandler_t)</span><span class="params">(<span class="type">const</span> Event_t *event)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">event_subscribe</span><span class="params">(EventId_t id, EventHandler_t handler)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event_publish</span><span class="params">(EventId_t id, <span class="type">const</span> Event_t *event)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 实现（二维函数指针数组）==========</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SUBSCRIBERS_PER_EVENT  8</span></span><br><span class="line"><span class="type">static</span> EventHandler_t subscribers[EVT_COUNT][MAX_SUBSCRIBERS_PER_EVENT];</span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> subscriber_count[EVT_COUNT];</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">event_publish</span><span class="params">(EventId_t id, <span class="type">const</span> Event_t *event)</span> {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint8_t</span> i = <span class="number">0</span>; i &lt; subscriber_count[id]; i++) {</span><br><span class="line">        <span class="keyword">if</span> (subscribers[id][i]) subscribers[id][i](event);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 使用 ==========</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">app_init</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    event_subscribe(EVT_CAN_RX, j1939_on_can_rx);</span><br><span class="line">    event_subscribe(EVT_FAULT_DETECTED, safety_on_fault);</span><br><span class="line">    event_subscribe(EVT_FAULT_DETECTED, led_on_fault);    <span class="comment">// 多个订阅者</span></span><br><span class="line">    event_subscribe(EVT_FAULT_DETECTED, can_report_fault);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// CAN 驱动只管发布，不知道谁在监听</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">CAN_RX_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    Event_t evt = { .id = EVT_CAN_RX };</span><br><span class="line">    read_can_frame(&amp;evt.can_frame);</span><br><span class="line">    event_publish(EVT_CAN_RX, &amp;evt);</span><br><span class="line">    <span class="comment">// 不需要 #include j1939.h</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>内存占用：</strong> 8个事件 × 8个订阅者 × 4字节 = 256 字节，静态分配无堆。</p>
+<hr>
+<h3 id="7-4-Mock-平台-CI-x2F-CD"><a href="#7-4-Mock-平台-CI-x2F-CD" class="headerlink" title="7.4 Mock 平台 + CI/CD"></a>7.4 Mock 平台 + CI/CD</h3><p><strong>项目结构：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">firmware/</span><br><span class="line">├── app/          # 业务层（平台无关）— foc_controller.c, pid.c, svpwm.c</span><br><span class="line">├── hal/          # 接口定义（纯头文件）— hal_pwm.h, hal_adc.h</span><br><span class="line">├── platform/</span><br><span class="line">│   ├── stm32g4/  # 真实硬件实现</span><br><span class="line">│   ├── gd32f303/ # GD32 实现</span><br><span class="line">│   └── mock/     # PC Mock 实现（单元测试用）</span><br><span class="line">├── tests/        # 测试用例</span><br><span class="line">└── .github/workflows/ci.yml</span><br></pre></td></tr></table></figure>
+
+<p><strong>Mock ADC 实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// platform/mock/mock_adc.c</span></span><br><span class="line"><span class="type">static</span> <span class="type">float</span> mock_ia = <span class="number">0</span>, mock_ib = <span class="number">0</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span>   read_count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试代码控制接口</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">mock_adc_set_current</span><span class="params">(<span class="type">float</span> ia, <span class="type">float</span> ib)</span> { mock_ia = ia; mock_ib = ib; }</span><br><span class="line"><span class="type">int</span>  <span class="title function_">mock_adc_get_read_count</span><span class="params">(<span class="type">void</span>)</span> { <span class="keyword">return</span> read_count; }</span><br><span class="line"></span><br><span class="line"><span class="comment">// HAL 接口实现（业务代码调用）</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">mock_read_current</span><span class="params">(<span class="type">float</span> *ia, <span class="type">float</span> *ib)</span> {</span><br><span class="line">    *ia = mock_ia; *ib = mock_ib; read_count++;</span><br><span class="line">}</span><br><span class="line"><span class="type">const</span> HAL_ADC_Interface_t mock_adc = { .read_phase_current = mock_read_current, ... };</span><br></pre></td></tr></table></figure>
+
+<p><strong>FOC 仿真测试（带电机模型）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test_foc_current_tracking</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="comment">// 简单电机模型</span></span><br><span class="line">    MotorModel_t motor = { .Rs=<span class="number">0.225f</span>, .Ld=<span class="number">263e-6</span>f, .omega_e=<span class="number">0</span> };</span><br><span class="line">    foc_set_iq_ref(&amp;foc, <span class="number">3.0f</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2000</span>; i++) {  <span class="comment">// 跑 100ms</span></span><br><span class="line">        mock_adc_set_current(ia_from_model(&amp;motor), ib_from_model(&amp;motor));</span><br><span class="line">        foc_loop(&amp;foc);</span><br><span class="line">        motor_model_step(&amp;motor, foc_get_ud(&amp;foc), foc_get_uq(&amp;foc), <span class="number">50e-6</span>f);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    assert(<span class="built_in">fabs</span>(motor.iq - <span class="number">3.0f</span>) &lt; <span class="number">0.1f</span>);  <span class="comment">// 误差 &lt; 0.1A</span></span><br><span class="line">    assert(<span class="built_in">fabs</span>(motor.id) &lt; <span class="number">0.1f</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"  PASS: FOC 电流跟踪精度满足要求\n"</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>GitHub Actions CI 配置：</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Firmware</span> <span class="string">CI</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">push</span>, <span class="string">pull_request</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">unit-test:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">编译</span> <span class="string">Mock</span> <span class="string">测试</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">mkdir</span> <span class="string">build</span> <span class="string">&amp;&amp;</span> <span class="string">cd</span> <span class="string">build</span> <span class="string">&amp;&amp;</span> <span class="string">cmake</span> <span class="string">-DPLATFORM=mock</span> <span class="string">..</span> <span class="string">&amp;&amp;</span> <span class="string">make</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">运行单元测试</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">cd</span> <span class="string">build</span> <span class="string">&amp;&amp;</span> <span class="string">./firmware_test</span>  <span class="comment"># 非0退出码 = CI 失败</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">static-analysis:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">cppcheck</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">-y</span> <span class="string">cppcheck</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">运行</span> <span class="string">cppcheck</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">cppcheck</span> <span class="string">--enable=all</span> <span class="string">--error-exitcode=1</span> <span class="string">app/</span> <span class="string">platform/mock/</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">cross-compile:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">-y</span> <span class="string">gcc-arm-none-eabi</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">编译</span> <span class="string">STM32</span> <span class="string">固件</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">mkdir</span> <span class="string">build_stm32</span> <span class="string">&amp;&amp;</span> <span class="string">cd</span> <span class="string">build_stm32</span> <span class="string">&amp;&amp;</span> <span class="string">cmake</span> <span class="string">-DPLATFORM=stm32g4</span> <span class="string">..</span> <span class="string">&amp;&amp;</span> <span class="string">make</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">检查固件大小</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          SIZE=$(arm-none-eabi-size build_stm32/firmware.elf | tail -1 | awk '{print $1}')</span></span><br><span class="line"><span class="string">          if [ "$SIZE" -gt 450000 ]; then echo "固件超限！" &amp;&amp; exit 1; fi</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Branch 保护：</strong> main 分支要求单元测试通过 + 交叉编译成功 + 至少1人 Code Review 才能合并。</p>
+<hr>
+<h3 id="7-5-状态机设计"><a href="#7-5-状态机设计" class="headerlink" title="7.5 状态机设计"></a>7.5 状态机设计</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    State_t  current;</span><br><span class="line">    Event_t  event;</span><br><span class="line">    State_t  next;</span><br><span class="line">    <span class="type">void</span> (*action)(<span class="type">void</span>);</span><br><span class="line">} Transition_t;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> Transition_t transitions[] = {</span><br><span class="line">    { STATE_INIT,    EVT_SELFTEST_PASS,  STATE_NORMAL,    action_start_normal },</span><br><span class="line">    { STATE_INIT,    EVT_SELFTEST_FAIL,  STATE_FAULT,     action_fault_lockdown },</span><br><span class="line">    { STATE_NORMAL,  EVT_FAULT_DETECTED, STATE_SAFE,      action_reduce_output },</span><br><span class="line">    { STATE_SAFE,    EVT_FAULT_CLEARED,  STATE_NORMAL,    action_resume },</span><br><span class="line">    { STATE_NORMAL,  EVT_CALIB_REQUEST,  STATE_CALIBRATE, action_enter_calib },</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">state_machine_process</span><span class="params">(Event_t evt)</span> {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; ARRAY_SIZE(transitions); i++) {</span><br><span class="line">        <span class="keyword">if</span> (transitions[i].current == current_state &amp;&amp; transitions[i].event == evt) {</span><br><span class="line">            <span class="keyword">if</span> (transitions[i].action) transitions[i].action();</span><br><span class="line">            current_state = transitions[i].next;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>表驱动的好处：所有状态转移一目了然，方便 Code Review 和安全认证。</p>
+<hr>
+<h2 id="八、项目面试题"><a href="#八、项目面试题" class="headerlink" title="八、项目面试题"></a>八、项目面试题</h2><h3 id="8-1-JC-系列工业摇杆控制器"><a href="#8-1-JC-系列工业摇杆控制器" class="headerlink" title="8.1 JC 系列工业摇杆控制器"></a>8.1 JC 系列工业摇杆控制器</h3><p><strong>替代 Gessmann/力士乐的核心竞争力：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能对等：J1939/CANopen 双协议栈兼容客户现有系统</span><br><span class="line">成本优势：国产 MCU + 器件，BOM 降 30%</span><br><span class="line">定制化：  按客户需求调 CAN 报文格式、校准曲线、安全参数</span><br><span class="line">技术差距：功能安全认证（竞品有 SIL 2/PL d），我们正在推进</span><br></pre></td></tr></table></figure>
+
+<p><strong>五点校准系统设计：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为什么五点不是两点？</span></span><br><span class="line"><span class="comment">// 两点只修正增益和偏移（线性），五点修正非线性</span></span><br><span class="line"><span class="comment">// 中位点特别重要——松手回中后液压阀必须停，安全隐患</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">uint16_t</span> raw[<span class="number">5</span>];     <span class="comment">// ADC原始值：min, 25%, mid, 75%, max</span></span><br><span class="line">    <span class="type">uint16_t</span> target[<span class="number">5</span>];  <span class="comment">// 目标输出：0, 25%, 50%, 75%, 100%</span></span><br><span class="line">    <span class="type">uint16_t</span> crc;</span><br><span class="line">} CalibData_t;</span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">calibrate</span><span class="params">(<span class="type">uint16_t</span> raw, <span class="type">const</span> CalibData_t *cal)</span> {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) {</span><br><span class="line">        <span class="keyword">if</span> (raw &lt;= cal-&gt;raw[i+<span class="number">1</span>]) {</span><br><span class="line">            <span class="type">float</span> ratio = (<span class="type">float</span>)(raw - cal-&gt;raw[i]) / (cal-&gt;raw[i+<span class="number">1</span>] - cal-&gt;raw[i]);</span><br><span class="line">            <span class="keyword">return</span> cal-&gt;target[i] + ratio * (cal-&gt;target[i+<span class="number">1</span>] - cal-&gt;target[i]);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> cal-&gt;target[<span class="number">4</span>];</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>EEPROM 双备份策略：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A区和B区交替写入，每次写入带 CRC16 + 写入计数</span><br><span class="line">上电读取：比较两区写入计数，用更新的那个</span><br><span class="line">两区都 CRC 错误 → 加载出厂默认值 + 报 DM1 故障码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="8-2-TKX-ThreadX-功能安全框架"><a href="#8-2-TKX-ThreadX-功能安全框架" class="headerlink" title="8.2 TKX_ThreadX 功能安全框架"></a>8.2 TKX_ThreadX 功能安全框架</h3><p><strong>SIL 2 实现清单：</strong></p>
+<table>
+<thead>
+<tr>
+<th>SIL 2 要求</th>
+<th>实现方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动自检</td>
+<td>CPU 寄存器测试 + RAM March-C + Flash CRC32 + 时钟频率验证</td>
+</tr>
+<tr>
+<td>运行时监控</td>
+<td>双看门狗（IWDG+WWDG）+ 程序流监控 + 栈水印检测</td>
+</tr>
+<tr>
+<td>内存保护</td>
+<td>MPU 6个保护区域，防止栈溢出和非法访问</td>
+</tr>
+<tr>
+<td>诊断覆盖率</td>
+<td>&gt; 90%（启动检测 + 运行时监控）</td>
+</tr>
+<tr>
+<td>编码规范</td>
+<td>MISRA-C 2012，IAR C-STAT 静态分析，零违规</td>
+</tr>
+</tbody></table>
+<p><strong>March-C RAM 测试（6步，检测所有耦合故障）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Step 1: ⇑(w0)     从低地址到高地址，全写0</span><br><span class="line">Step 2: ⇑(r0,w1)  从低到高，读0验证，再写1</span><br><span class="line">Step 3: ⇑(r1,w0)  从低到高，读1验证，再写0</span><br><span class="line">Step 4: ⇓(r0,w1)  从高到低，读0验证，再写1</span><br><span class="line">Step 5: ⇓(r1,w0)  从高到低，读1验证，再写0</span><br><span class="line">Step 6: ⇑(r0)     从低到高，读0验证</span><br><span class="line"></span><br><span class="line">工程问题：测试 RAM 时代码跑在哪里？</span><br><span class="line">→ 测试前把栈临时搬到 CCM RAM（单独总线，测 SRAM 时不受影响）</span><br></pre></td></tr></table></figure>
+
+<p><strong>增量式 Flash CRC 校验：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全量 CRC 一次要 50~100ms → 每次只校验 4KB（~0.5ms）</span></span><br><span class="line"><span class="comment">// 5分钟完成 512KB 全量校验</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FLASH_CHECK_BLOCK_SIZE  4096</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint32_t</span> current_block = <span class="number">0</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">uint32_t</span> expected_crc[<span class="number">128</span>];  <span class="comment">// 烧录时预计算存好</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">flash_integrity_check_step</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="type">uint32_t</span> addr = FLASH_BASE + current_block * FLASH_CHECK_BLOCK_SIZE;</span><br><span class="line">    <span class="type">uint32_t</span> crc = calc_crc32((<span class="type">uint8_t</span> *)addr, FLASH_CHECK_BLOCK_SIZE);</span><br><span class="line">    <span class="keyword">if</span> (crc != expected_crc[current_block]) {</span><br><span class="line">        safety_shutdown(FAULT_FLASH_CORRUPTION);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    current_block = (current_block + <span class="number">1</span>) % <span class="number">128</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>双看门狗令牌机制：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">每个安全关键线程有一个令牌位</span><br><span class="line">线程正常执行完一轮后置位自己的令牌</span><br><span class="line">安全监控线程检查所有令牌都置位了才喂狗</span><br><span class="line">任何一个线程卡住 → 对应令牌没置位 → 不喂狗 → 超时复位</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="8-3-综合面试模拟题速查"><a href="#8-3-综合面试模拟题速查" class="headerlink" title="8.3 综合面试模拟题速查"></a>8.3 综合面试模拟题速查</h3><p><strong>Q: 你怎么设计一套支持多款硬件的通用固件？</strong></p>
+<blockquote>
+<p>分三层：业务层（算法+状态机）、HAL 抽象层（接口定义）、平台实现层（具体硬件驱动）。业务层通过函数指针接口调用硬件，不直接操作寄存器。初始化时通过依赖注入把具体平台实现传入业务模块。换硬件只需新增一套平台实现，业务代码不动。Mock 平台可以在 PC 上跑单元测试，CI 自动验证算法正确性。</p>
+</blockquote>
+<p><strong>Q: 如何保证固件质量？</strong></p>
+<blockquote>
+<p>三道防线：①Mock 平台单元测试——核心算法在 PC 上跑，每次 push 自动执行，FOC 测试里有简单电机模型验证电流跟踪精度；②CI 交叉编译 + 静态分析——ARM-GCC 确保能烧进去，cppcheck 抓未初始化变量，检查固件大小不超限；③PR 必须单元测试全过 + Code Review 才能合并 main。</p>
+</blockquote>
+<p><strong>Q: PendSV 是什么，为什么优先级要最低？</strong></p>
+<blockquote>
+<p>PendSV 是 Cortex-M 专为 RTOS 上下文切换设计的异常。优先级最低确保所有外设中断处理完后才做切换，防止在中断嵌套中切换线程导致栈混乱，也防止打断 FOC 等高实时性中断。</p>
+</blockquote>
+<p><strong>Q: FreeRTOS Tickless 是怎么工作的？</strong></p>
+<blockquote>
+<p>所有任务阻塞时，内核从延时列表读出最早唤醒时刻，计算可以睡多久。Port 层把 tick 数换算成 LPTIM 计数值（LSE 32.768kHz，Stop 模式不停），设好 ARR 进 Stop 模式。唤醒后判断是时间到了还是外部中断提前唤醒，调 <code>vTaskStepTick</code> 补偿 tick 数。整个过程对上层任务完全透明。</p>
+</blockquote>
+<p><strong>Q: CCM RAM 存线程栈有什么好处？</strong></p>
+<blockquote>
+<p>三点：①CPU 专用 D-Bus 访问 CCM 零等待，不受 DMA 竞争，FOC 中断 jitter 从 1.8μs 降到 0.3μs；②DMA 不可访问 CCM，硬件层面消除”DMA 踩栈”故障；③MPU 可把安全线程栈设为特权模式，应用层改不了。</p>
+</blockquote>
+<hr>
+<h3 id="8-4-面试策略总结"><a href="#8-4-面试策略总结" class="headerlink" title="8.4 面试策略总结"></a>8.4 面试策略总结</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">你的强项（主动引导）：</span><br><span class="line">  ★★★★★ JC摇杆量产经验（J1939/CANopen/替代国际品牌）</span><br><span class="line">  ★★★★★ 功能安全（SIL 2/March-C/MPU/CCM）</span><br><span class="line">  ★★★★☆ Qt上位机（多线程/CAN解析）</span><br><span class="line">  ★★★★☆ 产线工具链（HIL/校准/CI/CD）</span><br><span class="line"></span><br><span class="line">你的弱项（快速防守后转移）：</span><br><span class="line">  ★★☆ BLE → 强调RTOS和协议栈能力可迁移</span><br><span class="line">  ★★☆ FOC → 预研阶段但理论深、有选型和方案设计</span><br><span class="line"></span><br><span class="line">节奏：</span><br><span class="line">  前10分钟：展示量产实战（JC摇杆、替代国际品牌）</span><br><span class="line">  中10分钟：展示技术深度（功能安全框架）</span><br><span class="line">  后10分钟：应对新方向（BLE/FOC），展示学习能力</span><br><span class="line"></span><br><span class="line">BLE 引导话术：</span><br><span class="line">  "链路层我了解广播和数据信道划分，实际项目中我更多在 GATT 层开发，</span><br><span class="line">   比如我设计了自定义电机控制 Service，实现 Notify 状态上报和 Write 控制指令。</span><br><span class="line">   架构上我们用双芯片——nRF52840 专心跑 BLE，STM32 专心跑 FOC，通过 SPI 解耦..."</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="附：英文自我介绍模板"><a href="#附：英文自我介绍模板" class="headerlink" title="附：英文自我介绍模板"></a>附：英文自我介绍模板</h2><blockquote>
+<p>“I’m an embedded engineer with 3.5 years of experience. Currently at Boge Automation, I lead the development of JC series industrial joystick controllers — our products have successfully replaced Gessmann and Bosch Rexroth in several customer deployments.</p>
+<p>My core strength is taking embedded products from prototype to mass production. I built a layered software architecture supporting J1939 and CANopen dual protocol stacks, designed a five-point calibration system for production line automation, and developed a Qt-based production test tool replacing LabVIEW.</p>
+<p>I also open-sourced a functional safety framework targeting IEC 61508 SIL 2, featuring startup self-tests, dual watchdog monitoring, MPU memory protection, and incremental Flash CRC verification — all MISRA-C 2012 compliant.</p>
+<p>I’m now exploring FOC motor force feedback for next-generation joysticks, and I’m excited about roles combining embedded systems with motor control.”</p>
+</blockquote>
+<hr>
+<p><em>本文整理自实际面试准备会话，内容涵盖固件工程师面试的核心知识点，持续更新。</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/FOC/" rel="tag"># FOC</a>
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" rel="tag"># 电机控制</a>
+              <a href="/tags/CAN/" rel="tag"># CAN</a>
+              <a href="/tags/J1939/" rel="tag"># J1939</a>
+              <a href="/tags/CANopen/" rel="tag"># CANopen</a>
+              <a href="/tags/FreeRTOS/" rel="tag"># FreeRTOS</a>
+              <a href="/tags/RTOS/" rel="tag"># RTOS</a>
+              <a href="/tags/ARM/" rel="tag"># ARM</a>
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+              <a href="/tags/%E5%9B%BA%E4%BB%B6/" rel="tag"># 固件</a>
+              <a href="/tags/Cortex-M/" rel="tag"># Cortex-M</a>
+              <a href="/tags/ThreadX/" rel="tag"># ThreadX</a>
+              <a href="/tags/BLE/" rel="tag"># BLE</a>
+              <a href="/tags/SPI/" rel="tag"># SPI</a>
+              <a href="/tags/I2C/" rel="tag"># I2C</a>
+              <a href="/tags/DMA/" rel="tag"># DMA</a>
+              <a href="/tags/USB-CDC/" rel="tag"># USB CDC</a>
+              <a href="/tags/%E5%8A%9F%E8%83%BD%E5%AE%89%E5%85%A8/" rel="tag"># 功能安全</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/19/CyberGear-FOC-Production-Guide/" rel="prev" title="以CyberGear为例的FOC量产工程化全解析：从算法到产线">
+                  <i class="fa fa-chevron-left"></i> 以CyberGear为例的FOC量产工程化全解析：从算法到产线
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/22/daily-study-2026-03-22/" rel="next" title="每日学习 — 2026-03-22">
+                  每日学习 — 2026-03-22 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">244k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:47</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
