@@ -13471,4 +13471,695 @@
         <tag>C语言</tag>
       </tags>
   </entry>
+  <entry>
+    <title>每日学习 — 2026-03-22</title>
+    <url>/2026/03/22/daily-study-2026-03-22/</url>
+    <content><![CDATA[<h2 id="🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O"><a href="#🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O" class="headerlink" title="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O"></a>🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><code>volatile</code> 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。</p>
+<p>编译器默认假设变量只在当前执行流中改变，所以会：</p>
+<ol>
+<li>把频繁访问的变量缓存在 CPU 寄存器</li>
+<li>消除”看似多余”的读写</li>
+<li>重排序无数据依赖的操作</li>
+</ol>
+<p>加了 <code>volatile</code>，每次都会从内存重新读取&#x2F;写入。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ❌ 不加 volatile，编译器可能优化掉循环</span></span><br><span class="line"><span class="type">uint32_t</span> *status = (<span class="type">uint32_t</span> *)<span class="number">0x40021000</span>;</span><br><span class="line"><span class="keyword">while</span> (*status &amp; <span class="number">0x01</span>) &#123;&#125;  <span class="comment">// 可能被优化成无限循环或直接跳过</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 正确写法</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">uint32_t</span> *status = (<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)<span class="number">0x40021000</span>;</span><br><span class="line"><span class="keyword">while</span> (*status &amp; <span class="number">0x01</span>) &#123;&#125;  <span class="comment">// 每次都真正读硬件寄存器</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 典型用法：中断标志</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">uint8_t</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ISR_Handler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (!flag) &#123;&#125;  <span class="comment">// 没有 volatile 编译器可能优化掉</span></span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ul>
+<li><strong>volatile ≠ 原子操作</strong>：<code>volatile</code> 只保证不被优化，不保证多核&#x2F;多线程安全</li>
+<li><strong>volatile ≠ 内存屏障</strong>：ARM Cortex-M 还需要 <code>__DSB()</code> &#x2F; <code>__DMB()</code> 保证顺序</li>
+<li><strong>const volatile 合法</strong>：表示”程序不能改，但硬件可能改”（只读状态寄存器）</li>
+</ul>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: volatile 和 const 能一起用吗？什么场景？</strong></p>
+<blockquote>
+<p>能。<code>const volatile uint32_t *reg = ...</code> 表示只读硬件寄存器，编译器不优化读取但禁止写入。</p>
+</blockquote>
+<p><strong>Q2: 在 RTOS 中，两个任务共享变量只加 volatile 够吗？</strong></p>
+<blockquote>
+<p>不够。<code>volatile</code> 防优化，但不防竞态。需要互斥锁&#x2F;信号量 + <code>volatile</code>。</p>
+</blockquote>
+<p><strong>Q3: DMA 传输完成后读 buffer，需要注意什么？</strong></p>
+<blockquote>
+<p>buffer 要声明 <code>volatile</code> 或者在读之前加 cache invalidate + 内存屏障，防止 CPU 读到旧缓存。</p>
+</blockquote>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-03-22-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-03-22-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>peripheral</td>
+<td>&#x2F;pəˈrɪfərəl&#x2F;</td>
+<td>外设，外围设备</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>impedance</td>
+<td>&#x2F;ɪmˈpiːdəns&#x2F;</td>
+<td>阻抗</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>latency</td>
+<td>&#x2F;ˈleɪtənsi&#x2F;</td>
+<td>延迟，潜伏期</td>
+<td>技术&#x2F;日常</td>
+</tr>
+<tr>
+<td>4</td>
+<td>mitigate</td>
+<td>&#x2F;ˈmɪtɪɡeɪt&#x2F;</td>
+<td>减轻，缓解</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>5</td>
+<td>elaborate</td>
+<td>&#x2F;ɪˈlæbəreɪt&#x2F;</td>
+<td>详细说明</td>
+<td>口语&#x2F;面试</td>
+</tr>
+<tr>
+<td>6</td>
+<td>bottleneck</td>
+<td>&#x2F;ˈbɒtlˌnɛk&#x2F;</td>
+<td>瓶颈</td>
+<td>技术&#x2F;日常</td>
+</tr>
+<tr>
+<td>7</td>
+<td>robust</td>
+<td>&#x2F;roʊˈbʌst&#x2F;</td>
+<td>健壮的，稳健的</td>
+<td>技术&#x2F;面试</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deprecate</td>
+<td>&#x2F;ˈdɛprɪkeɪt&#x2F;</td>
+<td>弃用，不推荐</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>concurrency</td>
+<td>&#x2F;kənˈkʌrənsi&#x2F;</td>
+<td>并发</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td>deterministic</td>
+<td>&#x2F;dɪˌtɜːrmɪˈnɪstɪk&#x2F;</td>
+<td>确定性的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>empirical</td>
+<td>&#x2F;ɪmˈpɪrɪkəl&#x2F;</td>
+<td>经验的，实证的</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>12</td>
+<td>agnostic</td>
+<td>&#x2F;æɡˈnɒstɪk&#x2F;</td>
+<td>与…无关的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>13</td>
+<td>delegate</td>
+<td>&#x2F;ˈdɛlɪɡeɪt&#x2F;</td>
+<td>委派，委托</td>
+<td>日常&#x2F;面试</td>
+</tr>
+<tr>
+<td>14</td>
+<td>idempotent</td>
+<td>&#x2F;ˌaɪdɛmˈpoʊtənt&#x2F;</td>
+<td>幂等的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td>propagate</td>
+<td>&#x2F;ˈprɒpəɡeɪt&#x2F;</td>
+<td>传播，传递</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>16</td>
+<td>jitter</td>
+<td>&#x2F;ˈdʒɪtər&#x2F;</td>
+<td>抖动</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>spurious</td>
+<td>&#x2F;ˈspjʊəriəs&#x2F;</td>
+<td>伪造的，虚假的</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>18</td>
+<td>leverage</td>
+<td>&#x2F;ˈlɛvərɪdʒ&#x2F;</td>
+<td>利用，借助</td>
+<td>面试&#x2F;书面</td>
+</tr>
+<tr>
+<td>19</td>
+<td>granularity</td>
+<td>&#x2F;ˌɡrænjʊˈlærɪti&#x2F;</td>
+<td>粒度</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>feasible</td>
+<td>&#x2F;ˈfiːzəbl&#x2F;</td>
+<td>可行的</td>
+<td>面试&#x2F;书面</td>
+</tr>
+<tr>
+<td>21</td>
+<td>overhead</td>
+<td>&#x2F;ˈoʊvərˌhɛd&#x2F;</td>
+<td>开销</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>22</td>
+<td>volatile</td>
+<td>&#x2F;ˈvɒlətaɪl&#x2F;</td>
+<td>易变的，不稳定的</td>
+<td>技术&#x2F;日常</td>
+</tr>
+<tr>
+<td>23</td>
+<td>throughput</td>
+<td>&#x2F;ˈθruːˌpʊt&#x2F;</td>
+<td>吞吐量</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>scalable</td>
+<td>&#x2F;ˈskeɪləbl&#x2F;</td>
+<td>可扩展的</td>
+<td>技术&#x2F;面试</td>
+</tr>
+<tr>
+<td>25</td>
+<td>decouple</td>
+<td>&#x2F;diːˈkʌpl&#x2F;</td>
+<td>解耦</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>truncate</td>
+<td>&#x2F;ˈtrʌŋkeɪt&#x2F;</td>
+<td>截断</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>27</td>
+<td>articulate</td>
+<td>&#x2F;ɑːrˈtɪkjʊleɪt&#x2F;</td>
+<td>清晰表达</td>
+<td>面试&#x2F;口语</td>
+</tr>
+<tr>
+<td>28</td>
+<td>pragma</td>
+<td>&#x2F;ˈpræɡmə&#x2F;</td>
+<td>编译指示</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>29</td>
+<td>sentinel</td>
+<td>&#x2F;ˈsɛntɪnəl&#x2F;</td>
+<td>哨兵，标记值</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>30</td>
+<td>deprecated</td>
+<td>&#x2F;ˈdɛprɪkeɪtɪd&#x2F;</td>
+<td>已弃用的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>31</td>
+<td>nuance</td>
+<td>&#x2F;ˈnjuːɑːns&#x2F;</td>
+<td>细微差别</td>
+<td>面试&#x2F;书面</td>
+</tr>
+<tr>
+<td>32</td>
+<td>comply</td>
+<td>&#x2F;kəmˈplaɪ&#x2F;</td>
+<td>遵守，符合</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>33</td>
+<td>encompass</td>
+<td>&#x2F;ɪnˈkʌmpəs&#x2F;</td>
+<td>包含，涵盖</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>34</td>
+<td>assertion</td>
+<td>&#x2F;əˈsɜːrʃən&#x2F;</td>
+<td>断言</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>35</td>
+<td>erratic</td>
+<td>&#x2F;ɪˈrætɪk&#x2F;</td>
+<td>不稳定的</td>
+<td>技术&#x2F;日常</td>
+</tr>
+<tr>
+<td>36</td>
+<td>verbose</td>
+<td>&#x2F;vɜːrˈboʊs&#x2F;</td>
+<td>冗长的，详细的</td>
+<td>技术&#x2F;日常</td>
+</tr>
+<tr>
+<td>37</td>
+<td>reminisce</td>
+<td>&#x2F;ˌrɛmɪˈnɪs&#x2F;</td>
+<td>回忆，追忆</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>38</td>
+<td>pragmatic</td>
+<td>&#x2F;præɡˈmætɪk&#x2F;</td>
+<td>务实的</td>
+<td>面试&#x2F;日常</td>
+</tr>
+<tr>
+<td>39</td>
+<td>intricate</td>
+<td>&#x2F;ˈɪntrɪkət&#x2F;</td>
+<td>复杂精细的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>40</td>
+<td>coherent</td>
+<td>&#x2F;koʊˈhɪərənt&#x2F;</td>
+<td>连贯的，一致的</td>
+<td>面试&#x2F;书面</td>
+</tr>
+<tr>
+<td>41</td>
+<td>mandate</td>
+<td>&#x2F;ˈmændeɪt&#x2F;</td>
+<td>强制要求</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>42</td>
+<td>excerpt</td>
+<td>&#x2F;ˈɛksɜːrpt&#x2F;</td>
+<td>摘录，节选</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>43</td>
+<td>alleviate</td>
+<td>&#x2F;əˈliːvieɪt&#x2F;</td>
+<td>减轻，缓和</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>44</td>
+<td>ambiguous</td>
+<td>&#x2F;æmˈbɪɡjuəs&#x2F;</td>
+<td>模棱两可的</td>
+<td>面试&#x2F;日常</td>
+</tr>
+<tr>
+<td>45</td>
+<td>derive</td>
+<td>&#x2F;dɪˈraɪv&#x2F;</td>
+<td>推导，派生</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>46</td>
+<td>substantiate</td>
+<td>&#x2F;səbˈstænʃieɪt&#x2F;</td>
+<td>证实，证明</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>47</td>
+<td>inadvertently</td>
+<td>&#x2F;ˌɪnədˈvɜːrtəntli&#x2F;</td>
+<td>无意中</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>48</td>
+<td>prevalent</td>
+<td>&#x2F;ˈprɛvələnt&#x2F;</td>
+<td>普遍的，流行的</td>
+<td>书面&#x2F;日常</td>
+</tr>
+<tr>
+<td>49</td>
+<td>benchmark</td>
+<td>&#x2F;ˈbɛntʃˌmɑːrk&#x2F;</td>
+<td>基准测试</td>
+<td>技术&#x2F;面试</td>
+</tr>
+<tr>
+<td>50</td>
+<td>succinct</td>
+<td>&#x2F;səkˈsɪŋkt&#x2F;</td>
+<td>简洁的，精炼的</td>
+<td>面试&#x2F;口语</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>peripheral</strong> &#x2F;pəˈrɪfərəl&#x2F; — 外设，外围设备 <code>技术</code></p>
+<blockquote>
+<p>The MCU communicates with peripherals via SPI and I2C.</p>
+</blockquote>
+</li>
+<li><p><strong>impedance</strong> &#x2F;ɪmˈpiːdəns&#x2F; — 阻抗 <code>技术</code></p>
+<blockquote>
+<p>Impedance matching is critical for high-speed signal integrity.</p>
+</blockquote>
+</li>
+<li><p><strong>latency</strong> &#x2F;ˈleɪtənsi&#x2F; — 延迟，潜伏期 <code>技术/日常</code></p>
+<blockquote>
+<p>The interrupt latency must be under 1 microsecond for real-time control.</p>
+</blockquote>
+</li>
+<li><p><strong>mitigate</strong> &#x2F;ˈmɪtɪɡeɪt&#x2F; — 减轻，缓解 <code>书面/面试</code></p>
+<blockquote>
+<p>We added a watchdog timer to mitigate the risk of firmware crashes.</p>
+</blockquote>
+</li>
+<li><p><strong>elaborate</strong> &#x2F;ɪˈlæbəreɪt&#x2F; — 详细说明 <code>口语/面试</code></p>
+<blockquote>
+<p>Could you elaborate on how you handled the race condition?</p>
+</blockquote>
+</li>
+<li><p><strong>bottleneck</strong> &#x2F;ˈbɒtlˌnɛk&#x2F; — 瓶颈 <code>技术/日常</code></p>
+<blockquote>
+<p>The UART baud rate became the bottleneck for data throughput.</p>
+</blockquote>
+</li>
+<li><p><strong>robust</strong> &#x2F;roʊˈbʌst&#x2F; — 健壮的，稳健的 <code>技术/面试</code></p>
+<blockquote>
+<p>A robust error-handling mechanism prevents silent data corruption.</p>
+</blockquote>
+</li>
+<li><p><strong>deprecate</strong> &#x2F;ˈdɛprɪkeɪt&#x2F; — 弃用，不推荐 <code>技术</code></p>
+<blockquote>
+<p>The old HAL API has been deprecated in favor of the LL drivers.</p>
+</blockquote>
+</li>
+<li><p><strong>concurrency</strong> &#x2F;kənˈkʌrənsi&#x2F; — 并发 <code>技术</code></p>
+<blockquote>
+<p>RTOS enables concurrency by scheduling multiple tasks on a single core.</p>
+</blockquote>
+</li>
+<li><p><strong>deterministic</strong> &#x2F;dɪˌtɜːrmɪˈnɪstɪk&#x2F; — 确定性的 <code>技术</code></p>
+<blockquote>
+<p>Real-time systems require deterministic response times.</p>
+</blockquote>
+</li>
+<li><p><strong>empirical</strong> &#x2F;ɪmˈpɪrɪkəl&#x2F; — 经验的，实证的 <code>书面/面试</code></p>
+<blockquote>
+<p>PID gains were tuned through empirical testing on the actual motor.</p>
+</blockquote>
+</li>
+<li><p><strong>agnostic</strong> &#x2F;æɡˈnɒstɪk&#x2F; — 与…无关的 <code>技术</code></p>
+<blockquote>
+<p>The middleware is platform-agnostic and runs on both ARM and RISC-V.</p>
+</blockquote>
+</li>
+<li><p><strong>delegate</strong> &#x2F;ˈdɛlɪɡeɪt&#x2F; — 委派，委托 <code>日常/面试</code></p>
+<blockquote>
+<p>We delegate non-critical logging tasks to a low-priority thread.</p>
+</blockquote>
+</li>
+<li><p><strong>idempotent</strong> &#x2F;ˌaɪdɛmˈpoʊtənt&#x2F; — 幂等的 <code>技术</code></p>
+<blockquote>
+<p>The calibration command should be idempotent — calling it twice gives the same result.</p>
+</blockquote>
+</li>
+<li><p><strong>propagate</strong> &#x2F;ˈprɒpəɡeɪt&#x2F; — 传播，传递 <code>技术/书面</code></p>
+<blockquote>
+<p>Clock signals propagate through the PLL before reaching the CPU.</p>
+</blockquote>
+</li>
+<li><p><strong>jitter</strong> &#x2F;ˈdʒɪtər&#x2F; — 抖动 <code>技术</code></p>
+<blockquote>
+<p>PWM jitter can cause audible noise in motor control applications.</p>
+</blockquote>
+</li>
+<li><p><strong>spurious</strong> &#x2F;ˈspjʊəriəs&#x2F; — 伪造的，虚假的 <code>技术/书面</code></p>
+<blockquote>
+<p>Spurious interrupts can occur when the interrupt flag is not cleared properly.</p>
+</blockquote>
+</li>
+<li><p><strong>leverage</strong> &#x2F;ˈlɛvərɪdʒ&#x2F; — 利用，借助 <code>面试/书面</code></p>
+<blockquote>
+<p>We can leverage DMA to offload data transfer from the CPU.</p>
+</blockquote>
+</li>
+<li><p><strong>granularity</strong> &#x2F;ˌɡrænjʊˈlærɪti&#x2F; — 粒度 <code>技术</code></p>
+<blockquote>
+<p>Timer resolution determines the granularity of PWM duty cycle control.</p>
+</blockquote>
+</li>
+<li><p><strong>feasible</strong> &#x2F;ˈfiːzəbl&#x2F; — 可行的 <code>面试/书面</code></p>
+<blockquote>
+<p>Running a neural network on a Cortex-M4 is feasible with quantization.</p>
+</blockquote>
+</li>
+<li><p><strong>overhead</strong> &#x2F;ˈoʊvərˌhɛd&#x2F; — 开销 <code>技术</code></p>
+<blockquote>
+<p>Context switching in an RTOS introduces a small but measurable overhead.</p>
+</blockquote>
+</li>
+<li><p><strong>volatile</strong> &#x2F;ˈvɒlətaɪl&#x2F; — 易变的，不稳定的 <code>技术/日常</code></p>
+<blockquote>
+<p>Market conditions remain volatile after the policy change.</p>
+</blockquote>
+</li>
+<li><p><strong>throughput</strong> &#x2F;ˈθruːˌpʊt&#x2F; — 吞吐量 <code>技术</code></p>
+<blockquote>
+<p>SPI offers higher throughput than I2C for bulk data transfers.</p>
+</blockquote>
+</li>
+<li><p><strong>scalable</strong> &#x2F;ˈskeɪləbl&#x2F; — 可扩展的 <code>技术/面试</code></p>
+<blockquote>
+<p>The firmware architecture must be scalable to support future sensor additions.</p>
+</blockquote>
+</li>
+<li><p><strong>decouple</strong> &#x2F;diːˈkʌpl&#x2F; — 解耦 <code>技术</code></p>
+<blockquote>
+<p>Use decoupling capacitors close to the power pins to reduce noise.</p>
+</blockquote>
+</li>
+<li><p><strong>truncate</strong> &#x2F;ˈtrʌŋkeɪt&#x2F; — 截断 <code>技术</code></p>
+<blockquote>
+<p>Fixed-point arithmetic may truncate the fractional part.</p>
+</blockquote>
+</li>
+<li><p><strong>articulate</strong> &#x2F;ɑːrˈtɪkjʊleɪt&#x2F; — 清晰表达 <code>面试/口语</code></p>
+<blockquote>
+<p>Can you articulate the difference between polling and interrupt-driven I&#x2F;O?</p>
+</blockquote>
+</li>
+<li><p><strong>pragma</strong> &#x2F;ˈpræɡmə&#x2F; — 编译指示 <code>技术</code></p>
+<blockquote>
+<p>Use #pragma pack(1) to prevent struct padding in communication protocols.</p>
+</blockquote>
+</li>
+<li><p><strong>sentinel</strong> &#x2F;ˈsɛntɪnəl&#x2F; — 哨兵，标记值 <code>技术</code></p>
+<blockquote>
+<p>A sentinel value of 0xFF marks the end of the configuration table.</p>
+</blockquote>
+</li>
+<li><p><strong>deprecated</strong> &#x2F;ˈdɛprɪkeɪtɪd&#x2F; — 已弃用的 <code>技术</code></p>
+<blockquote>
+<p>The deprecated function still works but will be removed in the next release.</p>
+</blockquote>
+</li>
+<li><p><strong>nuance</strong> &#x2F;ˈnjuːɑːns&#x2F; — 细微差别 <code>面试/书面</code></p>
+<blockquote>
+<p>There’s an important nuance between mutex and binary semaphore.</p>
+</blockquote>
+</li>
+<li><p><strong>comply</strong> &#x2F;kəmˈplaɪ&#x2F; — 遵守，符合 <code>书面/面试</code></p>
+<blockquote>
+<p>The device must comply with FCC regulations for electromagnetic emissions.</p>
+</blockquote>
+</li>
+<li><p><strong>encompass</strong> &#x2F;ɪnˈkʌmpəs&#x2F; — 包含，涵盖 <code>书面</code></p>
+<blockquote>
+<p>The test suite encompasses unit tests, integration tests, and hardware-in-the-loop tests.</p>
+</blockquote>
+</li>
+<li><p><strong>assertion</strong> &#x2F;əˈsɜːrʃən&#x2F; — 断言 <code>技术</code></p>
+<blockquote>
+<p>Static assertions catch configuration errors at compile time.</p>
+</blockquote>
+</li>
+<li><p><strong>erratic</strong> &#x2F;ɪˈrætɪk&#x2F; — 不稳定的 <code>技术/日常</code></p>
+<blockquote>
+<p>The sensor showed erratic readings due to a loose connection.</p>
+</blockquote>
+</li>
+<li><p><strong>verbose</strong> &#x2F;vɜːrˈboʊs&#x2F; — 冗长的，详细的 <code>技术/日常</code></p>
+<blockquote>
+<p>Enable verbose logging to debug the communication issue.</p>
+</blockquote>
+</li>
+<li><p><strong>reminisce</strong> &#x2F;ˌrɛmɪˈnɪs&#x2F; — 回忆，追忆 <code>口语</code></p>
+<blockquote>
+<p>We often reminisce about our college days over coffee.</p>
+</blockquote>
+</li>
+<li><p><strong>pragmatic</strong> &#x2F;præɡˈmætɪk&#x2F; — 务实的 <code>面试/日常</code></p>
+<blockquote>
+<p>A pragmatic approach is to fix the critical bug first, then refactor.</p>
+</blockquote>
+</li>
+<li><p><strong>intricate</strong> &#x2F;ˈɪntrɪkət&#x2F; — 复杂精细的 <code>书面</code></p>
+<blockquote>
+<p>The state machine for BLE pairing is quite intricate.</p>
+</blockquote>
+</li>
+<li><p><strong>coherent</strong> &#x2F;koʊˈhɪərənt&#x2F; — 连贯的，一致的 <code>面试/书面</code></p>
+<blockquote>
+<p>Make sure your technical explanation is coherent and well-structured.</p>
+</blockquote>
+</li>
+<li><p><strong>mandate</strong> &#x2F;ˈmændeɪt&#x2F; — 强制要求 <code>书面/面试</code></p>
+<blockquote>
+<p>Safety standards mandate a maximum response time of 10ms for braking.</p>
+</blockquote>
+</li>
+<li><p><strong>excerpt</strong> &#x2F;ˈɛksɜːrpt&#x2F; — 摘录，节选 <code>书面</code></p>
+<blockquote>
+<p>Here’s an excerpt from the datasheet showing the timing diagram.</p>
+</blockquote>
+</li>
+<li><p><strong>alleviate</strong> &#x2F;əˈliːvieɪt&#x2F; — 减轻，缓和 <code>书面/面试</code></p>
+<blockquote>
+<p>Adding a hardware FIFO helps alleviate the interrupt frequency problem.</p>
+</blockquote>
+</li>
+<li><p><strong>ambiguous</strong> &#x2F;æmˈbɪɡjuəs&#x2F; — 模棱两可的 <code>面试/日常</code></p>
+<blockquote>
+<p>The specification was ambiguous about the byte order for multi-byte fields.</p>
+</blockquote>
+</li>
+<li><p><strong>derive</strong> &#x2F;dɪˈraɪv&#x2F; — 推导，派生 <code>技术/书面</code></p>
+<blockquote>
+<p>You can derive the transfer function from the open-loop Bode plot.</p>
+</blockquote>
+</li>
+<li><p><strong>substantiate</strong> &#x2F;səbˈstænʃieɪt&#x2F; — 证实，证明 <code>书面/面试</code></p>
+<blockquote>
+<p>Can you substantiate your claim with benchmark data?</p>
+</blockquote>
+</li>
+<li><p><strong>inadvertently</strong> &#x2F;ˌɪnədˈvɜːrtəntli&#x2F; — 无意中 <code>书面</code></p>
+<blockquote>
+<p>The interrupt handler inadvertently cleared the wrong flag register.</p>
+</blockquote>
+</li>
+<li><p><strong>prevalent</strong> &#x2F;ˈprɛvələnt&#x2F; — 普遍的，流行的 <code>书面/日常</code></p>
+<blockquote>
+<p>ARM Cortex-M is prevalent in consumer and industrial embedded systems.</p>
+</blockquote>
+</li>
+<li><p><strong>benchmark</strong> &#x2F;ˈbɛntʃˌmɑːrk&#x2F; — 基准测试 <code>技术/面试</code></p>
+<blockquote>
+<p>We benchmark the FFT implementation against the CMSIS-DSP library.</p>
+</blockquote>
+</li>
+<li><p><strong>succinct</strong> &#x2F;səkˈsɪŋkt&#x2F; — 简洁的，精炼的 <code>面试/口语</code></p>
+<blockquote>
+<p>Keep your interview answers succinct — two minutes per question max.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“go-down-the-rabbit-hole”"><a href="#1-“go-down-the-rabbit-hole”" class="headerlink" title="1. “go down the rabbit hole”"></a>1. “go down the rabbit hole”</h3><p><strong>意思：</strong> 深入钻研某个话题，越陷越深<br><strong>场景：</strong> 日常&#x2F;技术讨论</p>
+<blockquote>
+<p><strong>A:</strong> I started reading about linker scripts and ended up going down the rabbit hole of ELF file formats.<br><strong>B:</strong> Yeah, that happens. You look up one thing and three hours later you’re reading about symbol relocation.</p>
+</blockquote>
+<h3 id="2-“back-to-square-one”"><a href="#2-“back-to-square-one”" class="headerlink" title="2. “back to square one”"></a>2. “back to square one”</h3><p><strong>意思：</strong> 回到原点，从头再来<br><strong>场景：</strong> 职场&#x2F;日常</p>
+<blockquote>
+<p><strong>A:</strong> We thought the bug was in the DMA config, but after two days of debugging, turns out it’s a hardware issue.<br><strong>B:</strong> So we’re basically back to square one with the PCB layout.</p>
+</blockquote>
+<h3 id="3-“cut-corners”"><a href="#3-“cut-corners”" class="headerlink" title="3. “cut corners”"></a>3. “cut corners”</h3><p><strong>意思：</strong> 偷工减料，走捷径<br><strong>场景：</strong> 职场&#x2F;面试</p>
+<blockquote>
+<p><strong>A:</strong> Why did the product fail field testing?<br><strong>B:</strong> The previous team cut corners on EMC shielding to save cost. Now we’re paying for it.</p>
+</blockquote>
+<h3 id="4-“the-devil-is-in-the-details”"><a href="#4-“the-devil-is-in-the-details”" class="headerlink" title="4. “the devil is in the details”"></a>4. “the devil is in the details”</h3><p><strong>意思：</strong> 细节决定成败<br><strong>场景：</strong> 技术讨论&#x2F;面试</p>
+<blockquote>
+<p><strong>A:</strong> The algorithm looks straightforward on paper.<br><strong>B:</strong> True, but the devil is in the details — timing constraints, edge cases, numerical precision…</p>
+</blockquote>
+<h3 id="5-“hit-the-ground-running”"><a href="#5-“hit-the-ground-running”" class="headerlink" title="5. “hit the ground running”"></a>5. “hit the ground running”</h3><p><strong>意思：</strong> 一开始就全力投入，迅速上手<br><strong>场景：</strong> 面试&#x2F;职场</p>
+<blockquote>
+<p><strong>A:</strong> We need someone who can hit the ground running on this project.<br><strong>B:</strong> I’ve worked with STM32 and FreeRTOS for three years, so I’m confident I can contribute from day one.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>每日学习</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+        <tag>英语</tag>
+        <tag>词汇</tag>
+        <tag>volatile</tag>
+      </tags>
+  </entry>
 </search>
