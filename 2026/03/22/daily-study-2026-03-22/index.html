@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O原理volatile 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。 编译器默认假设变量只在当前执行流中改变，所以会：  把频繁访问的变量缓存在 CPU 寄存器 消除”看似多余”的读写 重排序无数据依赖的操作  加了 volatile，每次都会从内存">
+    <meta name="description" content="今日内容：volatile 关键字与内存映射 I&#x2F;O · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日学习 — 2026-03-22">
 <meta property="og:url" content="http://ycx81.github.io/2026/03/22/daily-study-2026-03-22/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O原理volatile 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。 编译器默认假设变量只在当前执行流中改变，所以会：  把频繁访问的变量缓存在 CPU 寄存器 消除”看似多余”的读写 重排序无数据依赖的操作  加了 volatile，每次都会从内存">
+<meta property="og:description" content="今日内容：volatile 关键字与内存映射 I&#x2F;O · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-22T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-22T07:15:02.574Z">
+<meta property="article:modified_time" content="2026-03-22T08:07:27.798Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -256,7 +256,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -266,7 +266,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O"><a href="#🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O" class="headerlink" title="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O"></a>🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><code>volatile</code> 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。</p>
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>volatile 关键字与内存映射 I&#x2F;O</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O"><a href="#🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O" class="headerlink" title="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O"></a>🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><code>volatile</code> 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。</p>
 <p>编译器默认假设变量只在当前执行流中改变，所以会：</p>
 <ol>
 <li>把频繁访问的变量缓存在 CPU 寄存器</li>

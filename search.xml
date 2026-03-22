@@ -13474,7 +13474,10 @@
   <entry>
     <title>每日学习 — 2026-03-22</title>
     <url>/2026/03/22/daily-study-2026-03-22/</url>
-    <content><![CDATA[<h2 id="🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O"><a href="#🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O" class="headerlink" title="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O"></a>🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><code>volatile</code> 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。</p>
+    <content><![CDATA[<p>今日内容：<strong>volatile 关键字与内存映射 I&#x2F;O</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O"><a href="#🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O" class="headerlink" title="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O"></a>🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><code>volatile</code> 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。</p>
 <p>编译器默认假设变量只在当前执行流中改变，所以会：</p>
 <ol>
 <li>把频繁访问的变量缓存在 CPU 寄存器</li>
