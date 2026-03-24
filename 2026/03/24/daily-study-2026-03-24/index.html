@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-03-24">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/24/daily-study-2026-03-24/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-24T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-24T01:32:34.177Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="CAN">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="SPI">
+<meta property="article:tag" content="I2C">
+<meta property="article:tag" content="DMA">
+<meta property="article:tag" content="UART">
+<meta property="article:tag" content="外设驱动">
+<meta property="article:tag" content="ADC">
+<meta property="article:tag" content="Timer">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/24/daily-study-2026-03-24/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/24/daily-study-2026-03-24/","path":"2026/03/24/daily-study-2026-03-24/","title":"每日学习 — 2026-03-24"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-03-24 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E7%B2%BE%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：外设驱动精讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81SPI%EF%BC%88Serial-Peripheral-Interface%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">一、SPI（Serial Peripheral Interface）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#STM32-%E5%85%B8%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">STM32 典型配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">面试要点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81I2C%EF%BC%88Inter-Integrated-Circuit%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">二、I2C（Inter-Integrated Circuit）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%93%E9%94%99%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">易错点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81UART%EF%BC%88Universal-Asynchronous-Receiver-x2F-Transmitter%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">三、UART（Universal Asynchronous Receiver&#x2F;Transmitter）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">面试常见问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81CAN%EF%BC%88Controller-Area-Network%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">四、CAN（Controller Area Network）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%B2%E8%A3%81%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">仲裁机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81DMA%EF%BC%88Direct-Memory-Access%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">五、DMA（Direct Memory Access）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC"><span class="nav-number">1.5.1.</span> <span class="nav-text">核心价值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81ADC%EF%BC%88Analog-to-Digital-Converter%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">六、ADC（Analog-to-Digital Converter）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0"><span class="nav-number">1.6.1.</span> <span class="nav-text">关键参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81Timer%EF%BC%88%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">七、Timer（定时器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#STM32-%E5%AE%9A%E6%97%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">1.7.1.</span> <span class="nav-text">STM32 定时器分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cunder-the-hood%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “under the hood”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cahead-of-the-curve%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “ahead of the curve”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Ca-double-edged-sword%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “a double-edged sword”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cread-between-the-lines%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “read between the lines”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF%E5%A4%8D%E4%B9%A0-%E2%80%94-2026-03-22-%E8%AF%8D%E6%B1%87%EF%BC%88Day-2%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/24/daily-study-2026-03-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-03-24 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-03-24
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-24 09:00:00" itemprop="dateCreated datePublished" datetime="2026-03-24T09:00:00+08:00">2026-03-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：外设驱动精讲"><a href="#🔧-嵌入式知识：外设驱动精讲" class="headerlink" title="🔧 嵌入式知识：外设驱动精讲"></a>🔧 嵌入式知识：外设驱动精讲</h2><h3 id="一、SPI（Serial-Peripheral-Interface）"><a href="#一、SPI（Serial-Peripheral-Interface）" class="headerlink" title="一、SPI（Serial Peripheral Interface）"></a>一、SPI（Serial Peripheral Interface）</h3><h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>SPI 是一种同步、全双工、主从式串行通信协议，通常有 4 根线：</p>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>方向</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SCLK</td>
+<td>主→从</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>MOSI</td>
+<td>主→从</td>
+<td>主机输出，从机输入</td>
+</tr>
+<tr>
+<td>MISO</td>
+<td>从→主</td>
+<td>主机输入，从机输出</td>
+</tr>
+<tr>
+<td>CS&#x2F;NSS</td>
+<td>主→从</td>
+<td>片选（低有效）</td>
+</tr>
+</tbody></table>
+<p>SPI 支持 4 种工作模式（CPOL × CPHA），最常用的是 Mode 0（CPOL&#x3D;0, CPHA&#x3D;0）和 Mode 3（CPOL&#x3D;1, CPHA&#x3D;1）。</p>
+<h4 id="STM32-典型配置"><a href="#STM32-典型配置" class="headerlink" title="STM32 典型配置"></a>STM32 典型配置</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SPI_HandleTypeDef hspi1;</span><br><span class="line"></span><br><span class="line">hspi1.Instance = SPI1;</span><br><span class="line">hspi1.Init.Mode = SPI_MODE_MASTER;</span><br><span class="line">hspi1.Init.Direction = SPI_DIRECTION_2LINES;</span><br><span class="line">hspi1.Init.DataSize = SPI_DATASIZE_8BIT;</span><br><span class="line">hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;   <span class="comment">// CPOL=0</span></span><br><span class="line">hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;        <span class="comment">// CPHA=0 → Mode 0</span></span><br><span class="line">hspi1.Init.NSS = SPI_NSS_SOFT;</span><br><span class="line">hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;</span><br><span class="line">HAL_SPI_Init(&amp;hspi1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送+接收（全双工）</span></span><br><span class="line">HAL_SPI_TransmitReceive(&amp;hspi1, tx_buf, rx_buf, len, HAL_MAX_DELAY);</span><br></pre></td></tr></table></figure>
+
+<h4 id="面试要点"><a href="#面试要点" class="headerlink" title="面试要点"></a>面试要点</h4><p><strong>Q: SPI 和 I2C 如何选择？</strong></p>
+<blockquote>
+<p>SPI：速度快（数十 MHz）、全双工、无地址开销，适合高速传感器（IMU、ADC、Flash）；I2C：只需 2 根线、支持多主多从、有地址仲裁，适合低速设备（温湿度传感器、EEPROM）。</p>
+</blockquote>
+<p><strong>Q: 多个 SPI 从设备如何连接？</strong></p>
+<blockquote>
+<p>共用 SCLK&#x2F;MOSI&#x2F;MISO，每个从设备独立 CS 引脚，主机通过拉低对应 CS 选中目标设备。</p>
+</blockquote>
+<hr>
+<h3 id="二、I2C（Inter-Integrated-Circuit）"><a href="#二、I2C（Inter-Integrated-Circuit）" class="headerlink" title="二、I2C（Inter-Integrated Circuit）"></a>二、I2C（Inter-Integrated Circuit）</h3><h4 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h4><p>I2C 是两线式（SCL + SDA）、半双工、支持多主多从的同步串行协议。每个设备有 7 位（或 10 位）地址。通信始终由主机发起，SDA 和 SCL 需要上拉电阻（典型值 4.7 kΩ @ 100 kHz）。</p>
+<p>时序：Start → 地址（7 bit）+ R&#x2F;W → ACK → 数据 → ACK&#x2F;NACK → Stop</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// I2C 写寄存器（HAL）</span></span><br><span class="line"><span class="type">uint8_t</span> buf[<span class="number">2</span>] = &#123;REG_ADDR, data_value&#125;;</span><br><span class="line">HAL_I2C_Master_Transmit(&amp;hi2c1, (DEV_ADDR &lt;&lt; <span class="number">1</span>), buf, <span class="number">2</span>, HAL_MAX_DELAY);</span><br><span class="line"></span><br><span class="line"><span class="comment">// I2C 读寄存器</span></span><br><span class="line">HAL_I2C_Master_Transmit(&amp;hi2c1, (DEV_ADDR &lt;&lt; <span class="number">1</span>), &amp;reg, <span class="number">1</span>, HAL_MAX_DELAY);</span><br><span class="line">HAL_I2C_Master_Receive(&amp;hi2c1, (DEV_ADDR &lt;&lt; <span class="number">1</span>), &amp;rx, <span class="number">1</span>, HAL_MAX_DELAY);</span><br></pre></td></tr></table></figure>
+
+<h4 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h4><ul>
+<li><strong>上拉阻值</strong>：速度越高，阻值越小。Fast-mode（400 kHz）用 2.2 kΩ，标准（100 kHz）用 4.7 kΩ。</li>
+<li><strong>时钟延展（Clock Stretching）</strong>：从设备可拉低 SCL 来暂停传输，主机需支持。</li>
+<li><strong>地址冲突</strong>：同一总线上 I2C 地址必须唯一，有时需要用 ADDR 引脚选择变体地址。</li>
+</ul>
+<hr>
+<h3 id="三、UART（Universal-Asynchronous-Receiver-x2F-Transmitter）"><a href="#三、UART（Universal-Asynchronous-Receiver-x2F-Transmitter）" class="headerlink" title="三、UART（Universal Asynchronous Receiver&#x2F;Transmitter）"></a>三、UART（Universal Asynchronous Receiver&#x2F;Transmitter）</h3><h4 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h4><p>UART 是异步串行协议，无时钟线，靠预设波特率同步。帧格式：1 起始位 + 数据位（5~9 bit）+ 可选奇偶校验位 + 停止位（1&#x2F;1.5&#x2F;2 bit）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UART DMA 接收（不定长）</span></span><br><span class="line">HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart1, rx_buf, RX_BUF_SIZE);</span><br><span class="line"></span><br><span class="line"><span class="comment">// UART 中断发送</span></span><br><span class="line">HAL_UART_Transmit_IT(&amp;huart1, tx_buf, len);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 波特率计算（STM32）：</span></span><br><span class="line"><span class="comment">// BRR = fCK / (8 * (2 - OVER8) * BaudRate)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h4><p><strong>Q: UART 和 USART 区别？</strong></p>
+<blockquote>
+<p>USART（Universal Synchronous&#x2F;Asynchronous）比 UART 多一个同步模式（CK 引脚），可用于 SPI-like 同步通信。</p>
+</blockquote>
+<p><strong>Q: 如何实现不定长 UART 接收？</strong></p>
+<blockquote>
+<p>三种方法：① 空闲中断（IDLE Line Detection）+ DMA；② 超时检测；③ 固定帧头帧尾协议。STM32 HAL 的 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 是最优雅的方式。</p>
+</blockquote>
+<hr>
+<h3 id="四、CAN（Controller-Area-Network）"><a href="#四、CAN（Controller-Area-Network）" class="headerlink" title="四、CAN（Controller Area Network）"></a>四、CAN（Controller Area Network）</h3><h4 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h4><p>CAN 是差分串行总线（CAN_H &#x2F; CAN_L），支持多主、非破坏性位仲裁，消息优先级由 ID 决定（ID 越小优先级越高）。</p>
+<p>帧结构（标准帧）：SOF → 11 bit ID → RTR → DLC → 数据（0~8 B）→ CRC → ACK → EOF</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CAN_TxHeaderTypeDef tx_header;</span><br><span class="line"><span class="type">uint8_t</span> tx_data[<span class="number">8</span>];</span><br><span class="line"><span class="type">uint32_t</span> tx_mailbox;</span><br><span class="line"></span><br><span class="line">tx_header.StdId = <span class="number">0x123</span>;       <span class="comment">// 消息 ID</span></span><br><span class="line">tx_header.IDE = CAN_ID_STD;</span><br><span class="line">tx_header.RTR = CAN_RTR_DATA;</span><br><span class="line">tx_header.DLC = <span class="number">8</span>;             <span class="comment">// 数据长度</span></span><br><span class="line"></span><br><span class="line">HAL_CAN_AddTxMessage(&amp;hcan1, &amp;tx_header, tx_data, &amp;tx_mailbox);</span><br></pre></td></tr></table></figure>
+
+<h4 id="仲裁机制"><a href="#仲裁机制" class="headerlink" title="仲裁机制"></a>仲裁机制</h4><p>CAN 总线是”线与”逻辑：显性位（0）覆盖隐性位（1）。多个节点同时发送时，发送隐性位却检测到显性位的节点退出仲裁，ID 最小的帧胜出。</p>
+<hr>
+<h3 id="五、DMA（Direct-Memory-Access）"><a href="#五、DMA（Direct-Memory-Access）" class="headerlink" title="五、DMA（Direct Memory Access）"></a>五、DMA（Direct Memory Access）</h3><h4 id="核心价值"><a href="#核心价值" class="headerlink" title="核心价值"></a>核心价值</h4><p>DMA 控制器在不占用 CPU 的情况下，在外设和内存（或内存与内存）之间传输数据，极大降低 CPU 负载。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPI + DMA 发送</span></span><br><span class="line">HAL_SPI_Transmit_DMA(&amp;hspi1, tx_buf, len);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传输完成回调</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_SPI_TxCpltCallback</span><span class="params">(SPI_HandleTypeDef *hspi)</span> &#123;</span><br><span class="line">    <span class="comment">// DMA 传输完成</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项：</strong></p>
+<ul>
+<li><strong>Cache 一致性</strong>：Cortex-M7（有 D-Cache）需在 DMA 传输前后调用 <code>SCB_CleanDCache_by_Addr</code> &#x2F; <code>SCB_InvalidateDCache_by_Addr</code>。</li>
+<li><strong>缓冲区对齐</strong>：DMA 缓冲区通常需 4 字节对齐，部分外设要求更高。</li>
+<li><strong>双缓冲模式</strong>：DMA 完成回调中切换缓冲区，实现 ping-pong 无中断连续传输。</li>
+</ul>
+<hr>
+<h3 id="六、ADC（Analog-to-Digital-Converter）"><a href="#六、ADC（Analog-to-Digital-Converter）" class="headerlink" title="六、ADC（Analog-to-Digital Converter）"></a>六、ADC（Analog-to-Digital Converter）</h3><h4 id="关键参数"><a href="#关键参数" class="headerlink" title="关键参数"></a>关键参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分辨率</td>
+<td>STM32 支持 6&#x2F;8&#x2F;10&#x2F;12 bit</td>
+</tr>
+<tr>
+<td>采样率</td>
+<td>最高可达数 MHz（取决于型号）</td>
+</tr>
+<tr>
+<td>参考电压</td>
+<td>VREF+ 决定满量程，需稳定低噪声</td>
+</tr>
+<tr>
+<td>采样时间</td>
+<td>影响精度，信源阻抗高时需增加采样时间</td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ADC 单次转换</span></span><br><span class="line">HAL_ADC_Start(&amp;hadc1);</span><br><span class="line">HAL_ADC_PollForConversion(&amp;hadc1, HAL_MAX_DELAY);</span><br><span class="line"><span class="type">uint32_t</span> raw = HAL_ADC_GetValue(&amp;hadc1);</span><br><span class="line"><span class="type">float</span> voltage = raw * <span class="number">3.3f</span> / <span class="number">4095.0f</span>;  <span class="comment">// 12-bit, VREF=3.3V</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ADC + DMA 连续采集</span></span><br><span class="line">HAL_ADC_Start_DMA(&amp;hadc1, (<span class="type">uint32_t</span>*)adc_buf, ADC_BUF_LEN);</span><br></pre></td></tr></table></figure>
+
+<p><strong>面试提问：ADC 读数不稳定怎么办？</strong></p>
+<blockquote>
+<p>① 增加采样时间；② 软件滤波（均值&#x2F;中值&#x2F;IIR）；③ VREF 去耦（100nF + 10μF 电容靠近 VREF 引脚）；④ 避免 ADC 采样与 PWM 开关时刻重叠（用定时器触发 ADC）。</p>
+</blockquote>
+<hr>
+<h3 id="七、Timer（定时器）"><a href="#七、Timer（定时器）" class="headerlink" title="七、Timer（定时器）"></a>七、Timer（定时器）</h3><h4 id="STM32-定时器分类"><a href="#STM32-定时器分类" class="headerlink" title="STM32 定时器分类"></a>STM32 定时器分类</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>代表</th>
+<th>主要功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基本定时器</td>
+<td>TIM6&#x2F;TIM7</td>
+<td>定时中断、触发 DAC</td>
+</tr>
+<tr>
+<td>通用定时器</td>
+<td>TIM2~TIM5</td>
+<td>输入捕获、输出比较、PWM、编码器</td>
+</tr>
+<tr>
+<td>高级定时器</td>
+<td>TIM1&#x2F;TIM8</td>
+<td>互补 PWM、死区控制、刹车输入</td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PWM 输出配置</span></span><br><span class="line">TIM_OC_InitTypeDef sConfig;</span><br><span class="line">sConfig.OCMode = TIM_OCMODE_PWM1;</span><br><span class="line">sConfig.Pulse = <span class="number">500</span>;          <span class="comment">// 占空比 = Pulse / Period</span></span><br><span class="line">sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;</span><br><span class="line">HAL_TIM_PWM_ConfigChannel(&amp;htim1, &amp;sConfig, TIM_CHANNEL_1);</span><br><span class="line">HAL_TIM_PWM_Start(&amp;htim1, TIM_CHANNEL_1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改占空比</span></span><br><span class="line">__HAL_TIM_SET_COMPARE(&amp;htim1, TIM_CHANNEL_1, new_duty);</span><br></pre></td></tr></table></figure>
+
+<p><strong>编码器模式：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置为编码器接口模式</span></span><br><span class="line">htim2.Init.Period = <span class="number">0xFFFFFFFF</span>;</span><br><span class="line">TIM_Encoder_InitTypeDef enc = &#123;</span><br><span class="line">    .EncoderMode = TIM_ENCODERMODE_TI12,  <span class="comment">// 四倍频</span></span><br><span class="line">    .IC1Polarity = TIM_ICPOLARITY_RISING,</span><br><span class="line">    .IC2Polarity = TIM_ICPOLARITY_RISING,</span><br><span class="line">&#125;;</span><br><span class="line">HAL_TIM_Encoder_Init(&amp;htim2, &amp;enc);</span><br><span class="line">HAL_TIM_Encoder_Start(&amp;htim2, TIM_CHANNEL_ALL);</span><br><span class="line"><span class="type">int32_t</span> count = (<span class="type">int16_t</span>)__HAL_TIM_GET_COUNTER(&amp;htim2);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-03-24-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-03-24-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>register</td>
+<td>&#x2F;ˈredʒɪstər&#x2F;</td>
+<td>寄存器；登记，注册</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>interrupt</td>
+<td>&#x2F;ˌɪntəˈrʌpt&#x2F;</td>
+<td>中断（硬件&#x2F;软件中断）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>firmware</td>
+<td>&#x2F;ˈfɜːmweər&#x2F;</td>
+<td>固件</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>bootloader</td>
+<td>&#x2F;ˈbuːtloʊdər&#x2F;</td>
+<td>引导加载程序</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>calibrate</td>
+<td>&#x2F;ˈkælɪbreɪt&#x2F;</td>
+<td>校准，标定</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>6</td>
+<td>oscillator</td>
+<td>&#x2F;ˈɒsɪleɪtər&#x2F;</td>
+<td>振荡器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>encoder</td>
+<td>&#x2F;ɪnˈkoʊdər&#x2F;</td>
+<td>编码器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>8</td>
+<td>actuator</td>
+<td>&#x2F;ˈæktʃueɪtər&#x2F;</td>
+<td>执行器，致动器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>transducer</td>
+<td>&#x2F;trænzˈdjuːsər&#x2F;</td>
+<td>换能器，传感器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td>multiplexer</td>
+<td>&#x2F;ˈmʌltɪpleksər&#x2F;</td>
+<td>多路复用器（MUX）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>arbitration</td>
+<td>&#x2F;ˌɑːrbɪˈtreɪʃən&#x2F;</td>
+<td>仲裁</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>handshake</td>
+<td>&#x2F;ˈhændʃeɪk&#x2F;</td>
+<td>握手，协议交换</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>13</td>
+<td>payload</td>
+<td>&#x2F;ˈpeɪloʊd&#x2F;</td>
+<td>有效载荷，数据负载</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>checksum</td>
+<td>&#x2F;ˈtʃeksʌm&#x2F;</td>
+<td>校验和</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td>endian</td>
+<td>&#x2F;ˈendiən&#x2F;</td>
+<td>字节序（大端&#x2F;小端）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td>bitmask</td>
+<td>&#x2F;ˈbɪtmæsk&#x2F;</td>
+<td>位掩码</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>overflow</td>
+<td>&#x2F;ˈoʊvərfloʊ&#x2F;</td>
+<td>溢出</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>underflow</td>
+<td>&#x2F;ˈʌndərfloʊ&#x2F;</td>
+<td>下溢</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>dereference</td>
+<td>&#x2F;diːˈrefrəns&#x2F;</td>
+<td>解引用</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>prototype</td>
+<td>&#x2F;ˈproʊtətaɪp&#x2F;</td>
+<td>原型；快速制作原型</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>21</td>
+<td>abstraction</td>
+<td>&#x2F;æbˈstrækʃən&#x2F;</td>
+<td>抽象，抽象层</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>22</td>
+<td>encapsulation</td>
+<td>&#x2F;ɪnˌkæpsjuˈleɪʃən&#x2F;</td>
+<td>封装（驱动&#x2F;OOP设计）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td>oscilloscope</td>
+<td>&#x2F;əˈsɪləskoʊp&#x2F;</td>
+<td>示波器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>rectifier</td>
+<td>&#x2F;ˈrektɪfaɪər&#x2F;</td>
+<td>整流器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>25</td>
+<td>crucial</td>
+<td>&#x2F;ˈkruːʃəl&#x2F;</td>
+<td>至关重要的，关键的</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>26</td>
+<td>paramount</td>
+<td>&#x2F;ˈpærəmaʊnt&#x2F;</td>
+<td>首要的，至高无上的</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>27</td>
+<td>expedite</td>
+<td>&#x2F;ˈekspɪdaɪt&#x2F;</td>
+<td>加快，促进</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>28</td>
+<td>streamline</td>
+<td>&#x2F;ˈstriːmlaɪn&#x2F;</td>
+<td>精简，简化，提高效率</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>29</td>
+<td>optimize</td>
+<td>&#x2F;ˈɒptɪmaɪz&#x2F;</td>
+<td>优化</td>
+<td>技术&#x2F;面试</td>
+</tr>
+<tr>
+<td>30</td>
+<td>diagnose</td>
+<td>&#x2F;ˈdaɪəɡnoʊz&#x2F;</td>
+<td>诊断</td>
+<td>技术&#x2F;面试</td>
+</tr>
+<tr>
+<td>31</td>
+<td>enumerate</td>
+<td>&#x2F;ɪˈnjuːməreɪt&#x2F;</td>
+<td>枚举，逐一列举</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>32</td>
+<td>modular</td>
+<td>&#x2F;ˈmɒdjʊlər&#x2F;</td>
+<td>模块化的</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>33</td>
+<td>prerequisite</td>
+<td>&#x2F;ˌpriːˈrekwɪzɪt&#x2F;</td>
+<td>先决条件，前提</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>34</td>
+<td>inevitably</td>
+<td>&#x2F;ɪnˈevɪtəbli&#x2F;</td>
+<td>不可避免地</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>35</td>
+<td>ephemeral</td>
+<td>&#x2F;ɪˈfemərəl&#x2F;</td>
+<td>短暂的，转瞬即逝的</td>
+<td>书面&#x2F;技术</td>
+</tr>
+<tr>
+<td>36</td>
+<td>substantial</td>
+<td>&#x2F;səbˈstænʃəl&#x2F;</td>
+<td>大量的，实质性的</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>37</td>
+<td>complement</td>
+<td>&#x2F;ˈkɒmplɪment&#x2F;</td>
+<td>补充，互补；补码</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>38</td>
+<td>interleave</td>
+<td>&#x2F;ˌɪntərˈliːv&#x2F;</td>
+<td>交错，交叉存取</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>39</td>
+<td>proliferate</td>
+<td>&#x2F;prəˈlɪfəreɪt&#x2F;</td>
+<td>激增，扩散</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>40</td>
+<td>discrepancy</td>
+<td>&#x2F;dɪˈskrepənsi&#x2F;</td>
+<td>差异，不一致</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>41</td>
+<td>contingency</td>
+<td>&#x2F;kənˈtɪndʒənsi&#x2F;</td>
+<td>突发情况，应急预案</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>42</td>
+<td>heuristic</td>
+<td>&#x2F;hjʊˈrɪstɪk&#x2F;</td>
+<td>启发式的；启发法</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>43</td>
+<td>correlate</td>
+<td>&#x2F;ˈkɒrəleɪt&#x2F;</td>
+<td>关联，使相关</td>
+<td>书面&#x2F;技术</td>
+</tr>
+<tr>
+<td>44</td>
+<td>retrofit</td>
+<td>&#x2F;ˈretrəfɪt&#x2F;</td>
+<td>改装，加装（已有设备上）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>45</td>
+<td>scrutinize</td>
+<td>&#x2F;ˈskruːtɪnaɪz&#x2F;</td>
+<td>仔细检查，审查</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>46</td>
+<td>eloquent</td>
+<td>&#x2F;ˈeləkwənt&#x2F;</td>
+<td>雄辩的，表达有力的</td>
+<td>书面&#x2F;面试</td>
+</tr>
+<tr>
+<td>47</td>
+<td>mimic</td>
+<td>&#x2F;ˈmɪmɪk&#x2F;</td>
+<td>模拟，模仿</td>
+<td>技术&#x2F;口语</td>
+</tr>
+<tr>
+<td>48</td>
+<td>intrinsic</td>
+<td>&#x2F;ɪnˈtrɪnzɪk&#x2F;</td>
+<td>固有的，本质的；内置函数</td>
+<td>技术&#x2F;书面</td>
+</tr>
+<tr>
+<td>49</td>
+<td>latch</td>
+<td>&#x2F;læʧ&#x2F;</td>
+<td>锁存器；锁存</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>50</td>
+<td>toggle</td>
+<td>&#x2F;ˈtɒɡəl&#x2F;</td>
+<td>切换，翻转；拨动开关</td>
+<td>技术</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>register</strong> &#x2F;ˈredʒɪstər&#x2F; — 寄存器；登记，注册 <code>技术</code></p>
+<blockquote>
+<p>The STM32 GPIO_ODR register controls the output data for each pin.</p>
+</blockquote>
+</li>
+<li><p><strong>interrupt</strong> &#x2F;ˌɪntəˈrʌpt&#x2F; — 中断（硬件&#x2F;软件中断） <code>技术</code></p>
+<blockquote>
+<p>An external interrupt fires when the sensor detects motion, waking the MCU from sleep.</p>
+</blockquote>
+</li>
+<li><p><strong>firmware</strong> &#x2F;ˈfɜːmweər&#x2F; — 固件 <code>技术</code></p>
+<blockquote>
+<p>Updating the firmware over-the-air reduces the need for physical access to deployed devices.</p>
+</blockquote>
+</li>
+<li><p><strong>bootloader</strong> &#x2F;ˈbuːtloʊdər&#x2F; — 引导加载程序 <code>技术</code></p>
+<blockquote>
+<p>The bootloader verifies the CRC of the new image before jumping to the application.</p>
+</blockquote>
+</li>
+<li><p><strong>calibrate</strong> &#x2F;ˈkælɪbreɪt&#x2F; — 校准，标定 <code>技术</code></p>
+<blockquote>
+<p>You must calibrate the accelerometer offsets before using it for angle estimation.</p>
+</blockquote>
+</li>
+<li><p><strong>oscillator</strong> &#x2F;ˈɒsɪleɪtər&#x2F; — 振荡器 <code>技术</code></p>
+<blockquote>
+<p>An external crystal oscillator provides a more accurate clock than the internal RC oscillator.</p>
+</blockquote>
+</li>
+<li><p><strong>encoder</strong> &#x2F;ɪnˈkoʊdər&#x2F; — 编码器 <code>技术</code></p>
+<blockquote>
+<p>The quadrature encoder feeds position data to the FOC algorithm at 10 kHz.</p>
+</blockquote>
+</li>
+<li><p><strong>actuator</strong> &#x2F;ˈæktʃueɪtər&#x2F; — 执行器，致动器 <code>技术</code></p>
+<blockquote>
+<p>The voice coil actuator in a hard drive positions the read&#x2F;write head with nanometer precision.</p>
+</blockquote>
+</li>
+<li><p><strong>transducer</strong> &#x2F;trænzˈdjuːsər&#x2F; — 换能器，传感器 <code>技术</code></p>
+<blockquote>
+<p>A piezoelectric transducer converts mechanical vibration into an electrical signal.</p>
+</blockquote>
+</li>
+<li><p><strong>multiplexer</strong> &#x2F;ˈmʌltɪpleksər&#x2F; — 多路复用器（MUX） <code>技术</code></p>
+<blockquote>
+<p>The ADC multiplexer selects one of eight analog channels every millisecond.</p>
+</blockquote>
+</li>
+<li><p><strong>arbitration</strong> &#x2F;ˌɑːrbɪˈtreɪʃən&#x2F; — 仲裁 <code>技术</code></p>
+<blockquote>
+<p>CAN bus uses non-destructive bitwise arbitration so the highest-priority message always wins.</p>
+</blockquote>
+</li>
+<li><p><strong>handshake</strong> &#x2F;ˈhændʃeɪk&#x2F; — 握手，协议交换 <code>技术/书面</code></p>
+<blockquote>
+<p>The TLS handshake authenticates both parties and negotiates a session key before any data is transmitted.</p>
+</blockquote>
+</li>
+<li><p><strong>payload</strong> &#x2F;ˈpeɪloʊd&#x2F; — 有效载荷，数据负载 <code>技术</code></p>
+<blockquote>
+<p>Each CAN frame carries up to 8 bytes of payload at the classic protocol speed.</p>
+</blockquote>
+</li>
+<li><p><strong>checksum</strong> &#x2F;ˈtʃeksʌm&#x2F; — 校验和 <code>技术</code></p>
+<blockquote>
+<p>A mismatched checksum at the receiver indicates data corruption during transmission.</p>
+</blockquote>
+</li>
+<li><p><strong>endian</strong> &#x2F;ˈendiən&#x2F; — 字节序（大端&#x2F;小端） <code>技术</code></p>
+<blockquote>
+<p>ARM Cortex-M is little-endian by default, so byte order matters when parsing multi-byte sensor data.</p>
+</blockquote>
+</li>
+<li><p><strong>bitmask</strong> &#x2F;ˈbɪtmæsk&#x2F; — 位掩码 <code>技术</code></p>
+<blockquote>
+<p>Use a bitmask to set or clear individual bits in a control register without affecting others.</p>
+</blockquote>
+</li>
+<li><p><strong>overflow</strong> &#x2F;ˈoʊvərfloʊ&#x2F; — 溢出 <code>技术</code></p>
+<blockquote>
+<p>If a timer counter overflows before the interrupt fires, the measured time will be incorrect.</p>
+</blockquote>
+</li>
+<li><p><strong>underflow</strong> &#x2F;ˈʌndərfloʊ&#x2F; — 下溢 <code>技术</code></p>
+<blockquote>
+<p>Accessing an empty ring buffer causes an underflow condition that must be handled gracefully.</p>
+</blockquote>
+</li>
+<li><p><strong>dereference</strong> &#x2F;diːˈrefrəns&#x2F; — 解引用 <code>技术</code></p>
+<blockquote>
+<p>Dereferencing a null pointer causes an immediate HardFault on Cortex-M processors.</p>
+</blockquote>
+</li>
+<li><p><strong>prototype</strong> &#x2F;ˈproʊtətaɪp&#x2F; — 原型；快速制作原型 <code>技术/书面</code></p>
+<blockquote>
+<p>We built a prototype on a development board to validate the sensor fusion algorithm.</p>
+</blockquote>
+</li>
+<li><p><strong>abstraction</strong> &#x2F;æbˈstrækʃən&#x2F; — 抽象，抽象层 <code>技术/书面</code></p>
+<blockquote>
+<p>The HAL layer provides an abstraction over hardware-specific register access.</p>
+</blockquote>
+</li>
+<li><p><strong>encapsulation</strong> &#x2F;ɪnˌkæpsjuˈleɪʃən&#x2F; — 封装（驱动&#x2F;OOP设计） <code>技术</code></p>
+<blockquote>
+<p>Good encapsulation hides the low-level SPI details behind a clean sensor driver API.</p>
+</blockquote>
+</li>
+<li><p><strong>oscilloscope</strong> &#x2F;əˈsɪləskoʊp&#x2F; — 示波器 <code>技术</code></p>
+<blockquote>
+<p>Capture the I2C waveform on an oscilloscope to verify the pull-up resistor value is correct.</p>
+</blockquote>
+</li>
+<li><p><strong>rectifier</strong> &#x2F;ˈrektɪfaɪər&#x2F; — 整流器 <code>技术</code></p>
+<blockquote>
+<p>A full-bridge rectifier converts AC from the transformer into pulsating DC for the motor driver.</p>
+</blockquote>
+</li>
+<li><p><strong>crucial</strong> &#x2F;ˈkruːʃəl&#x2F; — 至关重要的，关键的 <code>书面/面试</code></p>
+<blockquote>
+<p>Accurate timing is crucial in motor control—a jitter of even 10 μs can destabilize the current loop.</p>
+</blockquote>
+</li>
+<li><p><strong>paramount</strong> &#x2F;ˈpærəmaʊnt&#x2F; — 首要的，至高无上的 <code>书面/面试</code></p>
+<blockquote>
+<p>Safety is paramount in medical device firmware; every fault must be handled gracefully.</p>
+</blockquote>
+</li>
+<li><p><strong>expedite</strong> &#x2F;ˈekspɪdaɪt&#x2F; — 加快，促进 <code>书面/面试</code></p>
+<blockquote>
+<p>Using DMA helps expedite data transfers and frees the CPU for higher-priority tasks.</p>
+</blockquote>
+</li>
+<li><p><strong>streamline</strong> &#x2F;ˈstriːmlaɪn&#x2F; — 精简，简化，提高效率 <code>书面/面试</code></p>
+<blockquote>
+<p>Refactoring the driver layer streamlined the codebase and cut boot time by 30%.</p>
+</blockquote>
+</li>
+<li><p><strong>optimize</strong> &#x2F;ˈɒptɪmaɪz&#x2F; — 优化 <code>技术/面试</code></p>
+<blockquote>
+<p>Profiling the main loop revealed a bottleneck; we optimized the filter math using CMSIS-DSP intrinsics.</p>
+</blockquote>
+</li>
+<li><p><strong>diagnose</strong> &#x2F;ˈdaɪəɡnoʊz&#x2F; — 诊断 <code>技术/面试</code></p>
+<blockquote>
+<p>The fault log helped the engineer diagnose the root cause of the recurring HardFault.</p>
+</blockquote>
+</li>
+<li><p><strong>enumerate</strong> &#x2F;ɪˈnjuːməreɪt&#x2F; — 枚举，逐一列举 <code>技术/书面</code></p>
+<blockquote>
+<p>The USB stack enumerates each connected device and assigns a unique address.</p>
+</blockquote>
+</li>
+<li><p><strong>modular</strong> &#x2F;ˈmɒdjʊlər&#x2F; — 模块化的 <code>技术/书面</code></p>
+<blockquote>
+<p>A modular firmware architecture makes it easier to port drivers between different MCU families.</p>
+</blockquote>
+</li>
+<li><p><strong>prerequisite</strong> &#x2F;ˌpriːˈrekwɪzɪt&#x2F; — 先决条件，前提 <code>书面/面试</code></p>
+<blockquote>
+<p>Understanding interrupt latency is a prerequisite for designing real-time control systems.</p>
+</blockquote>
+</li>
+<li><p><strong>inevitably</strong> &#x2F;ɪnˈevɪtəbli&#x2F; — 不可避免地 <code>书面</code></p>
+<blockquote>
+<p>Without proper memory management, embedded systems will inevitably suffer from heap fragmentation.</p>
+</blockquote>
+</li>
+<li><p><strong>ephemeral</strong> &#x2F;ɪˈfemərəl&#x2F; — 短暂的，转瞬即逝的 <code>书面/技术</code></p>
+<blockquote>
+<p>Stack variables are ephemeral—they disappear once the function returns.</p>
+</blockquote>
+</li>
+<li><p><strong>substantial</strong> &#x2F;səbˈstænʃəl&#x2F; — 大量的，实质性的 <code>书面/面试</code></p>
+<blockquote>
+<p>Moving computation to a DSP core yielded a substantial reduction in main CPU load.</p>
+</blockquote>
+</li>
+<li><p><strong>complement</strong> &#x2F;ˈkɒmplɪment&#x2F; — 补充，互补；补码 <code>技术/书面</code></p>
+<blockquote>
+<p>Two’s complement representation allows CPUs to handle both positive and negative integers uniformly.</p>
+</blockquote>
+</li>
+<li><p><strong>interleave</strong> &#x2F;ˌɪntərˈliːv&#x2F; — 交错，交叉存取 <code>技术</code></p>
+<blockquote>
+<p>The scheduler can interleave short high-priority tasks with longer background processes.</p>
+</blockquote>
+</li>
+<li><p><strong>proliferate</strong> &#x2F;prəˈlɪfəreɪt&#x2F; — 激增，扩散 <code>书面</code></p>
+<blockquote>
+<p>IoT devices have proliferated rapidly, making secure OTA firmware updates more critical than ever.</p>
+</blockquote>
+</li>
+<li><p><strong>discrepancy</strong> &#x2F;dɪˈskrepənsi&#x2F; — 差异，不一致 <code>书面/面试</code></p>
+<blockquote>
+<p>A discrepancy between the expected and measured ADC values suggests a reference voltage issue.</p>
+</blockquote>
+</li>
+<li><p><strong>contingency</strong> &#x2F;kənˈtɪndʒənsi&#x2F; — 突发情况，应急预案 <code>书面/面试</code></p>
+<blockquote>
+<p>Every fault handler should include a contingency path that restores the system to a safe state.</p>
+</blockquote>
+</li>
+<li><p><strong>heuristic</strong> &#x2F;hjʊˈrɪstɪk&#x2F; — 启发式的；启发法 <code>技术/书面</code></p>
+<blockquote>
+<p>The scheduler uses a heuristic to estimate task execution time and avoid deadline misses.</p>
+</blockquote>
+</li>
+<li><p><strong>correlate</strong> &#x2F;ˈkɒrəleɪt&#x2F; — 关联，使相关 <code>书面/技术</code></p>
+<blockquote>
+<p>Timestamps from the logic analyzer help correlate software events with hardware signal transitions.</p>
+</blockquote>
+</li>
+<li><p><strong>retrofit</strong> &#x2F;ˈretrəfɪt&#x2F; — 改装，加装（已有设备上） <code>技术</code></p>
+<blockquote>
+<p>The team decided to retrofit the legacy motor driver with a CAN interface module.</p>
+</blockquote>
+</li>
+<li><p><strong>scrutinize</strong> &#x2F;ˈskruːtɪnaɪz&#x2F; — 仔细检查，审查 <code>书面/面试</code></p>
+<blockquote>
+<p>Always scrutinize third-party libraries for license compatibility before integrating them into commercial firmware.</p>
+</blockquote>
+</li>
+<li><p><strong>eloquent</strong> &#x2F;ˈeləkwənt&#x2F; — 雄辩的，表达有力的 <code>书面/面试</code></p>
+<blockquote>
+<p>His eloquent explanation of the memory map convinced the team to redesign the linker script.</p>
+</blockquote>
+</li>
+<li><p><strong>mimic</strong> &#x2F;ˈmɪmɪk&#x2F; — 模拟，模仿 <code>技术/口语</code></p>
+<blockquote>
+<p>A software simulator can mimic peripheral behavior to speed up early-stage firmware testing.</p>
+</blockquote>
+</li>
+<li><p><strong>intrinsic</strong> &#x2F;ɪnˈtrɪnzɪk&#x2F; — 固有的，本质的；内置函数 <code>技术/书面</code></p>
+<blockquote>
+<p>CMSIS intrinsics map directly to Cortex-M instructions, offering intrinsic performance without inline assembly.</p>
+</blockquote>
+</li>
+<li><p><strong>latch</strong> &#x2F;læʧ&#x2F; — 锁存器；锁存 <code>技术</code></p>
+<blockquote>
+<p>The D-latch captures and holds the input signal on the rising edge of the clock.</p>
+</blockquote>
+</li>
+<li><p><strong>toggle</strong> &#x2F;ˈtɒɡəl&#x2F; — 切换，翻转；拨动开关 <code>技术</code></p>
+<blockquote>
+<p>Toggle a GPIO pin at the start and end of the ISR to measure interrupt latency with an oscilloscope.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“back-to-square-one”"><a href="#1-“back-to-square-one”" class="headerlink" title="1. “back to square one”"></a>1. “back to square one”</h3><p><strong>意思：</strong> 功亏一篑，从头来过<br><strong>场景：</strong> 项目失败、方案推倒重来</p>
+<blockquote>
+<p><strong>A:</strong> The CAN bus keeps dropping messages — we’ve tried everything in the filter config.<br><strong>B:</strong> If the timing analysis doesn’t pan out, we’re back to square one with the entire network topology.</p>
+</blockquote>
+<p><strong>引用：</strong> <em>The Guardian</em> (2019): “After the failed merger, both companies found themselves back to square one, with investors demanding an entirely new strategy.” 该短语源于 1920 年代 BBC 广播足球解说，将球场分为编号方格，回到 1 号格意即比赛重来。</p>
+<hr>
+<h3 id="2-“under-the-hood”"><a href="#2-“under-the-hood”" class="headerlink" title="2. “under the hood”"></a>2. “under the hood”</h3><p><strong>意思：</strong> 深入内部，探究底层机制<br><strong>场景：</strong> 讨论系统、软件或机器的内部实现原理</p>
+<blockquote>
+<p><strong>A:</strong> The HAL makes SPI look easy, but do you know what’s happening under the hood?<br><strong>B:</strong> Sure — it’s configuring the SCLK prescaler, setting CPOL&#x2F;CPHA, and enabling the SPI clock in RCC.</p>
+</blockquote>
+<p><strong>引用：</strong> <em>NYT</em> (2023): “To truly understand AI safety, researchers must look under the hood of large language models and examine how individual neurons behave.” 该短语也常见于 Steve Jobs 对”理解事物真正运作方式”的哲学表述。</p>
+<hr>
+<h3 id="3-“ahead-of-the-curve”"><a href="#3-“ahead-of-the-curve”" class="headerlink" title="3. “ahead of the curve”"></a>3. “ahead of the curve”</h3><p><strong>意思：</strong> 走在前沿，超前于他人<br><strong>场景：</strong> 描述某人或某公司在技术、策略上领先于同行</p>
+<blockquote>
+<p><strong>A:</strong> Our team adopted CAN FD two years ago when most competitors were still on classic CAN.<br><strong>B:</strong> That’s exactly what kept us ahead of the curve — faster data rates meant we could add diagnostics without redesigning the bus.</p>
+</blockquote>
+<p><strong>引用：</strong> <em>The Economist</em> (Jan 2024): “Taiwan’s semiconductor industry has stayed consistently ahead of the curve by investing in EUV lithography years before its competitors dared to commit.”</p>
+<hr>
+<h3 id="4-“a-double-edged-sword”"><a href="#4-“a-double-edged-sword”" class="headerlink" title="4. “a double-edged sword”"></a>4. “a double-edged sword”</h3><p><strong>意思：</strong> 双刃剑，有利有弊<br><strong>场景：</strong> 描述某事物既有正面优势又有负面风险</p>
+<blockquote>
+<p><strong>A:</strong> Using DMA is a double-edged sword — it offloads the CPU, but cache coherency bugs are notoriously hard to track down.<br><strong>B:</strong> Agreed. You save microseconds on transfer but can spend days debugging a silent data corruption.</p>
+</blockquote>
+<p><strong>引用：</strong> <em>BBC Technology</em> (2023): “AI-assisted code generation is a double-edged sword — it dramatically speeds up development but can silently introduce subtle security vulnerabilities.” 该比喻可追溯至《圣经·希伯来书》4:12。</p>
+<hr>
+<h3 id="5-“read-between-the-lines”"><a href="#5-“read-between-the-lines”" class="headerlink" title="5. “read between the lines”"></a>5. “read between the lines”</h3><p><strong>意思：</strong> 读懂言外之意，理解潜台词<br><strong>场景：</strong> 理解文字、对话或文件中没有明说的隐含含义</p>
+<blockquote>
+<p><strong>A:</strong> The datasheet says “typical” rise time is 10 ns, but no max is specified.<br><strong>B:</strong> You have to read between the lines — “typical” without a max usually means it can vary wildly across process corners.</p>
+</blockquote>
+<p><strong>引用：</strong> <em>The New York Times</em> (2024): “When parsing the Fed’s policy statements, seasoned investors must read between the lines to anticipate the next rate move before it is announced.” 该短语最早见于 Frederick Marryat 的小说 <em>Peter Simple</em>（1834 年）。</p>
+<hr>
+<h2 id="🔁-艾宾浩斯复习-—-2026-03-22-词汇（Day-2）"><a href="#🔁-艾宾浩斯复习-—-2026-03-22-词汇（Day-2）" class="headerlink" title="🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）"></a>🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）</h2><blockquote>
+<p>两天前学习的 50 个单词，今日是第二次复习节点。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>peripheral</td>
+<td>&#x2F;pəˈrɪfərəl&#x2F;</td>
+<td>外设，外围设备</td>
+</tr>
+<tr>
+<td>2</td>
+<td>impedance</td>
+<td>&#x2F;ɪmˈpiːdəns&#x2F;</td>
+<td>阻抗</td>
+</tr>
+<tr>
+<td>3</td>
+<td>latency</td>
+<td>&#x2F;ˈleɪtənsi&#x2F;</td>
+<td>延迟，潜伏期</td>
+</tr>
+<tr>
+<td>4</td>
+<td>mitigate</td>
+<td>&#x2F;ˈmɪtɪɡeɪt&#x2F;</td>
+<td>减轻，缓解</td>
+</tr>
+<tr>
+<td>5</td>
+<td>elaborate</td>
+<td>&#x2F;ɪˈlæbəreɪt&#x2F;</td>
+<td>详细说明</td>
+</tr>
+<tr>
+<td>6</td>
+<td>bottleneck</td>
+<td>&#x2F;ˈbɒtlˌnɛk&#x2F;</td>
+<td>瓶颈</td>
+</tr>
+<tr>
+<td>7</td>
+<td>robust</td>
+<td>&#x2F;roʊˈbʌst&#x2F;</td>
+<td>健壮的，稳健的</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deprecate</td>
+<td>&#x2F;ˈdɛprɪkeɪt&#x2F;</td>
+<td>弃用，不推荐</td>
+</tr>
+<tr>
+<td>9</td>
+<td>concurrency</td>
+<td>&#x2F;kənˈkʌrənsi&#x2F;</td>
+<td>并发</td>
+</tr>
+<tr>
+<td>10</td>
+<td>deterministic</td>
+<td>&#x2F;dɪˌtɜːrmɪˈnɪstɪk&#x2F;</td>
+<td>确定性的</td>
+</tr>
+<tr>
+<td>11</td>
+<td>empirical</td>
+<td>&#x2F;ɪmˈpɪrɪkəl&#x2F;</td>
+<td>经验的，实证的</td>
+</tr>
+<tr>
+<td>12</td>
+<td>agnostic</td>
+<td>&#x2F;æɡˈnɒstɪk&#x2F;</td>
+<td>与…无关的</td>
+</tr>
+<tr>
+<td>13</td>
+<td>delegate</td>
+<td>&#x2F;ˈdɛlɪɡeɪt&#x2F;</td>
+<td>委派，委托</td>
+</tr>
+<tr>
+<td>14</td>
+<td>idempotent</td>
+<td>&#x2F;ˌaɪdɛmˈpoʊtənt&#x2F;</td>
+<td>幂等的</td>
+</tr>
+<tr>
+<td>15</td>
+<td>propagate</td>
+<td>&#x2F;ˈprɒpəɡeɪt&#x2F;</td>
+<td>传播，传递</td>
+</tr>
+<tr>
+<td>16</td>
+<td>jitter</td>
+<td>&#x2F;ˈdʒɪtər&#x2F;</td>
+<td>抖动</td>
+</tr>
+<tr>
+<td>17</td>
+<td>spurious</td>
+<td>&#x2F;ˈspjʊəriəs&#x2F;</td>
+<td>伪造的，虚假的</td>
+</tr>
+<tr>
+<td>18</td>
+<td>leverage</td>
+<td>&#x2F;ˈlɛvərɪdʒ&#x2F;</td>
+<td>利用，借助</td>
+</tr>
+<tr>
+<td>19</td>
+<td>granularity</td>
+<td>&#x2F;ˌɡrænjʊˈlærɪti&#x2F;</td>
+<td>粒度</td>
+</tr>
+<tr>
+<td>20</td>
+<td>feasible</td>
+<td>&#x2F;ˈfiːzəbl&#x2F;</td>
+<td>可行的</td>
+</tr>
+<tr>
+<td>21</td>
+<td>overhead</td>
+<td>&#x2F;ˈoʊvərˌhɛd&#x2F;</td>
+<td>开销</td>
+</tr>
+<tr>
+<td>22</td>
+<td>volatile</td>
+<td>&#x2F;ˈvɒlətaɪl&#x2F;</td>
+<td>易变的，不稳定的</td>
+</tr>
+<tr>
+<td>23</td>
+<td>throughput</td>
+<td>&#x2F;ˈθruːˌpʊt&#x2F;</td>
+<td>吞吐量</td>
+</tr>
+<tr>
+<td>24</td>
+<td>scalable</td>
+<td>&#x2F;ˈskeɪləbl&#x2F;</td>
+<td>可扩展的</td>
+</tr>
+<tr>
+<td>25</td>
+<td>decouple</td>
+<td>&#x2F;diːˈkʌpl&#x2F;</td>
+<td>解耦</td>
+</tr>
+<tr>
+<td>26</td>
+<td>truncate</td>
+<td>&#x2F;ˈtrʌŋkeɪt&#x2F;</td>
+<td>截断</td>
+</tr>
+<tr>
+<td>27</td>
+<td>articulate</td>
+<td>&#x2F;ɑːrˈtɪkjʊleɪt&#x2F;</td>
+<td>清晰表达</td>
+</tr>
+<tr>
+<td>28</td>
+<td>pragma</td>
+<td>&#x2F;ˈpræɡmə&#x2F;</td>
+<td>编译指示</td>
+</tr>
+<tr>
+<td>29</td>
+<td>sentinel</td>
+<td>&#x2F;ˈsɛntɪnəl&#x2F;</td>
+<td>哨兵，标记值</td>
+</tr>
+<tr>
+<td>30</td>
+<td>deprecated</td>
+<td>&#x2F;ˈdɛprɪkeɪtɪd&#x2F;</td>
+<td>已弃用的</td>
+</tr>
+<tr>
+<td>31</td>
+<td>nuance</td>
+<td>&#x2F;ˈnjuːɑːns&#x2F;</td>
+<td>细微差别</td>
+</tr>
+<tr>
+<td>32</td>
+<td>comply</td>
+<td>&#x2F;kəmˈplaɪ&#x2F;</td>
+<td>遵守，符合</td>
+</tr>
+<tr>
+<td>33</td>
+<td>encompass</td>
+<td>&#x2F;ɪnˈkʌmpəs&#x2F;</td>
+<td>包含，涵盖</td>
+</tr>
+<tr>
+<td>34</td>
+<td>assertion</td>
+<td>&#x2F;əˈsɜːrʃən&#x2F;</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>35</td>
+<td>erratic</td>
+<td>&#x2F;ɪˈrætɪk&#x2F;</td>
+<td>不稳定的</td>
+</tr>
+<tr>
+<td>36</td>
+<td>verbose</td>
+<td>&#x2F;vɜːrˈboʊs&#x2F;</td>
+<td>冗长的，详细的</td>
+</tr>
+<tr>
+<td>37</td>
+<td>reminisce</td>
+<td>&#x2F;ˌrɛmɪˈnɪs&#x2F;</td>
+<td>回忆，追忆</td>
+</tr>
+<tr>
+<td>38</td>
+<td>pragmatic</td>
+<td>&#x2F;præɡˈmætɪk&#x2F;</td>
+<td>务实的</td>
+</tr>
+<tr>
+<td>39</td>
+<td>intricate</td>
+<td>&#x2F;ˈɪntrɪkət&#x2F;</td>
+<td>复杂精细的</td>
+</tr>
+<tr>
+<td>40</td>
+<td>coherent</td>
+<td>&#x2F;koʊˈhɪərənt&#x2F;</td>
+<td>连贯的，一致的</td>
+</tr>
+<tr>
+<td>41</td>
+<td>mandate</td>
+<td>&#x2F;ˈmændeɪt&#x2F;</td>
+<td>强制要求</td>
+</tr>
+<tr>
+<td>42</td>
+<td>excerpt</td>
+<td>&#x2F;ˈɛksɜːrpt&#x2F;</td>
+<td>摘录，节选</td>
+</tr>
+<tr>
+<td>43</td>
+<td>alleviate</td>
+<td>&#x2F;əˈliːvieɪt&#x2F;</td>
+<td>减轻，缓和</td>
+</tr>
+<tr>
+<td>44</td>
+<td>ambiguous</td>
+<td>&#x2F;æmˈbɪɡjuəs&#x2F;</td>
+<td>模棱两可的</td>
+</tr>
+<tr>
+<td>45</td>
+<td>derive</td>
+<td>&#x2F;dɪˈraɪv&#x2F;</td>
+<td>推导，派生</td>
+</tr>
+<tr>
+<td>46</td>
+<td>substantiate</td>
+<td>&#x2F;səbˈstænʃieɪt&#x2F;</td>
+<td>证实，证明</td>
+</tr>
+<tr>
+<td>47</td>
+<td>inadvertently</td>
+<td>&#x2F;ˌɪnədˈvɜːrtəntli&#x2F;</td>
+<td>无意中</td>
+</tr>
+<tr>
+<td>48</td>
+<td>prevalent</td>
+<td>&#x2F;ˈprɛvələnt&#x2F;</td>
+<td>普遍的，流行的</td>
+</tr>
+<tr>
+<td>49</td>
+<td>benchmark</td>
+<td>&#x2F;ˈbɛntʃˌmɑːrk&#x2F;</td>
+<td>基准测试</td>
+</tr>
+<tr>
+<td>50</td>
+<td>succinct</td>
+<td>&#x2F;səkˈsɪŋkt&#x2F;</td>
+<td>简洁的，精炼的</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/CAN/" rel="tag"># CAN</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/SPI/" rel="tag"># SPI</a>
+              <a href="/tags/I2C/" rel="tag"># I2C</a>
+              <a href="/tags/DMA/" rel="tag"># DMA</a>
+              <a href="/tags/UART/" rel="tag"># UART</a>
+              <a href="/tags/%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8/" rel="tag"># 外设驱动</a>
+              <a href="/tags/ADC/" rel="tag"># ADC</a>
+              <a href="/tags/Timer/" rel="tag"># Timer</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/23/daily-study-2026-03-23/" rel="prev" title="每日学习 — 2026-03-23">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-03-23
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">277k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:48</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
