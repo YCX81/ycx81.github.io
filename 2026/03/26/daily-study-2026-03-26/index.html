@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：通信协议（BLE · CAN · Modbus · USB） · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-03-26">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/26/daily-study-2026-03-26/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：通信协议（BLE · CAN · Modbus · USB） · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-26T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-26T01:07:55.821Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="CAN">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="BLE">
+<meta property="article:tag" content="Modbus">
+<meta property="article:tag" content="USB">
+<meta property="article:tag" content="通信协议">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/26/daily-study-2026-03-26/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/26/daily-study-2026-03-26/","path":"2026/03/26/daily-study-2026-03-26/","title":"每日学习 — 2026-03-26"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-03-26 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E5%85%A8%E6%99%AF%EF%BC%88BLE-x2F-CAN-x2F-Modbus-x2F-USB%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：通信协议全景（BLE &#x2F; CAN &#x2F; Modbus &#x2F; USB）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81CAN-%E6%80%BB%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">一、CAN 总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Modbus-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.</span> <span class="nav-text">二、Modbus 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81BLE%EF%BC%88%E8%93%9D%E7%89%99%E4%BD%8E%E5%8A%9F%E8%80%97%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">三、BLE（蓝牙低功耗）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81USB"><span class="nav-number">1.4.</span> <span class="nav-text">四、USB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cthe-last-mile%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “the last mile”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Clow-hanging-fruit%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “low-hanging fruit”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Chit-the-ground-running%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “hit the ground running”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Ca-moving-target%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “a moving target”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cshoot-yourself-in-the-foot%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “shoot yourself in the foot”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-03-22-%E8%AF%8D%E6%B1%87%EF%BC%88volatile-%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+4 复习：2026-03-22 词汇（volatile 主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-03-24-%E8%AF%8D%E6%B1%87%EF%BC%88%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-03-24 词汇（外设驱动主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-03-25-%E8%AF%8D%E6%B1%87%EF%BC%88FOC-%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+1 复习：2026-03-25 词汇（FOC 电机控制主题）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/26/daily-study-2026-03-26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-03-26 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-03-26
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-26 09:00:00" itemprop="dateCreated datePublished" datetime="2026-03-26T09:00:00+08:00">2026-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>19 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>通信协议（BLE · CAN · Modbus · USB）</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：通信协议全景（BLE-x2F-CAN-x2F-Modbus-x2F-USB）"><a href="#🔧-嵌入式知识：通信协议全景（BLE-x2F-CAN-x2F-Modbus-x2F-USB）" class="headerlink" title="🔧 嵌入式知识：通信协议全景（BLE &#x2F; CAN &#x2F; Modbus &#x2F; USB）"></a>🔧 嵌入式知识：通信协议全景（BLE &#x2F; CAN &#x2F; Modbus &#x2F; USB）</h2><h3 id="一、CAN-总线"><a href="#一、CAN-总线" class="headerlink" title="一、CAN 总线"></a>一、CAN 总线</h3><p>CAN（Controller Area Network）是一种差分串行总线协议，专为工业&#x2F;车载抗噪环境设计。</p>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li>多主仲裁（非破坏性位仲裁）：ID 越小优先级越高</li>
+<li>差分信号（CAN_H &#x2F; CAN_L），抗共模噪声</li>
+<li>最大速率：标准 CAN 1 Mbit&#x2F;s；CAN FD 最高 8 Mbit&#x2F;s</li>
+<li>硬件错误检测：CRC、位填充、ACK 错误</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// STM32 HAL — 发送一帧 CAN 数据</span></span><br><span class="line">CAN_TxHeaderTypeDef txHeader = &#123;</span><br><span class="line">    .StdId    = <span class="number">0x123</span>,       <span class="comment">// 11-bit ID（ID 越小优先级越高）</span></span><br><span class="line">    .RTR      = CAN_RTR_DATA,</span><br><span class="line">    .IDE      = CAN_ID_STD,</span><br><span class="line">    .DLC      = <span class="number">8</span>,           <span class="comment">// 数据长度（0-8 字节）</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">uint8_t</span> txData[<span class="number">8</span>] = &#123;<span class="number">0x01</span>, <span class="number">0x02</span>, <span class="number">0x03</span>, <span class="number">0x04</span>, <span class="number">0x05</span>, <span class="number">0x06</span>, <span class="number">0x07</span>, <span class="number">0x08</span>&#125;;</span><br><span class="line"><span class="type">uint32_t</span> mailbox;</span><br><span class="line">HAL_CAN_AddTxMessage(&amp;hcan1, &amp;txHeader, txData, &amp;mailbox);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收过滤器配置（只接受 ID 0x100~0x1FF）</span></span><br><span class="line">CAN_FilterTypeDef filter = &#123;</span><br><span class="line">    .FilterIdHigh         = <span class="number">0x0100</span> &lt;&lt; <span class="number">5</span>,</span><br><span class="line">    .FilterIdLow          = <span class="number">0x0000</span>,</span><br><span class="line">    .FilterMaskIdHigh     = <span class="number">0x0700</span> &lt;&lt; <span class="number">5</span>,  <span class="comment">// 高 3 位必须匹配</span></span><br><span class="line">    .FilterMaskIdLow      = <span class="number">0x0000</span>,</span><br><span class="line">    .FilterFIFOAssignment = CAN_RX_FIFO0,</span><br><span class="line">    .FilterMode           = CAN_FILTERMODE_IDMASK,</span><br><span class="line">    .FilterScale          = CAN_FILTERSCALE_32BIT,</span><br><span class="line">    .FilterActivation     = ENABLE,</span><br><span class="line">&#125;;</span><br><span class="line">HAL_CAN_ConfigFilter(&amp;hcan1, &amp;filter);</span><br></pre></td></tr></table></figure>
+
+<p><strong>错误计数机制：</strong></p>
+<ul>
+<li>TEC（发送错误计数）&#x2F; REC（接收错误计数）</li>
+<li>TEC &gt; 127 → Error Passive；TEC &gt; 255 → Bus Off（自动离线）</li>
+</ul>
+<hr>
+<h3 id="二、Modbus-协议"><a href="#二、Modbus-协议" class="headerlink" title="二、Modbus 协议"></a>二、Modbus 协议</h3><p>Modbus 是工业领域最常用的主从式串行协议（1979 年诞生），分为 RTU &#x2F; ASCII &#x2F; TCP 三种变体。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>物理层</th>
+<th>帧格式</th>
+<th>校验</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RTU</td>
+<td>RS-485</td>
+<td>二进制紧凑</td>
+<td>CRC-16</td>
+</tr>
+<tr>
+<td>ASCII</td>
+<td>RS-232&#x2F;485</td>
+<td>十六进制文本</td>
+<td>LRC</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Ethernet</td>
+<td>MBAP 头 + PDU</td>
+<td>TCP 自带</td>
+</tr>
+</tbody></table>
+<p><strong>常用功能码：</strong></p>
+<table>
+<thead>
+<tr>
+<th>FC</th>
+<th>功能</th>
+<th>寄存器类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x01</td>
+<td>读线圈</td>
+<td>线圈（DO）</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>读保持寄存器</td>
+<td>保持寄存器（AO）</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>读输入寄存器</td>
+<td>输入寄存器（AI）</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>写单个保持寄存器</td>
+<td>保持寄存器</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>写多个保持寄存器</td>
+<td>保持寄存器</td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Modbus RTU 请求帧构建（读取从机地址 0x01 的保持寄存器 40001 起 10 个）</span></span><br><span class="line"><span class="type">uint8_t</span> modbus_req[] = &#123;</span><br><span class="line">    <span class="number">0x01</span>,        <span class="comment">// 从机地址</span></span><br><span class="line">    <span class="number">0x03</span>,        <span class="comment">// 功能码：读保持寄存器</span></span><br><span class="line">    <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// 起始地址（40001 → 0x0000）</span></span><br><span class="line">    <span class="number">0x00</span>, <span class="number">0x0A</span>,  <span class="comment">// 数量：10 个寄存器</span></span><br><span class="line">    <span class="number">0xC5</span>, <span class="number">0xCD</span>   <span class="comment">// CRC-16（低字节在前）</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CRC-16 计算（Modbus 多项式 0xA001）</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">modbus_crc16</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *data, <span class="type">uint16_t</span> len)</span> &#123;</span><br><span class="line">    <span class="type">uint16_t</span> crc = <span class="number">0xFFFF</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint16_t</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        crc ^= data[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt; <span class="number">8</span>; b++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (crc &amp; <span class="number">0x0001</span>) crc = (crc &gt;&gt; <span class="number">1</span>) ^ <span class="number">0xA001</span>;</span><br><span class="line">            <span class="keyword">else</span>              crc &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> crc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="三、BLE（蓝牙低功耗）"><a href="#三、BLE（蓝牙低功耗）" class="headerlink" title="三、BLE（蓝牙低功耗）"></a>三、BLE（蓝牙低功耗）</h3><p>BLE 基于 GATT（Generic Attribute Profile）架构，分为 Central（主机）和 Peripheral（从机）两个角色。</p>
+<p><strong>协议栈层次：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">应用层 (Application)</span><br><span class="line">   └─ GATT (Generic Attribute Profile)</span><br><span class="line">       └─ ATT (Attribute Protocol)</span><br><span class="line">           └─ SMP (Security Manager) + L2CAP</span><br><span class="line">               └─ HCI (Host-Controller Interface)</span><br><span class="line">                   └─ LL (Link Layer)  ←  自适应跳频，37条数据信道</span><br><span class="line">                       └─ PHY (1M / 2M / Coded)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Nordic nRF5 SDK — 创建自定义 BLE 服务 + 特征值（带 Notify）</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ble_srv_common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义特征值 UUID</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CUSTOM_SERVICE_UUID  0x1523</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CUSTOM_CHAR_UUID     0x1524</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">ble_gatts_char_handles_t</span> m_char_handles;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ble_custom_service_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">uint32_t</span>              err_code;</span><br><span class="line">    <span class="type">ble_uuid_t</span>            service_uuid = &#123;CUSTOM_SERVICE_UUID, BLE_UUID_TYPE_BLE&#125;;</span><br><span class="line">    <span class="type">uint16_t</span>              service_handle;</span><br><span class="line">    <span class="type">ble_gatts_char_md_t</span>   char_md     = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">ble_gatts_attr_md_t</span>   attr_md     = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">ble_gatts_attr_t</span>      attr_char   = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1. 添加服务</span></span><br><span class="line">    sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY,</span><br><span class="line">                             &amp;service_uuid, &amp;service_handle);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 配置特征值：支持 Read + Notify</span></span><br><span class="line">    char_md.char_props.read   = <span class="number">1</span>;</span><br><span class="line">    char_md.char_props.notify = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&amp;attr_md.read_perm);</span><br><span class="line">    attr_md.vloc = BLE_GATTS_VLOC_STACK;</span><br><span class="line"></span><br><span class="line">    <span class="type">ble_uuid_t</span> char_uuid = &#123;CUSTOM_CHAR_UUID, BLE_UUID_TYPE_BLE&#125;;</span><br><span class="line">    <span class="type">uint8_t</span>    init_val  = <span class="number">0</span>;</span><br><span class="line">    attr_char.p_uuid    = &amp;char_uuid;</span><br><span class="line">    attr_char.p_attr_md = &amp;attr_md;</span><br><span class="line">    attr_char.init_len  = <span class="number">1</span>;</span><br><span class="line">    attr_char.p_value   = &amp;init_val;</span><br><span class="line">    attr_char.max_len   = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 注册特征值</span></span><br><span class="line">    sd_ble_gatts_characteristic_add(service_handle, &amp;char_md,</span><br><span class="line">                                    &amp;attr_char, &amp;m_char_handles);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送 Notification</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">ble_notify</span><span class="params">(<span class="type">uint16_t</span> conn_handle, <span class="type">uint8_t</span> *data, <span class="type">uint16_t</span> len)</span> &#123;</span><br><span class="line">    <span class="type">ble_gatts_hvx_params_t</span> hvx = &#123;</span><br><span class="line">        .handle = m_char_handles.value_handle,</span><br><span class="line">        .type   = BLE_GATT_HVX_NOTIFICATION,</span><br><span class="line">        .p_len  = &amp;len,</span><br><span class="line">        .p_data = data,</span><br><span class="line">    &#125;;</span><br><span class="line">    sd_ble_gatts_hvx(conn_handle, &amp;hvx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>BLE 功耗优化要点：</strong></p>
+<ul>
+<li>增大广播间隔（100 ms → 1 s，省电 ~10×）</li>
+<li>使用 Connection Interval 最大化 slave latency</li>
+<li>开启 LE Power Control（BLE 5.1+）动态调整发射功率</li>
+<li>仅在需要时开启 Scan</li>
+</ul>
+<hr>
+<h3 id="四、USB"><a href="#四、USB" class="headerlink" title="四、USB"></a>四、USB</h3><p>USB 是主机控制的枚举式总线，支持热插拔。常见传输类型：</p>
+<table>
+<thead>
+<tr>
+<th>传输类型</th>
+<th>特点</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Control</td>
+<td>双向，用于枚举和配置</td>
+<td>设备初始化</td>
+</tr>
+<tr>
+<td>Interrupt</td>
+<td>小包，低延迟，有保障</td>
+<td>HID 键鼠</td>
+</tr>
+<tr>
+<td>Bulk</td>
+<td>大量数据，有错误重传</td>
+<td>存储设备</td>
+</tr>
+<tr>
+<td>Isochronous</td>
+<td>实时，无重传，保证带宽</td>
+<td>音频&#x2F;视频</td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TinyUSB — 实现一个 USB CDC（虚拟串口）发送</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;tusb.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">usb_cdc_task</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (tud_cdc_connected()) &#123;</span><br><span class="line">        <span class="type">char</span> buf[<span class="number">64</span>];</span><br><span class="line">        <span class="type">int</span>  len = <span class="built_in">snprintf</span>(buf, <span class="keyword">sizeof</span>(buf),</span><br><span class="line">                            <span class="string">&quot;Timestamp: %lu ms\r\n&quot;</span>, HAL_GetTick());</span><br><span class="line">        tud_cdc_write(buf, len);</span><br><span class="line">        tud_cdc_write_flush();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// USB HID 报告描述符（单按键键盘）</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">uint8_t</span> hid_report_descriptor[] = &#123;</span><br><span class="line">    HID_USAGE_PAGE(HID_USAGE_PAGE_DESKTOP),</span><br><span class="line">    HID_USAGE(HID_USAGE_DESKTOP_KEYBOARD),</span><br><span class="line">    HID_COLLECTION(HID_COLLECTION_APPLICATION),</span><br><span class="line">        HID_USAGE_PAGE(HID_USAGE_PAGE_KEY),</span><br><span class="line">        HID_USAGE_MIN(<span class="number">224</span>), HID_USAGE_MAX(<span class="number">231</span>),</span><br><span class="line">        HID_LOGICAL_MIN(<span class="number">0</span>), HID_LOGICAL_MAX(<span class="number">1</span>),</span><br><span class="line">        HID_REPORT_COUNT(<span class="number">8</span>), HID_REPORT_SIZE(<span class="number">1</span>),</span><br><span class="line">        HID_INPUT(HID_DATA | HID_VARIABLE | HID_ABSOLUTE), <span class="comment">// Modifier keys</span></span><br><span class="line">        HID_REPORT_COUNT(<span class="number">1</span>), HID_REPORT_SIZE(<span class="number">8</span>),</span><br><span class="line">        HID_INPUT(HID_CONSTANT),                           <span class="comment">// Reserved</span></span><br><span class="line">        HID_USAGE_PAGE(HID_USAGE_PAGE_KEY),</span><br><span class="line">        HID_USAGE_MIN(<span class="number">0</span>), HID_USAGE_MAX(<span class="number">101</span>),</span><br><span class="line">        HID_LOGICAL_MIN(<span class="number">0</span>), HID_LOGICAL_MAX(<span class="number">101</span>),</span><br><span class="line">        HID_REPORT_COUNT(<span class="number">6</span>), HID_REPORT_SIZE(<span class="number">8</span>),</span><br><span class="line">        HID_INPUT(HID_DATA | HID_ARRAY | HID_ABSOLUTE),   <span class="comment">// Keycodes</span></span><br><span class="line">    HID_COLLECTION_END</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: CAN 总线是如何实现非破坏性仲裁的？</strong></p>
+<blockquote>
+<p>所有节点同时发送帧头的 ID 字段。发送显性位（0）的节点优先；发送隐性位（1）但检测到总线为显性（0）的节点立即退出，等待下一轮。ID 越小（0 越多）优先级越高。整个过程不会破坏正在进行的帧。</p>
+</blockquote>
+<p><strong>Q2: BLE Notification 和 Indication 有什么区别？</strong></p>
+<blockquote>
+<p>Notification 由服务端主动推送给客户端，无需确认（fire-and-forget）；Indication 同样主动推送，但要求客户端回复 ATT Confirmation，保证一次性可靠传输。Indication 代价是延迟更高。</p>
+</blockquote>
+<p><strong>Q3: Modbus RTU 从机地址 0 有什么特殊含义？</strong></p>
+<blockquote>
+<p>地址 0 是广播地址，主机发送广播帧时所有从机都执行，但不回复任何响应。只有写操作（FC 05&#x2F;06&#x2F;0F&#x2F;10）可以广播，读操作广播无意义。</p>
+</blockquote>
+<p><strong>Q4: USB 枚举过程（Enumeration）主要包括哪些步骤？</strong></p>
+<blockquote>
+<p>① 主机检测到设备插入（D+ 或 D- 上拉）→ ② 发送 Reset → ③ 分配临时地址 0 读取 Device Descriptor → ④ 分配唯一地址 → ⑤ 读取 Configuration Descriptor → ⑥ 加载驱动 → ⑦ Set Configuration 完成枚举。</p>
+</blockquote>
+<p><strong>Q5: BLE 自适应跳频（AFH）和 Wi-Fi 共存如何处理？</strong></p>
+<blockquote>
+<p>BLE 在 2.4 GHz 的 37 条数据信道上跳频，链路层维护一个”好信道”位图（channel map）。当 Wi-Fi 工作在某信道时，BLE 控制器通过 RSSI 或外部通知将被占用的信道标记为坏信道，自动绕开，实现 RF 共存。</p>
+</blockquote>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-03-26-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-03-26-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>protocol</td>
+<td>&#x2F;ˈprəʊtəkɒl&#x2F;</td>
+<td>协议；通信规程</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>topology</td>
+<td>&#x2F;təˈpɒlədʒi&#x2F;</td>
+<td>拓扑结构；网络布局</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>broadcast</td>
+<td>&#x2F;ˈbrɔːdkɑːst&#x2F;</td>
+<td>广播；广播传输</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>gateway</td>
+<td>&#x2F;ˈɡeɪtweɪ&#x2F;</td>
+<td>网关；协议转换器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>mesh</td>
+<td>&#x2F;meʃ&#x2F;</td>
+<td>网格；网状网络</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>6</td>
+<td>baud</td>
+<td>&#x2F;bɔːd&#x2F;</td>
+<td>波特率；调制符号速率</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>parity</td>
+<td>&#x2F;ˈpærɪti&#x2F;</td>
+<td>奇偶校验；对等性</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>8</td>
+<td>framing</td>
+<td>&#x2F;ˈfreɪmɪŋ&#x2F;</td>
+<td>帧格式；数据帧结构</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>retransmit</td>
+<td>&#x2F;ˌriːtrænsˈmɪt&#x2F;</td>
+<td>重传；再次发送</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td>isochronous</td>
+<td>&#x2F;aɪˈsɒkrənəs&#x2F;</td>
+<td>等时的；USB 同步传输</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>bulk</td>
+<td>&#x2F;bʌlk&#x2F;</td>
+<td>批量；USB 批量传输</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>notification</td>
+<td>&#x2F;ˌnəʊtɪfɪˈkeɪʃən&#x2F;</td>
+<td>通知；BLE 服务器推送</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>13</td>
+<td>indication</td>
+<td>&#x2F;ˌɪndɪˈkeɪʃən&#x2F;</td>
+<td>指示；BLE 需确认推送</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>bonding</td>
+<td>&#x2F;ˈbɒndɪŋ&#x2F;</td>
+<td>绑定；BLE 长期密钥配对</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td>hopping</td>
+<td>&#x2F;ˈhɒpɪŋ&#x2F;</td>
+<td>跳频；频道跳变</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td>whitelist</td>
+<td>&#x2F;ˈwaɪtlɪst&#x2F;</td>
+<td>白名单；受信任设备列表</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>congestion</td>
+<td>&#x2F;kənˈdʒestʃən&#x2F;</td>
+<td>拥塞；网络拥堵</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>propagation</td>
+<td>&#x2F;ˌprɒpəˈɡeɪʃən&#x2F;</td>
+<td>传播；信号传输延迟</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>transient</td>
+<td>&#x2F;ˈtrænziənt&#x2F;</td>
+<td>瞬态的；瞬变信号</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>negotiate</td>
+<td>&#x2F;nɪˈɡəʊʃieɪt&#x2F;</td>
+<td>协商；参数协商</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>21</td>
+<td>compliance</td>
+<td>&#x2F;kəmˈplaɪəns&#x2F;</td>
+<td>合规性；符合标准</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>22</td>
+<td>aggregate</td>
+<td>&#x2F;ˈæɡrɪɡɪt&#x2F;</td>
+<td>聚合；汇总；总计</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td>orchestrate</td>
+<td>&#x2F;ˈɔːkɪstreɪt&#x2F;</td>
+<td>精心策划；统筹协调</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>24</td>
+<td>obfuscate</td>
+<td>&#x2F;ˈɒbfʌskeɪt&#x2F;</td>
+<td>混淆；使晦涩难懂</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>25</td>
+<td>resilience</td>
+<td>&#x2F;rɪˈzɪliəns&#x2F;</td>
+<td>弹性；恢复能力；容错性</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>26</td>
+<td>latent</td>
+<td>&#x2F;ˈleɪtənt&#x2F;</td>
+<td>潜在的；隐伏的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>27</td>
+<td>arbitrate</td>
+<td>&#x2F;ˈɑːbɪtreɪt&#x2F;</td>
+<td>仲裁；裁决总线访问权</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>28</td>
+<td>coil</td>
+<td>&#x2F;kɔɪl&#x2F;</td>
+<td>线圈；Modbus 离散输出</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>29</td>
+<td>holding</td>
+<td>&#x2F;ˈhəʊldɪŋ&#x2F;</td>
+<td>保持；Modbus 保持寄存器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>30</td>
+<td>enumeration</td>
+<td>&#x2F;ɪˌnjuːməˈreɪʃən&#x2F;</td>
+<td>枚举；USB 设备枚举</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>31</td>
+<td>endpoint</td>
+<td>&#x2F;ˈendpɔɪnt&#x2F;</td>
+<td>端点；USB 通信端点</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>32</td>
+<td>characteristic</td>
+<td>&#x2F;ˌkærɪktəˈrɪstɪk&#x2F;</td>
+<td>特征；GATT 特征值</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>33</td>
+<td>profile</td>
+<td>&#x2F;ˈprəʊfaɪl&#x2F;</td>
+<td>配置文件；BLE 应用协议</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>34</td>
+<td>pairing</td>
+<td>&#x2F;ˈpeərɪŋ&#x2F;</td>
+<td>配对；BLE 安全绑定</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>35</td>
+<td>advertisement</td>
+<td>&#x2F;ədˈvɜːtɪsmənt&#x2F;</td>
+<td>广告；BLE 广播包</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>36</td>
+<td>central</td>
+<td>&#x2F;ˈsentrəl&#x2F;</td>
+<td>中心的；BLE 中心设备</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>37</td>
+<td>slot</td>
+<td>&#x2F;slɒt&#x2F;</td>
+<td>时隙；频道插槽</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>descriptor</td>
+<td>&#x2F;dɪˈskrɪptə&#x2F;</td>
+<td>描述符；USB&#x2F;BLE 结构体</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>39</td>
+<td>interoperability</td>
+<td>&#x2F;ˌɪntərˌɒpərəˈbɪlɪti&#x2F;</td>
+<td>互操作性；跨品牌兼容</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>40</td>
+<td>integrity</td>
+<td>&#x2F;ɪnˈteɡrɪti&#x2F;</td>
+<td>完整性；数据校验完好</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>41</td>
+<td>concurrent</td>
+<td>&#x2F;kənˈkɜːrənt&#x2F;</td>
+<td>并行的；同时发生的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>42</td>
+<td>synchronous</td>
+<td>&#x2F;ˈsɪŋkrənəs&#x2F;</td>
+<td>同步的；时钟驱动的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>43</td>
+<td>asynchronous</td>
+<td>&#x2F;eɪˈsɪŋkrənəs&#x2F;</td>
+<td>异步的；无公共时钟的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>44</td>
+<td>specification</td>
+<td>&#x2F;ˌspesɪfɪˈkeɪʃən&#x2F;</td>
+<td>规格说明；技术规范</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>45</td>
+<td>modulate</td>
+<td>&#x2F;ˈmɒdjʊleɪt&#x2F;</td>
+<td>调制；调节信号</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>46</td>
+<td>reconcile</td>
+<td>&#x2F;ˈrekənsaɪl&#x2F;</td>
+<td>使协调一致；调和</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>47</td>
+<td>autonomous</td>
+<td>&#x2F;ɔːˈtɒnəməs&#x2F;</td>
+<td>自主的；自治的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>48</td>
+<td>scrutiny</td>
+<td>&#x2F;ˈskruːtɪni&#x2F;</td>
+<td>详细审查；仔细检查</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>49</td>
+<td>deprecation</td>
+<td>&#x2F;ˌdeprɪˈkeɪʃən&#x2F;</td>
+<td>弃用；API 废止声明</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>50</td>
+<td>encapsulate</td>
+<td>&#x2F;ɪnˈkæpsjʊleɪt&#x2F;</td>
+<td>封装；包含；概括</td>
+<td>技术</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>protocol</strong> &#x2F;ˈprəʊtəkɒl&#x2F; — 协议；通信规程 <code>技术</code></p>
+<blockquote>
+<p>Modbus RTU is a simple serial communication protocol widely used in industrial PLCs and sensor networks.</p>
+</blockquote>
+</li>
+<li><p><strong>topology</strong> &#x2F;təˈpɒlədʒi&#x2F; — 拓扑结构；网络布局 <code>技术</code></p>
+<blockquote>
+<p>CAN bus uses a linear topology with 120 Ω termination resistors at both ends of the cable.</p>
+</blockquote>
+</li>
+<li><p><strong>broadcast</strong> &#x2F;ˈbrɔːdkɑːst&#x2F; — 广播；广播传输 <code>技术</code></p>
+<blockquote>
+<p>Every node on a CAN network receives the broadcast frame, but only the addressed node processes it.</p>
+</blockquote>
+</li>
+<li><p><strong>gateway</strong> &#x2F;ˈɡeɪtweɪ&#x2F; — 网关；协议转换器 <code>技术</code></p>
+<blockquote>
+<p>A protocol gateway converts Modbus RTU to MQTT so field sensors can publish data to the cloud.</p>
+</blockquote>
+</li>
+<li><p><strong>mesh</strong> &#x2F;meʃ&#x2F; — 网格；BLE Mesh 网状网络 <code>技术</code></p>
+<blockquote>
+<p>BLE Mesh allows hundreds of nodes to relay messages across a large factory floor.</p>
+</blockquote>
+</li>
+<li><p><strong>baud</strong> &#x2F;bɔːd&#x2F; — 波特率；调制符号速率 <code>技术</code></p>
+<blockquote>
+<p>Set the baud rate to 115200 when communicating with a GPS module over UART.</p>
+</blockquote>
+</li>
+<li><p><strong>parity</strong> &#x2F;ˈpærɪti&#x2F; — 奇偶校验；对等性 <code>技术</code></p>
+<blockquote>
+<p>Enable odd parity on the UART to detect single-bit transmission errors in noisy industrial environments.</p>
+</blockquote>
+</li>
+<li><p><strong>framing</strong> &#x2F;ˈfreɪmɪŋ&#x2F; — 帧格式；数据帧结构 <code>技术</code></p>
+<blockquote>
+<p>A UART framing error occurs when the stop bit is sampled as logic 0 instead of logic 1.</p>
+</blockquote>
+</li>
+<li><p><strong>retransmit</strong> &#x2F;ˌriːtrænsˈmɪt&#x2F; — 重传；再次发送 <code>技术</code></p>
+<blockquote>
+<p>USB automatically retransmits a packet when the receiver reports a CRC mismatch.</p>
+</blockquote>
+</li>
+<li><p><strong>isochronous</strong> &#x2F;aɪˈsɒkrənəs&#x2F; — 等时的；USB 同步传输 <code>技术</code></p>
+<blockquote>
+<p>USB isochronous transfers guarantee bandwidth and are ideal for real-time audio streaming.</p>
+</blockquote>
+</li>
+<li><p><strong>bulk</strong> &#x2F;bʌlk&#x2F; — 批量；USB 批量传输 <code>技术</code></p>
+<blockquote>
+<p>USB mass storage uses bulk transfers to move large blocks of data with error correction.</p>
+</blockquote>
+</li>
+<li><p><strong>notification</strong> &#x2F;ˌnəʊtɪfɪˈkeɪʃən&#x2F; — 通知；BLE 服务器主动推送 <code>技术</code></p>
+<blockquote>
+<p>Enable BLE notifications on the temperature characteristic so the central receives updates automatically.</p>
+</blockquote>
+</li>
+<li><p><strong>indication</strong> &#x2F;ˌɪndɪˈkeɪʃən&#x2F; — 指示；BLE 需确认推送 <code>技术</code></p>
+<blockquote>
+<p>Use BLE indications instead of notifications when the application requires guaranteed delivery.</p>
+</blockquote>
+</li>
+<li><p><strong>bonding</strong> &#x2F;ˈbɒndɪŋ&#x2F; — 绑定；BLE 长期密钥存储 <code>技术</code></p>
+<blockquote>
+<p>BLE bonding stores the long-term key in flash so paired devices reconnect without full re-pairing.</p>
+</blockquote>
+</li>
+<li><p><strong>hopping</strong> &#x2F;ˈhɒpɪŋ&#x2F; — 跳频；频道跳变 <code>技术</code></p>
+<blockquote>
+<p>BLE uses adaptive frequency hopping across 37 data channels to avoid Wi-Fi interference.</p>
+</blockquote>
+</li>
+<li><p><strong>whitelist</strong> &#x2F;ˈwaɪtlɪst&#x2F; — 白名单；受信任设备列表 <code>技术</code></p>
+<blockquote>
+<p>Configure the BLE whitelist so the peripheral only accepts connections from pre-approved centrals.</p>
+</blockquote>
+</li>
+<li><p><strong>congestion</strong> &#x2F;kənˈdʒestʃən&#x2F; — 拥塞；网络拥堵 <code>技术</code></p>
+<blockquote>
+<p>CAN bus congestion occurs when too many nodes transmit at equal priority simultaneously.</p>
+</blockquote>
+</li>
+<li><p><strong>propagation</strong> &#x2F;ˌprɒpəˈɡeɪʃən&#x2F; — 传播；信号传输延迟 <code>技术</code></p>
+<blockquote>
+<p>Bus propagation delay limits the maximum CAN bit rate for a given cable length.</p>
+</blockquote>
+</li>
+<li><p><strong>transient</strong> &#x2F;ˈtrænziənt&#x2F; — 瞬态的；瞬变信号 <code>技术</code></p>
+<blockquote>
+<p>A transient voltage spike on the CAN bus can corrupt a frame and increment the error counter.</p>
+</blockquote>
+</li>
+<li><p><strong>negotiate</strong> &#x2F;nɪˈɡəʊʃieɪt&#x2F; — 协商；参数协商 <code>技术</code></p>
+<blockquote>
+<p>The BLE connection request negotiates interval, latency, and supervision timeout with the peripheral.</p>
+</blockquote>
+</li>
+<li><p><strong>compliance</strong> &#x2F;kəmˈplaɪəns&#x2F; — 合规性；符合标准 <code>书面</code></p>
+<blockquote>
+<p>BLE compliance testing through a Bluetooth SIG-approved lab is required before product launch.</p>
+</blockquote>
+</li>
+<li><p><strong>aggregate</strong> &#x2F;ˈæɡrɪɡɪt&#x2F; — 聚合；汇总 <code>技术</code></p>
+<blockquote>
+<p>The IoT gateway aggregates readings from 50 Modbus slave devices before uploading to the cloud.</p>
+</blockquote>
+</li>
+<li><p><strong>orchestrate</strong> &#x2F;ˈɔːkɪstreɪt&#x2F; — 统筹协调 <code>书面</code></p>
+<blockquote>
+<p>The master node orchestrates data collection from all slave devices every 100 ms.</p>
+</blockquote>
+</li>
+<li><p><strong>obfuscate</strong> &#x2F;ˈɒbfʌskeɪt&#x2F; — 混淆；使晦涩 <code>书面</code></p>
+<blockquote>
+<p>Some vendors obfuscate their proprietary BLE protocol to prevent reverse engineering.</p>
+</blockquote>
+</li>
+<li><p><strong>resilience</strong> &#x2F;rɪˈzɪliəns&#x2F; — 弹性；容错性 <code>书面</code></p>
+<blockquote>
+<p>The mesh network’s resilience comes from its ability to reroute messages around failed nodes.</p>
+</blockquote>
+</li>
+<li><p><strong>latent</strong> &#x2F;ˈleɪtənt&#x2F; — 潜在的；隐伏的 <code>书面</code></p>
+<blockquote>
+<p>A latent bug in the error-handling state machine only surfaces under heavy CAN bus load.</p>
+</blockquote>
+</li>
+<li><p><strong>arbitrate</strong> &#x2F;ˈɑːbɪtreɪt&#x2F; — 仲裁；裁决总线访问权 <code>技术</code></p>
+<blockquote>
+<p>CAN controllers arbitrate bus access by comparing the dominant&#x2F;recessive bits they transmit.</p>
+</blockquote>
+</li>
+<li><p><strong>coil</strong> &#x2F;kɔɪl&#x2F; — 线圈；Modbus 离散输出寄存器 <code>技术</code></p>
+<blockquote>
+<p>Modbus function code 0x01 reads the ON&#x2F;OFF status of output coils on a remote slave device.</p>
+</blockquote>
+</li>
+<li><p><strong>holding</strong> &#x2F;ˈhəʊldɪŋ&#x2F; — 保持；Modbus 保持寄存器 <code>技术</code></p>
+<blockquote>
+<p>Write the target speed to holding register 40001 to command the variable-frequency drive.</p>
+</blockquote>
+</li>
+<li><p><strong>enumeration</strong> &#x2F;ɪˌnjuːməˈreɪʃən&#x2F; — 枚举；USB 设备枚举 <code>技术</code></p>
+<blockquote>
+<p>USB enumeration assigns the device a unique address and loads the correct host driver within milliseconds.</p>
+</blockquote>
+</li>
+<li><p><strong>endpoint</strong> &#x2F;ˈendpɔɪnt&#x2F; — 端点；USB 通信端点 <code>技术</code></p>
+<blockquote>
+<p>A USB HID device uses interrupt endpoints to send keyboard reports to the host every 8 ms.</p>
+</blockquote>
+</li>
+<li><p><strong>characteristic</strong> &#x2F;ˌkærɪktəˈrɪstɪk&#x2F; — 特征；GATT 特征值 <code>技术</code></p>
+<blockquote>
+<p>The heart rate GATT service contains a Measurement characteristic that sends BPM data.</p>
+</blockquote>
+</li>
+<li><p><strong>profile</strong> &#x2F;ˈprəʊfaɪl&#x2F; — 配置文件；BLE 应用层协议 <code>技术</code></p>
+<blockquote>
+<p>The Heart Rate Profile standardizes services and characteristics for interoperable wearable devices.</p>
+</blockquote>
+</li>
+<li><p><strong>pairing</strong> &#x2F;ˈpeərɪŋ&#x2F; — 配对；BLE 安全绑定流程 <code>技术</code></p>
+<blockquote>
+<p>BLE pairing uses ECDH key exchange to establish an encrypted link between devices.</p>
+</blockquote>
+</li>
+<li><p><strong>advertisement</strong> &#x2F;ədˈvɜːtɪsmənt&#x2F; — 广告；BLE 广播数据包 <code>技术</code></p>
+<blockquote>
+<p>A BLE sensor sends advertisement packets every 500 ms to minimize power consumption.</p>
+</blockquote>
+</li>
+<li><p><strong>central</strong> &#x2F;ˈsentrəl&#x2F; — 中心的；BLE 中心设备 <code>技术</code></p>
+<blockquote>
+<p>The smartphone acts as the BLE central, scanning and initiating connections to peripherals.</p>
+</blockquote>
+</li>
+<li><p><strong>slot</strong> &#x2F;slɒt&#x2F; — 时隙；频道插槽 <code>技术</code></p>
+<blockquote>
+<p>BLE frequency hopping assigns each connection event to a specific time slot on a channel.</p>
+</blockquote>
+</li>
+<li><p><strong>descriptor</strong> &#x2F;dɪˈskrɪptə&#x2F; — 描述符；USB&#x2F;BLE 结构描述体 <code>技术</code></p>
+<blockquote>
+<p>The USB HID report descriptor defines the exact byte layout of every data packet the device sends.</p>
+</blockquote>
+</li>
+<li><p><strong>interoperability</strong> &#x2F;ˌɪntərˌɒpərəˈbɪlɪti&#x2F; — 互操作性；跨品牌兼容 <code>技术</code></p>
+<blockquote>
+<p>Bluetooth SIG profiles ensure interoperability between fitness trackers and smartphones from different brands.</p>
+</blockquote>
+</li>
+<li><p><strong>integrity</strong> &#x2F;ɪnˈteɡrɪti&#x2F; — 完整性；数据校验完好 <code>技术</code></p>
+<blockquote>
+<p>CRC-16 is used to verify data integrity in Modbus RTU frames before processing the response.</p>
+</blockquote>
+</li>
+<li><p><strong>concurrent</strong> &#x2F;kənˈkɜːrənt&#x2F; — 并行的；同时发生的 <code>技术</code></p>
+<blockquote>
+<p>Running BLE and Wi-Fi concurrently on the same chip requires careful RF coexistence management.</p>
+</blockquote>
+</li>
+<li><p><strong>synchronous</strong> &#x2F;ˈsɪŋkrənəs&#x2F; — 同步的；时钟驱动的 <code>技术</code></p>
+<blockquote>
+<p>SPI is a synchronous protocol — data is clocked by a shared SCLK signal between master and slave.</p>
+</blockquote>
+</li>
+<li><p><strong>asynchronous</strong> &#x2F;eɪˈsɪŋkrənəs&#x2F; — 异步的；无公共时钟 <code>技术</code></p>
+<blockquote>
+<p>UART is asynchronous — both sides must be configured to the same baud rate with no shared clock.</p>
+</blockquote>
+</li>
+<li><p><strong>specification</strong> &#x2F;ˌspesɪfɪˈkeɪʃən&#x2F; — 规格说明；技术规范 <code>技术</code></p>
+<blockquote>
+<p>Always read the datasheet specification carefully before implementing a driver for a new peripheral.</p>
+</blockquote>
+</li>
+<li><p><strong>modulate</strong> &#x2F;ˈmɒdjʊleɪt&#x2F; — 调制；调节信号 <code>技术</code></p>
+<blockquote>
+<p>BLE uses GFSK to modulate data onto the 2.4 GHz carrier with a deviation of 250 kHz.</p>
+</blockquote>
+</li>
+<li><p><strong>reconcile</strong> &#x2F;ˈrekənsaɪl&#x2F; — 使协调一致；调和 <code>书面</code></p>
+<blockquote>
+<p>After a firmware update, you must reconcile the new register map with existing driver code.</p>
+</blockquote>
+</li>
+<li><p><strong>autonomous</strong> &#x2F;ɔːˈtɒnəməs&#x2F; — 自主的；自治的 <code>技术</code></p>
+<blockquote>
+<p>The autonomous sensor node wakes up every 30 seconds, samples data, and returns to deep sleep.</p>
+</blockquote>
+</li>
+<li><p><strong>scrutiny</strong> &#x2F;ˈskruːtɪni&#x2F; — 详细审查；仔细检查 <code>书面</code></p>
+<blockquote>
+<p>Security researchers applied intense scrutiny to the BLE pairing implementation and found a MITM vulnerability.</p>
+</blockquote>
+</li>
+<li><p><strong>deprecation</strong> &#x2F;ˌdeprɪˈkeɪʃən&#x2F; — 弃用；API 废止声明 <code>技术</code></p>
+<blockquote>
+<p>The Bluetooth SIG announced the deprecation of BR&#x2F;EDR piconet features in favor of BLE.</p>
+</blockquote>
+</li>
+<li><p><strong>encapsulate</strong> &#x2F;ɪnˈkæpsjʊleɪt&#x2F; — 封装；包含；概括 <code>技术</code></p>
+<blockquote>
+<p>The transport layer encapsulates the Modbus PDU inside an MBAP header for TCP transmission.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“the-last-mile”"><a href="#1-“the-last-mile”" class="headerlink" title="1. “the last mile”"></a>1. “the last mile”</h3><p><strong>意思：</strong> 最后一公里；完成任务中最困难、最耗时的最后阶段<br><strong>场景：</strong> 描述产品开发、基础设施或协议集成时最后阶段的挑战</p>
+<blockquote>
+<p><strong>A:</strong> We’ve got BLE working in the lab — why is it still failing in production?<br><strong>B:</strong> Classic last-mile problem. The lab has clean RF; the factory floor is full of Wi-Fi and motor interference.</p>
+</blockquote>
+<p>📌 <em>“For IoT deployments, the last mile — getting data reliably from sensor to cloud — remains the biggest engineering challenge.”</em> — MIT Technology Review, 2023</p>
+<hr>
+<h3 id="2-“low-hanging-fruit”"><a href="#2-“low-hanging-fruit”" class="headerlink" title="2. “low-hanging fruit”"></a>2. “low-hanging fruit”</h3><p><strong>意思：</strong> 唾手可得的成果；容易实现的优化项<br><strong>场景：</strong> 工程优化中优先处理最容易改进的部分</p>
+<blockquote>
+<p><strong>A:</strong> Where should we start optimizing power consumption?<br><strong>B:</strong> Low-hanging fruit: increase the BLE advertisement interval from 100 ms to 1 s — that alone cuts idle current by 60%.</p>
+</blockquote>
+<p>📌 <em>“Reducing the BLE advertisement interval was low-hanging fruit — a single parameter change cut power consumption by 40%.”</em> — Embedded.com, 2022</p>
+<hr>
+<h3 id="3-“hit-the-ground-running”"><a href="#3-“hit-the-ground-running”" class="headerlink" title="3. “hit the ground running”"></a>3. “hit the ground running”</h3><p><strong>意思：</strong> 迅速投入工作；一开始就全力以赴<br><strong>场景：</strong> 新员工入职、项目启动时迅速上手</p>
+<blockquote>
+<p><strong>A:</strong> We need someone who can hit the ground running — we’re already two sprints behind.<br><strong>B:</strong> I’ve shipped three CAN-based motor controllers; I can have the driver stack running by end of week.</p>
+</blockquote>
+<p>📌 <em>“She hit the ground running on day one, pushing her first firmware fix to production within 48 hours.”</em> — The Pragmatic Engineer Newsletter, Gergely Orosz, 2023</p>
+<hr>
+<h3 id="4-“a-moving-target”"><a href="#4-“a-moving-target”" class="headerlink" title="4. “a moving target”"></a>4. “a moving target”</h3><p><strong>意思：</strong> 移动靶子；不断变化的需求或规格，难以跟上<br><strong>场景：</strong> 描述需求频繁变动导致开发困难</p>
+<blockquote>
+<p><strong>A:</strong> How’s the Modbus register map looking?<br><strong>B:</strong> It’s a moving target — the customer changes the address layout every other week.</p>
+</blockquote>
+<p>📌 <em>“Keeping up with Bluetooth SIG specification updates is a moving target — the Core Spec has gone through five major revisions in a decade.”</em> — Bluetooth Developer Blog, 2024</p>
+<hr>
+<h3 id="5-“shoot-yourself-in-the-foot”"><a href="#5-“shoot-yourself-in-the-foot”" class="headerlink" title="5. “shoot yourself in the foot”"></a>5. “shoot yourself in the foot”</h3><p><strong>意思：</strong> 搬起石头砸自己的脚；因操作不当造成自身麻烦<br><strong>场景：</strong> 编程错误（错误协议配置、不当内存操作）导致系统崩溃</p>
+<blockquote>
+<p><strong>A:</strong> Why does the CAN node go Bus Off under load?<br><strong>B:</strong> You shot yourself in the foot — you disabled automatic error recovery in the controller config.</p>
+</blockquote>
+<p>📌 <em>“C gives you enough rope to shoot yourself in the foot — and in embedded systems, that foot is usually your production hardware running in the field.”</em> — paraphrased from Bjarne Stroustrup, <em>The Design and Evolution of C++</em>, 1994</p>
+<hr>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-Day-4-复习：2026-03-22-词汇（volatile-主题）"><a href="#📅-Day-4-复习：2026-03-22-词汇（volatile-主题）" class="headerlink" title="📅 Day+4 复习：2026-03-22 词汇（volatile 主题）"></a>📅 Day+4 复习：2026-03-22 词汇（volatile 主题）</h3><details>
+<summary>🔁 点击展开 50 个复习单词</summary>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>peripheral</td>
+<td>外设，外围设备</td>
+</tr>
+<tr>
+<td>2</td>
+<td>impedance</td>
+<td>阻抗</td>
+</tr>
+<tr>
+<td>3</td>
+<td>latency</td>
+<td>延迟，潜伏期</td>
+</tr>
+<tr>
+<td>4</td>
+<td>mitigate</td>
+<td>减轻，缓解</td>
+</tr>
+<tr>
+<td>5</td>
+<td>elaborate</td>
+<td>详细说明</td>
+</tr>
+<tr>
+<td>6</td>
+<td>bottleneck</td>
+<td>瓶颈</td>
+</tr>
+<tr>
+<td>7</td>
+<td>robust</td>
+<td>健壮的，稳健的</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deprecate</td>
+<td>弃用，不推荐</td>
+</tr>
+<tr>
+<td>9</td>
+<td>concurrency</td>
+<td>并发</td>
+</tr>
+<tr>
+<td>10</td>
+<td>deterministic</td>
+<td>确定性的</td>
+</tr>
+<tr>
+<td>11</td>
+<td>empirical</td>
+<td>经验的，实证的</td>
+</tr>
+<tr>
+<td>12</td>
+<td>agnostic</td>
+<td>与…无关的</td>
+</tr>
+<tr>
+<td>13</td>
+<td>delegate</td>
+<td>委派，委托</td>
+</tr>
+<tr>
+<td>14</td>
+<td>idempotent</td>
+<td>幂等的</td>
+</tr>
+<tr>
+<td>15</td>
+<td>propagate</td>
+<td>传播，传递</td>
+</tr>
+<tr>
+<td>16</td>
+<td>jitter</td>
+<td>抖动</td>
+</tr>
+<tr>
+<td>17</td>
+<td>spurious</td>
+<td>伪造的，虚假的</td>
+</tr>
+<tr>
+<td>18</td>
+<td>leverage</td>
+<td>利用，借助</td>
+</tr>
+<tr>
+<td>19</td>
+<td>granularity</td>
+<td>粒度</td>
+</tr>
+<tr>
+<td>20</td>
+<td>feasible</td>
+<td>可行的</td>
+</tr>
+<tr>
+<td>21</td>
+<td>overhead</td>
+<td>开销</td>
+</tr>
+<tr>
+<td>22</td>
+<td>volatile</td>
+<td>易变的，不稳定的</td>
+</tr>
+<tr>
+<td>23</td>
+<td>throughput</td>
+<td>吞吐量</td>
+</tr>
+<tr>
+<td>24</td>
+<td>scalable</td>
+<td>可扩展的</td>
+</tr>
+<tr>
+<td>25</td>
+<td>decouple</td>
+<td>解耦</td>
+</tr>
+<tr>
+<td>26</td>
+<td>truncate</td>
+<td>截断</td>
+</tr>
+<tr>
+<td>27</td>
+<td>articulate</td>
+<td>清晰表达</td>
+</tr>
+<tr>
+<td>28</td>
+<td>pragma</td>
+<td>编译指示</td>
+</tr>
+<tr>
+<td>29</td>
+<td>sentinel</td>
+<td>哨兵，标记值</td>
+</tr>
+<tr>
+<td>30</td>
+<td>deprecated</td>
+<td>已弃用的</td>
+</tr>
+<tr>
+<td>31</td>
+<td>nuance</td>
+<td>细微差别</td>
+</tr>
+<tr>
+<td>32</td>
+<td>comply</td>
+<td>遵守，符合</td>
+</tr>
+<tr>
+<td>33</td>
+<td>encompass</td>
+<td>包含，涵盖</td>
+</tr>
+<tr>
+<td>34</td>
+<td>assertion</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>35</td>
+<td>erratic</td>
+<td>不稳定的</td>
+</tr>
+<tr>
+<td>36</td>
+<td>verbose</td>
+<td>冗长的，详细的</td>
+</tr>
+<tr>
+<td>37</td>
+<td>reminisce</td>
+<td>回忆，追忆</td>
+</tr>
+<tr>
+<td>38</td>
+<td>pragmatic</td>
+<td>务实的</td>
+</tr>
+<tr>
+<td>39</td>
+<td>intricate</td>
+<td>复杂精细的</td>
+</tr>
+<tr>
+<td>40</td>
+<td>coherent</td>
+<td>连贯的，一致的</td>
+</tr>
+<tr>
+<td>41</td>
+<td>mandate</td>
+<td>强制要求</td>
+</tr>
+<tr>
+<td>42</td>
+<td>excerpt</td>
+<td>摘录，节选</td>
+</tr>
+<tr>
+<td>43</td>
+<td>alleviate</td>
+<td>减轻，缓和</td>
+</tr>
+<tr>
+<td>44</td>
+<td>ambiguous</td>
+<td>模棱两可的</td>
+</tr>
+<tr>
+<td>45</td>
+<td>derive</td>
+<td>推导，派生</td>
+</tr>
+<tr>
+<td>46</td>
+<td>substantiate</td>
+<td>证实，证明</td>
+</tr>
+<tr>
+<td>47</td>
+<td>inadvertently</td>
+<td>无意中</td>
+</tr>
+<tr>
+<td>48</td>
+<td>prevalent</td>
+<td>普遍的，流行的</td>
+</tr>
+<tr>
+<td>49</td>
+<td>benchmark</td>
+<td>基准测试</td>
+</tr>
+<tr>
+<td>50</td>
+<td>succinct</td>
+<td>简洁的，精炼的</td>
+</tr>
+</tbody></table>
+</details>
+
+<hr>
+<h3 id="📅-Day-2-复习：2026-03-24-词汇（外设驱动主题）"><a href="#📅-Day-2-复习：2026-03-24-词汇（外设驱动主题）" class="headerlink" title="📅 Day+2 复习：2026-03-24 词汇（外设驱动主题）"></a>📅 Day+2 复习：2026-03-24 词汇（外设驱动主题）</h3><details>
+<summary>🔁 点击展开 50 个复习单词</summary>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>register</td>
+<td>寄存器；登记，注册</td>
+</tr>
+<tr>
+<td>2</td>
+<td>interrupt</td>
+<td>中断（硬件&#x2F;软件中断）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>firmware</td>
+<td>固件</td>
+</tr>
+<tr>
+<td>4</td>
+<td>bootloader</td>
+<td>引导加载程序</td>
+</tr>
+<tr>
+<td>5</td>
+<td>calibrate</td>
+<td>校准，标定</td>
+</tr>
+<tr>
+<td>6</td>
+<td>oscillator</td>
+<td>振荡器</td>
+</tr>
+<tr>
+<td>7</td>
+<td>encoder</td>
+<td>编码器</td>
+</tr>
+<tr>
+<td>8</td>
+<td>actuator</td>
+<td>执行器，致动器</td>
+</tr>
+<tr>
+<td>9</td>
+<td>transducer</td>
+<td>换能器，传感器</td>
+</tr>
+<tr>
+<td>10</td>
+<td>multiplexer</td>
+<td>多路复用器（MUX）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>arbitration</td>
+<td>仲裁</td>
+</tr>
+<tr>
+<td>12</td>
+<td>handshake</td>
+<td>握手，协议交换</td>
+</tr>
+<tr>
+<td>13</td>
+<td>payload</td>
+<td>有效载荷，数据负载</td>
+</tr>
+<tr>
+<td>14</td>
+<td>checksum</td>
+<td>校验和</td>
+</tr>
+<tr>
+<td>15</td>
+<td>endian</td>
+<td>字节序（大端&#x2F;小端）</td>
+</tr>
+<tr>
+<td>16</td>
+<td>bitmask</td>
+<td>位掩码</td>
+</tr>
+<tr>
+<td>17</td>
+<td>overflow</td>
+<td>溢出</td>
+</tr>
+<tr>
+<td>18</td>
+<td>underflow</td>
+<td>下溢</td>
+</tr>
+<tr>
+<td>19</td>
+<td>dereference</td>
+<td>解引用</td>
+</tr>
+<tr>
+<td>20</td>
+<td>prototype</td>
+<td>原型；快速制作原型</td>
+</tr>
+<tr>
+<td>21</td>
+<td>abstraction</td>
+<td>抽象，抽象层</td>
+</tr>
+<tr>
+<td>22</td>
+<td>encapsulation</td>
+<td>封装（驱动&#x2F;OOP设计）</td>
+</tr>
+<tr>
+<td>23</td>
+<td>oscilloscope</td>
+<td>示波器</td>
+</tr>
+<tr>
+<td>24</td>
+<td>rectifier</td>
+<td>整流器</td>
+</tr>
+<tr>
+<td>25</td>
+<td>crucial</td>
+<td>至关重要的，关键的</td>
+</tr>
+<tr>
+<td>26</td>
+<td>paramount</td>
+<td>首要的，至高无上的</td>
+</tr>
+<tr>
+<td>27</td>
+<td>expedite</td>
+<td>加快，促进</td>
+</tr>
+<tr>
+<td>28</td>
+<td>streamline</td>
+<td>精简，简化</td>
+</tr>
+<tr>
+<td>29</td>
+<td>optimize</td>
+<td>优化</td>
+</tr>
+<tr>
+<td>30</td>
+<td>diagnose</td>
+<td>诊断</td>
+</tr>
+<tr>
+<td>31</td>
+<td>enumerate</td>
+<td>枚举，逐一列举</td>
+</tr>
+<tr>
+<td>32</td>
+<td>modular</td>
+<td>模块化的</td>
+</tr>
+<tr>
+<td>33</td>
+<td>prerequisite</td>
+<td>先决条件，前提</td>
+</tr>
+<tr>
+<td>34</td>
+<td>inevitably</td>
+<td>不可避免地</td>
+</tr>
+<tr>
+<td>35</td>
+<td>ephemeral</td>
+<td>短暂的，转瞬即逝的</td>
+</tr>
+<tr>
+<td>36</td>
+<td>substantial</td>
+<td>大量的，实质性的</td>
+</tr>
+<tr>
+<td>37</td>
+<td>complement</td>
+<td>补充，互补；补码</td>
+</tr>
+<tr>
+<td>38</td>
+<td>interleave</td>
+<td>交错，交叉存取</td>
+</tr>
+<tr>
+<td>39</td>
+<td>proliferate</td>
+<td>激增，扩散</td>
+</tr>
+<tr>
+<td>40</td>
+<td>discrepancy</td>
+<td>差异，不一致</td>
+</tr>
+<tr>
+<td>41</td>
+<td>contingency</td>
+<td>突发情况，应急预案</td>
+</tr>
+<tr>
+<td>42</td>
+<td>heuristic</td>
+<td>启发式的；启发法</td>
+</tr>
+<tr>
+<td>43</td>
+<td>correlate</td>
+<td>关联，使相关</td>
+</tr>
+<tr>
+<td>44</td>
+<td>retrofit</td>
+<td>改装，加装</td>
+</tr>
+<tr>
+<td>45</td>
+<td>scrutinize</td>
+<td>仔细检查，审查</td>
+</tr>
+<tr>
+<td>46</td>
+<td>eloquent</td>
+<td>雄辩的，表达有力的</td>
+</tr>
+<tr>
+<td>47</td>
+<td>mimic</td>
+<td>模拟，模仿</td>
+</tr>
+<tr>
+<td>48</td>
+<td>intrinsic</td>
+<td>固有的，本质的；内置函数</td>
+</tr>
+<tr>
+<td>49</td>
+<td>latch</td>
+<td>锁存器；锁存</td>
+</tr>
+<tr>
+<td>50</td>
+<td>toggle</td>
+<td>切换，翻转；拨动开关</td>
+</tr>
+</tbody></table>
+</details>
+
+<hr>
+<h3 id="📅-Day-1-复习：2026-03-25-词汇（FOC-电机控制主题）"><a href="#📅-Day-1-复习：2026-03-25-词汇（FOC-电机控制主题）" class="headerlink" title="📅 Day+1 复习：2026-03-25 词汇（FOC 电机控制主题）"></a>📅 Day+1 复习：2026-03-25 词汇（FOC 电机控制主题）</h3><details>
+<summary>🔁 点击展开 50 个复习单词</summary>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>torque</td>
+<td>扭矩；转动力矩</td>
+</tr>
+<tr>
+<td>2</td>
+<td>flux</td>
+<td>磁通量；流量；不断变化</td>
+</tr>
+<tr>
+<td>3</td>
+<td>stator</td>
+<td>定子（电机固定部分）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>rotor</td>
+<td>转子（电机旋转部分）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>commutation</td>
+<td>换相；换向</td>
+</tr>
+<tr>
+<td>6</td>
+<td>sinusoidal</td>
+<td>正弦波形的</td>
+</tr>
+<tr>
+<td>7</td>
+<td>quadrature</td>
+<td>正交；相位差90°</td>
+</tr>
+<tr>
+<td>8</td>
+<td>hysteresis</td>
+<td>磁滞现象；迟滞</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ripple</td>
+<td>纹波；涟漪；波动</td>
+</tr>
+<tr>
+<td>10</td>
+<td>resolver</td>
+<td>旋转变压器；位置解析器</td>
+</tr>
+<tr>
+<td>11</td>
+<td>reluctance</td>
+<td>磁阻；不情愿</td>
+</tr>
+<tr>
+<td>12</td>
+<td>inductance</td>
+<td>电感量</td>
+</tr>
+<tr>
+<td>13</td>
+<td>capacitance</td>
+<td>电容量</td>
+</tr>
+<tr>
+<td>14</td>
+<td>gain</td>
+<td>增益；收益；获得</td>
+</tr>
+<tr>
+<td>15</td>
+<td>overshoot</td>
+<td>超调量；过冲</td>
+</tr>
+<tr>
+<td>16</td>
+<td>setpoint</td>
+<td>设定值；目标值</td>
+</tr>
+<tr>
+<td>17</td>
+<td>deviation</td>
+<td>偏差；偏离</td>
+</tr>
+<tr>
+<td>18</td>
+<td>integral</td>
+<td>积分；整体的</td>
+</tr>
+<tr>
+<td>19</td>
+<td>derivative</td>
+<td>微分；衍生物；派生的</td>
+</tr>
+<tr>
+<td>20</td>
+<td>proportional</td>
+<td>比例的；成比例的</td>
+</tr>
+<tr>
+<td>21</td>
+<td>windup</td>
+<td>积分饱和；结尾</td>
+</tr>
+<tr>
+<td>22</td>
+<td>feedforward</td>
+<td>前馈控制</td>
+</tr>
+<tr>
+<td>23</td>
+<td>velocity</td>
+<td>速度（矢量）；速率</td>
+</tr>
+<tr>
+<td>24</td>
+<td>acceleration</td>
+<td>加速度；加速</td>
+</tr>
+<tr>
+<td>25</td>
+<td>trajectory</td>
+<td>轨迹；发展轨道</td>
+</tr>
+<tr>
+<td>26</td>
+<td>momentum</td>
+<td>动量；势头</td>
+</tr>
+<tr>
+<td>27</td>
+<td>magnitude</td>
+<td>幅度；量级；大小</td>
+</tr>
+<tr>
+<td>28</td>
+<td>dissipate</td>
+<td>耗散；消散；挥霍</td>
+</tr>
+<tr>
+<td>29</td>
+<td>attenuate</td>
+<td>衰减；减弱</td>
+</tr>
+<tr>
+<td>30</td>
+<td>converge</td>
+<td>收敛；汇聚</td>
+</tr>
+<tr>
+<td>31</td>
+<td>diverge</td>
+<td>发散；偏离；分歧</td>
+</tr>
+<tr>
+<td>32</td>
+<td>synthesize</td>
+<td>合成；综合</td>
+</tr>
+<tr>
+<td>33</td>
+<td>inference</td>
+<td>推断；推论；推理</td>
+</tr>
+<tr>
+<td>34</td>
+<td>discern</td>
+<td>辨别；识别；察觉</td>
+</tr>
+<tr>
+<td>35</td>
+<td>obsolete</td>
+<td>过时的；废弃的</td>
+</tr>
+<tr>
+<td>36</td>
+<td>deteriorate</td>
+<td>恶化；退化；变差</td>
+</tr>
+<tr>
+<td>37</td>
+<td>ambivalent</td>
+<td>矛盾的；对…感到犹豫</td>
+</tr>
+<tr>
+<td>38</td>
+<td>persevere</td>
+<td>坚持不懈；锲而不舍</td>
+</tr>
+<tr>
+<td>39</td>
+<td>endeavor</td>
+<td>努力；尝试；事业</td>
+</tr>
+<tr>
+<td>40</td>
+<td>tenacious</td>
+<td>坚韧的；顽强的</td>
+</tr>
+<tr>
+<td>41</td>
+<td>procrastinate</td>
+<td>拖延；拖拖拉拉</td>
+</tr>
+<tr>
+<td>42</td>
+<td>emulate</td>
+<td>仿效；模拟（软件）</td>
+</tr>
+<tr>
+<td>43</td>
+<td>paradox</td>
+<td>悖论；矛盾现象</td>
+</tr>
+<tr>
+<td>44</td>
+<td>circumvent</td>
+<td>规避；绕过；回避</td>
+</tr>
+<tr>
+<td>45</td>
+<td>exemplify</td>
+<td>举例说明；体现</td>
+</tr>
+<tr>
+<td>46</td>
+<td>anticipate</td>
+<td>预期；期待；提前考虑</td>
+</tr>
+<tr>
+<td>47</td>
+<td>facilitate</td>
+<td>促进；使便利；帮助</td>
+</tr>
+<tr>
+<td>48</td>
+<td>constitute</td>
+<td>构成；组成；等同于</td>
+</tr>
+<tr>
+<td>49</td>
+<td>portray</td>
+<td>描绘；描写；扮演</td>
+</tr>
+<tr>
+<td>50</td>
+<td>manifest</td>
+<td>显现；表明；清单；明显的</td>
+</tr>
+</tbody></table>
+</details>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/CAN/" rel="tag"># CAN</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/BLE/" rel="tag"># BLE</a>
+              <a href="/tags/Modbus/" rel="tag"># Modbus</a>
+              <a href="/tags/USB/" rel="tag"># USB</a>
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag"># 通信协议</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/25/daily-study-2026-03-25/" rel="prev" title="每日学习 — 2026-03-25">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-03-25
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">285k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:18</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
