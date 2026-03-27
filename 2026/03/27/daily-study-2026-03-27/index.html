@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：固件架构设计（状态机 · 分层 · Bootloader · OTA） · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &#x2F; 03-25 &#x2F; 03-26 批次）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-03-27">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/27/daily-study-2026-03-27/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：固件架构设计（状态机 · 分层 · Bootloader · OTA） · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &#x2F; 03-25 &#x2F; 03-26 批次）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-27T00:17:46.728Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="状态机">
+<meta property="article:tag" content="固件架构">
+<meta property="article:tag" content="Bootloader">
+<meta property="article:tag" content="OTA">
+<meta property="article:tag" content="分层设计">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/27/daily-study-2026-03-27/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/27/daily-study-2026-03-27/","path":"2026/03/27/daily-study-2026-03-27/","title":"每日学习 — 2026-03-27"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-03-27 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：固件架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E5%8E%9F%E5%88%99"><span class="nav-number">1.1.</span> <span class="nav-text">一、分层架构原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%88FSM%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">二、有限状态机（FSM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Bootloader-%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、Bootloader 设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81OTA-%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">四、OTA 升级流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.5.</span> <span class="nav-text">五、常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91"><span class="nav-number">1.6.</span> <span class="nav-text">六、面试高频</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日词汇（50词）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9F%E8%A7%88%E8%A1%A8"><span class="nav-number">2.1.</span> <span class="nav-text">速览表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.2.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E9%87%8A%E4%B9%89"><span class="nav-number">2.3.</span> <span class="nav-text">详细释义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885%E5%8F%A5%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5句）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-burn-the-midnight-oil"><span class="nav-number">3.1.</span> <span class="nav-text">1. burn the midnight oil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-a-chain-is-only-as-strong-as-its-weakest-link"><span class="nav-number">3.2.</span> <span class="nav-text">2. a chain is only as strong as its weakest link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kick-the-can-down-the-road"><span class="nav-number">3.3.</span> <span class="nav-text">3. kick the can down the road</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-paint-oneself-into-a-corner"><span class="nav-number">3.4.</span> <span class="nav-text">4. paint oneself into a corner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-separate-the-wheat-from-the-chaff"><span class="nav-number">3.5.</span> <span class="nav-text">5. separate the wheat from the chaff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-23-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC4%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-RTOS%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 2026-03-23 批次（第4天复习 — RTOS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-25-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC2%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-FOC%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 2026-03-25 批次（第2天复习 — FOC电机控制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-26-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 2026-03-26 批次（第1天复习 — 通信协议）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/27/daily-study-2026-03-27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-03-27 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-03-27
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-27 08:00:00" itemprop="dateCreated datePublished" datetime="2026-03-27T08:00:00+08:00">2026-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>固件架构设计（状态机 · 分层 · Bootloader · OTA）</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &#x2F; 03-25 &#x2F; 03-26 批次）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：固件架构设计"><a href="#🔧-嵌入式知识：固件架构设计" class="headerlink" title="🔧 嵌入式知识：固件架构设计"></a>🔧 嵌入式知识：固件架构设计</h2><h3 id="一、分层架构原则"><a href="#一、分层架构原则" class="headerlink" title="一、分层架构原则"></a>一、分层架构原则</h3><p>优秀固件的核心是「关注点分离」，自底向上分为四层：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────┐</span><br><span class="line">│        Application Layer    │  业务逻辑</span><br><span class="line">├─────────────────────────────┤</span><br><span class="line">│        Middleware Layer     │  协议栈、文件系统、RTOS</span><br><span class="line">├─────────────────────────────┤</span><br><span class="line">│        HAL / BSP Layer      │  硬件抽象、板级支持</span><br><span class="line">├─────────────────────────────┤</span><br><span class="line">│        Hardware             │  寄存器、外设</span><br><span class="line">└─────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>HAL</strong>（Hardware Abstraction Layer）：屏蔽芯片差异，向上提供统一接口</li>
+<li><strong>BSP</strong>（Board Support Package）：特定开发板的初始化、引脚配置</li>
+<li>上层代码通过接口调用，<strong>不直接操作寄存器</strong></li>
+</ul>
+<h3 id="二、有限状态机（FSM）"><a href="#二、有限状态机（FSM）" class="headerlink" title="二、有限状态机（FSM）"></a>二、有限状态机（FSM）</h3><p>表驱动状态机是嵌入式控制逻辑的核心模式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span></span><br><span class="line">    STATE_IDLE, STATE_RUNNING,</span><br><span class="line">    STATE_FAULT, STATE_STOP</span><br><span class="line">&#125; MotorState_t;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> StateHandler_t state_table[] = &#123;</span><br><span class="line">    [STATE_IDLE]    = &#123; idle_entry,    idle_run,    idle_exit    &#125;,</span><br><span class="line">    [STATE_RUNNING] = &#123; running_entry, running_run, running_exit &#125;,</span><br><span class="line">    [STATE_FAULT]   = &#123; fault_entry,   fault_run,   fault_exit   &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fsm_run</span><span class="params">(FSM_t *fsm, Event_t event)</span> &#123;</span><br><span class="line">    MotorState_t next = transition(fsm-&gt;current, event);</span><br><span class="line">    <span class="keyword">if</span> (next != fsm-&gt;current) &#123;</span><br><span class="line">        state_table[fsm-&gt;current].<span class="built_in">exit</span>();</span><br><span class="line">        state_table[next].entry();</span><br><span class="line">        fsm-&gt;current = next;</span><br><span class="line">    &#125;</span><br><span class="line">    state_table[fsm-&gt;current].run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、Bootloader-设计"><a href="#三、Bootloader-设计" class="headerlink" title="三、Bootloader 设计"></a>三、Bootloader 设计</h3><p>Flash 分区典型布局（STM32）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x0800_0000 ┌──────────────┐</span><br><span class="line">            │  Bootloader  │  ~16KB</span><br><span class="line">0x0800_4000 ├──────────────┤</span><br><span class="line">            │  App Slot A  │  主应用</span><br><span class="line">0x0808_0000 ├──────────────┤</span><br><span class="line">            │  App Slot B  │  OTA备份槽（双Bank）</span><br><span class="line">0x080C_0000 ├──────────────┤</span><br><span class="line">            │  Config/NVM  │  参数存储</span><br><span class="line">            └──────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>跳转代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">jump_to_app</span><span class="params">(<span class="type">uint32_t</span> app_addr)</span> &#123;</span><br><span class="line">    <span class="type">uint32_t</span> sp = *(<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)(app_addr);</span><br><span class="line">    <span class="type">uint32_t</span> pc = *(<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)(app_addr + <span class="number">4</span>);</span><br><span class="line">    __disable_irq();</span><br><span class="line">    SysTick-&gt;CTRL = <span class="number">0</span>;</span><br><span class="line">    __set_MSP(sp);</span><br><span class="line">    ((<span class="type">void</span> (*)(<span class="type">void</span>))pc)();  <span class="comment">// 永不返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、OTA-升级流程"><a href="#四、OTA-升级流程" class="headerlink" title="四、OTA 升级流程"></a>四、OTA 升级流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">设备                          服务器</span><br><span class="line"> │── 请求版本信息 ────────────→ │</span><br><span class="line"> │← 版本号 + 固件大小 + hash ──│</span><br><span class="line"> │── 分片下载（每包256B）──────→│</span><br><span class="line"> │  …循环直到完成…</span><br><span class="line"> │── CRC验证 OK ───────────────│</span><br><span class="line"> │  写入备用Slot B</span><br><span class="line"> │  设置升级标志（NVM）</span><br><span class="line"> │  Reboot</span><br><span class="line"> │── Bootloader验证Slot B ─────│</span><br><span class="line"> │── 交换Slot A/B，启动新固件 ─│</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键安全措施：</strong></p>
+<ul>
+<li>固件头包含：版本号、目标硬件ID、CRC32、ECDSA签名</li>
+<li>回滚机制：新固件首次启动须「确认」，否则自动回滚</li>
+</ul>
+<h3 id="五、常见误区"><a href="#五、常见误区" class="headerlink" title="五、常见误区"></a>五、常见误区</h3><table>
+<thead>
+<tr>
+<th>误区</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有逻辑堆进 main() 大循环</td>
+<td>用状态机或RTOS任务拆分</td>
+</tr>
+<tr>
+<td>HAL层反向调用上层函数</td>
+<td>依赖方向单向向下，HAL不知道上层存在</td>
+</tr>
+<tr>
+<td>OTA只校验CRC不验签名</td>
+<td>生产设备必须验ECDSA&#x2F;RSA签名</td>
+</tr>
+</tbody></table>
+<h3 id="六、面试高频"><a href="#六、面试高频" class="headerlink" title="六、面试高频"></a>六、面试高频</h3><p><strong>Q: Bootloader 如何安全隔离 Application？</strong><br>A: Flash分区 + MPU（内存保护单元）隔离。跳转时清除所有中断使能，重置向量表 SCB-&gt;VTOR。</p>
+<p><strong>Q: 双Bank OTA 的优势？</strong><br>A: 下载到备用Slot时应用正常运行（Zero Downtime），失败可自动回滚，安全性远高于单Bank原地升级。</p>
+<p><strong>Q: 状态机 vs RTOS任务，如何选择？</strong><br>A: 单一控制流、时序确定→状态机；多并发任务、有阻塞等待→RTOS。复杂系统常结合：每个RTOS任务内部用状态机。</p>
+<hr>
+<h2 id="📖-今日词汇（50词）"><a href="#📖-今日词汇（50词）" class="headerlink" title="📖 今日词汇（50词）"></a>📖 今日词汇（50词）</h2><h3 id="速览表"><a href="#速览表" class="headerlink" title="速览表"></a>速览表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>中文释义</th>
+<th>标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>coroutine</strong></td>
+<td>&#x2F;ˈkɒrətiːn&#x2F;</td>
+<td>协程（可暂停恢复的函数）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>debounce</strong></td>
+<td>&#x2F;diːˈbaʊns&#x2F;</td>
+<td>去抖动</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>precharge</strong></td>
+<td>&#x2F;ˈpriːtʃɑːrdʒ&#x2F;</td>
+<td>预充电</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>livelock</strong></td>
+<td>&#x2F;ˈlaɪvlɒk&#x2F;</td>
+<td>活锁（任务不断响应对方却无法推进）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>strobe</strong></td>
+<td>&#x2F;stroʊb&#x2F;</td>
+<td>选通脉冲；触发信号</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>pipeline</strong></td>
+<td>&#x2F;ˈpaɪplaɪn&#x2F;</td>
+<td>流水线</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>glitch</strong></td>
+<td>&#x2F;ɡlɪtʃ&#x2F;</td>
+<td>毛刺；短暂故障</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>opcode</strong></td>
+<td>&#x2F;ˈɒpkoʊd&#x2F;</td>
+<td>操作码；指令码</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>heap</strong></td>
+<td>&#x2F;hiːp&#x2F;</td>
+<td>堆（动态内存区域）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>polling</strong></td>
+<td>&#x2F;ˈpoʊlɪŋ&#x2F;</td>
+<td>轮询</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>handover</strong></td>
+<td>&#x2F;ˈhændoʊvər&#x2F;</td>
+<td>切换；移交</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>dequeue</strong></td>
+<td>&#x2F;diːˈkjuː&#x2F;</td>
+<td>出队；从队列取出</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>enqueue</strong></td>
+<td>&#x2F;ɪnˈkjuː&#x2F;</td>
+<td>入队；加入队列</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>invariant</strong></td>
+<td>&#x2F;ɪnˈveəriənt&#x2F;</td>
+<td>不变量；约束条件</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>demarcation</strong></td>
+<td>&#x2F;ˌdiːmɑːrˈkeɪʃən&#x2F;</td>
+<td>界定；分界线</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>elusive</strong></td>
+<td>&#x2F;ɪˈluːsɪv&#x2F;</td>
+<td>难以捉摸的；难以发现的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>proficient</strong></td>
+<td>&#x2F;prəˈfɪʃənt&#x2F;</td>
+<td>熟练的；精通的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>methodical</strong></td>
+<td>&#x2F;mɪˈθɒdɪkəl&#x2F;</td>
+<td>有条不紊的；系统化的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>rigorous</strong></td>
+<td>&#x2F;ˈrɪɡərəs&#x2F;</td>
+<td>严格的；严谨的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>diligence</strong></td>
+<td>&#x2F;ˈdɪlɪdʒəns&#x2F;</td>
+<td>勤奋；尽职</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>tenacity</strong></td>
+<td>&#x2F;tɪˈnæsɪti&#x2F;</td>
+<td>坚韧；不屈不挠</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>defer</strong></td>
+<td>&#x2F;dɪˈfɜːr&#x2F;</td>
+<td>推迟；延迟处理</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>degrade</strong></td>
+<td>&#x2F;dɪˈɡreɪd&#x2F;</td>
+<td>降级；性能下降</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>opaque</strong></td>
+<td>&#x2F;oʊˈpeɪk&#x2F;</td>
+<td>不透明的；隐藏实现细节的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>facade</strong></td>
+<td>&#x2F;fəˈsɑːd&#x2F;</td>
+<td>外观模式；简化接口</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>footprint</strong></td>
+<td>&#x2F;ˈfʊtprɪnt&#x2F;</td>
+<td>资源占用（内存&#x2F;Flash大小）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>preamble</strong></td>
+<td>&#x2F;ˈpriːæmbəl&#x2F;</td>
+<td>前导码；序言</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>alignment</strong></td>
+<td>&#x2F;əˈlaɪnmənt&#x2F;</td>
+<td>对齐（内存&#x2F;数据）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>clobber</strong></td>
+<td>&#x2F;ˈklɒbər&#x2F;</td>
+<td>（内联汇编）破坏寄存器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>postmortem</strong></td>
+<td>&#x2F;ˌpoʊstˈmɔːrtəm&#x2F;</td>
+<td>事后复盘；根因分析</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>regression</strong></td>
+<td>&#x2F;rɪˈɡrɛʃən&#x2F;</td>
+<td>回归（测试&#x2F;性能退化）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>calibration</strong></td>
+<td>&#x2F;ˌkælɪˈbreɪʃən&#x2F;</td>
+<td>校准；标定</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>oscillation</strong></td>
+<td>&#x2F;ˌɒsɪˈleɪʃən&#x2F;</td>
+<td>振荡；振动</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>abstracted</strong></td>
+<td>&#x2F;æbˈstræktɪd&#x2F;</td>
+<td>已抽象化的；封装好的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>granular</strong></td>
+<td>&#x2F;ˈɡrænjʊlər&#x2F;</td>
+<td>细粒度的；精细的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>36</td>
+<td><strong>succumb</strong></td>
+<td>&#x2F;səˈkʌm&#x2F;</td>
+<td>屈服；被压倒</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>37</td>
+<td><strong>concede</strong></td>
+<td>&#x2F;kənˈsiːd&#x2F;</td>
+<td>承认；让步</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>38</td>
+<td><strong>incur</strong></td>
+<td>&#x2F;ɪnˈkɜːr&#x2F;</td>
+<td>引起；招致（后果）</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>39</td>
+<td><strong>interject</strong></td>
+<td>&#x2F;ˌɪntərˈdʒɛkt&#x2F;</td>
+<td>插话；突然插入</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>40</td>
+<td><strong>oscillate</strong></td>
+<td>&#x2F;ˈɒsɪleɪt&#x2F;</td>
+<td>振荡；摇摆不定</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>41</td>
+<td><strong>consolidate</strong></td>
+<td>&#x2F;kənˈsɒlɪdeɪt&#x2F;</td>
+<td>整合；巩固</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>42</td>
+<td><strong>negligence</strong></td>
+<td>&#x2F;ˈnɛɡlɪdʒəns&#x2F;</td>
+<td>疏忽；粗心大意</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>43</td>
+<td><strong>preempt</strong></td>
+<td>&#x2F;priːˈɛmpt&#x2F;</td>
+<td>抢占；先发制人</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>44</td>
+<td><strong>perpetual</strong></td>
+<td>&#x2F;pərˈpɛtʃuəl&#x2F;</td>
+<td>持续不断的；永久的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>45</td>
+<td><strong>delineate</strong></td>
+<td>&#x2F;dɪˈlɪnieɪt&#x2F;</td>
+<td>清晰描述；明确划定</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>46</td>
+<td><strong>accelerate</strong></td>
+<td>&#x2F;əkˈsɛləreɪt&#x2F;</td>
+<td>加速；加快</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>47</td>
+<td><strong>erode</strong></td>
+<td>&#x2F;ɪˈroʊd&#x2F;</td>
+<td>侵蚀；逐渐削弱</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>48</td>
+<td><strong>infer</strong></td>
+<td>&#x2F;ɪnˈfɜːr&#x2F;</td>
+<td>推断；推理</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>49</td>
+<td><strong>stipulate</strong></td>
+<td>&#x2F;ˈstɪpjʊleɪt&#x2F;</td>
+<td>规定；明确要求</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>50</td>
+<td><strong>compartmentalize</strong></td>
+<td>&#x2F;kəmˌpɑːrtˈmɛntəlaɪz&#x2F;</td>
+<td>分隔；模块化隔离</td>
+<td>技术</td>
+</tr>
+</tbody></table>
+<h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><p><strong>Part 1（词汇 1-25）</strong><br><audio controls src="/audio/vocab/2026-03-27-part1.mp3"></audio></p>
+<p><strong>Part 2（词汇 26-50）</strong><br><audio controls src="/audio/vocab/2026-03-27-part2.mp3"></audio></p>
+<h3 id="详细释义"><a href="#详细释义" class="headerlink" title="详细释义"></a>详细释义</h3><details>
+<summary>点击展开 50 词详细释义</summary>
+
+<p><strong>1. coroutine</strong> &#x2F;ˈkɒrətiːn&#x2F;</p>
+<blockquote>
+<p>📖 协程（可暂停恢复的函数） [技术]<br>💬 <em>Coroutines enable cooperative multitasking without the overhead of a full RTOS.</em></p>
+</blockquote>
+<p><strong>2. debounce</strong> &#x2F;diːˈbaʊns&#x2F;</p>
+<blockquote>
+<p>📖 去抖动 [技术]<br>💬 <em>You must debounce the button input to avoid triggering multiple interrupts per press.</em></p>
+</blockquote>
+<p><strong>3. precharge</strong> &#x2F;ˈpriːtʃɑːrdʒ&#x2F;</p>
+<blockquote>
+<p>📖 预充电 [技术]<br>💬 <em>The precharge circuit ramps the DC bus voltage slowly to protect capacitors.</em></p>
+</blockquote>
+<p><strong>4. livelock</strong> &#x2F;ˈlaɪvlɒk&#x2F;</p>
+<blockquote>
+<p>📖 活锁（任务不断响应对方却无法推进） [技术]<br>💬 <em>Two tasks in livelock keep responding to each other without making any progress.</em></p>
+</blockquote>
+<p><strong>5. strobe</strong> &#x2F;stroʊb&#x2F;</p>
+<blockquote>
+<p>📖 选通脉冲；触发信号 [技术]<br>💬 <em>Assert the chip-select strobe for at least 10 ns before clocking data.</em></p>
+</blockquote>
+<p><strong>6. pipeline</strong> &#x2F;ˈpaɪplaɪn&#x2F;</p>
+<blockquote>
+<p>📖 流水线 [技术]<br>💬 <em>A 3-stage pipeline allows fetch, decode, and execute to overlap in time.</em></p>
+</blockquote>
+<p><strong>7. glitch</strong> &#x2F;ɡlɪtʃ&#x2F;</p>
+<blockquote>
+<p>📖 毛刺；短暂故障 [技术]<br>💬 <em>A power supply glitch caused an unexpected reset during high-current switching.</em></p>
+</blockquote>
+<p><strong>8. opcode</strong> &#x2F;ˈɒpkoʊd&#x2F;</p>
+<blockquote>
+<p>📖 操作码；指令码 [技术]<br>💬 <em>The disassembler translates raw opcodes into human-readable assembly instructions.</em></p>
+</blockquote>
+<p><strong>9. heap</strong> &#x2F;hiːp&#x2F;</p>
+<blockquote>
+<p>📖 堆（动态内存区域） [技术]<br>💬 <em>Avoid dynamic heap allocation in safety-critical code to prevent memory fragmentation.</em></p>
+</blockquote>
+<p><strong>10. polling</strong> &#x2F;ˈpoʊlɪŋ&#x2F;</p>
+<blockquote>
+<p>📖 轮询 [技术]<br>💬 <em>Interrupt-driven I&#x2F;O is more efficient than polling the status register in a tight loop.</em></p>
+</blockquote>
+<p><strong>11. handover</strong> &#x2F;ˈhændoʊvər&#x2F;</p>
+<blockquote>
+<p>📖 切换；移交 [技术]<br>💬 <em>A smooth handover from bootloader to application requires careful stack pointer reset.</em></p>
+</blockquote>
+<p><strong>12. dequeue</strong> &#x2F;diːˈkjuː&#x2F;</p>
+<blockquote>
+<p>📖 出队；从队列取出 [技术]<br>💬 <em>The consumer task dequeues messages from the mailbox at its own pace.</em></p>
+</blockquote>
+<p><strong>13. enqueue</strong> &#x2F;ɪnˈkjuː&#x2F;</p>
+<blockquote>
+<p>📖 入队；加入队列 [技术]<br>💬 <em>Enqueue sensor readings into a circular buffer to prevent data loss during bursts.</em></p>
+</blockquote>
+<p><strong>14. invariant</strong> &#x2F;ɪnˈveəriənt&#x2F;</p>
+<blockquote>
+<p>📖 不变量；约束条件 [技术]<br>💬 <em>A class invariant guarantees that the object is always in a valid state.</em></p>
+</blockquote>
+<p><strong>15. demarcation</strong> &#x2F;ˌdiːmɑːrˈkeɪʃən&#x2F;</p>
+<blockquote>
+<p>📖 界定；分界线 [技术]<br>💬 <em>The HAL provides a clear demarcation between hardware and application layers.</em></p>
+</blockquote>
+<p><strong>16. elusive</strong> &#x2F;ɪˈluːsɪv&#x2F;</p>
+<blockquote>
+<p>📖 难以捉摸的；难以发现的 [书面]<br>💬 <em>The intermittent race condition proved elusive until we added detailed timestamps.</em></p>
+</blockquote>
+<p><strong>17. proficient</strong> &#x2F;prəˈfɪʃənt&#x2F;</p>
+<blockquote>
+<p>📖 熟练的；精通的 [面试]<br>💬 <em>You should be proficient in reading ARM Cortex-M datasheets before the interview.</em></p>
+</blockquote>
+<p><strong>18. methodical</strong> &#x2F;mɪˈθɒdɪkəl&#x2F;</p>
+<blockquote>
+<p>📖 有条不紊的；系统化的 [面试]<br>💬 <em>A methodical approach to debugging saves far more time than random trial and error.</em></p>
+</blockquote>
+<p><strong>19. rigorous</strong> &#x2F;ˈrɪɡərəs&#x2F;</p>
+<blockquote>
+<p>📖 严格的；严谨的 [书面]<br>💬 <em>Safety-critical code requires rigorous review and formal verification.</em></p>
+</blockquote>
+<p><strong>20. diligence</strong> &#x2F;ˈdɪlɪdʒəns&#x2F;</p>
+<blockquote>
+<p>📖 勤奋；尽职 [面试]<br>💬 <em>His diligence in writing unit tests made the product far more reliable.</em></p>
+</blockquote>
+<p><strong>21. tenacity</strong> &#x2F;tɪˈnæsɪti&#x2F;</p>
+<blockquote>
+<p>📖 坚韧；不屈不挠 [面试]<br>💬 <em>Debugging a HardFault on bare metal requires tenacity and systematic investigation.</em></p>
+</blockquote>
+<p><strong>22. defer</strong> &#x2F;dɪˈfɜːr&#x2F;</p>
+<blockquote>
+<p>📖 推迟；延迟处理 [技术]<br>💬 <em>Defer heavy computation out of interrupt context to a low-priority task.</em></p>
+</blockquote>
+<p><strong>23. degrade</strong> &#x2F;dɪˈɡreɪd&#x2F;</p>
+<blockquote>
+<p>📖 降级；性能下降 [技术]<br>💬 <em>The system can degrade gracefully by disabling non-critical features when power is low.</em></p>
+</blockquote>
+<p><strong>24. opaque</strong> &#x2F;oʊˈpeɪk&#x2F;</p>
+<blockquote>
+<p>📖 不透明的；隐藏实现细节的 [技术]<br>💬 <em>Using an opaque handle type hides implementation details from the caller.</em></p>
+</blockquote>
+<p><strong>25. facade</strong> &#x2F;fəˈsɑːd&#x2F;</p>
+<blockquote>
+<p>📖 外观模式；简化接口 [技术]<br>💬 <em>The driver API is a facade that simplifies complex register-level operations.</em></p>
+</blockquote>
+<p><strong>26. footprint</strong> &#x2F;ˈfʊtprɪnt&#x2F;</p>
+<blockquote>
+<p>📖 资源占用（内存&#x2F;Flash大小） [技术]<br>💬 <em>The TLS library has too large a footprint for the 64 KB flash device.</em></p>
+</blockquote>
+<p><strong>27. preamble</strong> &#x2F;ˈpriːæmbəl&#x2F;</p>
+<blockquote>
+<p>📖 前导码；序言 [技术]<br>💬 <em>The UART frame starts with a preamble to allow the receiver to synchronize.</em></p>
+</blockquote>
+<p><strong>28. alignment</strong> &#x2F;əˈlaɪnmənt&#x2F;</p>
+<blockquote>
+<p>📖 对齐（内存&#x2F;数据） [技术]<br>💬 <em>Misaligned memory access causes a HardFault on architectures that require natural alignment.</em></p>
+</blockquote>
+<p><strong>29. clobber</strong> &#x2F;ˈklɒbər&#x2F;</p>
+<blockquote>
+<p>📖 （内联汇编）破坏寄存器 [技术]<br>💬 <em>List clobbered registers in the inline asm constraint string to avoid compiler errors.</em></p>
+</blockquote>
+<p><strong>30. postmortem</strong> &#x2F;ˌpoʊstˈmɔːrtəm&#x2F;</p>
+<blockquote>
+<p>📖 事后复盘；根因分析 [技术]<br>💬 <em>The team held a postmortem to understand why the field deployment caused a reset loop.</em></p>
+</blockquote>
+<p><strong>31. regression</strong> &#x2F;rɪˈɡrɛʃən&#x2F;</p>
+<blockquote>
+<p>📖 回归（测试&#x2F;性能退化） [技术]<br>💬 <em>Run the regression test suite after every commit to catch newly introduced bugs.</em></p>
+</blockquote>
+<p><strong>32. calibration</strong> &#x2F;ˌkælɪˈbreɪʃən&#x2F;</p>
+<blockquote>
+<p>📖 校准；标定 [技术]<br>💬 <em>Sensor calibration compensates for manufacturing tolerances and temperature drift.</em></p>
+</blockquote>
+<p><strong>33. oscillation</strong> &#x2F;ˌɒsɪˈleɪʃən&#x2F;</p>
+<blockquote>
+<p>📖 振荡；振动 [技术]<br>💬 <em>Too much integral gain in the PID controller causes sustained oscillation.</em></p>
+</blockquote>
+<p><strong>34. abstracted</strong> &#x2F;æbˈstræktɪd&#x2F;</p>
+<blockquote>
+<p>📖 已抽象化的；封装好的 [技术]<br>💬 <em>The abstracted GPIO API makes your application code portable across MCU families.</em></p>
+</blockquote>
+<p><strong>35. granular</strong> &#x2F;ˈɡrænjʊlər&#x2F;</p>
+<blockquote>
+<p>📖 细粒度的；精细的 [技术]<br>💬 <em>More granular power domains allow each subsystem to be switched off independently.</em></p>
+</blockquote>
+<p><strong>36. succumb</strong> &#x2F;səˈkʌm&#x2F;</p>
+<blockquote>
+<p>📖 屈服；被压倒 [书面]<br>💬 <em>Don’t let the project succumb to scope creep by adding unplanned features.</em></p>
+</blockquote>
+<p><strong>37. concede</strong> &#x2F;kənˈsiːd&#x2F;</p>
+<blockquote>
+<p>📖 承认；让步 [书面]<br>💬 <em>You must concede that software bugs caused by uninitialized pointers are hard to trace.</em></p>
+</blockquote>
+<p><strong>38. incur</strong> &#x2F;ɪnˈkɜːr&#x2F;</p>
+<blockquote>
+<p>📖 引起；招致（后果） [书面]<br>💬 <em>Frequent context switches incur overhead that can reduce overall system throughput.</em></p>
+</blockquote>
+<p><strong>39. interject</strong> &#x2F;ˌɪntərˈdʒɛkt&#x2F;</p>
+<blockquote>
+<p>📖 插话；突然插入 [口语]<br>💬 <em>The senior engineer interjected with an important observation about the memory layout.</em></p>
+</blockquote>
+<p><strong>40. oscillate</strong> &#x2F;ˈɒsɪleɪt&#x2F;</p>
+<blockquote>
+<p>📖 振荡；摇摆不定 [技术]<br>💬 <em>The control output began to oscillate when the sample rate dropped too low.</em></p>
+</blockquote>
+<p><strong>41. consolidate</strong> &#x2F;kənˈsɒlɪdeɪt&#x2F;</p>
+<blockquote>
+<p>📖 整合；巩固 [面试]<br>💬 <em>Consolidate multiple small writes into one block transfer to reduce flash wear.</em></p>
+</blockquote>
+<p><strong>42. negligence</strong> &#x2F;ˈnɛɡlɪdʒəns&#x2F;</p>
+<blockquote>
+<p>📖 疏忽；粗心大意 [书面]<br>💬 <em>Negligence in handling interrupt flags leads to hard-to-reproduce system crashes.</em></p>
+</blockquote>
+<p><strong>43. preempt</strong> &#x2F;priːˈɛmpt&#x2F;</p>
+<blockquote>
+<p>📖 抢占；先发制人 [技术]<br>💬 <em>A higher-priority task can preempt the current task at any instruction boundary.</em></p>
+</blockquote>
+<p><strong>44. perpetual</strong> &#x2F;pərˈpɛtʃuəl&#x2F;</p>
+<blockquote>
+<p>📖 持续不断的；永久的 [书面]<br>💬 <em>The watchdog timer provides a perpetual safety net against software lockups.</em></p>
+</blockquote>
+<p><strong>45. delineate</strong> &#x2F;dɪˈlɪnieɪt&#x2F;</p>
+<blockquote>
+<p>📖 清晰描述；明确划定 [书面]<br>💬 <em>The architecture document should delineate the responsibilities of each software layer.</em></p>
+</blockquote>
+<p><strong>46. accelerate</strong> &#x2F;əkˈsɛləreɪt&#x2F;</p>
+<blockquote>
+<p>📖 加速；加快 [技术]<br>💬 <em>Using hardware CRC acceleration reduces firmware update verification time by 80%.</em></p>
+</blockquote>
+<p><strong>47. erode</strong> &#x2F;ɪˈroʊd&#x2F;</p>
+<blockquote>
+<p>📖 侵蚀；逐渐削弱 [书面]<br>💬 <em>Without code reviews, technical debt will erode the maintainability of the codebase.</em></p>
+</blockquote>
+<p><strong>48. infer</strong> &#x2F;ɪnˈfɜːr&#x2F;</p>
+<blockquote>
+<p>📖 推断；推理 [技术]<br>💬 <em>You can infer the fault type from the CFSR register after a HardFault exception.</em></p>
+</blockquote>
+<p><strong>49. stipulate</strong> &#x2F;ˈstɪpjʊleɪt&#x2F;</p>
+<blockquote>
+<p>📖 规定；明确要求 [书面]<br>💬 <em>The safety standard stipulates that all safety functions must be independently testable.</em></p>
+</blockquote>
+<p><strong>50. compartmentalize</strong> &#x2F;kəmˌpɑːrtˈmɛntəlaɪz&#x2F;</p>
+<blockquote>
+<p>📖 分隔；模块化隔离 [技术]<br>💬 <em>Compartmentalize fault handling so that one subsystem failure does not cascade to others.</em></p>
+</blockquote>
+</details>
+
+<hr>
+<h2 id="🗣️-地道表达（5句）"><a href="#🗣️-地道表达（5句）" class="headerlink" title="🗣️ 地道表达（5句）"></a>🗣️ 地道表达（5句）</h2><h3 id="1-burn-the-midnight-oil"><a href="#1-burn-the-midnight-oil" class="headerlink" title="1. burn the midnight oil"></a>1. burn the midnight oil</h3><p><strong>含义：</strong> 挑灯夜战；深夜加班努力工作</p>
+<p><strong>场景：</strong> 描述为赶DDL或攻克难题而工作至深夜</p>
+<p>📌 <strong>出处：</strong> <em>The Phoenix Project</em>（Gene Kim, 2013）</p>
+<blockquote>
+<p>“The ops team burned the midnight oil to stabilize the system before the morning release window.”</p>
+</blockquote>
+<hr>
+<h3 id="2-a-chain-is-only-as-strong-as-its-weakest-link"><a href="#2-a-chain-is-only-as-strong-as-its-weakest-link" class="headerlink" title="2. a chain is only as strong as its weakest link"></a>2. a chain is only as strong as its weakest link</h3><p><strong>含义：</strong> 一条链子的强度取决于最薄弱的一环；系统安全性由最弱部分决定</p>
+<p><strong>场景：</strong> 谈安全、可靠性、团队协作时强调短板效应</p>
+<p>📌 <strong>出处：</strong> <em>The Economist</em>, 2022</p>
+<blockquote>
+<p>“In cybersecurity, a chain is only as strong as its weakest link — and that link is often an unpatched embedded device.”</p>
+</blockquote>
+<hr>
+<h3 id="3-kick-the-can-down-the-road"><a href="#3-kick-the-can-down-the-road" class="headerlink" title="3. kick the can down the road"></a>3. kick the can down the road</h3><p><strong>含义：</strong> 把问题推迟解决；拖延；先应付过去</p>
+<p><strong>场景：</strong> 批评技术债、临时补丁、短视决策</p>
+<p>📌 <strong>出处：</strong> <em>BBC News</em>, 2023</p>
+<blockquote>
+<p>“Refusing to refactor the legacy driver is just kicking the can down the road — it will cause a bigger crisis in production.”</p>
+</blockquote>
+<hr>
+<h3 id="4-paint-oneself-into-a-corner"><a href="#4-paint-oneself-into-a-corner" class="headerlink" title="4. paint oneself into a corner"></a>4. paint oneself into a corner</h3><p><strong>含义：</strong> 把自己逼进死角；因错误决策而陷入困境无法脱身</p>
+<p><strong>场景：</strong> 设计架构或API时过于耦合，导致后来难以修改</p>
+<p>📌 <strong>出处：</strong> <em>The New York Times</em>, 2021</p>
+<blockquote>
+<p>“By hardcoding the baud rate into every module, the team painted themselves into a corner when the hardware team changed it.”</p>
+</blockquote>
+<hr>
+<h3 id="5-separate-the-wheat-from-the-chaff"><a href="#5-separate-the-wheat-from-the-chaff" class="headerlink" title="5. separate the wheat from the chaff"></a>5. separate the wheat from the chaff</h3><p><strong>含义：</strong> 去粗取精；区分有价值的和无用的</p>
+<p><strong>场景：</strong> 代码审查、性能分析、大量日志中筛选关键信息</p>
+<p>📌 <strong>出处：</strong> <em>The Economist</em>, 2020（源自圣经典故）</p>
+<blockquote>
+<p>“During the postmortem, the engineer had to separate the wheat from the chaff among hundreds of log lines to find the root cause.”</p>
+</blockquote>
+<hr>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-2026-03-23-批次（第4天复习-—-RTOS）"><a href="#📅-2026-03-23-批次（第4天复习-—-RTOS）" class="headerlink" title="📅 2026-03-23 批次（第4天复习 — RTOS）"></a>📅 2026-03-23 批次（第4天复习 — RTOS）</h3><p>semaphore 信号量 · mutex 互斥锁 · preemption 抢占 · scheduler 调度器 · deadlock 死锁 · starvation 任务饥饿 · spinlock 自旋锁 · preemptive 抢占式 · priority 优先级 · inversion 优先级反转 · reentrant 可重入 · atomic 原子 · fragment 碎片 · allocate 分配 · invoke 调用 · suspend 挂起 · contention 争用 · suppress 抑制 · cascade 级联 · mailbox 邮箱 · tick 滴答 · watchdog 看门狗 · trigger 触发 · partition 分区 · diligent 勤勉 · concise 简明 · adjacent 相邻 · hierarchy 层次 · resilient 有弹性 · persist 持久 · resume 恢复 · timestamp 时间戳 · acknowledge 应答 · arbitrary 任意 · finite 有限 · meticulous 一丝不苟 · ponder 深思 · spontaneous 无预兆 · critique 评析 · disrupt 干扰 · analogy 类比 · transparent 透明 · bandwidth 带宽 · iterate 迭代 · validate 验证 · offset 偏移 · saturate 饱和 · negligible 可忽略 · contiguous 连续</p>
+<h3 id="📅-2026-03-25-批次（第2天复习-—-FOC电机控制）"><a href="#📅-2026-03-25-批次（第2天复习-—-FOC电机控制）" class="headerlink" title="📅 2026-03-25 批次（第2天复习 — FOC电机控制）"></a>📅 2026-03-25 批次（第2天复习 — FOC电机控制）</h3><p>torque 转矩 · flux 磁通量 · stator 定子 · rotor 转子 · commutation 换相 · sinusoidal 正弦 · quadrature 正交(q轴) · hysteresis 磁滞 · ripple 纹波 · resolver 旋转变压器 · reluctance 磁阻 · inductance 电感 · capacitance 电容 · gain 增益 · overshoot 超调 · setpoint 设定值 · deviation 偏差 · integral 积分 · derivative 微分 · proportional 比例 · windup 积分饱和 · feedforward 前馈 · velocity 速度 · acceleration 加速度 · trajectory 轨迹 · momentum 动量 · magnitude 幅值 · dissipate 耗散 · attenuate 衰减 · converge 收敛 · diverge 发散 · synthesize 综合 · inference 推断 · discern 辨别 · obsolete 过时 · deteriorate 恶化 · ambivalent 矛盾 · persevere 坚持 · endeavor 努力 · tenacious 坚韧 · procrastinate 拖延 · emulate 模拟 · paradox 悖论 · circumvent 绕过 · exemplify 体现 · anticipate 预见 · facilitate 促进 · constitute 构成 · portray 描绘 · manifest 表现</p>
+<h3 id="📅-2026-03-26-批次（第1天复习-—-通信协议）"><a href="#📅-2026-03-26-批次（第1天复习-—-通信协议）" class="headerlink" title="📅 2026-03-26 批次（第1天复习 — 通信协议）"></a>📅 2026-03-26 批次（第1天复习 — 通信协议）</h3><p>protocol 协议 · topology 拓扑 · broadcast 广播 · gateway 网关 · mesh 网状 · baud 波特率 · parity 奇偶校验 · framing 帧格式 · retransmit 重传 · isochronous 等时 · bulk 批量传输 · notification BLE通知 · indication BLE指示 · bonding 绑定 · hopping 跳频 · whitelist 白名单 · congestion 拥塞 · propagation 传播延迟 · transient 瞬变 · negotiate 协商 · compliance 合规 · aggregate 汇聚 · orchestrate 协调 · obfuscate 混淆 · resilience 弹性 · latent 潜伏 · arbitrate 仲裁 · coil Modbus线圈 · holding 保持寄存器 · enumeration USB枚举 · endpoint 端点 · characteristic GATT特征 · profile 配置规范 · pairing 配对 · advertisement 广播包 · central BLE主机 · slot 时隙 · descriptor 描述符 · interoperability 互操作性 · integrity 完整性 · concurrent 并发 · synchronous 同步 · asynchronous 异步 · specification 规格 · modulate 调制 · reconcile 使一致 · autonomous 自主 · scrutiny 审查 · deprecation 弃用 · encapsulate 封装</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/" rel="tag"># 状态机</a>
+              <a href="/tags/%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84/" rel="tag"># 固件架构</a>
+              <a href="/tags/Bootloader/" rel="tag"># Bootloader</a>
+              <a href="/tags/OTA/" rel="tag"># OTA</a>
+              <a href="/tags/%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1/" rel="tag"># 分层设计</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/26/daily-study-2026-03-26/" rel="prev" title="每日学习 — 2026-03-26">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-03-26
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">289k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:30</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
