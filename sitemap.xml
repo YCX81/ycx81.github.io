@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ycx81.github.io/2026/03/28/daily-study-2026-03-28/</loc>
+    
+    <lastmod>2026-03-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://ycx81.github.io/2026/03/29/daily-study-2026-03-29/</loc>
     
     <lastmod>2026-03-29</lastmod>
@@ -812,6 +821,34 @@
   
   <url>
     <loc>http://ycx81.github.io/tags/HardFault/</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC/</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/linker-script/</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/memory-layout/</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
