@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：调试技术（GDB · SWD · 逻辑分析仪 · HardFault 分析） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;22 · 3&#x2F;25 · 3&#x2F;27）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-03-29">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/29/daily-study-2026-03-29/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：调试技术（GDB · SWD · 逻辑分析仪 · HardFault 分析） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;22 · 3&#x2F;25 · 3&#x2F;27）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-29T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-29T07:27:42.743Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="调试">
+<meta property="article:tag" content="GDB">
+<meta property="article:tag" content="SWD">
+<meta property="article:tag" content="HardFault">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/29/daily-study-2026-03-29/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/29/daily-study-2026-03-29/","path":"2026/03/29/daily-study-2026-03-29/","title":"每日学习 — 2026-03-29"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-03-29 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：调试技术全景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-GDB-%E8%B0%83%E8%AF%95%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">1.1.</span> <span class="nav-text">1. GDB 调试工作流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SWD-%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.2.</span> <span class="nav-text">2. SWD 调试接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%80%BB%E8%BE%91%E5%88%86%E6%9E%90%E4%BB%AA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">1.3.</span> <span class="nav-text">3. 逻辑分析仪使用技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-HardFault-%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="nav-number">1.4.</span> <span class="nav-text">4. HardFault 分析方法论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-22-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88volatile-%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">📅 3&#x2F;22 词汇 — 第 7 天复习（volatile 主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-25-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88FOC-%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">📅 3&#x2F;25 词汇 — 第 4 天复习（FOC 主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-27-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88Architecture-%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">📅 3&#x2F;27 词汇 — 第 2 天复习（Architecture 主题）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">3.1.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">4.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cthrow-in-the-towel%E2%80%9D"><span class="nav-number">4.1.</span> <span class="nav-text">1. “throw in the towel”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cmove-the-goalposts%E2%80%9D"><span class="nav-number">4.2.</span> <span class="nav-text">2. “move the goalposts”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Ckeep-one%E2%80%99s-head-above-water%E2%80%9D"><span class="nav-number">4.3.</span> <span class="nav-text">3. “keep one’s head above water”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Csquare-peg-in-a-round-hole%E2%80%9D"><span class="nav-number">4.4.</span> <span class="nav-text">4. “square peg in a round hole”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cget-the-ball-rolling%E2%80%9D"><span class="nav-number">4.5.</span> <span class="nav-text">5. “get the ball rolling”</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/29/daily-study-2026-03-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-03-29 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-03-29
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-29 09:00:00" itemprop="dateCreated datePublished" datetime="2026-03-29T09:00:00+08:00">2026-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>调试技术（GDB · SWD · 逻辑分析仪 · HardFault 分析）</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;22 · 3&#x2F;25 · 3&#x2F;27）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：调试技术全景"><a href="#🔧-嵌入式知识：调试技术全景" class="headerlink" title="🔧 嵌入式知识：调试技术全景"></a>🔧 嵌入式知识：调试技术全景</h2><h3 id="1-GDB-调试工作流"><a href="#1-GDB-调试工作流" class="headerlink" title="1. GDB 调试工作流"></a>1. GDB 调试工作流</h3><p><code>arm-none-eabi-gdb</code> 配合 <code>openocd</code> 是嵌入式调试的黄金组合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 OpenOCD（连接 ST-Link / J-Link）</span></span><br><span class="line">openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另一终端启动 GDB</span></span><br><span class="line">arm-none-eabi-gdb build/firmware.elf</span><br><span class="line">(gdb) target remote :3333</span><br><span class="line">(gdb) monitor reset halt</span><br><span class="line">(gdb) load                      <span class="comment"># 烧录 firmware</span></span><br><span class="line">(gdb) <span class="built_in">break</span> main                <span class="comment"># 设断点</span></span><br><span class="line">(gdb) <span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用 GDB 命令速查：</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>info registers</code></td>
+<td>查看所有 CPU 寄存器</td>
+</tr>
+<tr>
+<td><code>x/16xw 0x20000000</code></td>
+<td>以十六进制查看内存</td>
+</tr>
+<tr>
+<td><code>backtrace</code> &#x2F; <code>bt</code></td>
+<td>调用栈回溯</td>
+</tr>
+<tr>
+<td><code>watch g_counter</code></td>
+<td>设置数据观察点（watchpoint）</td>
+</tr>
+<tr>
+<td><code>set $pc = 0x08001234</code></td>
+<td>手动设置 PC 指针</td>
+</tr>
+<tr>
+<td><code>disassemble</code></td>
+<td>反汇编当前函数</td>
+</tr>
+<tr>
+<td><code>info locals</code></td>
+<td>查看局部变量</td>
+</tr>
+<tr>
+<td><code>print/x *(uint32_t*)0x40020000</code></td>
+<td>读外设寄存器</td>
+</tr>
+</tbody></table>
+<p><strong>GDB Python 脚本（自动化调试）：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .gdbinit 自动执行脚本</span></span><br><span class="line">define hardfault_regs</span><br><span class="line">  echo === Fault Registers ===\n</span><br><span class="line">  x/1xw <span class="number">0xE000ED28</span>    <span class="comment"># CFSR</span></span><br><span class="line">  x/1xw <span class="number">0xE000ED2C</span>    <span class="comment"># HFSR</span></span><br><span class="line">  x/1xw <span class="number">0xE000ED34</span>    <span class="comment"># MMFAR</span></span><br><span class="line">  x/1xw <span class="number">0xE000ED38</span>    <span class="comment"># BFAR</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-SWD-调试接口"><a href="#2-SWD-调试接口" class="headerlink" title="2. SWD 调试接口"></a>2. SWD 调试接口</h3><p><strong>SWD（Serial Wire Debug）</strong> 是 ARM CoreSight 调试架构的 2 线接口，比 JTAG（4 线）更适合 pin 受限的嵌入式产品。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">调试主机（PC）</span><br><span class="line">     │</span><br><span class="line">  调试探针（ST-Link / J-Link / DAPLink）</span><br><span class="line">     │  SWDCLK + SWDIO（2 线）</span><br><span class="line">  目标 MCU</span><br><span class="line">     ├── CPU 内核调试（断点/单步）</span><br><span class="line">     ├── ETM/ITM 跟踪（SWO 引脚）</span><br><span class="line">     └── Flash 编程</span><br></pre></td></tr></table></figure>
+
+<p><strong>SWO（Serial Wire Output）</strong> — 免费的 printf：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// STM32 ITM 输出（无需 UART，通过 SWD SWO 引脚）</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;core_cm4.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _write(<span class="type">int</span> fd, <span class="type">char</span> *ptr, <span class="type">int</span> len) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        ITM_SendChar((<span class="type">uint32_t</span>)*ptr++);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 之后 printf 输出直接出现在 Ozone / STM32CubeIDE SWO Viewer</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-逻辑分析仪使用技巧"><a href="#3-逻辑分析仪使用技巧" class="headerlink" title="3. 逻辑分析仪使用技巧"></a>3. 逻辑分析仪使用技巧</h3><p>逻辑分析仪（LA）适合分析数字协议时序，不适合模拟信号（用示波器）。</p>
+<p><strong>推荐工具：</strong> Sigrok + PulseView（开源）、Saleae Logic（商业）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">常见使用场景：</span><br><span class="line">┌─────────────────────────────────────────────────┐</span><br><span class="line">│  I2C  — 验证 ACK/NACK、地址、时序是否符合规范  │</span><br><span class="line">│  SPI  — 检查 CPOL/CPHA 极性、CS 时序           │</span><br><span class="line">│  UART — 验证波特率、校验位、起止位             │</span><br><span class="line">│  CAN  — 分析帧 ID、仲裁、错误帧               │</span><br><span class="line">│  PWM  — 测量频率/占空比精度、毛刺（glitch）    │</span><br><span class="line">└─────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>实战诊断流程：</strong></p>
+<ol>
+<li><strong>探针夹到信号线</strong>（注意接地！地不共容易漏电感）</li>
+<li><strong>设置触发条件</strong>（如 I2C START 条件）</li>
+<li><strong>采集</strong>，选对协议解码器</li>
+<li><strong>对照数据手册时序图</strong>，找不符合的地方</li>
+<li><strong>常见问题：</strong> 上拉阻值过大导致上升沿迟缓、SPI 从机采样偏移</li>
+</ol>
+<hr>
+<h3 id="4-HardFault-分析方法论"><a href="#4-HardFault-分析方法论" class="headerlink" title="4. HardFault 分析方法论"></a>4. HardFault 分析方法论</h3><p>Cortex-M HardFault 是一切严重错误的”最终归宿”，包括总线错误、非法指令、栈溢出等。</p>
+<p><strong>Step 1：读 Fault 状态寄存器</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 HardFault 中断中保存上下文</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">HardFault_Handler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> CFSR  = SCB-&gt;CFSR;   <span class="comment">// 复合故障状态寄存器</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> HFSR  = SCB-&gt;HFSR;   <span class="comment">// 硬故障状态寄存器</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> MMFAR = SCB-&gt;MMFAR;  <span class="comment">// MemManage 故障地址</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> BFAR  = SCB-&gt;BFAR;   <span class="comment">// 总线故障地址</span></span><br><span class="line">    __asm <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;bkpt #0&quot;</span>)</span>; <span class="comment">// 触发断点，让调试器接管</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 2：从栈帧还原调用现场</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HardFault 触发时，CPU 自动压栈：</span><br><span class="line">┌────────────┐  ← SP 进入 Handler 时</span><br><span class="line">│   xPSR     │</span><br><span class="line">│   PC       │  ← 这是发生故障时的指令地址！</span><br><span class="line">│   LR       │</span><br><span class="line">│   R12      │</span><br><span class="line">│   R3       │</span><br><span class="line">│   R2       │</span><br><span class="line">│   R1       │</span><br><span class="line">│   R0       │  ← SP 的原始值</span><br><span class="line">└────────────┘</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取压栈的 PC（发生故障的地址）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">get_fault_pc</span><span class="params">(<span class="type">uint32_t</span> *sp)</span> &#123;</span><br><span class="line">    <span class="type">uint32_t</span> stacked_pc = sp[<span class="number">6</span>]; <span class="comment">// PC 在栈帧偏移 6</span></span><br><span class="line">    <span class="comment">// 用 addr2line 查找对应源码行</span></span><br><span class="line">    <span class="comment">// arm-none-eabi-addr2line -e firmware.elf 0x08003abc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 3：常见 HardFault 原因一览</strong></p>
+<table>
+<thead>
+<tr>
+<th>CFSR 位</th>
+<th>故障类型</th>
+<th>常见原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IBUSERR</td>
+<td>指令总线错误</td>
+<td>跳转到无效地址（函数指针未初始化）</td>
+</tr>
+<tr>
+<td>PRECISERR</td>
+<td>精确数据总线错误</td>
+<td>访问非法外设地址</td>
+</tr>
+<tr>
+<td>UNSTKERR</td>
+<td>出栈错误</td>
+<td>栈指针被破坏</td>
+</tr>
+<tr>
+<td>UNDEFINSTR</td>
+<td>未定义指令</td>
+<td>Thumb&#x2F;ARM 模式切换错误</td>
+</tr>
+<tr>
+<td>UNALIGNED</td>
+<td>非对齐访问</td>
+<td>对奇地址做 32-bit 读写</td>
+</tr>
+<tr>
+<td>DIVBYZERO</td>
+<td>除零</td>
+<td>整数除法 <code>/0</code></td>
+</tr>
+</tbody></table>
+<p><strong>Step 4：工程实践</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 flash 保存 coredump，方便现场问题定位</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> COREDUMP_ADDR  0x08070000  <span class="comment">// 最后 64KB flash 区域</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">save_coredump</span><span class="params">(<span class="type">uint32_t</span> *sp)</span> &#123;</span><br><span class="line">    <span class="type">coredump_t</span> dump = &#123;</span><br><span class="line">        .magic   = <span class="number">0xDEADBEEF</span>,</span><br><span class="line">        .cfsr    = SCB-&gt;CFSR,</span><br><span class="line">        .hfsr    = SCB-&gt;HFSR,</span><br><span class="line">        .bfar    = SCB-&gt;BFAR,</span><br><span class="line">        .pc      = sp[<span class="number">6</span>],</span><br><span class="line">        .lr      = sp[<span class="number">5</span>],</span><br><span class="line">        .sp      = (<span class="type">uint32_t</span>)sp,</span><br><span class="line">    &#125;;</span><br><span class="line">    flash_write(COREDUMP_ADDR, &amp;dump, <span class="keyword">sizeof</span>(dump));</span><br><span class="line">    NVIC_SystemReset();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: GDB 断点和 watchpoint 的区别？</strong></p>
+<blockquote>
+<p>断点（breakpoint）在代码执行到某地址时暂停；观察点（watchpoint）在某内存地址的值发生变化时暂停。Cortex-M 硬件支持 4 个硬件断点（FPB）和 2 个数据观察点（DWT COMP）。</p>
+</blockquote>
+<p><strong>Q2: HardFault 发生了，没有调试器，怎么定位问题？</strong></p>
+<blockquote>
+<p>在 HardFault Handler 里把故障信息（CFSR&#x2F;HFSR&#x2F;PC&#x2F;LR）保存到 Flash 或通过 UART 输出，重启后读出来，再用 <code>addr2line</code> 或 <code>objdump</code> 还原源码位置。</p>
+</blockquote>
+<p><strong>Q3: 逻辑分析仪和示波器分别适合什么场景？</strong></p>
+<blockquote>
+<p>逻辑分析仪适合分析数字协议的逻辑关系和时序（多通道、长时间），但无法看信号质量（过冲&#x2F;下冲&#x2F;边沿）。示波器适合信号完整性分析，但通道少、储存时间短。专业调试两者配合用。</p>
+</blockquote>
+<hr>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-22-词汇-—-第-7-天复习（volatile-主题）"><a href="#📅-3-x2F-22-词汇-—-第-7-天复习（volatile-主题）" class="headerlink" title="📅 3&#x2F;22 词汇 — 第 7 天复习（volatile 主题）"></a>📅 3&#x2F;22 词汇 — 第 7 天复习（volatile 主题）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>peripheral</td>
+<td>外设，外围设备</td>
+</tr>
+<tr>
+<td>impedance</td>
+<td>阻抗</td>
+</tr>
+<tr>
+<td>latency</td>
+<td>延迟，潜伏期</td>
+</tr>
+<tr>
+<td>mitigate</td>
+<td>减轻，缓解</td>
+</tr>
+<tr>
+<td>elaborate</td>
+<td>详细说明</td>
+</tr>
+<tr>
+<td>bottleneck</td>
+<td>瓶颈</td>
+</tr>
+<tr>
+<td>robust</td>
+<td>健壮的，稳健的</td>
+</tr>
+<tr>
+<td>deprecate</td>
+<td>弃用，不推荐</td>
+</tr>
+<tr>
+<td>concurrency</td>
+<td>并发</td>
+</tr>
+<tr>
+<td>deterministic</td>
+<td>确定性的</td>
+</tr>
+</tbody></table>
+<h3 id="📅-3-x2F-25-词汇-—-第-4-天复习（FOC-主题）"><a href="#📅-3-x2F-25-词汇-—-第-4-天复习（FOC-主题）" class="headerlink" title="📅 3&#x2F;25 词汇 — 第 4 天复习（FOC 主题）"></a>📅 3&#x2F;25 词汇 — 第 4 天复习（FOC 主题）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>torque</td>
+<td>扭矩；转动力矩</td>
+</tr>
+<tr>
+<td>flux</td>
+<td>磁通量；流量</td>
+</tr>
+<tr>
+<td>stator</td>
+<td>定子</td>
+</tr>
+<tr>
+<td>rotor</td>
+<td>转子</td>
+</tr>
+<tr>
+<td>commutation</td>
+<td>换相；换向</td>
+</tr>
+<tr>
+<td>sinusoidal</td>
+<td>正弦波形的</td>
+</tr>
+<tr>
+<td>quadrature</td>
+<td>正交；相位差90°</td>
+</tr>
+<tr>
+<td>hysteresis</td>
+<td>磁滞现象</td>
+</tr>
+</tbody></table>
+<h3 id="📅-3-x2F-27-词汇-—-第-2-天复习（Architecture-主题）"><a href="#📅-3-x2F-27-词汇-—-第-2-天复习（Architecture-主题）" class="headerlink" title="📅 3&#x2F;27 词汇 — 第 2 天复习（Architecture 主题）"></a>📅 3&#x2F;27 词汇 — 第 2 天复习（Architecture 主题）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>coroutine</td>
+<td>协程</td>
+</tr>
+<tr>
+<td>debounce</td>
+<td>去抖动</td>
+</tr>
+<tr>
+<td>precharge</td>
+<td>预充电</td>
+</tr>
+<tr>
+<td>livelock</td>
+<td>活锁</td>
+</tr>
+<tr>
+<td>strobe</td>
+<td>选通脉冲</td>
+</tr>
+<tr>
+<td>pipeline</td>
+<td>流水线</td>
+</tr>
+<tr>
+<td>glitch</td>
+<td>毛刺；短暂故障</td>
+</tr>
+<tr>
+<td>opcode</td>
+<td>操作码；指令码</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>trace</td>
+<td>&#x2F;treɪs&#x2F;</td>
+<td>追踪；调试跟踪</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>breakpoint</td>
+<td>&#x2F;ˈbreɪkpɔɪnt&#x2F;</td>
+<td>断点</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>watchpoint</td>
+<td>&#x2F;ˈwɒtʃpɔɪnt&#x2F;</td>
+<td>观察点（数据断点）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>disassembly</td>
+<td>&#x2F;ˌdɪsəˈsembli&#x2F;</td>
+<td>反汇编</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>symbol</td>
+<td>&#x2F;ˈsɪmbəl&#x2F;</td>
+<td>调试符号</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>6</td>
+<td>linker</td>
+<td>&#x2F;ˈlɪŋkər&#x2F;</td>
+<td>链接器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>exception</td>
+<td>&#x2F;ɪkˈsepʃən&#x2F;</td>
+<td>异常</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>8</td>
+<td>trap</td>
+<td>&#x2F;træp&#x2F;</td>
+<td>陷阱指令；捕获异常</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>emulator</td>
+<td>&#x2F;ˈemjʊleɪtər&#x2F;</td>
+<td>仿真器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td>semihosting</td>
+<td>&#x2F;ˌsemiˈhoʊstɪŋ&#x2F;</td>
+<td>半主机调试模式</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>probe</td>
+<td>&#x2F;proʊb&#x2F;</td>
+<td>探针；调试探针</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>capture</td>
+<td>&#x2F;ˈkæptʃər&#x2F;</td>
+<td>捕获；采集信号</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>13</td>
+<td>decode</td>
+<td>&#x2F;diːˈkoʊd&#x2F;</td>
+<td>解码；解析协议</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>waveform</td>
+<td>&#x2F;ˈweɪvfɔːrm&#x2F;</td>
+<td>波形</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td>coredump</td>
+<td>&#x2F;ˈkɔːrdʌmp&#x2F;</td>
+<td>核心转储（内存快照）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td>backtrace</td>
+<td>&#x2F;ˈbækˌtreɪs&#x2F;</td>
+<td>调用栈回溯</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>mock</td>
+<td>&#x2F;mɒk&#x2F;</td>
+<td>模拟对象；测试替身</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>stub</td>
+<td>&#x2F;stʌb&#x2F;</td>
+<td>桩函数；测试存根</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>harness</td>
+<td>&#x2F;ˈhɑːrnɪs&#x2F;</td>
+<td>测试框架；线束</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>anomaly</td>
+<td>&#x2F;əˈnɒməli&#x2F;</td>
+<td>异常现象；异常值</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>21</td>
+<td>intermittent</td>
+<td>&#x2F;ˌɪntərˈmɪtənt&#x2F;</td>
+<td>间歇性的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>22</td>
+<td>reproduce</td>
+<td>&#x2F;ˌriːprəˈdjuːs&#x2F;</td>
+<td>复现（问题）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td>isolate</td>
+<td>&#x2F;ˈaɪsəleɪt&#x2F;</td>
+<td>隔离；定位问题</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>hypothesis</td>
+<td>&#x2F;haɪˈpɒθɪsɪs&#x2F;</td>
+<td>假设；假说</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>25</td>
+<td>symptom</td>
+<td>&#x2F;ˈsɪmptəm&#x2F;</td>
+<td>症状；表象</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>nominal</td>
+<td>&#x2F;ˈnɒmɪnəl&#x2F;</td>
+<td>标称的；额定的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>27</td>
+<td>implicit</td>
+<td>&#x2F;ɪmˈplɪsɪt&#x2F;</td>
+<td>隐含的；未明确的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>28</td>
+<td>explicit</td>
+<td>&#x2F;ɪkˈsplɪsɪt&#x2F;</td>
+<td>明确的；显式的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>29</td>
+<td>assert</td>
+<td>&#x2F;əˈsɜːrt&#x2F;</td>
+<td>断言（动词）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>30</td>
+<td>inject</td>
+<td>&#x2F;ɪnˈdʒekt&#x2F;</td>
+<td>注入（故障注入）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>31</td>
+<td>astute</td>
+<td>&#x2F;əˈstjuːt&#x2F;</td>
+<td>精明的；机敏的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>32</td>
+<td>candid</td>
+<td>&#x2F;ˈkændɪd&#x2F;</td>
+<td>坦率的；直言不讳的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>33</td>
+<td>prudent</td>
+<td>&#x2F;ˈpruːdənt&#x2F;</td>
+<td>谨慎的；审慎的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>34</td>
+<td>daunting</td>
+<td>&#x2F;ˈdɔːntɪŋ&#x2F;</td>
+<td>令人畏惧的；艰巨的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>35</td>
+<td>brevity</td>
+<td>&#x2F;ˈbrevɪti&#x2F;</td>
+<td>简洁；简短</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>36</td>
+<td>conjecture</td>
+<td>&#x2F;kənˈdʒektʃər&#x2F;</td>
+<td>猜测；未经证实的判断</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>37</td>
+<td>pertinent</td>
+<td>&#x2F;ˈpɜːrtɪnənt&#x2F;</td>
+<td>相关的；切题的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>38</td>
+<td>tenuous</td>
+<td>&#x2F;ˈtenjuəs&#x2F;</td>
+<td>薄弱的；缺乏支撑的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>39</td>
+<td>plausible</td>
+<td>&#x2F;ˈplɔːzɪbəl&#x2F;</td>
+<td>合理的；似乎可信的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>40</td>
+<td>exacerbate</td>
+<td>&#x2F;ɪɡˈzæsərbeɪt&#x2F;</td>
+<td>加剧；使恶化</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>41</td>
+<td>proactive</td>
+<td>&#x2F;ˌproʊˈæktɪv&#x2F;</td>
+<td>主动的；积极防范的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>42</td>
+<td>tangible</td>
+<td>&#x2F;ˈtændʒɪbəl&#x2F;</td>
+<td>切实的；有形的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>43</td>
+<td>stringent</td>
+<td>&#x2F;ˈstrɪndʒənt&#x2F;</td>
+<td>严格的；苛刻的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>44</td>
+<td>marginal</td>
+<td>&#x2F;ˈmɑːrdʒɪnəl&#x2F;</td>
+<td>边缘的；临界的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>45</td>
+<td>lucid</td>
+<td>&#x2F;ˈluːsɪd&#x2F;</td>
+<td>清晰的；易懂的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>46</td>
+<td>meager</td>
+<td>&#x2F;ˈmiːɡər&#x2F;</td>
+<td>贫乏的；不足的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>47</td>
+<td>allude</td>
+<td>&#x2F;əˈluːd&#x2F;</td>
+<td>暗指；间接提到</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>48</td>
+<td>pivotal</td>
+<td>&#x2F;ˈpɪvətəl&#x2F;</td>
+<td>关键的；至关重要的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>49</td>
+<td>comprehensive</td>
+<td>&#x2F;ˌkɒmprɪˈhensɪv&#x2F;</td>
+<td>全面的；综合性的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>50</td>
+<td>adept</td>
+<td>&#x2F;əˈdept&#x2F;</td>
+<td>熟练的；精通的</td>
+<td>面试</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>trace</strong> &#x2F;treɪs&#x2F; — 追踪；调试跟踪信息 <code>技术</code></p>
+<blockquote>
+<p>Use ETM trace to capture every instruction the CPU executes for post-mortem analysis.</p>
+</blockquote>
+</li>
+<li><p><strong>breakpoint</strong> &#x2F;ˈbreɪkpɔɪnt&#x2F; — 断点 <code>技术</code></p>
+<blockquote>
+<p>Set a breakpoint at the interrupt handler entry to measure interrupt latency in GDB.</p>
+</blockquote>
+</li>
+<li><p><strong>watchpoint</strong> &#x2F;ˈwɒtʃpɔɪnt&#x2F; — 观察点（数据断点） <code>技术</code></p>
+<blockquote>
+<p>A watchpoint halts execution the instant a global variable is written by an unexpected code path.</p>
+</blockquote>
+</li>
+<li><p><strong>disassembly</strong> &#x2F;ˌdɪsəˈsembli&#x2F; — 反汇编 <code>技术</code></p>
+<blockquote>
+<p>Study the disassembly to verify that the compiler actually inlined the critical loop.</p>
+</blockquote>
+</li>
+<li><p><strong>symbol</strong> &#x2F;ˈsɪmbəl&#x2F; — 调试符号 <code>技术</code></p>
+<blockquote>
+<p>Strip debug symbols from release builds to reduce firmware size and protect IP.</p>
+</blockquote>
+</li>
+<li><p><strong>linker</strong> &#x2F;ˈlɪŋkər&#x2F; — 链接器 <code>技术</code></p>
+<blockquote>
+<p>The linker resolves all symbol references and produces the final binary.</p>
+</blockquote>
+</li>
+<li><p><strong>exception</strong> &#x2F;ɪkˈsepʃən&#x2F; — 异常 <code>技术</code></p>
+<blockquote>
+<p>An unaligned memory access triggers a usage-fault exception on Cortex-M3.</p>
+</blockquote>
+</li>
+<li><p><strong>trap</strong> &#x2F;træp&#x2F; — 陷阱指令；捕获异常 <code>技术</code></p>
+<blockquote>
+<p>A software trap can deliberately trigger a breakpoint to halt the debugger at a known state.</p>
+</blockquote>
+</li>
+<li><p><strong>emulator</strong> &#x2F;ˈemjʊleɪtər&#x2F; — 仿真器 <code>技术</code></p>
+<blockquote>
+<p>The QEMU emulator lets you test ARM firmware without physical hardware.</p>
+</blockquote>
+</li>
+<li><p><strong>semihosting</strong> &#x2F;ˌsemiˈhoʊstɪŋ&#x2F; — 半主机调试模式 <code>技术</code></p>
+<blockquote>
+<p>Semihosting routes printf output over the SWD interface to the host debugger console.</p>
+</blockquote>
+</li>
+<li><p><strong>probe</strong> &#x2F;proʊb&#x2F; — 探针；调试探针 <code>技术</code></p>
+<blockquote>
+<p>Attach the logic analyzer probe to the SPI clock line to verify timing margins.</p>
+</blockquote>
+</li>
+<li><p><strong>capture</strong> &#x2F;ˈkæptʃər&#x2F; — 捕获；采集信号 <code>技术</code></p>
+<blockquote>
+<p>Capture the CAN bus traffic at 500 kbps to verify message arbitration behavior.</p>
+</blockquote>
+</li>
+<li><p><strong>decode</strong> &#x2F;diːˈkoʊd&#x2F; — 解码；解析协议 <code>技术</code></p>
+<blockquote>
+<p>Most logic analyzers can automatically decode I2C transactions and highlight NACK responses.</p>
+</blockquote>
+</li>
+<li><p><strong>waveform</strong> &#x2F;ˈweɪvfɔːrm&#x2F; — 波形 <code>技术</code></p>
+<blockquote>
+<p>Inspect the SPI waveform to confirm that CPOL and CPHA match the sensor datasheet.</p>
+</blockquote>
+</li>
+<li><p><strong>coredump</strong> &#x2F;ˈkɔːrdʌmp&#x2F; — 核心转储（内存快照） <code>技术</code></p>
+<blockquote>
+<p>Save a coredump to flash on fault so engineers can do post-mortem analysis in the field.</p>
+</blockquote>
+</li>
+<li><p><strong>backtrace</strong> &#x2F;ˈbækˌtreɪs&#x2F; — 调用栈回溯 <code>技术</code></p>
+<blockquote>
+<p>Run backtrace in GDB to see the full call chain that led to the HardFault.</p>
+</blockquote>
+</li>
+<li><p><strong>mock</strong> &#x2F;mɒk&#x2F; — 模拟对象；测试替身 <code>技术</code></p>
+<blockquote>
+<p>Mock the I2C driver in unit tests so firmware logic can be tested on a host PC.</p>
+</blockquote>
+</li>
+<li><p><strong>stub</strong> &#x2F;stʌb&#x2F; — 桩函数；测试存根 <code>技术</code></p>
+<blockquote>
+<p>A stub replaces an unimplemented hardware driver with a minimal placeholder.</p>
+</blockquote>
+</li>
+<li><p><strong>harness</strong> &#x2F;ˈhɑːrnɪs&#x2F; — 测试框架；线束 <code>技术</code></p>
+<blockquote>
+<p>The hardware-in-the-loop test harness sends CAN commands and checks actuator responses.</p>
+</blockquote>
+</li>
+<li><p><strong>anomaly</strong> &#x2F;əˈnɒməli&#x2F; — 异常现象；异常值 <code>技术</code></p>
+<blockquote>
+<p>A current anomaly on the bus during initialization revealed a short circuit in the PCB.</p>
+</blockquote>
+</li>
+<li><p><strong>intermittent</strong> &#x2F;ˌɪntərˈmɪtənt&#x2F; — 间歇性的 <code>技术</code></p>
+<blockquote>
+<p>Intermittent failures are the hardest bugs to reproduce; always add detailed logging first.</p>
+</blockquote>
+</li>
+<li><p><strong>reproduce</strong> &#x2F;ˌriːprəˈdjuːs&#x2F; — 复现（问题） <code>技术</code></p>
+<blockquote>
+<p>The first step in debugging is to reliably reproduce the failure under controlled conditions.</p>
+</blockquote>
+</li>
+<li><p><strong>isolate</strong> &#x2F;ˈaɪsəleɪt&#x2F; — 隔离；定位问题 <code>技术</code></p>
+<blockquote>
+<p>Disable half the features and retest to isolate which subsystem is causing the crash.</p>
+</blockquote>
+</li>
+<li><p><strong>hypothesis</strong> &#x2F;haɪˈpɒθɪsɪs&#x2F; — 假设；假说 <code>书面</code></p>
+<blockquote>
+<p>Before changing any code, formulate a clear hypothesis about the root cause.</p>
+</blockquote>
+</li>
+<li><p><strong>symptom</strong> &#x2F;ˈsɪmptəm&#x2F; — 症状；表象 <code>技术</code></p>
+<blockquote>
+<p>A symptom like random resets could have dozens of root causes — measure first, guess second.</p>
+</blockquote>
+</li>
+<li><p><strong>nominal</strong> &#x2F;ˈnɒmɪnəl&#x2F; — 标称的；额定的 <code>技术</code></p>
+<blockquote>
+<p>The supply voltage should remain within ±5% of its nominal 3.3 V value.</p>
+</blockquote>
+</li>
+<li><p><strong>implicit</strong> &#x2F;ɪmˈplɪsɪt&#x2F; — 隐含的；未明确的 <code>书面</code></p>
+<blockquote>
+<p>There is an implicit assumption in this driver that the peripheral is already initialized.</p>
+</blockquote>
+</li>
+<li><p><strong>explicit</strong> &#x2F;ɪkˈsplɪsɪt&#x2F; — 明确的；显式的 <code>技术</code></p>
+<blockquote>
+<p>Make clock configurations explicit rather than relying on reset-default register values.</p>
+</blockquote>
+</li>
+<li><p><strong>assert</strong> &#x2F;əˈsɜːrt&#x2F; — 断言（动词） <code>技术</code></p>
+<blockquote>
+<p>assert(buffer !&#x3D; NULL) catches null-pointer bugs in debug builds at negligible runtime cost.</p>
+</blockquote>
+</li>
+<li><p><strong>inject</strong> &#x2F;ɪnˈdʒekt&#x2F; — 注入（故障注入） <code>技术</code></p>
+<blockquote>
+<p>Fault injection tests deliberately inject bit errors to verify that CRC detection works correctly.</p>
+</blockquote>
+</li>
+<li><p><strong>astute</strong> &#x2F;əˈstjuːt&#x2F; — 精明的；机敏的 <code>面试</code></p>
+<blockquote>
+<p>An astute engineer noticed that the bug only appeared when two tasks ran on the same tick.</p>
+</blockquote>
+</li>
+<li><p><strong>candid</strong> &#x2F;ˈkændɪd&#x2F; — 坦率的；直言不讳的 <code>书面</code></p>
+<blockquote>
+<p>Be candid in your post-mortem — a blame-free culture learns faster than a defensive one.</p>
+</blockquote>
+</li>
+<li><p><strong>prudent</strong> &#x2F;ˈpruːdənt&#x2F; — 谨慎的；审慎的 <code>书面</code></p>
+<blockquote>
+<p>It is prudent to validate all sensor inputs before feeding them into the control loop.</p>
+</blockquote>
+</li>
+<li><p><strong>daunting</strong> &#x2F;ˈdɔːntɪŋ&#x2F; — 令人畏惧的；艰巨的 <code>书面</code></p>
+<blockquote>
+<p>Debugging a 200,000-line codebase without documentation can feel daunting, but structured search helps.</p>
+</blockquote>
+</li>
+<li><p><strong>brevity</strong> &#x2F;ˈbrevɪti&#x2F; — 简洁；简短 <code>书面</code></p>
+<blockquote>
+<p>In technical writing, brevity is a virtue — one precise sentence beats three vague ones.</p>
+</blockquote>
+</li>
+<li><p><strong>conjecture</strong> &#x2F;kənˈdʒektʃər&#x2F; — 猜测；未经证实的判断 <code>书面</code></p>
+<blockquote>
+<p>Avoid debugging by conjecture; instrument the code and let data guide you to the root cause.</p>
+</blockquote>
+</li>
+<li><p><strong>pertinent</strong> &#x2F;ˈpɜːrtɪnənt&#x2F; — 相关的；切题的 <code>书面</code></p>
+<blockquote>
+<p>Only include pertinent register dumps in the bug report to keep it actionable.</p>
+</blockquote>
+</li>
+<li><p><strong>tenuous</strong> &#x2F;ˈtenjuəs&#x2F; — 薄弱的；缺乏支撑的 <code>书面</code></p>
+<blockquote>
+<p>The connection between the interrupt flag and the reset is tenuous without more evidence.</p>
+</blockquote>
+</li>
+<li><p><strong>plausible</strong> &#x2F;ˈplɔːzɪbəl&#x2F; — 合理的；似乎可信的 <code>书面</code></p>
+<blockquote>
+<p>Stack corruption is a plausible explanation given the random nature of the crashes.</p>
+</blockquote>
+</li>
+<li><p><strong>exacerbate</strong> &#x2F;ɪɡˈzæsərbeɪt&#x2F; — 加剧；使恶化 <code>书面</code></p>
+<blockquote>
+<p>High ambient temperature can exacerbate thermal throttling and cause intermittent resets.</p>
+</blockquote>
+</li>
+<li><p><strong>proactive</strong> &#x2F;ˌproʊˈæktɪv&#x2F; — 主动的；积极防范的 <code>面试</code></p>
+<blockquote>
+<p>Take a proactive approach to error handling — design for failure, not just the happy path.</p>
+</blockquote>
+</li>
+<li><p><strong>tangible</strong> &#x2F;ˈtændʒɪbəl&#x2F; — 切实的；有形的 <code>书面</code></p>
+<blockquote>
+<p>The refactoring effort produced tangible gains: 30% faster boot time and 20% smaller binary.</p>
+</blockquote>
+</li>
+<li><p><strong>stringent</strong> &#x2F;ˈstrɪndʒənt&#x2F; — 严格的；苛刻的 <code>技术</code></p>
+<blockquote>
+<p>Automotive firmware must meet stringent AUTOSAR standards for memory protection and timing.</p>
+</blockquote>
+</li>
+<li><p><strong>marginal</strong> &#x2F;ˈmɑːrdʒɪnəl&#x2F; — 边缘的；临界的 <code>技术</code></p>
+<blockquote>
+<p>Timing margins are marginal at 100°C — add guard bands to prevent setup-time violations.</p>
+</blockquote>
+</li>
+<li><p><strong>lucid</strong> &#x2F;ˈluːsɪd&#x2F; — 清晰的；易懂的 <code>书面</code></p>
+<blockquote>
+<p>A lucid architecture diagram saves hours of code archaeology for every new team member.</p>
+</blockquote>
+</li>
+<li><p><strong>meager</strong> &#x2F;ˈmiːɡər&#x2F; — 贫乏的；不足的 <code>书面</code></p>
+<blockquote>
+<p>Microcontrollers with meager RAM force developers to optimize every data structure carefully.</p>
+</blockquote>
+</li>
+<li><p><strong>allude</strong> &#x2F;əˈluːd&#x2F; — 暗指；间接提到 <code>书面</code></p>
+<blockquote>
+<p>The datasheet alludes to a timing constraint in a footnote that most engineers overlook.</p>
+</blockquote>
+</li>
+<li><p><strong>pivotal</strong> &#x2F;ˈpɪvətəl&#x2F; — 关键的；至关重要的 <code>书面</code></p>
+<blockquote>
+<p>The transition from polling to interrupt-driven I&#x2F;O was pivotal for reducing CPU load.</p>
+</blockquote>
+</li>
+<li><p><strong>comprehensive</strong> &#x2F;ˌkɒmprɪˈhensɪv&#x2F; — 全面的；综合性的 <code>面试</code></p>
+<blockquote>
+<p>A comprehensive test plan covers not just happy-path scenarios but also boundary conditions and fault modes.</p>
+</blockquote>
+</li>
+<li><p><strong>adept</strong> &#x2F;əˈdept&#x2F; — 熟练的；精通的 <code>面试</code></p>
+<blockquote>
+<p>She is adept at using GDB scripts to automate repetitive debugging tasks.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“throw-in-the-towel”"><a href="#1-“throw-in-the-towel”" class="headerlink" title="1. “throw in the towel”"></a>1. “throw in the towel”</h3><p><strong>意思：</strong> 认输；放弃；承认失败<br><strong>场景：</strong> 用于描述在努力之后决定不再继续某件事</p>
+<blockquote>
+<p><strong>A:</strong> We’ve been chasing this race condition for two weeks. Should we just rewrite the module?<br><strong>B:</strong> Not yet — don’t throw in the towel. Let’s add more instrumentation first and see what the data says.</p>
+</blockquote>
+<p><em>引用：「After three rounds of failed negotiations, the smaller firm finally threw in the towel and accepted the acquisition offer.」— The Economist, 2022</em></p>
+<hr>
+<h3 id="2-“move-the-goalposts”"><a href="#2-“move-the-goalposts”" class="headerlink" title="2. “move the goalposts”"></a>2. “move the goalposts”</h3><p><strong>意思：</strong> 临时改变规则&#x2F;要求；不断提高门槛；朝令夕改<br><strong>场景：</strong> 指在项目或谈判中，一方不断改变目标或标准</p>
+<blockquote>
+<p><strong>A:</strong> The spec said 100ms latency was acceptable. Now they want 10ms.<br><strong>B:</strong> Classic — they keep moving the goalposts. We need to freeze requirements before the next sprint.</p>
+</blockquote>
+<p><em>引用：「The client kept moving the goalposts — every sprint review ended with a new batch of requirements.」— The Pragmatic Programmer, 1999</em></p>
+<hr>
+<h3 id="3-“keep-one’s-head-above-water”"><a href="#3-“keep-one’s-head-above-water”" class="headerlink" title="3. “keep one’s head above water”"></a>3. “keep one’s head above water”</h3><p><strong>意思：</strong> 勉强维持；艰难应对局面；不被压垮<br><strong>场景：</strong> 用于描述在巨大压力下尚能维持现状</p>
+<blockquote>
+<p><strong>A:</strong> How’s the project going with only two engineers?<br><strong>B:</strong> We’re barely keeping our heads above water — critical bugs get fixed, but tech debt is piling up.</p>
+</blockquote>
+<p><em>引用：「Startups in the current downturn are struggling just to keep their heads above water.」— The New York Times, 2023</em></p>
+<hr>
+<h3 id="4-“square-peg-in-a-round-hole”"><a href="#4-“square-peg-in-a-round-hole”" class="headerlink" title="4. “square peg in a round hole”"></a>4. “square peg in a round hole”</h3><p><strong>意思：</strong> 格格不入；强行套用不合适的方案<br><strong>场景：</strong> 形容某种方案、人或事物完全不适合其所处的场合</p>
+<blockquote>
+<p><strong>A:</strong> Why did you switch from FreeRTOS to a bare-metal loop?<br><strong>B:</strong> FreeRTOS was a square peg in a round hole — the app only has one task, so the RTOS overhead wasn’t justified.</p>
+</blockquote>
+<p><em>引用：「Trying to run a legacy monolithic architecture inside containers is like forcing a square peg into a round hole.」— The Economist Technology Quarterly, 2021</em></p>
+<hr>
+<h3 id="5-“get-the-ball-rolling”"><a href="#5-“get-the-ball-rolling”" class="headerlink" title="5. “get the ball rolling”"></a>5. “get the ball rolling”</h3><p><strong>意思：</strong> 开始行动；启动某事；推动事情开始运转<br><strong>场景：</strong> 用于鼓励或宣布正式开始一个项目或讨论</p>
+<blockquote>
+<p><strong>A:</strong> We’ve been talking about adding unit tests for months.<br><strong>B:</strong> I know. Let me get the ball rolling — I’ll set up the CMock framework today and write the first three test cases.</p>
+</blockquote>
+<p><em>引用：「To get the ball rolling on cultural change, leadership must visibly model the behaviors they want to see.」— Harvard Business Review, 2020</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/%E8%B0%83%E8%AF%95/" rel="tag"># 调试</a>
+              <a href="/tags/GDB/" rel="tag"># GDB</a>
+              <a href="/tags/SWD/" rel="tag"># SWD</a>
+              <a href="/tags/HardFault/" rel="tag"># HardFault</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/27/daily-study-2026-03-27/" rel="prev" title="每日学习 — 2026-03-27">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-03-27
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">292k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:43</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
