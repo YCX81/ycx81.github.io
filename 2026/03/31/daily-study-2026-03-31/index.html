@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：安全标准与 MISRA C · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;24, 3&#x2F;29, 3&#x2F;30）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-03-31">
+<meta property="og:url" content="http://ycx81.github.io/2026/03/31/daily-study-2026-03-31/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：安全标准与 MISRA C · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;24, 3&#x2F;29, 3&#x2F;30）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-31T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-31T00:10:45.800Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="功能安全">
+<meta property="article:tag" content="MISRA">
+<meta property="article:tag" content="安全标准">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/03/31/daily-study-2026-03-31/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/03/31/daily-study-2026-03-31/","path":"2026/03/31/daily-study-2026-03-31/","title":"每日学习 — 2026-03-31"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-03-31 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86%E4%B8%8E-MISRA-C"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：安全标准与 MISRA C</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">1. 核心原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">2. 关键代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B8%B8%E8%A7%81%E8%AF%AF%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">3. 常见误解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Ccut-corners%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “cut corners”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cby-the-book%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “by the book”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Craise-the-bar%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “raise the bar”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cin-the-weeds%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “in the weeds”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cdrop-the-ball%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “drop the ball”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-24-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E7%B2%BE%E8%AE%B2%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;24 词汇 — 第 7 天复习（外设驱动精讲）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-29-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;29 词汇 — 第 2 天复习（调试技术全景）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-30-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BD%8E%E5%8A%9F%E8%80%97%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 3&#x2F;30 词汇 — 第 1 天复习（低功耗设计）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/03/31/daily-study-2026-03-31/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-03-31 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-03-31
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-31 09:00:00" itemprop="dateCreated datePublished" datetime="2026-03-31T09:00:00+08:00">2026-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>安全标准与 MISRA C</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;24, 3&#x2F;29, 3&#x2F;30）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：安全标准与-MISRA-C"><a href="#🔧-嵌入式知识：安全标准与-MISRA-C" class="headerlink" title="🔧 嵌入式知识：安全标准与 MISRA C"></a>🔧 嵌入式知识：安全标准与 MISRA C</h2><h3 id="1-核心原理"><a href="#1-核心原理" class="headerlink" title="1. 核心原理"></a>1. 核心原理</h3><p>功能安全标准（IEC 61508、ISO 26262、DO-178C）要求软件行为可预测、可验证。MISRA C 是一套 C 语言编码规范，通过限制语言特性消除未定义行为（UB）和实现定义行为，广泛用于汽车、航空、医疗和工业领域。</p>
+<p>MISRA C:2012 共 175 条规则，分三级：</p>
+<ul>
+<li><strong>Mandatory（强制）</strong>— 必须遵守，不允许偏离</li>
+<li><strong>Required（要求）</strong>— 应遵守，偏离需书面记录理由</li>
+<li><strong>Advisory（建议）</strong>— 鼓励遵守，不强制</li>
+</ul>
+<h3 id="2-关键代码示例"><a href="#2-关键代码示例" class="headerlink" title="2. 关键代码示例"></a>2. 关键代码示例</h3><p><strong>Rule 11.3 — 禁止不同对象类型指针互转</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 违规</span></span><br><span class="line"><span class="type">uint32_t</span> *p = (<span class="type">uint32_t</span> *)buffer;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 合规</span></span><br><span class="line"><span class="type">uint32_t</span> val;</span><br><span class="line"><span class="built_in">memcpy</span>(&amp;val, buffer, <span class="keyword">sizeof</span>(val));</span><br></pre></td></tr></table></figure>
+
+<p>原因：直接强转可能破坏对齐要求，导致 Hard Fault。</p>
+<p><strong>Rule 14.4 — 控制表达式必须是布尔类型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ if (ptr) &#123; ... &#125;</span></span><br><span class="line"><span class="comment">// ✅ if (ptr != NULL) &#123; ... &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>原因：隐式”真值”在不同平台行为可能不同。</p>
+<p><strong>Rule 15.5 — 函数应有单一出口</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 违规</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 合规</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="type">int</span> result;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) &#123; result = <span class="number">-1</span>; &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; result = x * <span class="number">2</span>; &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Rule 21.3 — 禁止动态内存分配</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ char *buf = malloc(256);</span></span><br><span class="line"><span class="comment">// ✅ static char buf[256]; // 或使用固定大小内存池</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-常见误解"><a href="#3-常见误解" class="headerlink" title="3. 常见误解"></a>3. 常见误解</h3><ul>
+<li>❌ “MISRA &#x3D; 不能用动态分配” → 准确说法：Rule 21.3 禁用 malloc&#x2F;free，但可以用静态分配的定长内存池（fixed-size pool）</li>
+<li>❌ “符合 MISRA &#x3D; 软件安全” → MISRA 只是安全拼图的一块，还需要需求追溯、MC&#x2F;DC 覆盖率测试、FMEA 分析等</li>
+<li>❌ “MISRA 只用于汽车行业” → 已扩展到 DO-178C（航空）、IEC 62304（医疗）、EN 50128（铁路）等</li>
+<li>❌ “静态分析工具能检出所有违规” → ~20% 规则需要人工代码审查（命名规范、注释要求等）</li>
+</ul>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: MISRA C:2012 中 Mandatory &#x2F; Required &#x2F; Advisory 有什么区别？</strong><br>A: Mandatory 绝对禁止偏离；Required 可偏离但需正式记录理由并经审批；Advisory 是最佳实践建议。</p>
+<p><strong>Q2: 为什么 MISRA 禁止动态内存分配？</strong><br>A: safety-critical 系统要求确定性。malloc 可能失败或产生堆碎片，导致不可预测行为。所有内存应在编译期或启动阶段静态分配。</p>
+<p><strong>Q3: 如何在已有项目中引入 MISRA？</strong><br>A: 分阶段：先用静态分析工具扫描 → 按严重级分批修复 → 先 Mandatory → 再 Required → 建立 deviation 审批流程 → CI 集成自动检查。</p>
+<p><strong>Q4: MISRA 与 CERT C 有什么区别？</strong><br>A: MISRA 侧重安全性（safety），针对嵌入式和安全关键系统；CERT C 侧重安全性（security），针对通用 C 程序的漏洞防护。</p>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-03-31-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-03-31-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>bitfield</td>
+<td>&#x2F;ˈbɪtfiːld&#x2F;</td>
+<td>位域</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>typedef</td>
+<td>&#x2F;ˈtaɪpdef&#x2F;</td>
+<td>类型定义</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>preprocessor</td>
+<td>&#x2F;priːˈprɒsɛsər&#x2F;</td>
+<td>预处理器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>macro</td>
+<td>&#x2F;ˈmækroʊ&#x2F;</td>
+<td>宏</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>inline</td>
+<td>&#x2F;ˈɪnlaɪn&#x2F;</td>
+<td>内联</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>6</td>
+<td>debounce</td>
+<td>&#x2F;diːˈbaʊns&#x2F;</td>
+<td>消抖</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>transistor</td>
+<td>&#x2F;trænˈzɪstər&#x2F;</td>
+<td>晶体管</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>8</td>
+<td>capacitor</td>
+<td>&#x2F;kəˈpæsɪtər&#x2F;</td>
+<td>电容器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>inductor</td>
+<td>&#x2F;ɪnˈdʌktər&#x2F;</td>
+<td>电感器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td>schematic</td>
+<td>&#x2F;skɪˈmætɪk&#x2F;</td>
+<td>原理图</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>footprint</td>
+<td>&#x2F;ˈfʊtprɪnt&#x2F;</td>
+<td>封装焊盘</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>crosstalk</td>
+<td>&#x2F;ˈkrɒstɔːk&#x2F;</td>
+<td>串扰</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>13</td>
+<td>sampling</td>
+<td>&#x2F;ˈsæmplɪŋ&#x2F;</td>
+<td>采样</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>quantization</td>
+<td>&#x2F;ˌkwɒntɪˈzeɪʃən&#x2F;</td>
+<td>量化</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td>aliasing</td>
+<td>&#x2F;ˈeɪliəsɪŋ&#x2F;</td>
+<td>混叠</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td>hysteresis</td>
+<td>&#x2F;ˌhɪstəˈriːsɪs&#x2F;</td>
+<td>迟滞</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>comparator</td>
+<td>&#x2F;kəmˈpærətər&#x2F;</td>
+<td>比较器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>errata</td>
+<td>&#x2F;ɪˈrɑːtə&#x2F;</td>
+<td>勘误表</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>silicon</td>
+<td>&#x2F;ˈsɪlɪkən&#x2F;</td>
+<td>硅，芯片</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>compliance</td>
+<td>&#x2F;kəmˈplaɪəns&#x2F;</td>
+<td>合规性</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>21</td>
+<td>deviation</td>
+<td>&#x2F;ˌdiːviˈeɪʃən&#x2F;</td>
+<td>偏离，偏差</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>22</td>
+<td>traceability</td>
+<td>&#x2F;ˌtreɪsəˈbɪlɪti&#x2F;</td>
+<td>可追溯性</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td>coverage</td>
+<td>&#x2F;ˈkʌvərɪdʒ&#x2F;</td>
+<td>覆盖率</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>assertion</td>
+<td>&#x2F;əˈsɜːrʃən&#x2F;</td>
+<td>断言</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>25</td>
+<td>static analysis</td>
+<td>&#x2F;ˈstætɪk əˈnæləsɪs&#x2F;</td>
+<td>静态分析</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>annotation</td>
+<td>&#x2F;ˌænəˈteɪʃən&#x2F;</td>
+<td>注解，标注</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>27</td>
+<td>invoke</td>
+<td>&#x2F;ɪnˈvoʊk&#x2F;</td>
+<td>调用</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>28</td>
+<td>coerce</td>
+<td>&#x2F;koʊˈɜːrs&#x2F;</td>
+<td>强制转换</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>29</td>
+<td>mandate</td>
+<td>&#x2F;ˈmændeɪt&#x2F;</td>
+<td>强制要求</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>30</td>
+<td>mitigate</td>
+<td>&#x2F;ˈmɪtɪɡeɪt&#x2F;</td>
+<td>减轻，缓解</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>31</td>
+<td>rationale</td>
+<td>&#x2F;ˌræʃəˈnæl&#x2F;</td>
+<td>理由，基本原理</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>32</td>
+<td>exemption</td>
+<td>&#x2F;ɪɡˈzɛmpʃən&#x2F;</td>
+<td>豁免</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>33</td>
+<td>stipulate</td>
+<td>&#x2F;ˈstɪpjuleɪt&#x2F;</td>
+<td>规定，约定</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>34</td>
+<td>oversee</td>
+<td>&#x2F;ˌoʊvərˈsiː&#x2F;</td>
+<td>监督，管理</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>35</td>
+<td>audit</td>
+<td>&#x2F;ˈɔːdɪt&#x2F;</td>
+<td>审计，审查</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>36</td>
+<td>certify</td>
+<td>&#x2F;ˈsɜːrtɪfaɪ&#x2F;</td>
+<td>认证</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>37</td>
+<td>accountability</td>
+<td>&#x2F;əˌkaʊntəˈbɪlɪti&#x2F;</td>
+<td>问责制</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>38</td>
+<td>benchmark</td>
+<td>&#x2F;ˈbɛntʃmɑːrk&#x2F;</td>
+<td>基准测试</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>39</td>
+<td>remediate</td>
+<td>&#x2F;rɪˈmiːdieɪt&#x2F;</td>
+<td>修复，补救</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>40</td>
+<td>articulate</td>
+<td>&#x2F;ɑːrˈtɪkjəleɪt&#x2F;</td>
+<td>清晰表达</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>41</td>
+<td>constraint</td>
+<td>&#x2F;kənˈstreɪnt&#x2F;</td>
+<td>约束</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>42</td>
+<td>stakeholder</td>
+<td>&#x2F;ˈsteɪkhoʊldər&#x2F;</td>
+<td>利益相关方</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>43</td>
+<td>hassle</td>
+<td>&#x2F;ˈhæsəl&#x2F;</td>
+<td>麻烦事</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>44</td>
+<td>nitpick</td>
+<td>&#x2F;ˈnɪtpɪk&#x2F;</td>
+<td>挑毛病</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>45</td>
+<td>nail down</td>
+<td>&#x2F;neɪl daʊn&#x2F;</td>
+<td>敲定，确定</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>46</td>
+<td>heads-up</td>
+<td>&#x2F;ˈhɛdzʌp&#x2F;</td>
+<td>提前通知</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>47</td>
+<td>gotcha</td>
+<td>&#x2F;ˈɡɒtʃə&#x2F;</td>
+<td>陷阱，隐患</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>48</td>
+<td>pushback</td>
+<td>&#x2F;ˈpʊʃbæk&#x2F;</td>
+<td>反对，抵制</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>49</td>
+<td>crunch</td>
+<td>&#x2F;krʌntʃ&#x2F;</td>
+<td>紧要关头</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>50</td>
+<td>offload</td>
+<td>&#x2F;ˈɒfloʊd&#x2F;</td>
+<td>分担，卸载</td>
+<td>口语</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>bitfield</strong> &#x2F;ˈbɪtfiːld&#x2F; — 位域 <code>技术</code></p>
+<blockquote>
+<p>A bitfield lets you pack multiple flags into a single register word.</p>
+</blockquote>
+</li>
+<li><p><strong>typedef</strong> &#x2F;ˈtaɪpdef&#x2F; — 类型定义 <code>技术</code></p>
+<blockquote>
+<p>Use a typedef to create readable aliases for complex struct pointers.</p>
+</blockquote>
+</li>
+<li><p><strong>preprocessor</strong> &#x2F;priːˈprɒsɛsər&#x2F; — 预处理器 <code>技术</code></p>
+<blockquote>
+<p>The preprocessor expands all macros before the compiler sees the code.</p>
+</blockquote>
+</li>
+<li><p><strong>macro</strong> &#x2F;ˈmækroʊ&#x2F; — 宏 <code>技术</code></p>
+<blockquote>
+<p>Wrap multi-statement macros in a do-while-zero block to avoid surprises.</p>
+</blockquote>
+</li>
+<li><p><strong>inline</strong> &#x2F;ˈɪnlaɪn&#x2F; — 内联 <code>技术</code></p>
+<blockquote>
+<p>Marking a short function as inline can eliminate call overhead in tight loops.</p>
+</blockquote>
+</li>
+<li><p><strong>debounce</strong> &#x2F;diːˈbaʊns&#x2F; — 消抖 <code>技术</code></p>
+<blockquote>
+<p>Always debounce mechanical switch inputs to avoid registering false presses.</p>
+</blockquote>
+</li>
+<li><p><strong>transistor</strong> &#x2F;trænˈzɪstər&#x2F; — 晶体管 <code>技术</code></p>
+<blockquote>
+<p>A MOSFET transistor switches the motor driver’s high-side rail.</p>
+</blockquote>
+</li>
+<li><p><strong>capacitor</strong> &#x2F;kəˈpæsɪtər&#x2F; — 电容器 <code>技术</code></p>
+<blockquote>
+<p>A bulk capacitor on the input rail absorbs transient voltage dips.</p>
+</blockquote>
+</li>
+<li><p><strong>inductor</strong> &#x2F;ɪnˈdʌktər&#x2F; — 电感器 <code>技术</code></p>
+<blockquote>
+<p>The buck converter’s inductor stores energy during the switch-on phase.</p>
+</blockquote>
+</li>
+<li><p><strong>schematic</strong> &#x2F;skɪˈmætɪk&#x2F; — 原理图 <code>技术</code></p>
+<blockquote>
+<p>Review the schematic carefully before sending the PCB to fabrication.</p>
+</blockquote>
+</li>
+<li><p><strong>footprint</strong> &#x2F;ˈfʊtprɪnt&#x2F; — 封装焊盘 <code>技术</code></p>
+<blockquote>
+<p>An incorrect pad footprint caused tombstoning on all 0402 resistors.</p>
+</blockquote>
+</li>
+<li><p><strong>crosstalk</strong> &#x2F;ˈkrɒstɔːk&#x2F; — 串扰 <code>技术</code></p>
+<blockquote>
+<p>Routing high-speed signals too close together introduces crosstalk noise.</p>
+</blockquote>
+</li>
+<li><p><strong>sampling</strong> &#x2F;ˈsæmplɪŋ&#x2F; — 采样 <code>技术</code></p>
+<blockquote>
+<p>The ADC sampling rate must be at least twice the signal bandwidth.</p>
+</blockquote>
+</li>
+<li><p><strong>quantization</strong> &#x2F;ˌkwɒntɪˈzeɪʃən&#x2F; — 量化 <code>技术</code></p>
+<blockquote>
+<p>A 12-bit ADC provides 4096 quantization levels across the reference range.</p>
+</blockquote>
+</li>
+<li><p><strong>aliasing</strong> &#x2F;ˈeɪliəsɪŋ&#x2F; — 混叠 <code>技术</code></p>
+<blockquote>
+<p>Without an anti-aliasing filter, high-frequency noise folds into the baseband.</p>
+</blockquote>
+</li>
+<li><p><strong>hysteresis</strong> &#x2F;ˌhɪstəˈriːsɪs&#x2F; — 迟滞 <code>技术</code></p>
+<blockquote>
+<p>Adding hysteresis to the comparator prevents output chattering near the threshold.</p>
+</blockquote>
+</li>
+<li><p><strong>comparator</strong> &#x2F;kəmˈpærətər&#x2F; — 比较器 <code>技术</code></p>
+<blockquote>
+<p>The comparator trips when the current-sense voltage exceeds the reference.</p>
+</blockquote>
+</li>
+<li><p><strong>errata</strong> &#x2F;ɪˈrɑːtə&#x2F; — 勘误表 <code>技术</code></p>
+<blockquote>
+<p>Check the chip errata before trusting the DMA controller in circular mode.</p>
+</blockquote>
+</li>
+<li><p><strong>silicon</strong> &#x2F;ˈsɪlɪkən&#x2F; — 硅，芯片 <code>技术</code></p>
+<blockquote>
+<p>The silicon revision B fixed the spurious interrupt bug on UART3.</p>
+</blockquote>
+</li>
+<li><p><strong>compliance</strong> &#x2F;kəmˈplaɪəns&#x2F; — 合规性 <code>技术</code></p>
+<blockquote>
+<p>All firmware releases must pass MISRA compliance checks in the CI pipeline.</p>
+</blockquote>
+</li>
+<li><p><strong>deviation</strong> &#x2F;ˌdiːviˈeɪʃən&#x2F; — 偏离，偏差 <code>技术</code></p>
+<blockquote>
+<p>Each MISRA rule deviation requires a signed justification in the safety case.</p>
+</blockquote>
+</li>
+<li><p><strong>traceability</strong> &#x2F;ˌtreɪsəˈbɪlɪti&#x2F; — 可追溯性 <code>技术</code></p>
+<blockquote>
+<p>ISO 26262 demands full traceability from requirements to test cases.</p>
+</blockquote>
+</li>
+<li><p><strong>coverage</strong> &#x2F;ˈkʌvərɪdʒ&#x2F; — 覆盖率 <code>技术</code></p>
+<blockquote>
+<p>We achieved 95 percent branch coverage but MC&#x2F;DC coverage was only 80 percent.</p>
+</blockquote>
+</li>
+<li><p><strong>assertion</strong> &#x2F;əˈsɜːrʃən&#x2F; — 断言 <code>技术</code></p>
+<blockquote>
+<p>Runtime assertions catch contract violations early during integration testing.</p>
+</blockquote>
+</li>
+<li><p><strong>static analysis</strong> &#x2F;ˈstætɪk əˈnæləsɪs&#x2F; — 静态分析 <code>技术</code></p>
+<blockquote>
+<p>Static analysis flagged a potential null-pointer dereference on line 412.</p>
+</blockquote>
+</li>
+<li><p><strong>annotation</strong> &#x2F;ˌænəˈteɪʃən&#x2F; — 注解，标注 <code>技术</code></p>
+<blockquote>
+<p>Polyspace uses code annotations to suppress known false positives.</p>
+</blockquote>
+</li>
+<li><p><strong>invoke</strong> &#x2F;ɪnˈvoʊk&#x2F; — 调用 <code>技术</code></p>
+<blockquote>
+<p>The bootloader invokes the application entry point after signature verification.</p>
+</blockquote>
+</li>
+<li><p><strong>coerce</strong> &#x2F;koʊˈɜːrs&#x2F; — 强制转换 <code>书面</code></p>
+<blockquote>
+<p>The compiler silently coerces the char to int, which may flip sign on ARM.</p>
+</blockquote>
+</li>
+<li><p><strong>mandate</strong> &#x2F;ˈmændeɪt&#x2F; — 强制要求 <code>书面</code></p>
+<blockquote>
+<p>Safety standards mandate the use of coding guidelines in certified projects.</p>
+</blockquote>
+</li>
+<li><p><strong>mitigate</strong> &#x2F;ˈmɪtɪɡeɪt&#x2F; — 减轻，缓解 <code>书面</code></p>
+<blockquote>
+<p>A redundant sensor path mitigates the risk of single-point failure.</p>
+</blockquote>
+</li>
+<li><p><strong>rationale</strong> &#x2F;ˌræʃəˈnæl&#x2F; — 理由，基本原理 <code>书面</code></p>
+<blockquote>
+<p>Document the rationale for every design decision in the safety manual.</p>
+</blockquote>
+</li>
+<li><p><strong>exemption</strong> &#x2F;ɪɡˈzɛmpʃən&#x2F; — 豁免 <code>书面</code></p>
+<blockquote>
+<p>The team applied for an exemption from Rule 15.5 due to performance constraints.</p>
+</blockquote>
+</li>
+<li><p><strong>stipulate</strong> &#x2F;ˈstɪpjuleɪt&#x2F; — 规定，约定 <code>书面</code></p>
+<blockquote>
+<p>The contract stipulates that all deliverables must be MISRA-compliant.</p>
+</blockquote>
+</li>
+<li><p><strong>oversee</strong> &#x2F;ˌoʊvərˈsiː&#x2F; — 监督，管理 <code>书面</code></p>
+<blockquote>
+<p>A functional safety manager oversees compliance across all ECU software teams.</p>
+</blockquote>
+</li>
+<li><p><strong>audit</strong> &#x2F;ˈɔːdɪt&#x2F; — 审计，审查 <code>面试</code></p>
+<blockquote>
+<p>The external audit revealed three unresolved MISRA deviations in the motor driver.</p>
+</blockquote>
+</li>
+<li><p><strong>certify</strong> &#x2F;ˈsɜːrtɪfaɪ&#x2F; — 认证 <code>面试</code></p>
+<blockquote>
+<p>We need to certify the firmware to ASIL-B before the vehicle SOP date.</p>
+</blockquote>
+</li>
+<li><p><strong>accountability</strong> &#x2F;əˌkaʊntəˈbɪlɪti&#x2F; — 问责制 <code>面试</code></p>
+<blockquote>
+<p>Clear accountability for each software module reduces finger-pointing during integration.</p>
+</blockquote>
+</li>
+<li><p><strong>benchmark</strong> &#x2F;ˈbɛntʃmɑːrk&#x2F; — 基准测试 <code>面试</code></p>
+<blockquote>
+<p>We benchmarked five static analysis tools before selecting Polyspace.</p>
+</blockquote>
+</li>
+<li><p><strong>remediate</strong> &#x2F;rɪˈmiːdieɪt&#x2F; — 修复，补救 <code>面试</code></p>
+<blockquote>
+<p>The team remediated 200 MISRA violations in a two-week sprint.</p>
+</blockquote>
+</li>
+<li><p><strong>articulate</strong> &#x2F;ɑːrˈtɪkjəleɪt&#x2F; — 清晰表达 <code>面试</code></p>
+<blockquote>
+<p>Being able to articulate your design choices is as important as writing clean code.</p>
+</blockquote>
+</li>
+<li><p><strong>constraint</strong> &#x2F;kənˈstreɪnt&#x2F; — 约束 <code>面试</code></p>
+<blockquote>
+<p>Memory constraints forced us to use a static allocation strategy from day one.</p>
+</blockquote>
+</li>
+<li><p><strong>stakeholder</strong> &#x2F;ˈsteɪkhoʊldər&#x2F; — 利益相关方 <code>面试</code></p>
+<blockquote>
+<p>Keep all stakeholders aligned on the safety requirements from the kickoff meeting.</p>
+</blockquote>
+</li>
+<li><p><strong>hassle</strong> &#x2F;ˈhæsəl&#x2F; — 麻烦事 <code>口语</code></p>
+<blockquote>
+<p>Setting up the MISRA checker was a hassle, but it saved us weeks of debugging later.</p>
+</blockquote>
+</li>
+<li><p><strong>nitpick</strong> &#x2F;ˈnɪtpɪk&#x2F; — 挑毛病，吹毛求疵 <code>口语</code></p>
+<blockquote>
+<p>Code reviewers who nitpick naming conventions actually improve long-term readability.</p>
+</blockquote>
+</li>
+<li><p><strong>nail down</strong> &#x2F;neɪl daʊn&#x2F; — 敲定，确定 <code>口语</code></p>
+<blockquote>
+<p>Let us nail down the safety requirements before writing any driver code.</p>
+</blockquote>
+</li>
+<li><p><strong>heads-up</strong> &#x2F;ˈhɛdzʌp&#x2F; — 提前通知 <code>口语</code></p>
+<blockquote>
+<p>Thanks for the heads-up about the tool license expiring this Friday.</p>
+</blockquote>
+</li>
+<li><p><strong>gotcha</strong> &#x2F;ˈɡɒtʃə&#x2F; — 陷阱，隐患 <code>口语</code></p>
+<blockquote>
+<p>Integer promotion in C is a classic gotcha that MISRA rules specifically target.</p>
+</blockquote>
+</li>
+<li><p><strong>pushback</strong> &#x2F;ˈpʊʃbæk&#x2F; — 反对，抵制 <code>口语</code></p>
+<blockquote>
+<p>There was some pushback from developers when we first enforced MISRA compliance.</p>
+</blockquote>
+</li>
+<li><p><strong>crunch</strong> &#x2F;krʌntʃ&#x2F; — 紧要关头 <code>口语</code></p>
+<blockquote>
+<p>We are in crunch mode to get the safety certification before the deadline.</p>
+</blockquote>
+</li>
+<li><p><strong>offload</strong> &#x2F;ˈɒfloʊd&#x2F; — 分担，卸载 <code>口语</code></p>
+<blockquote>
+<p>We offloaded the CRC computation to a hardware peripheral to free up CPU cycles.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“cut-corners”"><a href="#1-“cut-corners”" class="headerlink" title="1. “cut corners”"></a>1. “cut corners”</h3><p><strong>意思：</strong> 偷工减料，走捷径<br><strong>场景：</strong> 当有人为了赶进度而省略必要步骤（测试、文档、安全检查）时使用</p>
+<blockquote>
+<p><strong>A:</strong> We could skip the MISRA check to hit the deadline.<br><strong>B:</strong> No way. Cutting corners on safety-critical code is how recalls happen.</p>
+</blockquote>
+<p><em>引用：「The problem is, when you cut corners, the corners cut back.」— Ford v Ferrari, 2019</em></p>
+<hr>
+<h3 id="2-“by-the-book”"><a href="#2-“by-the-book”" class="headerlink" title="2. “by the book”"></a>2. “by the book”</h3><p><strong>意思：</strong> 按规矩来，严格照章办事<br><strong>场景：</strong> 强调按照标准流程和规范做事，不搞变通</p>
+<blockquote>
+<p><strong>A:</strong> Can we just submit the deviation without the full justification form?<br><strong>B:</strong> For ASIL-D components, we do everything by the book. No shortcuts.</p>
+</blockquote>
+<p><em>引用：「I do it by the book, every time.」— The Martian, 2015</em></p>
+<hr>
+<h3 id="3-“raise-the-bar”"><a href="#3-“raise-the-bar”" class="headerlink" title="3. “raise the bar”"></a>3. “raise the bar”</h3><p><strong>意思：</strong> 提高标准<br><strong>场景：</strong> 讨论质量要求提升或行业门槛变高时</p>
+<blockquote>
+<p><strong>A:</strong> Our competitors just announced ASIL-D certification for their sensor fusion module.<br><strong>B:</strong> That really raises the bar. We need to step up our test coverage too.</p>
+</blockquote>
+<p><em>引用：「We choose to go to the Moon… not because they are easy, but because they are hard.」— John F. Kennedy, 1962</em></p>
+<hr>
+<h3 id="4-“in-the-weeds”"><a href="#4-“in-the-weeds”" class="headerlink" title="4. “in the weeds”"></a>4. “in the weeds”</h3><p><strong>意思：</strong> 深陷细节，纠缠于琐碎问题<br><strong>场景：</strong> 当讨论过于关注细枝末节而忽视全局方向时</p>
+<blockquote>
+<p><strong>A:</strong> We have been debating this one naming convention for an hour.<br><strong>B:</strong> We are in the weeds. Let us step back and decide on the overall architecture first.</p>
+</blockquote>
+<p><em>引用：「You’re lost in the weeds; I need you to see the forest.」— Billions, Season 2, 2017</em></p>
+<hr>
+<h3 id="5-“drop-the-ball”"><a href="#5-“drop-the-ball”" class="headerlink" title="5. “drop the ball”"></a>5. “drop the ball”</h3><p><strong>意思：</strong> 失误，搞砸（尤其指疏忽责任）<br><strong>场景：</strong> 有人忘做关键事项、错过重要节点时</p>
+<blockquote>
+<p><strong>A:</strong> The release went out without the regression test for the CAN driver.<br><strong>B:</strong> Someone really dropped the ball. That test was on the checklist since day one.</p>
+</blockquote>
+<p><em>引用：「We dropped the ball on this one, and people paid the price.」— The Big Short, 2015</em></p>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-24-词汇-—-第-7-天复习（外设驱动精讲）"><a href="#📅-3-x2F-24-词汇-—-第-7-天复习（外设驱动精讲）" class="headerlink" title="📅 3&#x2F;24 词汇 — 第 7 天复习（外设驱动精讲）"></a>📅 3&#x2F;24 词汇 — 第 7 天复习（外设驱动精讲）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>register</td>
+<td>寄存器</td>
+</tr>
+<tr>
+<td>interrupt</td>
+<td>中断</td>
+</tr>
+<tr>
+<td>firmware</td>
+<td>固件</td>
+</tr>
+<tr>
+<td>bootloader</td>
+<td>引导加载程序</td>
+</tr>
+<tr>
+<td>calibrate</td>
+<td>校准</td>
+</tr>
+<tr>
+<td>oscillator</td>
+<td>振荡器</td>
+</tr>
+<tr>
+<td>encoder</td>
+<td>编码器</td>
+</tr>
+<tr>
+<td>actuator</td>
+<td>执行器</td>
+</tr>
+<tr>
+<td>transducer</td>
+<td>传感器&#x2F;换能器</td>
+</tr>
+<tr>
+<td>multiplexer</td>
+<td>多路复用器</td>
+</tr>
+<tr>
+<td>arbitration</td>
+<td>仲裁</td>
+</tr>
+<tr>
+<td>handshake</td>
+<td>握手</td>
+</tr>
+<tr>
+<td>payload</td>
+<td>有效载荷</td>
+</tr>
+<tr>
+<td>checksum</td>
+<td>校验和</td>
+</tr>
+<tr>
+<td>endian</td>
+<td>字节序</td>
+</tr>
+<tr>
+<td>bitmask</td>
+<td>位掩码</td>
+</tr>
+<tr>
+<td>overflow</td>
+<td>溢出</td>
+</tr>
+<tr>
+<td>underflow</td>
+<td>下溢</td>
+</tr>
+<tr>
+<td>dereference</td>
+<td>解引用</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>原型</td>
+</tr>
+<tr>
+<td>abstraction</td>
+<td>抽象</td>
+</tr>
+<tr>
+<td>encapsulation</td>
+<td>封装</td>
+</tr>
+<tr>
+<td>oscilloscope</td>
+<td>示波器</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>整流器</td>
+</tr>
+<tr>
+<td>crucial</td>
+<td>关键的</td>
+</tr>
+<tr>
+<td>paramount</td>
+<td>最重要的</td>
+</tr>
+<tr>
+<td>expedite</td>
+<td>加速</td>
+</tr>
+<tr>
+<td>streamline</td>
+<td>精简</td>
+</tr>
+<tr>
+<td>optimize</td>
+<td>优化</td>
+</tr>
+<tr>
+<td>diagnose</td>
+<td>诊断</td>
+</tr>
+<tr>
+<td>enumerate</td>
+<td>枚举</td>
+</tr>
+<tr>
+<td>modular</td>
+<td>模块化的</td>
+</tr>
+<tr>
+<td>prerequisite</td>
+<td>前提条件</td>
+</tr>
+<tr>
+<td>inevitably</td>
+<td>不可避免地</td>
+</tr>
+<tr>
+<td>ephemeral</td>
+<td>短暂的</td>
+</tr>
+<tr>
+<td>substantial</td>
+<td>大量的</td>
+</tr>
+<tr>
+<td>complement</td>
+<td>补充</td>
+</tr>
+<tr>
+<td>interleave</td>
+<td>交错</td>
+</tr>
+<tr>
+<td>proliferate</td>
+<td>激增</td>
+</tr>
+<tr>
+<td>discrepancy</td>
+<td>差异</td>
+</tr>
+<tr>
+<td>contingency</td>
+<td>应急方案</td>
+</tr>
+<tr>
+<td>heuristic</td>
+<td>启发式的</td>
+</tr>
+<tr>
+<td>correlate</td>
+<td>相关联</td>
+</tr>
+<tr>
+<td>retrofit</td>
+<td>改装</td>
+</tr>
+<tr>
+<td>scrutinize</td>
+<td>仔细检查</td>
+</tr>
+<tr>
+<td>eloquent</td>
+<td>雄辩的</td>
+</tr>
+<tr>
+<td>mimic</td>
+<td>模仿</td>
+</tr>
+<tr>
+<td>intrinsic</td>
+<td>固有的</td>
+</tr>
+<tr>
+<td>latch</td>
+<td>锁存器</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td>切换</td>
+</tr>
+</tbody></table>
+<p>习语：back to square one · under the hood · ahead of the curve · a double-edged sword · read between the lines</p>
+<h3 id="📅-3-x2F-29-词汇-—-第-2-天复习（调试技术全景）"><a href="#📅-3-x2F-29-词汇-—-第-2-天复习（调试技术全景）" class="headerlink" title="📅 3&#x2F;29 词汇 — 第 2 天复习（调试技术全景）"></a>📅 3&#x2F;29 词汇 — 第 2 天复习（调试技术全景）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trace</td>
+<td>跟踪</td>
+</tr>
+<tr>
+<td>breakpoint</td>
+<td>断点</td>
+</tr>
+<tr>
+<td>watchpoint</td>
+<td>观察点</td>
+</tr>
+<tr>
+<td>disassembly</td>
+<td>反汇编</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>符号</td>
+</tr>
+<tr>
+<td>linker</td>
+<td>链接器</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>异常</td>
+</tr>
+<tr>
+<td>trap</td>
+<td>陷阱</td>
+</tr>
+<tr>
+<td>emulator</td>
+<td>仿真器</td>
+</tr>
+<tr>
+<td>semihosting</td>
+<td>半主机调试</td>
+</tr>
+<tr>
+<td>probe</td>
+<td>探针</td>
+</tr>
+<tr>
+<td>capture</td>
+<td>捕获</td>
+</tr>
+<tr>
+<td>decode</td>
+<td>解码</td>
+</tr>
+<tr>
+<td>waveform</td>
+<td>波形</td>
+</tr>
+<tr>
+<td>coredump</td>
+<td>核心转储</td>
+</tr>
+<tr>
+<td>backtrace</td>
+<td>回溯</td>
+</tr>
+<tr>
+<td>mock</td>
+<td>模拟</td>
+</tr>
+<tr>
+<td>stub</td>
+<td>桩函数</td>
+</tr>
+<tr>
+<td>harness</td>
+<td>测试框架</td>
+</tr>
+<tr>
+<td>anomaly</td>
+<td>异常</td>
+</tr>
+<tr>
+<td>intermittent</td>
+<td>间歇性的</td>
+</tr>
+<tr>
+<td>reproduce</td>
+<td>复现</td>
+</tr>
+<tr>
+<td>isolate</td>
+<td>隔离</td>
+</tr>
+<tr>
+<td>hypothesis</td>
+<td>假设</td>
+</tr>
+<tr>
+<td>symptom</td>
+<td>症状</td>
+</tr>
+<tr>
+<td>nominal</td>
+<td>标称的</td>
+</tr>
+<tr>
+<td>implicit</td>
+<td>隐式的</td>
+</tr>
+<tr>
+<td>explicit</td>
+<td>显式的</td>
+</tr>
+<tr>
+<td>assert</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>inject</td>
+<td>注入</td>
+</tr>
+<tr>
+<td>astute</td>
+<td>敏锐的</td>
+</tr>
+<tr>
+<td>candid</td>
+<td>坦率的</td>
+</tr>
+<tr>
+<td>prudent</td>
+<td>谨慎的</td>
+</tr>
+<tr>
+<td>daunting</td>
+<td>令人畏惧的</td>
+</tr>
+<tr>
+<td>brevity</td>
+<td>简洁</td>
+</tr>
+<tr>
+<td>conjecture</td>
+<td>推测</td>
+</tr>
+<tr>
+<td>pertinent</td>
+<td>相关的</td>
+</tr>
+<tr>
+<td>tenuous</td>
+<td>薄弱的</td>
+</tr>
+<tr>
+<td>plausible</td>
+<td>合理的</td>
+</tr>
+<tr>
+<td>exacerbate</td>
+<td>加剧</td>
+</tr>
+<tr>
+<td>proactive</td>
+<td>主动的</td>
+</tr>
+<tr>
+<td>tangible</td>
+<td>有形的</td>
+</tr>
+<tr>
+<td>stringent</td>
+<td>严格的</td>
+</tr>
+<tr>
+<td>marginal</td>
+<td>边缘的</td>
+</tr>
+<tr>
+<td>lucid</td>
+<td>清晰的</td>
+</tr>
+<tr>
+<td>meager</td>
+<td>微薄的</td>
+</tr>
+<tr>
+<td>allude</td>
+<td>暗指</td>
+</tr>
+<tr>
+<td>pivotal</td>
+<td>关键的</td>
+</tr>
+<tr>
+<td>comprehensive</td>
+<td>全面的</td>
+</tr>
+<tr>
+<td>adept</td>
+<td>熟练的</td>
+</tr>
+</tbody></table>
+<p>习语：throw in the towel · move the goalposts · keep one’s head above water · square peg in a round hole · get the ball rolling</p>
+<h3 id="📅-3-x2F-30-词汇-—-第-1-天复习（低功耗设计）"><a href="#📅-3-x2F-30-词汇-—-第-1-天复习（低功耗设计）" class="headerlink" title="📅 3&#x2F;30 词汇 — 第 1 天复习（低功耗设计）"></a>📅 3&#x2F;30 词汇 — 第 1 天复习（低功耗设计）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>quiescent</td>
+<td>静态的</td>
+</tr>
+<tr>
+<td>leakage</td>
+<td>漏电</td>
+</tr>
+<tr>
+<td>regulator</td>
+<td>稳压器</td>
+</tr>
+<tr>
+<td>dormant</td>
+<td>休眠的</td>
+</tr>
+<tr>
+<td>throttle</td>
+<td>节流</td>
+</tr>
+<tr>
+<td>dissipation</td>
+<td>耗散</td>
+</tr>
+<tr>
+<td>attenuation</td>
+<td>衰减</td>
+</tr>
+<tr>
+<td>substrate</td>
+<td>基板</td>
+</tr>
+<tr>
+<td>quench</td>
+<td>淬灭</td>
+</tr>
+<tr>
+<td>ripple</td>
+<td>纹波</td>
+</tr>
+<tr>
+<td>brownout</td>
+<td>欠压</td>
+</tr>
+<tr>
+<td>sequencing</td>
+<td>上电时序</td>
+</tr>
+<tr>
+<td>decoupling</td>
+<td>去耦</td>
+</tr>
+<tr>
+<td>embark</td>
+<td>着手</td>
+</tr>
+<tr>
+<td>meander</td>
+<td>蜿蜒</td>
+</tr>
+<tr>
+<td>curtail</td>
+<td>削减</td>
+</tr>
+<tr>
+<td>entail</td>
+<td>需要</td>
+</tr>
+<tr>
+<td>elicit</td>
+<td>引出</td>
+</tr>
+<tr>
+<td>vindicate</td>
+<td>证明正确</td>
+</tr>
+<tr>
+<td>circumvent</td>
+<td>规避</td>
+</tr>
+<tr>
+<td>bolster</td>
+<td>支撑</td>
+</tr>
+<tr>
+<td>hinder</td>
+<td>阻碍</td>
+</tr>
+<tr>
+<td>relinquish</td>
+<td>放弃</td>
+</tr>
+<tr>
+<td>supersede</td>
+<td>取代</td>
+</tr>
+<tr>
+<td>elusive</td>
+<td>难以捉摸的</td>
+</tr>
+<tr>
+<td>compel</td>
+<td>迫使</td>
+</tr>
+<tr>
+<td>renowned</td>
+<td>著名的</td>
+</tr>
+<tr>
+<td>incentive</td>
+<td>激励</td>
+</tr>
+<tr>
+<td>setback</td>
+<td>挫折</td>
+</tr>
+<tr>
+<td>hands-on</td>
+<td>实际操作的</td>
+</tr>
+<tr>
+<td>trade-off</td>
+<td>权衡</td>
+</tr>
+<tr>
+<td>walkthrough</td>
+<td>详细讲解</td>
+</tr>
+<tr>
+<td>workaround</td>
+<td>变通方法</td>
+</tr>
+<tr>
+<td>upfront</td>
+<td>预先的</td>
+</tr>
+<tr>
+<td>revamp</td>
+<td>翻新</td>
+</tr>
+<tr>
+<td>glitch</td>
+<td>毛刺</td>
+</tr>
+<tr>
+<td>deplete</td>
+<td>耗尽</td>
+</tr>
+<tr>
+<td>ramp</td>
+<td>斜坡</td>
+</tr>
+<tr>
+<td>standby</td>
+<td>待机</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td>关断</td>
+</tr>
+<tr>
+<td>wake-up</td>
+<td>唤醒</td>
+</tr>
+<tr>
+<td>rail</td>
+<td>电源轨</td>
+</tr>
+<tr>
+<td>inrush</td>
+<td>浪涌</td>
+</tr>
+<tr>
+<td>triage</td>
+<td>分诊</td>
+</tr>
+<tr>
+<td>convey</td>
+<td>传达</td>
+</tr>
+<tr>
+<td>proficiency</td>
+<td>熟练度</td>
+</tr>
+<tr>
+<td>delegation</td>
+<td>委派</td>
+</tr>
+<tr>
+<td>acumen</td>
+<td>洞察力</td>
+</tr>
+<tr>
+<td>scalability</td>
+<td>可扩展性</td>
+</tr>
+<tr>
+<td>credential</td>
+<td>凭证</td>
+</tr>
+</tbody></table>
+<p>习语：burn the midnight oil · back to the drawing board · on the same page · the ball is in your court · pull the plug</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/%E5%8A%9F%E8%83%BD%E5%AE%89%E5%85%A8/" rel="tag"># 功能安全</a>
+              <a href="/tags/MISRA/" rel="tag"># MISRA</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86/" rel="tag"># 安全标准</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/30/daily-study-2026-03-30/" rel="prev" title="每日学习 — 2026-03-30">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-03-30
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">303k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:23</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
