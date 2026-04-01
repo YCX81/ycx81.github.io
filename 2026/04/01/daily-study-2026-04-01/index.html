@@ -20,22 +20,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="今日内容：C&#x2F;C++ 指针与内存模型 · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;28、3&#x2F;30、3&#x2F;31）">
+    <meta name="description" content="今日内容：volatile 与内存映射 I&#x2F;O（Round 2 深入篇） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;25, 3&#x2F;28, 3&#x2F;30, 3&#x2F;31）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日学习 — 2026-04-01">
 <meta property="og:url" content="http://ycx81.github.io/2026/04/01/daily-study-2026-04-01/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="今日内容：C&#x2F;C++ 指针与内存模型 · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;28、3&#x2F;30、3&#x2F;31）">
+<meta property="og:description" content="今日内容：volatile 与内存映射 I&#x2F;O（Round 2 深入篇） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;25, 3&#x2F;28, 3&#x2F;30, 3&#x2F;31）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-01T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-01T00:27:06.284Z">
+<meta property="article:modified_time" content="2026-04-01T00:38:14.314Z">
 <meta property="article:author" content="YCX">
-<meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
 <meta property="article:tag" content="词汇">
-<meta property="article:tag" content="指针">
-<meta property="article:tag" content="内存模型">
+<meta property="article:tag" content="volatile">
+<meta property="article:tag" content="内存屏障">
+<meta property="article:tag" content="缓存一致性">
 <meta name="twitter:card" content="summary">
 
 
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AC-x2F-C-%E6%8C%87%E9%92%88%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：C&#x2F;C++ 指针与内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8C%87%E9%92%88%E7%9A%84%E6%9C%AC%E8%B4%A8%E4%B8%8E%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 指针的本质与大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8C%87%E9%92%88%E7%AE%97%E6%9C%AF%E4%B8%8E%E5%AF%B9%E9%BD%90"><span class="nav-number">1.2.</span> <span class="nav-text">2. 指针算术与对齐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-volatile-%E6%8C%87%E9%92%88-vs-%E6%8C%87%E9%92%88-to-volatile"><span class="nav-number">1.3.</span> <span class="nav-text">3. volatile 指针 vs 指针 to volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-C-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%9C%A8%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9A%84%E5%8F%96%E8%88%8D"><span class="nav-number">1.4.</span> <span class="nav-text">4. C++ 智能指针在嵌入式的取舍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.5.</span> <span class="nav-text">5. 常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.6.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Chit-the-nail-on-the-head%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “hit the nail on the head”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Ca-blessing-in-disguise%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “a blessing in disguise”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cbite-the-bullet%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “bite the bullet”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-tip-of-the-iceberg%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the tip of the iceberg”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cget-the-ball-rolling%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “get the ball rolling”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-28-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;28 词汇 — 第 4 天复习（链接脚本与内存布局）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-30-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BD%8E%E5%8A%9F%E8%80%97%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;30 词汇 — 第 2 天复习（低功耗设计）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-31-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86%E4%B8%8E-MISRA-C%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 3&#x2F;31 词汇 — 第 1 天复习（安全标准与 MISRA C）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9Avolatile-%E4%B8%8E%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84-I-x2F-O%EF%BC%88Round-2-%E6%B7%B1%E5%85%A5%E7%AF%87%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：volatile 与内存映射 I&#x2F;O（Round 2 深入篇）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BC%96%E8%AF%91%E5%99%A8%E5%B1%8F%E9%9A%9C-vs-CPU-%E5%B1%8F%E9%9A%9C"><span class="nav-number">1.1.</span> <span class="nav-text">1. 编译器屏障 vs CPU 屏障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CMSIS-IO-x2F-I-x2F-O-%E5%AE%8F%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6"><span class="nav-number">1.2.</span> <span class="nav-text">2. CMSIS __IO &#x2F; __I &#x2F; __O 宏设计哲学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AF%BB-%E6%94%B9-%E5%86%99%EF%BC%88RMW%EF%BC%89%E9%99%B7%E9%98%B1"><span class="nav-number">1.3.</span> <span class="nav-text">3. 读-改-写（RMW）陷阱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9ADMA-volatile-%E4%B8%8D%E5%A4%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 缓存一致性：DMA + volatile 不够</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-volatile-vs-Atomic%EF%BC%88C11%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">5. volatile vs _Atomic（C11）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.6.</span> <span class="nav-text">6. 常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cdown-the-rabbit-hole%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “down the rabbit hole”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cthe-tip-of-the-iceberg%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “the tip of the iceberg”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Ca-blessing-in-disguise%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “a blessing in disguise”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cfrom-scratch%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “from scratch”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cmiss-the-forest-for-the-trees%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “miss the forest for the trees”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-25-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88FOC-%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;25 词汇 — 第 7 天复习（FOC 磁场定向控制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-28-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;28 词汇 — 第 4 天复习（链接脚本与内存布局）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-30-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BD%8E%E5%8A%9F%E8%80%97%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 3&#x2F;30 词汇 — 第 2 天复习（低功耗设计）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-31-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86%E4%B8%8E-MISRA-C%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 3&#x2F;31 词汇 — 第 1 天复习（安全标准与 MISRA C）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +172,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -251,14 +251,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
+      <span>4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>14 分钟</span>
     </span>
 </div>
 
@@ -268,65 +268,101 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>C&#x2F;C++ 指针与内存模型</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;28、3&#x2F;30、3&#x2F;31）</p>
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>volatile 与内存映射 I&#x2F;O（Round 2 深入篇）</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;25, 3&#x2F;28, 3&#x2F;30, 3&#x2F;31）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：C-x2F-C-指针与内存模型"><a href="#🔧-嵌入式知识：C-x2F-C-指针与内存模型" class="headerlink" title="🔧 嵌入式知识：C&#x2F;C++ 指针与内存模型"></a>🔧 嵌入式知识：C&#x2F;C++ 指针与内存模型</h2><h3 id="1-指针的本质与大小"><a href="#1-指针的本质与大小" class="headerlink" title="1. 指针的本质与大小"></a>1. 指针的本质与大小</h3><p>在嵌入式 C&#x2F;C++ 中，指针不仅是变量地址的别名，更是直接操控硬件寄存器和内存映射外设的核心工具。</p>
+<h2 id="🔧-嵌入式知识：volatile-与内存映射-I-x2F-O（Round-2-深入篇）"><a href="#🔧-嵌入式知识：volatile-与内存映射-I-x2F-O（Round-2-深入篇）" class="headerlink" title="🔧 嵌入式知识：volatile 与内存映射 I&#x2F;O（Round 2 深入篇）"></a>🔧 嵌入式知识：volatile 与内存映射 I&#x2F;O（Round 2 深入篇）</h2><p>上次讲了 volatile 基础用法（防优化、中断标志、const volatile）。今天深入：编译器屏障 vs CPU 屏障、缓存一致性、RMW 陷阱、多核场景。</p>
+<h3 id="1-编译器屏障-vs-CPU-屏障"><a href="#1-编译器屏障-vs-CPU-屏障" class="headerlink" title="1. 编译器屏障 vs CPU 屏障"></a>1. 编译器屏障 vs CPU 屏障</h3><p>volatile 只解决<strong>编译器重排序</strong>，不解决 <strong>CPU 硬件重排序</strong>。</p>
+<p><strong>编译器屏障（compiler barrier）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;&quot;</span> ::: <span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line"><span class="comment">// 告诉编译器：这行之前的内存操作不能移到之后</span></span><br><span class="line"><span class="comment">// 但 CPU 流水线仍可能乱序执行</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CPU 屏障（ARM Cortex-M）：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__DMB();  <span class="comment">// Data Memory Barrier — 保证屏障前后的内存访问顺序</span></span><br><span class="line">__DSB();  <span class="comment">// Data Synchronization Barrier — 等所有内存操作完成</span></span><br><span class="line">__ISB();  <span class="comment">// Instruction Synchronization Barrier — 刷新流水线</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>经典场景：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使能中断后必须 DSB + ISB 才能确保生效</span></span><br><span class="line">NVIC-&gt;ISER[<span class="number">0</span>] = (<span class="number">1</span> &lt;&lt; IRQn);</span><br><span class="line">__DSB();</span><br><span class="line">__ISB();  <span class="comment">// 确保后续指令能看到中断已使能</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Cortex-M 单核、Strongly-ordered 区域不需要额外屏障，但 Device&#x2F;Normal 内存类型的外设区需要！</p>
+</blockquote>
+<h3 id="2-CMSIS-IO-x2F-I-x2F-O-宏设计哲学"><a href="#2-CMSIS-IO-x2F-I-x2F-O-宏设计哲学" class="headerlink" title="2. CMSIS __IO &#x2F; __I &#x2F; __O 宏设计哲学"></a>2. CMSIS __IO &#x2F; __I &#x2F; __O 宏设计哲学</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> __I   volatile const   <span class="comment">// 只读寄存器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __O   volatile         <span class="comment">// 只写寄存器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __IO  volatile         <span class="comment">// 读写寄存器</span></span></span><br></pre></td></tr></table></figure>
+
+<p>为什么 <code>__O</code> 不是 “volatile write-only”？因为 C 语言没有 “只写” 语义。<code>__O</code> 仍是 volatile，靠程序员自律不读。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    __IO <span class="type">uint32_t</span> CR;    <span class="comment">// 控制寄存器</span></span><br><span class="line">    __I  <span class="type">uint32_t</span> SR;    <span class="comment">// 状态寄存器（只读）</span></span><br><span class="line">    __O  <span class="type">uint32_t</span> DR;    <span class="comment">// 数据寄存器（只写）</span></span><br><span class="line">&#125; USART_TypeDef;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USART1 ((USART_TypeDef *)0x40011000)</span></span><br><span class="line">USART1-&gt;CR |= (<span class="number">1</span> &lt;&lt; <span class="number">13</span>);  <span class="comment">// ⚠️ 这是读-改-写！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-读-改-写（RMW）陷阱"><a href="#3-读-改-写（RMW）陷阱" class="headerlink" title="3. 读-改-写（RMW）陷阱"></a>3. 读-改-写（RMW）陷阱</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REG |= MASK;</span><br><span class="line"><span class="comment">// 展开为：tmp = *REG; tmp |= MASK; *REG = tmp;</span></span><br><span class="line"><span class="comment">// 如果中断在 tmp=*REG 后改了 REG 其他位 → 写回覆盖中断修改！</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案：</strong></p>
 <ul>
-<li>指针变量存储的是地址值，大小取决于目标架构（32位 MCU &#x3D; 4 字节）</li>
-<li><code>void*</code> 是通用指针，但不能直接解引用</li>
-<li>函数指针用于回调机制，是 HAL 驱动的灵魂</li>
+<li>a) 关中断保护 RMW</li>
+<li>b) Cortex-M3&#x2F;M4 的 <strong>bit-banding</strong>（原子操作单个位，M33 已移除）</li>
+<li>c) GPIO <strong>BSRR 寄存器</strong>（硬件原子置位&#x2F;复位）</li>
+<li>d) M33+ 用 TrustZone Non-Secure Callable</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数指针做回调</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*IRQHandler_t)</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line">IRQHandler_t callbacks[<span class="number">16</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">register_handler</span><span class="params">(<span class="type">uint8_t</span> irq, IRQHandler_t fn)</span> &#123;</span><br><span class="line">    callbacks[irq] = fn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Bit-banding 原理：</strong> 外设区 <code>0x4000_0000–0x400F_FFFF</code> 的每一位映射到 <code>0x4200_0000</code> 起始的 32 位字。写该字 &#x3D; 原子操作单个位，无需 RMW。</p>
+<h3 id="4-缓存一致性：DMA-volatile-不够"><a href="#4-缓存一致性：DMA-volatile-不够" class="headerlink" title="4. 缓存一致性：DMA + volatile 不够"></a>4. 缓存一致性：DMA + volatile 不够</h3><p>Cortex-M7 有 D-Cache，DMA 不经过缓存直接写内存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 错误做法</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">uint8_t</span> dma_buf[<span class="number">256</span>];</span><br><span class="line"><span class="comment">// DMA 写完后直接读 dma_buf → 读到 D-Cache 旧值！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 正确做法</span></span><br><span class="line"><span class="comment">// 方案1：MPU 配置 buffer 为 non-cacheable（TEX=1, C=0, B=0）</span></span><br><span class="line"><span class="comment">// 方案2：DMA 完成后手动 invalidate</span></span><br><span class="line">SCB_InvalidateDCache_by_Addr(dma_buf, <span class="keyword">sizeof</span>(dma_buf));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送前要 clean cache</span></span><br><span class="line">SCB_CleanDCache_by_Addr(tx_buf, <span class="keyword">sizeof</span>(tx_buf));</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-指针算术与对齐"><a href="#2-指针算术与对齐" class="headerlink" title="2. 指针算术与对齐"></a>2. 指针算术与对齐</h3><ul>
-<li><code>ptr + 1</code> 移动 <code>sizeof(*ptr)</code> 字节，不是 1 字节！</li>
-<li>ARM Cortex-M 要求 32 位访问 4 字节对齐，否则触发 HardFault</li>
-<li>结构体内有 padding 以满足成员对齐要求</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 危险：未对齐访问</span></span><br><span class="line"><span class="type">uint8_t</span> buf[<span class="number">10</span>];</span><br><span class="line"><span class="type">uint32_t</span> *p = (<span class="type">uint32_t</span> *)&amp;buf[<span class="number">1</span>]; <span class="comment">// ❌ 未对齐</span></span><br><span class="line"><span class="type">uint32_t</span> val = *p; <span class="comment">// HardFault on Cortex-M0!</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 安全做法：使用 memcpy</span></span><br><span class="line"><span class="type">uint32_t</span> val;</span><br><span class="line"><span class="built_in">memcpy</span>(&amp;val, &amp;buf[<span class="number">1</span>], <span class="keyword">sizeof</span>(val));</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-volatile-指针-vs-指针-to-volatile"><a href="#3-volatile-指针-vs-指针-to-volatile" class="headerlink" title="3. volatile 指针 vs 指针 to volatile"></a>3. volatile 指针 vs 指针 to volatile</h3><ul>
-<li><code>volatile uint32_t *reg</code> → 指向的内容是 volatile（硬件寄存器）</li>
-<li><code>uint32_t * volatile ptr</code> → 指针本身是 volatile（中断中可能改变）</li>
-<li>嵌入式最常用的是第一种：指向寄存器的 volatile 指针</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOA_ODR (*(volatile uint32_t *)0x40020014)</span></span><br><span class="line">GPIOA_ODR |= (<span class="number">1</span> &lt;&lt; <span class="number">5</span>); <span class="comment">// 编译器不会优化掉这次写入</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-C-智能指针在嵌入式的取舍"><a href="#4-C-智能指针在嵌入式的取舍" class="headerlink" title="4. C++ 智能指针在嵌入式的取舍"></a>4. C++ 智能指针在嵌入式的取舍</h3><ul>
-<li><code>unique_ptr</code> 零开销，可用于 RAII 管理外设资源</li>
-<li><code>shared_ptr</code> 有引用计数开销 + 动态分配，嵌入式慎用</li>
-<li>自定义 deleter 可包装硬件释放逻辑</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RAII 管理 SPI 片选</span></span><br><span class="line"><span class="keyword">auto</span> cs_guard = std::<span class="built_in">unique_ptr</span>&lt;<span class="type">void</span>, <span class="built_in">void</span>(*)(<span class="type">void</span>*)&gt;(</span><br><span class="line">    (<span class="type">void</span>*)<span class="number">1</span>,  <span class="comment">// dummy</span></span><br><span class="line">    [](<span class="type">void</span>*) &#123; <span class="built_in">HAL_GPIO_WritePin</span>(CS_PORT, CS_PIN, GPIO_PIN_SET); &#125;</span><br><span class="line">);</span><br><span class="line"><span class="built_in">HAL_GPIO_WritePin</span>(CS_PORT, CS_PIN, GPIO_PIN_RESET);</span><br><span class="line"><span class="comment">// ... SPI 传输 ...</span></span><br><span class="line"><span class="comment">// 离开作用域自动拉高 CS</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-常见误区"><a href="#5-常见误区" class="headerlink" title="5. 常见误区"></a>5. 常见误区</h3><table>
+<blockquote>
+<p><strong>volatile 只管编译器，管不了硬件缓存！</strong></p>
+</blockquote>
+<h3 id="5-volatile-vs-Atomic（C11）"><a href="#5-volatile-vs-Atomic（C11）" class="headerlink" title="5. volatile vs _Atomic（C11）"></a>5. volatile vs _Atomic（C11）</h3><table>
 <thead>
 <tr>
-<th>误区</th>
-<th>说明</th>
+<th>特性</th>
+<th>volatile</th>
+<th>_Atomic</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>sizeof(指针) == sizeof(int)</code></td>
-<td>在 64 位主机编译时不成立</td>
+<td>防编译器优化</td>
+<td>✅</td>
+<td>✅</td>
 </tr>
 <tr>
-<td>对 <code>void*</code> 做算术运算</td>
-<td>GCC 允许但非标准，MISRA 禁止</td>
+<td>防编译器重排</td>
+<td>✅</td>
+<td>✅</td>
 </tr>
 <tr>
-<td>忘记 <code>restrict</code> 关键字</td>
-<td>编译器无法优化有别名的指针</td>
+<td>防 CPU 重排</td>
+<td>❌</td>
+<td>✅</td>
 </tr>
 <tr>
-<td>返回栈上局部数组地址</td>
-<td>函数返回后内存已无效</td>
+<td>原子读写</td>
+<td>❌</td>
+<td>✅</td>
 </tr>
 </tbody></table>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q: 什么是 dangling pointer？如何避免？</strong><br>A: 指向已释放内存的指针。避免方法：释放后置 NULL、使用 RAII（C++）、静态分析工具检查生命周期。</p>
-<p><strong>Q: <code>const int*</code> 和 <code>int* const</code> 有什么区别？</strong><br>A: <code>const int*</code> — 指向的值不可改；<code>int* const</code> — 指针本身不可改。记忆口诀：const 修饰它左边的东西（左边没有就修饰右边）。</p>
-<p><strong>Q: 嵌入式中为什么要用 volatile？</strong><br>A: 告诉编译器该变量可能被外部因素（硬件、中断、DMA）改变，禁止优化掉对它的读写。</p>
+<p><strong>嵌入式实践：</strong></p>
+<ul>
+<li>单核 MCU + ISR 共享：<code>volatile</code> + 关中断足够</li>
+<li>多核 SoC（如 STM32H7 双核）：必须 <code>_Atomic</code> 或硬件信号量 HSEM</li>
+</ul>
+<h3 id="6-常见误区"><a href="#6-常见误区" class="headerlink" title="6. 常见误区"></a>6. 常见误区</h3><ul>
+<li>❌ “volatile 变量是线程安全的” → 只防优化，不防竞态</li>
+<li>❌ “所有外设寄存器都需要手动加 volatile” → CMSIS 结构体已加</li>
+<li>❌ “volatile 保证写入立刻到达外设” → 写缓冲区&#x2F;缓存可能延迟</li>
+<li>❌ “Cortex-M 是单核所以不需要内存屏障” → 外设访问仍需 DSB</li>
+<li>❌ “bit-banding 在所有 ARM 核上都有” → M33&#x2F;M55 已移除</li>
+</ul>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: Cortex-M7 使用 DMA 接收数据后读 buffer 值不对，排查思路？</strong></p>
+<blockquote>
+<p>D-Cache 一致性问题。DMA 直接写 SRAM 不经过缓存，CPU 读到缓存旧值。方案：(1) MPU 配 non-cacheable 区域；(2) DMA 完成中断里调 <code>SCB_InvalidateDCache_by_Addr()</code>；(3) 发送前 <code>SCB_CleanDCache_by_Addr()</code>。</p>
+</blockquote>
+<p><strong>Q2: 为什么 GPIO BSRR 不需要 RMW 而 ODR 需要？</strong></p>
+<blockquote>
+<p>BSRR 是 write-only，写 1 置位&#x2F;复位对应位，写 0 无效，硬件保证原子性。ODR 是读写寄存器，修改单个位需要 RMW，中间可能被中断打断。</p>
+</blockquote>
+<p><strong>Q3: 在双核 STM32H7 上，两个核共享变量，volatile 够吗？</strong></p>
+<blockquote>
+<p>不够。volatile 只防单个编译器实例优化，双核有各自 D-Cache 和写缓冲。需要：(1) 共享变量放 non-cacheable 区域；(2) 使用硬件信号量 HSEM 做互斥；(3) 或用 <code>_Atomic</code> + 内存屏障。</p>
+</blockquote>
+<p><strong>Q4: <code>__DSB()</code> 和 <code>__DMB()</code> 区别？什么时候用哪个？</strong></p>
+<blockquote>
+<p>DMB 保证屏障前的内存操作在屏障后的内存操作之前完成（排序）。DSB 更强：等所有在途内存操作真正完成才继续（同步）。配置外设后用 DSB（确保寄存器写入生效），普通数据排序用 DMB。修改系统控制寄存器后还要 ISB 刷流水线。</p>
+</blockquote>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-04-01-part1.mp3" type="audio/mpeg">
@@ -348,644 +384,645 @@
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>polymorphism</td>
-<td>&#x2F;ˌpɒlɪˈmɔːrfɪzəm&#x2F;</td>
-<td>多态性</td>
+<td>stale</td>
+<td>&#x2F;steɪl&#x2F;</td>
+<td>过时的，陈旧的</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>2</td>
-<td>inheritance</td>
-<td>&#x2F;ɪnˈhɛrɪtəns&#x2F;</td>
-<td>继承</td>
+<td>evict</td>
+<td>&#x2F;ɪˈvɪkt&#x2F;</td>
+<td>驱逐，淘汰（缓存行）</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>3</td>
-<td>destructor</td>
-<td>&#x2F;dɪˈstrʌktər&#x2F;</td>
-<td>析构函数</td>
+<td>speculative</td>
+<td>&#x2F;ˈspɛkjʊlətɪv&#x2F;</td>
+<td>推测性的</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>4</td>
-<td>constructor</td>
-<td>&#x2F;kənˈstrʌktər&#x2F;</td>
-<td>构造函数</td>
+<td>reorder</td>
+<td>&#x2F;riːˈɔːrdər&#x2F;</td>
+<td>重排序</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>5</td>
-<td>vtable</td>
-<td>&#x2F;ˈviːteɪbəl&#x2F;</td>
-<td>虚函数表</td>
+<td>writeback</td>
+<td>&#x2F;ˈraɪtbæk&#x2F;</td>
+<td>回写（缓存策略）</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>6</td>
-<td>recursion</td>
-<td>&#x2F;rɪˈkɜːrʒən&#x2F;</td>
-<td>递归</td>
+<td>coherence</td>
+<td>&#x2F;koʊˈhɪrəns&#x2F;</td>
+<td>一致性（缓存）</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>7</td>
-<td>variadic</td>
-<td>&#x2F;ˌvɛriˈædɪk&#x2F;</td>
-<td>可变参数的</td>
+<td>invalidate</td>
+<td>&#x2F;ɪnˈvælɪdeɪt&#x2F;</td>
+<td>使无效，作废</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>8</td>
-<td>constexpr</td>
-<td>&#x2F;kɒnstˈɛkspɜːr&#x2F;</td>
-<td>常量表达式</td>
+<td>pipeline</td>
+<td>&#x2F;ˈpaɪplaɪn&#x2F;</td>
+<td>流水线</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>9</td>
-<td>nullptr</td>
-<td>&#x2F;ˈnʌlpɪtər&#x2F;</td>
-<td>空指针（C++11）</td>
+<td>unaligned</td>
+<td>&#x2F;ʌnəˈlaɪnd&#x2F;</td>
+<td>未对齐的</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>10</td>
-<td>bitwise</td>
-<td>&#x2F;ˈbɪtwaɪz&#x2F;</td>
-<td>按位的</td>
+<td>fence</td>
+<td>&#x2F;fɛns&#x2F;</td>
+<td>栅栏（内存屏障）</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>11</td>
-<td>arithmetic</td>
-<td>&#x2F;əˈrɪθmətɪk&#x2F;</td>
-<td>算术的</td>
+<td>side-effect</td>
+<td>&#x2F;ˈsaɪd ɪˌfɛkt&#x2F;</td>
+<td>副作用</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>12</td>
-<td>coprocessor</td>
-<td>&#x2F;koʊˈprɒsɛsər&#x2F;</td>
-<td>协处理器</td>
+<td>volatile-qualified</td>
+<td>&#x2F;ˈvɒlətaɪl ˈkwɒlɪfaɪd&#x2F;</td>
+<td>volatile 限定的</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>13</td>
-<td>endianness</td>
-<td>&#x2F;ˈɛndiənnəs&#x2F;</td>
-<td>字节序</td>
+<td>observable</td>
+<td>&#x2F;əbˈzɜːrvəbl&#x2F;</td>
+<td>可观测的</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>14</td>
-<td>linkage</td>
-<td>&#x2F;ˈlɪŋkɪdʒ&#x2F;</td>
-<td>链接属性</td>
+<td>prefetch</td>
+<td>&#x2F;ˈpriːfɛtʃ&#x2F;</td>
+<td>预取</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>15</td>
-<td>namespace</td>
-<td>&#x2F;ˈneɪmspeɪs&#x2F;</td>
-<td>命名空间</td>
+<td>opcode</td>
+<td>&#x2F;ˈɒpkoʊd&#x2F;</td>
+<td>操作码</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>16</td>
-<td>template</td>
-<td>&#x2F;ˈtɛmplɪt&#x2F;</td>
-<td>模板</td>
+<td>peripheral-mapped</td>
+<td>&#x2F;pəˈrɪfərəl mæpt&#x2F;</td>
+<td>外设映射的</td>
 <td>技术</td>
 </tr>
 <tr>
 <td>17</td>
-<td>singleton</td>
-<td>&#x2F;ˈsɪŋɡəltən&#x2F;</td>
-<td>单例</td>
-<td>技术</td>
+<td>idiosyncrasy</td>
+<td>&#x2F;ˌɪdiəˈsɪŋkrəsi&#x2F;</td>
+<td>特质，怪癖</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>18</td>
-<td>instantiate</td>
-<td>&#x2F;ɪnˈstænʃieɪt&#x2F;</td>
-<td>实例化</td>
-<td>技术</td>
+<td>verbatim</td>
+<td>&#x2F;vɜːrˈbeɪtɪm&#x2F;</td>
+<td>逐字地</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>19</td>
-<td>overload</td>
-<td>&#x2F;ˌoʊvərˈloʊd&#x2F;</td>
-<td>重载</td>
-<td>技术</td>
+<td>conflate</td>
+<td>&#x2F;kənˈfleɪt&#x2F;</td>
+<td>混为一谈</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>20</td>
-<td>opaque</td>
-<td>&#x2F;oʊˈpeɪk&#x2F;</td>
-<td>不透明的</td>
-<td>技术</td>
+<td>spuriously</td>
+<td>&#x2F;ˈspjʊəriəsli&#x2F;</td>
+<td>虚假地</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>21</td>
-<td>versatile</td>
-<td>&#x2F;ˈvɜːrsətaɪl&#x2F;</td>
-<td>多功能的</td>
+<td>tangential</td>
+<td>&#x2F;tænˈdʒɛnʃəl&#x2F;</td>
+<td>离题的</td>
 <td>书面</td>
 </tr>
 <tr>
 <td>22</td>
-<td>rigorous</td>
-<td>&#x2F;ˈrɪɡərəs&#x2F;</td>
-<td>严格的</td>
+<td>codify</td>
+<td>&#x2F;ˈkɒdɪfaɪ&#x2F;</td>
+<td>编纂，使成文</td>
 <td>书面</td>
 </tr>
 <tr>
 <td>23</td>
-<td>ubiquitous</td>
-<td>&#x2F;juːˈbɪkwɪtəs&#x2F;</td>
-<td>无处不在的</td>
+<td>salient</td>
+<td>&#x2F;ˈseɪliənt&#x2F;</td>
+<td>显著的</td>
 <td>书面</td>
 </tr>
 <tr>
 <td>24</td>
-<td>inherent</td>
-<td>&#x2F;ɪnˈhɪrənt&#x2F;</td>
-<td>固有的</td>
-<td>书面</td>
+<td>prerequisite</td>
+<td>&#x2F;priːˈrɛkwɪzɪt&#x2F;</td>
+<td>前提</td>
+<td>面试</td>
 </tr>
 <tr>
 <td>25</td>
-<td>convoluted</td>
-<td>&#x2F;ˈkɒnvəluːtɪd&#x2F;</td>
-<td>复杂难懂的</td>
-<td>书面</td>
+<td>elucidate</td>
+<td>&#x2F;ɪˈluːsɪdeɪt&#x2F;</td>
+<td>阐明</td>
+<td>面试</td>
 </tr>
 <tr>
 <td>26</td>
-<td>antiquated</td>
-<td>&#x2F;ˈæntɪkweɪtɪd&#x2F;</td>
-<td>过时的</td>
+<td>pervasive</td>
+<td>&#x2F;pərˈveɪsɪv&#x2F;</td>
+<td>普遍的</td>
 <td>书面</td>
 </tr>
 <tr>
 <td>27</td>
-<td>cumbersome</td>
-<td>&#x2F;ˈkʌmbərsəm&#x2F;</td>
-<td>繁琐的</td>
+<td>cavil</td>
+<td>&#x2F;ˈkævəl&#x2F;</td>
+<td>吹毛求疵</td>
 <td>书面</td>
 </tr>
 <tr>
 <td>28</td>
-<td>decipher</td>
-<td>&#x2F;dɪˈsaɪfər&#x2F;</td>
-<td>破译</td>
-<td>书面</td>
+<td>reckon</td>
+<td>&#x2F;ˈrɛkən&#x2F;</td>
+<td>认为，估计</td>
+<td>口语</td>
 </tr>
 <tr>
 <td>29</td>
-<td>extraneous</td>
-<td>&#x2F;ɪkˈstreɪniəs&#x2F;</td>
-<td>无关的</td>
-<td>书面</td>
+<td>crux</td>
+<td>&#x2F;krʌks&#x2F;</td>
+<td>关键，核心</td>
+<td>口语</td>
 </tr>
 <tr>
 <td>30</td>
-<td>juxtapose</td>
-<td>&#x2F;ˌdʒʌkstəˈpoʊz&#x2F;</td>
-<td>并列对比</td>
-<td>书面</td>
+<td>foolproof</td>
+<td>&#x2F;ˈfuːlpruːf&#x2F;</td>
+<td>万无一失的</td>
+<td>口语</td>
 </tr>
 <tr>
 <td>31</td>
-<td>discern</td>
-<td>&#x2F;dɪˈsɜːrn&#x2F;</td>
-<td>辨别</td>
-<td>书面</td>
+<td>nitty-gritty</td>
+<td>&#x2F;ˌnɪtiˈɡrɪti&#x2F;</td>
+<td>细节</td>
+<td>口语</td>
 </tr>
 <tr>
 <td>32</td>
-<td>rectify</td>
-<td>&#x2F;ˈrɛktɪfaɪ&#x2F;</td>
-<td>纠正</td>
-<td>书面</td>
+<td>bygone</td>
+<td>&#x2F;ˈbaɪɡɒn&#x2F;</td>
+<td>过去的</td>
+<td>口语</td>
 </tr>
 <tr>
 <td>33</td>
-<td>impeccable</td>
-<td>&#x2F;ɪmˈpɛkəbəl&#x2F;</td>
-<td>无可挑剔的</td>
-<td>书面</td>
+<td>tweak</td>
+<td>&#x2F;twiːk&#x2F;</td>
+<td>微调</td>
+<td>口语</td>
 </tr>
 <tr>
 <td>34</td>
+<td>encompassing</td>
+<td>&#x2F;ɪnˈkʌmpəsɪŋ&#x2F;</td>
+<td>包含一切的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>35</td>
+<td>repercussion</td>
+<td>&#x2F;ˌriːpərˈkʌʃən&#x2F;</td>
+<td>反响，后果</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>36</td>
+<td>embroil</td>
+<td>&#x2F;ɪmˈbrɔɪl&#x2F;</td>
+<td>使卷入</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>37</td>
+<td>detriment</td>
+<td>&#x2F;ˈdɛtrɪmənt&#x2F;</td>
+<td>损害</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>38</td>
+<td>spurring</td>
+<td>&#x2F;ˈspɜːrɪŋ&#x2F;</td>
+<td>刺激，推动</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>39</td>
+<td>bespoke</td>
+<td>&#x2F;bɪˈspoʊk&#x2F;</td>
+<td>定制的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>40</td>
+<td>germane</td>
+<td>&#x2F;dʒɜːrˈmeɪn&#x2F;</td>
+<td>有关的，切题的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>41</td>
 <td>inadvertent</td>
 <td>&#x2F;ˌɪnədˈvɜːrtənt&#x2F;</td>
 <td>无意的</td>
 <td>书面</td>
 </tr>
 <tr>
-<td>35</td>
-<td>indispensable</td>
-<td>&#x2F;ˌɪndɪˈspɛnsəbəl&#x2F;</td>
-<td>不可或缺的</td>
-<td>书面</td>
-</tr>
-<tr>
-<td>36</td>
-<td>quirky</td>
-<td>&#x2F;ˈkwɜːrki&#x2F;</td>
-<td>古怪的</td>
-<td>口语</td>
-</tr>
-<tr>
-<td>37</td>
-<td>nifty</td>
-<td>&#x2F;ˈnɪfti&#x2F;</td>
-<td>精巧的</td>
-<td>口语</td>
-</tr>
-<tr>
-<td>38</td>
-<td>rookie</td>
-<td>&#x2F;ˈrʊki&#x2F;</td>
-<td>新手</td>
-<td>口语</td>
-</tr>
-<tr>
-<td>39</td>
-<td>heads-up</td>
-<td>&#x2F;ˈhɛdzʌp&#x2F;</td>
-<td>提醒</td>
-<td>口语</td>
-</tr>
-<tr>
-<td>40</td>
-<td>swamped</td>
-<td>&#x2F;swɒmpt&#x2F;</td>
-<td>忙得不可开交的</td>
-<td>口语</td>
-</tr>
-<tr>
-<td>41</td>
-<td>legit</td>
-<td>&#x2F;ləˈdʒɪt&#x2F;</td>
-<td>靠谱的</td>
-<td>口语</td>
-</tr>
-<tr>
 <td>42</td>
-<td>ballpark</td>
-<td>&#x2F;ˈbɔːlpɑːrk&#x2F;</td>
-<td>粗略估计</td>
+<td>conundrum</td>
+<td>&#x2F;kəˈnʌndrəm&#x2F;</td>
+<td>难题</td>
 <td>口语</td>
 </tr>
 <tr>
 <td>43</td>
-<td>demonstrate</td>
-<td>&#x2F;ˈdɛmənstreɪt&#x2F;</td>
-<td>展示</td>
-<td>面试</td>
+<td>judiciously</td>
+<td>&#x2F;dʒuːˈdɪʃəsli&#x2F;</td>
+<td>明智地</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>44</td>
-<td>collaborate</td>
-<td>&#x2F;kəˈlæbəreɪt&#x2F;</td>
-<td>协作</td>
+<td>rudimentary</td>
+<td>&#x2F;ˌruːdɪˈmɛntəri&#x2F;</td>
+<td>基本的</td>
 <td>面试</td>
 </tr>
 <tr>
 <td>45</td>
-<td>prioritize</td>
-<td>&#x2F;praɪˈɒrɪtaɪz&#x2F;</td>
-<td>确定优先级</td>
-<td>面试</td>
+<td>quintessential</td>
+<td>&#x2F;ˌkwɪntɪˈsɛnʃəl&#x2F;</td>
+<td>典型的</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>46</td>
-<td>implement</td>
-<td>&#x2F;ˈɪmplɪmɛnt&#x2F;</td>
-<td>实现</td>
-<td>面试</td>
+<td>avert</td>
+<td>&#x2F;əˈvɜːrt&#x2F;</td>
+<td>避免</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>47</td>
-<td>initiative</td>
-<td>&#x2F;ɪˈnɪʃətɪv&#x2F;</td>
-<td>主动性</td>
-<td>面试</td>
+<td>auxiliary</td>
+<td>&#x2F;ɔːɡˈzɪljəri&#x2F;</td>
+<td>辅助的</td>
+<td>技术</td>
 </tr>
 <tr>
 <td>48</td>
-<td>methodical</td>
-<td>&#x2F;mɪˈθɒdɪkəl&#x2F;</td>
-<td>有条理的</td>
-<td>面试</td>
+<td>disparity</td>
+<td>&#x2F;dɪˈspærɪti&#x2F;</td>
+<td>差异</td>
+<td>书面</td>
 </tr>
 <tr>
 <td>49</td>
-<td>aptitude</td>
-<td>&#x2F;ˈæptɪtjuːd&#x2F;</td>
-<td>天赋</td>
+<td>amenable</td>
+<td>&#x2F;əˈmiːnəbl&#x2F;</td>
+<td>适合的</td>
 <td>面试</td>
 </tr>
 <tr>
 <td>50</td>
-<td>proficient</td>
-<td>&#x2F;prəˈfɪʃənt&#x2F;</td>
-<td>熟练的</td>
-<td>面试</td>
+<td>debacle</td>
+<td>&#x2F;dɪˈbɑːkəl&#x2F;</td>
+<td>惨败</td>
+<td>口语</td>
 </tr>
 </tbody></table>
 <h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
 <summary>📘 点击展开全部例句</summary>
 
 <ol>
-<li><p><strong>polymorphism</strong> &#x2F;ˌpɒlɪˈmɔːrfɪzəm&#x2F; — 多态性 <code>技术</code></p>
+<li><p><strong>stale</strong> &#x2F;steɪl&#x2F; — 过时的，陈旧的 <code>技术</code></p>
 <blockquote>
-<p>Runtime polymorphism in C++ is implemented through virtual functions and vtables.</p>
+<p>The CPU read stale data from the cache because the DMA had updated the buffer directly in SRAM.</p>
 </blockquote>
 </li>
-<li><p><strong>inheritance</strong> &#x2F;ɪnˈhɛrɪtəns&#x2F; — 继承 <code>技术</code></p>
+<li><p><strong>evict</strong> &#x2F;ɪˈvɪkt&#x2F; — 驱逐，淘汰（缓存行） <code>技术</code></p>
 <blockquote>
-<p>Use inheritance to share common peripheral driver interfaces across chip families.</p>
+<p>When the cache is full, the controller must evict a line before loading a new one.</p>
 </blockquote>
 </li>
-<li><p><strong>destructor</strong> &#x2F;dɪˈstrʌktər&#x2F; — 析构函数 <code>技术</code></p>
+<li><p><strong>speculative</strong> &#x2F;ˈspɛkjʊlətɪv&#x2F; — 推测性的 <code>技术</code></p>
 <blockquote>
-<p>The destructor releases the DMA channel when the transfer object goes out of scope.</p>
+<p>Speculative execution can cause side-channel vulnerabilities like Spectre.</p>
 </blockquote>
 </li>
-<li><p><strong>constructor</strong> &#x2F;kənˈstrʌktər&#x2F; — 构造函数 <code>技术</code></p>
+<li><p><strong>reorder</strong> &#x2F;riːˈɔːrdər&#x2F; — 重排序 <code>技术</code></p>
 <blockquote>
-<p>A constexpr constructor allows compile-time initialization of peripheral register maps.</p>
+<p>The compiler may reorder memory accesses unless a barrier is inserted.</p>
 </blockquote>
 </li>
-<li><p><strong>vtable</strong> &#x2F;ˈviːteɪbəl&#x2F; — 虚函数表 <code>技术</code></p>
+<li><p><strong>writeback</strong> &#x2F;ˈraɪtbæk&#x2F; — 回写（缓存策略） <code>技术</code></p>
 <blockquote>
-<p>Each class with virtual functions carries a hidden vtable pointer, adding 4 bytes on 32-bit targets.</p>
+<p>In writeback mode, modified cache lines are only flushed to memory on eviction.</p>
 </blockquote>
 </li>
-<li><p><strong>recursion</strong> &#x2F;rɪˈkɜːrʒən&#x2F; — 递归 <code>技术</code></p>
+<li><p><strong>coherence</strong> &#x2F;koʊˈhɪrəns&#x2F; — 一致性（缓存） <code>技术</code></p>
 <blockquote>
-<p>Avoid deep recursion on embedded targets where stack space is limited to a few kilobytes.</p>
+<p>Cache coherence protocols ensure all cores see the same memory state.</p>
 </blockquote>
 </li>
-<li><p><strong>variadic</strong> &#x2F;ˌvɛriˈædɪk&#x2F; — 可变参数的 <code>技术</code></p>
+<li><p><strong>invalidate</strong> &#x2F;ɪnˈvælɪdeɪt&#x2F; — 使无效，作废 <code>技术</code></p>
 <blockquote>
-<p>The printf family uses variadic arguments, which bypass type checking at compile time.</p>
+<p>After DMA reception, invalidate the D-Cache region before reading the buffer.</p>
 </blockquote>
 </li>
-<li><p><strong>constexpr</strong> &#x2F;kɒnstˈɛkspɜːr&#x2F; — 常量表达式（C++编译期求值） <code>技术</code></p>
+<li><p><strong>pipeline</strong> &#x2F;ˈpaɪplaɪn&#x2F; — 流水线 <code>技术</code></p>
 <blockquote>
-<p>Mark baud rate divisor calculations as constexpr so the compiler resolves them at build time.</p>
+<p>The ARM Cortex-M7 has a six-stage pipeline that enables higher clock speeds.</p>
 </blockquote>
 </li>
-<li><p><strong>nullptr</strong> &#x2F;ˈnʌlpɪtər&#x2F; — 空指针（C++11） <code>技术</code></p>
+<li><p><strong>unaligned</strong> &#x2F;ʌnəˈlaɪnd&#x2F; — 未对齐的 <code>技术</code></p>
 <blockquote>
-<p>Prefer nullptr over NULL to avoid ambiguity with integer overloads in C++.</p>
+<p>Unaligned memory access on Cortex-M0 triggers a HardFault exception.</p>
 </blockquote>
 </li>
-<li><p><strong>bitwise</strong> &#x2F;ˈbɪtwaɪz&#x2F; — 按位的 <code>技术</code></p>
+<li><p><strong>fence</strong> &#x2F;fɛns&#x2F; — 栅栏（内存屏障） <code>技术</code></p>
 <blockquote>
-<p>Bitwise AND with a mask clears the unwanted bits in a hardware status register.</p>
+<p>A memory fence prevents the CPU from reordering loads and stores across it.</p>
 </blockquote>
 </li>
-<li><p><strong>arithmetic</strong> &#x2F;əˈrɪθmətɪk&#x2F; — 算术的 <code>技术</code></p>
+<li><p><strong>side-effect</strong> &#x2F;ˈsaɪd ɪˌfɛkt&#x2F; — 副作用 <code>技术</code></p>
 <blockquote>
-<p>Pointer arithmetic advances by the size of the pointed-to type, not by one byte.</p>
+<p>Reading a status register has a side-effect: it clears the pending interrupt flag.</p>
 </blockquote>
 </li>
-<li><p><strong>coprocessor</strong> &#x2F;koʊˈprɒsɛsər&#x2F; — 协处理器 <code>技术</code></p>
+<li><p><strong>volatile-qualified</strong> &#x2F;ˈvɒlətaɪl ˈkwɒlɪfaɪd&#x2F; — volatile 限定的 <code>技术</code></p>
 <blockquote>
-<p>The FPU coprocessor must be enabled in the SystemInit function before any float operations.</p>
+<p>Accessing a volatile-qualified object must occur exactly as written in the source code.</p>
 </blockquote>
 </li>
-<li><p><strong>endianness</strong> &#x2F;ˈɛndiənnəs&#x2F; — 字节序 <code>技术</code></p>
+<li><p><strong>observable</strong> &#x2F;əbˈzɜːrvəbl&#x2F; — 可观测的 <code>技术</code></p>
 <blockquote>
-<p>Always convert network packets to host endianness before parsing multi-byte fields.</p>
+<p>The C standard defines volatile accesses as observable behavior that must be preserved.</p>
 </blockquote>
 </li>
-<li><p><strong>linkage</strong> &#x2F;ˈlɪŋkɪdʒ&#x2F; — 链接属性 <code>技术</code></p>
+<li><p><strong>prefetch</strong> &#x2F;ˈpriːfɛtʃ&#x2F; — 预取 <code>技术</code></p>
 <blockquote>
-<p>Declaring a function static gives it internal linkage, hiding it from other translation units.</p>
+<p>The prefetch unit loads instructions from flash into the ART accelerator buffer.</p>
 </blockquote>
 </li>
-<li><p><strong>namespace</strong> &#x2F;ˈneɪmspeɪs&#x2F; — 命名空间 <code>技术</code></p>
+<li><p><strong>opcode</strong> &#x2F;ˈɒpkoʊd&#x2F; — 操作码 <code>技术</code></p>
 <blockquote>
-<p>Wrap driver APIs in a namespace to avoid symbol collisions in large firmware projects.</p>
+<p>The disassembler translates raw opcodes into human-readable mnemonics.</p>
 </blockquote>
 </li>
-<li><p><strong>template</strong> &#x2F;ˈtɛmplɪt&#x2F; — 模板 <code>技术</code></p>
+<li><p><strong>peripheral-mapped</strong> &#x2F;pəˈrɪfərəl mæpt&#x2F; — 外设映射的 <code>技术</code></p>
 <blockquote>
-<p>A C++ template can generate type-safe ring buffers without runtime overhead.</p>
+<p>Peripheral-mapped registers occupy a dedicated address range in the memory map.</p>
 </blockquote>
 </li>
-<li><p><strong>singleton</strong> &#x2F;ˈsɪŋɡəltən&#x2F; — 单例 <code>技术</code></p>
+<li><p><strong>idiosyncrasy</strong> &#x2F;ˌɪdiəˈsɪŋkrəsi&#x2F; — 特质，怪癖 <code>书面</code></p>
 <blockquote>
-<p>The UART driver is implemented as a singleton to prevent multiple instances accessing the same peripheral.</p>
+<p>Every microcontroller family has its own idiosyncrasies in register layout.</p>
 </blockquote>
 </li>
-<li><p><strong>instantiate</strong> &#x2F;ɪnˈstænʃieɪt&#x2F; — 实例化 <code>技术</code></p>
+<li><p><strong>verbatim</strong> &#x2F;vɜːrˈbeɪtɪm&#x2F; — 逐字地，一字不差地 <code>书面</code></p>
 <blockquote>
-<p>The linker will instantiate every template used, so monitor code size on constrained targets.</p>
+<p>Copy the configuration sequence verbatim from the reference manual.</p>
 </blockquote>
 </li>
-<li><p><strong>overload</strong> &#x2F;ˌoʊvərˈloʊd&#x2F; — 重载 <code>技术</code></p>
+<li><p><strong>conflate</strong> &#x2F;kənˈfleɪt&#x2F; — 混为一谈 <code>书面</code></p>
 <blockquote>
-<p>Operator overloading lets you use natural syntax for fixed-point math classes.</p>
+<p>Beginners often conflate volatile with atomic, but they solve different problems.</p>
 </blockquote>
 </li>
-<li><p><strong>opaque</strong> &#x2F;oʊˈpeɪk&#x2F; — 不透明的 <code>技术</code></p>
+<li><p><strong>spuriously</strong> &#x2F;ˈspjʊəriəsli&#x2F; — 虚假地，错误地 <code>书面</code></p>
 <blockquote>
-<p>An opaque pointer hides struct internals from the caller, enforcing encapsulation in C.</p>
+<p>The condition variable may wake up spuriously, so always recheck in a loop.</p>
 </blockquote>
 </li>
-<li><p><strong>versatile</strong> &#x2F;ˈvɜːrsətaɪl&#x2F; — 多功能的，通用的 <code>书面</code></p>
+<li><p><strong>tangential</strong> &#x2F;tænˈdʒɛnʃəl&#x2F; — 离题的，不相干的 <code>书面</code></p>
 <blockquote>
-<p>The STM32 family is versatile enough to cover both low-power sensors and motor control.</p>
+<p>His question about GUI frameworks was tangential to the embedded firmware discussion.</p>
 </blockquote>
 </li>
-<li><p><strong>rigorous</strong> &#x2F;ˈrɪɡərəs&#x2F; — 严格的，严谨的 <code>书面</code></p>
+<li><p><strong>codify</strong> &#x2F;ˈkɒdɪfaɪ&#x2F; — 编纂，使成文 <code>书面</code></p>
 <blockquote>
-<p>Rigorous code reviews catch alignment bugs before they reach production hardware.</p>
+<p>We codified all register access patterns into a hardware abstraction layer.</p>
 </blockquote>
 </li>
-<li><p><strong>ubiquitous</strong> &#x2F;juːˈbɪkwɪtəs&#x2F; — 无处不在的 <code>书面</code></p>
+<li><p><strong>salient</strong> &#x2F;ˈseɪliənt&#x2F; — 显著的，突出的 <code>书面</code></p>
 <blockquote>
-<p>The C language remains ubiquitous in embedded systems despite being over 50 years old.</p>
+<p>The most salient difference between M4 and M7 is the presence of a data cache.</p>
 </blockquote>
 </li>
-<li><p><strong>inherent</strong> &#x2F;ɪnˈhɪrənt&#x2F; — 固有的，内在的 <code>书面</code></p>
+<li><p><strong>prerequisite</strong> &#x2F;priːˈrɛkwɪzɪt&#x2F; — 前提，先决条件 <code>面试</code></p>
 <blockquote>
-<p>There is an inherent risk of stack overflow when using recursion on microcontrollers.</p>
+<p>Enabling the peripheral clock is a prerequisite for accessing its registers.</p>
 </blockquote>
 </li>
-<li><p><strong>convoluted</strong> &#x2F;ˈkɒnvəluːtɪd&#x2F; — 复杂难懂的 <code>书面</code></p>
+<li><p><strong>elucidate</strong> &#x2F;ɪˈluːsɪdeɪt&#x2F; — 阐明，解释 <code>面试</code></p>
 <blockquote>
-<p>The convoluted macro expansion made the preprocessor output nearly unreadable.</p>
+<p>Can you elucidate the difference between DSB and DMB instructions?</p>
 </blockquote>
 </li>
-<li><p><strong>antiquated</strong> &#x2F;ˈæntɪkweɪtɪd&#x2F; — 过时的，陈旧的 <code>书面</code></p>
+<li><p><strong>pervasive</strong> &#x2F;pərˈveɪsɪv&#x2F; — 普遍的，渗透的 <code>书面</code></p>
 <blockquote>
-<p>Replacing antiquated K&amp;R function declarations with ANSI prototypes improves type safety.</p>
+<p>Cache-related bugs are pervasive in Cortex-M7 projects that use DMA.</p>
 </blockquote>
 </li>
-<li><p><strong>cumbersome</strong> &#x2F;ˈkʌmbərsəm&#x2F; — 笨重的，繁琐的 <code>书面</code></p>
+<li><p><strong>cavil</strong> &#x2F;ˈkævəl&#x2F; — 吹毛求疵 <code>书面</code></p>
 <blockquote>
-<p>Manual memory management in C is cumbersome but gives deterministic performance.</p>
+<p>Don’t cavil about coding style when the real issue is a cache coherence bug.</p>
 </blockquote>
 </li>
-<li><p><strong>decipher</strong> &#x2F;dɪˈsaɪfər&#x2F; — 破译，解读 <code>书面</code></p>
+<li><p><strong>reckon</strong> &#x2F;ˈrɛkən&#x2F; — 认为，估计 <code>口语</code></p>
 <blockquote>
-<p>It took hours to decipher the undocumented register bits from the silicon errata.</p>
+<p>I reckon we need at least a 10 μs delay after enabling the PLL.</p>
 </blockquote>
 </li>
-<li><p><strong>extraneous</strong> &#x2F;ɪkˈstreɪniəs&#x2F; — 无关的，多余的 <code>书面</code></p>
+<li><p><strong>crux</strong> &#x2F;krʌks&#x2F; — 关键，核心 <code>口语</code></p>
 <blockquote>
-<p>Strip extraneous debug symbols to reduce the final binary size.</p>
+<p>The crux of the problem was that the write buffer delayed the register update.</p>
 </blockquote>
 </li>
-<li><p><strong>juxtapose</strong> &#x2F;ˌdʒʌkstəˈpoʊz&#x2F; — 并列对比 <code>书面</code></p>
+<li><p><strong>foolproof</strong> &#x2F;ˈfuːlpruːf&#x2F; — 万无一失的 <code>口语</code></p>
 <blockquote>
-<p>Juxtaposing the assembly output from -O0 and -O2 reveals how aggressively the compiler optimizes.</p>
+<p>There is no foolproof way to detect all race conditions at compile time.</p>
 </blockquote>
 </li>
-<li><p><strong>discern</strong> &#x2F;dɪˈsɜːrn&#x2F; — 辨别，识别 <code>书面</code></p>
+<li><p><strong>nitty-gritty</strong> &#x2F;ˌnɪtiˈɡrɪti&#x2F; — 细节，具体细节 <code>口语</code></p>
 <blockquote>
-<p>A senior engineer can discern subtle race conditions just by reading the source code.</p>
+<p>Let’s get into the nitty-gritty of how the MPU regions are configured.</p>
 </blockquote>
 </li>
-<li><p><strong>rectify</strong> &#x2F;ˈrɛktɪfaɪ&#x2F; — 纠正，修正 <code>书面</code></p>
+<li><p><strong>bygone</strong> &#x2F;ˈbaɪɡɒn&#x2F; — 过去的 <code>口语</code></p>
 <blockquote>
-<p>We rectified the off-by-one error that caused the DMA to overwrite adjacent memory.</p>
+<p>Bit-banding is a bygone feature that was removed in the ARMv8-M architecture.</p>
 </blockquote>
 </li>
-<li><p><strong>impeccable</strong> &#x2F;ɪmˈpɛkəbəl&#x2F; — 无可挑剔的 <code>书面</code></p>
+<li><p><strong>tweak</strong> &#x2F;twiːk&#x2F; — 微调 <code>口语</code></p>
 <blockquote>
-<p>Her impeccable coding style made the entire module easy to maintain.</p>
+<p>We tweaked the wait-state configuration to eliminate flash read errors at 168 MHz.</p>
 </blockquote>
 </li>
-<li><p><strong>inadvertent</strong> &#x2F;ˌɪnədˈvɜːrtənt&#x2F; — 无意的，不经意的 <code>书面</code></p>
+<li><p><strong>encompassing</strong> &#x2F;ɪnˈkʌmpəsɪŋ&#x2F; — 包含一切的 <code>书面</code></p>
 <blockquote>
-<p>An inadvertent cast from signed to unsigned introduced a wraparound bug.</p>
+<p>The HAL provides an all-encompassing set of APIs that abstract hardware details.</p>
 </blockquote>
 </li>
-<li><p><strong>indispensable</strong> &#x2F;ˌɪndɪˈspɛnsəbəl&#x2F; — 不可或缺的 <code>书面</code></p>
+<li><p><strong>repercussion</strong> &#x2F;ˌriːpərˈkʌʃən&#x2F; — 反响，后果 <code>书面</code></p>
 <blockquote>
-<p>A logic analyzer is indispensable when debugging SPI timing issues.</p>
+<p>Ignoring cache maintenance has serious repercussions for data integrity.</p>
 </blockquote>
 </li>
-<li><p><strong>quirky</strong> &#x2F;ˈkwɜːrki&#x2F; — 古怪的，奇特的 <code>口语</code></p>
+<li><p><strong>embroil</strong> &#x2F;ɪmˈbrɔɪl&#x2F; — 使卷入（纷争） <code>书面</code></p>
 <blockquote>
-<p>C has some quirky promotion rules that trip up even experienced developers.</p>
+<p>A subtle volatile omission embroiled the team in weeks of debugging.</p>
 </blockquote>
 </li>
-<li><p><strong>nifty</strong> &#x2F;ˈnɪfti&#x2F; — 精巧的，好用的 <code>口语</code></p>
+<li><p><strong>detriment</strong> &#x2F;ˈdɛtrɪmənt&#x2F; — 损害，不利 <code>书面</code></p>
 <blockquote>
-<p>That is a nifty trick — using a union to access individual bytes of a 32-bit register.</p>
+<p>Excessive use of volatile can be to the detriment of performance.</p>
 </blockquote>
 </li>
-<li><p><strong>rookie</strong> &#x2F;ˈrʊki&#x2F; — 新手，菜鸟 <code>口语</code></p>
+<li><p><strong>spurring</strong> &#x2F;ˈspɜːrɪŋ&#x2F; — 刺激，推动 <code>书面</code></p>
 <blockquote>
-<p>Forgetting to initialize a pointer is a classic rookie mistake in C programming.</p>
+<p>The Spectre vulnerability spurred the industry to rethink speculative execution.</p>
 </blockquote>
 </li>
-<li><p><strong>heads-up</strong> &#x2F;ˈhɛdzʌp&#x2F; — 提醒，预先通知 <code>口语</code></p>
+<li><p><strong>bespoke</strong> &#x2F;bɪˈspoʊk&#x2F; — 定制的 <code>口语</code></p>
 <blockquote>
-<p>Just a heads-up: the new toolchain defaults to C17 instead of C11.</p>
+<p>We wrote a bespoke register access macro to enforce volatile semantics.</p>
 </blockquote>
 </li>
-<li><p><strong>swamped</strong> &#x2F;swɒmpt&#x2F; — 忙得不可开交的 <code>口语</code></p>
+<li><p><strong>germane</strong> &#x2F;dʒɜːrˈmeɪn&#x2F; — 有关的，切题的 <code>书面</code></p>
 <blockquote>
-<p>I am swamped with bug reports after the firmware update went out.</p>
+<p>Your point about DMA alignment is germane to the cache invalidation issue.</p>
 </blockquote>
 </li>
-<li><p><strong>legit</strong> &#x2F;ləˈdʒɪt&#x2F; — 合法的，靠谱的 <code>口语</code></p>
+<li><p><strong>inadvertent</strong> &#x2F;ˌɪnədˈvɜːrtənt&#x2F; — 无意的，疏忽的 <code>书面</code></p>
 <blockquote>
-<p>Is this pointer legit or did we just dereference freed memory?</p>
+<p>An inadvertent cast removed the volatile qualifier, causing the optimizer to cache the read.</p>
 </blockquote>
 </li>
-<li><p><strong>ballpark</strong> &#x2F;ˈbɔːlpɑːrk&#x2F; — 大致范围，粗略估计 <code>口语</code></p>
+<li><p><strong>conundrum</strong> &#x2F;kəˈnʌndrəm&#x2F; — 难题 <code>口语</code></p>
 <blockquote>
-<p>Give me a ballpark figure for the RAM usage of the new feature.</p>
+<p>Balancing performance and correctness with volatile is an age-old conundrum.</p>
 </blockquote>
 </li>
-<li><p><strong>demonstrate</strong> &#x2F;ˈdɛmənstreɪt&#x2F; — 展示，证明 <code>面试</code></p>
+<li><p><strong>judiciously</strong> &#x2F;dʒuːˈdɪʃəsli&#x2F; — 明智地 <code>书面</code></p>
 <blockquote>
-<p>Can you demonstrate how virtual dispatch works with a concrete code example?</p>
+<p>Use volatile judiciously — over-qualifying variables harms optimization.</p>
 </blockquote>
 </li>
-<li><p><strong>collaborate</strong> &#x2F;kəˈlæbəreɪt&#x2F; — 协作，合作 <code>面试</code></p>
+<li><p><strong>rudimentary</strong> &#x2F;ˌruːdɪˈmɛntəri&#x2F; — 基本的，初步的 <code>面试</code></p>
 <blockquote>
-<p>We collaborate with the hardware team to define the register memory map.</p>
+<p>Even a rudimentary understanding of memory ordering prevents many volatile-related bugs.</p>
 </blockquote>
 </li>
-<li><p><strong>prioritize</strong> &#x2F;praɪˈɒrɪtaɪz&#x2F; — 确定优先级 <code>面试</code></p>
+<li><p><strong>quintessential</strong> &#x2F;ˌkwɪntɪˈsɛnʃəl&#x2F; — 典型的，精髓的 <code>书面</code></p>
 <blockquote>
-<p>When debugging, prioritize reproducible crashes over intermittent warnings.</p>
+<p>The MMIO polling loop is a quintessential use case for volatile.</p>
 </blockquote>
 </li>
-<li><p><strong>implement</strong> &#x2F;ˈɪmplɪmɛnt&#x2F; — 实现，实施 <code>面试</code></p>
+<li><p><strong>avert</strong> &#x2F;əˈvɜːrt&#x2F; — 避免，防止 <code>书面</code></p>
 <blockquote>
-<p>I implemented a memory pool allocator to replace malloc in our RTOS project.</p>
+<p>Proper use of memory barriers averts data corruption in multi-master systems.</p>
 </blockquote>
 </li>
-<li><p><strong>initiative</strong> &#x2F;ɪˈnɪʃətɪv&#x2F; — 主动性，倡议 <code>面试</code></p>
+<li><p><strong>auxiliary</strong> &#x2F;ɔːɡˈzɪljəri&#x2F; — 辅助的 <code>技术</code></p>
 <blockquote>
-<p>She took the initiative to set up a CI pipeline for automated static analysis.</p>
+<p>The auxiliary control register configures the write buffer and cache policy.</p>
 </blockquote>
 </li>
-<li><p><strong>methodical</strong> &#x2F;mɪˈθɒdɪkəl&#x2F; — 有条理的，系统的 <code>面试</code></p>
+<li><p><strong>disparity</strong> &#x2F;dɪˈspærɪti&#x2F; — 差异，不等 <code>书面</code></p>
 <blockquote>
-<p>A methodical approach to debugging saves hours compared to random trial and error.</p>
+<p>There is a performance disparity between cached and non-cached memory regions.</p>
 </blockquote>
 </li>
-<li><p><strong>aptitude</strong> &#x2F;ˈæptɪtjuːd&#x2F; — 天赋，才能 <code>面试</code></p>
+<li><p><strong>amenable</strong> &#x2F;əˈmiːnəbl&#x2F; — 顺从的，适合的 <code>面试</code></p>
 <blockquote>
-<p>His aptitude for low-level programming was evident from his first bare-metal project.</p>
+<p>Tight polling loops are not amenable to compiler optimization when volatile is used.</p>
 </blockquote>
 </li>
-<li><p><strong>proficient</strong> &#x2F;prəˈfɪʃənt&#x2F; — 熟练的，精通的 <code>面试</code></p>
+<li><p><strong>debacle</strong> &#x2F;dɪˈbɑːkəl&#x2F; — 惨败，灾难 <code>口语</code></p>
 <blockquote>
-<p>You should be proficient in pointer manipulation before attempting kernel development.</p>
+<p>The production recall was a debacle caused by a single missing volatile qualifier.</p>
 </blockquote>
 </li>
 </ol>
 </details>
 
 <hr>
-<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“hit-the-nail-on-the-head”"><a href="#1-“hit-the-nail-on-the-head”" class="headerlink" title="1. “hit the nail on the head”"></a>1. “hit the nail on the head”</h3><p><strong>意思：</strong> 一针见血，说得完全正确<br><strong>场景：</strong> 当同事精准找出问题根因时使用</p>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“down-the-rabbit-hole”"><a href="#1-“down-the-rabbit-hole”" class="headerlink" title="1. “down the rabbit hole”"></a>1. “down the rabbit hole”</h3><p><strong>意思：</strong> 越陷越深，深入研究某个复杂话题<br><strong>场景：</strong> 调试一个小 bug 结果牵出一堆底层问题</p>
 <blockquote>
-<p><strong>A:</strong> I think the bug is caused by struct padding mismatch between the host and the MCU.<br><strong>B:</strong> You hit the nail on the head — the host sends 12 bytes but the MCU expects 8.</p>
+<p><strong>A:</strong> I just wanted to fix a simple register read issue.<br><strong>B:</strong> And? How long did it take?<br><strong>A:</strong> Three days. I went down the rabbit hole — turns out the cache policy was wrong, the MPU wasn’t configured, and the linker script put the buffer in the wrong region.<br><strong>B:</strong> Classic embedded debugging.</p>
 </blockquote>
-<p><em>引用：「You hit the nail on the head.」— To Kill a Mockingbird, 1962</em></p>
+<p><em>引用：「Follow the white rabbit.」— The Matrix, 1999</em></p>
 <hr>
-<h3 id="2-“a-blessing-in-disguise”"><a href="#2-“a-blessing-in-disguise”" class="headerlink" title="2. “a blessing in disguise”"></a>2. “a blessing in disguise”</h3><p><strong>意思：</strong> 塞翁失马，因祸得福<br><strong>场景：</strong> 描述看似坏事最终带来好结果的转折</p>
+<h3 id="2-“the-tip-of-the-iceberg”"><a href="#2-“the-tip-of-the-iceberg”" class="headerlink" title="2. “the tip of the iceberg”"></a>2. “the tip of the iceberg”</h3><p><strong>意思：</strong> 冰山一角，问题远比表面严重<br><strong>场景：</strong> 发现一个 volatile 遗漏后意识到整个代码库都有类似问题</p>
 <blockquote>
-<p><strong>A:</strong> The chip shortage forced us to redesign the whole board.<br><strong>B:</strong> Turned out to be a blessing in disguise — the new design uses half the power.</p>
+<p><strong>A:</strong> We found one missing volatile qualifier in the ADC driver.<br><strong>B:</strong> That’s just the tip of the iceberg. I audited the other drivers — twelve more missing.<br><strong>A:</strong> We need a static analysis rule for this.</p>
 </blockquote>
-<p><em>引用：「It was a blessing in disguise.」— The Shawshank Redemption, 1994</em></p>
+<p><em>引用：「What you see here is just the tip of the iceberg.」— Titanic, 1997</em></p>
 <hr>
-<h3 id="3-“bite-the-bullet”"><a href="#3-“bite-the-bullet”" class="headerlink" title="3. “bite the bullet”"></a>3. “bite the bullet”</h3><p><strong>意思：</strong> 咬牙硬上，硬着头皮做困难但必要的事<br><strong>场景：</strong> 面对痛苦但不得不做的技术决策</p>
+<h3 id="3-“a-blessing-in-disguise”"><a href="#3-“a-blessing-in-disguise”" class="headerlink" title="3. “a blessing in disguise”"></a>3. “a blessing in disguise”</h3><p><strong>意思：</strong> 因祸得福，塞翁失马<br><strong>场景：</strong> 产品召回虽痛苦但促使团队建立更好的流程</p>
 <blockquote>
-<p><strong>A:</strong> Refactoring the entire HAL layer will take two sprints.<br><strong>B:</strong> Let’s bite the bullet now before the codebase gets even messier.</p>
+<p><strong>A:</strong> The recall cost us half a million dollars.<br><strong>B:</strong> True, but it was a blessing in disguise. We now have automated cache coherence checks in CI, and the codebase is way more robust.<br><strong>A:</strong> Silver lining, I guess.</p>
 </blockquote>
-<p><em>引用：「Sometimes you just have to bite the bullet.」— BBC News, 2021</em></p>
+<p><em>引用：「Sometimes the worst thing that happens to you can be the best thing for you.」— The Pursuit of Happyness, 2006</em></p>
 <hr>
-<h3 id="4-“the-tip-of-the-iceberg”"><a href="#4-“the-tip-of-the-iceberg”" class="headerlink" title="4. “the tip of the iceberg”"></a>4. “the tip of the iceberg”</h3><p><strong>意思：</strong> 冰山一角，只是问题的表面<br><strong>场景：</strong> 当初步调查暴露更深层问题时</p>
+<h3 id="4-“from-scratch”"><a href="#4-“from-scratch”" class="headerlink" title="4. “from scratch”"></a>4. “from scratch”</h3><p><strong>意思：</strong> 从零开始<br><strong>场景：</strong> 决定重写 HAL 层而不是修补旧代码</p>
 <blockquote>
-<p><strong>A:</strong> We found three memory leaks in the parser module.<br><strong>B:</strong> That’s just the tip of the iceberg — wait until you profile the network stack.</p>
+<p><strong>A:</strong> Can we patch the existing register abstraction layer?<br><strong>B:</strong> No, it’s fundamentally broken. We need to build it from scratch with proper volatile semantics and memory barriers.<br><strong>A:</strong> That’s a month of work at least.<br><strong>B:</strong> Better one month now than six months of field failures.</p>
 </blockquote>
-<p><em>引用：「That was just the tip of the iceberg.」— Titanic, 1997</em></p>
+<p><em>引用：「I built this company from scratch.」— Steve Jobs, PBS documentary, 1996</em></p>
 <hr>
-<h3 id="5-“get-the-ball-rolling”"><a href="#5-“get-the-ball-rolling”" class="headerlink" title="5. “get the ball rolling”"></a>5. “get the ball rolling”</h3><p><strong>意思：</strong> 开始行动，启动进程<br><strong>场景：</strong> 推动项目从计划进入执行阶段</p>
+<h3 id="5-“miss-the-forest-for-the-trees”"><a href="#5-“miss-the-forest-for-the-trees”" class="headerlink" title="5. “miss the forest for the trees”"></a>5. “miss the forest for the trees”</h3><p><strong>意思：</strong> 只见树木不见森林，因小失大<br><strong>场景：</strong> 团队纠结于单个 volatile 用法却忽略了整体缓存策略</p>
 <blockquote>
-<p><strong>A:</strong> When do we start porting to the new MCU?<br><strong>B:</strong> I’ve already set up the toolchain — let’s get the ball rolling with the GPIO driver.</p>
+<p><strong>A:</strong> We spent the entire review arguing about whether this one variable needs volatile.<br><strong>B:</strong> We’re missing the forest for the trees. The real question is whether our MPU configuration even puts this region as Device memory.<br><strong>A:</strong> Good point. If the region is already Strongly-ordered, volatile alone is sufficient.</p>
 </blockquote>
-<p><em>引用：「It’s time to get the ball rolling.」— The New York Times, 2020</em></p>
+<p><em>引用：「You can’t see the forest for the trees.」— John Heywood, A Dialogue of Proverbs, 1546</em></p>
 <hr>
-<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-28-词汇-—-第-4-天复习（链接脚本与内存布局）"><a href="#📅-3-x2F-28-词汇-—-第-4-天复习（链接脚本与内存布局）" class="headerlink" title="📅 3&#x2F;28 词汇 — 第 4 天复习（链接脚本与内存布局）"></a>📅 3&#x2F;28 词汇 — 第 4 天复习（链接脚本与内存布局）</h3><table>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-25-词汇-—-第-7-天复习（FOC-磁场定向控制）"><a href="#📅-3-x2F-25-词汇-—-第-7-天复习（FOC-磁场定向控制）" class="headerlink" title="📅 3&#x2F;25 词汇 — 第 7 天复习（FOC 磁场定向控制）"></a>📅 3&#x2F;25 词汇 — 第 7 天复习（FOC 磁场定向控制）</h3><p>（该日无词汇记录）</p>
+<h3 id="📅-3-x2F-28-词汇-—-第-4-天复习（链接脚本与内存布局）"><a href="#📅-3-x2F-28-词汇-—-第-4-天复习（链接脚本与内存布局）" class="headerlink" title="📅 3&#x2F;28 词汇 — 第 4 天复习（链接脚本与内存布局）"></a>📅 3&#x2F;28 词汇 — 第 4 天复习（链接脚本与内存布局）</h3><table>
 <thead>
 <tr>
 <th>单词</th>
@@ -1062,7 +1099,7 @@
 </tr>
 <tr>
 <td>objdump</td>
-<td>目标转储</td>
+<td>反汇编工具</td>
 </tr>
 <tr>
 <td>disassemble</td>
@@ -1106,11 +1143,11 @@
 </tr>
 <tr>
 <td>objcopy</td>
-<td>目标拷贝</td>
+<td>二进制转换工具</td>
 </tr>
 <tr>
 <td>bootrom</td>
-<td>引导ROM</td>
+<td>启动ROM</td>
 </tr>
 <tr>
 <td>eliminate</td>
@@ -1130,11 +1167,11 @@
 </tr>
 <tr>
 <td>delineation</td>
-<td>划界</td>
+<td>划分</td>
 </tr>
 <tr>
 <td>contend</td>
-<td>争论</td>
+<td>竞争</td>
 </tr>
 <tr>
 <td>segregate</td>
@@ -1149,7 +1186,14 @@
 <td>指定</td>
 </tr>
 </tbody></table>
-<p><strong>习语复习：</strong> lay the groundwork · under the hood · set in stone · the devil is in the details · put it into perspective</p>
+<p><strong>地道表达复习：</strong></p>
+<ul>
+<li>lay the groundwork — 打基础</li>
+<li>under the hood — 底层内部</li>
+<li>set in stone — 板上钉钉</li>
+<li>the devil is in the details — 细节决定成败</li>
+<li>put it into perspective — 客观看待</li>
+</ul>
 <h3 id="📅-3-x2F-30-词汇-—-第-2-天复习（低功耗设计）"><a href="#📅-3-x2F-30-词汇-—-第-2-天复习（低功耗设计）" class="headerlink" title="📅 3&#x2F;30 词汇 — 第 2 天复习（低功耗设计）"></a>📅 3&#x2F;30 词汇 — 第 2 天复习（低功耗设计）</h3><table>
 <thead>
 <tr>
@@ -1159,11 +1203,11 @@
 </thead>
 <tbody><tr>
 <td>quiescent</td>
-<td>静态的</td>
+<td>静态的，静止的</td>
 </tr>
 <tr>
 <td>leakage</td>
-<td>漏电</td>
+<td>漏电，泄漏</td>
 </tr>
 <tr>
 <td>regulator</td>
@@ -1175,7 +1219,7 @@
 </tr>
 <tr>
 <td>throttle</td>
-<td>节流</td>
+<td>节流，限速</td>
 </tr>
 <tr>
 <td>dissipation</td>
@@ -1187,11 +1231,11 @@
 </tr>
 <tr>
 <td>substrate</td>
-<td>基板</td>
+<td>基板，衬底</td>
 </tr>
 <tr>
 <td>quench</td>
-<td>淬灭</td>
+<td>淬灭，抑制</td>
 </tr>
 <tr>
 <td>ripple</td>
@@ -1211,7 +1255,7 @@
 </tr>
 <tr>
 <td>embark</td>
-<td>着手</td>
+<td>着手，开始</td>
 </tr>
 <tr>
 <td>meander</td>
@@ -1223,7 +1267,7 @@
 </tr>
 <tr>
 <td>entail</td>
-<td>需要</td>
+<td>需要，牵涉</td>
 </tr>
 <tr>
 <td>elicit</td>
@@ -1239,7 +1283,7 @@
 </tr>
 <tr>
 <td>bolster</td>
-<td>增强</td>
+<td>支撑，增强</td>
 </tr>
 <tr>
 <td>hinder</td>
@@ -1275,19 +1319,19 @@
 </tr>
 <tr>
 <td>hands-on</td>
-<td>实操的</td>
+<td>实际操作的</td>
 </tr>
 <tr>
 <td>trade-off</td>
-<td>权衡</td>
+<td>权衡取舍</td>
 </tr>
 <tr>
 <td>walkthrough</td>
-<td>讲解</td>
+<td>详细讲解</td>
 </tr>
 <tr>
 <td>workaround</td>
-<td>变通</td>
+<td>变通方法</td>
 </tr>
 <tr>
 <td>upfront</td>
@@ -1307,7 +1351,7 @@
 </tr>
 <tr>
 <td>ramp</td>
-<td>斜坡</td>
+<td>渐升</td>
 </tr>
 <tr>
 <td>standby</td>
@@ -1347,7 +1391,7 @@
 </tr>
 <tr>
 <td>acumen</td>
-<td>洞察力</td>
+<td>敏锐</td>
 </tr>
 <tr>
 <td>scalability</td>
@@ -1358,7 +1402,14 @@
 <td>凭证</td>
 </tr>
 </tbody></table>
-<p><strong>习语复习：</strong> burn the midnight oil · back to the drawing board · on the same page · the ball is in your court · pull the plug</p>
+<p><strong>地道表达复习：</strong></p>
+<ul>
+<li>burn the midnight oil — 熬夜工作</li>
+<li>back to the drawing board — 推倒重来</li>
+<li>on the same page — 达成共识</li>
+<li>the ball is in your court — 该你行动了</li>
+<li>pull the plug — 终止，叫停</li>
+</ul>
 <h3 id="📅-3-x2F-31-词汇-—-第-1-天复习（安全标准与-MISRA-C）"><a href="#📅-3-x2F-31-词汇-—-第-1-天复习（安全标准与-MISRA-C）" class="headerlink" title="📅 3&#x2F;31 词汇 — 第 1 天复习（安全标准与 MISRA C）"></a>📅 3&#x2F;31 词汇 — 第 1 天复习（安全标准与 MISRA C）</h3><table>
 <thead>
 <tr>
@@ -1372,7 +1423,7 @@
 </tr>
 <tr>
 <td>hazard</td>
-<td>危害</td>
+<td>危险</td>
 </tr>
 <tr>
 <td>severity</td>
@@ -1384,7 +1435,7 @@
 </tr>
 <tr>
 <td>directive</td>
-<td>准则</td>
+<td>指令，准则</td>
 </tr>
 <tr>
 <td>operand</td>
@@ -1408,7 +1459,7 @@
 </tr>
 <tr>
 <td>fallback</td>
-<td>回退</td>
+<td>回退方案</td>
 </tr>
 <tr>
 <td>redundancy</td>
@@ -1512,7 +1563,7 @@
 </tr>
 <tr>
 <td>attestation</td>
-<td>证实</td>
+<td>证明</td>
 </tr>
 <tr>
 <td>enumerate</td>
@@ -1552,7 +1603,7 @@
 </tr>
 <tr>
 <td>corroborate</td>
-<td>佐证</td>
+<td>证实</td>
 </tr>
 <tr>
 <td>inadmissible</td>
@@ -1567,7 +1618,14 @@
 <td>宽容</td>
 </tr>
 </tbody></table>
-<p><strong>习语复习：</strong> cut corners · cover all the bases · in the weeds · raise the bar · by the book</p>
+<p><strong>地道表达复习：</strong></p>
+<ul>
+<li>cut corners — 偷工减料</li>
+<li>cover all the bases — 面面俱到</li>
+<li>in the weeds — 陷入细节</li>
+<li>raise the bar — 提高标准</li>
+<li>by the book — 按规矩办事</li>
+</ul>
 
     </div>
 
@@ -1577,12 +1635,12 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C-C/" rel="tag"># C/C++</a>
               <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
               <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
               <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
-              <a href="/tags/%E6%8C%87%E9%92%88/" rel="tag"># 指针</a>
-              <a href="/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="tag"># 内存模型</a>
+              <a href="/tags/volatile/" rel="tag"># volatile</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" rel="tag"># 内存屏障</a>
+              <a href="/tags/%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag"># 缓存一致性</a>
           </div>
 
         
@@ -1630,7 +1688,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:35</span>
+    <span title="站点阅读时长">18:37</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
