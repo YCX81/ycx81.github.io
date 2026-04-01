@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ycx81.github.io/2026/04/01/daily-study-2026-04-01/</loc>
+    
+    <lastmod>2026-04-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://ycx81.github.io/2026/03/31/daily-study-2026-03-31/</loc>
     
     <lastmod>2026-03-31</lastmod>
@@ -902,6 +911,13 @@
   
   <url>
     <loc>http://ycx81.github.io/tags/%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86/</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
