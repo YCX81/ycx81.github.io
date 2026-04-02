@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池 · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;26, 3&#x2F;29, 3&#x2F;31, 4&#x2F;01）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-04-02">
+<meta property="og:url" content="http://ycx81.github.io/2026/04/02/daily-study-2026-04-02/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池 · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;26, 3&#x2F;29, 3&#x2F;31, 4&#x2F;01）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-02T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-02T07:12:39.205Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="RTOS">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="优先级反转">
+<meta property="article:tag" content="Tick-less">
+<meta property="article:tag" content="内存池">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/04/02/daily-study-2026-04-02/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/04/02/daily-study-2026-04-02/","path":"2026/04/02/daily-study-2026-04-02/","title":"每日学习 — 2026-04-02"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-04-02 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9ARTOS-%E6%B7%B1%E5%85%A5%E7%AF%87-%E2%80%94-%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC%E3%80%81Tick-less-Idle-%E4%B8%8E%E5%86%85%E5%AD%98%E6%B1%A0"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC%EF%BC%88Priority-Inversion%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">1. 优先级反转（Priority Inversion）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tick-less-Idle%EF%BC%88%E6%97%A0%E8%8A%82%E6%8B%8D%E7%A9%BA%E9%97%B2%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. Tick-less Idle（无节拍空闲模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E5%86%85%E5%AD%98%E6%B1%A0-vs-%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D"><span class="nav-number">1.3.</span> <span class="nav-text">3. 静态内存池 vs 动态分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cburn-the-midnight-oil%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “burn the midnight oil”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cback-to-the-drawing-board%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “back to the drawing board”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Ca-double-edged-sword%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “a double-edged sword”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-elephant-in-the-room%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the elephant in the room”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Ccut-to-the-chase%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “cut to the chase”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-26-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E5%85%A8%E6%99%AF%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;26 词汇 — 第 7 天复习（通信协议全景）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-29-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;29 词汇 — 第 4 天复习（调试技术全景）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-31-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86%E4%B8%8E-MISRA-C%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 3&#x2F;31 词汇 — 第 2 天复习（安全标准与 MISRA C）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-4-x2F-01-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88volatile-%E4%B8%8E%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84-Round-2%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 4&#x2F;01 词汇 — 第 1 天复习（volatile 与内存映射 Round 2）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/04/02/daily-study-2026-04-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-04-02 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-04-02
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-02 09:00:00" itemprop="dateCreated datePublished" datetime="2026-04-02T09:00:00+08:00">2026-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>14 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;26, 3&#x2F;29, 3&#x2F;31, 4&#x2F;01）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：RTOS-深入篇-—-优先级反转、Tick-less-Idle-与内存池"><a href="#🔧-嵌入式知识：RTOS-深入篇-—-优先级反转、Tick-less-Idle-与内存池" class="headerlink" title="🔧 嵌入式知识：RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池"></a>🔧 嵌入式知识：RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池</h2><h3 id="1-优先级反转（Priority-Inversion）"><a href="#1-优先级反转（Priority-Inversion）" class="headerlink" title="1. 优先级反转（Priority Inversion）"></a>1. 优先级反转（Priority Inversion）</h3><p>原理：低优先级任务持有互斥锁，高优先级任务阻塞等待该锁，而中优先级任务抢占低优先级任务运行 → 高优先级任务被”间接延迟”。</p>
+<p>经典案例：1997 年火星探路者号（Mars Pathfinder）因优先级反转导致系统反复重启。</p>
+<p>解决方案：</p>
+<ul>
+<li><strong>优先级继承（Priority Inheritance）</strong>：持锁任务临时提升到等待者的优先级</li>
+<li><strong>优先级天花板（Priority Ceiling）</strong>：互斥锁创建时指定天花板优先级，任何持锁任务自动提升</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FreeRTOS 优先级继承示例</span></span><br><span class="line">SemaphoreHandle_t xMutex = xSemaphoreCreateMutex();</span><br><span class="line"><span class="comment">// FreeRTOS 的 Mutex 默认启用优先级继承</span></span><br><span class="line"><span class="comment">// 当高优先级任务 xSemaphoreTake() 阻塞时，</span></span><br><span class="line"><span class="comment">// 持锁的低优先级任务自动继承高优先级</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 手动实现优先级天花板（CMSIS-RTOS2）</span></span><br><span class="line">osMutexAttr_t mutex_attr = &#123;</span><br><span class="line">    .attr_bits = osMutexPrioInherit | osMutexRobust</span><br><span class="line">&#125;;</span><br><span class="line">osMutexId_t mutex = osMutexNew(&amp;mutex_attr);</span><br></pre></td></tr></table></figure>
+
+<p>常见误区：</p>
+<ul>
+<li>✗ “用信号量（Binary Semaphore）代替互斥锁也能防止优先级反转” → 错！信号量没有 ownership 概念，无法实现优先级继承</li>
+<li>✗ “优先级继承能解决所有反转问题” → 不完全。嵌套锁（ABBA deadlock）仍然可能发生</li>
+</ul>
+<h3 id="2-Tick-less-Idle（无节拍空闲模式）"><a href="#2-Tick-less-Idle（无节拍空闲模式）" class="headerlink" title="2. Tick-less Idle（无节拍空闲模式）"></a>2. Tick-less Idle（无节拍空闲模式）</h3><p>传统 RTOS 用周期性 SysTick 中断（如 1kHz）驱动调度器。空闲时 SysTick 仍不断唤醒 CPU → 浪费功耗。Tick-less 模式在空闲时停止 SysTick，改用低功耗定时器（LPTIM &#x2F; RTC）在下一个任务唤醒点触发中断。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FreeRTOS configUSE_TICKLESS_IDLE 配置</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TICKLESS_IDLE    2  <span class="comment">// 2 = 用户自定义实现</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configEXPECTED_IDLE_TIME_BEFORE_SLEEP  2  <span class="comment">// 最少 2 tick 才进入</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">vPortSuppressTicksAndSleep</span><span class="params">(TickType_t xExpectedIdleTime)</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 计算可以睡眠的时间</span></span><br><span class="line">    <span class="type">uint32_t</span> sleep_ms = xExpectedIdleTime * portTICK_PERIOD_MS;</span><br><span class="line">    <span class="comment">// 2. 配置 LPTIM 唤醒</span></span><br><span class="line">    HAL_LPTIM_Counter_Start_IT(&amp;hlptim1, sleep_ms);</span><br><span class="line">    <span class="comment">// 3. 进入 STOP2 模式</span></span><br><span class="line">    HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);</span><br><span class="line">    <span class="comment">// 4. 唤醒后补偿 tick 计数</span></span><br><span class="line">    vTaskStepTick(actual_sleep_ticks);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键点：</p>
+<ul>
+<li>补偿精度：唤醒后必须准确补偿 tick 计数，否则 <code>vTaskDelay()</code> 时间不准</li>
+<li>最小睡眠阈值：太短的空闲期（&lt;2 ticks）不值得进入低功耗</li>
+<li>唤醒源：除 LPTIM 外还需考虑 GPIO 中断、UART 接收等外部唤醒</li>
+</ul>
+<h3 id="3-静态内存池-vs-动态分配"><a href="#3-静态内存池-vs-动态分配" class="headerlink" title="3. 静态内存池 vs 动态分配"></a>3. 静态内存池 vs 动态分配</h3><p>为什么 RTOS 推荐静态分配：</p>
+<ul>
+<li><strong>确定性</strong>：malloc&#x2F;free 在碎片化后时间不可预测</li>
+<li><strong>安全性</strong>：MISRA C 禁止动态内存分配（Rule 21.3）</li>
+<li><strong>可靠性</strong>：堆耗尽 &#x3D; 系统崩溃，静态分配在编译期就能确定</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FreeRTOS 静态任务创建</span></span><br><span class="line"><span class="type">static</span> StaticTask_t xTaskBuffer;</span><br><span class="line"><span class="type">static</span> StackType_t xStack[<span class="number">256</span>];</span><br><span class="line"></span><br><span class="line">TaskHandle_t xHandle = xTaskCreateStatic(</span><br><span class="line">    vTaskFunction,</span><br><span class="line">    <span class="string">&quot;TaskName&quot;</span>,</span><br><span class="line">    <span class="number">256</span>,            <span class="comment">// stack depth</span></span><br><span class="line">    <span class="literal">NULL</span>,           <span class="comment">// parameter</span></span><br><span class="line">    tskIDLE_PRIORITY + <span class="number">1</span>,</span><br><span class="line">    xStack,</span><br><span class="line">    &amp;xTaskBuffer</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 内存池模式（固定块大小，O(1) 分配）</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> POOL_BLOCK_SIZE  64</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> POOL_BLOCK_COUNT 32</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> pool_memory[POOL_BLOCK_SIZE * POOL_BLOCK_COUNT];</span><br><span class="line"><span class="type">static</span> QueueHandle_t xPoolQueue;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">pool_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    xPoolQueue = xQueueCreate(POOL_BLOCK_COUNT, <span class="keyword">sizeof</span>(<span class="type">void</span>*));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; POOL_BLOCK_COUNT; i++) &#123;</span><br><span class="line">        <span class="type">void</span> *block = &amp;pool_memory[i * POOL_BLOCK_SIZE];</span><br><span class="line">        xQueueSend(xPoolQueue, &amp;block, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="title function_">pool_alloc</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">void</span> *block;</span><br><span class="line">    <span class="keyword">if</span> (xQueueReceive(xPoolQueue, &amp;block, <span class="number">0</span>) == pdTRUE)</span><br><span class="line">        <span class="keyword">return</span> block;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;  <span class="comment">// 池耗尽</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">pool_free</span><span class="params">(<span class="type">void</span> *block)</span> &#123;</span><br><span class="line">    xQueueSend(xPoolQueue, &amp;block, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: 什么是优先级反转？如何解决？</strong><br>A: 高优先级任务因低优先级任务持有锁而被阻塞，中优先级任务抢占低优先级任务运行导致高优先级任务间接延迟。解决方案：优先级继承（持锁任务临时提升优先级）和优先级天花板（锁自带最高优先级）。</p>
+<p><strong>Q2: FreeRTOS 的 Tick-less Idle 原理是什么？</strong><br>A: 空闲时停止 SysTick，计算下一个任务唤醒时间点，配置低功耗定时器（LPTIM）在该时间点触发中断，CPU 进入 STOP 模式。唤醒后调用 <code>vTaskStepTick()</code> 补偿流逝的 tick 数。</p>
+<p><strong>Q3: 为什么嵌入式系统避免使用 malloc？</strong><br>A: 堆碎片化导致分配时间不确定（违反实时性要求），堆耗尽无法恢复（安全隐患），且 MISRA C 明确禁止。替代方案：静态分配或固定大小内存池（O(1) 分配&#x2F;释放，无碎片）。</p>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-04-02-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-04-02-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>abate</td>
+<td>&#x2F;əˈbeɪt&#x2F;</td>
+<td>减弱，减轻</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>accrue</td>
+<td>&#x2F;əˈkruː&#x2F;</td>
+<td>积累，增长</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>3</td>
+<td>adjunct</td>
+<td>&#x2F;ˈædʒʌŋkt&#x2F;</td>
+<td>附属物，辅助</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>4</td>
+<td>affinity</td>
+<td>&#x2F;əˈfɪnɪti&#x2F;</td>
+<td>亲和性，关联</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>albeit</td>
+<td>&#x2F;ɔːlˈbiːɪt&#x2F;</td>
+<td>虽然，尽管</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>6</td>
+<td>allot</td>
+<td>&#x2F;əˈlɒt&#x2F;</td>
+<td>分配，拨出</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>7</td>
+<td>amortize</td>
+<td>&#x2F;ˈæmətaɪz&#x2F;</td>
+<td>摊销，分期偿还</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>8</td>
+<td>antecedent</td>
+<td>&#x2F;ˌæntɪˈsiːdənt&#x2F;</td>
+<td>前因，先行词</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>9</td>
+<td>apex</td>
+<td>&#x2F;ˈeɪpɛks&#x2F;</td>
+<td>顶点，最高点</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>10</td>
+<td>auspicious</td>
+<td>&#x2F;ɔːˈspɪʃəs&#x2F;</td>
+<td>吉利的，有利的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>11</td>
+<td>backpressure</td>
+<td>&#x2F;ˈbækˌprɛʃər&#x2F;</td>
+<td>背压</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>brunt</td>
+<td>&#x2F;brʌnt&#x2F;</td>
+<td>冲击的主要部分</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>13</td>
+<td>circumspect</td>
+<td>&#x2F;ˈsɜːrkəmspɛkt&#x2F;</td>
+<td>谨慎的，周到的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>14</td>
+<td>conducive</td>
+<td>&#x2F;kənˈdjuːsɪv&#x2F;</td>
+<td>有助于的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>15</td>
+<td>coroutine</td>
+<td>&#x2F;kɒˈruːtiːn&#x2F;</td>
+<td>协程</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td>deficiency</td>
+<td>&#x2F;dɪˈfɪʃənsi&#x2F;</td>
+<td>不足，缺陷</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>17</td>
+<td>demarcation</td>
+<td>&#x2F;ˌdiːmɑːrˈkeɪʃən&#x2F;</td>
+<td>界限，划分</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>depict</td>
+<td>&#x2F;dɪˈpɪkt&#x2F;</td>
+<td>描绘，描述</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>19</td>
+<td>dequeue</td>
+<td>&#x2F;diːˈkjuː&#x2F;</td>
+<td>出队</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>diminish</td>
+<td>&#x2F;dɪˈmɪnɪʃ&#x2F;</td>
+<td>减少，削弱</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>21</td>
+<td>discern</td>
+<td>&#x2F;dɪˈsɜːrn&#x2F;</td>
+<td>辨别，识别</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>22</td>
+<td>dwindle</td>
+<td>&#x2F;ˈdwɪndəl&#x2F;</td>
+<td>逐渐减少</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>23</td>
+<td>efficacy</td>
+<td>&#x2F;ˈɛfɪkəsi&#x2F;</td>
+<td>功效，有效性</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>24</td>
+<td>egregious</td>
+<td>&#x2F;ɪˈɡriːdʒəs&#x2F;</td>
+<td>极其恶劣的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>25</td>
+<td>emanate</td>
+<td>&#x2F;ˈɛməneɪt&#x2F;</td>
+<td>发出，散发</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>26</td>
+<td>erode</td>
+<td>&#x2F;ɪˈroʊd&#x2F;</td>
+<td>侵蚀，削弱</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>27</td>
+<td>extraneous</td>
+<td>&#x2F;ɪkˈstreɪniəs&#x2F;</td>
+<td>无关的，多余的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>28</td>
+<td>facet</td>
+<td>&#x2F;ˈfæsɪt&#x2F;</td>
+<td>方面，层面</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>29</td>
+<td>fidelity</td>
+<td>&#x2F;fɪˈdɛlɪti&#x2F;</td>
+<td>保真度，忠实</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>30</td>
+<td>futile</td>
+<td>&#x2F;ˈfjuːtaɪl&#x2F;</td>
+<td>徒劳的，无用的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>31</td>
+<td>gratuitous</td>
+<td>&#x2F;ɡrəˈtjuːɪtəs&#x2F;</td>
+<td>不必要的，多余的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>32</td>
+<td>heap</td>
+<td>&#x2F;hiːp&#x2F;</td>
+<td>堆</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>33</td>
+<td>incur</td>
+<td>&#x2F;ɪnˈkɜːr&#x2F;</td>
+<td>招致，引起</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>34</td>
+<td>infer</td>
+<td>&#x2F;ɪnˈfɜːr&#x2F;</td>
+<td>推断，推理</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>35</td>
+<td>ingress</td>
+<td>&#x2F;ˈɪnɡrɛs&#x2F;</td>
+<td>入口，进入</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>36</td>
+<td>innate</td>
+<td>&#x2F;ɪˈneɪt&#x2F;</td>
+<td>固有的，天生的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>37</td>
+<td>interpose</td>
+<td>&#x2F;ˌɪntərˈpoʊz&#x2F;</td>
+<td>插入，介入</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>juncture</td>
+<td>&#x2F;ˈdʒʌŋktʃər&#x2F;</td>
+<td>关键时刻，节点</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>39</td>
+<td>kernel</td>
+<td>&#x2F;ˈkɜːrnəl&#x2F;</td>
+<td>内核</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>40</td>
+<td>lapse</td>
+<td>&#x2F;læps&#x2F;</td>
+<td>失误，间隔</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>41</td>
+<td>negate</td>
+<td>&#x2F;nɪˈɡeɪt&#x2F;</td>
+<td>否定，取消</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>42</td>
+<td>onerous</td>
+<td>&#x2F;ˈɒnərəs&#x2F;</td>
+<td>繁重的，费力的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>43</td>
+<td>ostensibly</td>
+<td>&#x2F;ɒˈstɛnsɪbli&#x2F;</td>
+<td>表面上</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>44</td>
+<td>paradigm</td>
+<td>&#x2F;ˈpærədaɪm&#x2F;</td>
+<td>范式，典范</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>45</td>
+<td>peculiar</td>
+<td>&#x2F;pɪˈkjuːliər&#x2F;</td>
+<td>奇特的，独特的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>46</td>
+<td>preclude</td>
+<td>&#x2F;prɪˈkluːd&#x2F;</td>
+<td>排除，阻止</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>47</td>
+<td>rendezvous</td>
+<td>&#x2F;ˈrɒndɪvuː&#x2F;</td>
+<td>会合点</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>48</td>
+<td>thrash</td>
+<td>&#x2F;θræʃ&#x2F;</td>
+<td>颠簸，剧烈抖动</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>49</td>
+<td>trampoline</td>
+<td>&#x2F;ˈtræmpəliːn&#x2F;</td>
+<td>跳板（函数）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>50</td>
+<td>unwind</td>
+<td>&#x2F;ʌnˈwaɪnd&#x2F;</td>
+<td>展开，回溯</td>
+<td>技术</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>abate</strong> &#x2F;əˈbeɪt&#x2F; — 减弱，减轻 <code>技术</code></p>
+<blockquote>
+<p>The noise abated once we added ferrite beads to the power line.</p>
+</blockquote>
+</li>
+<li><p><strong>accrue</strong> &#x2F;əˈkruː&#x2F; — 积累，增长 <code>书面</code></p>
+<blockquote>
+<p>Technical debt accrues rapidly when you skip code reviews.</p>
+</blockquote>
+</li>
+<li><p><strong>adjunct</strong> &#x2F;ˈædʒʌŋkt&#x2F; — 附属物，辅助 <code>书面</code></p>
+<blockquote>
+<p>The debug module serves as an adjunct to the main firmware image.</p>
+</blockquote>
+</li>
+<li><p><strong>affinity</strong> &#x2F;əˈfɪnɪti&#x2F; — 亲和性，关联 <code>技术</code></p>
+<blockquote>
+<p>Setting CPU affinity ensures the ISR handler runs on core 0.</p>
+</blockquote>
+</li>
+<li><p><strong>albeit</strong> &#x2F;ɔːlˈbiːɪt&#x2F; — 虽然，尽管 <code>书面</code></p>
+<blockquote>
+<p>The new chip is faster, albeit more power-hungry at peak load.</p>
+</blockquote>
+</li>
+<li><p><strong>allot</strong> &#x2F;əˈlɒt&#x2F; — 分配，拨出 <code>书面</code></p>
+<blockquote>
+<p>We allotted 4 KB of SRAM for the task stack.</p>
+</blockquote>
+</li>
+<li><p><strong>amortize</strong> &#x2F;ˈæmətaɪz&#x2F; — 摊销，分期偿还 <code>面试</code></p>
+<blockquote>
+<p>We amortize the cost of initialization over thousands of transactions.</p>
+</blockquote>
+</li>
+<li><p><strong>antecedent</strong> &#x2F;ˌæntɪˈsiːdənt&#x2F; — 前因，先行词 <code>书面</code></p>
+<blockquote>
+<p>Understanding the antecedent hardware revision is key to reproducing the bug.</p>
+</blockquote>
+</li>
+<li><p><strong>apex</strong> &#x2F;ˈeɪpɛks&#x2F; — 顶点，最高点 <code>口语</code></p>
+<blockquote>
+<p>The CPU usage hits its apex during the motor alignment phase.</p>
+</blockquote>
+</li>
+<li><p><strong>auspicious</strong> &#x2F;ɔːˈspɪʃəs&#x2F; — 吉利的，有利的 <code>口语</code></p>
+<blockquote>
+<p>An auspicious start — all unit tests passed on the first run.</p>
+</blockquote>
+</li>
+<li><p><strong>backpressure</strong> &#x2F;ˈbækˌprɛʃər&#x2F; — 背压 <code>技术</code></p>
+<blockquote>
+<p>The message queue applies backpressure when the consumer cannot keep up.</p>
+</blockquote>
+</li>
+<li><p><strong>brunt</strong> &#x2F;brʌnt&#x2F; — 冲击的主要部分 <code>口语</code></p>
+<blockquote>
+<p>The power supply bore the brunt of the voltage spike.</p>
+</blockquote>
+</li>
+<li><p><strong>circumspect</strong> &#x2F;ˈsɜːrkəmspɛkt&#x2F; — 谨慎的，周到的 <code>面试</code></p>
+<blockquote>
+<p>Be circumspect when modifying the bootloader — a bad flash bricks the device.</p>
+</blockquote>
+</li>
+<li><p><strong>conducive</strong> &#x2F;kənˈdjuːsɪv&#x2F; — 有助于的 <code>书面</code></p>
+<blockquote>
+<p>A modular architecture is conducive to long-term maintainability.</p>
+</blockquote>
+</li>
+<li><p><strong>coroutine</strong> &#x2F;kɒˈruːtiːn&#x2F; — 协程 <code>技术</code></p>
+<blockquote>
+<p>The event loop uses coroutines to handle UART RX without blocking.</p>
+</blockquote>
+</li>
+<li><p><strong>deficiency</strong> &#x2F;dɪˈfɪʃənsi&#x2F; — 不足，缺陷 <code>面试</code></p>
+<blockquote>
+<p>The audit revealed a deficiency in our error-handling coverage.</p>
+</blockquote>
+</li>
+<li><p><strong>demarcation</strong> &#x2F;ˌdiːmɑːrˈkeɪʃən&#x2F; — 界限，划分 <code>技术</code></p>
+<blockquote>
+<p>Clear demarcation between HAL and application layers simplifies porting.</p>
+</blockquote>
+</li>
+<li><p><strong>depict</strong> &#x2F;dɪˈpɪkt&#x2F; — 描绘，描述 <code>书面</code></p>
+<blockquote>
+<p>The state diagram depicts all valid transitions of the motor controller.</p>
+</blockquote>
+</li>
+<li><p><strong>dequeue</strong> &#x2F;diːˈkjuː&#x2F; — 出队 <code>技术</code></p>
+<blockquote>
+<p>The scheduler dequeues the highest-priority ready task on each context switch.</p>
+</blockquote>
+</li>
+<li><p><strong>diminish</strong> &#x2F;dɪˈmɪnɪʃ&#x2F; — 减少，削弱 <code>口语</code></p>
+<blockquote>
+<p>Signal strength diminishes as the antenna distance exceeds 10 meters.</p>
+</blockquote>
+</li>
+<li><p><strong>discern</strong> &#x2F;dɪˈsɜːrn&#x2F; — 辨别，识别 <code>面试</code></p>
+<blockquote>
+<p>It is difficult to discern the root cause from the crash dump alone.</p>
+</blockquote>
+</li>
+<li><p><strong>dwindle</strong> &#x2F;ˈdwɪndəl&#x2F; — 逐渐减少 <code>口语</code></p>
+<blockquote>
+<p>Free heap space dwindled to zero after 72 hours of continuous operation.</p>
+</blockquote>
+</li>
+<li><p><strong>efficacy</strong> &#x2F;ˈɛfɪkəsi&#x2F; — 功效，有效性 <code>书面</code></p>
+<blockquote>
+<p>We measured the efficacy of each optimization pass on code size.</p>
+</blockquote>
+</li>
+<li><p><strong>egregious</strong> &#x2F;ɪˈɡriːdʒəs&#x2F; — 极其恶劣的 <code>口语</code></p>
+<blockquote>
+<p>Dereferencing a NULL pointer is an egregious programming error.</p>
+</blockquote>
+</li>
+<li><p><strong>emanate</strong> &#x2F;ˈɛməneɪt&#x2F; — 发出，散发 <code>书面</code></p>
+<blockquote>
+<p>The EMI emanates from the unshielded DC-DC converter trace.</p>
+</blockquote>
+</li>
+<li><p><strong>erode</strong> &#x2F;ɪˈroʊd&#x2F; — 侵蚀，削弱 <code>口语</code></p>
+<blockquote>
+<p>Skipping reviews erodes code quality over successive sprints.</p>
+</blockquote>
+</li>
+<li><p><strong>extraneous</strong> &#x2F;ɪkˈstreɪniəs&#x2F; — 无关的，多余的 <code>面试</code></p>
+<blockquote>
+<p>Strip extraneous debug symbols from the release binary to save flash.</p>
+</blockquote>
+</li>
+<li><p><strong>facet</strong> &#x2F;ˈfæsɪt&#x2F; — 方面，层面 <code>书面</code></p>
+<blockquote>
+<p>Power consumption is just one facet of the overall design trade-off.</p>
+</blockquote>
+</li>
+<li><p><strong>fidelity</strong> &#x2F;fɪˈdɛlɪti&#x2F; — 保真度，忠实 <code>技术</code></p>
+<blockquote>
+<p>A 24-bit ADC provides higher fidelity than a 12-bit one for audio sampling.</p>
+</blockquote>
+</li>
+<li><p><strong>futile</strong> &#x2F;ˈfjuːtaɪl&#x2F; — 徒劳的，无用的 <code>口语</code></p>
+<blockquote>
+<p>Retrying the I2C write is futile when the bus is stuck in a low state.</p>
+</blockquote>
+</li>
+<li><p><strong>gratuitous</strong> &#x2F;ɡrəˈtjuːɪtəs&#x2F; — 不必要的，多余的 <code>面试</code></p>
+<blockquote>
+<p>Avoid gratuitous use of volatile — it disables useful compiler optimizations.</p>
+</blockquote>
+</li>
+<li><p><strong>heap</strong> &#x2F;hiːp&#x2F; — 堆 <code>技术</code></p>
+<blockquote>
+<p>The heap fragmented after thousands of variable-size allocations.</p>
+</blockquote>
+</li>
+<li><p><strong>incur</strong> &#x2F;ɪnˈkɜːr&#x2F; — 招致，引起 <code>书面</code></p>
+<blockquote>
+<p>Each context switch incurs a latency of approximately 12 clock cycles.</p>
+</blockquote>
+</li>
+<li><p><strong>infer</strong> &#x2F;ɪnˈfɜːr&#x2F; — 推断，推理 <code>面试</code></p>
+<blockquote>
+<p>We can infer the interrupt frequency from the timer prescaler and reload value.</p>
+</blockquote>
+</li>
+<li><p><strong>ingress</strong> &#x2F;ˈɪnɡrɛs&#x2F; — 入口，进入 <code>技术</code></p>
+<blockquote>
+<p>The firewall inspects all ingress packets on the Ethernet interface.</p>
+</blockquote>
+</li>
+<li><p><strong>innate</strong> &#x2F;ɪˈneɪt&#x2F; — 固有的，天生的 <code>书面</code></p>
+<blockquote>
+<p>The Cortex-M has an innate ability to handle nested interrupts via NVIC.</p>
+</blockquote>
+</li>
+<li><p><strong>interpose</strong> &#x2F;ˌɪntərˈpoʊz&#x2F; — 插入，介入 <code>技术</code></p>
+<blockquote>
+<p>We interpose a shim layer between the driver and the application.</p>
+</blockquote>
+</li>
+<li><p><strong>juncture</strong> &#x2F;ˈdʒʌŋktʃər&#x2F; — 关键时刻，节点 <code>书面</code></p>
+<blockquote>
+<p>At this juncture, we must decide between bare-metal and an RTOS.</p>
+</blockquote>
+</li>
+<li><p><strong>kernel</strong> &#x2F;ˈkɜːrnəl&#x2F; — 内核 <code>技术</code></p>
+<blockquote>
+<p>The FreeRTOS kernel uses a linked list to manage the ready queue.</p>
+</blockquote>
+</li>
+<li><p><strong>lapse</strong> &#x2F;læps&#x2F; — 失误，间隔 <code>口语</code></p>
+<blockquote>
+<p>A brief lapse in the watchdog feed caused an unexpected reset.</p>
+</blockquote>
+</li>
+<li><p><strong>negate</strong> &#x2F;nɪˈɡeɪt&#x2F; — 否定，取消 <code>面试</code></p>
+<blockquote>
+<p>Enabling DMA negates the CPU overhead of byte-by-byte SPI transfers.</p>
+</blockquote>
+</li>
+<li><p><strong>onerous</strong> &#x2F;ˈɒnərəs&#x2F; — 繁重的，费力的 <code>书面</code></p>
+<blockquote>
+<p>Manual register configuration for each peripheral is onerous and error-prone.</p>
+</blockquote>
+</li>
+<li><p><strong>ostensibly</strong> &#x2F;ɒˈstɛnsɪbli&#x2F; — 表面上 <code>书面</code></p>
+<blockquote>
+<p>The fix ostensibly resolved the crash, but the root cause remained hidden.</p>
+</blockquote>
+</li>
+<li><p><strong>paradigm</strong> &#x2F;ˈpærədaɪm&#x2F; — 范式，典范 <code>面试</code></p>
+<blockquote>
+<p>Event-driven programming is a common paradigm in embedded systems.</p>
+</blockquote>
+</li>
+<li><p><strong>peculiar</strong> &#x2F;pɪˈkjuːliər&#x2F; — 奇特的，独特的 <code>口语</code></p>
+<blockquote>
+<p>We observed a peculiar glitch on the SDA line during clock stretching.</p>
+</blockquote>
+</li>
+<li><p><strong>preclude</strong> &#x2F;prɪˈkluːd&#x2F; — 排除，阻止 <code>面试</code></p>
+<blockquote>
+<p>Using a single-threaded loop precludes true concurrent task execution.</p>
+</blockquote>
+</li>
+<li><p><strong>rendezvous</strong> &#x2F;ˈrɒndɪvuː&#x2F; — 会合点 <code>技术</code></p>
+<blockquote>
+<p>The two tasks synchronize at a rendezvous point using event flags.</p>
+</blockquote>
+</li>
+<li><p><strong>thrash</strong> &#x2F;θræʃ&#x2F; — 颠簸，剧烈抖动 <code>技术</code></p>
+<blockquote>
+<p>The cache thrashes when the working set exceeds the cache size.</p>
+</blockquote>
+</li>
+<li><p><strong>trampoline</strong> &#x2F;ˈtræmpəliːn&#x2F; — 跳板（函数） <code>技术</code></p>
+<blockquote>
+<p>The vector table uses trampoline stubs to redirect interrupts to RAM handlers.</p>
+</blockquote>
+</li>
+<li><p><strong>unwind</strong> &#x2F;ʌnˈwaɪnd&#x2F; — 展开，回溯 <code>技术</code></p>
+<blockquote>
+<p>The exception handler unwinds the stack to generate a backtrace.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“burn-the-midnight-oil”"><a href="#1-“burn-the-midnight-oil”" class="headerlink" title="1. “burn the midnight oil”"></a>1. “burn the midnight oil”</h3><p><strong>意思：</strong> 开夜车，熬夜工作<br><strong>场景：</strong> 项目赶工期，团队加班赶 deadline</p>
+<blockquote>
+<p><strong>A:</strong> The demo is tomorrow and the motor control loop still oscillates.<br><strong>B:</strong> Looks like we’re burning the midnight oil again.</p>
+</blockquote>
+<p><em>引用：「We’ve been burning the midnight oil trying to get this investigation wrapped up.」— The West Wing, Season 1 (1999)</em></p>
+<hr>
+<h3 id="2-“back-to-the-drawing-board”"><a href="#2-“back-to-the-drawing-board”" class="headerlink" title="2. “back to the drawing board”"></a>2. “back to the drawing board”</h3><p><strong>意思：</strong> 推倒重来，从头再来<br><strong>场景：</strong> 方案被否定后需要重新设计</p>
+<blockquote>
+<p><strong>A:</strong> The power budget doesn’t work — the battery only lasts two hours.<br><strong>B:</strong> Well, back to the drawing board. Let’s rethink the sleep strategy.</p>
+</blockquote>
+<p><em>引用：「Well, back to the drawing board.」— Peter Arno, The New Yorker (1941)</em></p>
+<hr>
+<h3 id="3-“a-double-edged-sword”"><a href="#3-“a-double-edged-sword”" class="headerlink" title="3. “a double-edged sword”"></a>3. “a double-edged sword”</h3><p><strong>意思：</strong> 双刃剑，利弊兼有<br><strong>场景：</strong> 讨论技术选型时权衡优缺点</p>
+<blockquote>
+<p><strong>A:</strong> Enabling compiler optimizations at -O3 shaved 20% off execution time.<br><strong>B:</strong> It’s a double-edged sword though — we lost step-through debugging accuracy.</p>
+</blockquote>
+<p><em>引用：「Technology is a double-edged sword that has brought both immense benefits and significant challenges.」— BBC News, Technology Review (2018)</em></p>
+<hr>
+<h3 id="4-“the-elephant-in-the-room”"><a href="#4-“the-elephant-in-the-room”" class="headerlink" title="4. “the elephant in the room”"></a>4. “the elephant in the room”</h3><p><strong>意思：</strong> 显而易见但被回避的问题<br><strong>场景：</strong> 团队会议中大家不愿提及的关键障碍</p>
+<blockquote>
+<p><strong>A:</strong> We’ve optimized the algorithm, reduced memory, tuned the PID gains…<br><strong>B:</strong> But the elephant in the room is that the MCU simply doesn’t have enough MIPS.</p>
+</blockquote>
+<p><em>引用：「There’s an elephant in the room and it has a nuclear bomb strapped to its back.」— An Inconvenient Truth (2006)</em></p>
+<hr>
+<h3 id="5-“cut-to-the-chase”"><a href="#5-“cut-to-the-chase”" class="headerlink" title="5. “cut to the chase”"></a>5. “cut to the chase”</h3><p><strong>意思：</strong> 直入主题，别绕弯子<br><strong>场景：</strong> 会议冗长时希望直接讨论核心问题</p>
+<blockquote>
+<p><strong>A:</strong> So, as I was explaining, the historical context of the I2C specification and its evolution from Philips to NXP—<br><strong>B:</strong> Let me cut to the chase: does the sensor respond at 400 kHz or not?</p>
+</blockquote>
+<p><em>引用：「Cut to the chase. What is it you want me to do?」— The Shawshank Redemption (1994)</em></p>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-26-词汇-—-第-7-天复习（通信协议全景）"><a href="#📅-3-x2F-26-词汇-—-第-7-天复习（通信协议全景）" class="headerlink" title="📅 3&#x2F;26 词汇 — 第 7 天复习（通信协议全景）"></a>📅 3&#x2F;26 词汇 — 第 7 天复习（通信协议全景）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>protocol</td>
+<td>协议</td>
+</tr>
+<tr>
+<td>topology</td>
+<td>拓扑</td>
+</tr>
+<tr>
+<td>broadcast</td>
+<td>广播</td>
+</tr>
+<tr>
+<td>gateway</td>
+<td>网关</td>
+</tr>
+<tr>
+<td>mesh</td>
+<td>网状</td>
+</tr>
+<tr>
+<td>baud</td>
+<td>波特</td>
+</tr>
+<tr>
+<td>parity</td>
+<td>奇偶校验</td>
+</tr>
+<tr>
+<td>framing</td>
+<td>成帧</td>
+</tr>
+<tr>
+<td>retransmit</td>
+<td>重传</td>
+</tr>
+<tr>
+<td>isochronous</td>
+<td>等时</td>
+</tr>
+<tr>
+<td>bulk</td>
+<td>批量</td>
+</tr>
+<tr>
+<td>notification</td>
+<td>通知</td>
+</tr>
+<tr>
+<td>indication</td>
+<td>指示</td>
+</tr>
+<tr>
+<td>bonding</td>
+<td>绑定</td>
+</tr>
+<tr>
+<td>hopping</td>
+<td>跳频</td>
+</tr>
+<tr>
+<td>whitelist</td>
+<td>白名单</td>
+</tr>
+<tr>
+<td>congestion</td>
+<td>拥塞</td>
+</tr>
+<tr>
+<td>propagation</td>
+<td>传播</td>
+</tr>
+<tr>
+<td>transient</td>
+<td>瞬态</td>
+</tr>
+<tr>
+<td>negotiate</td>
+<td>协商</td>
+</tr>
+<tr>
+<td>compliance</td>
+<td>合规</td>
+</tr>
+<tr>
+<td>aggregate</td>
+<td>聚合</td>
+</tr>
+<tr>
+<td>orchestrate</td>
+<td>编排</td>
+</tr>
+<tr>
+<td>obfuscate</td>
+<td>混淆</td>
+</tr>
+<tr>
+<td>resilience</td>
+<td>弹性</td>
+</tr>
+<tr>
+<td>latent</td>
+<td>潜在</td>
+</tr>
+<tr>
+<td>arbitrate</td>
+<td>仲裁</td>
+</tr>
+<tr>
+<td>coil</td>
+<td>线圈</td>
+</tr>
+<tr>
+<td>holding</td>
+<td>保持</td>
+</tr>
+<tr>
+<td>enumeration</td>
+<td>枚举</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>端点</td>
+</tr>
+<tr>
+<td>characteristic</td>
+<td>特征</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>配置文件</td>
+</tr>
+<tr>
+<td>pairing</td>
+<td>配对</td>
+</tr>
+<tr>
+<td>advertisement</td>
+<td>广播包</td>
+</tr>
+<tr>
+<td>central</td>
+<td>中心设备</td>
+</tr>
+<tr>
+<td>slot</td>
+<td>时隙</td>
+</tr>
+<tr>
+<td>descriptor</td>
+<td>描述符</td>
+</tr>
+<tr>
+<td>interoperability</td>
+<td>互操作性</td>
+</tr>
+<tr>
+<td>integrity</td>
+<td>完整性</td>
+</tr>
+<tr>
+<td>concurrent</td>
+<td>并发</td>
+</tr>
+<tr>
+<td>synchronous</td>
+<td>同步</td>
+</tr>
+<tr>
+<td>asynchronous</td>
+<td>异步</td>
+</tr>
+<tr>
+<td>specification</td>
+<td>规范</td>
+</tr>
+<tr>
+<td>modulate</td>
+<td>调制</td>
+</tr>
+<tr>
+<td>reconcile</td>
+<td>调和</td>
+</tr>
+<tr>
+<td>autonomous</td>
+<td>自主</td>
+</tr>
+<tr>
+<td>scrutiny</td>
+<td>审查</td>
+</tr>
+<tr>
+<td>deprecation</td>
+<td>弃用</td>
+</tr>
+<tr>
+<td>encapsulate</td>
+<td>封装</td>
+</tr>
+</tbody></table>
+<p>习语复习：the last mile · low-hanging fruit · hit the ground running · a moving target · shoot yourself in the foot</p>
+<h3 id="📅-3-x2F-29-词汇-—-第-4-天复习（调试技术全景）"><a href="#📅-3-x2F-29-词汇-—-第-4-天复习（调试技术全景）" class="headerlink" title="📅 3&#x2F;29 词汇 — 第 4 天复习（调试技术全景）"></a>📅 3&#x2F;29 词汇 — 第 4 天复习（调试技术全景）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trace</td>
+<td>跟踪</td>
+</tr>
+<tr>
+<td>breakpoint</td>
+<td>断点</td>
+</tr>
+<tr>
+<td>watchpoint</td>
+<td>观察点</td>
+</tr>
+<tr>
+<td>disassembly</td>
+<td>反汇编</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>符号</td>
+</tr>
+<tr>
+<td>linker</td>
+<td>链接器</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>异常</td>
+</tr>
+<tr>
+<td>trap</td>
+<td>陷阱</td>
+</tr>
+<tr>
+<td>emulator</td>
+<td>仿真器</td>
+</tr>
+<tr>
+<td>semihosting</td>
+<td>半主机</td>
+</tr>
+<tr>
+<td>probe</td>
+<td>探针</td>
+</tr>
+<tr>
+<td>capture</td>
+<td>捕获</td>
+</tr>
+<tr>
+<td>decode</td>
+<td>解码</td>
+</tr>
+<tr>
+<td>waveform</td>
+<td>波形</td>
+</tr>
+<tr>
+<td>coredump</td>
+<td>核心转储</td>
+</tr>
+<tr>
+<td>backtrace</td>
+<td>回溯</td>
+</tr>
+<tr>
+<td>mock</td>
+<td>模拟</td>
+</tr>
+<tr>
+<td>stub</td>
+<td>桩</td>
+</tr>
+<tr>
+<td>harness</td>
+<td>测试框架</td>
+</tr>
+<tr>
+<td>anomaly</td>
+<td>异常</td>
+</tr>
+<tr>
+<td>intermittent</td>
+<td>间歇性</td>
+</tr>
+<tr>
+<td>reproduce</td>
+<td>复现</td>
+</tr>
+<tr>
+<td>isolate</td>
+<td>隔离</td>
+</tr>
+<tr>
+<td>hypothesis</td>
+<td>假设</td>
+</tr>
+<tr>
+<td>symptom</td>
+<td>症状</td>
+</tr>
+<tr>
+<td>nominal</td>
+<td>额定</td>
+</tr>
+<tr>
+<td>implicit</td>
+<td>隐式</td>
+</tr>
+<tr>
+<td>explicit</td>
+<td>显式</td>
+</tr>
+<tr>
+<td>assert</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>inject</td>
+<td>注入</td>
+</tr>
+<tr>
+<td>astute</td>
+<td>精明</td>
+</tr>
+<tr>
+<td>candid</td>
+<td>坦率</td>
+</tr>
+<tr>
+<td>prudent</td>
+<td>审慎</td>
+</tr>
+<tr>
+<td>daunting</td>
+<td>令人畏惧</td>
+</tr>
+<tr>
+<td>brevity</td>
+<td>简洁</td>
+</tr>
+<tr>
+<td>conjecture</td>
+<td>推测</td>
+</tr>
+<tr>
+<td>pertinent</td>
+<td>相关的</td>
+</tr>
+<tr>
+<td>tenuous</td>
+<td>脆弱的</td>
+</tr>
+<tr>
+<td>plausible</td>
+<td>合理的</td>
+</tr>
+<tr>
+<td>exacerbate</td>
+<td>加剧</td>
+</tr>
+<tr>
+<td>proactive</td>
+<td>主动的</td>
+</tr>
+<tr>
+<td>tangible</td>
+<td>有形的</td>
+</tr>
+<tr>
+<td>stringent</td>
+<td>严格的</td>
+</tr>
+<tr>
+<td>marginal</td>
+<td>边际的</td>
+</tr>
+<tr>
+<td>lucid</td>
+<td>清晰的</td>
+</tr>
+<tr>
+<td>meager</td>
+<td>微薄的</td>
+</tr>
+<tr>
+<td>allude</td>
+<td>暗示</td>
+</tr>
+<tr>
+<td>pivotal</td>
+<td>关键的</td>
+</tr>
+<tr>
+<td>comprehensive</td>
+<td>全面的</td>
+</tr>
+<tr>
+<td>adept</td>
+<td>熟练的</td>
+</tr>
+</tbody></table>
+<p>习语复习：throw in the towel · move the goalposts · keep one’s head above water · square peg in a round hole · get the ball rolling</p>
+<h3 id="📅-3-x2F-31-词汇-—-第-2-天复习（安全标准与-MISRA-C）"><a href="#📅-3-x2F-31-词汇-—-第-2-天复习（安全标准与-MISRA-C）" class="headerlink" title="📅 3&#x2F;31 词汇 — 第 2 天复习（安全标准与 MISRA C）"></a>📅 3&#x2F;31 词汇 — 第 2 天复习（安全标准与 MISRA C）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compliant</td>
+<td>合规的</td>
+</tr>
+<tr>
+<td>hazard</td>
+<td>危害</td>
+</tr>
+<tr>
+<td>severity</td>
+<td>严重度</td>
+</tr>
+<tr>
+<td>precaution</td>
+<td>预防措施</td>
+</tr>
+<tr>
+<td>directive</td>
+<td>指令</td>
+</tr>
+<tr>
+<td>operand</td>
+<td>操作数</td>
+</tr>
+<tr>
+<td>sanitize</td>
+<td>净化</td>
+</tr>
+<tr>
+<td>hardening</td>
+<td>加固</td>
+</tr>
+<tr>
+<td>invariant</td>
+<td>不变量</td>
+</tr>
+<tr>
+<td>precondition</td>
+<td>前置条件</td>
+</tr>
+<tr>
+<td>fallback</td>
+<td>回退</td>
+</tr>
+<tr>
+<td>redundancy</td>
+<td>冗余</td>
+</tr>
+<tr>
+<td>diagnostic</td>
+<td>诊断</td>
+</tr>
+<tr>
+<td>vulnerability</td>
+<td>漏洞</td>
+</tr>
+<tr>
+<td>tamper</td>
+<td>篡改</td>
+</tr>
+<tr>
+<td>violation</td>
+<td>违规</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>回调</td>
+</tr>
+<tr>
+<td>assertion</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>exempt</td>
+<td>豁免</td>
+</tr>
+<tr>
+<td>mandate</td>
+<td>强制</td>
+</tr>
+<tr>
+<td>deviation</td>
+<td>偏差</td>
+</tr>
+<tr>
+<td>mitigate</td>
+<td>缓解</td>
+</tr>
+<tr>
+<td>impede</td>
+<td>妨碍</td>
+</tr>
+<tr>
+<td>clause</td>
+<td>条款</td>
+</tr>
+<tr>
+<td>traceability</td>
+<td>可追溯性</td>
+</tr>
+<tr>
+<td>audit</td>
+<td>审计</td>
+</tr>
+<tr>
+<td>benchmark</td>
+<td>基准测试</td>
+</tr>
+<tr>
+<td>regression</td>
+<td>回归</td>
+</tr>
+<tr>
+<td>proliferation</td>
+<td>扩散</td>
+</tr>
+<tr>
+<td>ambiguity</td>
+<td>歧义</td>
+</tr>
+<tr>
+<td>pragmatic</td>
+<td>务实的</td>
+</tr>
+<tr>
+<td>substantive</td>
+<td>实质性的</td>
+</tr>
+<tr>
+<td>compelling</td>
+<td>令人信服的</td>
+</tr>
+<tr>
+<td>degradation</td>
+<td>降级</td>
+</tr>
+<tr>
+<td>determinism</td>
+<td>确定性</td>
+</tr>
+<tr>
+<td>certify</td>
+<td>认证</td>
+</tr>
+<tr>
+<td>attestation</td>
+<td>证实</td>
+</tr>
+<tr>
+<td>enumerate</td>
+<td>列举</td>
+</tr>
+<tr>
+<td>encompass</td>
+<td>涵盖</td>
+</tr>
+<tr>
+<td>introspection</td>
+<td>自检</td>
+</tr>
+<tr>
+<td>allocator</td>
+<td>分配器</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>不可变</td>
+</tr>
+<tr>
+<td>caveat</td>
+<td>注意事项</td>
+</tr>
+<tr>
+<td>countermeasure</td>
+<td>对策</td>
+</tr>
+<tr>
+<td>susceptible</td>
+<td>易受影响的</td>
+</tr>
+<tr>
+<td>provisional</td>
+<td>暂定的</td>
+</tr>
+<tr>
+<td>corroborate</td>
+<td>佐证</td>
+</tr>
+<tr>
+<td>inadmissible</td>
+<td>不可接受的</td>
+</tr>
+<tr>
+<td>foreseeable</td>
+<td>可预见的</td>
+</tr>
+<tr>
+<td>leniency</td>
+<td>宽容</td>
+</tr>
+</tbody></table>
+<p>习语复习：cut corners · cover all the bases · in the weeds · raise the bar · by the book</p>
+<h3 id="📅-4-x2F-01-词汇-—-第-1-天复习（volatile-与内存映射-Round-2）"><a href="#📅-4-x2F-01-词汇-—-第-1-天复习（volatile-与内存映射-Round-2）" class="headerlink" title="📅 4&#x2F;01 词汇 — 第 1 天复习（volatile 与内存映射 Round 2）"></a>📅 4&#x2F;01 词汇 — 第 1 天复习（volatile 与内存映射 Round 2）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stale</td>
+<td>过时的</td>
+</tr>
+<tr>
+<td>evict</td>
+<td>驱逐</td>
+</tr>
+<tr>
+<td>speculative</td>
+<td>推测性的</td>
+</tr>
+<tr>
+<td>reorder</td>
+<td>重排</td>
+</tr>
+<tr>
+<td>writeback</td>
+<td>回写</td>
+</tr>
+<tr>
+<td>coherence</td>
+<td>一致性</td>
+</tr>
+<tr>
+<td>invalidate</td>
+<td>使无效</td>
+</tr>
+<tr>
+<td>pipeline</td>
+<td>流水线</td>
+</tr>
+<tr>
+<td>unaligned</td>
+<td>未对齐的</td>
+</tr>
+<tr>
+<td>fence</td>
+<td>屏障</td>
+</tr>
+<tr>
+<td>observable</td>
+<td>可观测的</td>
+</tr>
+<tr>
+<td>prefetch</td>
+<td>预取</td>
+</tr>
+<tr>
+<td>opcode</td>
+<td>操作码</td>
+</tr>
+<tr>
+<td>idiosyncrasy</td>
+<td>特性</td>
+</tr>
+<tr>
+<td>verbatim</td>
+<td>逐字的</td>
+</tr>
+<tr>
+<td>conflate</td>
+<td>混为一谈</td>
+</tr>
+<tr>
+<td>spuriously</td>
+<td>虚假地</td>
+</tr>
+<tr>
+<td>tangential</td>
+<td>次要的</td>
+</tr>
+<tr>
+<td>codify</td>
+<td>编纂</td>
+</tr>
+<tr>
+<td>salient</td>
+<td>显著的</td>
+</tr>
+<tr>
+<td>prerequisite</td>
+<td>先决条件</td>
+</tr>
+<tr>
+<td>elucidate</td>
+<td>阐明</td>
+</tr>
+<tr>
+<td>pervasive</td>
+<td>普遍的</td>
+</tr>
+<tr>
+<td>cavil</td>
+<td>吹毛求疵</td>
+</tr>
+<tr>
+<td>reckon</td>
+<td>认为</td>
+</tr>
+<tr>
+<td>crux</td>
+<td>关键</td>
+</tr>
+<tr>
+<td>foolproof</td>
+<td>万无一失的</td>
+</tr>
+<tr>
+<td>bygone</td>
+<td>过去的</td>
+</tr>
+<tr>
+<td>tweak</td>
+<td>微调</td>
+</tr>
+<tr>
+<td>encompassing</td>
+<td>包罗万象</td>
+</tr>
+<tr>
+<td>repercussion</td>
+<td>后果</td>
+</tr>
+<tr>
+<td>embroil</td>
+<td>卷入</td>
+</tr>
+<tr>
+<td>detriment</td>
+<td>损害</td>
+</tr>
+<tr>
+<td>spurring</td>
+<td>刺激</td>
+</tr>
+<tr>
+<td>bespoke</td>
+<td>定制的</td>
+</tr>
+<tr>
+<td>germane</td>
+<td>相关的</td>
+</tr>
+<tr>
+<td>inadvertent</td>
+<td>无意的</td>
+</tr>
+<tr>
+<td>conundrum</td>
+<td>难题</td>
+</tr>
+<tr>
+<td>judiciously</td>
+<td>明智地</td>
+</tr>
+<tr>
+<td>rudimentary</td>
+<td>基础的</td>
+</tr>
+<tr>
+<td>quintessential</td>
+<td>典型的</td>
+</tr>
+<tr>
+<td>avert</td>
+<td>避免</td>
+</tr>
+<tr>
+<td>auxiliary</td>
+<td>辅助的</td>
+</tr>
+<tr>
+<td>disparity</td>
+<td>差异</td>
+</tr>
+<tr>
+<td>amenable</td>
+<td>顺从的</td>
+</tr>
+<tr>
+<td>debacle</td>
+<td>惨败</td>
+</tr>
+</tbody></table>
+<p>习语复习：down the rabbit hole · the tip of the iceberg · a blessing in disguise · from scratch · miss the forest for the trees</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/RTOS/" rel="tag"># RTOS</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC/" rel="tag"># 优先级反转</a>
+              <a href="/tags/Tick-less/" rel="tag"># Tick-less</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/" rel="tag"># 内存池</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/02/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2026-04-02/" rel="prev" title="每日学习 — 2026-04-02">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-04-02
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">316k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:08</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,3 +1,5 @@
+http://ycx81.github.io/2026/04/02/daily-study-2026-04-02/
+http://ycx81.github.io/2026/04/02/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2026-04-02/
 http://ycx81.github.io/2026/04/01/daily-study-2026-04-01/
 http://ycx81.github.io/2026/03/31/daily-study-2026-03-31/
 http://ycx81.github.io/2026/03/30/daily-study-2026-03-30/
@@ -117,6 +119,10 @@ http://ycx81.github.io/tags/MISRA/
 http://ycx81.github.io/tags/%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86/
 http://ycx81.github.io/tags/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/
 http://ycx81.github.io/tags/%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/
+http://ycx81.github.io/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC/
+http://ycx81.github.io/tags/Tick-less/
+http://ycx81.github.io/tags/%E5%86%85%E5%AD%98%E6%B1%A0/
+http://ycx81.github.io/tags/Round2/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
