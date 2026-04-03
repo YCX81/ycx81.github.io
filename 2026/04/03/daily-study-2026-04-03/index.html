@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：外设驱动深入篇（Round 2） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;27, 3&#x2F;30, 4&#x2F;01, 4&#x2F;02）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-04-03">
+<meta property="og:url" content="http://ycx81.github.io/2026/04/03/daily-study-2026-04-03/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：外设驱动深入篇（Round 2） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;27, 3&#x2F;30, 4&#x2F;01, 4&#x2F;02）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-03T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-03T03:10:17.873Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="SPI">
+<meta property="article:tag" content="I2C">
+<meta property="article:tag" content="DMA">
+<meta property="article:tag" content="UART">
+<meta property="article:tag" content="外设驱动">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/04/03/daily-study-2026-04-03/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/04/03/daily-study-2026-04-03/","path":"2026/04/03/daily-study-2026-04-03/","title":"每日学习 — 2026-04-03"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-04-03 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E6%B7%B1%E5%85%A5%E7%AF%87%EF%BC%88Round-2%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：外设驱动深入篇（Round 2）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DMA-%E5%8F%8C%E7%BC%93%E5%86%B2%E4%B8%8E-Scatter-Gather"><span class="nav-number">1.1.</span> <span class="nav-text">1. DMA 双缓冲与 Scatter-Gather</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-I2C-%E6%80%BB%E7%BA%BF%E5%BC%82%E5%B8%B8%E6%81%A2%E5%A4%8D"><span class="nav-number">1.2.</span> <span class="nav-text">2. I2C 总线异常恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-UART-%E7%8E%AF%E5%BD%A2%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%88Ring-Buffer%EF%BC%89%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">3. UART 环形缓冲区（Ring Buffer）设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SPI-DMA-%E4%BC%A0%E8%BE%93%E4%B8%8E-CS-%E6%97%B6%E5%BA%8F"><span class="nav-number">1.4.</span> <span class="nav-text">4. SPI DMA 传输与 CS 时序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Chit-the-ground-running%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “hit the ground running”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cmove-the-needle%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “move the needle”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cpaint-yourself-into-a-corner%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “paint yourself into a corner”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-devil-is-in-the-details%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the devil is in the details”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cthrow-someone-under-the-bus%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “throw someone under the bus”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-27-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;27 词汇 — 第 7 天复习（固件架构设计）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-30-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BD%8E%E5%8A%9F%E8%80%97%E8%AE%BE%E8%AE%A1-Low-Power-Design%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;30 词汇 — 第 4 天复习（低功耗设计 Low-Power Design）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-4-x2F-01-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88volatile-%E4%B8%8E%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84-I-x2F-O-Round-2%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 4&#x2F;01 词汇 — 第 2 天复习（volatile 与内存映射 I&#x2F;O Round 2）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-4-x2F-02-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88RTOS-%E6%B7%B1%E5%85%A5%E7%AF%87-%E2%80%94-%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC%E3%80%81Tick-less-Idle-%E4%B8%8E%E5%86%85%E5%AD%98%E6%B1%A0%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 4&#x2F;02 词汇 — 第 1 天复习（RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/04/03/daily-study-2026-04-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-04-03 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-04-03
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-03 09:00:00" itemprop="dateCreated datePublished" datetime="2026-04-03T09:00:00+08:00">2026-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>外设驱动深入篇（Round 2）</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;27, 3&#x2F;30, 4&#x2F;01, 4&#x2F;02）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：外设驱动深入篇（Round-2）"><a href="#🔧-嵌入式知识：外设驱动深入篇（Round-2）" class="headerlink" title="🔧 嵌入式知识：外设驱动深入篇（Round 2）"></a>🔧 嵌入式知识：外设驱动深入篇（Round 2）</h2><h3 id="1-DMA-双缓冲与-Scatter-Gather"><a href="#1-DMA-双缓冲与-Scatter-Gather" class="headerlink" title="1. DMA 双缓冲与 Scatter-Gather"></a>1. DMA 双缓冲与 Scatter-Gather</h3><p><strong>为什么需要双缓冲（Double Buffering）：</strong><br>单缓冲 DMA 传输期间 CPU 不能动 buffer，否则数据损坏。双缓冲让 DMA 在 buffer A 上传输，同时 CPU 处理 buffer B，传输完成后自动切换——实现零等待。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// STM32 DMA 双缓冲配置（HAL）</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> adc_buf[<span class="number">2</span>][DMA_BUF_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化：使能双缓冲模式，DMA_IT_HT（半传输）+ DMA_IT_TC（全传输）</span></span><br><span class="line">hdma_adc.Init.Mode = DMA_CIRCULAR;</span><br><span class="line">HAL_DMA_Init(&amp;hdma_adc);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中断回调：半传输中断 → 处理前半段，全传输中断 → 处理后半段</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_ADC_ConvHalfCpltCallback</span><span class="params">(ADC_HandleTypeDef* hadc)</span> &#123;</span><br><span class="line">    process_adc_data(adc_buf[<span class="number">0</span>], DMA_BUF_SIZE / <span class="number">2</span>);  <span class="comment">// 处理前半</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_ADC_ConvCpltCallback</span><span class="params">(ADC_HandleTypeDef* hadc)</span> &#123;</span><br><span class="line">    process_adc_data(adc_buf[<span class="number">1</span>], DMA_BUF_SIZE / <span class="number">2</span>);  <span class="comment">// 处理后半</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Scatter-Gather DMA（链式 DMA）：</strong><br>描述符链表方式，DMA 自动按链表顺序传输多段不连续内存，无需 CPU 介入，适合以太网、USB 等协议帧的分段收发。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码：链式描述符</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dma_desc</span> &#123;</span></span><br><span class="line">    <span class="type">uint32_t</span>  src;</span><br><span class="line">    <span class="type">uint32_t</span>  dst;</span><br><span class="line">    <span class="type">uint32_t</span>  len;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dma_desc</span> *<span class="title">next</span>;</span>  <span class="comment">// NULL 表示链尾</span></span><br><span class="line">&#125; <span class="type">dma_desc_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">dma_desc_t</span> desc_a = &#123; .src = buf_a, .dst = periph_dr, .len = <span class="number">64</span>, .next = &amp;desc_b &#125;;</span><br><span class="line"><span class="type">dma_desc_t</span> desc_b = &#123; .src = buf_b, .dst = periph_dr, .len = <span class="number">32</span>, .next = <span class="literal">NULL</span> &#125;;</span><br><span class="line">dma_start_chain(&amp;desc_a);  <span class="comment">// 硬件自动完成 a→b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-I2C-总线异常恢复"><a href="#2-I2C-总线异常恢复" class="headerlink" title="2. I2C 总线异常恢复"></a>2. I2C 总线异常恢复</h3><p>I2C 是最容易”卡死”的总线。常见故障：从机 stretch 时 master 复位 → SDA 卡在低电平（Bus Stuck Low）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 软件 I2C 恢复：手动发送 9 个 SCL 脉冲强制从机释放 SDA</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">i2c_bus_recovery</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 切换为 GPIO 模式</span></span><br><span class="line">    GPIO_InitTypeDef g = &#123; .Pin = SCL_PIN | SDA_PIN,</span><br><span class="line">                            .Mode = GPIO_MODE_OUTPUT_OD,</span><br><span class="line">                            .Pull = GPIO_NOPULL &#125;;</span><br><span class="line">    HAL_GPIO_Init(I2C_PORT, &amp;g);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) &#123;</span><br><span class="line">        HAL_GPIO_WritePin(I2C_PORT, SCL_PIN, GPIO_PIN_SET);</span><br><span class="line">        delay_us(<span class="number">5</span>);</span><br><span class="line">        HAL_GPIO_WritePin(I2C_PORT, SCL_PIN, GPIO_PIN_RESET);</span><br><span class="line">        delay_us(<span class="number">5</span>);</span><br><span class="line">        <span class="keyword">if</span> (HAL_GPIO_ReadPin(I2C_PORT, SDA_PIN)) <span class="keyword">break</span>;  <span class="comment">// SDA 已释放</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 发送 STOP 条件</span></span><br><span class="line">    HAL_GPIO_WritePin(I2C_PORT, SDA_PIN, GPIO_PIN_RESET);</span><br><span class="line">    delay_us(<span class="number">5</span>);</span><br><span class="line">    HAL_GPIO_WritePin(I2C_PORT, SCL_PIN, GPIO_PIN_SET);</span><br><span class="line">    delay_us(<span class="number">5</span>);</span><br><span class="line">    HAL_GPIO_WritePin(I2C_PORT, SDA_PIN, GPIO_PIN_SET);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 切回 I2C 复用功能，重新初始化</span></span><br><span class="line">    MX_I2C1_Init();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键策略：每次 <code>HAL_I2C_Master_Transmit()</code> 失败后调用 recovery，最多重试 3 次，仍失败则记录错误日志、触发系统告警。</p>
+<h3 id="3-UART-环形缓冲区（Ring-Buffer）设计"><a href="#3-UART-环形缓冲区（Ring-Buffer）设计" class="headerlink" title="3. UART 环形缓冲区（Ring Buffer）设计"></a>3. UART 环形缓冲区（Ring Buffer）设计</h3><p>中断驱动 UART 接收的标准模式：ISR 把字节压入环形缓冲区，主任务从中消费，彻底解耦收发速率。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RING_SIZE 256  <span class="comment">// 必须是 2 的幂</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">uint8_t</span>  buf[RING_SIZE];</span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> head;  <span class="comment">// 生产者写</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> tail;  <span class="comment">// 消费者读</span></span><br><span class="line">&#125; <span class="type">ring_buf_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">ring_buf_t</span> uart_rx;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 UART RX ISR 中调用</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_rx_isr</span><span class="params">(<span class="type">uint8_t</span> byte)</span> &#123;</span><br><span class="line">    <span class="type">uint32_t</span> next = (uart_rx.head + <span class="number">1</span>) &amp; (RING_SIZE - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (next != uart_rx.tail) &#123;     <span class="comment">// 未满</span></span><br><span class="line">        uart_rx.buf[uart_rx.head] = byte;</span><br><span class="line">        uart_rx.head = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 满则丢弃（或置溢出标志）</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主任务中调用</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uart_rx_read</span><span class="params">(<span class="type">uint8_t</span> *out)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (uart_rx.tail == uart_rx.head) <span class="keyword">return</span> <span class="number">-1</span>;  <span class="comment">// 空</span></span><br><span class="line">    *out = uart_rx.buf[uart_rx.tail];</span><br><span class="line">    uart_rx.tail = (uart_rx.tail + <span class="number">1</span>) &amp; (RING_SIZE - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>head</code>&#x2F;<code>tail</code> 必须声明 <code>volatile</code>；在多核或支持 out-of-order 的平台还需要内存屏障 <code>__DMB()</code>。</p>
+<h3 id="4-SPI-DMA-传输与-CS-时序"><a href="#4-SPI-DMA-传输与-CS-时序" class="headerlink" title="4. SPI DMA 传输与 CS 时序"></a>4. SPI DMA 传输与 CS 时序</h3><p>SPI DMA 传输完成后片选（CS）不能立即拉高，必须等 FIFO 彻底清空。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">spi_dma_tx</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *data, <span class="type">uint16_t</span> len)</span> &#123;</span><br><span class="line">    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  <span class="comment">// CS↓</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动 DMA 发送（非阻塞）</span></span><br><span class="line">    HAL_SPI_Transmit_DMA(&amp;hspi1, (<span class="type">uint8_t</span> *)data, len);</span><br><span class="line">    <span class="comment">// 等待 DMA 完成回调后再操作 CS</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_SPI_TxCpltCallback</span><span class="params">(SPI_HandleTypeDef *hspi)</span> &#123;</span><br><span class="line">    <span class="comment">// DMA 搬完了，但 SPI 移位寄存器可能还在移最后一个字节</span></span><br><span class="line">    <span class="keyword">while</span> (hspi-&gt;Instance-&gt;SR &amp; SPI_SR_BSY);  <span class="comment">// 等 BSY 清零</span></span><br><span class="line">    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);   <span class="comment">// CS↑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>常见 Bug：在 <code>HAL_SPI_Transmit_DMA()</code> 返回后立即拉高 CS → 最后几个字节丢失。原因是 DMA 传完但 SPI BSY 位还是 1。</p>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：DMA 双缓冲的核心优势是什么？</strong><br>A：传输与处理并行。DMA 写 buffer A 的同时，CPU 处理 buffer B，消除等待，吞吐量翻倍，适合 ADC 连续采样、音频流等高带宽场景。</p>
+<p><strong>Q2：I2C Bus Stuck Low 怎么处理？</strong><br>A：检测到 SDA 持续低电平后，GPIO 模拟 9 个 SCL 脉冲强制从机完成字节传输并释放总线，然后发送 STOP 条件，最后重新初始化 I2C 控制器。</p>
+<p><strong>Q3：环形缓冲区为什么 size 要取 2 的幂？</strong><br>A：取模操作可用位与替代（<code>idx &amp; (SIZE-1)</code> 代替 <code>idx % SIZE</code>），避免除法，ISR 中执行更快，且消除了 size 不对齐时的边界判断问题。</p>
+<p><strong>Q4：SPI DMA 发送完成后为什么要检查 BSY 位？</strong><br>A：<code>HAL_SPI_TxCpltCallback</code> 在 DMA 搬完最后一字节到 SPI DR 时触发，但 SPI 移位寄存器可能还在发送这个字节。过早拉高 CS 会截断最后一个字节的传输。</p>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-04-03-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-04-03-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>abstain</td>
+<td>&#x2F;əbˈsteɪn&#x2F;</td>
+<td>避免，弃权</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>2</td>
+<td>arbitrage</td>
+<td>&#x2F;ˈɑːrbɪtrɑːʒ&#x2F;</td>
+<td>套利，利用差异获利</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ascertain</td>
+<td>&#x2F;ˌæsərˈteɪn&#x2F;</td>
+<td>查明，确定</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>4</td>
+<td>asymmetric</td>
+<td>&#x2F;ˌeɪsɪˈmɛtrɪk&#x2F;</td>
+<td>非对称的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>atrophy</td>
+<td>&#x2F;ˈætrəfi&#x2F;</td>
+<td>萎缩，退化</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>6</td>
+<td>augment</td>
+<td>&#x2F;ɔːɡˈmɛnt&#x2F;</td>
+<td>增强，扩充</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>benign</td>
+<td>&#x2F;bɪˈnaɪn&#x2F;</td>
+<td>良性的，无害的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>8</td>
+<td>blatant</td>
+<td>&#x2F;ˈbleɪtənt&#x2F;</td>
+<td>公然的，明显的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>9</td>
+<td>brevity</td>
+<td>&#x2F;ˈbrɛvɪti&#x2F;</td>
+<td>简洁</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>10</td>
+<td>coalesce</td>
+<td>&#x2F;ˌkoʊəˈlɛs&#x2F;</td>
+<td>合并，联合</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>cognizant</td>
+<td>&#x2F;ˈkɒɡnɪzənt&#x2F;</td>
+<td>认识到的，意识到的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>12</td>
+<td>confiscate</td>
+<td>&#x2F;ˈkɒnfɪskeɪt&#x2F;</td>
+<td>没收，充公</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>13</td>
+<td>congruent</td>
+<td>&#x2F;ˈkɒŋɡruənt&#x2F;</td>
+<td>一致的，协调的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>14</td>
+<td>construe</td>
+<td>&#x2F;kənˈstruː&#x2F;</td>
+<td>解释，理解为</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>15</td>
+<td>consummate</td>
+<td>&#x2F;ˈkɒnsəmɪt&#x2F;</td>
+<td>完美的，至上的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>16</td>
+<td>counterfeit</td>
+<td>&#x2F;ˈkaʊntərfɪt&#x2F;</td>
+<td>伪造的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>culminate</td>
+<td>&#x2F;ˈkʌlmɪneɪt&#x2F;</td>
+<td>达到顶点，以…告终</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>18</td>
+<td>decimate</td>
+<td>&#x2F;ˈdɛsɪmeɪt&#x2F;</td>
+<td>大幅削减</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>19</td>
+<td>delineate</td>
+<td>&#x2F;dɪˈlɪniːeɪt&#x2F;</td>
+<td>描绘，划定</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>20</td>
+<td>denominator</td>
+<td>&#x2F;dɪˈnɒmɪneɪtər&#x2F;</td>
+<td>分母，共同特征</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>21</td>
+<td>deterrent</td>
+<td>&#x2F;dɪˈtɛrənt&#x2F;</td>
+<td>威慑，阻碍因素</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>22</td>
+<td>deviate</td>
+<td>&#x2F;ˈdiːvieɪt&#x2F;</td>
+<td>偏离</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td>diligence</td>
+<td>&#x2F;ˈdɪlɪdʒəns&#x2F;</td>
+<td>勤勉，尽职调查</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>24</td>
+<td>disseminate</td>
+<td>&#x2F;dɪˈsɛmɪneɪt&#x2F;</td>
+<td>传播，散布</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>25</td>
+<td>dormancy</td>
+<td>&#x2F;ˈdɔːrmənsi&#x2F;</td>
+<td>休眠状态</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>elapse</td>
+<td>&#x2F;ɪˈlæps&#x2F;</td>
+<td>（时间）流逝</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>27</td>
+<td>encumber</td>
+<td>&#x2F;ɪnˈkʌmbər&#x2F;</td>
+<td>妨碍，拖累</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>28</td>
+<td>exert</td>
+<td>&#x2F;ɪɡˈzɜːrt&#x2F;</td>
+<td>施加，运用</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>29</td>
+<td>expedient</td>
+<td>&#x2F;ɪkˈspiːdiənt&#x2F;</td>
+<td>权宜的，方便的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>30</td>
+<td>extrapolate</td>
+<td>&#x2F;ɪkˈstræpəleɪt&#x2F;</td>
+<td>推断，外推</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>31</td>
+<td>fallible</td>
+<td>&#x2F;ˈfæləbəl&#x2F;</td>
+<td>易犯错的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>32</td>
+<td>forsake</td>
+<td>&#x2F;fɔːrˈseɪk&#x2F;</td>
+<td>放弃，抛弃</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>33</td>
+<td>gyrate</td>
+<td>&#x2F;ˈdʒaɪreɪt&#x2F;</td>
+<td>旋转，回旋</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>34</td>
+<td>hamper</td>
+<td>&#x2F;ˈhæmpər&#x2F;</td>
+<td>妨碍，阻碍</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>35</td>
+<td>imminent</td>
+<td>&#x2F;ˈɪmɪnənt&#x2F;</td>
+<td>即将发生的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>36</td>
+<td>impair</td>
+<td>&#x2F;ɪmˈpɛər&#x2F;</td>
+<td>损害，削弱</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>37</td>
+<td>intercept</td>
+<td>&#x2F;ˌɪntərˈsɛpt&#x2F;</td>
+<td>拦截</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>intermingle</td>
+<td>&#x2F;ˌɪntərˈmɪŋɡəl&#x2F;</td>
+<td>混合</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>39</td>
+<td>juxtapose</td>
+<td>&#x2F;ˌdʒʌkstəˈpoʊz&#x2F;</td>
+<td>并列比较</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>40</td>
+<td>meticulous</td>
+<td>&#x2F;məˈtɪkjələs&#x2F;</td>
+<td>一丝不苟的</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>41</td>
+<td>misnomer</td>
+<td>&#x2F;mɪsˈnoʊmər&#x2F;</td>
+<td>用词不当</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>42</td>
+<td>nascent</td>
+<td>&#x2F;ˈnæsənt&#x2F;</td>
+<td>新生的，初期的</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>43</td>
+<td>obviate</td>
+<td>&#x2F;ˈɒbvieɪt&#x2F;</td>
+<td>消除，避免</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>44</td>
+<td>pedagogy</td>
+<td>&#x2F;ˈpɛdəɡɒdʒi&#x2F;</td>
+<td>教学法</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>45</td>
+<td>precipitate</td>
+<td>&#x2F;prɪˈsɪpɪteɪt&#x2F;</td>
+<td>促使，加速</td>
+<td>书面</td>
+</tr>
+<tr>
+<td>46</td>
+<td>profuse</td>
+<td>&#x2F;prəˈfjuːs&#x2F;</td>
+<td>大量的，丰富的</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>47</td>
+<td>relegate</td>
+<td>&#x2F;ˈrɛlɪɡeɪt&#x2F;</td>
+<td>降级，归入</td>
+<td>面试</td>
+</tr>
+<tr>
+<td>48</td>
+<td>replenish</td>
+<td>&#x2F;rɪˈplɛnɪʃ&#x2F;</td>
+<td>补充</td>
+<td>口语</td>
+</tr>
+<tr>
+<td>49</td>
+<td>solder</td>
+<td>&#x2F;ˈsɒldər&#x2F;</td>
+<td>焊接</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>50</td>
+<td>supplant</td>
+<td>&#x2F;səˈplɑːnt&#x2F;</td>
+<td>取代</td>
+<td>书面</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>abstain</strong> &#x2F;əbˈsteɪn&#x2F; — 避免，弃权 <code>书面</code></p>
+<blockquote>
+<p>The team abstained from using dynamic memory in safety-critical modules.</p>
+</blockquote>
+</li>
+<li><p><strong>arbitrage</strong> &#x2F;ˈɑːrbɪtrɑːʒ&#x2F; — 套利，利用差异获利 <code>面试</code></p>
+<blockquote>
+<p>Clever arbitrage between clock domains can save significant power.</p>
+</blockquote>
+</li>
+<li><p><strong>ascertain</strong> &#x2F;ˌæsərˈteɪn&#x2F; — 查明，确定 <code>面试</code></p>
+<blockquote>
+<p>We need to ascertain whether the fault is in hardware or firmware.</p>
+</blockquote>
+</li>
+<li><p><strong>asymmetric</strong> &#x2F;ˌeɪsɪˈmɛtrɪk&#x2F; — 非对称的 <code>技术</code></p>
+<blockquote>
+<p>The asymmetric DMA channel supports different source and destination widths.</p>
+</blockquote>
+</li>
+<li><p><strong>atrophy</strong> &#x2F;ˈætrəfi&#x2F; — 萎缩，退化 <code>书面</code></p>
+<blockquote>
+<p>Skills atrophy quickly if you stop writing bare-metal code for a year.</p>
+</blockquote>
+</li>
+<li><p><strong>augment</strong> &#x2F;ɔːɡˈmɛnt&#x2F; — 增强，扩充 <code>技术</code></p>
+<blockquote>
+<p>We augmented the SPI driver with CRC checking for data integrity.</p>
+</blockquote>
+</li>
+<li><p><strong>benign</strong> &#x2F;bɪˈnaɪn&#x2F; — 良性的，无害的 <code>口语</code></p>
+<blockquote>
+<p>The warning is benign — it comes from an unused register read.</p>
+</blockquote>
+</li>
+<li><p><strong>blatant</strong> &#x2F;ˈbleɪtənt&#x2F; — 公然的，明显的 <code>口语</code></p>
+<blockquote>
+<p>Ignoring return codes is a blatant violation of defensive programming.</p>
+</blockquote>
+</li>
+<li><p><strong>brevity</strong> &#x2F;ˈbrɛvɪti&#x2F; — 简洁 <code>书面</code></p>
+<blockquote>
+<p>For brevity, the driver uses macro-based register access instead of functions.</p>
+</blockquote>
+</li>
+<li><p><strong>coalesce</strong> &#x2F;ˌkoʊəˈlɛs&#x2F; — 合并，联合 <code>技术</code></p>
+<blockquote>
+<p>The interrupt controller coalesces multiple pending IRQs into a single handler call.</p>
+</blockquote>
+</li>
+<li><p><strong>cognizant</strong> &#x2F;ˈkɒɡnɪzənt&#x2F; — 认识到的，意识到的 <code>面试</code></p>
+<blockquote>
+<p>Be cognizant of the fact that ISR latency varies with interrupt nesting depth.</p>
+</blockquote>
+</li>
+<li><p><strong>confiscate</strong> &#x2F;ˈkɒnfɪskeɪt&#x2F; — 没收，充公 <code>口语</code></p>
+<blockquote>
+<p>The OS confiscates unused stack space for heap expansion in some configurations.</p>
+</blockquote>
+</li>
+<li><p><strong>congruent</strong> &#x2F;ˈkɒŋɡruənt&#x2F; — 一致的，协调的 <code>书面</code></p>
+<blockquote>
+<p>The test results are congruent with the simulation predictions.</p>
+</blockquote>
+</li>
+<li><p><strong>construe</strong> &#x2F;kənˈstruː&#x2F; — 解释，理解为 <code>书面</code></p>
+<blockquote>
+<p>The compiler may construe that pointer cast as a strict aliasing violation.</p>
+</blockquote>
+</li>
+<li><p><strong>consummate</strong> &#x2F;ˈkɒnsəmɪt&#x2F; — 完美的，至上的 <code>书面</code></p>
+<blockquote>
+<p>She is a consummate engineer — her drivers have zero known defects in production.</p>
+</blockquote>
+</li>
+<li><p><strong>counterfeit</strong> &#x2F;ˈkaʊntərfɪt&#x2F; — 伪造的 <code>技术</code></p>
+<blockquote>
+<p>Counterfeit flash chips report the correct JEDEC ID but fail endurance tests.</p>
+</blockquote>
+</li>
+<li><p><strong>culminate</strong> &#x2F;ˈkʌlmɪneɪt&#x2F; — 达到顶点，以…告终 <code>书面</code></p>
+<blockquote>
+<p>Months of debugging culminated in finding a single missing volatile qualifier.</p>
+</blockquote>
+</li>
+<li><p><strong>decimate</strong> &#x2F;ˈdɛsɪmeɪt&#x2F; — 大幅削减 <code>口语</code></p>
+<blockquote>
+<p>The buffer overflow decimated the task control blocks stored in adjacent memory.</p>
+</blockquote>
+</li>
+<li><p><strong>delineate</strong> &#x2F;dɪˈlɪniːeɪt&#x2F; — 描绘，划定 <code>面试</code></p>
+<blockquote>
+<p>The architecture document delineates responsibility between BSP and application layers.</p>
+</blockquote>
+</li>
+<li><p><strong>denominator</strong> &#x2F;dɪˈnɒmɪneɪtər&#x2F; — 分母，共同特征 <code>口语</code></p>
+<blockquote>
+<p>Reliability is the common denominator across all automotive peripheral drivers.</p>
+</blockquote>
+</li>
+<li><p><strong>deterrent</strong> &#x2F;dɪˈtɛrənt&#x2F; — 威慑，阻碍因素 <code>书面</code></p>
+<blockquote>
+<p>High licensing costs are a deterrent against adopting proprietary RTOS solutions.</p>
+</blockquote>
+</li>
+<li><p><strong>deviate</strong> &#x2F;ˈdiːvieɪt&#x2F; — 偏离 <code>技术</code></p>
+<blockquote>
+<p>The ADC reading deviated by 3 LSBs due to power supply noise coupling.</p>
+</blockquote>
+</li>
+<li><p><strong>diligence</strong> &#x2F;ˈdɪlɪdʒəns&#x2F; — 勤勉，尽职调查 <code>面试</code></p>
+<blockquote>
+<p>Due diligence on the sensor datasheet revealed an undocumented timing constraint.</p>
+</blockquote>
+</li>
+<li><p><strong>disseminate</strong> &#x2F;dɪˈsɛmɪneɪt&#x2F; — 传播，散布 <code>书面</code></p>
+<blockquote>
+<p>The errata notice was disseminated to all teams using the affected chip revision.</p>
+</blockquote>
+</li>
+<li><p><strong>dormancy</strong> &#x2F;ˈdɔːrmənsi&#x2F; — 休眠状态 <code>技术</code></p>
+<blockquote>
+<p>The peripheral enters dormancy when its clock gate bit is cleared.</p>
+</blockquote>
+</li>
+<li><p><strong>elapse</strong> &#x2F;ɪˈlæps&#x2F; — （时间）流逝 <code>书面</code></p>
+<blockquote>
+<p>If more than 100 ms elapses without an ACK, the driver triggers a timeout.</p>
+</blockquote>
+</li>
+<li><p><strong>encumber</strong> &#x2F;ɪnˈkʌmbər&#x2F; — 妨碍，拖累 <code>书面</code></p>
+<blockquote>
+<p>Legacy API compatibility encumbers the new driver with unnecessary abstraction layers.</p>
+</blockquote>
+</li>
+<li><p><strong>exert</strong> &#x2F;ɪɡˈzɜːrt&#x2F; — 施加，运用 <code>口语</code></p>
+<blockquote>
+<p>The pull-up resistor exerts a constant force on the I2C bus line.</p>
+</blockquote>
+</li>
+<li><p><strong>expedient</strong> &#x2F;ɪkˈspiːdiənt&#x2F; — 权宜的，方便的 <code>面试</code></p>
+<blockquote>
+<p>Polling is expedient for prototyping, but interrupt-driven designs scale better.</p>
+</blockquote>
+</li>
+<li><p><strong>extrapolate</strong> &#x2F;ɪkˈstræpəleɪt&#x2F; — 推断，外推 <code>面试</code></p>
+<blockquote>
+<p>We can extrapolate the MTBF from the accelerated life test results.</p>
+</blockquote>
+</li>
+<li><p><strong>fallible</strong> &#x2F;ˈfæləbəl&#x2F; — 易犯错的 <code>口语</code></p>
+<blockquote>
+<p>Even experienced engineers are fallible — that is why we mandate code review.</p>
+</blockquote>
+</li>
+<li><p><strong>forsake</strong> &#x2F;fɔːrˈseɪk&#x2F; — 放弃，抛弃 <code>书面</code></p>
+<blockquote>
+<p>We forsook the vendor HAL in favor of hand-tuned register access for performance.</p>
+</blockquote>
+</li>
+<li><p><strong>gyrate</strong> &#x2F;ˈdʒaɪreɪt&#x2F; — 旋转，回旋 <code>技术</code></p>
+<blockquote>
+<p>The motor shaft gyrates erratically when the commutation sequence is incorrect.</p>
+</blockquote>
+</li>
+<li><p><strong>hamper</strong> &#x2F;ˈhæmpər&#x2F; — 妨碍，阻碍 <code>口语</code></p>
+<blockquote>
+<p>Excessive logging hampers real-time performance by consuming UART bandwidth.</p>
+</blockquote>
+</li>
+<li><p><strong>imminent</strong> &#x2F;ˈɪmɪnənt&#x2F; — 即将发生的 <code>口语</code></p>
+<blockquote>
+<p>An imminent brownout was detected, triggering an emergency state save to flash.</p>
+</blockquote>
+</li>
+<li><p><strong>impair</strong> &#x2F;ɪmˈpɛər&#x2F; — 损害，削弱 <code>书面</code></p>
+<blockquote>
+<p>Electromagnetic interference impairs the accuracy of high-resolution ADC conversions.</p>
+</blockquote>
+</li>
+<li><p><strong>intercept</strong> &#x2F;ˌɪntərˈsɛpt&#x2F; — 拦截 <code>技术</code></p>
+<blockquote>
+<p>The debug probe intercepts the SWD clock to inject breakpoint instructions.</p>
+</blockquote>
+</li>
+<li><p><strong>intermingle</strong> &#x2F;ˌɪntərˈmɪŋɡəl&#x2F; — 混合 <code>书面</code></p>
+<blockquote>
+<p>Do not intermingle DMA buffers with stack variables — alignment and caching issues arise.</p>
+</blockquote>
+</li>
+<li><p><strong>juxtapose</strong> &#x2F;ˌdʒʌkstəˈpoʊz&#x2F; — 并列比较 <code>面试</code></p>
+<blockquote>
+<p>Let us juxtapose the polling and interrupt approaches in terms of CPU utilization.</p>
+</blockquote>
+</li>
+<li><p><strong>meticulous</strong> &#x2F;məˈtɪkjələs&#x2F; — 一丝不苟的 <code>面试</code></p>
+<blockquote>
+<p>Meticulous register initialization order is critical for the Ethernet MAC peripheral.</p>
+</blockquote>
+</li>
+<li><p><strong>misnomer</strong> &#x2F;mɪsˈnoʊmər&#x2F; — 用词不当 <code>口语</code></p>
+<blockquote>
+<p>Calling it real-time is a misnomer — the system has no deadline guarantees.</p>
+</blockquote>
+</li>
+<li><p><strong>nascent</strong> &#x2F;ˈnæsənt&#x2F; — 新生的，初期的 <code>书面</code></p>
+<blockquote>
+<p>RISC-V peripheral ecosystems are still nascent compared to ARM Cortex-M.</p>
+</blockquote>
+</li>
+<li><p><strong>obviate</strong> &#x2F;ˈɒbvieɪt&#x2F; — 消除，避免 <code>面试</code></p>
+<blockquote>
+<p>DMA obviates the need for byte-level interrupt handling on high-speed interfaces.</p>
+</blockquote>
+</li>
+<li><p><strong>pedagogy</strong> &#x2F;ˈpɛdəɡɒdʒi&#x2F; — 教学法 <code>书面</code></p>
+<blockquote>
+<p>Hands-on lab exercises are superior pedagogy for teaching peripheral driver development.</p>
+</blockquote>
+</li>
+<li><p><strong>precipitate</strong> &#x2F;prɪˈsɪpɪteɪt&#x2F; — 促使，加速 <code>书面</code></p>
+<blockquote>
+<p>A race condition in the SPI driver precipitated a cascade of data corruption.</p>
+</blockquote>
+</li>
+<li><p><strong>profuse</strong> &#x2F;prəˈfjuːs&#x2F; — 大量的，丰富的 <code>口语</code></p>
+<blockquote>
+<p>The debug build produces profuse log output that floods the serial console.</p>
+</blockquote>
+</li>
+<li><p><strong>relegate</strong> &#x2F;ˈrɛlɪɡeɪt&#x2F; — 降级，归入 <code>面试</code></p>
+<blockquote>
+<p>Error handling was relegated to a low-priority task, causing silent failures.</p>
+</blockquote>
+</li>
+<li><p><strong>replenish</strong> &#x2F;rɪˈplɛnɪʃ&#x2F; — 补充 <code>口语</code></p>
+<blockquote>
+<p>The DMA controller replenishes the transmit buffer from a ring queue in memory.</p>
+</blockquote>
+</li>
+<li><p><strong>solder</strong> &#x2F;ˈsɒldər&#x2F; — 焊接 <code>技术</code></p>
+<blockquote>
+<p>Cold solder joints on the crystal pins cause intermittent clock failures.</p>
+</blockquote>
+</li>
+<li><p><strong>supplant</strong> &#x2F;səˈplɑːnt&#x2F; — 取代 <code>书面</code></p>
+<blockquote>
+<p>The new HAL generator aims to supplant hand-written register definitions entirely.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“hit-the-ground-running”"><a href="#1-“hit-the-ground-running”" class="headerlink" title="1. “hit the ground running”"></a>1. “hit the ground running”</h3><p><strong>意思：</strong> 一开始就全力以赴<br><strong>场景：</strong> 形容新人入职或项目启动后立即进入高效工作状态，不需要适应期</p>
+<blockquote>
+<p><strong>A:</strong> The new firmware engineer just joined — when do you think she’ll be productive?<br><strong>B:</strong> She hit the ground running — shipped her first driver fix on day two.</p>
+</blockquote>
+<p><em>引用：「We need someone who can hit the ground running, not someone we have to train for six months.」— Eric Schmidt, In the Plex (2011)</em></p>
+<hr>
+<h3 id="2-“move-the-needle”"><a href="#2-“move-the-needle”" class="headerlink" title="2. “move the needle”"></a>2. “move the needle”</h3><p><strong>意思：</strong> 产生明显效果<br><strong>场景：</strong> 讨论某个改动或优化是否能带来可量化的性能&#x2F;业务提升</p>
+<blockquote>
+<p><strong>A:</strong> We spent two weeks refactoring the logger. Did it actually move the needle on latency?<br><strong>B:</strong> Barely — shaved off 2 μs. The real gain will come from DMA-ing those SPI transfers.</p>
+</blockquote>
+<p><em>引用：「We need features that actually move the needle on user engagement, not cosmetic changes.」— Marissa Mayer, Bloomberg Businessweek (2013)</em></p>
+<hr>
+<h3 id="3-“paint-yourself-into-a-corner”"><a href="#3-“paint-yourself-into-a-corner”" class="headerlink" title="3. “paint yourself into a corner”"></a>3. “paint yourself into a corner”</h3><p><strong>意思：</strong> 把自己逼入困境<br><strong>场景：</strong> 形容因前期决策失误，导致后续无法收场或无路可退的窘境</p>
+<blockquote>
+<p><strong>A:</strong> We hardcoded the baud rate at 115200 everywhere in the driver layer.<br><strong>B:</strong> You’ve painted yourself into a corner — now every new customer with 921600 requirements is a nightmare.</p>
+</blockquote>
+<p><em>引用：「Companies that focus only on current customers paint themselves into a corner when disruptive technologies emerge.」— Clayton Christensen, The Innovator’s Dilemma (1997)</em></p>
+<hr>
+<h3 id="4-“the-devil-is-in-the-details”"><a href="#4-“the-devil-is-in-the-details”" class="headerlink" title="4. “the devil is in the details”"></a>4. “the devil is in the details”</h3><p><strong>意思：</strong> 细节决定成败<br><strong>场景：</strong> 强调方案整体看起来没问题，但具体实现中藏着关键的坑</p>
+<blockquote>
+<p><strong>A:</strong> The DMA transfer looks correct in the block diagram.<br><strong>B:</strong> The devil is in the details — the cache line alignment and the missing DSB instruction are what breaks it.</p>
+</blockquote>
+<p><em>引用：「God is in the detail」— later inverted to 「The devil is in the details」by Ludwig Mies van der Rohe (c. 1960s)</em></p>
+<hr>
+<h3 id="5-“throw-someone-under-the-bus”"><a href="#5-“throw-someone-under-the-bus”" class="headerlink" title="5. “throw someone under the bus”"></a>5. “throw someone under the bus”</h3><p><strong>意思：</strong> 为保全自己而甩锅<br><strong>场景：</strong> 团队出了问题，某人把责任推给同事以撇清自身</p>
+<blockquote>
+<p><strong>A:</strong> At the post-mortem, who got blamed for the SPI race condition?<br><strong>B:</strong> Dave threw the junior engineer under the bus — even though the design review missed it too.</p>
+</blockquote>
+<p><em>引用：「The phrase gained political currency after staffers threw colleagues under the bus to distance themselves from the scandal.」— Politico (2009)</em></p>
+<hr>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-27-词汇-—-第-7-天复习（固件架构设计）"><a href="#📅-3-x2F-27-词汇-—-第-7-天复习（固件架构设计）" class="headerlink" title="📅 3&#x2F;27 词汇 — 第 7 天复习（固件架构设计）"></a>📅 3&#x2F;27 词汇 — 第 7 天复习（固件架构设计）</h3><blockquote>
+<p>本批次词汇数据已从博客正文复习完毕，关键词包括：architecture · layered · HAL · BSP · abstraction · coupling · cohesion · modular · reentrant · callback 等固件架构核心术语。</p>
+</blockquote>
+<hr>
+<h3 id="📅-3-x2F-30-词汇-—-第-4-天复习（低功耗设计-Low-Power-Design）"><a href="#📅-3-x2F-30-词汇-—-第-4-天复习（低功耗设计-Low-Power-Design）" class="headerlink" title="📅 3&#x2F;30 词汇 — 第 4 天复习（低功耗设计 Low-Power Design）"></a>📅 3&#x2F;30 词汇 — 第 4 天复习（低功耗设计 Low-Power Design）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>quiescent</td>
+<td>静态的，静止的</td>
+</tr>
+<tr>
+<td>leakage</td>
+<td>漏电，泄漏</td>
+</tr>
+<tr>
+<td>regulator</td>
+<td>稳压器</td>
+</tr>
+<tr>
+<td>dormant</td>
+<td>休眠的，蛰伏的</td>
+</tr>
+<tr>
+<td>throttle</td>
+<td>节流，限速</td>
+</tr>
+<tr>
+<td>dissipation</td>
+<td>耗散</td>
+</tr>
+<tr>
+<td>attenuation</td>
+<td>衰减</td>
+</tr>
+<tr>
+<td>substrate</td>
+<td>基板，衬底</td>
+</tr>
+<tr>
+<td>quench</td>
+<td>淬灭，抑制</td>
+</tr>
+<tr>
+<td>ripple</td>
+<td>纹波</td>
+</tr>
+<tr>
+<td>brownout</td>
+<td>欠压，电压跌落</td>
+</tr>
+<tr>
+<td>sequencing</td>
+<td>上电时序</td>
+</tr>
+<tr>
+<td>decoupling</td>
+<td>去耦</td>
+</tr>
+<tr>
+<td>embark</td>
+<td>着手，开始</td>
+</tr>
+<tr>
+<td>meander</td>
+<td>蜿蜒，漫步</td>
+</tr>
+<tr>
+<td>curtail</td>
+<td>削减，缩短</td>
+</tr>
+<tr>
+<td>entail</td>
+<td>需要，牵涉</td>
+</tr>
+<tr>
+<td>elicit</td>
+<td>引出，引起</td>
+</tr>
+<tr>
+<td>vindicate</td>
+<td>证明…正确</td>
+</tr>
+<tr>
+<td>circumvent</td>
+<td>规避，绕过</td>
+</tr>
+<tr>
+<td>bolster</td>
+<td>支撑，增强</td>
+</tr>
+<tr>
+<td>hinder</td>
+<td>阻碍</td>
+</tr>
+<tr>
+<td>relinquish</td>
+<td>放弃，让出</td>
+</tr>
+<tr>
+<td>supersede</td>
+<td>取代</td>
+</tr>
+<tr>
+<td>elusive</td>
+<td>难以捉摸的</td>
+</tr>
+<tr>
+<td>compel</td>
+<td>迫使</td>
+</tr>
+<tr>
+<td>renowned</td>
+<td>著名的</td>
+</tr>
+<tr>
+<td>incentive</td>
+<td>激励</td>
+</tr>
+<tr>
+<td>setback</td>
+<td>挫折</td>
+</tr>
+<tr>
+<td>hands-on</td>
+<td>实际操作的</td>
+</tr>
+<tr>
+<td>trade-off</td>
+<td>权衡取舍</td>
+</tr>
+<tr>
+<td>walkthrough</td>
+<td>详细讲解</td>
+</tr>
+<tr>
+<td>workaround</td>
+<td>变通方法</td>
+</tr>
+<tr>
+<td>upfront</td>
+<td>预先的，坦率的</td>
+</tr>
+<tr>
+<td>revamp</td>
+<td>翻新，改造</td>
+</tr>
+<tr>
+<td>glitch</td>
+<td>毛刺，小故障</td>
+</tr>
+<tr>
+<td>deplete</td>
+<td>耗尽</td>
+</tr>
+<tr>
+<td>ramp</td>
+<td>斜坡，渐升</td>
+</tr>
+<tr>
+<td>standby</td>
+<td>待机</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td>关断</td>
+</tr>
+<tr>
+<td>wake-up</td>
+<td>唤醒</td>
+</tr>
+<tr>
+<td>rail</td>
+<td>电源轨</td>
+</tr>
+<tr>
+<td>inrush</td>
+<td>浪涌，冲击电流</td>
+</tr>
+<tr>
+<td>triage</td>
+<td>分诊，优先排序</td>
+</tr>
+<tr>
+<td>convey</td>
+<td>传达，表达</td>
+</tr>
+<tr>
+<td>proficiency</td>
+<td>熟练度</td>
+</tr>
+<tr>
+<td>delegation</td>
+<td>授权，委派</td>
+</tr>
+<tr>
+<td>acumen</td>
+<td>敏锐，洞察力</td>
+</tr>
+<tr>
+<td>scalability</td>
+<td>可扩展性</td>
+</tr>
+<tr>
+<td>credential</td>
+<td>资质，凭证</td>
+</tr>
+</tbody></table>
+<p>习语复习：burn the midnight oil · back to the drawing board · on the same page · the ball is in your court · pull the plug</p>
+<hr>
+<h3 id="📅-4-x2F-01-词汇-—-第-2-天复习（volatile-与内存映射-I-x2F-O-Round-2）"><a href="#📅-4-x2F-01-词汇-—-第-2-天复习（volatile-与内存映射-I-x2F-O-Round-2）" class="headerlink" title="📅 4&#x2F;01 词汇 — 第 2 天复习（volatile 与内存映射 I&#x2F;O Round 2）"></a>📅 4&#x2F;01 词汇 — 第 2 天复习（volatile 与内存映射 I&#x2F;O Round 2）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stale</td>
+<td>过时的，陈旧的</td>
+</tr>
+<tr>
+<td>evict</td>
+<td>驱逐，逐出</td>
+</tr>
+<tr>
+<td>speculative</td>
+<td>推测的，投机的</td>
+</tr>
+<tr>
+<td>reorder</td>
+<td>重排序</td>
+</tr>
+<tr>
+<td>writeback</td>
+<td>写回</td>
+</tr>
+<tr>
+<td>coherence</td>
+<td>一致性</td>
+</tr>
+<tr>
+<td>invalidate</td>
+<td>使无效</td>
+</tr>
+<tr>
+<td>pipeline</td>
+<td>流水线</td>
+</tr>
+<tr>
+<td>unaligned</td>
+<td>未对齐的</td>
+</tr>
+<tr>
+<td>fence</td>
+<td>屏障（内存屏障）</td>
+</tr>
+<tr>
+<td>observable</td>
+<td>可观测的</td>
+</tr>
+<tr>
+<td>prefetch</td>
+<td>预取</td>
+</tr>
+<tr>
+<td>opcode</td>
+<td>操作码</td>
+</tr>
+<tr>
+<td>idiosyncrasy</td>
+<td>特质，怪癖</td>
+</tr>
+<tr>
+<td>verbatim</td>
+<td>逐字的，一字不差的</td>
+</tr>
+<tr>
+<td>conflate</td>
+<td>混为一谈</td>
+</tr>
+<tr>
+<td>spuriously</td>
+<td>虚假地，不合理地</td>
+</tr>
+<tr>
+<td>tangential</td>
+<td>离题的，切线的</td>
+</tr>
+<tr>
+<td>codify</td>
+<td>编纂，系统化</td>
+</tr>
+<tr>
+<td>salient</td>
+<td>突出的，显著的</td>
+</tr>
+<tr>
+<td>prerequisite</td>
+<td>先决条件</td>
+</tr>
+<tr>
+<td>elucidate</td>
+<td>阐明，解释</td>
+</tr>
+<tr>
+<td>pervasive</td>
+<td>普遍的，弥漫的</td>
+</tr>
+<tr>
+<td>cavil</td>
+<td>挑剔，吹毛求疵</td>
+</tr>
+<tr>
+<td>reckon</td>
+<td>认为，估算</td>
+</tr>
+<tr>
+<td>crux</td>
+<td>症结，关键</td>
+</tr>
+<tr>
+<td>foolproof</td>
+<td>万无一失的</td>
+</tr>
+<tr>
+<td>bygone</td>
+<td>过去的，往昔的</td>
+</tr>
+<tr>
+<td>tweak</td>
+<td>微调</td>
+</tr>
+<tr>
+<td>encompassing</td>
+<td>包含的，涵盖的</td>
+</tr>
+<tr>
+<td>repercussion</td>
+<td>后果，影响</td>
+</tr>
+<tr>
+<td>embroil</td>
+<td>使卷入，牵连</td>
+</tr>
+<tr>
+<td>detriment</td>
+<td>损害，不利</td>
+</tr>
+<tr>
+<td>spurring</td>
+<td>激励，促进</td>
+</tr>
+<tr>
+<td>bespoke</td>
+<td>定制的，量身打造的</td>
+</tr>
+<tr>
+<td>germane</td>
+<td>相关的，切题的</td>
+</tr>
+<tr>
+<td>inadvertent</td>
+<td>无意的，疏忽的</td>
+</tr>
+<tr>
+<td>conundrum</td>
+<td>难题，谜题</td>
+</tr>
+<tr>
+<td>judiciously</td>
+<td>明智地，审慎地</td>
+</tr>
+<tr>
+<td>rudimentary</td>
+<td>基本的，初步的</td>
+</tr>
+<tr>
+<td>quintessential</td>
+<td>典型的，精髓的</td>
+</tr>
+<tr>
+<td>avert</td>
+<td>避免，转移</td>
+</tr>
+<tr>
+<td>auxiliary</td>
+<td>辅助的，备用的</td>
+</tr>
+<tr>
+<td>disparity</td>
+<td>差距，不平等</td>
+</tr>
+<tr>
+<td>amenable</td>
+<td>顺从的，适合的</td>
+</tr>
+<tr>
+<td>debacle</td>
+<td>大败，崩溃</td>
+</tr>
+</tbody></table>
+<p>习语复习：down the rabbit hole · the tip of the iceberg · a blessing in disguise · from scratch · miss the forest for the trees</p>
+<hr>
+<h3 id="📅-4-x2F-02-词汇-—-第-1-天复习（RTOS-深入篇-—-优先级反转、Tick-less-Idle-与内存池）"><a href="#📅-4-x2F-02-词汇-—-第-1-天复习（RTOS-深入篇-—-优先级反转、Tick-less-Idle-与内存池）" class="headerlink" title="📅 4&#x2F;02 词汇 — 第 1 天复习（RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池）"></a>📅 4&#x2F;02 词汇 — 第 1 天复习（RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abate</td>
+<td>减弱，减轻</td>
+</tr>
+<tr>
+<td>accrue</td>
+<td>积累，增长</td>
+</tr>
+<tr>
+<td>adjunct</td>
+<td>附属物，辅助</td>
+</tr>
+<tr>
+<td>affinity</td>
+<td>亲和性，关联</td>
+</tr>
+<tr>
+<td>albeit</td>
+<td>虽然，尽管</td>
+</tr>
+<tr>
+<td>allot</td>
+<td>分配，拨出</td>
+</tr>
+<tr>
+<td>amortize</td>
+<td>摊销，分期偿还</td>
+</tr>
+<tr>
+<td>antecedent</td>
+<td>前因，先行词</td>
+</tr>
+<tr>
+<td>apex</td>
+<td>顶点，最高点</td>
+</tr>
+<tr>
+<td>auspicious</td>
+<td>吉利的，有利的</td>
+</tr>
+<tr>
+<td>backpressure</td>
+<td>背压</td>
+</tr>
+<tr>
+<td>brunt</td>
+<td>冲击的主要部分</td>
+</tr>
+<tr>
+<td>circumspect</td>
+<td>谨慎的，周到的</td>
+</tr>
+<tr>
+<td>conducive</td>
+<td>有助于的</td>
+</tr>
+<tr>
+<td>coroutine</td>
+<td>协程</td>
+</tr>
+<tr>
+<td>deficiency</td>
+<td>不足，缺陷</td>
+</tr>
+<tr>
+<td>demarcation</td>
+<td>界限，划分</td>
+</tr>
+<tr>
+<td>depict</td>
+<td>描绘，描述</td>
+</tr>
+<tr>
+<td>dequeue</td>
+<td>出队</td>
+</tr>
+<tr>
+<td>diminish</td>
+<td>减少，削弱</td>
+</tr>
+<tr>
+<td>discern</td>
+<td>辨别，识别</td>
+</tr>
+<tr>
+<td>dwindle</td>
+<td>逐渐减少</td>
+</tr>
+<tr>
+<td>efficacy</td>
+<td>功效，有效性</td>
+</tr>
+<tr>
+<td>egregious</td>
+<td>极其恶劣的</td>
+</tr>
+<tr>
+<td>emanate</td>
+<td>发出，散发</td>
+</tr>
+<tr>
+<td>erode</td>
+<td>侵蚀，削弱</td>
+</tr>
+<tr>
+<td>extraneous</td>
+<td>无关的，多余的</td>
+</tr>
+<tr>
+<td>facet</td>
+<td>方面，层面</td>
+</tr>
+<tr>
+<td>fidelity</td>
+<td>保真度，忠实</td>
+</tr>
+<tr>
+<td>futile</td>
+<td>徒劳的，无用的</td>
+</tr>
+<tr>
+<td>gratuitous</td>
+<td>不必要的，多余的</td>
+</tr>
+<tr>
+<td>heap</td>
+<td>堆</td>
+</tr>
+<tr>
+<td>incur</td>
+<td>招致，引起</td>
+</tr>
+<tr>
+<td>infer</td>
+<td>推断，推理</td>
+</tr>
+<tr>
+<td>ingress</td>
+<td>入口，进入</td>
+</tr>
+<tr>
+<td>innate</td>
+<td>固有的，天生的</td>
+</tr>
+<tr>
+<td>interpose</td>
+<td>插入，介入</td>
+</tr>
+<tr>
+<td>juncture</td>
+<td>关键时刻，节点</td>
+</tr>
+<tr>
+<td>kernel</td>
+<td>内核</td>
+</tr>
+<tr>
+<td>lapse</td>
+<td>失误，间隔</td>
+</tr>
+<tr>
+<td>negate</td>
+<td>否定，取消</td>
+</tr>
+<tr>
+<td>onerous</td>
+<td>繁重的，费力的</td>
+</tr>
+<tr>
+<td>ostensibly</td>
+<td>表面上</td>
+</tr>
+<tr>
+<td>paradigm</td>
+<td>范式，典范</td>
+</tr>
+<tr>
+<td>peculiar</td>
+<td>奇特的，独特的</td>
+</tr>
+<tr>
+<td>preclude</td>
+<td>排除，阻止</td>
+</tr>
+<tr>
+<td>rendezvous</td>
+<td>会合点</td>
+</tr>
+<tr>
+<td>thrash</td>
+<td>颠簸，剧烈抖动</td>
+</tr>
+<tr>
+<td>trampoline</td>
+<td>跳板（函数）</td>
+</tr>
+<tr>
+<td>unwind</td>
+<td>展开，回溯</td>
+</tr>
+</tbody></table>
+<p>习语复习：burn the midnight oil · back to the drawing board · a double-edged sword · the elephant in the room · cut to the chase</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/SPI/" rel="tag"># SPI</a>
+              <a href="/tags/I2C/" rel="tag"># I2C</a>
+              <a href="/tags/DMA/" rel="tag"># DMA</a>
+              <a href="/tags/UART/" rel="tag"># UART</a>
+              <a href="/tags/%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8/" rel="tag"># 外设驱动</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/02/daily-study-2026-04-02/" rel="prev" title="每日学习 — 2026-04-02">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-04-02
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">320k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:23</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
