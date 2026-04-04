@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：FOC 磁场定向控制深入篇（Round 2） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;28, 3&#x2F;31, 4&#x2F;02, 4&#x2F;03）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-04-04">
+<meta property="og:url" content="http://ycx81.github.io/2026/04/04/daily-study-2026-04-04/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：FOC 磁场定向控制深入篇（Round 2） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;28, 3&#x2F;31, 4&#x2F;02, 4&#x2F;03）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-04T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-04T03:28:05.833Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="FOC">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="电机控制">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="SVPWM">
+<meta property="article:tag" content="磁场定向控制">
+<meta property="article:tag" content="PI控制">
+<meta property="article:tag" content="无感FOC">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/04/04/daily-study-2026-04-04/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/04/04/daily-study-2026-04-04/","path":"2026/04/04/daily-study-2026-04-04/","title":"每日学习 — 2026-04-04"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-04-04 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AFOC-%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91%E6%8E%A7%E5%88%B6%E6%B7%B1%E5%85%A5%E7%AF%87%EF%BC%88Round-2%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：FOC 磁场定向控制深入篇（Round 2）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SVPWM-%E7%A9%BA%E9%97%B4%E7%9F%A2%E9%87%8F%E8%B0%83%E5%88%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">1. SVPWM 空间矢量调制详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%97%A0%E6%84%9F-FOC%EF%BC%88Sensorless-FOC%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 无感 FOC（Sensorless FOC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-MTPA-%E4%B8%8E%E5%BC%B1%E7%A3%81%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.</span> <span class="nav-text">3. MTPA 与弱磁控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cget-the-ball-rolling%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “get the ball rolling”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cturn-the-tables%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “turn the tables”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Ca-tall-order%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “a tall order”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cin-full-swing%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “in full swing”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-28-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;28 词汇 — 第 7 天复习（链接脚本与内存布局）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-31-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86%E4%B8%8E-MISRA-C%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;31 词汇 — 第 4 天复习（安全标准与 MISRA C）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-4-x2F-02-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88RTOS-%E6%B7%B1%E5%85%A5%E7%AF%87-%E2%80%94-%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC%E3%80%81Tick-less-Idle-%E4%B8%8E%E5%86%85%E5%AD%98%E6%B1%A0%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 4&#x2F;02 词汇 — 第 2 天复习（RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-4-x2F-03-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E6%B7%B1%E5%85%A5%E7%AF%87-Round-2%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 4&#x2F;03 词汇 — 第 1 天复习（外设驱动深入篇 Round 2）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/04/04/daily-study-2026-04-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-04-04 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-04-04
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-04 09:00:00" itemprop="dateCreated datePublished" datetime="2026-04-04T09:00:00+08:00">2026-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>16 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>FOC 磁场定向控制深入篇（Round 2）</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;28, 3&#x2F;31, 4&#x2F;02, 4&#x2F;03）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：FOC-磁场定向控制深入篇（Round-2）"><a href="#🔧-嵌入式知识：FOC-磁场定向控制深入篇（Round-2）" class="headerlink" title="🔧 嵌入式知识：FOC 磁场定向控制深入篇（Round 2）"></a>🔧 嵌入式知识：FOC 磁场定向控制深入篇（Round 2）</h2><h3 id="1-SVPWM-空间矢量调制详解"><a href="#1-SVPWM-空间矢量调制详解" class="headerlink" title="1. SVPWM 空间矢量调制详解"></a>1. SVPWM 空间矢量调制详解</h3><p><strong>为什么 SVPWM 优于 SPWM：</strong><br>SPWM（正弦 PWM）独立调制三相占空比，直流母线利用率仅 86.6%。SVPWM 把三相电压视为一个空间矢量，用相邻基本矢量合成目标矢量，母线利用率提升至 100%（线性调制区）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SVPWM 扇区判断 + 作用时间计算</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">svpwm</span><span class="params">(<span class="type">float</span> Valpha, <span class="type">float</span> Vbeta, <span class="type">float</span> Vdc, <span class="type">float</span> Ts,</span></span><br><span class="line"><span class="params">           <span class="type">float</span> *Ta, <span class="type">float</span> *Tb, <span class="type">float</span> *Tc)</span> &#123;</span><br><span class="line">    <span class="type">float</span> Va = Vbeta;</span><br><span class="line">    <span class="type">float</span> Vb = (-Vbeta + sqrtf(<span class="number">3.0f</span>) * Valpha) / <span class="number">2.0f</span>;</span><br><span class="line">    <span class="type">float</span> Vc = (-Vbeta - sqrtf(<span class="number">3.0f</span>) * Valpha) / <span class="number">2.0f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 扇区判断</span></span><br><span class="line">    <span class="type">uint8_t</span> sector = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (Va &gt; <span class="number">0</span>) sector |= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (Vb &gt; <span class="number">0</span>) sector |= <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (Vc &gt; <span class="number">0</span>) sector |= <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> T1, T2, T0;</span><br><span class="line">    <span class="type">float</span> k = sqrtf(<span class="number">3.0f</span>) * Ts / Vdc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (sector) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:  <span class="comment">// 扇区 I</span></span><br><span class="line">            T1 = k * Vb;  T2 = k * Va;  <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:  <span class="comment">// 扇区 II</span></span><br><span class="line">            T1 = -k * Vc; T2 = -k * Vb; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:  <span class="comment">// 扇区 III</span></span><br><span class="line">            T1 = k * Va;  T2 = k * Vc;  <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:  <span class="comment">// 扇区 IV</span></span><br><span class="line">            T1 = -k * Vb; T2 = -k * Va; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:  <span class="comment">// 扇区 V</span></span><br><span class="line">            T1 = k * Vc;  T2 = k * Vb;  <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:  <span class="comment">// 扇区 VI</span></span><br><span class="line">            T1 = -k * Va; T2 = -k * Vc; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>: T1 = T2 = <span class="number">0</span>; <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 过调制保护</span></span><br><span class="line">    <span class="keyword">if</span> (T1 + T2 &gt; Ts) &#123;</span><br><span class="line">        <span class="type">float</span> scale = Ts / (T1 + T2);</span><br><span class="line">        T1 *= scale;  T2 *= scale;</span><br><span class="line">    &#125;</span><br><span class="line">    T0 = Ts - T1 - T2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 七段式对称分配 → 三相占空比</span></span><br><span class="line">    *Ta = (T0/<span class="number">4</span> + T1/<span class="number">2</span> + T2/<span class="number">2</span>) / Ts;</span><br><span class="line">    *Tb = (T0/<span class="number">4</span> + T2/<span class="number">2</span>) / Ts;</span><br><span class="line">    *Tc = T0/<span class="number">4</span> / Ts;</span><br><span class="line">    <span class="comment">// 注：实际还需根据扇区重映射 Ta/Tb/Tc → A/B/C 相</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键细节：</p>
+<ul>
+<li><strong>七段式 vs 五段式</strong>：七段式（0127…7210）波形对称、谐波小，但开关次数多；五段式减少开关损耗，适合高功率场景</li>
+<li><strong>死区补偿</strong>：deadtime 导致实际输出电压偏离指令值，尤其低速时影响显著，需根据电流方向补偿</li>
+</ul>
+<h3 id="2-无感-FOC（Sensorless-FOC）"><a href="#2-无感-FOC（Sensorless-FOC）" class="headerlink" title="2. 无感 FOC（Sensorless FOC）"></a>2. 无感 FOC（Sensorless FOC）</h3><p>省掉编码器&#x2F;旋变器，通过电气信号估算转子位置：</p>
+<p><strong>方法一：反电动势观测器（中高速）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 滑模观测器（SMO）估算反电动势</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">float</span> e_alpha, e_beta;   <span class="comment">// 估算的反电动势</span></span><br><span class="line">    <span class="type">float</span> i_alpha_hat, i_beta_hat;  <span class="comment">// 估算电流</span></span><br><span class="line">    <span class="type">float</span> k_smo;             <span class="comment">// 滑模增益</span></span><br><span class="line">&#125; <span class="type">smo_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">smo_update</span><span class="params">(<span class="type">smo_t</span> *obs, <span class="type">float</span> v_alpha, <span class="type">float</span> v_beta,</span></span><br><span class="line"><span class="params">                <span class="type">float</span> i_alpha, <span class="type">float</span> i_beta, <span class="type">float</span> Rs, <span class="type">float</span> Ls, <span class="type">float</span> dt)</span> &#123;</span><br><span class="line">    <span class="comment">// 电流误差</span></span><br><span class="line">    <span class="type">float</span> err_a = i_alpha - obs-&gt;i_alpha_hat;</span><br><span class="line">    <span class="type">float</span> err_b = i_beta  - obs-&gt;i_beta_hat;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 滑模切换函数（用 sigmoid 替代 sign 减少抖振）</span></span><br><span class="line">    <span class="type">float</span> z_a = obs-&gt;k_smo * tanhf(<span class="number">50.0f</span> * err_a);</span><br><span class="line">    <span class="type">float</span> z_b = obs-&gt;k_smo * tanhf(<span class="number">50.0f</span> * err_b);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 估算电流微分方程</span></span><br><span class="line">    obs-&gt;i_alpha_hat += (v_alpha - Rs * obs-&gt;i_alpha_hat - z_a) / Ls * dt;</span><br><span class="line">    obs-&gt;i_beta_hat  += (v_beta  - Rs * obs-&gt;i_beta_hat  - z_b) / Ls * dt;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 低通滤波提取反电动势</span></span><br><span class="line">    <span class="type">float</span> lpf = <span class="number">0.02f</span>;  <span class="comment">// 滤波系数</span></span><br><span class="line">    obs-&gt;e_alpha += lpf * (z_a - obs-&gt;e_alpha);</span><br><span class="line">    obs-&gt;e_beta  += lpf * (z_b - obs-&gt;e_beta);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从反电动势估算电角度</span></span><br><span class="line"><span class="type">float</span> theta_est = atan2f(-obs-&gt;e_alpha, obs-&gt;e_beta);</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二：高频注入法（零速&#x2F;低速）</strong></p>
+<p>在 d 轴注入高频正弦电压，利用凸极效应（Ld ≠ Lq）从响应电流中解调出转子位置。仅适用于 IPMSM（Interior PM）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 高频注入（简化）</span></span><br><span class="line"><span class="type">float</span> v_hf = V_INJ * sinf(omega_hf * t);  <span class="comment">// 注入信号</span></span><br><span class="line">Vd_ref += v_hf;  <span class="comment">// 叠加到 d 轴指令</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解调：带通滤波 → 乘以载波 → 低通</span></span><br><span class="line"><span class="comment">// 解调后的信号正比于 sin(2 * theta_error)</span></span><br><span class="line"><span class="comment">// 用 PI/PLL 跟踪 → 收敛到真实转子位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-MTPA-与弱磁控制"><a href="#3-MTPA-与弱磁控制" class="headerlink" title="3. MTPA 与弱磁控制"></a>3. MTPA 与弱磁控制</h3><p><strong>MTPA（Maximum Torque Per Ampere）：</strong><br>对于 IPMSM（Ld ≠ Lq），纯 Iq 控制并非最优。注入适当负 Id 利用磁阻转矩，相同电流下产生更大转矩：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MTPA 查表或公式</span></span><br><span class="line"><span class="comment">// 简化公式（忽略饱和）：</span></span><br><span class="line"><span class="comment">// Id_mtpa = (lambda_pm - sqrt(lambda_pm^2 + 8*(Lq-Ld)^2 * Iq^2)) / (4*(Lq-Ld))</span></span><br><span class="line"><span class="type">float</span> <span class="title function_">compute_id_mtpa</span><span class="params">(<span class="type">float</span> iq, <span class="type">float</span> lambda_pm, <span class="type">float</span> Ld, <span class="type">float</span> Lq)</span> &#123;</span><br><span class="line">    <span class="type">float</span> dL = Lq - Ld;</span><br><span class="line">    <span class="keyword">if</span> (fabsf(dL) &lt; <span class="number">1e-6</span>f) <span class="keyword">return</span> <span class="number">0.0f</span>;  <span class="comment">// SPM 退化为 Id=0</span></span><br><span class="line">    <span class="type">float</span> disc = lambda_pm * lambda_pm + <span class="number">8.0f</span> * dL * dL * iq * iq;</span><br><span class="line">    <span class="keyword">return</span> (lambda_pm - sqrtf(disc)) / (<span class="number">4.0f</span> * dL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>弱磁控制（Field Weakening）：</strong><br>转速超过额定点后，反电动势逼近母线电压上限。通过注入更多负 Id 削弱磁通，换取更高转速，但最大转矩随之下降（恒功率区）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 电压限制圆 + 弱磁判断</span></span><br><span class="line"><span class="type">float</span> Vs_max = Vdc / sqrtf(<span class="number">3.0f</span>);  <span class="comment">// 最大线性调制电压</span></span><br><span class="line"><span class="type">float</span> Vs_actual = sqrtf(Vd*Vd + Vq*Vq);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (Vs_actual &gt; Vs_max * <span class="number">0.95f</span>) &#123;</span><br><span class="line">    <span class="comment">// 进入弱磁：减小 Id（更负）</span></span><br><span class="line">    Id_ref -= fw_ki * (Vs_actual - Vs_max * <span class="number">0.95f</span>);</span><br><span class="line">    Id_ref = fmaxf(Id_ref, -Is_max);  <span class="comment">// 电流限制</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：SVPWM 七段式调制的原理是什么？</strong><br>A：将调制周期分为七段，零矢量对称分配在首尾和中间，两个有效矢量按正弦规律分配作用时间。对称结构使输出波形谐波最小化，等效开关频率翻倍。</p>
+<p><strong>Q2：无感 FOC 低速性能差的根本原因？</strong><br>A：反电动势幅值正比于转速，低速时 BEMF 信号微弱，信噪比极低，观测器无法可靠估算转子位置。解决方案：高频注入法（需要凸极电机）或启动阶段用 I&#x2F;f 开环过渡。</p>
+<p><strong>Q3：MTPA 控制的物理意义？</strong><br>A：在电流矢量轨迹上找到使 T&#x2F;|I| 最大的工作点。对于 IPMSM，因 Ld &lt; Lq，注入负 Id 可同时获得永磁转矩和磁阻转矩，同等转矩下铜耗最小，效率最高。</p>
+<p><strong>Q4：弱磁控制为什么存在失控风险？</strong><br>A：弱磁状态下 Id 为大幅负值，若控制器突然失效（如过流保护跳闸），Id 归零，磁通恢复到额定值，高转速下反电动势瞬间远超母线电压，产生不可控的再生电流，可能损坏功率器件。需要安全策略：逐步退出弱磁 + 泄放电阻。</p>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-04-04-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-04-04-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>commutate</td>
+<td>&#x2F;ˈkɒmjʊteɪt&#x2F;</td>
+<td>换相</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>salient</td>
+<td>&#x2F;ˈseɪliənt&#x2F;</td>
+<td>凸极的；显著的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>torque</td>
+<td>&#x2F;tɔːrk&#x2F;</td>
+<td>扭矩，转矩</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>flux</td>
+<td>&#x2F;flʌks&#x2F;</td>
+<td>磁通，通量</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>sinusoidal</td>
+<td>&#x2F;ˌsaɪnəˈsɔɪdəl&#x2F;</td>
+<td>正弦的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>6</td>
+<td>modulation</td>
+<td>&#x2F;ˌmɒdjʊˈleɪʃən&#x2F;</td>
+<td>调制</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>inverter</td>
+<td>&#x2F;ɪnˈvɜːrtər&#x2F;</td>
+<td>逆变器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>8</td>
+<td>attenuate</td>
+<td>&#x2F;əˈtɛnjʊeɪt&#x2F;</td>
+<td>衰减，减弱</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>stator</td>
+<td>&#x2F;ˈsteɪtər&#x2F;</td>
+<td>定子</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>10</td>
+<td>rotor</td>
+<td>&#x2F;ˈroʊtər&#x2F;</td>
+<td>转子</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>11</td>
+<td>inductance</td>
+<td>&#x2F;ɪnˈdʌktəns&#x2F;</td>
+<td>电感</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>impedance</td>
+<td>&#x2F;ɪmˈpiːdəns&#x2F;</td>
+<td>阻抗</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>13</td>
+<td>decouple</td>
+<td>&#x2F;diːˈkʌpəl&#x2F;</td>
+<td>解耦</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>feedforward</td>
+<td>&#x2F;ˈfiːdˌfɔːrwərd&#x2F;</td>
+<td>前馈</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>15</td>
+<td>transient</td>
+<td>&#x2F;ˈtrænziənt&#x2F;</td>
+<td>瞬态的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>16</td>
+<td>bandwidth</td>
+<td>&#x2F;ˈbændwɪdθ&#x2F;</td>
+<td>带宽</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>overshoot</td>
+<td>&#x2F;ˌoʊvərˈʃuːt&#x2F;</td>
+<td>超调</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>saturation</td>
+<td>&#x2F;ˌsætʃəˈreɪʃən&#x2F;</td>
+<td>饱和</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>ripple</td>
+<td>&#x2F;ˈrɪpəl&#x2F;</td>
+<td>纹波</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>harmonics</td>
+<td>&#x2F;hɑːrˈmɒnɪks&#x2F;</td>
+<td>谐波</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>21</td>
+<td>resolver</td>
+<td>&#x2F;rɪˈzɒlvər&#x2F;</td>
+<td>旋转变压器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>22</td>
+<td>encoder</td>
+<td>&#x2F;ɪnˈkoʊdər&#x2F;</td>
+<td>编码器</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>23</td>
+<td>quadrature</td>
+<td>&#x2F;ˈkwɒdrətʃər&#x2F;</td>
+<td>正交的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>interpolate</td>
+<td>&#x2F;ɪnˈtɜːrpəleɪt&#x2F;</td>
+<td>插值</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>25</td>
+<td>discretize</td>
+<td>&#x2F;dɪˈskriːtaɪz&#x2F;</td>
+<td>离散化</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>integral</td>
+<td>&#x2F;ˈɪntɪɡrəl&#x2F;</td>
+<td>积分</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>27</td>
+<td>proportional</td>
+<td>&#x2F;prəˈpɔːrʃənəl&#x2F;</td>
+<td>比例的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>28</td>
+<td>windup</td>
+<td>&#x2F;ˈwaɪndʌp&#x2F;</td>
+<td>积分饱和</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>29</td>
+<td>clamp</td>
+<td>&#x2F;klæmp&#x2F;</td>
+<td>钳位，限幅</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>30</td>
+<td>magnitude</td>
+<td>&#x2F;ˈmæɡnɪtjuːd&#x2F;</td>
+<td>幅值，大小</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>31</td>
+<td>phasor</td>
+<td>&#x2F;ˈfeɪzɔːr&#x2F;</td>
+<td>相量</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>32</td>
+<td>reluctance</td>
+<td>&#x2F;rɪˈlʌktəns&#x2F;</td>
+<td>磁阻</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>33</td>
+<td>cogging</td>
+<td>&#x2F;ˈkɒɡɪŋ&#x2F;</td>
+<td>齿槽效应</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>34</td>
+<td>skew</td>
+<td>&#x2F;skjuː&#x2F;</td>
+<td>斜置，倾斜</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>35</td>
+<td>bemf</td>
+<td>&#x2F;biːˌiːˌɛmˈɛf&#x2F;</td>
+<td>反电动势</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>36</td>
+<td>deadtime</td>
+<td>&#x2F;ˈdɛdtaɪm&#x2F;</td>
+<td>死区时间</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>37</td>
+<td>shoot-through</td>
+<td>&#x2F;ˈʃuːtθruː&#x2F;</td>
+<td>直通（上下桥臂同时导通）</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>bootstrap</td>
+<td>&#x2F;ˈbuːtˌstræp&#x2F;</td>
+<td>自举</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>39</td>
+<td>dissipate</td>
+<td>&#x2F;ˈdɪsɪpeɪt&#x2F;</td>
+<td>耗散</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>40</td>
+<td>thermal</td>
+<td>&#x2F;ˈθɜːrməl&#x2F;</td>
+<td>热的，热学的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>41</td>
+<td>derate</td>
+<td>&#x2F;diːˈreɪt&#x2F;</td>
+<td>降额</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>42</td>
+<td>regenerative</td>
+<td>&#x2F;rɪˈdʒɛnərətɪv&#x2F;</td>
+<td>再生的</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>43</td>
+<td>decrement</td>
+<td>&#x2F;ˈdɛkrɪmənt&#x2F;</td>
+<td>递减</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>44</td>
+<td>slew</td>
+<td>&#x2F;sluː&#x2F;</td>
+<td>摆率，转换速率</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>45</td>
+<td>notch</td>
+<td>&#x2F;nɒtʃ&#x2F;</td>
+<td>陷波</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>46</td>
+<td>damping</td>
+<td>&#x2F;ˈdæmpɪŋ&#x2F;</td>
+<td>阻尼</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>47</td>
+<td>setpoint</td>
+<td>&#x2F;ˈsɛtˌpɔɪnt&#x2F;</td>
+<td>设定值，目标值</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>48</td>
+<td>inertia</td>
+<td>&#x2F;ɪˈnɜːrʃə&#x2F;</td>
+<td>惯量，惯性</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>49</td>
+<td>backlash</td>
+<td>&#x2F;ˈbæklæʃ&#x2F;</td>
+<td>齿隙，回差</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>50</td>
+<td>dither</td>
+<td>&#x2F;ˈdɪðər&#x2F;</td>
+<td>抖动</td>
+<td>技术</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>commutate</strong> &#x2F;ˈkɒmjʊteɪt&#x2F; — 换相 <code>技术</code></p>
+<blockquote>
+<p>The inverter commutates the motor phases in the correct sequence to produce smooth rotation.</p>
+</blockquote>
+</li>
+<li><p><strong>salient</strong> &#x2F;ˈseɪliənt&#x2F; — 凸极的；显著的 <code>技术</code></p>
+<blockquote>
+<p>Salient-pole machines exhibit significant inductance variation between d and q axes.</p>
+</blockquote>
+</li>
+<li><p><strong>torque</strong> &#x2F;tɔːrk&#x2F; — 扭矩，转矩 <code>技术</code></p>
+<blockquote>
+<p>FOC decouples torque and flux by independently controlling I-q and I-d.</p>
+</blockquote>
+</li>
+<li><p><strong>flux</strong> &#x2F;flʌks&#x2F; — 磁通，通量 <code>技术</code></p>
+<blockquote>
+<p>The d-axis current component directly controls the rotor flux linkage.</p>
+</blockquote>
+</li>
+<li><p><strong>sinusoidal</strong> &#x2F;ˌsaɪnəˈsɔɪdəl&#x2F; — 正弦的 <code>技术</code></p>
+<blockquote>
+<p>FOC produces sinusoidal phase currents, resulting in lower torque ripple than trapezoidal drive.</p>
+</blockquote>
+</li>
+<li><p><strong>modulation</strong> &#x2F;ˌmɒdjʊˈleɪʃən&#x2F; — 调制 <code>技术</code></p>
+<blockquote>
+<p>Space-vector modulation achieves higher bus utilization than carrier-based sinusoidal modulation.</p>
+</blockquote>
+</li>
+<li><p><strong>inverter</strong> &#x2F;ɪnˈvɜːrtər&#x2F; — 逆变器 <code>技术</code></p>
+<blockquote>
+<p>A three-phase inverter uses six switches arranged in three half-bridge legs.</p>
+</blockquote>
+</li>
+<li><p><strong>attenuate</strong> &#x2F;əˈtɛnjʊeɪt&#x2F; — 衰减，减弱 <code>技术</code></p>
+<blockquote>
+<p>The low-pass filter attenuates switching noise from the current measurement.</p>
+</blockquote>
+</li>
+<li><p><strong>stator</strong> &#x2F;ˈsteɪtər&#x2F; — 定子 <code>技术</code></p>
+<blockquote>
+<p>The stator windings carry the phase currents that create the rotating magnetic field.</p>
+</blockquote>
+</li>
+<li><p><strong>rotor</strong> &#x2F;ˈroʊtər&#x2F; — 转子 <code>技术</code></p>
+<blockquote>
+<p>The rotor permanent magnets provide the excitation flux in a PMSM.</p>
+</blockquote>
+</li>
+<li><p><strong>inductance</strong> &#x2F;ɪnˈdʌktəns&#x2F; — 电感 <code>技术</code></p>
+<blockquote>
+<p>The q-axis inductance determines how quickly the torque-producing current can change.</p>
+</blockquote>
+</li>
+<li><p><strong>impedance</strong> &#x2F;ɪmˈpiːdəns&#x2F; — 阻抗 <code>技术</code></p>
+<blockquote>
+<p>At high electrical frequencies, the winding impedance limits achievable current.</p>
+</blockquote>
+</li>
+<li><p><strong>decouple</strong> &#x2F;diːˈkʌpəl&#x2F; — 解耦 <code>技术</code></p>
+<blockquote>
+<p>FOC decouples the d and q axis dynamics using feedforward compensation terms.</p>
+</blockquote>
+</li>
+<li><p><strong>feedforward</strong> &#x2F;ˈfiːdˌfɔːrwərd&#x2F; — 前馈 <code>技术</code></p>
+<blockquote>
+<p>Adding a feedforward term for back-EMF improves transient response in the current loop.</p>
+</blockquote>
+</li>
+<li><p><strong>transient</strong> &#x2F;ˈtrænziənt&#x2F; — 瞬态的 <code>技术</code></p>
+<blockquote>
+<p>The controller must handle transient load steps without losing synchronization.</p>
+</blockquote>
+</li>
+<li><p><strong>bandwidth</strong> &#x2F;ˈbændwɪdθ&#x2F; — 带宽 <code>技术</code></p>
+<blockquote>
+<p>A current-loop bandwidth of 1 kilohertz is typical for industrial servo drives.</p>
+</blockquote>
+</li>
+<li><p><strong>overshoot</strong> &#x2F;ˌoʊvərˈʃuːt&#x2F; — 超调 <code>技术</code></p>
+<blockquote>
+<p>Excessive PI gain causes current overshoot that may trigger the overcurrent protection.</p>
+</blockquote>
+</li>
+<li><p><strong>saturation</strong> &#x2F;ˌsætʃəˈreɪʃən&#x2F; — 饱和 <code>技术</code></p>
+<blockquote>
+<p>Magnetic saturation in the iron core reduces effective inductance at high currents.</p>
+</blockquote>
+</li>
+<li><p><strong>ripple</strong> &#x2F;ˈrɪpəl&#x2F; — 纹波 <code>技术</code></p>
+<blockquote>
+<p>Current ripple amplitude is inversely proportional to PWM frequency and inductance.</p>
+</blockquote>
+</li>
+<li><p><strong>harmonics</strong> &#x2F;hɑːrˈmɒnɪks&#x2F; — 谐波 <code>技术</code></p>
+<blockquote>
+<p>Fifth and seventh harmonics in the phase currents produce sixth-order torque pulsation.</p>
+</blockquote>
+</li>
+<li><p><strong>resolver</strong> &#x2F;rɪˈzɒlvər&#x2F; — 旋转变压器 <code>技术</code></p>
+<blockquote>
+<p>A resolver provides absolute position feedback with high noise immunity in harsh environments.</p>
+</blockquote>
+</li>
+<li><p><strong>encoder</strong> &#x2F;ɪnˈkoʊdər&#x2F; — 编码器 <code>技术</code></p>
+<blockquote>
+<p>An incremental encoder outputs A&#x2F;B quadrature pulses and an index signal per revolution.</p>
+</blockquote>
+</li>
+<li><p><strong>quadrature</strong> &#x2F;ˈkwɒdrətʃər&#x2F; — 正交的 <code>技术</code></p>
+<blockquote>
+<p>The q-axis is in quadrature with the d-axis, leading it by 90 electrical degrees.</p>
+</blockquote>
+</li>
+<li><p><strong>interpolate</strong> &#x2F;ɪnˈtɜːrpəleɪt&#x2F; — 插值 <code>技术</code></p>
+<blockquote>
+<p>The observer interpolates rotor angle between encoder edges for smoother commutation.</p>
+</blockquote>
+</li>
+<li><p><strong>discretize</strong> &#x2F;dɪˈskriːtaɪz&#x2F; — 离散化 <code>技术</code></p>
+<blockquote>
+<p>The continuous PI controller must be discretized using bilinear or forward-Euler methods.</p>
+</blockquote>
+</li>
+<li><p><strong>integral</strong> &#x2F;ˈɪntɪɡrəl&#x2F; — 积分 <code>技术</code></p>
+<blockquote>
+<p>The integral term in the PI controller eliminates steady-state current error.</p>
+</blockquote>
+</li>
+<li><p><strong>proportional</strong> &#x2F;prəˈpɔːrʃənəl&#x2F; — 比例的 <code>技术</code></p>
+<blockquote>
+<p>The proportional gain sets the initial stiffness of the current response.</p>
+</blockquote>
+</li>
+<li><p><strong>windup</strong> &#x2F;ˈwaɪndʌp&#x2F; — 积分饱和 <code>技术</code></p>
+<blockquote>
+<p>Anti-windup logic clamps the integrator when the output hits the voltage limit.</p>
+</blockquote>
+</li>
+<li><p><strong>clamp</strong> &#x2F;klæmp&#x2F; — 钳位，限幅 <code>技术</code></p>
+<blockquote>
+<p>Clamp the d-q voltage vector magnitude to stay within the inscribed circle.</p>
+</blockquote>
+</li>
+<li><p><strong>magnitude</strong> &#x2F;ˈmæɡnɪtjuːd&#x2F; — 幅值，大小 <code>技术</code></p>
+<blockquote>
+<p>The magnitude of the reference vector determines the modulation index.</p>
+</blockquote>
+</li>
+<li><p><strong>phasor</strong> &#x2F;ˈfeɪzɔːr&#x2F; — 相量 <code>技术</code></p>
+<blockquote>
+<p>The current phasor angle relative to the back-EMF determines the power factor.</p>
+</blockquote>
+</li>
+<li><p><strong>reluctance</strong> &#x2F;rɪˈlʌktəns&#x2F; — 磁阻 <code>技术</code></p>
+<blockquote>
+<p>Interior PM motors exploit reluctance torque in addition to magnet torque.</p>
+</blockquote>
+</li>
+<li><p><strong>cogging</strong> &#x2F;ˈkɒɡɪŋ&#x2F; — 齿槽效应 <code>技术</code></p>
+<blockquote>
+<p>Cogging torque causes vibration at low speed and is mitigated by skewing the stator slots.</p>
+</blockquote>
+</li>
+<li><p><strong>skew</strong> &#x2F;skjuː&#x2F; — 斜置，倾斜 <code>技术</code></p>
+<blockquote>
+<p>Skewing the rotor magnets by one slot pitch reduces cogging torque significantly.</p>
+</blockquote>
+</li>
+<li><p><strong>bemf</strong> &#x2F;biːˌiːˌɛmˈɛf&#x2F; — 反电动势 <code>技术</code></p>
+<blockquote>
+<p>The BEMF waveform shape reveals whether the motor is suitable for sinusoidal or trapezoidal drive.</p>
+</blockquote>
+</li>
+<li><p><strong>deadtime</strong> &#x2F;ˈdɛdtaɪm&#x2F; — 死区时间 <code>技术</code></p>
+<blockquote>
+<p>Deadtime insertion prevents shoot-through but introduces voltage distortion at low speeds.</p>
+</blockquote>
+</li>
+<li><p><strong>shoot-through</strong> &#x2F;ˈʃuːtθruː&#x2F; — 直通（上下桥臂同时导通） <code>技术</code></p>
+<blockquote>
+<p>Without deadtime, both high-side and low-side switches conducting simultaneously cause shoot-through.</p>
+</blockquote>
+</li>
+<li><p><strong>bootstrap</strong> &#x2F;ˈbuːtˌstræp&#x2F; — 自举 <code>技术</code></p>
+<blockquote>
+<p>A bootstrap capacitor charges during the low-side on-time to drive the high-side gate.</p>
+</blockquote>
+</li>
+<li><p><strong>dissipate</strong> &#x2F;ˈdɪsɪpeɪt&#x2F; — 耗散 <code>技术</code></p>
+<blockquote>
+<p>Each switching event dissipates energy in the MOSFET during the transition period.</p>
+</blockquote>
+</li>
+<li><p><strong>thermal</strong> &#x2F;ˈθɜːrməl&#x2F; — 热的，热学的 <code>技术</code></p>
+<blockquote>
+<p>Thermal derating limits continuous current when the heatsink temperature exceeds 85 degrees Celsius.</p>
+</blockquote>
+</li>
+<li><p><strong>derate</strong> &#x2F;diːˈreɪt&#x2F; — 降额 <code>技术</code></p>
+<blockquote>
+<p>The drive derates maximum torque when junction temperature approaches the thermal limit.</p>
+</blockquote>
+</li>
+<li><p><strong>regenerative</strong> &#x2F;rɪˈdʒɛnərətɪv&#x2F; — 再生的 <code>技术</code></p>
+<blockquote>
+<p>During regenerative braking, kinetic energy flows back to the DC bus through the inverter.</p>
+</blockquote>
+</li>
+<li><p><strong>decrement</strong> &#x2F;ˈdɛkrɪmənt&#x2F; — 递减 <code>技术</code></p>
+<blockquote>
+<p>The speed ramp decrements the reference by a fixed step each control period.</p>
+</blockquote>
+</li>
+<li><p><strong>slew</strong> &#x2F;sluː&#x2F; — 摆率，转换速率 <code>技术</code></p>
+<blockquote>
+<p>Limiting the voltage slew rate reduces EMI radiated from the motor cables.</p>
+</blockquote>
+</li>
+<li><p><strong>notch</strong> &#x2F;nɒtʃ&#x2F; — 陷波 <code>技术</code></p>
+<blockquote>
+<p>A notch filter at the mechanical resonance frequency prevents oscillation in the speed loop.</p>
+</blockquote>
+</li>
+<li><p><strong>damping</strong> &#x2F;ˈdæmpɪŋ&#x2F; — 阻尼 <code>技术</code></p>
+<blockquote>
+<p>Insufficient damping in the speed loop causes sustained oscillation around the setpoint.</p>
+</blockquote>
+</li>
+<li><p><strong>setpoint</strong> &#x2F;ˈsɛtˌpɔɪnt&#x2F; — 设定值，目标值 <code>技术</code></p>
+<blockquote>
+<p>The speed setpoint ramps from zero to target over 500 milliseconds to limit inrush current.</p>
+</blockquote>
+</li>
+<li><p><strong>inertia</strong> &#x2F;ɪˈnɜːrʃə&#x2F; — 惯量，惯性 <code>技术</code></p>
+<blockquote>
+<p>High rotor inertia requires a more aggressive speed-loop integral gain for fast settling.</p>
+</blockquote>
+</li>
+<li><p><strong>backlash</strong> &#x2F;ˈbæklæʃ&#x2F; — 齿隙，回差 <code>技术</code></p>
+<blockquote>
+<p>Gear backlash introduces a dead zone that degrades position-loop accuracy.</p>
+</blockquote>
+</li>
+<li><p><strong>dither</strong> &#x2F;ˈdɪðər&#x2F; — 抖动 <code>技术</code></p>
+<blockquote>
+<p>Injecting dither into the PWM duty cycle improves ADC effective resolution at low currents.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="💬-地道表达"><a href="#💬-地道表达" class="headerlink" title="💬 地道表达"></a>💬 地道表达</h2><h3 id="1-“get-the-ball-rolling”"><a href="#1-“get-the-ball-rolling”" class="headerlink" title="1. “get the ball rolling”"></a>1. “get the ball rolling”</h3><p><strong>意思：</strong> 启动，开始行动<br><strong>场景：</strong> 项目启动或推动停滞事务时，号召大家先迈出第一步</p>
+<blockquote>
+<p><strong>A:</strong> We’ve been planning the FOC migration for months but nothing’s happening.<br><strong>B:</strong> Let’s get the ball rolling — start with the Clarke transform module and iterate from there.</p>
+</blockquote>
+<p><em>引用：「The hardest part of any project is getting the ball rolling — once momentum builds, everything accelerates.」— Eric Ries, The Lean Startup (2011)</em></p>
+<hr>
+<h3 id="2-“turn-the-tables”"><a href="#2-“turn-the-tables”" class="headerlink" title="2. “turn the tables”"></a>2. “turn the tables”</h3><p><strong>意思：</strong> 扭转局面<br><strong>场景：</strong> 形容从劣势逆转为优势，或局面发生戏剧性反转</p>
+<blockquote>
+<p><strong>A:</strong> The motor was oscillating wildly at low speed — we nearly scrapped the whole design.<br><strong>B:</strong> Adding the sliding-mode observer completely turned the tables — smooth as butter now.</p>
+</blockquote>
+<p><em>引用：「Edmond Dantès spent fourteen years in prison before he turned the tables on every man who had wronged him.」— Alexandre Dumas, The Count of Monte Cristo (1844)</em></p>
+<hr>
+<h3 id="3-“a-tall-order”"><a href="#3-“a-tall-order”" class="headerlink" title="3. “a tall order”"></a>3. “a tall order”</h3><p><strong>意思：</strong> 艰巨的任务<br><strong>场景：</strong> 形容某个要求或目标难度极高，实现起来挑战巨大</p>
+<blockquote>
+<p><strong>A:</strong> Can we get sensorless FOC running at zero speed with position accuracy under 5 degrees?<br><strong>B:</strong> That’s a tall order — you basically need high-frequency injection and a very clean signal chain.</p>
+</blockquote>
+<p><em>引用：「Achieving consistent profitability in a bear market is a tall order, even for seasoned fund managers.」— The Wall Street Journal (2015)</em></p>
+<hr>
+<h3 id="4-“back-to-square-one”"><a href="#4-“back-to-square-one”" class="headerlink" title="4. “back to square one”"></a>4. “back to square one”</h3><p><strong>意思：</strong> 回到原点，从头再来<br><strong>场景：</strong> 之前的方案或进展被推翻，不得不重新开始</p>
+<blockquote>
+<p><strong>A:</strong> The PI gains we tuned yesterday don’t work with the new motor at all.<br><strong>B:</strong> Back to square one — different inductance means a completely different plant model.</p>
+</blockquote>
+<p><em>引用：来源于英国棋盘游戏 Snakes and Ladders 的比喻，踩到蛇滑回起点 (1940s)</em></p>
+<hr>
+<h3 id="5-“in-full-swing”"><a href="#5-“in-full-swing”" class="headerlink" title="5. “in full swing”"></a>5. “in full swing”</h3><p><strong>意思：</strong> 全面展开，正在高潮<br><strong>场景：</strong> 形容某项活动、项目或计划已经进入最活跃、最忙碌的阶段</p>
+<blockquote>
+<p><strong>A:</strong> How’s the motor control project coming along?<br><strong>B:</strong> In full swing — we’ve got torque control working and the speed loop is next on the list.</p>
+</blockquote>
+<p><em>引用：「The holiday shopping season is now in full swing, with retailers reporting record online traffic.」— The New York Times (2018)</em></p>
+<hr>
+<h2 id="🔄-Ebbinghaus-复习"><a href="#🔄-Ebbinghaus-复习" class="headerlink" title="🔄 Ebbinghaus 复习"></a>🔄 Ebbinghaus 复习</h2><h3 id="📅-3-x2F-28-词汇-—-第-7-天复习（链接脚本与内存布局）"><a href="#📅-3-x2F-28-词汇-—-第-7-天复习（链接脚本与内存布局）" class="headerlink" title="📅 3&#x2F;28 词汇 — 第 7 天复习（链接脚本与内存布局）"></a>📅 3&#x2F;28 词汇 — 第 7 天复习（链接脚本与内存布局）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>linker</td>
+<td>链接器</td>
+</tr>
+<tr>
+<td>relocate</td>
+<td>重定位</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>符号</td>
+</tr>
+<tr>
+<td>segment</td>
+<td>段</td>
+</tr>
+<tr>
+<td>section</td>
+<td>节</td>
+</tr>
+<tr>
+<td>executable</td>
+<td>可执行的</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>二进制</td>
+</tr>
+<tr>
+<td>flash</td>
+<td>闪存</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>起始地址</td>
+</tr>
+<tr>
+<td>allocation</td>
+<td>分配</td>
+</tr>
+<tr>
+<td>virtual</td>
+<td>虚拟的</td>
+</tr>
+<tr>
+<td>physical</td>
+<td>物理的</td>
+</tr>
+<tr>
+<td>initialize</td>
+<td>初始化</td>
+</tr>
+<tr>
+<td>canary</td>
+<td>金丝雀（栈保护）</td>
+</tr>
+<tr>
+<td>scatter</td>
+<td>分散加载</td>
+</tr>
+<tr>
+<td>region</td>
+<td>区域</td>
+</tr>
+<tr>
+<td>placement</td>
+<td>放置</td>
+</tr>
+<tr>
+<td>objdump</td>
+<td>目标文件转储</td>
+</tr>
+<tr>
+<td>disassemble</td>
+<td>反汇编</td>
+</tr>
+<tr>
+<td>relocation</td>
+<td>重定位</td>
+</tr>
+<tr>
+<td>contiguous</td>
+<td>连续的</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>填充</td>
+</tr>
+<tr>
+<td>corrupt</td>
+<td>损坏</td>
+</tr>
+<tr>
+<td>overwrite</td>
+<td>覆写</td>
+</tr>
+<tr>
+<td>epilogue</td>
+<td>收尾，尾声</td>
+</tr>
+<tr>
+<td>prologue</td>
+<td>序言，开场</td>
+</tr>
+<tr>
+<td>watermark</td>
+<td>水位标记</td>
+</tr>
+<tr>
+<td>stripping</td>
+<td>剥离</td>
+</tr>
+<tr>
+<td>objcopy</td>
+<td>目标文件拷贝</td>
+</tr>
+<tr>
+<td>bootrom</td>
+<td>引导ROM</td>
+</tr>
+<tr>
+<td>eliminate</td>
+<td>消除</td>
+</tr>
+<tr>
+<td>retention</td>
+<td>保持</td>
+</tr>
+<tr>
+<td>persistent</td>
+<td>持久的</td>
+</tr>
+<tr>
+<td>manifest</td>
+<td>清单，显示</td>
+</tr>
+<tr>
+<td>delineation</td>
+<td>划定，描绘</td>
+</tr>
+<tr>
+<td>contend</td>
+<td>竞争，争论</td>
+</tr>
+<tr>
+<td>segregate</td>
+<td>隔离，分离</td>
+</tr>
+<tr>
+<td>reside</td>
+<td>驻留</td>
+</tr>
+<tr>
+<td>designate</td>
+<td>指定</td>
+</tr>
+</tbody></table>
+<p>习语复习：lay the groundwork · under the hood · set in stone · the devil is in the details · put it into perspective</p>
+<hr>
+<h3 id="📅-3-x2F-31-词汇-—-第-4-天复习（安全标准与-MISRA-C）"><a href="#📅-3-x2F-31-词汇-—-第-4-天复习（安全标准与-MISRA-C）" class="headerlink" title="📅 3&#x2F;31 词汇 — 第 4 天复习（安全标准与 MISRA C）"></a>📅 3&#x2F;31 词汇 — 第 4 天复习（安全标准与 MISRA C）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compliant</td>
+<td>合规的</td>
+</tr>
+<tr>
+<td>hazard</td>
+<td>危险，危害</td>
+</tr>
+<tr>
+<td>severity</td>
+<td>严重度</td>
+</tr>
+<tr>
+<td>precaution</td>
+<td>预防措施</td>
+</tr>
+<tr>
+<td>directive</td>
+<td>指令，准则</td>
+</tr>
+<tr>
+<td>operand</td>
+<td>操作数</td>
+</tr>
+<tr>
+<td>sanitize</td>
+<td>净化，消毒</td>
+</tr>
+<tr>
+<td>hardening</td>
+<td>加固</td>
+</tr>
+<tr>
+<td>invariant</td>
+<td>不变量</td>
+</tr>
+<tr>
+<td>precondition</td>
+<td>前置条件</td>
+</tr>
+<tr>
+<td>fallback</td>
+<td>回退方案</td>
+</tr>
+<tr>
+<td>redundancy</td>
+<td>冗余</td>
+</tr>
+<tr>
+<td>diagnostic</td>
+<td>诊断的</td>
+</tr>
+<tr>
+<td>vulnerability</td>
+<td>漏洞</td>
+</tr>
+<tr>
+<td>tamper</td>
+<td>篡改</td>
+</tr>
+<tr>
+<td>violation</td>
+<td>违规</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>回调</td>
+</tr>
+<tr>
+<td>assertion</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>exempt</td>
+<td>豁免的</td>
+</tr>
+<tr>
+<td>mandate</td>
+<td>强制要求</td>
+</tr>
+<tr>
+<td>deviation</td>
+<td>偏差，豁免</td>
+</tr>
+<tr>
+<td>mitigate</td>
+<td>缓解</td>
+</tr>
+<tr>
+<td>impede</td>
+<td>妨碍</td>
+</tr>
+<tr>
+<td>clause</td>
+<td>条款</td>
+</tr>
+<tr>
+<td>traceability</td>
+<td>可追溯性</td>
+</tr>
+<tr>
+<td>audit</td>
+<td>审计</td>
+</tr>
+<tr>
+<td>benchmark</td>
+<td>基准测试</td>
+</tr>
+<tr>
+<td>regression</td>
+<td>回归</td>
+</tr>
+<tr>
+<td>proliferation</td>
+<td>激增，扩散</td>
+</tr>
+<tr>
+<td>ambiguity</td>
+<td>歧义</td>
+</tr>
+<tr>
+<td>pragmatic</td>
+<td>务实的</td>
+</tr>
+<tr>
+<td>substantive</td>
+<td>实质性的</td>
+</tr>
+<tr>
+<td>compelling</td>
+<td>令人信服的</td>
+</tr>
+<tr>
+<td>degradation</td>
+<td>退化，降级</td>
+</tr>
+<tr>
+<td>determinism</td>
+<td>确定性</td>
+</tr>
+<tr>
+<td>certify</td>
+<td>认证</td>
+</tr>
+<tr>
+<td>attestation</td>
+<td>证明，证实</td>
+</tr>
+<tr>
+<td>enumerate</td>
+<td>列举</td>
+</tr>
+<tr>
+<td>encompass</td>
+<td>包含，涵盖</td>
+</tr>
+<tr>
+<td>introspection</td>
+<td>内省，自检</td>
+</tr>
+<tr>
+<td>allocator</td>
+<td>分配器</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>不可变的</td>
+</tr>
+<tr>
+<td>caveat</td>
+<td>注意事项</td>
+</tr>
+<tr>
+<td>countermeasure</td>
+<td>对策</td>
+</tr>
+<tr>
+<td>susceptible</td>
+<td>易受影响的</td>
+</tr>
+<tr>
+<td>provisional</td>
+<td>临时的</td>
+</tr>
+<tr>
+<td>corroborate</td>
+<td>证实，佐证</td>
+</tr>
+<tr>
+<td>inadmissible</td>
+<td>不可接受的</td>
+</tr>
+<tr>
+<td>foreseeable</td>
+<td>可预见的</td>
+</tr>
+<tr>
+<td>leniency</td>
+<td>宽容</td>
+</tr>
+</tbody></table>
+<p>习语复习：cut corners · cover all the bases · in the weeds · raise the bar · by the book</p>
+<hr>
+<h3 id="📅-4-x2F-02-词汇-—-第-2-天复习（RTOS-深入篇-—-优先级反转、Tick-less-Idle-与内存池）"><a href="#📅-4-x2F-02-词汇-—-第-2-天复习（RTOS-深入篇-—-优先级反转、Tick-less-Idle-与内存池）" class="headerlink" title="📅 4&#x2F;02 词汇 — 第 2 天复习（RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池）"></a>📅 4&#x2F;02 词汇 — 第 2 天复习（RTOS 深入篇 — 优先级反转、Tick-less Idle 与内存池）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abate</td>
+<td>减弱，减轻</td>
+</tr>
+<tr>
+<td>accrue</td>
+<td>积累，增长</td>
+</tr>
+<tr>
+<td>adjunct</td>
+<td>附属物，辅助</td>
+</tr>
+<tr>
+<td>affinity</td>
+<td>亲和性，关联</td>
+</tr>
+<tr>
+<td>albeit</td>
+<td>虽然，尽管</td>
+</tr>
+<tr>
+<td>allot</td>
+<td>分配，拨出</td>
+</tr>
+<tr>
+<td>amortize</td>
+<td>摊销，分期偿还</td>
+</tr>
+<tr>
+<td>antecedent</td>
+<td>前因，先行词</td>
+</tr>
+<tr>
+<td>apex</td>
+<td>顶点，最高点</td>
+</tr>
+<tr>
+<td>auspicious</td>
+<td>吉利的，有利的</td>
+</tr>
+<tr>
+<td>backpressure</td>
+<td>背压</td>
+</tr>
+<tr>
+<td>brunt</td>
+<td>冲击的主要部分</td>
+</tr>
+<tr>
+<td>circumspect</td>
+<td>谨慎的，周到的</td>
+</tr>
+<tr>
+<td>conducive</td>
+<td>有助于的</td>
+</tr>
+<tr>
+<td>coroutine</td>
+<td>协程</td>
+</tr>
+<tr>
+<td>deficiency</td>
+<td>不足，缺陷</td>
+</tr>
+<tr>
+<td>demarcation</td>
+<td>界限，划分</td>
+</tr>
+<tr>
+<td>depict</td>
+<td>描绘，描述</td>
+</tr>
+<tr>
+<td>dequeue</td>
+<td>出队</td>
+</tr>
+<tr>
+<td>diminish</td>
+<td>减少，削弱</td>
+</tr>
+<tr>
+<td>discern</td>
+<td>辨别，识别</td>
+</tr>
+<tr>
+<td>dwindle</td>
+<td>逐渐减少</td>
+</tr>
+<tr>
+<td>efficacy</td>
+<td>功效，有效性</td>
+</tr>
+<tr>
+<td>egregious</td>
+<td>极其恶劣的</td>
+</tr>
+<tr>
+<td>emanate</td>
+<td>发出，散发</td>
+</tr>
+<tr>
+<td>erode</td>
+<td>侵蚀，削弱</td>
+</tr>
+<tr>
+<td>extraneous</td>
+<td>无关的，多余的</td>
+</tr>
+<tr>
+<td>facet</td>
+<td>方面，层面</td>
+</tr>
+<tr>
+<td>fidelity</td>
+<td>保真度，忠实</td>
+</tr>
+<tr>
+<td>futile</td>
+<td>徒劳的，无用的</td>
+</tr>
+<tr>
+<td>gratuitous</td>
+<td>不必要的，多余的</td>
+</tr>
+<tr>
+<td>heap</td>
+<td>堆</td>
+</tr>
+<tr>
+<td>incur</td>
+<td>招致，引起</td>
+</tr>
+<tr>
+<td>infer</td>
+<td>推断，推理</td>
+</tr>
+<tr>
+<td>ingress</td>
+<td>入口，进入</td>
+</tr>
+<tr>
+<td>innate</td>
+<td>固有的，天生的</td>
+</tr>
+<tr>
+<td>interpose</td>
+<td>插入，介入</td>
+</tr>
+<tr>
+<td>juncture</td>
+<td>关键时刻，节点</td>
+</tr>
+<tr>
+<td>kernel</td>
+<td>内核</td>
+</tr>
+<tr>
+<td>lapse</td>
+<td>失误，间隔</td>
+</tr>
+<tr>
+<td>negate</td>
+<td>否定，取消</td>
+</tr>
+<tr>
+<td>onerous</td>
+<td>繁重的，费力的</td>
+</tr>
+<tr>
+<td>ostensibly</td>
+<td>表面上</td>
+</tr>
+<tr>
+<td>paradigm</td>
+<td>范式，典范</td>
+</tr>
+<tr>
+<td>peculiar</td>
+<td>奇特的，独特的</td>
+</tr>
+<tr>
+<td>preclude</td>
+<td>排除，阻止</td>
+</tr>
+<tr>
+<td>rendezvous</td>
+<td>会合点</td>
+</tr>
+<tr>
+<td>thrash</td>
+<td>颠簸，剧烈抖动</td>
+</tr>
+<tr>
+<td>trampoline</td>
+<td>跳板（函数）</td>
+</tr>
+<tr>
+<td>unwind</td>
+<td>展开，回溯</td>
+</tr>
+</tbody></table>
+<p>习语复习：burn the midnight oil · back to the drawing board · a double-edged sword · the elephant in the room · cut to the chase</p>
+<hr>
+<h3 id="📅-4-x2F-03-词汇-—-第-1-天复习（外设驱动深入篇-Round-2）"><a href="#📅-4-x2F-03-词汇-—-第-1-天复习（外设驱动深入篇-Round-2）" class="headerlink" title="📅 4&#x2F;03 词汇 — 第 1 天复习（外设驱动深入篇 Round 2）"></a>📅 4&#x2F;03 词汇 — 第 1 天复习（外设驱动深入篇 Round 2）</h3><table>
+<thead>
+<tr>
+<th>单词</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abstain</td>
+<td>避免，弃权</td>
+</tr>
+<tr>
+<td>arbitrage</td>
+<td>套利，利用差异获利</td>
+</tr>
+<tr>
+<td>ascertain</td>
+<td>查明，确定</td>
+</tr>
+<tr>
+<td>asymmetric</td>
+<td>非对称的</td>
+</tr>
+<tr>
+<td>atrophy</td>
+<td>萎缩，退化</td>
+</tr>
+<tr>
+<td>augment</td>
+<td>增强，扩充</td>
+</tr>
+<tr>
+<td>benign</td>
+<td>良性的，无害的</td>
+</tr>
+<tr>
+<td>blatant</td>
+<td>公然的，明显的</td>
+</tr>
+<tr>
+<td>brevity</td>
+<td>简洁</td>
+</tr>
+<tr>
+<td>coalesce</td>
+<td>合并，联合</td>
+</tr>
+<tr>
+<td>cognizant</td>
+<td>认识到的，意识到的</td>
+</tr>
+<tr>
+<td>confiscate</td>
+<td>没收，充公</td>
+</tr>
+<tr>
+<td>congruent</td>
+<td>一致的，协调的</td>
+</tr>
+<tr>
+<td>construe</td>
+<td>解释，理解为</td>
+</tr>
+<tr>
+<td>consummate</td>
+<td>完美的，至上的</td>
+</tr>
+<tr>
+<td>counterfeit</td>
+<td>伪造的</td>
+</tr>
+<tr>
+<td>culminate</td>
+<td>达到顶点</td>
+</tr>
+<tr>
+<td>decimate</td>
+<td>大幅削减</td>
+</tr>
+<tr>
+<td>delineate</td>
+<td>描绘，划定</td>
+</tr>
+<tr>
+<td>denominator</td>
+<td>分母，共同特征</td>
+</tr>
+<tr>
+<td>deterrent</td>
+<td>威慑，阻碍因素</td>
+</tr>
+<tr>
+<td>deviate</td>
+<td>偏离</td>
+</tr>
+<tr>
+<td>diligence</td>
+<td>勤勉，尽职调查</td>
+</tr>
+<tr>
+<td>disseminate</td>
+<td>传播，散布</td>
+</tr>
+<tr>
+<td>dormancy</td>
+<td>休眠状态</td>
+</tr>
+<tr>
+<td>elapse</td>
+<td>（时间）流逝</td>
+</tr>
+<tr>
+<td>encumber</td>
+<td>妨碍，拖累</td>
+</tr>
+<tr>
+<td>exert</td>
+<td>施加，运用</td>
+</tr>
+<tr>
+<td>expedient</td>
+<td>权宜的，方便的</td>
+</tr>
+<tr>
+<td>extrapolate</td>
+<td>推断，外推</td>
+</tr>
+<tr>
+<td>fallible</td>
+<td>易犯错的</td>
+</tr>
+<tr>
+<td>forsake</td>
+<td>放弃，抛弃</td>
+</tr>
+<tr>
+<td>gyrate</td>
+<td>旋转，回旋</td>
+</tr>
+<tr>
+<td>hamper</td>
+<td>妨碍，阻碍</td>
+</tr>
+<tr>
+<td>imminent</td>
+<td>即将发生的</td>
+</tr>
+<tr>
+<td>impair</td>
+<td>损害，削弱</td>
+</tr>
+<tr>
+<td>intercept</td>
+<td>拦截</td>
+</tr>
+<tr>
+<td>intermingle</td>
+<td>混合</td>
+</tr>
+<tr>
+<td>juxtapose</td>
+<td>并列比较</td>
+</tr>
+<tr>
+<td>meticulous</td>
+<td>一丝不苟的</td>
+</tr>
+<tr>
+<td>misnomer</td>
+<td>用词不当</td>
+</tr>
+<tr>
+<td>nascent</td>
+<td>新生的，初期的</td>
+</tr>
+<tr>
+<td>obviate</td>
+<td>消除，避免</td>
+</tr>
+<tr>
+<td>pedagogy</td>
+<td>教学法</td>
+</tr>
+<tr>
+<td>precipitate</td>
+<td>促使，加速</td>
+</tr>
+<tr>
+<td>profuse</td>
+<td>大量的，丰富的</td>
+</tr>
+<tr>
+<td>relegate</td>
+<td>降级，归入</td>
+</tr>
+<tr>
+<td>replenish</td>
+<td>补充</td>
+</tr>
+<tr>
+<td>solder</td>
+<td>焊接</td>
+</tr>
+<tr>
+<td>supplant</td>
+<td>取代</td>
+</tr>
+</tbody></table>
+<p>习语复习：hit the ground running · move the needle · paint yourself into a corner · the devil is in the details · throw someone under the bus</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/FOC/" rel="tag"># FOC</a>
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" rel="tag"># 电机控制</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/SVPWM/" rel="tag"># SVPWM</a>
+              <a href="/tags/%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91%E6%8E%A7%E5%88%B6/" rel="tag"># 磁场定向控制</a>
+              <a href="/tags/PI%E6%8E%A7%E5%88%B6/" rel="tag"># PI控制</a>
+              <a href="/tags/%E6%97%A0%E6%84%9FFOC/" rel="tag"># 无感FOC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/03/daily-study-2026-04-03/" rel="prev" title="每日学习 — 2026-04-03">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-04-03
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">324k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:39</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
