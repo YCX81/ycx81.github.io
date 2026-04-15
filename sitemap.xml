@@ -817,6 +817,13 @@
   </url>
   
   <url>
+    <loc>http://ycx81.github.io/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://ycx81.github.io/tags/SVPWM/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -1034,14 +1041,21 @@
   </url>
   
   <url>
-    <loc>http://ycx81.github.io/tags/%E5%AF%B9%E9%BD%90/</loc>
+    <loc>http://ycx81.github.io/tags/FFT/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://ycx81.github.io/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</loc>
+    <loc>http://ycx81.github.io/tags/%E9%A2%91%E5%9F%9F/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/DSP/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

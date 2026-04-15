@@ -20,22 +20,23 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="今日内容：结构体对齐与字节序 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）">
+    <meta name="description" content="今日内容：FFT（快速傅里叶变换）与频域分析 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日学习 — 2026-04-16">
 <meta property="og:url" content="http://ycx81.github.io/2026/04/16/daily-study-2026-04-16/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="今日内容：结构体对齐与字节序 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）">
+<meta property="og:description" content="今日内容：FFT（快速傅里叶变换）与频域分析 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-16T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-15T16:50:21.119Z">
+<meta property="article:modified_time" content="2026-04-15T17:00:04.305Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
-<meta property="article:tag" content="C语言">
 <meta property="article:tag" content="英语">
 <meta property="article:tag" content="词汇">
-<meta property="article:tag" content="对齐">
-<meta property="article:tag" content="序列化">
+<meta property="article:tag" content="信号处理">
+<meta property="article:tag" content="FFT">
+<meta property="article:tag" content="频域">
+<meta property="article:tag" content="DSP">
 <meta name="twitter:card" content="summary">
 
 
@@ -146,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E7%BB%93%E6%9E%84%E4%BD%93%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：结构体对齐与字节序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2026-04-15-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%C2%B7-50%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">2026-04-15 批次（第1天复习 · 50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AFFT%EF%BC%88%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%89%E4%B8%8E%E9%A2%91%E5%9F%9F%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：FFT（快速傅里叶变换）与频域分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2026-04-15-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%C2%B7-50%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">2026-04-15 批次（第1天复习 · 50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +173,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -251,14 +252,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span></span>
+      <span>3.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>NaN:aN</span>
+      <span>13 分钟</span>
     </span>
 </div>
 
@@ -268,19 +269,19 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>结构体对齐与字节序</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）</p>
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>FFT（快速傅里叶变换）与频域分析</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：结构体对齐与字节序"><a href="#🔧-嵌入式知识：结构体对齐与字节序" class="headerlink" title="🔧 嵌入式知识：结构体对齐与字节序"></a>🔧 嵌入式知识：结构体对齐与字节序</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>对齐是CPU访问内存的效率和硬件要求。大端&#x2F;小端定义多字节数据的存储顺序。序列化(打包)减小数据包，但需小心对齐和字节序。</p>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 自然对齐（编译器默认）*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Natural</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c;         <span class="comment">// offset 0</span></span><br><span class="line">    <span class="comment">// padding: 1 byte</span></span><br><span class="line">    <span class="type">short</span> s;        <span class="comment">// offset 2</span></span><br><span class="line">    <span class="type">int</span> i;          <span class="comment">// offset 4</span></span><br><span class="line">&#125;; <span class="comment">// sizeof = 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 紧凑对齐 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span>((<span class="title">packed</span>)) <span class="title">Packed</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c;         <span class="comment">// offset 0</span></span><br><span class="line">    <span class="type">short</span> s;        <span class="comment">// offset 1</span></span><br><span class="line">    <span class="type">int</span> i;          <span class="comment">// offset 3</span></span><br><span class="line">&#125;; <span class="comment">// sizeof = 7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 自定义对齐 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Aligned</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    <span class="type">short</span> s __attribute__((aligned(<span class="number">4</span>)));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 字节序检测 */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">is_little_endian</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> *(<span class="type">char</span> *)&amp;x == <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 字节序转换 */</span></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">swap_endian32</span><span class="params">(<span class="type">uint32_t</span> val)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ((val &amp; <span class="number">0xFF000000</span>) &gt;&gt; <span class="number">24</span>) |</span><br><span class="line">           ((val &amp; <span class="number">0x00FF0000</span>) &gt;&gt; <span class="number">8</span>) |</span><br><span class="line">           ((val &amp; <span class="number">0x0000FF00</span>) &lt;&lt; <span class="number">8</span>) |</span><br><span class="line">           ((val &amp; <span class="number">0x000000FF</span>) &lt;&lt; <span class="number">24</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 网络字节序 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="type">uint32_t</span> net_val = htonl(host_val);  <span class="comment">// Host To Network Long</span></span><br><span class="line"><span class="type">uint32_t</span> host_val = ntohl(net_val);  <span class="comment">// Network To Host Long</span></span><br></pre></td></tr></table></figure>
+<h2 id="🔧-嵌入式知识：FFT（快速傅里叶变换）与频域分析"><a href="#🔧-嵌入式知识：FFT（快速傅里叶变换）与频域分析" class="headerlink" title="🔧 嵌入式知识：FFT（快速傅里叶变换）与频域分析"></a>🔧 嵌入式知识：FFT（快速傅里叶变换）与频域分析</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>FFT将时域信号转换为频域，揭示信号包含的频率成分。复杂度O(N log N)。ARM CMSIS-DSP库提供优化的FFT实现。采样率需至少为信号最高频率的2倍（奈奎斯特定理）。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;arm_math.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// FFT分析1kHz + 3kHz两个正弦波</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">fft_example</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> FFT_SIZE 1024</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">float32_t</span> input[FFT_SIZE];</span><br><span class="line">    <span class="type">float32_t</span> output[FFT_SIZE];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 生成测试信号（采样率10kHz）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; FFT_SIZE; i++) &#123;</span><br><span class="line">        <span class="type">float</span> t = i / <span class="number">10000.0f</span>;</span><br><span class="line">        input[i] = arm_sin_f32(<span class="number">2</span> * PI * <span class="number">1000</span> * t) +    <span class="comment">// 1kHz</span></span><br><span class="line">                   arm_sin_f32(<span class="number">2</span> * PI * <span class="number">3000</span> * t);     <span class="comment">// 3kHz</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建FFT实例</span></span><br><span class="line">    arm_rfft_fast_instance_f32 fft_instance;</span><br><span class="line">    arm_rfft_fast_init_f32(&amp;fft_instance, FFT_SIZE);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 执行实FFT</span></span><br><span class="line">    arm_rfft_fast_f32(&amp;fft_instance, input, output, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算幅度谱（复数转幅度）</span></span><br><span class="line">    <span class="type">float32_t</span> magnitude[FFT_SIZE/<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; FFT_SIZE/<span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="type">float</span> real = output[<span class="number">2</span>*i];</span><br><span class="line">        <span class="type">float</span> imag = output[<span class="number">2</span>*i + <span class="number">1</span>];</span><br><span class="line">        magnitude[i] = arm_sqrt_f32(real*real + imag*imag);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查找峰值频率（应该在FFT_SIZE*1000/10000=102和FFT_SIZE*3000/10000=307处）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li><strong>对齐损耗</strong>: Natural对齐浪费空间，Packed访问慢</li>
-<li><strong>跨平台问题</strong>: Packed在ARM和x86行为可能不同</li>
-<li><strong>网络协议</strong>: 总是大端(网络字节序)</li>
+<li>实FFT输出对称，仅需前N&#x2F;2个点，虚部不对称</li>
+<li>频率分辨率&#x3D;采样率&#x2F;FFT大小，需要足够大的FFT才能区分接近的频率</li>
+<li>窗函数（Hann&#x2F;Hamming）减少频谱泄露，但会加宽峰值</li>
 </ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: 为什么硬件寄存器不能用packed结构体？</strong><br>A: Packed访问非对齐地址可能产生多个总线周期或异常，寄存器访问需一次原子操作。</p>
-<p><strong>Q2: 如何传输结构体数据到网络？</strong><br>A: 序列化为字节流（big-endian），用htonl&#x2F;htons转换多字节字段，接收端反向处理。</p>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p>Q: FFT输出的索引对应什么频率？<br>A: 第k个点的频率&#x3D;k×采样率&#x2F;FFT大小，例如10kHz采样、1024点FFT，第100点是约976Hz</p>
+<p>Q: 如何提高FFT频率分辨率？<br>A: 增加FFT大小或降低采样率；权衡计算量和时间延迟</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-04-16-part1.mp3" type="audio/mpeg">
@@ -302,629 +303,626 @@
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>accountancy</td>
-<td>ә’kauntәnsi</td>
-<td>n. 会计工作, 会计学\n[经] 会计工作, 会计学术,</td>
-<td>日常</td>
+<td>avril</td>
+<td></td>
+<td>n. 艾薇尔（加拿大女歌手）；四月之恋（电影名）</td>
+<td>技术</td>
 </tr>
 <tr>
 <td>2</td>
-<td>coconut</td>
-<td>‘kәukәnәt</td>
-<td>n. 椰子\n[医] 椰子(实)</td>
-<td>日常</td>
+<td>indenture</td>
+<td>in’dentʃә</td>
+<td>n. 契约, 契据, 凹痕\nvt. 以契约束缚</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>3</td>
-<td>cease</td>
-<td>si:s</td>
-<td>n. 停止\nv. 停止, 终了</td>
-<td>雅思&#x2F;学术&#x2F;日常</td>
+<td>stillness</td>
+<td>‘stilnis</td>
+<td>n. 静止, 沉静</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>4</td>
-<td>inexperience</td>
-<td>.inik’spiәriәns</td>
-<td>n. 无经验, 不熟练</td>
-<td>学术</td>
+<td>defame</td>
+<td>di’feim</td>
+<td>vt. 诽谤, 中伤, 破坏名誉\n[法] 诽谤, 中伤,</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>5</td>
-<td>awaken</td>
-<td>ә’weikәn</td>
-<td>vt. 唤醒, 唤起, 使意识到\nvi. 觉醒, 意识到</td>
-<td>日常</td>
-</tr>
-<tr>
-<td>6</td>
-<td>blueprint</td>
-<td>&#x2F;‘blu:’print&#x2F;</td>
-<td>蓝图, 设计图, (周详的)计划\nvt. 制成蓝图, 计划</td>
-<td>学术&#x2F;雅思</td>
-</tr>
-<tr>
-<td>7</td>
-<td>allied</td>
-<td>&#x2F;ә’laid&#x2F;</td>
-<td>联盟的, 联姻的, 联系起来的</td>
+<td>forgive</td>
+<td>&#x2F;fә’giv&#x2F;</td>
+<td>原谅, 宽恕, 免除\n[法] 免除, 宽恕, 原谅</td>
 <td>学术&#x2F;雅思&#x2F;日常</td>
 </tr>
 <tr>
-<td>8</td>
-<td>socket</td>
-<td>‘sɒkit</td>
-<td>n. 窝, 穴, 插座, 眼窝\nvt. 插进插座\n[计]</td>
-<td>日常</td>
+<td>6</td>
+<td>investiture</td>
+<td>in’vestitʃә</td>
+<td>n. 授职, 封爵\n[法] 授受, 授职, 授权</td>
+<td>雅思</td>
 </tr>
 <tr>
-<td>9</td>
-<td>mommy</td>
-<td>‘mɒmi</td>
-<td>n. 妈咪</td>
+<td>7</td>
+<td>entrancing</td>
+<td>‘entrәnsiŋ</td>
+<td>a. 使人神魂颠倒的, 使人入神的, 令人欣喜的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>8</td>
+<td>surprising</td>
+<td>sә’praiziŋ</td>
+<td>a. 令人惊讶的</td>
 <td>学术</td>
 </tr>
 <tr>
+<td>9</td>
+<td>corrugation</td>
+<td>.kɒru’geiʃәn</td>
+<td>n. 起皱, 波纹, 皱状\n[电] 波形, 棱皱</td>
+<td>技术</td>
+</tr>
+<tr>
 <td>10</td>
-<td>rooftop</td>
-<td>‘ru:ftɒp</td>
-<td>n. 屋顶</td>
+<td>gramophone</td>
+<td>‘græmәfәun</td>
+<td>n. 留声机</td>
 <td>学术</td>
 </tr>
 <tr>
 <td>11</td>
-<td>armistice</td>
-<td>‘ɑ:mistis</td>
-<td>n. 休战, 停战\n[法] 休战, 停战, 停火</td>
-<td>雅思</td>
+<td>microbial</td>
+<td>mai’krәubiәl</td>
+<td>a. 微生物的, 由细菌引起的\n[医] 微生物的</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>12</td>
-<td>quid</td>
-<td>kwid</td>
-<td>n. 一镑金币, 一镑, 咀嚼物</td>
-<td>日常</td>
+<td>widen</td>
+<td>‘waidn</td>
+<td>vt. 弄宽, 加宽, 扩大\nvi. 变宽, 扩大</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>13</td>
-<td>grease</td>
-<td>&#x2F;gri:s&#x2F;</td>
-<td>脂肪, 兽脂, 油脂, 贿赂\nvt. 涂脂于, 贿赂</td>
-<td>学术&#x2F;雅思</td>
+<td>unconscionable</td>
+<td>.ʌn’kɒnʃәnәbl</td>
+<td>a. 不受良心支配的, 不合理的, 过度的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>14</td>
-<td>rebelliousness</td>
-<td>rɪ’beljəsnəs</td>
-<td>n. 造反, 难以控制</td>
-<td>技术</td>
+<td>vitality</td>
+<td>vai’tæliti</td>
+<td>n. 活力, 生命力\n[医] 生机, 活力, 生活</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>15</td>
-<td>stirring</td>
-<td>‘stә:riŋ</td>
-<td>a. 活跃的, 忙碌的, 激动人心的\n[化] 调和; 搅拌</td>
-<td>学术</td>
+<td>imbibe</td>
+<td>im’baib</td>
+<td>vt. 饮, 吸取, 吸入\nvi. 喝, 吸收水分</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>16</td>
-<td>bluntly</td>
-<td>‘blʌntli</td>
-<td>adv. 坦率地, 率直地</td>
-<td>学术</td>
+<td>syntactic</td>
+<td>sin’tæktik</td>
+<td>a. 句法的, 句法上的, 按照句法规则的\n[计] 语法的</td>
+<td>日常</td>
 </tr>
 <tr>
 <td>17</td>
-<td>sewer</td>
-<td>&#x2F;‘su:ә&#x2F;</td>
-<td>下水道, 阴沟, 裁缝师\nvt. 用下水道排, 铺设下水道</td>
-<td>学术&#x2F;雅思</td>
+<td>shrug</td>
+<td>ʃrʌg</td>
+<td>n. 耸肩\nv. 耸肩</td>
+<td>雅思&#x2F;学术</td>
 </tr>
 <tr>
 <td>18</td>
-<td>consort</td>
-<td>&#x2F;‘kɒnsɒ:t&#x2F;</td>
-<td>配偶, 夫妻\nvi. 陪伴, 结交, 符合\nvt. 使结</td>
-<td>学术</td>
+<td>meter</td>
+<td>‘mi:tә</td>
+<td>n. 米, 公尺, 仪表, 计量器\nvt. 以仪表计量</td>
+<td>日常</td>
 </tr>
 <tr>
 <td>19</td>
-<td>bash</td>
-<td>bæʃ</td>
-<td>v. 猛击, 打坏\nn. 猛撞, 猛击</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>20</td>
-<td>oceanic</td>
-<td>.әuʃi’ænik</td>
-<td>a. 海洋的, 产于海洋的, 在海洋中生活的, 广阔的</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>21</td>
-<td>watt</td>
-<td>&#x2F;wɒt&#x2F;</td>
-<td>瓦(特)\n[化] 瓦; 瓦特</td>
+<td>dreary</td>
+<td>&#x2F;‘driәri&#x2F;</td>
+<td>沉闷的</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
+<td>20</td>
+<td>caregiver</td>
+<td>ˈkeəgɪvə(r)</td>
+<td>n. 照料者, 护理者</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>21</td>
+<td>unstable</td>
+<td>.ʌn’steibl</td>
+<td>a. 不稳定的</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
 <td>22</td>
-<td>spouse</td>
-<td>&#x2F;spauz&#x2F;</td>
-<td>配偶</td>
+<td>linen</td>
+<td>&#x2F;‘linin&#x2F;</td>
+<td>亚麻布, 亚麻线, 亚麻制品\na. 亚麻布制的, 亚麻的</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
 <td>23</td>
-<td>arc</td>
-<td>&#x2F;ɑ:k&#x2F;</td>
-<td>弧, 弧形, 弓形, 弧光\n[化] 弧</td>
-<td>学术&#x2F;雅思</td>
+<td>collateral</td>
+<td>&#x2F;kә’lætәrәl&#x2F;</td>
+<td>并行的, 附随的, 旁系的\nn. 旁系亲属, 担保品</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>24</td>
-<td>trooper</td>
-<td>‘tru:pә</td>
-<td>n. 骑兵, 骑警, 伞兵</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>25</td>
-<td>acquisitive</td>
-<td>ә’kwizitiv</td>
-<td>a. 渴望获得的, 贪婪的\n[法] 取得的, 获得的, 贪</td>
-<td>雅思&#x2F;学术</td>
-</tr>
-<tr>
-<td>26</td>
-<td>frankfurt</td>
-<td>‘fræŋkfәt</td>
-<td>n. 牛肉香肠, 猪牛肉混合香肠</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>27</td>
-<td>nt</td>
-<td></td>
-<td>[医] 氡, 镭射气(86号元素)</td>
-<td>日常</td>
-</tr>
-<tr>
-<td>28</td>
-<td>cobalt</td>
-<td>‘kәubɒ:lt</td>
-<td>n. 钴, 钴类颜料\n[化] 钴Co</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>29</td>
-<td>nickel</td>
-<td>&#x2F;‘nikl&#x2F;</td>
-<td>镍, 镍币, 五分镍币\nvt. 镀镍于</td>
-<td>学术&#x2F;雅思</td>
-</tr>
-<tr>
-<td>30</td>
-<td>catchment</td>
-<td>‘kætʃmәnt</td>
-<td>n. 排水区, 集水, 流域</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>31</td>
-<td>minster</td>
-<td>‘minstә</td>
-<td>n. 修道院附属的教堂, 大教堂</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>32</td>
-<td>nesting</td>
-<td>‘nestiŋ</td>
-<td>[计] 嵌套</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>33</td>
-<td>diary</td>
-<td>‘daiәri</td>
-<td>n. 日记\n[经] 日记簿</td>
-<td>雅思&#x2F;学术&#x2F;日常</td>
-</tr>
-<tr>
-<td>34</td>
-<td>precondition</td>
-<td>.pri:kәn’diʃәn</td>
-<td>vt. 事先准备, 事先处理\nn. 先决条件, 前提\n[</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>35</td>
-<td>estimable</td>
-<td>‘estimәbl</td>
-<td>a. 可尊敬的, 可估计的</td>
-<td>雅思</td>
-</tr>
-<tr>
-<td>36</td>
-<td>wound</td>
-<td>wu:nd</td>
-<td>n. 创伤, 伤口, 伤疤, 伤害, 痛苦\nvt. 伤害,</td>
+<td>solid</td>
+<td>‘sɒlid</td>
+<td>n. 固体\na. 坚硬的, 稳固的, 固体的, 实心的,</td>
 <td>学术&#x2F;日常</td>
 </tr>
 <tr>
-<td>37</td>
-<td>diarrhoea</td>
-<td>daiә’riә</td>
-<td>n. 腹泻</td>
+<td>25</td>
+<td>skinny</td>
+<td>‘skini</td>
+<td>a. 似皮的, 极瘦的, 少的, 小气的\n[医] 皮的;</td>
 <td>日常</td>
 </tr>
 <tr>
-<td>38</td>
-<td>cow</td>
-<td>kau</td>
-<td>n. 母牛, 母兽\nvt. 威胁</td>
+<td>26</td>
+<td>navigable</td>
+<td>‘nævigәbl</td>
+<td>a. 可航行的, 可通船的, 适于航行的\n[法] 可航行的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>27</td>
+<td>stress</td>
+<td>stres</td>
+<td>n. 压力, 紧迫, 强调, 重音, 重点, 应力\nvt.</td>
 <td>雅思&#x2F;学术&#x2F;日常</td>
 </tr>
 <tr>
-<td>39</td>
-<td>diseases</td>
-<td></td>
-<td>n. 病害；疾病；疾病种类；病（disease的复数）</td>
+<td>28</td>
+<td>dissolute</td>
+<td>‘disәljut</td>
+<td>a. 放荡的, 风流的</td>
 <td>雅思</td>
 </tr>
 <tr>
-<td>40</td>
-<td>rocker</td>
-<td>‘rɒkә</td>
-<td>n. 摇的人, 摇杆\n[电] 摇杆</td>
-<td>技术</td>
+<td>29</td>
+<td>pronounced</td>
+<td>prә’naunst</td>
+<td>a. 发出音的, 读出来的, 显著的, 断然的, 明显的\n</td>
+<td>雅思</td>
 </tr>
 <tr>
-<td>41</td>
-<td>bearded</td>
-<td>‘biәdid</td>
-<td>a. 有须的, 有胡子的</td>
-<td>学术</td>
-</tr>
-<tr>
-<td>42</td>
-<td>crab</td>
-<td>&#x2F;kræb&#x2F;</td>
-<td>螃蟹, 偏航, 脾气乖戾的人, 沙果\nvi. 捕蟹, 偏航</td>
+<td>30</td>
+<td>ramble</td>
+<td>&#x2F;‘ræmbl&#x2F;</td>
+<td>漫步, 随笔\nvi. 漫步, 漫谈, 漫游, 蔓延\nvt</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
-<td>43</td>
-<td>oafishness</td>
-<td></td>
-<td>n. oafish的变形</td>
+<td>31</td>
+<td>potentially</td>
+<td>pә’tenʃәli</td>
+<td>adv. 可能地, 潜在地</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>32</td>
+<td>atom</td>
+<td>&#x2F;‘ætәm&#x2F;</td>
+<td>原子, 核能, 微粒, 微量\n[计] 原子</td>
+<td>学术&#x2F;雅思&#x2F;日常</td>
+</tr>
+<tr>
+<td>33</td>
+<td>affluent</td>
+<td>&#x2F;‘æfluәnt&#x2F;</td>
+<td>丰富的, 富裕的\nn. 支流, 富人</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>34</td>
+<td>quadruped</td>
+<td>‘kwɒdruped</td>
+<td>n. 四足动物\n[医] 四足的, 四足动物</td>
 <td>雅思</td>
 </tr>
 <tr>
+<td>35</td>
+<td>cosmopolitan</td>
+<td>&#x2F;,kɔzmә’pɔlitәn&#x2F;</td>
+<td>世界主义的, 世界性的, 全世界的, 遍生的, 不偏狭的,</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>36</td>
+<td>instructor</td>
+<td>in’strʌktә</td>
+<td>n. 教员, 讲师\n[法] 指导者, 教员, 讲师</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>37</td>
+<td>logistical</td>
+<td>lə’dʒɪstɪkl</td>
+<td>a. 逻辑的; 后勤方面的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>trumpet</td>
+<td>&#x2F;‘trʌmpit&#x2F;</td>
+<td>喇叭, 小号, 喇叭声\nvi. 吹喇叭\nvt. 用喇叭吹</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>39</td>
+<td>confess</td>
+<td>&#x2F;kәn’fes&#x2F;</td>
+<td>承认, 坦白, 忏悔, 供认</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>40</td>
+<td>shameful</td>
+<td>‘ʃeimful</td>
+<td>a. 可耻的, 丢脸的, 不道德的, 淫猥的, 猥亵的, 不</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>41</td>
+<td>accommodation</td>
+<td>ә.kɒmә’deiʃәn</td>
+<td>n. 膳宿, 预订铺位, 适应性调节, 调和, 贷款\n[医</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>42</td>
+<td>maxwell</td>
+<td>‘mækswәl</td>
+<td>n. 麦克斯韦\n[医] 麦克斯韦(磁通量单位)</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>43</td>
+<td>mighty</td>
+<td>&#x2F;‘maiti&#x2F;</td>
+<td>有势力的人\na. 有势力的, 强大的, 有力的\nadv.</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
 <td>44</td>
-<td>sedimentary</td>
-<td>.sedi’mentәri</td>
-<td>a. 沉渣的, 沉淀物的, 由沉淀物所生成的\n[医] 沉淀</td>
+<td>hearten</td>
+<td>‘hɑ:tn</td>
+<td>vt. 使振作, 激励\nvi. 振作</td>
 <td>雅思</td>
 </tr>
 <tr>
 <td>45</td>
-<td>menace</td>
-<td>&#x2F;‘menis&#x2F;</td>
-<td>威胁, 胁迫\nv. 威吓, 胁迫</td>
-<td>学术&#x2F;雅思</td>
+<td>boor</td>
+<td>buә</td>
+<td>n. 粗野的人, 不懂礼貌的人, 农民</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>46</td>
-<td>debtor</td>
-<td>&#x2F;‘detә&#x2F;</td>
-<td>债务人, 借主, 借方\n[法] 负债者, 债务人, 借方</td>
-<td>学术</td>
+<td>bcp</td>
+<td></td>
+<td>abbr. 企业可持续发展计划（Business Conti</td>
+<td>技术</td>
 </tr>
 <tr>
 <td>47</td>
-<td>centerpiece</td>
-<td>‘sentәpi:s</td>
-<td>n. 中心装饰品；放在餐桌中央的摆饰</td>
-<td>学术</td>
+<td>arboreal</td>
+<td>ɑ:’bәuriәl</td>
+<td>a. 树的, 栖于树木的\n[医] 树的, 树上生活的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>48</td>
-<td>desktop</td>
-<td>‘desktɔp</td>
-<td>n. 桌面\n[计] 桌面</td>
-<td>日常</td>
+<td>mains</td>
+<td></td>
+<td>n. 电源, 网路, 干线\n[电] 输电干线</td>
+<td>技术</td>
 </tr>
 <tr>
 <td>49</td>
-<td>nightfall</td>
-<td>‘naitfɒ:l</td>
-<td>n. 傍晚, 黄昏, 日暮</td>
-<td>学术</td>
+<td>wingspan</td>
+<td>‘wiŋspæn</td>
+<td>n. 翼展</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>50</td>
-<td>nucleus</td>
-<td>&#x2F;‘nju:kliәs&#x2F;</td>
-<td>核心, 核子, 原子核, 起点\n[计] 核心程序</td>
-<td>技术&#x2F;学术&#x2F;雅思</td>
+<td>poly</td>
+<td></td>
+<td>n. 理工学院, 工艺高等专科学校\n[化] 聚尿苷酸</td>
+<td>学术</td>
 </tr>
 </tbody></table>
 <h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
 <summary>📘 点击展开全部例句</summary>
 
 <ol>
-<li><p><strong>accountancy</strong> ә’kauntәnsi — n. 会计工作, 会计学\n[经] 会计工作, 会计学术, 会计职业 <code>日常</code></p>
+<li><p><strong>avril</strong>  — n. 艾薇尔（加拿大女歌手）；四月之恋（电影名） <code>技术</code></p>
+</li>
+<li><p><strong>indenture</strong> in’dentʃә — n. 契约, 契据, 凹痕\nvt. 以契约束缚 <code>雅思</code></p>
 <blockquote>
-<p>(n. the occupation of maintaining and auditing records and preparing financial reports for a business)</p>
+<p>(n. formal agreement between the issuer of bonds and the bondholders as to terms of the debt\nn. a contract binding one party into the service of another for a specified term\nv. bind by or as if by in)</p>
 </blockquote>
 </li>
-<li><p><strong>coconut</strong> ‘kәukәnәt — n. 椰子\n[医] 椰子(实) <code>日常</code></p>
+<li><p><strong>stillness</strong> ‘stilnis — n. 静止, 沉静 <code>学术</code></p>
 <blockquote>
-<p>(n. the edible white meat of a coconut; often shredded for use in e.g. cakes and curries\nn. large hard-shelled oval nut with a fibrous husk containing thick white meat surrounding a central cavity fil)</p>
+<p>(n. calmness without winds)</p>
 </blockquote>
 </li>
-<li><p><strong>cease</strong> si:s — n. 停止\nv. 停止, 终了 <code>雅思/学术/日常</code></p>
+<li><p><strong>defame</strong> di’feim — vt. 诽谤, 中伤, 破坏名誉\n[法] 诽谤, 中伤, 诋毁名誉 <code>雅思</code></p>
 <blockquote>
-<p>(n. (<code>cease&#39; is a noun only in the phrase </code>without cease’) end)</p>
+<p>(v. charge falsely or with malicious intent; attack the good name and reputation of someone)</p>
 </blockquote>
 </li>
-<li><p><strong>inexperience</strong> .inik’spiәriәns — n. 无经验, 不熟练 <code>学术</code></p>
+<li><p><strong>forgive</strong> &#x2F;fә’giv&#x2F; — 原谅, 宽恕, 免除\n[法] 免除, 宽恕, 原谅 <code>学术/雅思/日常</code></p>
 <blockquote>
-<p>(n. lack of experience and the knowledge and understanding derived from experience)</p>
+<p>(v. stop blaming or grant forgiveness\nv. absolve from payment)</p>
 </blockquote>
 </li>
-<li><p><strong>awaken</strong> ә’weikәn — vt. 唤醒, 唤起, 使意识到\nvi. 觉醒, 意识到 <code>日常</code></p>
+<li><p><strong>investiture</strong> in’vestitʃә — n. 授职, 封爵\n[法] 授受, 授职, 授权 <code>雅思</code></p>
 <blockquote>
-<p>(v. cause to become awake or conscious\nv. make aware)</p>
+<p>(n the ceremony of installing a new monarch\nn the ceremonial act of clothing someone in the insignia of an office; the formal promotion of a person to an office or rank)</p>
 </blockquote>
 </li>
-<li><p><strong>blueprint</strong> &#x2F;‘blu:’print&#x2F; — 蓝图, 设计图, (周详的)计划\nvt. 制成蓝图, 计划 <code>学术/雅思</code></p>
+<li><p><strong>entrancing</strong> ‘entrәnsiŋ — a. 使人神魂颠倒的, 使人入神的, 令人欣喜的 <code>雅思</code></p>
 <blockquote>
-<p>(n. something intended as a guide for making something else\nn. photographic print of plans or technical drawings etc.\nv)</p>
+<p>(v attract; cause to be enamored\nv put into a trance\ns capturing interest as if by a spell)</p>
 </blockquote>
 </li>
-<li><p><strong>allied</strong> &#x2F;ә’laid&#x2F; — 联盟的, 联姻的, 联系起来的 <code>学术/雅思/日常</code></p>
+<li><p><strong>surprising</strong> sә’praiziŋ — a. 令人惊讶的 <code>学术</code></p>
 <blockquote>
-<p>(s. related by common characteristics or ancestry\na. of or relating to or denoting the Allies in World War II\na. of or )</p>
+<p>(a. causing surprise or wonder or amazement)</p>
 </blockquote>
 </li>
-<li><p><strong>socket</strong> ‘sɒkit — n. 窝, 穴, 插座, 眼窝\nvt. 插进插座\n[计] 套接字 <code>日常</code></p>
+<li><p><strong>corrugation</strong> .kɒru’geiʃәn — n. 起皱, 波纹, 皱状\n[电] 波形, 棱皱 <code>技术</code></p>
 <blockquote>
-<p>(n. a bony hollow into which a structure fits\nn. receptacle where something (a pipe or probe or end of a bone) is inserted\nn. a receptacle into which an electric device can be inserted)</p>
+<p>(n. a ridge on a corrugated surface\nn. the act of shaping into parallel ridges and grooves)</p>
 </blockquote>
 </li>
-<li><p><strong>mommy</strong> ‘mɒmi — n. 妈咪 <code>学术</code></p>
+<li><p><strong>gramophone</strong> ‘græmәfәun — n. 留声机 <code>学术</code></p>
 <blockquote>
-<p>(n informal terms for a mother)</p>
+<p>(n. an antique record player; the sound of the vibrating needle is amplified acoustically)</p>
 </blockquote>
 </li>
-<li><p><strong>rooftop</strong> ‘ru:ftɒp — n. 屋顶 <code>学术</code></p>
+<li><p><strong>microbial</strong> mai’krәubiәl — a. 微生物的, 由细菌引起的\n[医] 微生物的 <code>学术</code></p>
 <blockquote>
-<p>(n. the top of a (usually flat) roof)</p>
+<p>(a. of or involving or caused by or being microbes)</p>
 </blockquote>
 </li>
-<li><p><strong>armistice</strong> ‘ɑ:mistis — n. 休战, 停战\n[法] 休战, 停战, 停火 <code>雅思</code></p>
+<li><p><strong>widen</strong> ‘waidn — vt. 弄宽, 加宽, 扩大\nvi. 变宽, 扩大 <code>学术</code></p>
 <blockquote>
-<p>(n. a state of peace agreed to between opponents so they can discuss peace terms)</p>
+<p>(v. become broader or wider or more extensive\nv. make wider\nv. extend in scope or range or area)</p>
 </blockquote>
 </li>
-<li><p><strong>quid</strong> kwid — n. 一镑金币, 一镑, 咀嚼物 <code>日常</code></p>
+<li><p><strong>unconscionable</strong> .ʌn’kɒnʃәnәbl — a. 不受良心支配的, 不合理的, 过度的 <code>雅思</code></p>
 <blockquote>
-<p>(n the basic unit of money in Great Britain and Northern Ireland; equal to 100 pence\nn something for something; that which a party receives (or is promised) in return for something he does or gives or)</p>
+<p>(s lacking a conscience\ns greatly exceeding bounds of reason or moderation)</p>
 </blockquote>
 </li>
-<li><p><strong>grease</strong> &#x2F;gri:s&#x2F; — 脂肪, 兽脂, 油脂, 贿赂\nvt. 涂脂于, 贿赂 <code>学术/雅思</code></p>
+<li><p><strong>vitality</strong> vai’tæliti — n. 活力, 生命力\n[医] 生机, 活力, 生活 <code>雅思</code></p>
 <blockquote>
-<p>(n. a thick fatty oil (especially one used to lubricate machinery)\nv. lubricate with grease)</p>
+<p>(n. an energetic style)</p>
 </blockquote>
 </li>
-<li><p><strong>rebelliousness</strong> rɪ’beljəsnəs — n. 造反, 难以控制 <code>技术</code></p>
+<li><p><strong>imbibe</strong> im’baib — vt. 饮, 吸取, 吸入\nvi. 喝, 吸收水分 <code>雅思</code></p>
 <blockquote>
-<p>(n intentionally contemptuous behavior or attitude\nn an insubordinate act)</p>
+<p>(v. receive into the mind and retain)</p>
 </blockquote>
 </li>
-<li><p><strong>stirring</strong> ‘stә:riŋ — a. 活跃的, 忙碌的, 激动人心的\n[化] 调和; 搅拌 <code>学术</code></p>
+<li><p><strong>syntactic</strong> sin’tæktik — a. 句法的, 句法上的, 按照句法规则的\n[计] 语法的, 句法的 <code>日常</code></p>
 <blockquote>
-<p>(n. agitating a liquid with an implement\ns. exciting strong but not unpleasant emotions)</p>
+<p>(a. of or relating to or conforming to the rules of syntax)</p>
 </blockquote>
 </li>
-<li><p><strong>bluntly</strong> ‘blʌntli — adv. 坦率地, 率直地 <code>学术</code></p>
+<li><p><strong>shrug</strong> ʃrʌg — n. 耸肩\nv. 耸肩 <code>雅思/学术</code></p>
 <blockquote>
-<p>(r in a blunt direct manner)</p>
+<p>(n. a gesture involving the shoulders\nv. raise one’s shoulders to indicate indifference or resignation)</p>
 </blockquote>
 </li>
-<li><p><strong>sewer</strong> &#x2F;‘su:ә&#x2F; — 下水道, 阴沟, 裁缝师\nvt. 用下水道排, 铺设下水道于 <code>学术/雅思</code></p>
+<li><p><strong>meter</strong> ‘mi:tә — n. 米, 公尺, 仪表, 计量器\nvt. 以仪表计量 <code>日常</code></p>
 <blockquote>
-<p>(n. a waste pipe that carries away sewage or surface water\nn. someone who sews)</p>
+<p>(n. the basic unit of length adopted under the Systeme International d’Unites (approximately 1.094 yards)\nn. any of various measuring instruments for measuring a quantity\nn. (prosody) the accent in a)</p>
 </blockquote>
 </li>
-<li><p><strong>consort</strong> &#x2F;‘kɒnsɒ:t&#x2F; — 配偶, 夫妻\nvi. 陪伴, 结交, 符合\nvt. 使结合 <code>学术</code></p>
+<li><p><strong>dreary</strong> &#x2F;‘driәri&#x2F; — 沉闷的 <code>学术/雅思</code></p>
 <blockquote>
-<p>(n. the husband or wife of a reigning monarch\nv. keep company with; hang out with)</p>
+<p>(s lacking in liveliness or charm or surprise\ns causing dejection)</p>
 </blockquote>
 </li>
-<li><p><strong>bash</strong> bæʃ — v. 猛击, 打坏\nn. 猛撞, 猛击 <code>学术</code></p>
+<li><p><strong>caregiver</strong> ˈkeəgɪvə(r) — n. 照料者, 护理者 <code>日常</code></p>
 <blockquote>
-<p>(n. an uproarious party)</p>
+<p>(n. a person who is responsible for attending to the needs of a child or dependent adult)</p>
 </blockquote>
 </li>
-<li><p><strong>oceanic</strong> .әuʃi’ænik — a. 海洋的, 产于海洋的, 在海洋中生活的, 广阔的 <code>学术</code></p>
+<li><p><strong>unstable</strong> .ʌn’steibl — a. 不稳定的 <code>雅思/学术</code></p>
 <blockquote>
-<p>(n. an eastern subfamily of Malayo-Polynesian languages\na. relating to or occurring or living in or frequenting the open ocean\ns. resembling the ocean in apparent limitlessness in extent or degree)</p>
+<p>(a. lacking stability or fixity or firmness\ns. highly or violently reactive\ns. disposed to psychological variability)</p>
 </blockquote>
 </li>
-<li><p><strong>watt</strong> &#x2F;wɒt&#x2F; — 瓦(特)\n[化] 瓦; 瓦特 <code>学术/雅思</code></p>
+<li><p><strong>linen</strong> &#x2F;‘linin&#x2F; — 亚麻布, 亚麻线, 亚麻制品\na. 亚麻布制的, 亚麻的 <code>学术/雅思</code></p>
 <blockquote>
-<p>(n. a unit of power equal to 1 joule per second; the power dissipated by a current of 1 ampere flowing across a resistanc)</p>
+<p>(n. a fabric woven with fibers from the flax plant\nn. a high-quality paper made of linen fibers or with a linen finish\n)</p>
 </blockquote>
 </li>
-<li><p><strong>spouse</strong> &#x2F;spauz&#x2F; — 配偶 <code>学术/雅思</code></p>
+<li><p><strong>collateral</strong> &#x2F;kә’lætәrәl&#x2F; — 并行的, 附随的, 旁系的\nn. 旁系亲属, 担保品 <code>学术</code></p>
 <blockquote>
-<p>(n. a person’s partner in marriage)</p>
+<p>(n. a security pledged for the repayment of a loan\na. descended from a common ancestor but through different lines\ns. s)</p>
 </blockquote>
 </li>
-<li><p><strong>arc</strong> &#x2F;ɑ:k&#x2F; — 弧, 弧形, 弓形, 弧光\n[化] 弧 <code>学术/雅思</code></p>
+<li><p><strong>solid</strong> ‘sɒlid — n. 固体\na. 坚硬的, 稳固的, 固体的, 实心的, 纯质的, 立体的,  <code>学术/日常</code></p>
 <blockquote>
-<p>(n. a continuous portion of a circle)</p>
+<p>(n. matter that is solid at room temperature and pressure\nn. the state in which a substance has no tendency to flow under moderate stress; resists forces (such as compression) that tend to deform it; )</p>
 </blockquote>
 </li>
-<li><p><strong>trooper</strong> ‘tru:pә — n. 骑兵, 骑警, 伞兵 <code>学术</code></p>
+<li><p><strong>skinny</strong> ‘skini — a. 似皮的, 极瘦的, 少的, 小气的\n[医] 皮的; 消瘦的 <code>日常</code></p>
 <blockquote>
-<p>(n. a mounted policeman\nn. a state police officer)</p>
+<p>(n. confidential information about a topic or person\na. of or relating to or resembling skin)</p>
 </blockquote>
 </li>
-<li><p><strong>acquisitive</strong> ә’kwizitiv — a. 渴望获得的, 贪婪的\n[法] 取得的, 获得的, 贪得无厌的 <code>雅思/学术</code></p>
+<li><p><strong>navigable</strong> ‘nævigәbl — a. 可航行的, 可通船的, 适于航行的\n[法] 可航行的, 可通航的 <code>雅思</code></p>
 <blockquote>
-<p>(a. eager to acquire and possess things especially material possessions or ideas)</p>
+<p>(s. able to be sailed on or through safely)</p>
 </blockquote>
 </li>
-<li><p><strong>frankfurt</strong> ‘fræŋkfәt — n. 牛肉香肠, 猪牛肉混合香肠 <code>学术</code></p>
+<li><p><strong>stress</strong> stres — n. 压力, 紧迫, 强调, 重音, 重点, 应力\nvt. 加压力于, 着重, <code>雅思/学术/日常</code></p>
 <blockquote>
-<p>(n a German city; an industrial and commercial and financial center)</p>
+<p>(n. the relative prominence of a syllable or musical note (especially with regard to stress or pitch)\nn. special emphasis attached to something\nn. difficulty that causes worry or emotional tension\nn)</p>
 </blockquote>
 </li>
-<li><p><strong>nt</strong>  — [医] 氡, 镭射气(86号元素) <code>日常</code></p>
+<li><p><strong>dissolute</strong> ‘disәljut — a. 放荡的, 风流的 <code>雅思</code></p>
 <blockquote>
-<p>(n an organization concerned to preserve historic monuments and buildings and places of historical interest or natural beauty; founded in 1895 and supported by endowment and private subscription)</p>
+<p>(s unrestrained by convention or morality)</p>
 </blockquote>
 </li>
-<li><p><strong>cobalt</strong> ‘kәubɒ:lt — n. 钴, 钴类颜料\n[化] 钴Co <code>学术</code></p>
+<li><p><strong>pronounced</strong> prә’naunst — a. 发出音的, 读出来的, 显著的, 断然的, 明显的\n[法] 显著的, 明 <code>雅思</code></p>
 <blockquote>
-<p>(n. a hard ferromagnetic silver-white bivalent or trivalent metallic element; a trace element in plant and animal nutrition)</p>
+<p>(v speak, pronounce, or utter in a certain way\nv pronounce judgment on\ns strongly marked; easily noticeable)</p>
 </blockquote>
 </li>
-<li><p><strong>nickel</strong> &#x2F;‘nikl&#x2F; — 镍, 镍币, 五分镍币\nvt. 镀镍于 <code>学术/雅思</code></p>
+<li><p><strong>ramble</strong> &#x2F;‘ræmbl&#x2F; — 漫步, 随笔\nvi. 漫步, 漫谈, 漫游, 蔓延\nvt. 闲逛于 <code>学术/雅思</code></p>
 <blockquote>
-<p>(n. a hard malleable ductile silvery metallic element that is resistant to corrosion; used in alloys; occurs in pentlandi)</p>
+<p>(n. an aimless amble on a winding course)</p>
 </blockquote>
 </li>
-<li><p><strong>catchment</strong> ‘kætʃmәnt — n. 排水区, 集水, 流域 <code>学术</code></p>
+<li><p><strong>potentially</strong> pә’tenʃәli — adv. 可能地, 潜在地 <code>日常</code></p>
 <blockquote>
-<p>(n. a structure in which water is collected (especially a natural drainage area))</p>
+<p>(r. with a possibility of becoming actual)</p>
 </blockquote>
 </li>
-<li><p><strong>minster</strong> ‘minstә — n. 修道院附属的教堂, 大教堂 <code>学术</code></p>
+<li><p><strong>atom</strong> &#x2F;‘ætәm&#x2F; — 原子, 核能, 微粒, 微量\n[计] 原子 <code>学术/雅思/日常</code></p>
 <blockquote>
-<p>(n. any of certain cathedrals and large churches; originally connected to a monastery)</p>
+<p>(n. (physics and chemistry) the smallest component of an element having the chemical properties of the element\nn. (nonte)</p>
 </blockquote>
 </li>
-<li><p><strong>nesting</strong> ‘nestiŋ — [计] 嵌套 <code>学术</code></p>
+<li><p><strong>affluent</strong> &#x2F;‘æfluәnt&#x2F; — 丰富的, 富裕的\nn. 支流, 富人 <code>学术/雅思</code></p>
 <blockquote>
-<p>(v inhabit a nest, usually after building\nv fit together or fit inside\nv move or arrange oneself in a comfortable and cozy position\nv gather nests)</p>
+<p>(n. an affluent person; a person who is financially well off\ns. having an abundant supply of money or possessions of val)</p>
 </blockquote>
 </li>
-<li><p><strong>diary</strong> ‘daiәri — n. 日记\n[经] 日记簿 <code>雅思/学术/日常</code></p>
+<li><p><strong>quadruped</strong> ‘kwɒdruped — n. 四足动物\n[医] 四足的, 四足动物 <code>雅思</code></p>
 <blockquote>
-<p>(n. a daily written record of (usually personal) experiences and observations\nn. a personal journal (as a physical object))</p>
+<p>(n. an animal especially a mammal having four limbs specialized for walking)</p>
 </blockquote>
 </li>
-<li><p><strong>precondition</strong> .pri:kәn’diʃәn — vt. 事先准备, 事先处理\nn. 先决条件, 前提\n[计] 前置条件 <code>学术</code></p>
+<li><p><strong>cosmopolitan</strong> &#x2F;,kɔzmә’pɔlitәn&#x2F; — 世界主义的, 世界性的, 全世界的, 遍生的, 不偏狭的, 卓有见识的\nn.  <code>学术/雅思</code></p>
 <blockquote>
-<p>(n. a condition that is a prerequisite\nv. put into the required condition beforehand)</p>
+<p>(n. a sophisticated person who has travelled in many countries\na. growing or occurring in many parts of the world\na. co)</p>
 </blockquote>
 </li>
-<li><p><strong>estimable</strong> ‘estimәbl — a. 可尊敬的, 可估计的 <code>雅思</code></p>
+<li><p><strong>instructor</strong> in’strʌktә — n. 教员, 讲师\n[法] 指导者, 教员, 讲师 <code>学术</code></p>
 <blockquote>
-<p>(a. deserving of respect or high regard\ns. deserving of esteem and respect)</p>
+<p>(n a person whose occupation is teaching)</p>
 </blockquote>
 </li>
-<li><p><strong>wound</strong> wu:nd — n. 创伤, 伤口, 伤疤, 伤害, 痛苦\nvt. 伤害, 损害, 使受伤\n <code>学术/日常</code></p>
+<li><p><strong>logistical</strong>  lə’dʒɪstɪkl — a. 逻辑的; 后勤方面的 <code>学术</code></p>
 <blockquote>
-<p>(n. an injury to living tissue (especially an injury involving a cut or break in the skin)\nn. a casualty to military personnel resulting from combat\nn. a figurative injury (to your feelings or pride))</p>
+<p>(a of or relating to logistics)</p>
 </blockquote>
 </li>
-<li><p><strong>diarrhoea</strong> daiә’riә — n. 腹泻 <code>日常</code></p>
+<li><p><strong>trumpet</strong> &#x2F;‘trʌmpit&#x2F; — 喇叭, 小号, 喇叭声\nvi. 吹喇叭\nvt. 用喇叭吹出, 吹嘘 <code>学术/雅思</code></p>
 <blockquote>
-<p>(n frequent and watery bowel movements; can be a symptom of infection or food poisoning or colitis or a gastrointestinal tumor)</p>
+<p>(v. proclaim on, or as if on, a trumpet\nv. play or blow on the trumpet\nv. utter in trumpet-like sounds)</p>
 </blockquote>
 </li>
-<li><p><strong>cow</strong> kau — n. 母牛, 母兽\nvt. 威胁 <code>雅思/学术/日常</code></p>
+<li><p><strong>confess</strong> &#x2F;kәn’fes&#x2F; — 承认, 坦白, 忏悔, 供认 <code>学术/雅思</code></p>
 <blockquote>
-<p>(n. female of domestic cattle: “<code>moo-cow&#39; is a child&#39;s term&quot;\nn. mature female of mammals of which the male is called </code>bull’\nn. a large unpleasant woman)</p>
+<p>(v. confess to a punishable or reprehensible deed, usually under pressure\nv. confess to God in the presence of a priest,)</p>
 </blockquote>
 </li>
-<li><p><strong>diseases</strong>  — n. 病害；疾病；疾病种类；病（disease的复数） <code>雅思</code></p>
+<li><p><strong>shameful</strong> ‘ʃeimful — a. 可耻的, 丢脸的, 不道德的, 淫猥的, 猥亵的, 不体面的 <code>学术</code></p>
 <blockquote>
-<p>(n an impairment of health or a condition of abnormal functioning)</p>
+<p>(s (used of conduct or character) deserving or bringing disgrace or shame\ns giving offense to moral sensibilities and injurious to reputation)</p>
 </blockquote>
 </li>
-<li><p><strong>rocker</strong> ‘rɒkә — n. 摇的人, 摇杆\n[电] 摇杆 <code>技术</code></p>
+<li><p><strong>accommodation</strong> ә.kɒmә’deiʃәn — n. 膳宿, 预订铺位, 适应性调节, 调和, 贷款\n[医] 调节(眼); 适 <code>雅思/学术</code></p>
 <blockquote>
-<p>(n. an attendant who rocks a child in a cradle\nn. a performer or composer or fan of rock music\nn. a teenager or young adult in the 1960s who wore leather jackets and rode motorcycles\nn. a trough tha)</p>
+<p>(n. a settlement of differences\nn. in the theories of Jean Piaget: the modification of internal representations in order to accommodate a changing knowledge of reality\nn. living quarters provided for)</p>
 </blockquote>
 </li>
-<li><p><strong>bearded</strong> ‘biәdid — a. 有须的, 有胡子的 <code>学术</code></p>
+<li><p><strong>maxwell</strong> ‘mækswәl — n. 麦克斯韦\n[医] 麦克斯韦(磁通量单位) <code>日常</code></p>
 <blockquote>
-<p>(s. having hair on the cheeks and chin\ns. having a growth of hairlike awns)</p>
+<p>(n. a cgs unit of magnetic flux equal to the flux perpendicular to an area of 1 square centimeter in a magnetic field of 1 gauss\nn. Scottish physicist whose equations unified electricity and magnetism)</p>
 </blockquote>
 </li>
-<li><p><strong>crab</strong> &#x2F;kræb&#x2F; — 螃蟹, 偏航, 脾气乖戾的人, 沙果\nvi. 捕蟹, 偏航, 发牢骚\nvt. <code>学术/雅思</code></p>
+<li><p><strong>mighty</strong> &#x2F;‘maiti&#x2F; — 有势力的人\na. 有势力的, 强大的, 有力的\nadv. 很, 极 <code>学术/雅思</code></p>
 <blockquote>
-<p>(n. decapod having eyes on short stalks and a broad flattened carapace with a small abdomen folded under the thorax and p)</p>
+<p>(s. having or showing great strength or force or intensity\nr. (Southern regional intensive) very; to a great degree)</p>
 </blockquote>
 </li>
-<li><p><strong>oafishness</strong>  — n. oafish的变形 <code>雅思</code></p>
-</li>
-<li><p><strong>sedimentary</strong> .sedi’mentәri — a. 沉渣的, 沉淀物的, 由沉淀物所生成的\n[医] 沉淀的, 沉积的, 沉降 <code>雅思</code></p>
+<li><p><strong>hearten</strong> ‘hɑ:tn — vt. 使振作, 激励\nvi. 振作 <code>雅思</code></p>
 <blockquote>
-<p>(a. resembling or containing or formed by the accumulation of sediment)</p>
+<p>(v give encouragement to)</p>
 </blockquote>
 </li>
-<li><p><strong>menace</strong> &#x2F;‘menis&#x2F; — 威胁, 胁迫\nv. 威吓, 胁迫 <code>学术/雅思</code></p>
+<li><p><strong>boor</strong> buә — n. 粗野的人, 不懂礼貌的人, 农民 <code>雅思</code></p>
 <blockquote>
-<p>(n. something that is a source of danger\nn. a threat or the act of threatening\nv. express a threat either by an utteran)</p>
+<p>(n a crude uncouth ill-bred person lacking culture or refinement)</p>
 </blockquote>
 </li>
-<li><p><strong>debtor</strong> &#x2F;‘detә&#x2F; — 债务人, 借主, 借方\n[法] 负债者, 债务人, 借方 <code>学术</code></p>
+<li><p><strong>bcp</strong>  — abbr. 企业可持续发展计划（Business Continuity Plan <code>技术</code></p>
+</li>
+<li><p><strong>arboreal</strong> ɑ:’bәuriәl — a. 树的, 栖于树木的\n[医] 树的, 树上生活的 <code>雅思</code></p>
 <blockquote>
-<p>(n. a person who owes a creditor; someone who has the obligation of paying a debt)</p>
+<p>(a. inhabiting or frequenting trees\ns. resembling a tree in form and branching structure)</p>
 </blockquote>
 </li>
-<li><p><strong>centerpiece</strong> ‘sentәpi:s — n. 中心装饰品；放在餐桌中央的摆饰 <code>学术</code></p>
+<li><p><strong>mains</strong>  — n. 电源, 网路, 干线\n[电] 输电干线 <code>技术</code></p>
 <blockquote>
-<p>(n. the central or most important feature\nn. something placed at the center of something else (as on a table))</p>
+<p>(n any very large body of (salt) water\nn a principal pipe in a system that distributes water or gas or electricity or that collects sewage)</p>
 </blockquote>
 </li>
-<li><p><strong>desktop</strong> ‘desktɔp — n. 桌面\n[计] 桌面 <code>日常</code></p>
+<li><p><strong>wingspan</strong> ‘wiŋspæn — n. 翼展 <code>雅思</code></p>
 <blockquote>
-<p>(n. the top of a desk)</p>
+<p>(n. linear distance between the extremities of an airfoil)</p>
 </blockquote>
 </li>
-<li><p><strong>nightfall</strong> ‘naitfɒ:l — n. 傍晚, 黄昏, 日暮 <code>学术</code></p>
+<li><p><strong>poly</strong>  — n. 理工学院, 工艺高等专科学校\n[化] 聚尿苷酸 <code>学术</code></p>
 <blockquote>
-<p>(n the time of day immediately following sunset)</p>
-</blockquote>
-</li>
-<li><p><strong>nucleus</strong> &#x2F;‘nju:kliәs&#x2F; — 核心, 核子, 原子核, 起点\n[计] 核心程序 <code>技术/学术/雅思</code></p>
-<blockquote>
-<p>(n. a part of the cell containing DNA and RNA and responsible for growth and reproduction\nn. the positively charged dens)</p>
+<p>(n. A whitish woolly plant (Teucrium Polium) of the order\n   Labiatae, found throughout the Mediterranean region. The name, with\n   sundry prefixes, is sometimes given to other related species of the)</p>
 </blockquote>
 </li>
 </ol>
 </details>
 
 <hr>
-<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. underwrite the risk</strong> — 承保风险，同意承担风险</p>
+<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. don’t put all your eggs in one basket</strong> — 不要把所有赌注放在一个地方，要分散风险</p>
 <blockquote>
-<p>“Insurance companies underwrite the financial risk.” — Insurance and Finance Magazine, 2021</p>
+<p>“The investment advisor recommended not putting all your eggs in one basket.” — Financial Planning Guide, 2023</p>
 </blockquote>
-<p><strong>2. touch and go</strong> — 情况危急，前景不明</p>
+<p><strong>2. touched a nerve</strong> — 触及敏感话题，惹恼</p>
 <blockquote>
-<p>“For a moment, the surgery was touch and go.” — Medical Crisis Magazine, 2020</p>
+<p>“The comment touched a nerve with the audience.” — Communication Impact Quarterly, 2019</p>
 </blockquote>
-<p><strong>3. zenith of success</strong> — 成功的顶峰</p>
+<p><strong>3. dose escalation</strong> — 剂量递增</p>
 <blockquote>
-<p>“The company reached the zenith of success after launching its flagship product.” — Business History Journal, 2023</p>
+<p>“The dose escalation study identified the maximum tolerated dose.” — Phase 1 Trial Protocol, 2023</p>
 </blockquote>
-<p><strong>4. smooth sailing</strong> — 一帆风顺，顺利</p>
+<p><strong>4. fragment of</strong> — …的片段</p>
 <blockquote>
-<p>“Once we solved the initial problems, it was smooth sailing.” — Project Management Review, 2021</p>
+<p>“What he said was just a fragment of the truth.” — Truth and Consequences, 2021</p>
 </blockquote>
-<p><strong>5. knowledge base</strong> — 知识库，知识基础</p>
+<p><strong>5. the crack of dawn</strong> — 黎明，天刚亮</p>
 <blockquote>
-<p>“Building a comprehensive knowledge base improved training effectiveness significantly.” — Knowledge Management Review, 2023</p>
+<p>“We need to leave at the crack of dawn to beat the traffic.” — Travel Guide Magazine, 2020</p>
 </blockquote>
 <hr>
 <h2 id="🔁-Ebbinghaus-复习"><a href="#🔁-Ebbinghaus-复习" class="headerlink" title="🔁 Ebbinghaus 复习"></a>🔁 Ebbinghaus 复习</h2><h3 id="2026-04-15-批次（第1天复习-·-50词）"><a href="#2026-04-15-批次（第1天复习-·-50词）" class="headerlink" title="2026-04-15 批次（第1天复习 · 50词）"></a>2026-04-15 批次（第1天复习 · 50词）</h3><p>ambassador &#x2F; flood &#x2F; halt &#x2F; northeast &#x2F; pump &#x2F; underground &#x2F; abstinence &#x2F; acute &#x2F; ape &#x2F; arouse &#x2F; baggage &#x2F; bonus &#x2F; cannon &#x2F; chasm &#x2F; chick &#x2F; citizenship &#x2F; clamour &#x2F; compact &#x2F; cosy &#x2F; curfew &#x2F; detached &#x2F; devastation &#x2F; droop &#x2F; endemic &#x2F; fruitful &#x2F; gospel &#x2F; idle &#x2F; indigenous &#x2F; industrialize &#x2F; intertwine &#x2F; ironic &#x2F; monologue &#x2F; obsession &#x2F; obstacle &#x2F; occurrence &#x2F; purify &#x2F; rap &#x2F; reservoir &#x2F; revelation &#x2F; sly &#x2F; soar &#x2F; spotlight &#x2F; stain &#x2F; swift &#x2F; tropical &#x2F; vegetation &#x2F; whichever &#x2F; wicked &#x2F; zoom &#x2F; defile</p>
@@ -938,11 +936,12 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
-              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
               <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
               <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
-              <a href="/tags/%E5%AF%B9%E9%BD%90/" rel="tag"># 对齐</a>
-              <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag"># 序列化</a>
+              <a href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag"># 信号处理</a>
+              <a href="/tags/FFT/" rel="tag"># FFT</a>
+              <a href="/tags/%E9%A2%91%E5%9F%9F/" rel="tag"># 频域</a>
+              <a href="/tags/DSP/" rel="tag"># DSP</a>
           </div>
 
         
