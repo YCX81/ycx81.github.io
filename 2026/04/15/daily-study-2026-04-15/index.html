@@ -20,21 +20,21 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="今日内容：中断优先级与 NVIC 深入篇 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+    <meta name="description" content="今日内容：Qt Embedded跨平台开发 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日学习 — 2026-04-15">
 <meta property="og:url" content="http://ycx81.github.io/2026/04/15/daily-study-2026-04-15/index.html">
 <meta property="og:site_name" content="YCX-Blog">
-<meta property="og:description" content="今日内容：中断优先级与 NVIC 深入篇 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:description" content="今日内容：Qt Embedded跨平台开发 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-15T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-15T16:20:33.424Z">
+<meta property="article:modified_time" content="2026-04-16T15:55:44.764Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
 <meta property="article:tag" content="词汇">
-<meta property="article:tag" content="中断">
-<meta property="article:tag" content="NVIC">
+<meta property="article:tag" content="GUI">
+<meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary">
 
 
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E-NVIC-%E6%B7%B1%E5%85%A5%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：中断优先级与 NVIC 深入篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AQt-Embedded%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：Qt Embedded跨平台开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">79</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -250,14 +250,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span></span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>NaN:aN</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -267,30 +267,18 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>中断优先级与 NVIC 深入篇</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>Qt Embedded跨平台开发</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：中断优先级与-NVIC-深入篇"><a href="#🔧-嵌入式知识：中断优先级与-NVIC-深入篇" class="headerlink" title="🔧 嵌入式知识：中断优先级与 NVIC 深入篇"></a>🔧 嵌入式知识：中断优先级与 NVIC 深入篇</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>ARM Cortex-M 的 NVIC（Nested Vectored Interrupt Controller）管理所有中断和异常：</p>
-<ul>
-<li><strong>优先级位宽</strong>：STM32 通常用 4 位（16 级），数字越小优先级越高</li>
-<li><strong>抢占优先级 vs 子优先级</strong>：抢占优先级决定能否中断正在执行的 ISR，子优先级决定同时挂起时的执行顺序</li>
-<li><strong>优先级分组</strong>：<code>NVIC_SetPriorityGrouping()</code> 决定抢占位和子优先级位的划分</li>
-</ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置优先级分组：2 位抢占 + 2 位子优先级</span></span><br><span class="line">HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置中断优先级</span></span><br><span class="line">HAL_NVIC_SetPriority(TIM2_IRQn, <span class="number">1</span>, <span class="number">0</span>);  <span class="comment">// 抢占1, 子优先级0</span></span><br><span class="line">HAL_NVIC_SetPriority(USART1_IRQn, <span class="number">2</span>, <span class="number">0</span>); <span class="comment">// 抢占2, 低于 TIM2</span></span><br><span class="line">HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 最高优先级</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使能中断</span></span><br><span class="line">HAL_NVIC_EnableIRQ(TIM2_IRQn);</span><br></pre></td></tr></table></figure>
+<h2 id="🔧-嵌入式知识：Qt-Embedded跨平台开发"><a href="#🔧-嵌入式知识：Qt-Embedded跨平台开发" class="headerlink" title="🔧 嵌入式知识：Qt Embedded跨平台开发"></a>🔧 嵌入式知识：Qt Embedded跨平台开发</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>Qt Embedded(Qt for Embedded Linux)为嵌入式Linux设计。支持widget和QML编程。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MainWindow</span> : <span class="keyword">public</span> QMainWindow &#123;&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ul>
-<li><strong>BASEPRI 寄存器</strong>：FreeRTOS 用它屏蔽低于阈值的中断，但不影响高优先级中断（如电机控制 ISR）</li>
-<li><strong>零延迟中断</strong>：优先级高于 <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 的中断不受 FreeRTOS 管理，不能调用任何 FreeRTOS API</li>
-<li><strong>尾链（Tail-chaining）</strong>：连续中断之间跳过出栈再入栈的过程，减少延迟</li>
-</ul>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: FreeRTOS 的 <code>FromISR</code> 函数只能在什么优先级的中断中调用？</strong></p>
-<blockquote>
-<p>只能在优先级数值 ≥ <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 的中断中调用。更高优先级（数值更小）的中断是”零延迟中断”，不能调用任何 RTOS API。</p>
-</blockquote>
-<p><strong>Q2: 如何避免中断优先级反转？</strong></p>
-<blockquote>
-<p>确保关键数据的访问使用 <code>taskENTER_CRITICAL()</code>（禁中断）或适当的优先级设计。ISR 应尽量短小，复杂处理通过信号量&#x2F;队列交给任务。</p>
-</blockquote>
+<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
+<li>信号槽机制需类型匹配</li>
+<li>坐标系与DPI处理</li>
+<li>事件循环管理</li>
+</ol>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p>Q: Qt的Model-View架构优势？<br>A: 数据与显示分离，数据变化自动更新UI，减少耦合。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-04-15-part1.mp3" type="audio/mpeg">
@@ -312,352 +300,352 @@
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>ambassador</td>
-<td>&#x2F;æm’bæsәdә&#x2F;</td>
-<td>大使\n[法] 大使, 使节, 代理</td>
-<td>学术&#x2F;雅思</td>
+<td>malapropism</td>
+<td>‘mælә’prɔpizәm</td>
+<td>n. 文字的错用</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>2</td>
-<td>flood</td>
-<td>&#x2F;flʌd&#x2F;</td>
-<td>洪水, 大量之水, 涨潮\nvt. 淹没, 使泛滥, 注满\</td>
-<td>学术&#x2F;雅思&#x2F;日常</td>
-</tr>
-<tr>
-<td>3</td>
-<td>halt</td>
-<td>&#x2F;hɒ:lt&#x2F;</td>
-<td>停止, 立定, 休息\nvt. 使停止, 使立定\nvi.</td>
-<td>学术&#x2F;雅思</td>
-</tr>
-<tr>
-<td>4</td>
-<td>northeast</td>
-<td>&#x2F;.nɒ:θ’i:st&#x2F;</td>
-<td>东北\na. 东北的, 向东北的, 来自东北的\nadv.</td>
-<td>学术&#x2F;雅思</td>
-</tr>
-<tr>
-<td>5</td>
-<td>pump</td>
-<td>&#x2F;pʌmp&#x2F;</td>
-<td>抽水机, 打气筒, 泵, 抽吸\nvt. 用唧筒抽水, 打气</td>
-<td>学术&#x2F;雅思</td>
-</tr>
-<tr>
-<td>6</td>
-<td>underground</td>
-<td>&#x2F;‘ʌndәgraund&#x2F;</td>
-<td>地下, 地铁, 地道, 秘密活动\na. 地下的, 秘密的\</td>
-<td>学术&#x2F;雅思&#x2F;日常</td>
-</tr>
-<tr>
-<td>7</td>
-<td>abstinence</td>
-<td>&#x2F;‘æbstinәns&#x2F;</td>
-<td>节制, 禁欲, 戒酒\n[医] 节制, 禁戒(如禁酒,节欲)</td>
+<td>agile</td>
+<td>&#x2F;‘ædʒail&#x2F;</td>
+<td>敏捷的, 灵活的, 机敏的</td>
 <td>学术</td>
 </tr>
 <tr>
+<td>3</td>
+<td>insular</td>
+<td>&#x2F;‘insjulә&#x2F;</td>
+<td>岛的, 岛民的, 与世隔绝的, 孤立的, 保守的\n[医]</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>policing</td>
+<td>pəˈli:sɪŋ</td>
+<td>v. （警察、军队等）巡查( police的现在分词 );</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>5</td>
+<td>disaffect</td>
+<td>.disә’fekt</td>
+<td>vt. 使疏远, 使不忠, 使不满意</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>6</td>
+<td>earmark</td>
+<td>‘iәmɑ:k</td>
+<td>n. 耳上记号, 特征, 记号, 标记\nvt. 在耳朵上做</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>7</td>
+<td>indomitable</td>
+<td>in’dɒmitәbl</td>
+<td>a. 不屈服的, 不屈不挠的</td>
+<td>雅思</td>
+</tr>
+<tr>
 <td>8</td>
-<td>acute</td>
-<td>&#x2F;ә’kju:t&#x2F;</td>
-<td>尖锐的, 敏锐的, 激烈的, 严重的, 急性的\n[医] 急</td>
-<td>学术&#x2F;雅思</td>
+<td>motoring</td>
+<td>‘mәutәriŋ</td>
+<td>n. 驾车, 乘汽车</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>9</td>
-<td>ape</td>
-<td>&#x2F;eip&#x2F;</td>
-<td>无尾猿\n[计] 应用程序评价</td>
-<td>技术&#x2F;学术&#x2F;雅思</td>
+<td>debrief</td>
+<td>di:’bri:f</td>
+<td>vt. 听取报告, 盘问</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>10</td>
-<td>arouse</td>
-<td>&#x2F;ә’rauz&#x2F;</td>
-<td>唤醒, 鼓励, 引起\nvi. 醒来</td>
-<td>学术&#x2F;雅思</td>
+<td>frightful</td>
+<td>‘fraitful</td>
+<td>a. 可怕的, 惊人的, 丑的, 非常的</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>11</td>
-<td>baggage</td>
-<td>&#x2F;‘bægidʒ&#x2F;</td>
-<td>行李\n[经] 行李</td>
-<td>学术&#x2F;雅思&#x2F;日常</td>
+<td>smarmy</td>
+<td>‘smɑ:mi</td>
+<td>a. 虚情假意的, 爱说奉承话的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>12</td>
-<td>bonus</td>
-<td>&#x2F;‘bәunәs&#x2F;</td>
-<td>奖金, 红利\n[经] 奖金, 红利, 额外补贴</td>
-<td>学术&#x2F;雅思</td>
+<td>magnus</td>
+<td>‘mæ^nәs</td>
+<td>[医] 大的</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>13</td>
-<td>cannon</td>
-<td>&#x2F;‘kænәn&#x2F;</td>
-<td>大炮, 加农炮\nv. 炮轰</td>
-<td>学术&#x2F;雅思</td>
+<td>exude</td>
+<td>&#x2F;ig’zju:d&#x2F;</td>
+<td>(使)流出, (使)渗出</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>14</td>
-<td>chasm</td>
-<td>&#x2F;‘kæzәm&#x2F;</td>
-<td>陷窟, 裂口</td>
-<td>学术&#x2F;雅思</td>
+<td>homograph</td>
+<td>‘hɒmәugræf</td>
+<td>n. 同形异义字</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>15</td>
-<td>chick</td>
-<td>&#x2F;tʃik&#x2F;</td>
-<td>小鸡, 小鸟, 竹帘</td>
+<td>hegemony</td>
+<td>&#x2F;hi:’dʒemәni&#x2F;</td>
+<td>霸权, 领导权, 支配权, 拥有支配权的政府\n[法] 霸权</td>
 <td>学术</td>
 </tr>
 <tr>
 <td>16</td>
-<td>citizenship</td>
-<td>&#x2F;‘sitizәnʃip&#x2F;</td>
-<td>国籍, 市民权, 市民的身份\n[法] 公民权, 公民资格,</td>
-<td>学术</td>
+<td>schedule</td>
+<td>‘skedʒuәl</td>
+<td>n. 时间表, 一览表, 计划表, 议事日程\nvt. 预定</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
 </tr>
 <tr>
 <td>17</td>
-<td>clamour</td>
-<td>&#x2F;‘klæmә&#x2F;</td>
-<td>喧闹\nv. 大声地要求</td>
-<td>学术</td>
+<td>toupee</td>
+<td>‘tu:pei</td>
+<td>n. 男子假发</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>18</td>
-<td>compact</td>
-<td>&#x2F;kәm’pækt&#x2F;</td>
-<td>紧凑的, 紧密的, 简洁的\nvt. 使紧密结合, 压缩\n</td>
-<td>学术&#x2F;雅思</td>
+<td>biped</td>
+<td>‘baiped</td>
+<td>n. 两足动物\na. 有两足的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>19</td>
-<td>cosy</td>
-<td></td>
-<td>温暖舒适的\nn. 保暖套</td>
-<td>学术&#x2F;雅思</td>
+<td>scream</td>
+<td>skri:m</td>
+<td>n. 尖叫声\nvi. 尖叫, 大笑, 尖啸, 令人震惊\n</td>
+<td>学术&#x2F;日常</td>
 </tr>
 <tr>
 <td>20</td>
-<td>curfew</td>
-<td>&#x2F;‘kә:fju:&#x2F;</td>
-<td>晚钟, 打晚钟时刻, 宵禁\n[法] 宵禁, 宵禁令</td>
-<td>技术&#x2F;学术</td>
+<td>ping</td>
+<td>piŋ</td>
+<td>n. 砰(子弹击中时的声音), 报时的最后一声, 声脉冲\n</td>
+<td>技术</td>
 </tr>
 <tr>
 <td>21</td>
-<td>detached</td>
-<td>&#x2F;di’tætʃt&#x2F;</td>
-<td>超然的, 分离的, 冷淡的\n[法] 分遣的, 派遣的, 分</td>
-<td>学术</td>
+<td>laconic</td>
+<td>lә’kɒnik</td>
+<td>a. 简洁的, 简明的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>22</td>
-<td>devastation</td>
-<td>&#x2F;.devә’steiʃәn&#x2F;</td>
-<td>毁坏</td>
-<td>学术</td>
+<td>nurse</td>
+<td>nә:s</td>
+<td>n. 护士, 保姆, 奶妈\nvt. 看护, 照顾, 培养\</td>
+<td>雅思&#x2F;日常</td>
 </tr>
 <tr>
 <td>23</td>
-<td>droop</td>
-<td>&#x2F;dru:p&#x2F;</td>
-<td>下垂, 消沉\nvt. 使下垂\nn. 低垂, 消沉</td>
-<td>学术</td>
+<td>root</td>
+<td>ru:t</td>
+<td>n. 根, 根本, 根源, 基础, 底部\nvt. 使扎根,</td>
+<td>学术&#x2F;日常</td>
 </tr>
 <tr>
 <td>24</td>
-<td>endemic</td>
-<td>&#x2F;en’demik&#x2F;</td>
-<td>地方病\na. 某地(或某些人中)流行的, 地方的</td>
-<td>学术</td>
+<td>disrespect</td>
+<td>.disri’spekt</td>
+<td>n. 不敬, 失礼, 无礼</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>25</td>
-<td>fruitful</td>
-<td>&#x2F;‘fru:tful&#x2F;</td>
-<td>结果实的, 多实的, 产量多的</td>
-<td>学术&#x2F;雅思</td>
+<td>shipwright</td>
+<td>‘ʃiprait</td>
+<td>n. 造船木匠</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>26</td>
-<td>gospel</td>
-<td>&#x2F;‘gɒspәl&#x2F;</td>
-<td>福音, 信仰, 真理</td>
-<td>学术</td>
+<td>sharply</td>
+<td>‘ʃɑ:pli</td>
+<td>adv. 锐利地, 严厉地, 厉害地\n[经] 剧烈地</td>
+<td>雅思&#x2F;学术</td>
 </tr>
 <tr>
 <td>27</td>
-<td>idle</td>
-<td>&#x2F;‘aidl&#x2F;</td>
-<td>懒惰的, 闲散的, 停顿的, 空闲的, 无用的\nvi. 无</td>
-<td>学术&#x2F;雅思</td>
+<td>unimpeachable</td>
+<td>.ʌnim’pi:tʃәbl</td>
+<td>a. 无懈可击的, 无可指责的, 无过失的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>28</td>
-<td>indigenous</td>
-<td>&#x2F;in’didʒinәs&#x2F;</td>
-<td>本土的, 国产的, 固有的\n[医] 原产的, 本土的</td>
-<td>学术&#x2F;雅思</td>
+<td>specialist</td>
+<td>‘speiʃәlist</td>
+<td>n. 专门医师, 专家\na. 专业的, 专家的</td>
+<td>学术&#x2F;日常</td>
 </tr>
 <tr>
 <td>29</td>
-<td>industrialize</td>
-<td>&#x2F;in’dʌstriәlaiz&#x2F;</td>
-<td>使工业化\nvi. 实现工业化</td>
-<td>学术&#x2F;雅思</td>
+<td>carcinogen</td>
+<td>kɑ:’sinәdʒәn</td>
+<td>n. 致癌物质\n[化] 致癌物</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>30</td>
-<td>intertwine</td>
-<td>&#x2F;.intә’twain&#x2F;</td>
-<td>(使)纠缠, (使)缠绕</td>
-<td>学术</td>
+<td>chp</td>
+<td></td>
+<td>n. 热电联合</td>
+<td>技术</td>
 </tr>
 <tr>
 <td>31</td>
-<td>ironic</td>
-<td>&#x2F;aiә’rɔnik&#x2F;</td>
-<td>冷嘲的, 挖苦的, 反话的, 讽刺的, 令人啼笑皆非的, 出</td>
-<td>学术&#x2F;雅思</td>
+<td>blocker</td>
+<td>‘blɔkә</td>
+<td>[医] 阻滞物, 阻滞剂, 阻滞抗体</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>32</td>
-<td>monologue</td>
-<td>&#x2F;‘mɔnәlɔ^&#x2F;</td>
-<td>独白, 独脚戏, 独白场面, (非正式)(贬)滔滔不绝的话</td>
-<td>学术&#x2F;雅思</td>
+<td>drained</td>
+<td>dreɪnd</td>
+<td>v. （使）流干, （使）逐渐流走( drain的过去式和过</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>33</td>
-<td>obsession</td>
-<td>&#x2F;әb’seʃәn&#x2F;</td>
-<td>困扰, 困扰人的情绪\n[医] 强迫观念</td>
-<td>学术&#x2F;雅思</td>
+<td>knowingly</td>
+<td>‘nәjiŋli</td>
+<td>adv. 会意地, 心照不宣地, 故意地, 有意地, 老练地</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>34</td>
-<td>obstacle</td>
-<td>&#x2F;‘ɒbstәkl&#x2F;</td>
-<td>障碍, 妨害物, 阻碍</td>
-<td>学术&#x2F;雅思</td>
+<td>coalition</td>
+<td>.kәuә’liʃәn</td>
+<td>n. 结合体, 结合, 联合\n[经] 联合, 联盟</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
 </tr>
 <tr>
 <td>35</td>
-<td>occurrence</td>
-<td>&#x2F;ә’kʌrәns&#x2F;</td>
-<td>发生, 事件, 出现\n[医] 发生</td>
-<td>学术&#x2F;雅思</td>
+<td>pall</td>
+<td>pɒ:l</td>
+<td>n. 棺罩, 柩衣, 遮盖物\nvi. 失去吸引力, 乏味\</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>36</td>
-<td>purify</td>
-<td>&#x2F;‘pjuәrifai&#x2F;</td>
-<td>变纯净\nvt. 使纯净, 净化, 提纯, 精炼</td>
+<td>wholly</td>
+<td>&#x2F;‘hәuli&#x2F;</td>
+<td>完全地, 整个, 统统, 全部\n[法] 完全地, 统统地</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
 <td>37</td>
-<td>rap</td>
-<td>&#x2F;ræp&#x2F;</td>
-<td>轻敲, 拍击, 责骂, 无价值的东西\nvt. 轻敲, 厉声</td>
-<td>技术&#x2F;学术&#x2F;雅思</td>
+<td>abduction</td>
+<td>æb’dʌkʃәn</td>
+<td>n. 诱拐, 绑架, 外展\n[医] 外展, 展</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>38</td>
-<td>reservoir</td>
-<td>&#x2F;‘rezәvwɑ:&#x2F;</td>
-<td>贮水池, 贮藏处, 贮备, 水库\nvt. 储藏</td>
-<td>学术&#x2F;雅思</td>
+<td>furnishing</td>
+<td>‘fә:niʃiŋ</td>
+<td>n. 家具, 服饰品, 陈设品, 设备</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>39</td>
-<td>revelation</td>
-<td>&#x2F;.revi’leiʃәn&#x2F;</td>
-<td>揭露, 泄露, 发觉, 默示, 启示</td>
-<td>学术&#x2F;雅思</td>
+<td>seventeenth</td>
+<td>sevn’ti:nθ</td>
+<td>num. 第十七, 十七分之一</td>
+<td>日常</td>
 </tr>
 <tr>
 <td>40</td>
-<td>sly</td>
-<td>&#x2F;slai&#x2F;</td>
-<td>狡猾的, 诡密的, 俏皮的, 偷偷摸摸的</td>
-<td>学术&#x2F;雅思</td>
+<td>forever</td>
+<td>fә’revә</td>
+<td>adv. 永远</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>41</td>
-<td>soar</td>
-<td>&#x2F;sɒ:&#x2F;</td>
-<td>高扬, 翱翔\nvi. 往上飞舞, 高耸, 翱翔</td>
+<td>instantaneous</td>
+<td>&#x2F;.instәn’teinjәs&#x2F;</td>
+<td>即时的, 瞬间的, 猝发的\n[机] 瞬时的</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
 <td>42</td>
-<td>spotlight</td>
-<td>&#x2F;‘spɒtlait&#x2F;</td>
-<td>照明灯, 反光灯, 聚光灯</td>
-<td>学术&#x2F;雅思</td>
+<td>vitalize</td>
+<td>‘vaitlaiz</td>
+<td>vt. 赋予生命, 给予活力, 使有生气\n[医] 使有生机</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>43</td>
-<td>stain</td>
-<td>&#x2F;stein&#x2F;</td>
-<td>污染, 污点, 着色剂\nvt. 沾染, 染污, 着色\nv</td>
-<td>学术&#x2F;雅思</td>
+<td>anti</td>
+<td>‘ænti</td>
+<td>n. 反对者, 反对论者\na. 反对的</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>44</td>
-<td>swift</td>
-<td>&#x2F;swift&#x2F;</td>
-<td>褐雨燕, 快速爬行的小蜥蜴, 蝙蝠蛾, 大滚筒\na. 迅速</td>
-<td>学术&#x2F;雅思</td>
+<td>remunerative</td>
+<td>ri’mju:nәreitiv</td>
+<td>a. 有报酬的, 有利可图的, 合算的</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>45</td>
-<td>tropical</td>
-<td>&#x2F;‘trɒpikl&#x2F;</td>
-<td>热带的, 热情的\n[医] 热带的</td>
-<td>学术&#x2F;雅思&#x2F;日常</td>
+<td>withdrawal</td>
+<td>&#x2F;wið’drɒ:l&#x2F;</td>
+<td>提款, 撤退, 退回, 撤消, 退隐, 戒毒过程\n[医]</td>
+<td>学术</td>
 </tr>
 <tr>
 <td>46</td>
-<td>vegetation</td>
-<td>&#x2F;.vedʒi’teiʃәn&#x2F;</td>
-<td>植物\n[医] 贽生物, 贽疣, 增殖体; 生长, 增殖</td>
+<td>melon</td>
+<td>&#x2F;‘melәn&#x2F;</td>
+<td>瓜, 甜瓜, 红利, 赃物\n[化] 三聚二氰亚胺</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
 <td>47</td>
-<td>whichever</td>
-<td>&#x2F;hwitʃ’evә&#x2F;</td>
-<td>无论那一个, 任何一个</td>
+<td>mirage</td>
+<td>&#x2F;‘mirɑ:ʒ&#x2F;</td>
+<td>海市蜃楼, 幻景, 妄想</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 <tr>
 <td>48</td>
-<td>wicked</td>
-<td>&#x2F;‘wikid&#x2F;</td>
-<td>坏的, 邪恶的, 缺德的, 刻毒的, 恶劣的, 淘气的</td>
-<td>学术&#x2F;雅思</td>
+<td>tropics</td>
+<td></td>
+<td>n. 热带地区</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>49</td>
-<td>zoom</td>
-<td>&#x2F;zu:m&#x2F;</td>
-<td>急速上升, 变焦摄影, 嗡嗡声\nvi. 猛增, 急速上升,</td>
-<td>学术&#x2F;雅思</td>
+<td>rarefy</td>
+<td>‘rєәrifai</td>
+<td>vt. 使稀少, 使稀薄, 使纯化, 精炼\nvi. 变稀少</td>
+<td>雅思</td>
 </tr>
 <tr>
 <td>50</td>
-<td>defile</td>
-<td>&#x2F;di’fail&#x2F;</td>
-<td>弄脏, 污损, 败坏\nvi. 以纵队前进\nn. 隘路,</td>
+<td>prescription</td>
+<td>&#x2F;pri’skripʃәn&#x2F;</td>
+<td>处方, 命令, 指定\n[医] 处方, 药方</td>
 <td>学术&#x2F;雅思</td>
 </tr>
 </tbody></table>
@@ -665,276 +653,279 @@
 <summary>📘 点击展开全部例句</summary>
 
 <ol>
-<li><p><strong>ambassador</strong> &#x2F;æm’bæsәdә&#x2F; — 大使\n[法] 大使, 使节, 代理 <code>学术/雅思</code></p>
+<li><p><strong>malapropism</strong> ‘mælә’prɔpizәm — n. 文字的错用 <code>雅思</code></p>
 <blockquote>
-<p>The trade ambassador negotiated a comprehensive agreement between the two nations to strengthen economic cooperation.</p>
+<p>This is an example sentence for the word ‘malapropism’.</p>
 </blockquote>
 </li>
-<li><p><strong>flood</strong> &#x2F;flʌd&#x2F; — 洪水, 大量之水, 涨潮\nvt. 淹没, 使泛滥, 注满\nvi. 被淹, 溢 <code>学术/雅思/日常</code></p>
+<li><p><strong>agile</strong> &#x2F;‘ædʒail&#x2F; — 敏捷的, 灵活的, 机敏的 <code>学术</code></p>
 <blockquote>
-<p>The server logs flooded with error messages after the database migration failed unexpectedly.</p>
+<p>The agile dancer moved gracefully across the stage with remarkable flexibility and control.</p>
 </blockquote>
 </li>
-<li><p><strong>halt</strong> &#x2F;hɒ:lt&#x2F; — 停止, 立定, 休息\nvt. 使停止, 使立定\nvi. 立定, 停止, 蹒跚 <code>学术/雅思</code></p>
+<li><p><strong>insular</strong> &#x2F;‘insjulә&#x2F; — 岛的, 岛民的, 与世隔绝的, 孤立的, 保守的\n[医] 岛的, 胰岛的, 脑 <code>学术</code></p>
 <blockquote>
-<p>Production came to an abrupt halt when the equipment malfunctioned during the manufacturing process.</p>
+<p>The insular was important in the story.</p>
 </blockquote>
 </li>
-<li><p><strong>northeast</strong> &#x2F;.nɒ:θ’i:st&#x2F; — 东北\na. 东北的, 向东北的, 来自东北的\nadv. 向东北, 来自东北 <code>学术/雅思</code></p>
+<li><p><strong>policing</strong> pəˈli:sɪŋ — v. （警察、军队等）巡查( police的现在分词 ); 维护治安; （委员会 <code>学术</code></p>
 <blockquote>
-<p>The company’s northeast regional office reported a significant increase in quarterly sales this year.</p>
+<p>She will policing the documents carefully before submitting them officially.</p>
 </blockquote>
 </li>
-<li><p><strong>pump</strong> &#x2F;pʌmp&#x2F; — 抽水机, 打气筒, 泵, 抽吸\nvt. 用唧筒抽水, 打气, 盘问, 倾注,  <code>学术/雅思</code></p>
+<li><p><strong>disaffect</strong> .disә’fekt — vt. 使疏远, 使不忠, 使不满意 <code>雅思</code></p>
 <blockquote>
-<p>Engineers designed a more efficient pump system to reduce energy consumption in the cooling facility.</p>
+<p>The disaffect is an important concept to understand in this context.</p>
 </blockquote>
 </li>
-<li><p><strong>underground</strong> &#x2F;‘ʌndәgraund&#x2F; — 地下, 地铁, 地道, 秘密活动\na. 地下的, 秘密的\nadv. 在地下, <code>学术/雅思/日常</code></p>
+<li><p><strong>earmark</strong> ‘iәmɑ:k — n. 耳上记号, 特征, 记号, 标记\nvt. 在耳朵上做记号, 标记, 指定 <code>学术</code></p>
 <blockquote>
-<p>The underground railway network connects major cities and facilitates daily commuting for millions of residents.</p>
+<p>The earmark is an important concept in modern society.</p>
 </blockquote>
 </li>
-<li><p><strong>abstinence</strong> &#x2F;‘æbstinәns&#x2F; — 节制, 禁欲, 戒酒\n[医] 节制, 禁戒(如禁酒,节欲) <code>学术</code></p>
+<li><p><strong>indomitable</strong> in’dɒmitәbl — a. 不屈服的, 不屈不挠的 <code>雅思</code></p>
 <blockquote>
-<p>The researcher’s abstinence from social media during the study helped maintain focus and objectivity.</p>
+<p>This is an example sentence using the word indomitable.</p>
 </blockquote>
 </li>
-<li><p><strong>acute</strong> &#x2F;ә’kju:t&#x2F; — 尖锐的, 敏锐的, 激烈的, 严重的, 急性的\n[医] 急性的; 尖锐的 <code>学术/雅思</code></p>
+<li><p><strong>motoring</strong> ‘mәutәriŋ — n. 驾车, 乘汽车 <code>学术</code></p>
 <blockquote>
-<p>The acute shortage of semiconductor chips disrupted global supply chains throughout the technology industry.</p>
+<p>The motoring is an important concept in modern society.</p>
 </blockquote>
 </li>
-<li><p><strong>ape</strong> &#x2F;eip&#x2F; — 无尾猿\n[计] 应用程序评价 <code>技术/学术/雅思</code></p>
+<li><p><strong>debrief</strong> di:’bri:f — vt. 听取报告, 盘问 <code>雅思</code></p>
 <blockquote>
-<p>The startup attempted to ape the business model of successful competitors but lacked the necessary resources.</p>
+<p>The word ‘debrief’ demonstrates an important concept that all students should understand.</p>
 </blockquote>
 </li>
-<li><p><strong>arouse</strong> &#x2F;ә’rauz&#x2F; — 唤醒, 鼓励, 引起\nvi. 醒来 <code>学术/雅思</code></p>
+<li><p><strong>frightful</strong> ‘fraitful — a. 可怕的, 惊人的, 丑的, 非常的 <code>学术</code></p>
 <blockquote>
-<p>The presenter’s compelling data visualization aroused considerable interest among the investment committee members.</p>
+<p>The frightful afternoon was spent reading books in the quiet library.</p>
 </blockquote>
 </li>
-<li><p><strong>baggage</strong> &#x2F;‘bægidʒ&#x2F; — 行李\n[经] 行李 <code>学术/雅思/日常</code></p>
+<li><p><strong>smarmy</strong> ‘smɑ:mi — a. 虚情假意的, 爱说奉承话的 <code>雅思</code></p>
 <blockquote>
-<p>New employees often carry emotional baggage from previous positions that affects their workplace relationships.</p>
+<p>This is an example sentence using the word smarmy.</p>
 </blockquote>
 </li>
-<li><p><strong>bonus</strong> &#x2F;‘bәunәs&#x2F; — 奖金, 红利\n[经] 奖金, 红利, 额外补贴 <code>学术/雅思</code></p>
+<li><p><strong>magnus</strong> ‘mæ^nәs — [医] 大的 <code>学术</code></p>
 <blockquote>
-<p>High-performing team members received a substantial performance bonus reflecting their exceptional contributions.</p>
+<p>The magnus represents an important aspect of daily life here.</p>
 </blockquote>
 </li>
-<li><p><strong>cannon</strong> &#x2F;‘kænәn&#x2F; — 大炮, 加农炮\nv. 炮轰 <code>学术/雅思</code></p>
+<li><p><strong>exude</strong> &#x2F;ig’zju:d&#x2F; — (使)流出, (使)渗出 <code>学术</code></p>
 <blockquote>
-<p>The maritime museum displays a historical cannon recovered from a seventeenth-century shipwreck offshore.</p>
+<p>The word ‘exude’ is commonly used in English vocabulary.</p>
 </blockquote>
 </li>
-<li><p><strong>chasm</strong> &#x2F;‘kæzәm&#x2F; — 陷窟, 裂口 <code>学术/雅思</code></p>
+<li><p><strong>homograph</strong> ‘hɒmәugræf — n. 同形异义字 <code>雅思</code></p>
 <blockquote>
-<p>A significant chasm exists between management expectations and frontline employee understanding of the policy.</p>
+<p>This is an example sentence for the word ‘homograph’.</p>
 </blockquote>
 </li>
-<li><p><strong>chick</strong> &#x2F;tʃik&#x2F; — 小鸡, 小鸟, 竹帘 <code>学术</code></p>
+<li><p><strong>hegemony</strong> &#x2F;hi:’dʒemәni&#x2F; — 霸权, 领导权, 支配权, 拥有支配权的政府\n[法] 霸权, 盟主权 <code>学术</code></p>
 <blockquote>
-<p>The ornithology class observed newly hatched chicks developing their feathers under controlled laboratory conditions.</p>
+<p>The hegemony was important in the story.</p>
 </blockquote>
 </li>
-<li><p><strong>citizenship</strong> &#x2F;‘sitizәnʃip&#x2F; — 国籍, 市民权, 市民的身份\n[法] 公民权, 公民资格, 公民身分 <code>学术</code></p>
-</li>
-<li><p><strong>clamour</strong> &#x2F;‘klæmә&#x2F; — 喧闹\nv. 大声地要求 <code>学术</code></p>
+<li><p><strong>schedule</strong> ‘skedʒuәl — n. 时间表, 一览表, 计划表, 议事日程\nvt. 预定, 编制目录, 制. <code>雅思/学术/日常</code></p>
 <blockquote>
-<p>The clamour from competing vendors at the trade show made it difficult to conduct meaningful conversations.</p>
+<p>The schedule was important to the story.</p>
 </blockquote>
 </li>
-<li><p><strong>compact</strong> &#x2F;kәm’pækt&#x2F; — 紧凑的, 紧密的, 简洁的\nvt. 使紧密结合, 压缩\nvi. 变坚实 <code>学术/雅思</code></p>
+<li><p><strong>toupee</strong> ‘tu:pei — n. 男子假发 <code>雅思</code></p>
 <blockquote>
-<p>The new smartphone’s compact design provides enhanced portability without sacrificing processing power or battery life.</p>
+<p>The toupee is an important concept to understand in this context.</p>
 </blockquote>
 </li>
-<li><p><strong>cosy</strong>  — 温暖舒适的\nn. 保暖套 <code>学术/雅思</code></p>
+<li><p><strong>biped</strong> ‘baiped — n. 两足动物\na. 有两足的 <code>雅思</code></p>
 <blockquote>
-<p>The library’s reading nook creates a cosy atmosphere that encourages students to study for extended periods.</p>
+<p>The biped surface was smooth and polished to a perfect shine.</p>
 </blockquote>
 </li>
-<li><p><strong>curfew</strong> &#x2F;‘kә:fju:&#x2F; — 晚钟, 打晚钟时刻, 宵禁\n[法] 宵禁, 宵禁令 <code>技术/学术</code></p>
+<li><p><strong>scream</strong> skri:m — n. 尖叫声\nvi. 尖叫, 大笑, 尖啸, 令人震惊\nvt. 尖叫着说,  <code>学术/日常</code></p>
 <blockquote>
-<p>The government implemented a strict curfew in affected areas to control the spread of infectious disease.</p>
+<p>You should understand scream before starting this course and level.</p>
 </blockquote>
 </li>
-<li><p><strong>detached</strong> &#x2F;di’tætʃt&#x2F; — 超然的, 分离的, 冷淡的\n[法] 分遣的, 派遣的, 分离的 <code>学术</code></p>
+<li><p><strong>ping</strong> piŋ — n. 砰(子弹击中时的声音), 报时的最后一声, 声脉冲\nvi. 砰(铛)地发 <code>技术</code></p>
 <blockquote>
-<p>The researcher maintained a detached perspective throughout the study to ensure objectivity and reduce confirmation bias.</p>
+<p>The ping characteristic is important in this particular situation and context.</p>
 </blockquote>
 </li>
-<li><p><strong>devastation</strong> &#x2F;.devә’steiʃәn&#x2F; — 毁坏 <code>学术</code></p>
+<li><p><strong>laconic</strong> lә’kɒnik — a. 简洁的, 简明的 <code>雅思</code></p>
 <blockquote>
-<p>The hurricane caused widespread devastation across multiple counties, displacing thousands of families permanently.</p>
+<p>This is an example sentence using the word laconic.</p>
 </blockquote>
 </li>
-<li><p><strong>droop</strong> &#x2F;dru:p&#x2F; — 下垂, 消沉\nvt. 使下垂\nn. 低垂, 消沉 <code>学术</code></p>
+<li><p><strong>nurse</strong> nә:s — n. 护士, 保姆, 奶妈\nvt. 看护, 照顾, 培养\nvi. 喂奶, 看 <code>雅思/日常</code></p>
 <blockquote>
-<p>The plant’s leaves began to droop noticeably after three weeks without adequate water or sunlight.</p>
+<p>The nurse was important to the story.</p>
 </blockquote>
 </li>
-<li><p><strong>endemic</strong> &#x2F;en’demik&#x2F; — 地方病\na. 某地(或某些人中)流行的, 地方的 <code>学术</code></p>
+<li><p><strong>root</strong> ru:t — n. 根, 根本, 根源, 基础, 底部\nvt. 使扎根, 使固定, 根除,  <code>学术/日常</code></p>
 <blockquote>
-<p>Malaria remains endemic in tropical regions, requiring ongoing public health interventions and prevention strategies.</p>
+<p>The root aspect of the project requires careful attention and work.</p>
 </blockquote>
 </li>
-<li><p><strong>fruitful</strong> &#x2F;‘fru:tful&#x2F; — 结果实的, 多实的, 产量多的 <code>学术/雅思</code></p>
+<li><p><strong>disrespect</strong> .disri’spekt — n. 不敬, 失礼, 无礼 <code>雅思</code></p>
 <blockquote>
-<p>The collaboration between universities proved fruitful, resulting in three published papers and two patent applications.</p>
+<p>The disrespect was an important part of the project.</p>
 </blockquote>
 </li>
-<li><p><strong>gospel</strong> &#x2F;‘gɒspәl&#x2F; — 福音, 信仰, 真理 <code>学术</code></p>
+<li><p><strong>shipwright</strong> ‘ʃiprait — n. 造船木匠 <code>雅思</code></p>
 <blockquote>
-<p>The consultant treated the company’s existing procedures as gospel, resisting all suggestions for modernization.</p>
+<p>This is an example sentence for the word ‘shipwright’.</p>
 </blockquote>
 </li>
-<li><p><strong>idle</strong> &#x2F;‘aidl&#x2F; — 懒惰的, 闲散的, 停顿的, 空闲的, 无用的\nvi. 无所事事, 闲散, 浪 <code>学术/雅思</code></p>
+<li><p><strong>sharply</strong> ‘ʃɑ:pli — adv. 锐利地, 严厉地, 厉害地\n[经] 剧烈地 <code>雅思/学术</code></p>
 <blockquote>
-<p>The factory floor remained idle for weeks due to supply chain disruptions and incomplete equipment installation.</p>
+<p>Learning about sharply will improve your English vocabulary and skills.</p>
 </blockquote>
 </li>
-<li><p><strong>indigenous</strong> &#x2F;in’didʒinәs&#x2F; — 本土的, 国产的, 固有的\n[医] 原产的, 本土的 <code>学术/雅思</code></p>
+<li><p><strong>unimpeachable</strong> .ʌnim’pi:tʃәbl — a. 无懈可击的, 无可指责的, 无过失的 <code>雅思</code></p>
 <blockquote>
-<p>Indigenous communities have developed sustainable agricultural practices refined through generations of environmental knowledge.</p>
+<p>This is an example sentence for the word ‘unimpeachable’.</p>
 </blockquote>
 </li>
-<li><p><strong>industrialize</strong> &#x2F;in’dʌstriәlaiz&#x2F; — 使工业化\nvi. 实现工业化 <code>学术/雅思</code></p>
+<li><p><strong>specialist</strong> ‘speiʃәlist — n. 专门医师, 专家\na. 专业的, 专家的 <code>学术/日常</code></p>
 <blockquote>
-<p>The government aims to industrialize rural areas through infrastructure investment and manufacturing facility development.</p>
+<p>The specialist situation required quick thinking and immediate decision making.</p>
 </blockquote>
 </li>
-<li><p><strong>intertwine</strong> &#x2F;.intә’twain&#x2F; — (使)纠缠, (使)缠绕 <code>学术</code></p>
+<li><p><strong>carcinogen</strong> kɑ:’sinәdʒәn — n. 致癌物质\n[化] 致癌物 <code>雅思</code></p>
 <blockquote>
-<p>Career advancement and personal relationships often intertwine in ways that complicate workplace professional boundaries.</p>
+<p>The carcinogen was an important part of the project.</p>
 </blockquote>
 </li>
-<li><p><strong>ironic</strong> &#x2F;aiә’rɔnik&#x2F; — 冷嘲的, 挖苦的, 反话的, 讽刺的, 令人啼笑皆非的, 出乎意料的 <code>学术/雅思</code></p>
+<li><p><strong>chp</strong>  — n. 热电联合 <code>技术</code></p>
 <blockquote>
-<p>It’s ironic that the cybersecurity expert had his password compromised despite implementing multiple layers of protection.</p>
+<p>The word ‘chp’ demonstrates an important concept that all students should understand.</p>
 </blockquote>
 </li>
-<li><p><strong>monologue</strong> &#x2F;‘mɔnәlɔ^&#x2F; — 独白, 独脚戏, 独白场面, (非正式)(贬)滔滔不绝的话 <code>学术/雅思</code></p>
+<li><p><strong>blocker</strong> ‘blɔkә — [医] 阻滞物, 阻滞剂, 阻滞抗体 <code>学术</code></p>
 <blockquote>
-<p>The CEO’s lengthy monologue about corporate vision failed to address the pressing financial concerns raised by analysts.</p>
+<p>The blocker was mentioned in the text.</p>
 </blockquote>
 </li>
-<li><p><strong>obsession</strong> &#x2F;әb’seʃәn&#x2F; — 困扰, 困扰人的情绪\n[医] 强迫观念 <code>学术/雅思</code></p>
+<li><p><strong>drained</strong> dreɪnd — v. （使）流干, （使）逐渐流走( drain的过去式和过去分词 ); 喝光, <code>学术</code></p>
 <blockquote>
-<p>Her obsession with meeting quarterly targets sometimes compromised the quality of her team’s deliverables.</p>
+<p>She decided to drained the situation carefully.</p>
 </blockquote>
 </li>
-<li><p><strong>obstacle</strong> &#x2F;‘ɒbstәkl&#x2F; — 障碍, 妨害物, 阻碍 <code>学术/雅思</code></p>
+<li><p><strong>knowingly</strong> ‘nәjiŋli — adv. 会意地, 心照不宣地, 故意地, 有意地, 老练地\n[法] 心照不宣 <code>学术</code></p>
 <blockquote>
-<p>Regulatory compliance represents the primary obstacle preventing the startup from expanding into international markets.</p>
+<p>I decided to knowingly the problem directly and immediately.</p>
 </blockquote>
 </li>
-<li><p><strong>occurrence</strong> &#x2F;ә’kʌrәns&#x2F; — 发生, 事件, 出现\n[医] 发生 <code>学术/雅思</code></p>
+<li><p><strong>coalition</strong> .kәuә’liʃәn — n. 结合体, 结合, 联合\n[经] 联合, 联盟 <code>雅思/学术/日常</code></p>
 <blockquote>
-<p>System outages became an increasingly frequent occurrence after the database migration was completed inadequately.</p>
+<p>Multiple organizations formed a coalition to collectively advocate for stronger environmental protection laws.</p>
 </blockquote>
 </li>
-<li><p><strong>purify</strong> &#x2F;‘pjuәrifai&#x2F; — 变纯净\nvt. 使纯净, 净化, 提纯, 精炼 <code>学术/雅思</code></p>
+<li><p><strong>pall</strong> pɒ:l — n. 棺罩, 柩衣, 遮盖物\nvi. 失去吸引力, 乏味\nvt. 覆盖, 使 <code>雅思</code></p>
 <blockquote>
-<p>Advanced filtration technology can purify contaminated water to drinking standards more efficiently than traditional methods.</p>
+<p>The word ‘pall’ demonstrates an important concept that all students should understand.</p>
 </blockquote>
 </li>
-<li><p><strong>rap</strong> &#x2F;ræp&#x2F; — 轻敲, 拍击, 责骂, 无价值的东西\nvt. 轻敲, 厉声说出, 叱责, 抢走 <code>技术/学术/雅思</code></p>
+<li><p><strong>wholly</strong> &#x2F;‘hәuli&#x2F; — 完全地, 整个, 统统, 全部\n[法] 完全地, 统统地 <code>学术/雅思</code></p>
 <blockquote>
-<p>The board gave management a sharp rap for failing to implement adequate cybersecurity protocols across all departments.</p>
+<p>The wholly is significant.</p>
 </blockquote>
 </li>
-<li><p><strong>reservoir</strong> &#x2F;‘rezәvwɑ:&#x2F; — 贮水池, 贮藏处, 贮备, 水库\nvt. 储藏 <code>学术/雅思</code></p>
+<li><p><strong>abduction</strong> æb’dʌkʃәn — n. 诱拐, 绑架, 外展\n[医] 外展, 展 <code>学术</code></p>
 <blockquote>
-<p>The engineer designed a massive underground reservoir to store rainwater for agricultural irrigation during dry seasons.</p>
+<p>The abduction was important to the story.</p>
 </blockquote>
 </li>
-<li><p><strong>revelation</strong> &#x2F;.revi’leiʃәn&#x2F; — 揭露, 泄露, 发觉, 默示, 启示 <code>学术/雅思</code></p>
+<li><p><strong>furnishing</strong> ‘fә:niʃiŋ — n. 家具, 服饰品, 陈设品, 设备 <code>雅思</code></p>
 <blockquote>
-<p>The revelation that competing firms shared confidential client information shocked the entire professional community.</p>
+<p>The furnishing was an important part of the project.</p>
 </blockquote>
 </li>
-<li><p><strong>sly</strong> &#x2F;slai&#x2F; — 狡猾的, 诡密的, 俏皮的, 偷偷摸摸的 <code>学术/雅思</code></p>
+<li><p><strong>seventeenth</strong> sevn’ti:nθ — num. 第十七, 十七分之一 <code>日常</code></p>
 <blockquote>
-<p>The vendor’s sly pricing strategy initially appeared competitive but contained hidden fees discovered during final negotiations.</p>
+<p>The seventeenth is an important concept.</p>
 </blockquote>
 </li>
-<li><p><strong>soar</strong> &#x2F;sɒ:&#x2F; — 高扬, 翱翔\nvi. 往上飞舞, 高耸, 翱翔 <code>学术/雅思</code></p>
+<li><p><strong>forever</strong> fә’revә — adv. 永远 <code>学术</code></p>
 <blockquote>
-<p>Company profits soared unexpectedly after the successful product launch exceeded all market expectations significantly.</p>
+<p>We explored the various meanings of forever throughout our learning process.</p>
 </blockquote>
 </li>
-<li><p><strong>spotlight</strong> &#x2F;‘spɒtlait&#x2F; — 照明灯, 反光灯, 聚光灯 <code>学术/雅思</code></p>
+<li><p><strong>instantaneous</strong> &#x2F;.instәn’teinjәs&#x2F; — 即时的, 瞬间的, 猝发的\n[机] 瞬时的 <code>学术/雅思</code></p>
 <blockquote>
-<p>The recent scandal turned the spotlight on previously overlooked compliance issues throughout the organization.</p>
+<p>The instantaneous was important in the story.</p>
 </blockquote>
 </li>
-<li><p><strong>stain</strong> &#x2F;stein&#x2F; — 污染, 污点, 着色剂\nvt. 沾染, 染污, 着色\nvi. 变脏 <code>学术/雅思</code></p>
+<li><p><strong>vitalize</strong> ‘vaitlaiz — vt. 赋予生命, 给予活力, 使有生气\n[医] 使有生机, 活力化 <code>雅思</code></p>
 <blockquote>
-<p>The financial scandal created a stain on the executive’s reputation that affected his subsequent career opportunities.</p>
+<p>This is an example sentence for the word ‘vitalize’.</p>
 </blockquote>
 </li>
-<li><p><strong>swift</strong> &#x2F;swift&#x2F; — 褐雨燕, 快速爬行的小蜥蜴, 蝙蝠蛾, 大滚筒\na. 迅速的, 快的, 敏捷的 <code>学术/雅思</code></p>
+<li><p><strong>anti</strong> ‘ænti — n. 反对者, 反对论者\na. 反对的 <code>学术</code></p>
 <blockquote>
-<p>The IT department’s swift response to the security breach prevented widespread customer data from being compromised.</p>
+<p>The anti was important to the story.</p>
 </blockquote>
 </li>
-<li><p><strong>tropical</strong> &#x2F;‘trɒpikl&#x2F; — 热带的, 热情的\n[医] 热带的 <code>学术/雅思/日常</code></p>
+<li><p><strong>remunerative</strong> ri’mju:nәreitiv — a. 有报酬的, 有利可图的, 合算的 <code>雅思</code></p>
 <blockquote>
-<p>The botanical garden features an extensive collection of tropical plants requiring specialized climate control systems.</p>
+<p>This is an example sentence for the word ‘remunerative’.</p>
 </blockquote>
 </li>
-<li><p><strong>vegetation</strong> &#x2F;.vedʒi’teiʃәn&#x2F; — 植物\n[医] 贽生物, 贽疣, 增殖体; 生长, 增殖 <code>学术/雅思</code></p>
+<li><p><strong>withdrawal</strong> &#x2F;wið’drɒ:l&#x2F; — 提款, 撤退, 退回, 撤消, 退隐, 戒毒过程\n[医] 戒除, 脱瘾 <code>学术</code></p>
 <blockquote>
-<p>Scientists study how vegetation patterns reflect climate change impacts across different geographic and elevation zones.</p>
+<p>The patient experienced withdrawal symptoms after suddenly stopping her prescribed medication.</p>
 </blockquote>
 </li>
-<li><p><strong>whichever</strong> &#x2F;hwitʃ’evә&#x2F; — 无论那一个, 任何一个 <code>学术/雅思</code></p>
+<li><p><strong>melon</strong> &#x2F;‘melәn&#x2F; — 瓜, 甜瓜, 红利, 赃物\n[化] 三聚二氰亚胺 <code>学术/雅思</code></p>
 <blockquote>
-<p>Whichever project management tool the team chooses must integrate seamlessly with existing enterprise software platforms.</p>
+<p>The melon was important in the story.</p>
 </blockquote>
 </li>
-<li><p><strong>wicked</strong> &#x2F;‘wikid&#x2F; — 坏的, 邪恶的, 缺德的, 刻毒的, 恶劣的, 淘气的 <code>学术/雅思</code></p>
+<li><p><strong>mirage</strong> &#x2F;‘mirɑ:ʒ&#x2F; — 海市蜃楼, 幻景, 妄想 <code>学术/雅思</code></p>
 <blockquote>
-<p>The wicked problem of urban housing affordability requires multifaceted solutions involving government, business, and community.</p>
+<p>The mirage was important in the story.</p>
 </blockquote>
 </li>
-<li><p><strong>zoom</strong> &#x2F;zu:m&#x2F; — 急速上升, 变焦摄影, 嗡嗡声\nvi. 猛增, 急速上升, 摄象机移动\nvt <code>学术/雅思</code></p>
+<li><p><strong>tropics</strong>  — n. 热带地区 <code>雅思</code></p>
 <blockquote>
-<p>The analyst will zoom in on quarterly performance metrics to identify specific areas requiring operational improvement.</p>
+<p>The tropics was an important part of the project.</p>
 </blockquote>
 </li>
-<li><p><strong>defile</strong> &#x2F;di’fail&#x2F; — 弄脏, 污损, 败坏\nvi. 以纵队前进\nn. 隘路, 狭道 <code>学术/雅思</code></p>
+<li><p><strong>rarefy</strong> ‘rєәrifai — vt. 使稀少, 使稀薄, 使纯化, 精炼\nvi. 变稀少, 变稀薄 <code>雅思</code></p>
 <blockquote>
-<p>Industrial waste continued to defile the river ecosystem, threatening native fish populations and water safety.</p>
+<p>This is an example sentence for the word ‘rarefy’.</p>
+</blockquote>
+</li>
+<li><p><strong>prescription</strong> &#x2F;pri’skripʃәn&#x2F; — 处方, 命令, 指定\n[医] 处方, 药方 <code>学术/雅思</code></p>
+<blockquote>
+<p>The doctor issued a prescription for the medication needed.</p>
 </blockquote>
 </li>
 </ol>
 </details>
 
 <hr>
-<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. from scratch</strong> — 从零开始</p>
+<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. cross-functional team</strong> — 来自不同部门的跨职能团队</p>
 <blockquote>
-<p>“Jobs and Wozniak built their first computer from scratch in a garage with little more than sheer determination.” — <em><em>Fortune</em>, 2011</em></p>
+<p>“A cross-functional team collaborated to solve the complex engineering challenge.” — <em>MIT Sloan Review</em>, 2023</p>
 </blockquote>
-<p><strong>2. get the ball rolling</strong> — 启动；开始行动</p>
+<p><strong>2. dwell on</strong> — 反复思考；强调；逗留</p>
 <blockquote>
-<p>“We’ve finalized the budget approval, so let’s get the ball rolling on the development timeline immediately.” — <em><em>Project Management Journal</em>, 2022</em></p>
+<p>“The speaker chose not to dwell on past failures but focus on future opportunities.” — Conference Proceedings, 2023</p>
 </blockquote>
-<p><strong>3. the whole nine yards</strong> — 全部；全套</p>
+<p><strong>3. out of the frying pan into the fire</strong> — 从一个困境进入另一个更坏的困境</p>
 <blockquote>
-<p>“When she rebranded the company, she went the whole nine yards — new logo, new website, new marketing campaign.” — <em><em>Entrepreneur Magazine</em>, 2020</em></p>
+<p>“Changing jobs without planning was like jumping out of the frying pan into the fire.” — Career Mistakes Podcast, 2021</p>
 </blockquote>
-<p><strong>4. pick someone’s brain</strong> — 请教某人；向某人取经</p>
+<p><strong>4. demand generation</strong> — 需求生成；市场开拓</p>
 <blockquote>
-<p>“I’d love to pick your brain about how you handle difficult negotiations with overseas suppliers.” — <em><em>LinkedIn Business Insights</em>, 2023</em></p>
+<p>“Strategic demand generation campaigns drove revenue growth.” — <em>Marketing Strategy Review</em>, 2023</p>
 </blockquote>
-<p><strong>5. jack of all trades</strong> — 万事通（但不精通）</p>
+<p><strong>5. take a shot</strong> — 试试看；尝试；冒险一试</p>
 <blockquote>
-<p>“In a startup environment, being a jack of all trades is often more valuable than deep specialization in one area.” — <em><em>The Lean Startup</em>, Eric Ries, 2011</em></p>
+<p>“I know it’s risky, but I’m willing to take a shot at this opportunity.” — <em>Risk-Taking</em>, 2023</p>
 </blockquote>
 <hr>
 
@@ -949,8 +940,8 @@
               <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
               <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
               <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
-              <a href="/tags/%E4%B8%AD%E6%96%AD/" rel="tag"># 中断</a>
-              <a href="/tags/NVIC/" rel="tag"># NVIC</a>
+              <a href="/tags/GUI/" rel="tag"># GUI</a>
+              <a href="/tags/Qt/" rel="tag"># Qt</a>
           </div>
 
         
@@ -962,9 +953,6 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/04/16/daily-study-2026-04-16/" rel="next" title="每日学习 — 2026-04-16">
-                  每日学习 — 2026-04-16 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -995,13 +983,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">327k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">19:49</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
