@@ -817,6 +817,13 @@
   </url>
   
   <url>
+    <loc>http://ycx81.github.io/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://ycx81.github.io/tags/SVPWM/</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -1027,21 +1034,35 @@
   </url>
   
   <url>
-    <loc>http://ycx81.github.io/tags/GUI/</loc>
+    <loc>http://ycx81.github.io/tags/%E5%8A%9F%E8%80%97/</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://ycx81.github.io/tags/Qt/</loc>
+    <loc>http://ycx81.github.io/tags/%E7%94%B5%E6%BA%90/</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://ycx81.github.io/tags/%E9%80%9A%E4%BF%A1/</loc>
+    <loc>http://ycx81.github.io/tags/IIR/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E6%BB%A4%E6%B3%A2/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ycx81.github.io/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
