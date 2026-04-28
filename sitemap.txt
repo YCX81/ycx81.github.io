@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/04/28/daily-study-2026-04-28/
 http://ycx81.github.io/2026/04/27/daily-study-2026-04-27/
 http://ycx81.github.io/2026/04/26/daily-study-2026-04-26/
 http://ycx81.github.io/2026/04/25/daily-study-2026-04-25/
@@ -174,6 +175,10 @@ http://ycx81.github.io/tags/WCET/
 http://ycx81.github.io/tags/%E5%88%86%E6%9E%90/
 http://ycx81.github.io/tags/%E4%B8%B2%E5%8F%A3/
 http://ycx81.github.io/tags/%E9%80%9A%E4%BF%A1/
+http://ycx81.github.io/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/
+http://ycx81.github.io/tags/%E5%86%85%E6%A0%B8%E9%A9%B1%E5%8A%A8/
+http://ycx81.github.io/tags/%E7%AC%A6%E5%8F%B7%E5%AF%BC%E5%87%BA/
+http://ycx81.github.io/tags/insmod/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
