@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/05/01/daily-study-2026-05-01/
 http://ycx81.github.io/2026/04/30/daily-study-2026-04-30/
 http://ycx81.github.io/2026/04/29/daily-study-2026-04-29/
 http://ycx81.github.io/2026/04/28/daily-study-2026-04-28/
@@ -185,6 +186,8 @@ http://ycx81.github.io/tags/%E5%AE%89%E5%85%A8/
 http://ycx81.github.io/tags/ISO-26262/
 http://ycx81.github.io/tags/ASIL/
 http://ycx81.github.io/tags/%E8%AF%8A%E6%96%AD/
+http://ycx81.github.io/tags/%E7%B2%BE%E5%BA%A6/
+http://ycx81.github.io/tags/%E5%AE%9A%E7%82%B9/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
