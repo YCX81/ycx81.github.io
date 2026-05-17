@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/05/17/daily-study-2026-05-17/
 http://ycx81.github.io/2026/05/16/daily-study-2026-05-16/
 http://ycx81.github.io/2026/05/15/daily-study-2026-05-15/
 http://ycx81.github.io/2026/05/14/daily-study-2026-05-14/
@@ -242,6 +243,8 @@ http://ycx81.github.io/tags/namespace/
 http://ycx81.github.io/tags/%E4%BC%A0%E6%84%9F%E5%99%A8/
 http://ycx81.github.io/tags/IMU/
 http://ycx81.github.io/tags/%E8%BF%90%E5%8A%A8/
+http://ycx81.github.io/tags/LDO/
+http://ycx81.github.io/tags/DC-DC/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
