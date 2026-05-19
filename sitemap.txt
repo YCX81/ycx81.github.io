@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/05/19/daily-study-2026-05-19/
 http://ycx81.github.io/2026/05/18/daily-study-2026-05-18/
 http://ycx81.github.io/2026/05/17/daily-study-2026-05-17/
 http://ycx81.github.io/2026/05/16/daily-study-2026-05-16/
@@ -249,6 +250,10 @@ http://ycx81.github.io/tags/DC-DC/
 http://ycx81.github.io/tags/NOR/
 http://ycx81.github.io/tags/NAND/
 http://ycx81.github.io/tags/Flash%E7%89%B9%E6%80%A7/
+http://ycx81.github.io/tags/RISC-V/
+http://ycx81.github.io/tags/%E6%8C%87%E4%BB%A4%E9%9B%86/
+http://ycx81.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/
+http://ycx81.github.io/tags/%E5%A4%84%E7%90%86%E5%99%A8/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
