@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：电源时序与上电启动流程 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-05-28">
+<meta property="og:url" content="http://ycx81.github.io/2026/05/28/daily-study-2026-05-28/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：电源时序与上电启动流程 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-28T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-28T00:02:40.071Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="power">
+<meta property="article:tag" content="sequencing">
+<meta property="article:tag" content="startup">
+<meta property="article:tag" content="bootup">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/05/28/daily-study-2026-05-28/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/05/28/daily-study-2026-05-28/","path":"2026/05/28/daily-study-2026-05-28/","title":"每日学习 — 2026-05-28"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-05-28 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E7%94%B5%E6%BA%90%E6%97%B6%E5%BA%8F%E4%B8%8E%E4%B8%8A%E7%94%B5%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：电源时序与上电启动流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">177</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/05/28/daily-study-2026-05-28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-05-28 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-05-28
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-28 09:00:00" itemprop="dateCreated datePublished" datetime="2026-05-28T09:00:00+08:00">2026-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>电源时序与上电启动流程</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：电源时序与上电启动流程"><a href="#🔧-嵌入式知识：电源时序与上电启动流程" class="headerlink" title="🔧 嵌入式知识：电源时序与上电启动流程"></a>🔧 嵌入式知识：电源时序与上电启动流程</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>电源时序(Power Sequencing)规定芯片各供电域的上电顺序和延迟时间，确保电源稳定性和无启动故障。典型流程为：模拟电源→核心电压→I&#x2F;O电源，每个阶段需满足上升时间、稳定时间等时间约束。上电启动(power-up sequencing)还包括复位信号管理、时钟稳定检测和固件加载，多个电源域的不当顺序会导致电路进入未定义状态或损坏。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 电源时序管理(PMIC通信)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pmic_regulator</span> &#123;</span></span><br><span class="line">    <span class="type">uint8_t</span> id;          <span class="comment">// 电源输出ID</span></span><br><span class="line">    <span class="type">uint32_t</span> voltage;    <span class="comment">// 目标电压(mV)</span></span><br><span class="line">    <span class="type">uint32_t</span> ramp_rate;  <span class="comment">// 上升速率(mV/us)</span></span><br><span class="line">    <span class="type">uint32_t</span> enable_delay; <span class="comment">// 启用后延迟(us)</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PMIC I2C通信</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">pmic_write_reg</span><span class="params">(<span class="type">uint8_t</span> addr, <span class="type">uint8_t</span> reg, <span class="type">uint8_t</span> value)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">pmic_read_reg</span><span class="params">(<span class="type">uint8_t</span> addr, <span class="type">uint8_t</span> reg, <span class="type">uint8_t</span> *value)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 电源时序启动</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">power_sequencing_startup</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pmic_regulator</span> <span class="title">regulators</span>[] =</span> &#123;</span><br><span class="line">        &#123;<span class="number">0</span>, <span class="number">1800</span>, <span class="number">1</span>, <span class="number">50</span>&#125;,   <span class="comment">// VDDIO: 1.8V, 1mV/us, 50us延迟</span></span><br><span class="line">        &#123;<span class="number">1</span>, <span class="number">1200</span>, <span class="number">2</span>, <span class="number">100</span>&#125;,  <span class="comment">// VDDCORE: 1.2V, 2mV/us, 100us延迟</span></span><br><span class="line">        &#123;<span class="number">2</span>, <span class="number">3300</span>, <span class="number">1</span>, <span class="number">50</span>&#125;,   <span class="comment">// VDDA: 3.3V, 1mV/us, 50us延迟</span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第1步: 启用VDDIO</span></span><br><span class="line">    pmic_write_reg(<span class="number">0x50</span>, <span class="number">0x10</span>, <span class="number">0x01</span>);  <span class="comment">// 启用输出0</span></span><br><span class="line">    delay_us(regulators[<span class="number">0</span>].enable_delay);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第2步: 启用VDDCORE</span></span><br><span class="line">    pmic_write_reg(<span class="number">0x50</span>, <span class="number">0x11</span>, <span class="number">0x01</span>);  <span class="comment">// 启用输出1</span></span><br><span class="line">    delay_us(regulators[<span class="number">1</span>].enable_delay);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第3步: 启用VDDA</span></span><br><span class="line">    pmic_write_reg(<span class="number">0x50</span>, <span class="number">0x12</span>, <span class="number">0x01</span>);  <span class="comment">// 启用输出2</span></span><br><span class="line">    delay_us(regulators[<span class="number">2</span>].enable_delay);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第4步: 等待电源稳定</span></span><br><span class="line">    delay_us(<span class="number">200</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第5步: 释放复位信号</span></span><br><span class="line">    release_reset();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 电源故障监测</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">monitor_power_rails</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">uint8_t</span> status;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 读取电源故障状态</span></span><br><span class="line">    pmic_read_reg(<span class="number">0x50</span>, <span class="number">0x20</span>, &amp;status);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ((status &amp; <span class="number">0x01</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// VDDIO欠压</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((status &amp; <span class="number">0x02</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// VDDCORE欠压</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
+<li>上电顺序与优先级：某些电压域必须先上电为其他域供电(如基准电压)，顺序错误导致启动失败；文档需明确声明依赖关系</li>
+<li>复位信号与时钟的关系：复位信号必须在电压稳定后释放，时钟信号必须在复位释放后稳定；时序混乱导致ROM代码执行异常</li>
+<li>PMIC与PMU的区别：PMIC是电源管理IC(集成多路输出)，PMU是电源管理单元(可在SoC内集成)，通信接口和时序要求不同</li>
+</ol>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q: 为何电源时序的上升时间(ramp-rate)需要控制，过快或过慢的后果？</strong><br>A: 上升过快导致瞬间浪涌电流冲击电源、输出电感和电容；过慢延长启动时间。规范上升时间防止芯片内部产生过大过渡瞬间噪声，影响模拟电路工作。</p>
+<p><strong>Q: 多个PMIC输出的电源时序如何设计以保证稳定性？</strong><br>A: 遵循数据手册推荐顺序(通常内核&gt;I&#x2F;O&gt;模拟)；采用可编程PMIC设置不同斜率和延迟；在电源间配置去耦电容；监测PG(Power Good)信号验证每级都正常工作。</p>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-05-28-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-05-28-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>disfigure</td>
+<td>&#x2F;dis’fi^ә&#x2F;</td>
+<td>毁损…的外形, 玷污, 损害, 毁损…的容貌\n[法</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>uncertainty</td>
+<td>&#x2F;.ʌn’sә:tnti&#x2F;</td>
+<td>n. 不确定, 不可靠, 不确定的事物\n[化] 不确定度</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>3</td>
+<td>extinction</td>
+<td>&#x2F;ik’stiŋkʃәn&#x2F;</td>
+<td>n. 消失, 消灭, 废止\n[化] 消光; 熄灭</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>practicable</td>
+<td>&#x2F;‘præktikәbl&#x2F;</td>
+<td>可实行的, 可做的, 可用的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>5</td>
+<td>proceed</td>
+<td>&#x2F;prәu’si:d&#x2F;</td>
+<td>vi. 继续进行, 进行, 开始, 发出, 起诉\n[法]</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>6</td>
+<td>speck</td>
+<td>&#x2F;spek&#x2F;</td>
+<td>n. 斑点, 有斑点的东西, 污点, 缺点, 微粒, 肥肉\</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>7</td>
+<td>plug</td>
+<td>&#x2F;plʌg&#x2F;</td>
+<td>塞子, 栓, 插头\nvt. 插入, 塞住, 接插头\nvi</td>
+<td>学术&#x2F;雅思&#x2F;日常</td>
+</tr>
+<tr>
+<td>8</td>
+<td>eager</td>
+<td>&#x2F;‘i:gә&#x2F;</td>
+<td>热心的, 渴望的, 热望的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>9</td>
+<td>swan</td>
+<td>&#x2F;swɒn&#x2F;</td>
+<td>天鹅, 天鹅星座, 有才华的诗人\nvi. 闲荡, 蜿蜒而行</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>10</td>
+<td>encomium</td>
+<td>&#x2F;en’kәumjәm&#x2F;</td>
+<td>n. 赞辞, 称赞, 赞美</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>11</td>
+<td>clinician</td>
+<td>&#x2F;kli’niʃәn&#x2F;</td>
+<td>[医] 临床医师, 临证医师</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>whimsical</td>
+<td>&#x2F;hwimzikl&#x2F;</td>
+<td>a. 怪念头多的, 反复无常的, 古怪的, 异想天开的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>13</td>
+<td>cinderella</td>
+<td>&#x2F;sindә’relә&#x2F;</td>
+<td>n. 灰姑娘</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>gaggle</td>
+<td>&#x2F;gægl&#x2F;</td>
+<td>n. 鹅群, 一群, 嘎嘎叫声\nvi. 嘎嘎地叫</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>15</td>
+<td>atmospheric</td>
+<td>&#x2F;ætmәs’ferik&#x2F;</td>
+<td>大气的\n[医] 大气的; 大气压的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>16</td>
+<td>cheesecake</td>
+<td>&#x2F;tʃi:zkeik&#x2F;</td>
+<td>n. 干酪饼, 半裸体的女人照片</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>conceit</td>
+<td>&#x2F;kәn’si:t&#x2F;</td>
+<td>自负, 空想, 狂妄</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>asbestos</td>
+<td>&#x2F;æs’bestɒs&#x2F;</td>
+<td>n. 石棉\n[化] 石棉</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>screech</td>
+<td>&#x2F;skri:tʃ&#x2F;</td>
+<td>n. 尖声喊叫, 尖叫声, 煞车声\nvt. 尖声讲\nvi</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>turquoise</td>
+<td>&#x2F;tә:kwɒiz&#x2F;</td>
+<td>n. 绿松石, 绿松石色</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>21</td>
+<td>pyjamas</td>
+<td>&#x2F;pә’dʒɑ:mәs&#x2F;</td>
+<td>n. 睡衣裤, 宽松裤</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>22</td>
+<td>climate</td>
+<td>&#x2F;klaimit&#x2F;</td>
+<td>n. 气候, 社会趋势, 气候区\n[医] 气候</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>23</td>
+<td>ordination</td>
+<td>&#x2F;.ɒ:di’neiʃәn&#x2F;</td>
+<td>n. 任命, 授神职(礼), 颁布法令, 排列</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>blunder</td>
+<td>&#x2F;‘blʌndә&#x2F;</td>
+<td>大错, 大失策\nvi. 失策, 跌跌撞撞地走, 犯错\nv</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>25</td>
+<td>breakdown</td>
+<td>&#x2F;‘breikdaun&#x2F;</td>
+<td>崩溃, 故障\n[化] 事故; 击穿</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>26</td>
+<td>chronological</td>
+<td>&#x2F;, krɔnә’lɔdʒikәl&#x2F;</td>
+<td>年代学的, 按时间顺序的, 按照年月顺序的\n[计] 编年的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>27</td>
+<td>sweet</td>
+<td>&#x2F;swi:t&#x2F;</td>
+<td>n. 甜蜜, 糖果, 情人\na. 甜的, 芳香的, 悦耳的</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>28</td>
+<td>bedlam</td>
+<td>&#x2F;bedlәm&#x2F;</td>
+<td>n. 混乱, 喧闹, 疯人院\n[医] 精神病院, 精神病</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>29</td>
+<td>expense</td>
+<td>&#x2F;ik’spens&#x2F;</td>
+<td>n. 费用, 代价, 开支, 损失\n[经] 费用, 开支,</td>
+<td>学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>30</td>
+<td>wheeze</td>
+<td>&#x2F;hwi:z&#x2F;</td>
+<td>vi. 喘气\nvt. 喘息着说\nn. 喘气声, 喘息</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>31</td>
+<td>ardent</td>
+<td>&#x2F;‘ɑ:dnt&#x2F;</td>
+<td>热心的, 激动的, 燃烧般的\n[医] 灼热的; 热心的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>32</td>
+<td>ironic</td>
+<td>&#x2F;aiә’rɔnik&#x2F;</td>
+<td>冷嘲的, 挖苦的, 反话的, 讽刺的, 令人啼笑皆非的, 出</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>33</td>
+<td>generalized</td>
+<td>&#x2F;dʒenәrәlaizd&#x2F;</td>
+<td>a. 广义的, 普遍的；无显著特点的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>34</td>
+<td>narcotic</td>
+<td>&#x2F;nɑ:’kɒtik&#x2F;</td>
+<td>麻醉药, 镇静剂\na. 麻醉的, 催眠的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>35</td>
+<td>dirt</td>
+<td>&#x2F;dә:t&#x2F;</td>
+<td>n. 污垢, 泥土\n[化] 污垢</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>36</td>
+<td>emphasis</td>
+<td>&#x2F;emfәsis&#x2F;</td>
+<td>n. 强调, 加强, 重点, 强语气</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>37</td>
+<td>expertise</td>
+<td>&#x2F;.ekspә:’ti:z&#x2F;</td>
+<td>n. 专家意见, 专门技术\n[法] 专门知识, 专家意见</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>seafood</td>
+<td>&#x2F;‘si<span class="github-emoji" alias="fu" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f595.png?v8">&amp;#x1f595;</span>d&#x2F;</td>
+<td>海味, 海鲜, 鱼类</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>39</td>
+<td>communicator</td>
+<td>&#x2F;kә’mju:nikeitә&#x2F;</td>
+<td>n. 传播者, 通信装置, 列车内通话装置</td>
+<td>技术</td>
+</tr>
+<tr>
+<td>40</td>
+<td>ventral</td>
+<td>&#x2F;ventrәl&#x2F;</td>
+<td>a. 腹的, 腹部的, 腹面的\nn. 腹鳍</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>41</td>
+<td>demolish</td>
+<td>&#x2F;di’mɒliʃ&#x2F;</td>
+<td>毁坏, 破坏, 粉碎</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>42</td>
+<td>underside</td>
+<td>&#x2F;ʌndәsaid&#x2F;</td>
+<td>n. 下面, 下侧, 底面</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>43</td>
+<td>grocer</td>
+<td>&#x2F;‘grәusә&#x2F;</td>
+<td>食品商</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>44</td>
+<td>silent</td>
+<td>&#x2F;sailәnt&#x2F;</td>
+<td>a. 沉默的, 安静的, 无声的, 静止的\n[医] 静止的</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>45</td>
+<td>bleed</td>
+<td>&#x2F;bli:d&#x2F;</td>
+<td>流血, 悲痛, 渗出\nvt. 使出血, 榨取</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>46</td>
+<td>ashamed</td>
+<td>&#x2F;ә’ʃeimd&#x2F;</td>
+<td>惭愧的, 羞耻的</td>
+<td>学术&#x2F;雅思&#x2F;日常</td>
+</tr>
+<tr>
+<td>47</td>
+<td>loading</td>
+<td>&#x2F;lәudiŋ&#x2F;</td>
+<td>n. 装载, 装填\n[化] 填充剂; 填料; 装载; 装料</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>48</td>
+<td>vegetable</td>
+<td>&#x2F;vedʒәtәbl&#x2F;</td>
+<td>n. 蔬菜, 植物, 无精打采之人\na. 蔬菜的, 植物的</td>
+<td>雅思&#x2F;日常</td>
+</tr>
+<tr>
+<td>49</td>
+<td>caprice</td>
+<td>&#x2F;kә’pri:s&#x2F;</td>
+<td>n. 反复无常, 多变, 任性</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>50</td>
+<td>provender</td>
+<td>&#x2F;prɒvәndә&#x2F;</td>
+<td>n. 粮草, 秣, 食物</td>
+<td>雅思</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>disfigure</strong> &#x2F;dis’fi^ә&#x2F; — 毁损…的外形, 玷污, 损害, 毁损…的容貌\n[法] 损毁容颜, 破相 <code>学术</code></p>
+<blockquote>
+<p>The accident left scars that would permanently disfigure the side of his face.</p>
+</blockquote>
+</li>
+<li><p><strong>uncertainty</strong> &#x2F;.ʌn’sә:tnti&#x2F; — n. 不确定, 不可靠, 不确定的事物\n[化] 不确定度 <code>日常</code></p>
+<blockquote>
+<p>His uncertainty behavior surprised all of his friends at the party.</p>
+</blockquote>
+</li>
+<li><p><strong>extinction</strong> &#x2F;ik’stiŋkʃәn&#x2F; — n. 消失, 消灭, 废止\n[化] 消光; 熄灭 <code>雅思/学术</code></p>
+<blockquote>
+<p>Learning about extinction will improve your English vocabulary and skills.</p>
+</blockquote>
+</li>
+<li><p><strong>practicable</strong> &#x2F;‘præktikәbl&#x2F; — 可实行的, 可做的, 可用的 <code>学术/雅思</code></p>
+<blockquote>
+<p>The practicable was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>proceed</strong> &#x2F;prәu’si:d&#x2F; — vi. 继续进行, 进行, 开始, 发出, 起诉\n[法] 所得, 收入, 收益 <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>Please proceed with the presentation after the introduction.</p>
+</blockquote>
+</li>
+<li><p><strong>speck</strong> &#x2F;spek&#x2F; — n. 斑点, 有斑点的东西, 污点, 缺点, 微粒, 肥肉\nvt. 使有斑点 <code>雅思</code></p>
+<blockquote>
+<p>The speck in this context demonstrates a clear meaningful relationship today.</p>
+</blockquote>
+</li>
+<li><p><strong>plug</strong> &#x2F;plʌg&#x2F; — 塞子, 栓, 插头\nvt. 插入, 塞住, 接插头\nvi. 被塞住 <code>学术/雅思/日常</code></p>
+<blockquote>
+<p>The plug was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>eager</strong> &#x2F;‘i:gә&#x2F; — 热心的, 渴望的, 热望的 <code>学术/雅思</code></p>
+<blockquote>
+<p>The eager student volunteered first and asked thoughtful questions during class discussion.</p>
+</blockquote>
+</li>
+<li><p><strong>swan</strong> &#x2F;swɒn&#x2F; — 天鹅, 天鹅星座, 有才华的诗人\nvi. 闲荡, 蜿蜒而行 <code>学术/雅思</code></p>
+<blockquote>
+<p>A white swan glided on the lake.</p>
+</blockquote>
+</li>
+<li><p><strong>encomium</strong> &#x2F;en’kәumjәm&#x2F; — n. 赞辞, 称赞, 赞美 <code>雅思</code></p>
+<blockquote>
+<p>The encomium is an important concept to understand in this context.</p>
+</blockquote>
+</li>
+<li><p><strong>clinician</strong> &#x2F;kli’niʃәn&#x2F; — [医] 临床医师, 临证医师 <code>学术</code></p>
+<blockquote>
+<p>The word clinician describes something important in daily life.</p>
+</blockquote>
+</li>
+<li><p><strong>whimsical</strong> &#x2F;hwimzikl&#x2F; — a. 怪念头多的, 反复无常的, 古怪的, 异想天开的 <code>雅思</code></p>
+<blockquote>
+<p>That whimsical quality impressed everyone.</p>
+</blockquote>
+</li>
+<li><p><strong>cinderella</strong> &#x2F;sindә’relә&#x2F; — n. 灰姑娘 <code>学术</code></p>
+<blockquote>
+<p>The cinderella was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>gaggle</strong> &#x2F;gægl&#x2F; — n. 鹅群, 一群, 嘎嘎叫声\nvi. 嘎嘎地叫 <code>雅思</code></p>
+<blockquote>
+<p>A gaggle of geese flew overhead.</p>
+</blockquote>
+</li>
+<li><p><strong>atmospheric</strong> &#x2F;ætmәs’ferik&#x2F; — 大气的\n[医] 大气的; 大气压的 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘atmospheric’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>cheesecake</strong> &#x2F;tʃi:zkeik&#x2F; — n. 干酪饼, 半裸体的女人照片 <code>学术</code></p>
+<blockquote>
+<p>The cheesecake was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>conceit</strong> &#x2F;kәn’si:t&#x2F; — 自负, 空想, 狂妄 <code>学术</code></p>
+<blockquote>
+<p>The word ‘conceit’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>asbestos</strong> &#x2F;æs’bestɒs&#x2F; — n. 石棉\n[化] 石棉 <code>学术</code></p>
+<blockquote>
+<p>The asbestos is an important concept in modern society.</p>
+</blockquote>
+</li>
+<li><p><strong>screech</strong> &#x2F;skri:tʃ&#x2F; — n. 尖声喊叫, 尖叫声, 煞车声\nvt. 尖声讲\nvi. 发出尖声 <code>学术</code></p>
+<blockquote>
+<p>The screech was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>turquoise</strong> &#x2F;tә:kwɒiz&#x2F; — n. 绿松石, 绿松石色 <code>雅思</code></p>
+<blockquote>
+<p>The turquoise was an important part of the project.</p>
+</blockquote>
+</li>
+<li><p><strong>pyjamas</strong> &#x2F;pә’dʒɑ:mәs&#x2F; — n. 睡衣裤, 宽松裤 <code>学术</code></p>
+<blockquote>
+<p>The word ‘pyjamas’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>climate</strong> &#x2F;klaimit&#x2F; — n. 气候, 社会趋势, 气候区\n[医] 气候 <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>The climate was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>ordination</strong> &#x2F;.ɒ:di’neiʃәn&#x2F; — n. 任命, 授神职(礼), 颁布法令, 排列 <code>学术</code></p>
+<blockquote>
+<p>The ordination is an important concept in modern society today.</p>
+</blockquote>
+</li>
+<li><p><strong>blunder</strong> &#x2F;‘blʌndә&#x2F; — 大错, 大失策\nvi. 失策, 跌跌撞撞地走, 犯错\nvt. 做错 <code>学术/雅思</code></p>
+<blockquote>
+<p>His embarrassing blunder during the presentation amused the audience.</p>
+</blockquote>
+</li>
+<li><p><strong>breakdown</strong> &#x2F;‘breikdaun&#x2F; — 崩溃, 故障\n[化] 事故; 击穿 <code>学术/雅思</code></p>
+<blockquote>
+<p>The mechanical breakdown halted production for several days, requiring expensive repairs from specialized technicians.</p>
+</blockquote>
+</li>
+<li><p><strong>chronological</strong> &#x2F;, krɔnә’lɔdʒikәl&#x2F; — 年代学的, 按时间顺序的, 按照年月顺序的\n[计] 编年的, 按年月日顺序的 <code>学术/雅思</code></p>
+<blockquote>
+<p>List the events in chronological order from earliest to latest.</p>
+</blockquote>
+</li>
+<li><p><strong>sweet</strong> &#x2F;swi:t&#x2F; — n. 甜蜜, 糖果, 情人\na. 甜的, 芳香的, 悦耳的, 漂亮的, 和蔼的 <code>日常</code></p>
+<blockquote>
+<p>The sweet dessert was enjoyed by everyone at the table.</p>
+</blockquote>
+</li>
+<li><p><strong>bedlam</strong> &#x2F;bedlәm&#x2F; — n. 混乱, 喧闹, 疯人院\n[医] 精神病院, 精神病 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘bedlam’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>expense</strong> &#x2F;ik’spens&#x2F; — n. 费用, 代价, 开支, 损失\n[经] 费用, 开支, 将支出转为费用 <code>学术/日常</code></p>
+<blockquote>
+<p>The definition of expense appears in most standard English dictionaries.</p>
+</blockquote>
+</li>
+<li><p><strong>wheeze</strong> &#x2F;hwi:z&#x2F; — vi. 喘气\nvt. 喘息着说\nn. 喘气声, 喘息 <code>学术</code></p>
+<blockquote>
+<p>The wheeze was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>ardent</strong> &#x2F;‘ɑ:dnt&#x2F; — 热心的, 激动的, 燃烧般的\n[医] 灼热的; 热心的 <code>学术/雅思</code></p>
+<blockquote>
+<p>She was an ardent supporter of environmental conservation and sustainability causes.</p>
+</blockquote>
+</li>
+<li><p><strong>ironic</strong> &#x2F;aiә’rɔnik&#x2F; — 冷嘲的, 挖苦的, 反话的, 讽刺的, 令人啼笑皆非的, 出乎意料的 <code>学术/雅思</code></p>
+<blockquote>
+<p>It’s ironic that the cybersecurity expert had his password compromised despite implementing multiple layers of protection.</p>
+</blockquote>
+</li>
+<li><p><strong>generalized</strong> &#x2F;dʒenәrәlaizd&#x2F; — a. 广义的, 普遍的；无显著特点的 <code>学术</code></p>
+<blockquote>
+<p>The situation was quite generalized and required immediate attention.</p>
+</blockquote>
+</li>
+<li><p><strong>narcotic</strong> &#x2F;nɑ:’kɒtik&#x2F; — 麻醉药, 镇静剂\na. 麻醉的, 催眠的 <code>学术/雅思</code></p>
+<blockquote>
+<p>The narcotic was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>dirt</strong> &#x2F;dә:t&#x2F; — n. 污垢, 泥土\n[化] 污垢 <code>学术</code></p>
+<blockquote>
+<p>The dirt technique proved effective for solving complex problems successfully.</p>
+</blockquote>
+</li>
+<li><p><strong>emphasis</strong> &#x2F;emfәsis&#x2F; — n. 强调, 加强, 重点, 强语气 <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>The teacher placed emphasis on the importance of regular practice and consistency.</p>
+</blockquote>
+</li>
+<li><p><strong>expertise</strong> &#x2F;.ekspә:’ti:z&#x2F; — n. 专家意见, 专门技术\n[法] 专门知识, 专家意见 <code>雅思/学术</code></p>
+<blockquote>
+<p>Her expertise in finance made her invaluable to the company’s executive team.</p>
+</blockquote>
+</li>
+<li><p><strong>seafood</strong> &#x2F;‘si<span class="github-emoji" alias="fu" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f595.png?v8">&amp;#x1f595;</span>d&#x2F; — 海味, 海鲜, 鱼类 <code>雅思</code></p>
+<blockquote>
+<p>The seafood was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>communicator</strong> &#x2F;kә’mju:nikeitә&#x2F; — n. 传播者, 通信装置, 列车内通话装置 <code>技术</code></p>
+<blockquote>
+<p>Her understanding of communicator exceeded most of her classmates and peers.</p>
+</blockquote>
+</li>
+<li><p><strong>ventral</strong> &#x2F;ventrәl&#x2F; — a. 腹的, 腹部的, 腹面的\nn. 腹鳍 <code>雅思</code></p>
+<blockquote>
+<p>The ventral was an important part of the project.</p>
+</blockquote>
+</li>
+<li><p><strong>demolish</strong> &#x2F;di’mɒliʃ&#x2F; — 毁坏, 破坏, 粉碎 <code>学术/雅思</code></p>
+<blockquote>
+<p>The construction crew will demolish the old building next month.</p>
+</blockquote>
+</li>
+<li><p><strong>underside</strong> &#x2F;ʌndәsaid&#x2F; — n. 下面, 下侧, 底面 <code>学术</code></p>
+<blockquote>
+<p>The underside was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>grocer</strong> &#x2F;‘grәusә&#x2F; — 食品商 <code>学术/雅思</code></p>
+<blockquote>
+<p>The grocer stocked fresh produce.</p>
+</blockquote>
+</li>
+<li><p><strong>silent</strong> &#x2F;sailәnt&#x2F; — a. 沉默的, 安静的, 无声的, 静止的\n[医] 静止的, 无症状的 <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>This is a very silent situation.</p>
+</blockquote>
+</li>
+<li><p><strong>bleed</strong> &#x2F;bli:d&#x2F; — 流血, 悲痛, 渗出\nvt. 使出血, 榨取 <code>学术/雅思</code></p>
+<blockquote>
+<p>His wound began to bleed heavily despite the bandage applied.</p>
+</blockquote>
+</li>
+<li><p><strong>ashamed</strong> &#x2F;ә’ʃeimd&#x2F; — 惭愧的, 羞耻的 <code>学术/雅思/日常</code></p>
+<blockquote>
+<p>The word ‘ashamed’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>loading</strong> &#x2F;lәudiŋ&#x2F; — n. 装载, 装填\n[化] 填充剂; 填料; 装载; 装料; 填充; 载液;  <code>日常</code></p>
+<blockquote>
+<p>The loading is an important concept in modern society.</p>
+</blockquote>
+</li>
+<li><p><strong>vegetable</strong> &#x2F;vedʒәtәbl&#x2F; — n. 蔬菜, 植物, 无精打采之人\na. 蔬菜的, 植物的 <code>雅思/日常</code></p>
+<blockquote>
+<p>The vegetable was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>caprice</strong> &#x2F;kә’pri:s&#x2F; — n. 反复无常, 多变, 任性 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘caprice’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>provender</strong> &#x2F;prɒvәndә&#x2F; — n. 粮草, 秣, 食物 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘provender’.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. serotonin syndrome</strong> — 血清素综合征</p>
+<blockquote>
+<p>“Serotonin syndrome is a potentially life-threatening drug interaction requiring immediate recognition.” — <em>Annals of Emergency Medicine</em>, 2023</p>
+</blockquote>
+<p><strong>2. customer acquisition cost</strong> — 获得一个新客户的平均成本</p>
+<blockquote>
+<p>“We’re working to reduce our customer acquisition cost through optimized marketing.” — <em>Marketing Efficiency Review</em>, 2023</p>
+</blockquote>
+<p><strong>3. the icing on the cake</strong> — 锦上添花；最好的部分；额外的好处</p>
+<blockquote>
+<p>“Getting the promotion was great, but the icing on the cake was the unexpected bonus from the company.” — <em>Financial Times</em>, 2023</p>
+</blockquote>
+<p><strong>4. tipping point</strong> — （环境）临界点，一旦超越就会引发不可逆变化的关键阈值</p>
+<blockquote>
+<p>“Scientists warned that Arctic permafrost was rapidly approaching a tipping point beyond which methane release would accelerate uncontrollably.” — <em>Science</em>, 2022</p>
+</blockquote>
+<p><strong>5. spot on</strong> — 完全准确；恰好；完美</p>
+<blockquote>
+<p>“Your analysis was spot on, you identified all the key issues.” — <em>Agreement</em>, 2023</p>
+</blockquote>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/power/" rel="tag"># power</a>
+              <a href="/tags/sequencing/" rel="tag"># sequencing</a>
+              <a href="/tags/startup/" rel="tag"># startup</a>
+              <a href="/tags/bootup/" rel="tag"># bootup</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/20/daily-study-2026-05-20/" rel="prev" title="每日学习 — 2026-05-20">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-05-20
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">532k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">32:13</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
