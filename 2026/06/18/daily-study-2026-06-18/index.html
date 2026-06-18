@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：嵌入式系统时间同步与RTC驱动 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-06-18">
+<meta property="og:url" content="http://ycx81.github.io/2026/06/18/daily-study-2026-06-18/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：嵌入式系统时间同步与RTC驱动 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-18T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-18T00:00:41.661Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="驱动">
+<meta property="article:tag" content="RTC">
+<meta property="article:tag" content="时间同步">
+<meta property="article:tag" content="NTP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/06/18/daily-study-2026-06-18/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/06/18/daily-study-2026-06-18/","path":"2026/06/18/daily-study-2026-06-18/","title":"每日学习 — 2026-06-18"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-06-18 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E4%B8%8ERTC%E9%A9%B1%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：嵌入式系统时间同步与RTC驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">195</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/06/18/daily-study-2026-06-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-06-18 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-06-18
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-18 09:00:00" itemprop="dateCreated datePublished" datetime="2026-06-18T09:00:00+08:00">2026-06-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>嵌入式系统时间同步与RTC驱动</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：嵌入式系统时间同步与RTC驱动"><a href="#🔧-嵌入式知识：嵌入式系统时间同步与RTC驱动" class="headerlink" title="🔧 嵌入式知识：嵌入式系统时间同步与RTC驱动"></a>🔧 嵌入式知识：嵌入式系统时间同步与RTC驱动</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>实时时钟(RTC)独立于主CPU供电,即使系统关闭也继续计时。RTC驱动通过I2C&#x2F;SPI与IC通信,包含秒分时日月年寄存器和告警功能。系统启动时RTC初始化系统时间,运行时kernel维护wall clock。NTP网络时间协议用于时间同步,精度通常毫秒级。Chrony和systemd-timesyncd是常用NTP客户端。RTC告警可唤醒系统(Alarm Wake)。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RTC驱动(DS3231示例)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/i2c.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/rtc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DS3231_ADDR 0x68</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DS3231_SEC_REG  0x00</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DS3231_ALARM1 0x07</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ds3231_data</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">i2c_client</span> *<span class="title">client</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">rtc_device</span> *<span class="title">rtc</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">ds3231_get_time</span><span class="params">(<span class="keyword">struct</span> device *dev, <span class="keyword">struct</span> rtc_time *tm)</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">ds3231_data</span> *<span class="title">data</span> =</span> dev_get_drvdata(dev);</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> buf[<span class="number">7</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 读取时间寄存器(秒到年,共7字节)</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">i2c_msg</span> <span class="title">msg</span>[2] =</span> &#123;</span><br><span class="line">    &#123;</span><br><span class="line">      .addr = data-&gt;client-&gt;addr,</span><br><span class="line">      .flags = <span class="number">0</span>,</span><br><span class="line">      .len = <span class="number">1</span>,</span><br><span class="line">      .buf = &amp;DS3231_SEC_REG,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      .addr = data-&gt;client-&gt;addr,</span><br><span class="line">      .flags = I2C_M_RD,</span><br><span class="line">      .len = <span class="number">7</span>,</span><br><span class="line">      .buf = buf,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (i2c_transfer(data-&gt;client-&gt;adapter, msg, <span class="number">2</span>) != <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> -EIO;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 解析BCD编码</span></span><br><span class="line">  tm-&gt;tm_sec = bcd2bin(buf[<span class="number">0</span>] &amp; <span class="number">0x7F</span>);</span><br><span class="line">  tm-&gt;tm_min = bcd2bin(buf[<span class="number">1</span>]);</span><br><span class="line">  tm-&gt;tm_hour = bcd2bin(buf[<span class="number">2</span>]);</span><br><span class="line">  tm-&gt;tm_mday = bcd2bin(buf[<span class="number">3</span>]);</span><br><span class="line">  tm-&gt;tm_mon = bcd2bin(buf[<span class="number">4</span>] &amp; <span class="number">0x1F</span>) - <span class="number">1</span>;</span><br><span class="line">  tm-&gt;tm_year = bcd2bin(buf[<span class="number">5</span>]) + <span class="number">100</span>;  <span class="comment">// 2000年起</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">ds3231_set_time</span><span class="params">(<span class="keyword">struct</span> device *dev, <span class="keyword">struct</span> rtc_time *tm)</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">ds3231_data</span> *<span class="title">data</span> =</span> dev_get_drvdata(dev);</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> buf[<span class="number">8</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 编码BCD</span></span><br><span class="line">  buf[<span class="number">0</span>] = DS3231_SEC_REG;</span><br><span class="line">  buf[<span class="number">1</span>] = bin2bcd(tm-&gt;tm_sec);</span><br><span class="line">  buf[<span class="number">2</span>] = bin2bcd(tm-&gt;tm_min);</span><br><span class="line">  buf[<span class="number">3</span>] = bin2bcd(tm-&gt;tm_hour);</span><br><span class="line">  buf[<span class="number">4</span>] = bin2bcd(tm-&gt;tm_mday);</span><br><span class="line">  buf[<span class="number">5</span>] = bin2bcd(tm-&gt;tm_mon + <span class="number">1</span>);</span><br><span class="line">  buf[<span class="number">6</span>] = bin2bcd(tm-&gt;tm_year - <span class="number">100</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 写入I2C</span></span><br><span class="line">  <span class="keyword">return</span> i2c_master_send(data-&gt;client, buf, <span class="number">7</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">rtc_class_ops</span> <span class="title">ds3231_rtc_ops</span> =</span> &#123;</span><br><span class="line">  .read_time = ds3231_get_time,</span><br><span class="line">  .set_time = ds3231_set_time,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">ds3231_probe</span><span class="params">(<span class="keyword">struct</span> i2c_client *client,</span></span><br><span class="line"><span class="params">                       <span class="type">const</span> <span class="keyword">struct</span> i2c_device_id *id)</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">ds3231_data</span> *<span class="title">data</span> =</span> </span><br><span class="line">    devm_kzalloc(&amp;client-&gt;dev, <span class="keyword">sizeof</span>(*data), GFP_KERNEL);</span><br><span class="line">  </span><br><span class="line">  data-&gt;client = client;</span><br><span class="line">  i2c_set_clientdata(client, data);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 注册RTC设备</span></span><br><span class="line">  data-&gt;rtc = devm_rtc_device_register(&amp;client-&gt;dev, <span class="string">&quot;ds3231&quot;</span>,</span><br><span class="line">                                       &amp;ds3231_rtc_ops, THIS_MODULE);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (IS_ERR(data-&gt;rtc)) &#123;</span><br><span class="line">    <span class="keyword">return</span> PTR_ERR(data-&gt;rtc);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  dev_info(&amp;client-&gt;dev, <span class="string">&quot;DS3231 RTC registered\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">i2c_driver</span> <span class="title">ds3231_driver</span> =</span> &#123;</span><br><span class="line">  .driver = &#123;</span><br><span class="line">    .name = <span class="string">&quot;ds3231&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  .probe = ds3231_probe,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module_i2c_driver(ds3231_driver);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 告警功能</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">ds3231_set_alarm</span><span class="params">(<span class="keyword">struct</span> device *dev, <span class="keyword">struct</span> rtc_wkalrm *alrm)</span> &#123;</span><br><span class="line">  <span class="comment">// 设置告警寄存器</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> buf[<span class="number">4</span>];</span><br><span class="line">  buf[<span class="number">0</span>] = DS3231_ALARM1;</span><br><span class="line">  buf[<span class="number">1</span>] = bin2bcd(alrm-&gt;time.tm_sec);</span><br><span class="line">  buf[<span class="number">2</span>] = bin2bcd(alrm-&gt;time.tm_min);</span><br><span class="line">  buf[<span class="number">3</span>] = bin2bcd(alrm-&gt;time.tm_hour);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> i2c_master_send(data-&gt;client, buf, <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用户空间RTC操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取系统时间(来自RTC)</span></span><br><span class="line"><span class="built_in">date</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置系统时间</span></span><br><span class="line"><span class="built_in">date</span> -s <span class="string">&quot;2024-04-16 10:30:00&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步系统时间到RTC</span></span><br><span class="line">hwclock --systohc --localtime</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从RTC读取时间到系统</span></span><br><span class="line">hwclock --hctosys --localtime</span><br><span class="line"></span><br><span class="line"><span class="comment"># NTP时间同步</span></span><br><span class="line">sudo systemctl start systemd-timesyncd</span><br><span class="line">timedatectl status  <span class="comment"># 查看时间同步状态</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Chrony NTP客户端</span></span><br><span class="line">chronyc sources</span><br><span class="line">chronyc tracking</span><br></pre></td></tr></table></figure>
+
+<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
+<li><strong>系统时间 vs RTC时间</strong>: 系统时间由kernel维护(高精度),RTC仅秒级精度</li>
+<li><strong>硬件时钟 vs 软件时钟</strong>: 硬件RTC断电继续走,软件时钟依赖kernel tick</li>
+<li><strong>UTC vs 本地时间</strong>: RTC通常UTC,显示时需根据时区转换</li>
+</ol>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q: 系统启动时如何初始化时间？</strong><br>A: Bootloader或kernel从RTC读取时间初始化系统clock,或通过NTP从网络同步。</p>
+<p><strong>Q: RTC告警如何唤醒系统？</strong><br>A: RTC告警时产生硬件中断,唤醒电源管理模块使系统退出睡眠状态。</p>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-06-18-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-06-18-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>deaf</td>
+<td>&#x2F;def&#x2F;</td>
+<td>a. 聋的\n[医] 聋的</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>2</td>
+<td>spokeswoman</td>
+<td>&#x2F;spәuks,wumәn&#x2F;</td>
+<td>n. 女发言人, 女代言人</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>3</td>
+<td>bryony</td>
+<td>&#x2F;braiәni&#x2F;</td>
+<td>n. 泻根属植物\n[医] 泻根</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>4</td>
+<td>nonprofessional</td>
+<td>&#x2F;.nɒnprʌ’feʃәnl&#x2F;</td>
+<td>a. 无职业的, 无专长的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>5</td>
+<td>non</td>
+<td>&#x2F;nɔn&#x2F;</td>
+<td>adv. 非, 不</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>6</td>
+<td>proprietorship</td>
+<td>&#x2F;prә’praiәtәʃip&#x2F;</td>
+<td>n. 所有权\n[经] 所有权, 业主权, 资本</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>7</td>
+<td>improbable</td>
+<td>&#x2F;im’prɒbәbl&#x2F;</td>
+<td>不大可能的, 不象发生的, 荒谬可笑的\n[法] 未必会的,</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>8</td>
+<td>comedy</td>
+<td>&#x2F;‘kɒmidi&#x2F;</td>
+<td>喜剧, 有趣的事情</td>
+<td>学术&#x2F;雅思&#x2F;日常</td>
+</tr>
+<tr>
+<td>9</td>
+<td>holland</td>
+<td>&#x2F;hɒlәnd&#x2F;</td>
+<td>n. 荷兰</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>10</td>
+<td>retool</td>
+<td>&#x2F;ri:’tu:l&#x2F;</td>
+<td>[化] 重新装备</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>11</td>
+<td>dental</td>
+<td>&#x2F;‘dentl&#x2F;</td>
+<td>牙齿的\n[医] 牙的, 齿的, 齿音, 齿音字母</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>12</td>
+<td>messrs</td>
+<td>&#x2F;mesәz&#x2F;</td>
+<td>[法]<a href="=Messieurs">pl. </a>各位(先生)</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>13</td>
+<td>sententious</td>
+<td>&#x2F;sen’tenʃәs&#x2F;</td>
+<td>a. 简洁的, 警句的, 富于格言的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>14</td>
+<td>pueblo</td>
+<td>&#x2F;pu’eblәu&#x2F;</td>
+<td>n. 普韦布洛印第安人, 印第安人村庄</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>15</td>
+<td>urge</td>
+<td>&#x2F;ә:dʒ&#x2F;</td>
+<td>n. 冲动, 推动力, 迫切的要求\nvt. 驱策, 力劝,</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>16</td>
+<td>charisma</td>
+<td>&#x2F;kә’rizmә&#x2F;</td>
+<td>非凡的领导力, 神秘的个人魅力, 神授的能力</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>17</td>
+<td>canopy</td>
+<td>&#x2F;‘kænәpi&#x2F;</td>
+<td>天篷, 遮篷, 苍穹\nvt. 用天蓬遮盖</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>18</td>
+<td>goddamned</td>
+<td>&#x2F;^ɔddæmd&#x2F;</td>
+<td>a. 该死的, 完全的, 十足的, 讨厌的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>19</td>
+<td>adventurer</td>
+<td>&#x2F;әd’ventʃәrә&#x2F;</td>
+<td>冒险家, 投机者\n[法] 冒险者, 投机者</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>20</td>
+<td>reef</td>
+<td>&#x2F;ri:f&#x2F;</td>
+<td>n. 暗礁, 礁, 缩帆\nv. 缩(帆)</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>21</td>
+<td>diabolic</td>
+<td>&#x2F;daiә’bɔlik&#x2F;</td>
+<td>a. 恶魔的, 恶毒的, 凶暴的, 恶魔似的, (非正式)非</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>22</td>
+<td>crochet</td>
+<td>&#x2F;krәuʃei&#x2F;</td>
+<td>n. 钩针编织品, 钩边\nv. 用钩针编织</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>23</td>
+<td>premeditate</td>
+<td>&#x2F;pri’mediteit&#x2F;</td>
+<td>v. 预谋, 预先考虑</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>24</td>
+<td>neuron</td>
+<td>&#x2F;njuәrɔn&#x2F;</td>
+<td>n. 神经原, 轴索, 神经细胞\n[计] 神经元</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>25</td>
+<td>carboniferous</td>
+<td>&#x2F;.kɑ:bә’nifәrәs&#x2F;</td>
+<td>n. 石炭纪, 石炭层\na. 含碳或煤的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>slavish</td>
+<td>&#x2F;sleiviʃ&#x2F;</td>
+<td>a. 奴隶的, 奴性的, 盲从的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>27</td>
+<td>acrophobia</td>
+<td>&#x2F;.ækrәu’fәubiә&#x2F;</td>
+<td>n. 恐高症\n[医] 高处恐怖</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>28</td>
+<td>discretion</td>
+<td>&#x2F;dis’kreʃәn&#x2F;</td>
+<td>慎重, 辨别力, 考虑, 处理权\n[法] 有决定权的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>29</td>
+<td>diverse</td>
+<td>&#x2F;dai’vә:s&#x2F;</td>
+<td>a. 不同的, 变化多的</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>30</td>
+<td>glow</td>
+<td>&#x2F;glәu&#x2F;</td>
+<td>赤热, 光辉, 热情, 热烈, 红光\nvi. 发红光, 红</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>31</td>
+<td>satiric</td>
+<td>&#x2F;sә’tirik&#x2F;</td>
+<td>a. 讽刺的, 挖苦的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>32</td>
+<td>argot</td>
+<td>&#x2F;ɑ:gәu&#x2F;</td>
+<td>n. 行话, 俚语, 黑话</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>33</td>
+<td>stickler</td>
+<td>&#x2F;stiklә&#x2F;</td>
+<td>n. 坚持要求某种品质的人, 坚持要求一丝不苟者, 难题,</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>34</td>
+<td>forswear</td>
+<td>&#x2F;fɒ:’swєә&#x2F;</td>
+<td>vt. 发誓抛弃, 发誓否定\nvi. 发伪誓, 作伪证</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>35</td>
+<td>uncanny</td>
+<td>&#x2F;.ʌn’kæni&#x2F;</td>
+<td>a. 怪诞的, 可怕的, 离奇的, 神秘的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>36</td>
+<td>contravene</td>
+<td>&#x2F;,kɔntrә’vi:n&#x2F;</td>
+<td>违反, 触犯, 否认, 反驳, 抵触, 与…冲突\n[法</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>37</td>
+<td>beech</td>
+<td>&#x2F;bi:tʃ&#x2F;</td>
+<td>n. 山毛榉\n[机] 山毛榉</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>cortex</td>
+<td>&#x2F;kɒ:teks&#x2F;</td>
+<td>n. 皮层\n[医] (树)皮; 皮质, 皮层</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>39</td>
+<td>truant</td>
+<td>&#x2F;‘tru:әnt&#x2F;</td>
+<td>懒惰的人, 玩忽职守者, 旷课者\na. 偷懒的, 旷课的,</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>40</td>
+<td>internalize</td>
+<td>&#x2F;in’tә:nәlaiz&#x2F;</td>
+<td>vt. 使内在化</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>41</td>
+<td>ultrasonic</td>
+<td>&#x2F;.ʌltrә’sɒnik&#x2F;</td>
+<td>n. 超声波\na. 超音速的</td>
+<td>雅思&#x2F;学术</td>
+</tr>
+<tr>
+<td>42</td>
+<td>reprimand</td>
+<td>&#x2F;reprimɑ:nd&#x2F;</td>
+<td>n. 谴责, 惩戒, 非难\nvt. 谴责, 惩戒, 严责</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>43</td>
+<td>introductory</td>
+<td>&#x2F;.intrә’dʌktәri&#x2F;</td>
+<td>a. 介绍的, 引导的, 开端的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>44</td>
+<td>wheat</td>
+<td>&#x2F;hwi:t&#x2F;</td>
+<td>小麦</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>45</td>
+<td>duo</td>
+<td>&#x2F;dju:әu&#x2F;</td>
+<td>n. 二重唱</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>46</td>
+<td>inform</td>
+<td>&#x2F;in’fɒ:m&#x2F;</td>
+<td>vt. 通知, 使了解, 使充满\nvi. 提供资料, 告发</td>
+<td>学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>47</td>
+<td>unreasonable</td>
+<td>&#x2F;.ʌn’ri:znәbl&#x2F;</td>
+<td>a. 不合理的, 过度的, 不切实际的\n[法] 不讲道理的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>48</td>
+<td>distal</td>
+<td>&#x2F;distәl&#x2F;</td>
+<td>a. 末梢的\n[医] 远侧的, 远中的(牙)</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>49</td>
+<td>supervisor</td>
+<td>&#x2F;.sju:pә’vaizә&#x2F;</td>
+<td>管理者, 监督者, 指导者, 视导员\n[计] 管理程序</td>
+<td>技术&#x2F;学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>50</td>
+<td>bacchanal</td>
+<td>&#x2F;bækәnl&#x2F;</td>
+<td>a. 酒神的, 酒神节的, 狂饮作乐的\nn. 酒神崇拜者,</td>
+<td>雅思</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>deaf</strong> &#x2F;def&#x2F; — a. 聋的\n[医] 聋的 <code>雅思/学术</code></p>
+<blockquote>
+<p>The deaf children learned sign language fluently in special classes.</p>
+</blockquote>
+</li>
+<li><p><strong>spokeswoman</strong> &#x2F;spәuks,wumәn&#x2F; — n. 女发言人, 女代言人 <code>日常</code></p>
+<blockquote>
+<p>The spokeswoman is an important concept to understand in this context.</p>
+</blockquote>
+</li>
+<li><p><strong>bryony</strong> &#x2F;braiәni&#x2F; — n. 泻根属植物\n[医] 泻根 <code>学术</code></p>
+<blockquote>
+<p>The bryony was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>nonprofessional</strong> &#x2F;.nɒnprʌ’feʃәnl&#x2F; — a. 无职业的, 无专长的 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘nonprofessional’.</p>
+</blockquote>
+</li>
+<li><p><strong>non</strong> &#x2F;nɔn&#x2F; — adv. 非, 不 <code>日常</code></p>
+<blockquote>
+<p>I decided to non the problem directly and immediately.</p>
+</blockquote>
+</li>
+<li><p><strong>proprietorship</strong> &#x2F;prә’praiәtәʃip&#x2F; — n. 所有权\n[经] 所有权, 业主权, 资本 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘proprietorship’.</p>
+</blockquote>
+</li>
+<li><p><strong>improbable</strong> &#x2F;im’prɒbәbl&#x2F; — 不大可能的, 不象发生的, 荒谬可笑的\n[法] 未必会的, 不大可能发生的,  <code>学术</code></p>
+<blockquote>
+<p>The improbable was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>comedy</strong> &#x2F;‘kɒmidi&#x2F; — 喜剧, 有趣的事情 <code>学术/雅思/日常</code></p>
+<blockquote>
+<p>The comedy show entertained the audience with witty observations about workplace culture and modern technology.</p>
+</blockquote>
+</li>
+<li><p><strong>holland</strong> &#x2F;hɒlәnd&#x2F; — n. 荷兰 <code>日常</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘holland’.</p>
+</blockquote>
+</li>
+<li><p><strong>retool</strong> &#x2F;ri:’tu:l&#x2F; — [化] 重新装备 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word retool.</p>
+</blockquote>
+</li>
+<li><p><strong>dental</strong> &#x2F;‘dentl&#x2F; — 牙齿的\n[医] 牙的, 齿的, 齿音, 齿音字母 <code>学术/雅思</code></p>
+<blockquote>
+<p>The word ‘dental’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>messrs</strong> &#x2F;mesәz&#x2F; — [法]<a href="=Messieurs">pl. </a>各位(先生) <code>学术</code></p>
+<blockquote>
+<p>The word messrs describes something important in daily life.</p>
+</blockquote>
+</li>
+<li><p><strong>sententious</strong> &#x2F;sen’tenʃәs&#x2F; — a. 简洁的, 警句的, 富于格言的 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘sententious’.</p>
+</blockquote>
+</li>
+<li><p><strong>pueblo</strong> &#x2F;pu’eblәu&#x2F; — n. 普韦布洛印第安人, 印第安人村庄 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word pueblo.</p>
+</blockquote>
+</li>
+<li><p><strong>urge</strong> &#x2F;ә:dʒ&#x2F; — n. 冲动, 推动力, 迫切的要求\nvt. 驱策, 力劝, 竭力主张, 推动\ <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>The urge was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>charisma</strong> &#x2F;kә’rizmә&#x2F; — 非凡的领导力, 神秘的个人魅力, 神授的能力 <code>学术</code></p>
+<blockquote>
+<p>His natural charisma made people want to follow his leadership.</p>
+</blockquote>
+</li>
+<li><p><strong>canopy</strong> &#x2F;‘kænәpi&#x2F; — 天篷, 遮篷, 苍穹\nvt. 用天蓬遮盖 <code>学术</code></p>
+<blockquote>
+<p>The forest canopy blocks most sunlight from reaching the ground.</p>
+</blockquote>
+</li>
+<li><p><strong>goddamned</strong> &#x2F;^ɔddæmd&#x2F; — a. 该死的, 完全的, 十足的, 讨厌的 <code>学术</code></p>
+<blockquote>
+<p>The goddamned appearance of the building made it stand out beautifully.</p>
+</blockquote>
+</li>
+<li><p><strong>adventurer</strong> &#x2F;әd’ventʃәrә&#x2F; — 冒险家, 投机者\n[法] 冒险者, 投机者 <code>学术</code></p>
+<blockquote>
+<p>The word ‘adventurer’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>reef</strong> &#x2F;ri:f&#x2F; — n. 暗礁, 礁, 缩帆\nv. 缩(帆) <code>雅思/学术</code></p>
+<blockquote>
+<p>The use of reef varies across different contexts and situations.</p>
+</blockquote>
+</li>
+<li><p><strong>diabolic</strong> &#x2F;daiә’bɔlik&#x2F; — a. 恶魔的, 恶毒的, 凶暴的, 恶魔似的, (非正式)非常可憎的 <code>雅思</code></p>
+<blockquote>
+<p>The diabolic is an important concept to understand in this context.</p>
+</blockquote>
+</li>
+<li><p><strong>crochet</strong> &#x2F;krәuʃei&#x2F; — n. 钩针编织品, 钩边\nv. 用钩针编织 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘crochet’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>premeditate</strong> &#x2F;pri’mediteit&#x2F; — v. 预谋, 预先考虑 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘premeditate’.</p>
+</blockquote>
+</li>
+<li><p><strong>neuron</strong> &#x2F;njuәrɔn&#x2F; — n. 神经原, 轴索, 神经细胞\n[计] 神经元 <code>雅思/学术</code></p>
+<blockquote>
+<p>The neuron aspect of the project requires careful attention and work.</p>
+</blockquote>
+</li>
+<li><p><strong>carboniferous</strong> &#x2F;.kɑ:bә’nifәrәs&#x2F; — n. 石炭纪, 石炭层\na. 含碳或煤的 <code>学术</code></p>
+<blockquote>
+<p>The carboniferous was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>slavish</strong> &#x2F;sleiviʃ&#x2F; — a. 奴隶的, 奴性的, 盲从的 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word slavish.</p>
+</blockquote>
+</li>
+<li><p><strong>acrophobia</strong> &#x2F;.ækrәu’fәubiә&#x2F; — n. 恐高症\n[医] 高处恐怖 <code>雅思</code></p>
+<blockquote>
+<p>The acrophobia is an important concept to understand in this context.</p>
+</blockquote>
+</li>
+<li><p><strong>discretion</strong> &#x2F;dis’kreʃәn&#x2F; — 慎重, 辨别力, 考虑, 处理权\n[法] 有决定权的 <code>学术</code></p>
+<blockquote>
+<p>I appreciate your discretion regarding this sensitive personal matter.</p>
+</blockquote>
+</li>
+<li><p><strong>diverse</strong> &#x2F;dai’vә:s&#x2F; — a. 不同的, 变化多的 <code>雅思/学术</code></p>
+<blockquote>
+<p>The university attracts diverse students from more than one hundred countries worldwide.</p>
+</blockquote>
+</li>
+<li><p><strong>glow</strong> &#x2F;glәu&#x2F; — 赤热, 光辉, 热情, 热烈, 红光\nvi. 发红光, 红光焕发, 发热, 洋 <code>学术/雅思</code></p>
+<blockquote>
+<p>The neon signs began to glow as darkness fell.</p>
+</blockquote>
+</li>
+<li><p><strong>satiric</strong> &#x2F;sә’tirik&#x2F; — a. 讽刺的, 挖苦的 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word satiric.</p>
+</blockquote>
+</li>
+<li><p><strong>argot</strong> &#x2F;ɑ:gәu&#x2F; — n. 行话, 俚语, 黑话 <code>雅思</code></p>
+<blockquote>
+<p>The argot is an important concept to understand in this context.</p>
+</blockquote>
+</li>
+<li><p><strong>stickler</strong> &#x2F;stiklә&#x2F; — n. 坚持要求某种品质的人, 坚持要求一丝不苟者, 难题, 费解的事物 <code>雅思</code></p>
+<blockquote>
+<p>He is a stickler for grammar and always corrects my spelling mistakes.</p>
+</blockquote>
+</li>
+<li><p><strong>forswear</strong> &#x2F;fɒ:’swєә&#x2F; — vt. 发誓抛弃, 发誓否定\nvi. 发伪誓, 作伪证 <code>雅思</code></p>
+<blockquote>
+<p>He swore to forswear all violent behavior for the rest of his life.</p>
+</blockquote>
+</li>
+<li><p><strong>uncanny</strong> &#x2F;.ʌn’kæni&#x2F; — a. 怪诞的, 可怕的, 离奇的, 神秘的 <code>雅思</code></p>
+<blockquote>
+<p>That uncanny quality impressed everyone.</p>
+</blockquote>
+</li>
+<li><p><strong>contravene</strong> &#x2F;,kɔntrә’vi:n&#x2F; — 违反, 触犯, 否认, 反驳, 抵触, 与…冲突\n[法] 触法, 违反,  <code>学术</code></p>
+<blockquote>
+<p>The word ‘contravene’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>beech</strong> &#x2F;bi:tʃ&#x2F; — n. 山毛榉\n[机] 山毛榉 <code>学术</code></p>
+<blockquote>
+<p>The beech was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>cortex</strong> &#x2F;kɒ:teks&#x2F; — n. 皮层\n[医] (树)皮; 皮质, 皮层 <code>学术</code></p>
+<blockquote>
+<p>The cortex is an important concept in modern society.</p>
+</blockquote>
+</li>
+<li><p><strong>truant</strong> &#x2F;‘tru:әnt&#x2F; — 懒惰的人, 玩忽职守者, 旷课者\na. 偷懒的, 旷课的, 游荡的\nvi.  <code>学术/雅思</code></p>
+<blockquote>
+<p>This is a very truant situation.</p>
+</blockquote>
+</li>
+<li><p><strong>internalize</strong> &#x2F;in’tә:nәlaiz&#x2F; — vt. 使内在化 <code>学术</code></p>
+<blockquote>
+<p>The internalize represents an important aspect of daily life here.</p>
+</blockquote>
+</li>
+<li><p><strong>ultrasonic</strong> &#x2F;.ʌltrә’sɒnik&#x2F; — n. 超声波\na. 超音速的 <code>雅思/学术</code></p>
+<blockquote>
+<p>The ultrasonic characteristic is important in this particular situation and context.</p>
+</blockquote>
+</li>
+<li><p><strong>reprimand</strong> &#x2F;reprimɑ:nd&#x2F; — n. 谴责, 惩戒, 非难\nvt. 谴责, 惩戒, 严责 <code>雅思</code></p>
+<blockquote>
+<p>The concept of reprimand requires careful study and dedicated attention today.</p>
+</blockquote>
+</li>
+<li><p><strong>introductory</strong> &#x2F;.intrә’dʌktәri&#x2F; — a. 介绍的, 引导的, 开端的 <code>学术</code></p>
+<blockquote>
+<p>The situation was quite introductory and required immediate attention.</p>
+</blockquote>
+</li>
+<li><p><strong>wheat</strong> &#x2F;hwi:t&#x2F; — 小麦 <code>学术/雅思</code></p>
+<blockquote>
+<p>The wheat is significant.</p>
+</blockquote>
+</li>
+<li><p><strong>duo</strong> &#x2F;dju:әu&#x2F; — n. 二重唱 <code>学术</code></p>
+<blockquote>
+<p>The duo is an important concept in modern society.</p>
+</blockquote>
+</li>
+<li><p><strong>inform</strong> &#x2F;in’fɒ:m&#x2F; — vt. 通知, 使了解, 使充满\nvi. 提供资料, 告发 <code>学术/日常</code></p>
+<blockquote>
+<p>The concept of inform requires careful study and dedicated attention today.</p>
+</blockquote>
+</li>
+<li><p><strong>unreasonable</strong> &#x2F;.ʌn’ri:znәbl&#x2F; — a. 不合理的, 过度的, 不切实际的\n[法] 不讲道理的, 非理智的, 不合 <code>学术</code></p>
+<blockquote>
+<p>The word ‘unreasonable’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>distal</strong> &#x2F;distәl&#x2F; — a. 末梢的\n[医] 远侧的, 远中的(牙) <code>雅思</code></p>
+<blockquote>
+<p>That distal quality impressed everyone.</p>
+</blockquote>
+</li>
+<li><p><strong>supervisor</strong> &#x2F;.sju:pә’vaizә&#x2F; — 管理者, 监督者, 指导者, 视导员\n[计] 管理程序 <code>技术/学术/雅思</code></p>
+<blockquote>
+<p>My supervisor approved my vacation request.</p>
+</blockquote>
+</li>
+<li><p><strong>bacchanal</strong> &#x2F;bækәnl&#x2F; — a. 酒神的, 酒神节的, 狂饮作乐的\nn. 酒神崇拜者, 狂饮作乐 <code>雅思</code></p>
+<blockquote>
+<p>The bacchanal is an important concept to understand in this context.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. given the circumstances</strong> — 考虑到情况，鉴于环境</p>
+<blockquote>
+<p>“Given the circumstances, we made the best decision possible.” — Decision-Making Justification Analysis, 2022</p>
+</blockquote>
+<p><strong>2. fish out of water</strong> — 如鱼离水；处于不熟悉或不舒适的环境中</p>
+<blockquote>
+<p>“Moving from a small law firm to a sprawling corporation, she felt like a complete fish out of water at first.” — <em>Harvard Business Review</em>, 2021</p>
+</blockquote>
+<p><strong>3. crash and burn</strong> — 彻底失败；灾难性地结束；崩溃</p>
+<blockquote>
+<p>“The product launch crashed and burned due to technical issues.” — <em>Product Failure</em>, 2023</p>
+</blockquote>
+<p><strong>4. keep one’s head above water</strong> — 勉强维持；艰难度日</p>
+<blockquote>
+<p>“Small businesses are barely keeping their heads above water as rising energy costs eat into already thin margins.” — <em>BBC News</em>, 2023</p>
+</blockquote>
+<p><strong>5. rubber stamp</strong> — 不假思索就批准；形式上的同意</p>
+<blockquote>
+<p>“The board tends to rubber stamp management proposals without meaningful review.” — <em>Financial Times</em>, 2023</p>
+</blockquote>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/%E9%A9%B1%E5%8A%A8/" rel="tag"># 驱动</a>
+              <a href="/tags/RTC/" rel="tag"># RTC</a>
+              <a href="/tags/%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/" rel="tag"># 时间同步</a>
+              <a href="/tags/NTP/" rel="tag"># NTP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/09/daily-study-2026-06-09/" rel="prev" title="每日学习 — 2026-06-09">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-06-09
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">574k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">34:49</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
