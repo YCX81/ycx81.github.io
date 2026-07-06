@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/07/06/daily-study-2026-07-06/
 http://ycx81.github.io/2026/07/05/daily-study-2026-07-05/
 http://ycx81.github.io/2026/07/04/daily-study-2026-07-04/
 http://ycx81.github.io/2026/07/03/daily-study-2026-07-03/
@@ -325,6 +326,9 @@ http://ycx81.github.io/tags/pll/
 http://ycx81.github.io/tags/cmu/
 http://ycx81.github.io/tags/hardware/
 http://ycx81.github.io/tags/MPU/
+http://ycx81.github.io/tags/%E5%AE%89%E5%85%A8%E5%8F%AF%E9%9D%A0%E6%80%A7/
+http://ycx81.github.io/tags/EMC/
+http://ycx81.github.io/tags/%E5%B9%B2%E6%89%B0/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
