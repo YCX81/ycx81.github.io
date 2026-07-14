@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-24T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.831Z">
+<meta property="article:modified_time" content="2026-07-14T15:58:55.127Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="CAN">
 <meta property="article:tag" content="嵌入式">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E7%B2%BE%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：外设驱动精讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cunder-the-hood%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “under the hood”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cahead-of-the-curve%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “ahead of the curve”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Ca-double-edged-sword%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “a double-edged sword”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cread-between-the-lines%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “read between the lines”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF%E5%A4%8D%E4%B9%A0-%E2%80%94-2026-03-22-%E8%AF%8D%E6%B1%87%EF%BC%88Day-2%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E5%A5%91%E7%BA%A6%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E5%88%86%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：外设驱动契约、生命周期与分层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E9%A6%96%E5%85%88%E6%98%AF%E4%B8%80%E4%BB%BD%E5%8F%AF%E9%AA%8C%E8%AF%81%E7%9A%84%E5%A5%91%E7%BA%A6"><span class="nav-number">1.1.</span> <span class="nav-text">驱动首先是一份可验证的契约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E5%BA%94%E9%9A%94%E7%A6%BB%E5%8F%98%E5%8C%96%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E9%9A%90%E8%97%8F%E7%A1%AC%E4%BB%B6%E4%BA%8B%E5%AE%9E"><span class="nav-number">1.2.</span> <span class="nav-text">分层应隔离变化，而不是隐藏硬件事实</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E8%BE%B9%E7%95%8C"><span class="nav-number">1.3.</span> <span class="nav-text">适用边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">1.5.</span> <span class="nav-text">验证清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.6.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.7.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cunder-the-hood%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “under the hood”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cahead-of-the-curve%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “ahead of the curve”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Ca-double-edged-sword%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “a double-edged sword”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cread-between-the-lines%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “read between the lines”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF%E5%A4%8D%E4%B9%A0-%E2%80%94-2026-03-22-%E8%AF%8D%E6%B1%87%EF%BC%88Day-2%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -192,23 +192,6 @@
     </div>
 
     
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
-    相关文章
-  </div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/03/22/daily-study-2026-03-22/" rel="bookmark">
-        <time class="popular-posts-time">2026-03-22</time>
-        <br>
-      每日学习 — 2026-03-22
-      </a>
-    </li>
-  </ul>
-
-          </div>
-        </div>
   </aside>
 
 
@@ -273,14 +256,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
+      <span>3.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
+      <span>14 分钟</span>
     </span>
 </div>
 
@@ -293,10 +276,36 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：外设驱动精讲"><a href="#🔧-嵌入式知识：外设驱动精讲" class="headerlink" title="🔧 嵌入式知识：外设驱动精讲"></a>🔧 嵌入式知识：外设驱动精讲</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：外设驱动契约、生命周期与分层"><a href="#🔧-嵌入式知识：外设驱动契约、生命周期与分层" class="headerlink" title="🔧 嵌入式知识：外设驱动契约、生命周期与分层"></a>🔧 嵌入式知识：外设驱动契约、生命周期与分层</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="驱动首先是一份可验证的契约"><a href="#驱动首先是一份可验证的契约" class="headerlink" title="驱动首先是一份可验证的契约"></a>驱动首先是一份可验证的契约</h3><p>外设驱动不只是若干寄存器写入函数。它应明确生命周期（未初始化、就绪、忙、停止、错误）、调用上下文、资源所有权和完成语义。同步 API 返回时操作已经完成；异步 API 返回只表示请求被接受，必须定义完成事件、错误事件、取消、超时以及缓冲区何时可复用。ISR 可调用的接口不得阻塞或隐式分配内存，线程接口也不能在文档未声明时从回调重入。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">transfer</span> &#123;</span></span><br><span class="line">    <span class="type">uint8_t</span> *buf;</span><br><span class="line">    <span class="type">size_t</span> len;</span><br><span class="line">    <span class="type">void</span> (*done)(<span class="type">int</span> status, <span class="type">size_t</span> transferred, <span class="type">void</span> *ctx);</span><br><span class="line">    <span class="type">void</span> *ctx;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">uart_submit</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> transfer *xfer)</span>; <span class="comment">/* 0 仅表示请求已接收 */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uart_cancel</span><span class="params">(<span class="type">void</span>)</span>;                        <span class="comment">/* 定义完成回调是否仍会到达 */</span></span><br></pre></td></tr></table></figure>
+
+<p>契约还应覆盖：零长度、最大长度、对齐、DMA 可访问区域、cache 一致性、部分完成、并发提交、设备移除&#x2F;掉电、错误后的恢复状态。<code>busy</code>、<code>timeout</code>、<code>overrun</code>、<code>bus error</code> 不能都折叠成一个 <code>-1</code>；上层只有获得稳定错误分类，才能决定重试、降级还是复位。</p>
+<h3 id="分层应隔离变化，而不是隐藏硬件事实"><a href="#分层应隔离变化，而不是隐藏硬件事实" class="headerlink" title="分层应隔离变化，而不是隐藏硬件事实"></a>分层应隔离变化，而不是隐藏硬件事实</h3><p>常见边界是：寄存器&#x2F;厂商 LL → 芯片驱动 → 通用驱动 API → 协议或设备服务 → 应用。底层负责时钟、引脚、IRQ&#x2F;DMA 和寄存器副作用；通用层表达能力查询、配置、传输与事件；协议层处理帧、重试和业务状态。应用不应同时绕过驱动直接改同一外设寄存器，否则所有权、锁和状态机都会失效。</p>
+<p>抽象不能假装所有硬件能力一致。应提供 capability 查询或在初始化时拒绝不支持的模式，而不是静默降级。CMSIS-Driver 的统一接口与 capability&#x2F;version、Zephyr 的 device&#x2F;driver model 都体现了“统一契约 + 设备能力”的分离；但具体 DMA 通道、引脚复用和功耗域仍属于平台配置。</p>
+<h3 id="适用边界"><a href="#适用边界" class="headerlink" title="适用边界"></a>适用边界</h3><p>轻量裸机项目可以减少层数，但不能省略契约。只有单一调用点的简单 GPIO 也应明确电平有效性与初始化顺序。高吞吐、热插拔、共享总线或安全相关设备则通常需要更完整的状态机、超时、取消和恢复设计。通用 API 不负责替代芯片参考手册，也不自动保证实时性。</p>
+<h3 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h3><ul>
+<li>用 <code>init()</code> 成功代表设备永久可用，忽略运行中掉电、总线错误和时钟切换。</li>
+<li>回调在 ISR 中执行，却调用锁、日志格式化或阻塞协议栈。</li>
+<li>DMA 启动后立刻复用栈上缓冲区，或未定义 cache clean&#x2F;invalidate 的责任方。</li>
+<li>用全局单例隐藏实例和所有权，使测试、双外设与并发失效。</li>
+<li>在 HAL、协议层和应用层各做一遍重试，形成不可控的延迟放大。</li>
+</ul>
+<h3 id="验证清单"><a href="#验证清单" class="headerlink" title="验证清单"></a>验证清单</h3><ul>
+<li>为每个 API 记录前置状态、后置状态、上下文、阻塞性、超时单位和错误码。</li>
+<li>对 init&#x2F;start&#x2F;complete&#x2F;cancel&#x2F;timeout&#x2F;error&#x2F;recover 绘制状态转移并覆盖非法调用。</li>
+<li>用 loopback 或硬件夹具验证参数、实际波形、部分传输和错误注入。</li>
+<li>在 ISR&#x2F;线程并发、重复取消、回调重入、掉电和 DMA&#x2F;cache 条件下运行压力测试。</li>
+<li>capability、API version 与实现 version 不匹配时必须可观测地失败。</li>
+</ul>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>异步发送函数返回 0 后，调用者能否立即修改发送缓冲区？不能仅凭返回值判断；必须由契约规定所有权转移，并等待完成&#x2F;取消确认后再复用。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/main/Driver/index.html">Arm CMSIS-Driver: Overview</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.zephyrproject.org/latest/kernel/drivers/index.html">Zephyr Project: Device Driver Model</a></li>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/main/Driver/driverValidation.html">Arm CMSIS-Driver: Driver Validation</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-03-24-part1.mp3" type="audio/mpeg">
@@ -1332,13 +1341,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">671k</span>
+    <span title="站点总字数">692k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">40:40</span>
+    <span title="站点阅读时长">41:56</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

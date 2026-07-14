@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：IIR滤波器与稳定性分析 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-16T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.843Z">
+<meta property="article:modified_time" content="2026-07-14T15:58:55.130Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AIIR%E6%BB%A4%E6%B3%A2%E5%99%A8%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：IIR滤波器与稳定性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-15-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-04-15 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AIIR-%E7%A8%B3%E5%AE%9A%E6%80%A7%E3%80%81SOS-%E4%B8%8E%E5%AE%9A%E7%82%B9%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：IIR 稳定性、SOS 与定点实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IIR-%E7%A8%B3%E5%AE%9A%E6%80%A7%E8%A6%81%E5%9C%A8%E5%AE%9E%E9%99%85%E7%B3%BB%E6%95%B0%E4%B8%8E%E7%AE%97%E6%9C%AF%E4%B8%AD%E9%AA%8C%E8%AF%81"><span class="nav-number">1.1.</span> <span class="nav-text">IIR 稳定性要在实际系数与算术中验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%82%B9%E5%AE%9E%E7%8E%B0%E6%98%AF%E8%8C%83%E5%9B%B4%E9%A2%84%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">定点实现是范围预算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E8%BE%B9%E7%95%8C"><span class="nav-number">1.3.</span> <span class="nav-text">适用边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">1.5.</span> <span class="nav-text">验证清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.6.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.7.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-15-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-04-15 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -199,13 +199,6 @@
         <time class="popular-posts-time">2026-04-15</time>
         <br>
       每日学习 — 2026-04-15
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/04/17/daily-study-2026-04-17/" rel="bookmark">
-        <time class="popular-posts-time">2026-04-17</time>
-        <br>
-      每日学习 — 2026-04-17
       </a>
     </li>
   </ul>
@@ -276,14 +269,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
+      <span>4.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -296,10 +289,35 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>IIR滤波器与稳定性分析</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-15 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：IIR滤波器与稳定性分析"><a href="#🔧-嵌入式知识：IIR滤波器与稳定性分析" class="headerlink" title="🔧 嵌入式知识：IIR滤波器与稳定性分析"></a>🔧 嵌入式知识：IIR滤波器与稳定性分析</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：IIR-稳定性、SOS-与定点实现"><a href="#🔧-嵌入式知识：IIR-稳定性、SOS-与定点实现" class="headerlink" title="🔧 嵌入式知识：IIR 稳定性、SOS 与定点实现"></a>🔧 嵌入式知识：IIR 稳定性、SOS 与定点实现</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="IIR-稳定性要在实际系数与算术中验证"><a href="#IIR-稳定性要在实际系数与算术中验证" class="headerlink" title="IIR 稳定性要在实际系数与算术中验证"></a>IIR 稳定性要在实际系数与算术中验证</h3><p>离散 LTI IIR 的理论 BIBO 稳定要求传递函数的极点位于单位圆内。但设计工具输出的浮点系数不是最终实现：系数量化、符号约定、结构、舍入、饱和和状态位宽都可能移动极点或改变非线性行为。高阶多项式直接型对数值误差敏感，工程上通常拆成 Second-Order Sections（SOS&#x2F;biquad）级联，并为每级安排增益与顺序。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一个 biquad（符号以具体库为准）</span><br><span class="line">y[n] = b0*x[n] + b1*x[n-1] + b2*x[n-2]</span><br><span class="line">                 + a1*y[n-1] + a2*y[n-2]</span><br></pre></td></tr></table></figure>
+
+<p>CMSIS-DSP DF1 文档使用上式的加号反馈约定；如果设计工具按常见的减号分母形式输出，导入时需要对 <code>a1/a2</code> 取反。不能只凭数组长度“看起来正确”。还要核对系数顺序、Q 格式、state 布局、<code>postShift</code> 和 fast&#x2F;regular 实现的累加器行为。</p>
+<h3 id="定点实现是范围预算"><a href="#定点实现是范围预算" class="headerlink" title="定点实现是范围预算"></a>定点实现是范围预算</h3><p>输入小于 1 不代表内部不会溢出：滤波器某些频率的峰值增益、biquad 内部状态和级联中间值可能更大。每级应估计峰值增益，分配 headroom，明确乘积&#x2F;累加位宽、右移的舍入方式和最终饱和。简单 wraparound 会把正溢出变成负值，形成严重失真甚至非线性振荡。</p>
+<p>定点递归滤波还可能出现零输入极限环：量化后的状态在几个非零码之间循环。可依据需求采用更高状态精度、舍入、微小 dither 或在安全阈值内清零，但任何处理都会改变噪声或小信号响应，必须量化验证。热切换系数时，旧状态通常不适合新滤波器；应定义清零、状态映射或交叉渐变策略。</p>
+<h3 id="适用边界"><a href="#适用边界" class="headerlink" title="适用边界"></a>适用边界</h3><p>单位圆判据针对线性、时不变、无限精度模型；含饱和、时变系数和有限字长的实现还需非线性测试。<code>filtfilt</code> 的离线零相位处理不能直接用于因果实时控制。本文不替代控制环整体稳定性分析，滤波器相位延迟可能降低闭环裕度。</p>
+<h3 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h3><ul>
+<li>浮点仿真稳定就认定 Q15&#x2F;Q31 实现稳定。</li>
+<li>把整段高阶分母一次量化，而不使用 SOS 并检查每级极点。</li>
+<li>忽略 CMSIS 与设计工具反馈系数符号不同。</li>
+<li>只测正弦稳态，不测 impulse、step、满量程和零输入尾迹。</li>
+<li>用输出未饱和推断内部累加器从未溢出。</li>
+</ul>
+<h3 id="验证清单"><a href="#验证清单" class="headerlink" title="验证清单"></a>验证清单</h3><ul>
+<li>保存采样率、SOS、设计工具版本与浮点 golden model；量化后重新计算每级极点和频响。</li>
+<li>对每级记录系数 Q 格式、postShift、状态&#x2F;累加位宽、最大内部值和饱和计数。</li>
+<li>比较 impulse、step、扫频、噪声、DC、Nyquist 附近与最大正负输入的浮点&#x2F;定点结果。</li>
+<li>长时间输入零与最小码，检查 limit cycle；在系数切换和状态恢复后重复。</li>
+<li>在目标 MCU 上测 WCET，并验证所有 blockSize、对齐和 in-place 使用条件。</li>
+</ul>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>量化后所有 biquad 极点仍在单位圆内，能否保证实现永不出现异常输出？不能；还需验证内部溢出、饱和、极限环、系数符号和状态初始化等有限字长行为。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS-DSP/main/group__BiquadCascadeDF1.html">Arm CMSIS-DSP: Biquad Cascade Direct Form I</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.sosfilt.html">SciPy: sosfilt</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-04-16-part1.mp3" type="audio/mpeg">
@@ -1323,13 +1341,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">671k</span>
+    <span title="站点总字数">692k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">40:40</span>
+    <span title="站点阅读时长">41:56</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
