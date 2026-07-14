@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：NuttX文件系统与VFS抽象 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-05-01、2026-04-30 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-02T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.856Z">
+<meta property="article:modified_time" content="2026-07-14T15:42:04.530Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9ANuttX%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8EVFS%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：NuttX文件系统与VFS抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-01-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-05-01 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-04-30 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-04-28 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-25-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 Day+7 复习：2026-04-25 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AApache-NuttX-VFS%E3%80%81%E8%AE%BE%E5%A4%87%E8%8A%82%E7%82%B9%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：Apache NuttX VFS、设备节点与文件系统挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NuttX-%E7%9A%84%E6%A0%B9%E6%98%AF%E4%BC%AA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%8C%E7%9C%9F%E5%AE%9E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8C%82%E5%9C%A8%E5%85%B6%E4%B8%AD"><span class="nav-number">1.1.</span> <span class="nav-text">NuttX 的根是伪文件系统，真实文件系统挂在其中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84%E6%8E%A5%E5%85%A5%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">1.2.</span> <span class="nav-text">可执行的接入与验证清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.3.</span> <span class="nav-text">边界与常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.4.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-01-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-05-01 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-04-30 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-04-28 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-25-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 Day+7 复习：2026-04-25 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -252,14 +252,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.5k</span>
+      <span>6.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>20 分钟</span>
+      <span>23 分钟</span>
     </span>
 </div>
 
@@ -272,10 +272,28 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>NuttX文件系统与VFS抽象</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-05-01、2026-04-30 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：NuttX文件系统与VFS抽象"><a href="#🔧-嵌入式知识：NuttX文件系统与VFS抽象" class="headerlink" title="🔧 嵌入式知识：NuttX文件系统与VFS抽象"></a>🔧 嵌入式知识：NuttX文件系统与VFS抽象</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：Apache-NuttX-VFS、设备节点与文件系统挂载"><a href="#🔧-嵌入式知识：Apache-NuttX-VFS、设备节点与文件系统挂载" class="headerlink" title="🔧 嵌入式知识：Apache NuttX VFS、设备节点与文件系统挂载"></a>🔧 嵌入式知识：Apache NuttX VFS、设备节点与文件系统挂载</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="NuttX-的根是伪文件系统，真实文件系统挂在其中"><a href="#NuttX-的根是伪文件系统，真实文件系统挂在其中" class="headerlink" title="NuttX 的根是伪文件系统，真实文件系统挂在其中"></a>NuttX 的根是伪文件系统，真实文件系统挂在其中</h3><p>本文以 Apache NuttX 12.7.0 文件系统文档为固定基线，并参考 latest 的任务资源说明。NuttX VFS 为文件、目录和设备节点提供统一的 <code>open/read/write/ioctl/close</code> 入口；根文件系统本身是无需底层介质的 pseudo file system，字符&#x2F;块设备通常注册为 <code>/dev/...</code> inode。FAT、LittleFS、SMARTFS 等真实文件系统再通过 <code>mount()</code> 绑定到底层 block&#x2F;MTD 驱动并挂到伪文件系统的目录。</p>
+<p>这与典型 Linux “真实根文件系统上再挂伪文件系统”的结构不同。VFS 只统一命名与调用，不抹平介质语义：块设备、MTD、掉电一致性、磨损均衡、缓存和并发能力仍由驱动与具体文件系统决定。选型前要确认文件系统要求 block driver、MTD driver，还是不需要二者，不能仅凭都支持 POSIX 风格 API 就互换。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">路径解析 -&gt; pseudo-FS inode</span><br><span class="line">  ├─ device inode -&gt; driver file_operations</span><br><span class="line">  └─ mount-point inode -&gt; mountpt_operations -&gt; block/MTD/transport</span><br></pre></td></tr></table></figure>
+
+<p>一个 task group 持有共享的 file list；由 <code>pthread_create()</code> 创建且属于同一组的线程共享这些文件描述符。因此一个线程关闭或复用 fd 会影响同组其他线程，驱动和应用必须定义 fd、缓冲区及 mount 的所有权。</p>
+<h3 id="可执行的接入与验证清单"><a href="#可执行的接入与验证清单" class="headerlink" title="可执行的接入与验证清单"></a>可执行的接入与验证清单</h3><ol>
+<li>固定 NuttX 版本和 Kconfig，确认 <code>CONFIG_DISABLE_MOUNTPOINT</code>、目标文件系统、block&#x2F;MTD 层、分区和 <code>/dev</code> 注册顺序。</li>
+<li>先验证底层驱动的几何信息、对齐、擦写粒度和错误传播，再格式化并挂载；启动流程要区分“未格式化”“介质缺失”“损坏”和“暂时忙”。</li>
+<li>为每个打开路径定义谁关闭 fd、能否跨线程、卸载时如何阻止新 I&#x2F;O；测试 fd 耗尽、短读写、<code>EINTR</code>&#x2F;超时、重复 mount、busy unmount 和介质拔出。</li>
+<li>对 Flash 文件系统做复位&#x2F;掉电注入、空间耗尽、磨损和恢复测试；<code>write()</code> 返回成功是否已持久化必须按具体文件系统及同步 API 判定。</li>
+<li>用目标板压力测试并记录堆、inode&#x2F;fd 上限和栈；如启用 VFS profiler，只把它当作调用次数&#x2F;耗时观测，不能替代一致性验证。</li>
+</ol>
+<h3 id="边界与常见误区"><a href="#边界与常见误区" class="headerlink" title="边界与常见误区"></a>边界与常见误区</h3><p>“everything is a file descriptor”不表示所有对象都可 seek、可并发或具有磁盘文件的持久性。VFS 锁也不能自动让设备事务原子化；跨多个 <code>write/ioctl</code> 的协议仍需上层串行化。挂载成功只证明 bind 路径完成，不证明掉电恢复、容量边界或长期磨损满足产品要求。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>应用能在 <code>/data/test.bin</code> 写入并立刻读回，是否说明文件系统可用于掉电保存配置？不足；还要在真实介质上验证同步语义、写入中断电、元数据恢复、空间耗尽和磨损寿命。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://nuttx.apache.org/docs/12.7.0/components/filesystem/index.html">Apache NuttX 12.7.0 file system and VFS</a></li>
+<li><a target="_blank" rel="noopener" href="https://nuttx.apache.org/docs/latest/implementation/nuttx_tasking.html">Apache NuttX tasking: pseudo file system and task resources</a></li>
+<li><a target="_blank" rel="noopener" href="https://nuttx.apache.org/docs/latest/components/filesystem/profiler.html">Apache NuttX VFS performance profiler</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-05-02-part1.mp3" type="audio/mpeg">
@@ -2244,13 +2262,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">655k</span>
+    <span title="站点总字数">671k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:42</span>
+    <span title="站点阅读时长">40:40</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：功率模块与散热设计 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-29、2026-06-28 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-30T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.883Z">
+<meta property="article:modified_time" content="2026-07-14T15:42:04.538Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%8A%9F%E7%8E%87%E6%A8%A1%E5%9D%97%E4%B8%8E%E6%95%A3%E7%83%AD%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：功率模块与散热设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-29-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-29 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-28 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-26-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-06-26 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%8A%9F%E7%8E%87%E6%A8%A1%E5%9D%97%E6%8D%9F%E8%80%97%E3%80%81%E7%83%AD%E8%B7%AF%E5%BE%84%E4%B8%8E%E6%95%A3%E7%83%AD%E9%AA%8C%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：功率模块损耗、热路径与散热验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%8D%9F%E8%80%97%E5%92%8C%E5%AE%8C%E6%95%B4%E7%83%AD%E8%B7%AF%E5%BE%84%E8%AE%A1%E7%AE%97%E7%BB%93%E6%B8%A9"><span class="nav-number">1.1.</span> <span class="nav-text">从损耗和完整热路径计算结温</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E4%BE%8B%E5%AD%90%EF%BC%9A%E4%B8%89%E7%9B%B8%E9%80%86%E5%8F%98%E5%8A%9F%E7%8E%87%E6%A8%A1%E5%9D%97"><span class="nav-number">1.2.</span> <span class="nav-text">工程例子：三相逆变功率模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E9%87%8F%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">1.3.</span> <span class="nav-text">测量与验证清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">适用边界与常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.5.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-29-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-29 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-28 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-26-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-06-26 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -187,37 +187,6 @@
     </div>
 
     
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
-    相关文章
-  </div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/06/28/daily-study-2026-06-28/" rel="bookmark">
-        <time class="popular-posts-time">2026-06-28</time>
-        <br>
-      每日学习 — 2026-06-28
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/07/01/daily-study-2026-07-01/" rel="bookmark">
-        <time class="popular-posts-time">2026-07-01</time>
-        <br>
-      每日学习 — 2026-07-01
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/07/02/daily-study-2026-07-02/" rel="bookmark">
-        <time class="popular-posts-time">2026-07-02</time>
-        <br>
-      每日学习 — 2026-07-02
-      </a>
-    </li>
-  </ul>
-
-          </div>
-        </div>
   </aside>
 
 
@@ -282,14 +251,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.8k</span>
+      <span>5.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>17 分钟</span>
+      <span>21 分钟</span>
     </span>
 </div>
 
@@ -302,10 +271,27 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>功率模块与散热设计</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-29、2026-06-28 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：功率模块与散热设计"><a href="#🔧-嵌入式知识：功率模块与散热设计" class="headerlink" title="🔧 嵌入式知识：功率模块与散热设计"></a>🔧 嵌入式知识：功率模块与散热设计</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：功率模块损耗、热路径与散热验证"><a href="#🔧-嵌入式知识：功率模块损耗、热路径与散热验证" class="headerlink" title="🔧 嵌入式知识：功率模块损耗、热路径与散热验证"></a>🔧 嵌入式知识：功率模块损耗、热路径与散热验证</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="从损耗和完整热路径计算结温"><a href="#从损耗和完整热路径计算结温" class="headerlink" title="从损耗和完整热路径计算结温"></a>从损耗和完整热路径计算结温</h3><p>功率模块的热设计从器件损耗开始，而不是从“额定电流”开始。导通损耗取决于工作电流、占空比和结温；开关损耗取决于母线电压、电流、开关速度、栅极驱动、寄生参数和温度。还要计入二极管反向恢复、磁性器件、母排与驱动损耗。应按真实任务周期计算每个芯片的平均与瞬态损耗，避免把数据手册单个测试点外推到全部工况。</p>
+<p>稳态一阶模型可将结到壳、壳到散热器的 TIM、散热器到环境等热阻串联，并用 <code>ΔT = P × Rθ</code> 检查结温裕量。但 <code>RθJA</code> 高度依赖 JEDEC 测试板、铜面积、气流和邻近热源，不能直接当成自有整机的常数；<code>RθJC</code>、<code>ΨJT</code> 也有特定定义和使用条件。短脉冲或周期负载需要数据手册的瞬态热阻抗 <code>Zth(t)</code> 或经过验证的 Foster&#x2F;Cauer 模型，不能只用稳态热阻。</p>
+<p>机械装配属于热路的一部分。TIM 厚度、覆盖、泵出和老化，底板平整度、螺钉顺序&#x2F;扭矩、绝缘片与爬电距离都会改变热阻和可靠性。多个芯片共用散热器时存在热耦合，风扇性能还会受风道、背压、灰尘、海拔和故障影响。设计工作结温应留有寿命和容差裕量，不能以绝对最大结温作为正常目标。</p>
+<h3 id="工程例子：三相逆变功率模块"><a href="#工程例子：三相逆变功率模块" class="headerlink" title="工程例子：三相逆变功率模块"></a>工程例子：三相逆变功率模块</h3><p>对六开关模块，先由最坏母线、电机电流、调制、开关频率和死区计算各 IGBT&#x2F;MOSFET 与二极管损耗，再把任务周期输入瞬态热模型。由允许结温反推 TIM 与散热器热阻，并检查相邻开关的热耦合。样机在高环境温度、低转速高转矩和堵转保护等最坏工况下测壳温&#x2F;散热器温度；若数据手册提供可用的温敏电参数或内部传感器，再据厂商方法估算结温。只用热像仪看塑封表面温度不能证明芯片结温安全。</p>
+<h3 id="测量与验证清单"><a href="#测量与验证清单" class="headerlink" title="测量与验证清单"></a>测量与验证清单</h3><ul>
+<li>建立可追溯损耗表，覆盖器件工艺角、结温、母线范围、开关频率、栅极电阻、死区和任务周期，并与双脉冲&#x2F;整机电气测量校准。</li>
+<li>使用正确的 <code>Rθ</code>&#x2F;<code>Zth</code> 定义构建热网络，纳入 TIM、PCB&#x2F;母排、散热器、风道及多个热源；核对模型是否允许直接串接。</li>
+<li>按厂商装配规范控制表面清洁、TIM 量、螺钉顺序和扭矩，检查装配后平整度、绝缘与局部热点。</li>
+<li>用细线热电偶、校准后的热像或厂商规定的温敏电参数测温；修正 IR 发射率并避免探头显著改变热路。</li>
+<li>在最高环境温度、最差气流、风扇降速&#x2F;失效、散热器积尘和代表性任务周期下验证稳态与瞬态温度。</li>
+<li>做功率循环、热循环和保护测试，记录结温摆幅、壳温、降额点与关断行为；热保护只能是最后防线。</li>
+</ul>
+<h3 id="适用边界与常见误区"><a href="#适用边界与常见误区" class="headerlink" title="适用边界与常见误区"></a>适用边界与常见误区</h3><p>简单热阻网络适合初步定尺寸，不足以描述强热耦合、非均匀热流、液冷冷板或快速脉冲；此时需要厂商模型、有限元或系统级测量。Foster 网络参数通常是拟合模型，不能随意把不同部件的 Foster 热阻直接串联。器件额定电流往往在理想壳温下给出，不代表实际散热器上可连续运行。增加散热器面积也不一定解决 TIM 空洞、安装压力或风道旁路造成的局部热点。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>数据手册给出 <code>RθJA = 30 °C/W</code>，是否可直接用整机环境温度和功耗计算最终结温？通常不可以。该值依赖规定的测试板和边界条件，应使用与实际热路径匹配的参数、模型或整机测量。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ti.com/lit/an/spra953d/spra953d.pdf">Texas Instruments: Semiconductor and IC Package Thermal Metrics (SPRA953D)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.infineon.com/dgdl/an-1057.pdf?fileId=5546d462533600a401535591d3170fbd">Infineon: AN-1057 Heatsink Characteristics</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-06-30-part1.mp3" type="audio/mpeg">
@@ -1958,13 +1944,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">655k</span>
+    <span title="站点总字数">671k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:42</span>
+    <span title="站点阅读时长">40:40</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

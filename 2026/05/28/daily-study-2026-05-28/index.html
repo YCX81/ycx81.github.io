@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：电源时序与上电启动流程 · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-28T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.873Z">
+<meta property="article:modified_time" content="2026-07-14T15:42:04.533Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E7%94%B5%E6%BA%90%E6%97%B6%E5%BA%8F%E4%B8%8E%E4%B8%8A%E7%94%B5%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：电源时序与上电启动流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%9A%E7%94%B5%E6%BA%90%E6%97%B6%E5%BA%8F%E3%80%81%E4%B8%8A%E7%94%B5%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%95%85%E9%9A%9C%E8%B7%AF%E5%BE%84"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：多电源时序、上电启动与故障路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%8A%E4%B8%8A%E7%94%B5%E8%A6%81%E6%B1%82%E5%86%99%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%E7%9A%84%E6%97%B6%E5%BA%8F%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.1.</span> <span class="nav-text">把上电要求写成可验证的时序约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%A4%84%E7%90%86%E5%99%A8%E3%80%81DDR-%E4%B8%8E%E5%A4%96%E8%AE%BE"><span class="nav-number">1.2.</span> <span class="nav-text">工程例子：处理器、DDR 与外设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E9%87%8F%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">1.3.</span> <span class="nav-text">测量与验证清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">适用边界与常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.5.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -199,20 +199,6 @@
         <time class="popular-posts-time">2026-05-29</time>
         <br>
       每日学习 — 2026-05-29
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/05/30/daily-study-2026-05-30/" rel="bookmark">
-        <time class="popular-posts-time">2026-05-30</time>
-        <br>
-      每日学习 — 2026-05-30
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/06/01/daily-study-2026-06-01/" rel="bookmark">
-        <time class="popular-posts-time">2026-06-01</time>
-        <br>
-      每日学习 — 2026-06-01
       </a>
     </li>
   </ul>
@@ -283,14 +269,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>3.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
+      <span>14 分钟</span>
     </span>
 </div>
 
@@ -303,10 +289,27 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>电源时序与上电启动流程</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：电源时序与上电启动流程"><a href="#🔧-嵌入式知识：电源时序与上电启动流程" class="headerlink" title="🔧 嵌入式知识：电源时序与上电启动流程"></a>🔧 嵌入式知识：电源时序与上电启动流程</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：多电源时序、上电启动与故障路径"><a href="#🔧-嵌入式知识：多电源时序、上电启动与故障路径" class="headerlink" title="🔧 嵌入式知识：多电源时序、上电启动与故障路径"></a>🔧 嵌入式知识：多电源时序、上电启动与故障路径</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="把上电要求写成可验证的时序约束"><a href="#把上电要求写成可验证的时序约束" class="headerlink" title="把上电要求写成可验证的时序约束"></a>把上电要求写成可验证的时序约束</h3><p>多电源系统的正确启动顺序只能从目标器件数据手册、硬件设计指南和绝对最大额定值推导。要逐条记录每路电压的启动&#x2F;关断先后、允许的轨间电压差、斜率、稳定阈值、延迟、输入输出在掉电时的状态，以及外部信号能否在器件未供电时进入。某些器件允许任意顺序，另一些会因保护二极管导通、反向供电、锁存或配置失败而受损；不能把“核心电压总要先上”当成通用规则。</p>
+<p>一个可靠的启动链通常由稳压器 <code>EN</code>、<code>PG/POK</code>、监控器和系统 <code>RESET</code> 组成：前级真正达到合格窗口并经过去抖后再允许下一级启动，所有必需电源、时钟和复位条件成立后才释放处理器。还要定义掉电与故障路径，包括欠压时是否立即复位、哪一路先关闭、输出是否主动放电、重试次数和闩锁策略。只设计正常上电，不设计 brownout 和半上电状态，会留下最难复现的问题。</p>
+<p>简单 RC 接 <code>EN</code> 只能产生依赖电源斜率、阈值、公差、漏电和温度的近似延迟。若轨间差、斜率或故障响应有严格窗口，应使用带精确门限&#x2F;监控的 sequencer、PMIC 或受监督状态机；软件只有在其自身电源和时钟已经可靠后才能参与，不能负责救活尚未启动的自己。</p>
+<h3 id="工程例子：处理器、DDR-与外设"><a href="#工程例子：处理器、DDR-与外设" class="headerlink" title="工程例子：处理器、DDR 与外设"></a>工程例子：处理器、DDR 与外设</h3><p>系统有核心、I&#x2F;O、DDR 和模拟四路电源。先把处理器和内存数据手册的约束合并为状态图，而不是凭经验排列电压高低。某路 <code>PG</code> 仅表示调节器输出越过内部阈值，未必代表斜率、纹波、时钟或负载端电压均合格，因此下一步延迟和复位释放条件要按整机要求设置。外设通过 I&#x2F;O 与处理器相连时，还要验证任一侧断电、另一侧仍为高电平的注入电流，必要时使用隔离、限流或掉电高阻器件。</p>
+<h3 id="测量与验证清单"><a href="#测量与验证清单" class="headerlink" title="测量与验证清单"></a>测量与验证清单</h3><ul>
+<li>用多通道示波器同屏捕获输入、每条电源轨、<code>EN</code>、<code>PG</code>、时钟和 <code>RESET</code>；统一触发并测实际阈值、斜率、轨间差和复位保持时间。</li>
+<li>覆盖输入慢升&#x2F;快升、热插拔、短时跌落、反复开关、最小&#x2F;最大负载、高低温和元件容差，而不只测一次冷启动。</li>
+<li>在电源稳定前后检查所有跨电源域引脚的电压和注入电流，确认未超过绝对最大额定值。</li>
+<li>模拟某一路启动失败、迟到、过压或掉电，确认系统进入已定义的安全状态，不发生无休止重启或功率级误动作。</li>
+<li>测量浪涌电流和输入跌落；错峰启动虽可减小峰值，但必须仍满足器件顺序和最大启动时间。</li>
+<li>保存启动&#x2F;关断波形与测试条件，按量产慢&#x2F;快角、不同电源批次和固件版本回归。</li>
+</ul>
+<h3 id="适用边界与常见误区"><a href="#适用边界与常见误区" class="headerlink" title="适用边界与常见误区"></a>适用边界与常见误区</h3><p>厂商应用笔记给出的是方法或特定器件示例，不覆盖你的全部负载和连接关系。<code>PG</code> 不是理想数字信号：其门限、迟滞、延迟、开漏上拉所在电源和掉电行为均需核对。把所有轨同时拉升也不一定叫“无顺序要求”，仍要满足轨间差与外部信号限制。电源最终值正确也不能证明过程安全，损伤和锁存往往发生在斜坡中间。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>四路电源最终都在额定值内，处理器偶尔仍不启动，是否可以排除电源问题？不可以。还需同屏检查上电斜率、先后、<code>PG</code>、复位、时钟、输入跌落和未供电 I&#x2F;O 注入。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.analog.com/en/resources/app-notes/an-932.html">Analog Devices: AN-932 Power Supply Sequencing</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.analog.com/en/resources/app-notes/an-1311.html">Analog Devices: AN-1311 Complex Power Supply Sequencing Made Easy</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-05-28-part1.mp3" type="audio/mpeg">
@@ -1016,13 +1019,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">655k</span>
+    <span title="站点总字数">671k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:42</span>
+    <span title="站点阅读时长">40:40</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

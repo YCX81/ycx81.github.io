@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：电源完整性(PI)分析 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-05-29、2026-05-28 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-30T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.874Z">
+<meta property="article:modified_time" content="2026-07-14T15:42:04.534Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E7%94%B5%E6%BA%90%E5%AE%8C%E6%95%B4%E6%80%A7-PI-%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：电源完整性(PI)分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-29-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-05-29 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-05-28 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E7%94%B5%E6%BA%90%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%9A%E7%9B%AE%E6%A0%87%E9%98%BB%E6%8A%97%E3%80%81%E5%8E%BB%E8%80%A6%E4%B8%8E-PDN-%E9%AA%8C%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：电源完整性：目标阻抗、去耦与 PDN 验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%BA%90%E5%AE%8C%E6%95%B4%E6%80%A7%E5%85%B3%E6%B3%A8%E7%9A%84%E6%98%AF%E8%B4%9F%E8%BD%BD%E7%AB%AF%E7%9A%84%E9%A2%91%E5%9F%9F%E9%98%BB%E6%8A%97"><span class="nav-number">1.1.</span> <span class="nav-text">电源完整性关注的是负载端的频域阻抗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E4%BE%8B%E5%AD%90%EF%BC%9A%E6%97%A0%E7%BA%BF%E5%8F%91%E5%B0%84%E6%97%B6-MCU-%E5%A4%8D%E4%BD%8D"><span class="nav-number">1.2.</span> <span class="nav-text">工程例子：无线发射时 MCU 复位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E9%87%8F%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">1.3.</span> <span class="nav-text">测量与验证清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">适用边界与常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.5.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-29-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-05-29 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-05-28 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -205,20 +205,6 @@
         <time class="popular-posts-time">2026-05-31</time>
         <br>
       每日学习 — 2026-05-31
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/05/28/daily-study-2026-05-28/" rel="bookmark">
-        <time class="popular-posts-time">2026-05-28</time>
-        <br>
-      每日学习 — 2026-05-28
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/06/01/daily-study-2026-06-01/" rel="bookmark">
-        <time class="popular-posts-time">2026-06-01</time>
-        <br>
-      每日学习 — 2026-06-01
       </a>
     </li>
   </ul>
@@ -289,14 +275,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4k</span>
+      <span>5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>15 分钟</span>
+      <span>18 分钟</span>
     </span>
 </div>
 
@@ -309,10 +295,27 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>电源完整性(PI)分析</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-05-29、2026-05-28 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：电源完整性-PI-分析"><a href="#🔧-嵌入式知识：电源完整性-PI-分析" class="headerlink" title="🔧 嵌入式知识：电源完整性(PI)分析"></a>🔧 嵌入式知识：电源完整性(PI)分析</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：电源完整性：目标阻抗、去耦与-PDN-验证"><a href="#🔧-嵌入式知识：电源完整性：目标阻抗、去耦与-PDN-验证" class="headerlink" title="🔧 嵌入式知识：电源完整性：目标阻抗、去耦与 PDN 验证"></a>🔧 嵌入式知识：电源完整性：目标阻抗、去耦与 PDN 验证</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="电源完整性关注的是负载端的频域阻抗"><a href="#电源完整性关注的是负载端的频域阻抗" class="headerlink" title="电源完整性关注的是负载端的频域阻抗"></a>电源完整性关注的是负载端的频域阻抗</h3><p>电源分配网络（PDN）从稳压器、连接器、走线&#x2F;平面、储能与去耦电容，一直延伸到封装和芯片。负载电流变化通过 PDN 阻抗变成电压扰动。若允许电压变化为 <code>ΔV</code>、最坏电流阶跃为 <code>ΔI</code>，可用 <code>Ztarget = ΔV / ΔI</code> 建立首个目标；但真实目标还要按负载电流频谱、芯片厂商阻抗要求、封装与板级模型细化，不能把一个常数机械覆盖到无限频率。</p>
+<p>不同部件覆盖不同频段：稳压器控制环路处理较低频变化，bulk 电容提供较慢的大电荷，靠近负载的低 ESL 电容和紧耦合电源&#x2F;地平面处理更快的电流，封装与片上电容接管更高频。电容的实际阻抗包含 ESR、ESL、焊盘、过孔和安装电感；MLCC 还受直流偏压、温度和容差影响。简单堆叠许多不同容值可能在它们之间形成反谐振峰，数量更多并不必然更好。</p>
+<p>布局目标是降低完整供电回路的电感：电容电源端与地端都要有短而宽的连接、紧邻过孔和连续参考平面。只把器件在二维图上贴近引脚却让地回流绕远，仍会失效。磁珠会把上下游阻抗和电容网络耦合成新的谐振系统；除非有阻尼、稳定性与频谱证据，不应把“每路电源串磁珠”当作默认净化方案。</p>
+<h3 id="工程例子：无线发射时-MCU-复位"><a href="#工程例子：无线发射时-MCU-复位" class="headerlink" title="工程例子：无线发射时 MCU 复位"></a>工程例子：无线发射时 MCU 复位</h3><p>无线模块发射瞬间电流阶跃使 3.3 V 轨在模块端下陷，MCU 触发 brownout。先在模块电源引脚用低电感探测测真实瞬态，并同步捕获稳压器输入、输出与复位。若低频跌落来自电池&#x2F;连接器阻抗，应改善输入路径或 bulk 储能；若高频尖峰来自局部安装电感，则优化去耦回路和层叠。单纯在电源入口再加一个 100 nF 往往无效，因为它距负载太远且作用频段不匹配。</p>
+<h3 id="测量与验证清单"><a href="#测量与验证清单" class="headerlink" title="测量与验证清单"></a>测量与验证清单</h3><ul>
+<li>由电压容限和实际电流谱定义目标阻抗&#x2F;时域跌落指标，包含 DC 压降、纹波、负载阶跃和噪声频带。</li>
+<li>在设计阶段使用稳压器、板级、封装和去耦模型扫阻抗，检查反谐振和控制环路稳定性；模型和安装参数要可追溯。</li>
+<li>用两端口或适当的一端口 VNA 方法测板级 PDN 阻抗，并校准&#x2F;去嵌夹具；不要把未经校准的曲线当绝对值。</li>
+<li>在负载引脚以短回路&#x2F;同轴探测测负载阶跃，记录峰值、恢复时间和振铃频率，同时检查稳压器环路响应。</li>
+<li>核对 MLCC 在工作偏压下的有效容量、器件额定纹波电流、温升与可靠性；检查焊盘&#x2F;过孔&#x2F;平面而非只核 BOM。</li>
+<li>覆盖电池低电量、线束最长、连接器老化、高低温、不同工作模式和多个负载同时切换的最坏组合。</li>
+</ul>
+<h3 id="适用边界与常见误区"><a href="#适用边界与常见误区" class="headerlink" title="适用边界与常见误区"></a>适用边界与常见误区</h3><p>目标阻抗法是设计框架，不是所有芯片都能从一个 <code>ΔI</code> 阶跃准确描述；高速处理器可能需要厂商提供的频域模型和专用工具。示波器波形合格也不能证明全频段无阻抗峰，VNA 曲线平坦也不能替代真实启动与负载瞬态。去耦电容“越靠近越好”需落实为整个供电&#x2F;回流环路的电感，而不只是封装间直线距离。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>把十颗不同容值 MLCC 并联后，PDN 阻抗是否一定下降？不一定。寄生参数与安装电感会产生谐振和反谐振，必须使用实际模型并通过阻抗&#x2F;瞬态测量验证。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ti.com/lit/an/sprabv2/sprabv2.pdf">Texas Instruments: General Hardware Design&#x2F;BGA PCB Design&#x2F;BGA Decoupling (SPRABV2)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.analog.com/en/resources/app-notes/an-1142.html">Analog Devices: AN-1142 Techniques for High Speed ADC PCB Layout</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-05-30-part1.mp3" type="audio/mpeg">
@@ -1650,13 +1653,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">655k</span>
+    <span title="站点总字数">671k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:42</span>
+    <span title="站点阅读时长">40:40</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
