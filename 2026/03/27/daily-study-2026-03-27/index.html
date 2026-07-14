@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：固件架构设计（状态机 · 分层 · Bootloader · OTA） · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &#x2F; 03-25 &#x2F; 03-26 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-27T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-27T00:17:46.728Z">
+<meta property="article:modified_time" content="2026-07-14T14:41:51.835Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：固件架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E5%8E%9F%E5%88%99"><span class="nav-number">1.1.</span> <span class="nav-text">一、分层架构原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%88FSM%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">二、有限状态机（FSM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Bootloader-%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、Bootloader 设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81OTA-%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">四、OTA 升级流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.5.</span> <span class="nav-text">五、常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91"><span class="nav-number">1.6.</span> <span class="nav-text">六、面试高频</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日词汇（50词）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9F%E8%A7%88%E8%A1%A8"><span class="nav-number">2.1.</span> <span class="nav-text">速览表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.2.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E9%87%8A%E4%B9%89"><span class="nav-number">2.3.</span> <span class="nav-text">详细释义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885%E5%8F%A5%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5句）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-burn-the-midnight-oil"><span class="nav-number">3.1.</span> <span class="nav-text">1. burn the midnight oil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-a-chain-is-only-as-strong-as-its-weakest-link"><span class="nav-number">3.2.</span> <span class="nav-text">2. a chain is only as strong as its weakest link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kick-the-can-down-the-road"><span class="nav-number">3.3.</span> <span class="nav-text">3. kick the can down the road</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-paint-oneself-into-a-corner"><span class="nav-number">3.4.</span> <span class="nav-text">4. paint oneself into a corner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-separate-the-wheat-from-the-chaff"><span class="nav-number">3.5.</span> <span class="nav-text">5. separate the wheat from the chaff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-23-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC4%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-RTOS%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 2026-03-23 批次（第4天复习 — RTOS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-25-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC2%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-FOC%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 2026-03-25 批次（第2天复习 — FOC电机控制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-26-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 2026-03-26 批次（第1天复习 — 通信协议）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%9B%BA%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：固件架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日词汇（50词）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9F%E8%A7%88%E8%A1%A8"><span class="nav-number">2.1.</span> <span class="nav-text">速览表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.2.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E9%87%8A%E4%B9%89"><span class="nav-number">2.3.</span> <span class="nav-text">详细释义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885%E5%8F%A5%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5句）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-burn-the-midnight-oil"><span class="nav-number">3.1.</span> <span class="nav-text">1. burn the midnight oil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-a-chain-is-only-as-strong-as-its-weakest-link"><span class="nav-number">3.2.</span> <span class="nav-text">2. a chain is only as strong as its weakest link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kick-the-can-down-the-road"><span class="nav-number">3.3.</span> <span class="nav-text">3. kick the can down the road</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-paint-oneself-into-a-corner"><span class="nav-number">3.4.</span> <span class="nav-text">4. paint oneself into a corner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-separate-the-wheat-from-the-chaff"><span class="nav-number">3.5.</span> <span class="nav-text">5. separate the wheat from the chaff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-23-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC4%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-RTOS%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 2026-03-23 批次（第4天复习 — RTOS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-25-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC2%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-FOC%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 2026-03-25 批次（第2天复习 — FOC电机控制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-2026-03-26-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%E2%80%94-%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 2026-03-26 批次（第1天复习 — 通信协议）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -253,14 +253,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>2.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -273,53 +273,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>固件架构设计（状态机 · 分层 · Bootloader · OTA）</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &#x2F; 03-25 &#x2F; 03-26 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：固件架构设计"><a href="#🔧-嵌入式知识：固件架构设计" class="headerlink" title="🔧 嵌入式知识：固件架构设计"></a>🔧 嵌入式知识：固件架构设计</h2><h3 id="一、分层架构原则"><a href="#一、分层架构原则" class="headerlink" title="一、分层架构原则"></a>一、分层架构原则</h3><p>优秀固件的核心是「关注点分离」，自底向上分为四层：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────┐</span><br><span class="line">│        Application Layer    │  业务逻辑</span><br><span class="line">├─────────────────────────────┤</span><br><span class="line">│        Middleware Layer     │  协议栈、文件系统、RTOS</span><br><span class="line">├─────────────────────────────┤</span><br><span class="line">│        HAL / BSP Layer      │  硬件抽象、板级支持</span><br><span class="line">├─────────────────────────────┤</span><br><span class="line">│        Hardware             │  寄存器、外设</span><br><span class="line">└─────────────────────────────┘</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>HAL</strong>（Hardware Abstraction Layer）：屏蔽芯片差异，向上提供统一接口</li>
-<li><strong>BSP</strong>（Board Support Package）：特定开发板的初始化、引脚配置</li>
-<li>上层代码通过接口调用，<strong>不直接操作寄存器</strong></li>
-</ul>
-<h3 id="二、有限状态机（FSM）"><a href="#二、有限状态机（FSM）" class="headerlink" title="二、有限状态机（FSM）"></a>二、有限状态机（FSM）</h3><p>表驱动状态机是嵌入式控制逻辑的核心模式：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span></span><br><span class="line">    STATE_IDLE, STATE_RUNNING,</span><br><span class="line">    STATE_FAULT, STATE_STOP</span><br><span class="line">&#125; MotorState_t;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> StateHandler_t state_table[] = &#123;</span><br><span class="line">    [STATE_IDLE]    = &#123; idle_entry,    idle_run,    idle_exit    &#125;,</span><br><span class="line">    [STATE_RUNNING] = &#123; running_entry, running_run, running_exit &#125;,</span><br><span class="line">    [STATE_FAULT]   = &#123; fault_entry,   fault_run,   fault_exit   &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fsm_run</span><span class="params">(FSM_t *fsm, Event_t event)</span> &#123;</span><br><span class="line">    MotorState_t next = transition(fsm-&gt;current, event);</span><br><span class="line">    <span class="keyword">if</span> (next != fsm-&gt;current) &#123;</span><br><span class="line">        state_table[fsm-&gt;current].<span class="built_in">exit</span>();</span><br><span class="line">        state_table[next].entry();</span><br><span class="line">        fsm-&gt;current = next;</span><br><span class="line">    &#125;</span><br><span class="line">    state_table[fsm-&gt;current].run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、Bootloader-设计"><a href="#三、Bootloader-设计" class="headerlink" title="三、Bootloader 设计"></a>三、Bootloader 设计</h3><p>Flash 分区典型布局（STM32）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x0800_0000 ┌──────────────┐</span><br><span class="line">            │  Bootloader  │  ~16KB</span><br><span class="line">0x0800_4000 ├──────────────┤</span><br><span class="line">            │  App Slot A  │  主应用</span><br><span class="line">0x0808_0000 ├──────────────┤</span><br><span class="line">            │  App Slot B  │  OTA备份槽（双Bank）</span><br><span class="line">0x080C_0000 ├──────────────┤</span><br><span class="line">            │  Config/NVM  │  参数存储</span><br><span class="line">            └──────────────┘</span><br></pre></td></tr></table></figure>
-
-<p>跳转代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">jump_to_app</span><span class="params">(<span class="type">uint32_t</span> app_addr)</span> &#123;</span><br><span class="line">    <span class="type">uint32_t</span> sp = *(<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)(app_addr);</span><br><span class="line">    <span class="type">uint32_t</span> pc = *(<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)(app_addr + <span class="number">4</span>);</span><br><span class="line">    __disable_irq();</span><br><span class="line">    SysTick-&gt;CTRL = <span class="number">0</span>;</span><br><span class="line">    __set_MSP(sp);</span><br><span class="line">    ((<span class="type">void</span> (*)(<span class="type">void</span>))pc)();  <span class="comment">// 永不返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="四、OTA-升级流程"><a href="#四、OTA-升级流程" class="headerlink" title="四、OTA 升级流程"></a>四、OTA 升级流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">设备                          服务器</span><br><span class="line"> │── 请求版本信息 ────────────→ │</span><br><span class="line"> │← 版本号 + 固件大小 + hash ──│</span><br><span class="line"> │── 分片下载（每包256B）──────→│</span><br><span class="line"> │  …循环直到完成…</span><br><span class="line"> │── CRC验证 OK ───────────────│</span><br><span class="line"> │  写入备用Slot B</span><br><span class="line"> │  设置升级标志（NVM）</span><br><span class="line"> │  Reboot</span><br><span class="line"> │── Bootloader验证Slot B ─────│</span><br><span class="line"> │── 交换Slot A/B，启动新固件 ─│</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键安全措施：</strong></p>
-<ul>
-<li>固件头包含：版本号、目标硬件ID、CRC32、ECDSA签名</li>
-<li>回滚机制：新固件首次启动须「确认」，否则自动回滚</li>
-</ul>
-<h3 id="五、常见误区"><a href="#五、常见误区" class="headerlink" title="五、常见误区"></a>五、常见误区</h3><table>
-<thead>
-<tr>
-<th>误区</th>
-<th>正确做法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>所有逻辑堆进 main() 大循环</td>
-<td>用状态机或RTOS任务拆分</td>
-</tr>
-<tr>
-<td>HAL层反向调用上层函数</td>
-<td>依赖方向单向向下，HAL不知道上层存在</td>
-</tr>
-<tr>
-<td>OTA只校验CRC不验签名</td>
-<td>生产设备必须验ECDSA&#x2F;RSA签名</td>
-</tr>
-</tbody></table>
-<h3 id="六、面试高频"><a href="#六、面试高频" class="headerlink" title="六、面试高频"></a>六、面试高频</h3><p><strong>Q: Bootloader 如何安全隔离 Application？</strong><br>A: Flash分区 + MPU（内存保护单元）隔离。跳转时清除所有中断使能，重置向量表 SCB-&gt;VTOR。</p>
-<p><strong>Q: 双Bank OTA 的优势？</strong><br>A: 下载到备用Slot时应用正常运行（Zero Downtime），失败可自动回滚，安全性远高于单Bank原地升级。</p>
-<p><strong>Q: 状态机 vs RTOS任务，如何选择？</strong><br>A: 单一控制流、时序确定→状态机；多并发任务、有阻塞等待→RTOS。复杂系统常结合：每个RTOS任务内部用状态机。</p>
+<h2 id="🔧-嵌入式知识：固件架构设计"><a href="#🔧-嵌入式知识：固件架构设计" class="headerlink" title="🔧 嵌入式知识：固件架构设计"></a>🔧 嵌入式知识：固件架构设计</h2><blockquote>
+<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+</blockquote>
+<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
 <hr>
 <h2 id="📖-今日词汇（50词）"><a href="#📖-今日词汇（50词）" class="headerlink" title="📖 今日词汇（50词）"></a>📖 今日词汇（50词）</h2><h3 id="速览表"><a href="#速览表" class="headerlink" title="速览表"></a>速览表</h3><table>
 <thead>
@@ -989,13 +946,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">684k</span>
+    <span title="站点总字数">649k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:27</span>
+    <span title="站点阅读时长">39:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

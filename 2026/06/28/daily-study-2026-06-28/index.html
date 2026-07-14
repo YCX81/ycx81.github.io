@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：LoRa广域网通信 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-27、2026-06-26 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-28T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-28T00:02:24.892Z">
+<meta property="article:modified_time" content="2026-07-14T14:41:51.881Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9ALoRa%E5%B9%BF%E5%9F%9F%E7%BD%91%E9%80%9A%E4%BF%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：LoRa广域网通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%EF%BC%88SX1276-%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BC%A0%E8%BE%93-%E6%B7%B1%E5%BA%A6%E7%9D%A1%E7%9C%A0%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码（SX1276 点对点传输 + 深度睡眠）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-27-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-27 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-26-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-26 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9ALoRa%E5%B9%BF%E5%9F%9F%E7%BD%91%E9%80%9A%E4%BF%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：LoRa广域网通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-27-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-27 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-26-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-26 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -197,6 +197,20 @@
         <time class="popular-posts-time">2026-06-27</time>
         <br>
       每日学习 — 2026-06-27
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/06/30/daily-study-2026-06-30/" rel="bookmark">
+        <time class="popular-posts-time">2026-06-30</time>
+        <br>
+      每日学习 — 2026-06-30
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/06/29/daily-study-2026-06-29/" rel="bookmark">
+        <time class="popular-posts-time">2026-06-29</time>
+        <br>
+      每日学习 — 2026-06-29
       </a>
     </li>
   </ul>
@@ -267,14 +281,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>18 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -287,40 +301,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>LoRa广域网通信</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-27、2026-06-26 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：LoRa广域网通信"><a href="#🔧-嵌入式知识：LoRa广域网通信" class="headerlink" title="🔧 嵌入式知识：LoRa广域网通信"></a>🔧 嵌入式知识：LoRa广域网通信</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>LoRa（Long Range）是 Semtech 专有的线性调频扩频（CSS, Chirp Spread Spectrum）物理层，工作于 Sub-GHz ISM 频段（中国 470MHz、欧洲 868MHz、美国 915MHz）。核心特性：</p>
-<ul>
-<li><strong>超长距离</strong>：城区 2~5km，郊区 10km+，视距 15km 以上。</li>
-<li><strong>超低功耗</strong>：发射 100mW（20dBm）下峰值 ~120mA，但配合深度睡眠全年可靠电池跑。</li>
-<li><strong>超低速率</strong>：几百 bps 到几十 kbps，不是给视频用的。</li>
-</ul>
-<p>关键物理参数：</p>
-<ul>
-<li><strong>扩频因子 SF（Spreading Factor）</strong>：SF7~SF12。每增加 1，空中时间翻倍、灵敏度提升 ~2.5dB、距离更远。</li>
-<li><strong>带宽 BW</strong>：125 &#x2F; 250 &#x2F; 500 kHz。BW 越大速率越高、抗多径越强，但占用频谱。</li>
-<li><strong>编码率 CR</strong>：4&#x2F;5、4&#x2F;6、4&#x2F;7、4&#x2F;8，纠错强度换速率。</li>
-<li><strong>数据速率</strong>：典型 SF7&#x2F;BW125 ≈ 5.5kbps，SF12&#x2F;BW125 ≈ 250bps。</li>
-</ul>
-<p><strong>LoRaWAN</strong> 是建立在 LoRa PHY 上的 MAC 层，ClassA&#x2F;B&#x2F;C 三种工作模式：</p>
-<ul>
-<li><strong>Class A</strong>：上行完后开两个短接收窗口（RX1 &#x2F; RX2），功耗最低，适合电池设备。</li>
-<li><strong>Class B</strong>：节点在 Beacon 同步下周期性开接收窗，低功耗 + 下行可控。</li>
-<li><strong>Class C</strong>：一直开接收（除了上行时），下行任意时刻，功耗高，但响应快。</li>
-</ul>
-<p>典型 LoRaWAN 架构：<strong>End Device → Gateway（集中器，多通道同时监听）→ Network Server（调度 &#x2F; 去重 &#x2F; ADR）→ Application Server（业务）</strong>。</p>
-<h3 id="关键代码（SX1276-点对点传输-深度睡眠）"><a href="#关键代码（SX1276-点对点传输-深度睡眠）" class="headerlink" title="关键代码（SX1276 点对点传输 + 深度睡眠）"></a>关键代码（SX1276 点对点传输 + 深度睡眠）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;sx1276.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">lora_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    SX1276_Reset();</span><br><span class="line">    SX1276_SetOpMode(RF_OPMODE_SLEEP);</span><br><span class="line">    SX1276_SetModem (MODEM_LORA);</span><br><span class="line">    SX1276_SetFrequency(<span class="number">470100000</span>);                   <span class="comment">// 470.1MHz</span></span><br><span class="line">    SX1276_SetTxConfig(MODEM_LORA,</span><br><span class="line">        <span class="comment">/*power*/</span><span class="number">14</span>, <span class="comment">/*fdev*/</span><span class="number">0</span>, <span class="comment">/*bw*/</span>BW_125K,</span><br><span class="line">        <span class="comment">/*sf*/</span>  <span class="number">12</span>, <span class="comment">/*cr*/</span> CR_4_5,</span><br><span class="line">        <span class="comment">/*preamble*/</span><span class="number">8</span>, <span class="comment">/*fixLen*/</span><span class="literal">false</span>, <span class="comment">/*crcOn*/</span><span class="literal">true</span>, <span class="literal">false</span>, <span class="number">0</span>, <span class="literal">false</span>, <span class="number">3000</span>);</span><br><span class="line">    SX1276_SetRxConfig(MODEM_LORA,</span><br><span class="line">        BW_125K, <span class="number">12</span>, CR_4_5, <span class="number">0</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="literal">false</span>, <span class="number">0</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="number">0</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">lora_send</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *p, <span class="type">uint8_t</span> len)</span> &#123;</span><br><span class="line">    SX1276_Send((<span class="type">uint8_t</span>*)p, len);                    <span class="comment">// 阻塞，内部 IRQ 指示完成</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">lora_enter_rx</span><span class="params">(<span class="type">void</span>)</span> &#123; SX1276_SetRx(<span class="number">0</span>); &#125;         <span class="comment">// timeout=0 即持续</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 深度睡眠：STOP 模式 + RTC 唤醒，典型电流 &lt;5μA</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">system_sleep_ms</span><span class="params">(<span class="type">uint32_t</span> ms)</span> &#123;</span><br><span class="line">    HAL_RTCEx_SetWakeUpTimer_IT(&amp;hrtc, ms/<span class="number">1000</span>, RTC_WAKEUPCLOCK_CK_SPRE_16BITS);</span><br><span class="line">    HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);</span><br><span class="line">    SystemClock_Config();                             <span class="comment">// 唤醒后重配 PLL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li><strong>LoRa vs LoRaWAN</strong>：LoRa 只是物理层，LoRaWAN 是基于它的通信协议栈（入网、加密、ADR）。点对点小网络完全可以只用 LoRa PHY + 自研协议。</li>
-<li><strong>速率与距离不能兼得</strong>：SF12 最远但空中时间长，占空比法规限制更严（欧洲 1% duty-cycle 可能就发不了大包）。</li>
-<li><strong>频段合规</strong>：中国 470~510MHz 民用，不允许 868&#x2F;915；欧美则相反；硬件可能相同但频段软件定死。</li>
-<li><strong>集中器工作原理</strong>：不是单路扫描，而是 8 通道 LoRa 同时解调（Semtech SX1301 &#x2F; SX1302），以及 1 路 GFSK。</li>
-<li><strong>电池寿命计算</strong>：要把 Tx 电流 × Tx 时间 + Rx 电流 × Rx 窗口 + 睡眠电流 × 睡眠时间，全部加起来再除以容量；只算 Tx 会高估一年以上。</li>
-<li><strong>地面反射多径</strong>：LoRa 抗多径强，但低矮天线仍会出现 fading；现场多用 90 度偏振方向实验。</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：LoRa 能达到 10km，为什么 WiFi 才 100m？</strong><br>A：① Sub-GHz 频段波长长、绕射强，穿墙优于 2.4GHz；② 扩频把信号铺在宽带中，接收灵敏度到 -140dBm（比 Wifi 好 40dB）；③ 数据率极低（几 kbps），信号带宽窄，处理增益高。代价就是带宽小，无法传图片视频。</p>
-<p><strong>Q2：为什么 LoRaWAN Class A 功耗最低？</strong><br>A：节点发送一次上行后，只在 RX1（频率与上行一致）和 RX2（固定下行信道）两个短时间窗打开接收，其他时间全部深度睡眠。下行只能在节点上行之后，Gateway 排队调度；这对遥控类应用不合适，但对传感器非常省电。</p>
-<p><strong>Q3：如何提升 LoRa 节点的工作稳定性？</strong><br>A：① 天线要加匹配网络并做 VSWR 测量；② 时钟用 TCXO（Semtech 要求 ±15ppm），普通 XO 温度漂移会丢同步；③ 加 ADR（Adaptive Data Rate）让服务器动态调 SF；④ 注意电池内阻，发射瞬间电压下跌 MCU 复位；⑤ 统计 PER（包错误率）做远程诊断。</p>
-<p><strong>Q4：LoRaWAN 安全吗？</strong><br>A：协议层两级 AES-128 密钥：NwkSKey（网络完整性 + MIC）、AppSKey（应用数据加密）。下行有 frame counter 防重放。但需要关心 OTAA&#x2F;ABP 入网方式：OTAA 每次入网动态协商密钥，较 ABP 更安全；密钥分发全靠私人管理，厂商平台的密钥保管是系统短板。</p>
+<h2 id="🔧-嵌入式知识：LoRa广域网通信"><a href="#🔧-嵌入式知识：LoRa广域网通信" class="headerlink" title="🔧 嵌入式知识：LoRa广域网通信"></a>🔧 嵌入式知识：LoRa广域网通信</h2><blockquote>
+<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+</blockquote>
+<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-06-28-part1.mp3" type="audio/mpeg">
@@ -1657,13 +1641,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">684k</span>
+    <span title="站点总字数">649k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:27</span>
+    <span title="站点阅读时长">39:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

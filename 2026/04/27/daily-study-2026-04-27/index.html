@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：UART串口编程与缓冲 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-25、2026-04-23 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-27T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-27T00:01:51.324Z">
+<meta property="article:modified_time" content="2026-07-14T14:41:51.851Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AUART%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BC%93%E5%86%B2"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：UART串口编程与缓冲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%EF%BC%88%E7%8E%AF%E5%BD%A2%E7%BC%93%E5%86%B2-DMA-IDLE-%E4%B8%AD%E6%96%AD%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码（环形缓冲 + DMA + IDLE 中断）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-25-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+2 复习：2026-04-25 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-23-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+4 复习：2026-04-23 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AUART%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BC%93%E5%86%B2"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：UART串口编程与缓冲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-25-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+2 复习：2026-04-25 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-23-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+4 复习：2026-04-23 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,6 +186,23 @@
     </div>
 
     
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/04/29/daily-study-2026-04-29/" rel="bookmark">
+        <time class="popular-posts-time">2026-04-29</time>
+        <br>
+      每日学习 — 2026-04-29
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
   </aside>
 
 
@@ -250,14 +267,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.2k</span>
+      <span>4.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>19 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -270,28 +287,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>UART串口编程与缓冲</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-25、2026-04-23 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：UART串口编程与缓冲"><a href="#🔧-嵌入式知识：UART串口编程与缓冲" class="headerlink" title="🔧 嵌入式知识：UART串口编程与缓冲"></a>🔧 嵌入式知识：UART串口编程与缓冲</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>UART（Universal Asynchronous Receiver&#x2F;Transmitter）是最古老也最常用的异步串行协议：两根数据线 TX&#x2F;RX，无共享时钟，靠<strong>起始位 + 数据位 + 校验位 + 停止位</strong>的帧结构让双方在相同波特率下对齐采样。典型 8-N-1 &#x3D; 1 起始 + 8 数据 + 无校验 + 1 停止 &#x3D; 10 位每字符，115200 bps 下吞吐约 11.5KB&#x2F;s。波特率误差容忍度约 ±3.5%，否则采样点会滑出数据位边界导致误码。</p>
-<p>电平层多样：TTL（3.3&#x2F;5V，MCU 之间直连）、RS-232（±12V，长线早年通讯）、RS-485（差分，抗干扰远距离）、USB-to-UART（CP2102&#x2F;CH340，电脑调试常用）。工程里还要区分：<strong>UART</strong>（纯异步）vs <strong>USART</strong>（可选同步模式，带时钟线）。</p>
-<p>MCU 侧三种编程模型：</p>
-<ol>
-<li><strong>轮询阻塞</strong>：最简单但 CPU 忙等，仅调试用。</li>
-<li><strong>中断驱动</strong>：每收到一个字节触发 ISR，把数据塞进环形缓冲。写入&#x2F;读取要考虑原子性与缓冲区满的策略（丢新帧 vs 丢旧帧）。</li>
-<li><strong>DMA + IDLE</strong>：DMA 把数据搬到循环缓冲，IDLE 中断告诉你“这一段数据包到此为止”；CPU 零参与，是高吞吐&#x2F;低功耗场景的首选。</li>
-</ol>
-<p>帧同步是另一个常见痛点：UART 本身没有“帧”概念，应用层必须自己定义包格式——固定长度、超时切分（IDLE）、特殊帧头（0xAA 0x55）、或协议自带长度字段（如 Modbus RTU、SLIP、COBS）。</p>
-<h3 id="关键代码（环形缓冲-DMA-IDLE-中断）"><a href="#关键代码（环形缓冲-DMA-IDLE-中断）" class="headerlink" title="关键代码（环形缓冲 + DMA + IDLE 中断）"></a>关键代码（环形缓冲 + DMA + IDLE 中断）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RX_BUF_SZ  512</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> rx_buf[RX_BUF_SZ];</span><br><span class="line"><span class="type">static</span> <span class="keyword">volatile</span> <span class="type">uint16_t</span> rx_rd = <span class="number">0</span>;      <span class="comment">// 应用读指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DMA 启动一次，之后就不停循环搬运</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    HAL_UART_Receive_DMA(&amp;huart1, rx_buf, RX_BUF_SZ);</span><br><span class="line">    __HAL_UART_ENABLE_IT(&amp;huart1, UART_IT_IDLE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IDLE 中断：总线空闲一个字符时间，说明一帧结束</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">USART1_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (__HAL_UART_GET_FLAG(&amp;huart1, UART_FLAG_IDLE)) &#123;</span><br><span class="line">        __HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);</span><br><span class="line">        <span class="type">uint16_t</span> wr = RX_BUF_SZ - __HAL_DMA_GET_COUNTER(huart1.hdmarx);</span><br><span class="line">        <span class="comment">// 通知应用：[rx_rd, wr) 这段是新数据（可能跨越尾部）</span></span><br><span class="line">        rx_on_frame(rx_rd, wr);</span><br><span class="line">        rx_rd = wr;</span><br><span class="line">    &#125;</span><br><span class="line">    HAL_UART_IRQHandler(&amp;huart1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应用层读取，考虑环绕</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uart_read</span><span class="params">(<span class="type">uint8_t</span> *dst, <span class="type">int</span> max, <span class="type">uint16_t</span> start, <span class="type">uint16_t</span> end)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint16_t</span> i = start; i != end &amp;&amp; n &lt; max; i = (i + <span class="number">1</span>) % RX_BUF_SZ)</span><br><span class="line">        dst[n++] = rx_buf[i];</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送侧简单封装</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_write</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *p, <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    HAL_UART_Transmit(&amp;huart1, (<span class="type">uint8_t</span>*)p, len, HAL_MAX_DELAY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li><strong>波特率偏差</strong>：MCU 的 HSI 内部振荡器误差可达 ±1%，串口长时间通讯容易丢帧；关键链路要用外部晶振。</li>
-<li><strong>TX&#x2F;RX 交叉</strong>：设备 A 的 TX 必须接 B 的 RX；直连接同名端会互相拉低，调试时 90% 的“没反应”都是这个。</li>
-<li><strong>共地</strong>：两端 GND 必须连在一起，否则电平漂移无法判定 0&#x2F;1。</li>
-<li><strong>5V&#x2F;3.3V 混用</strong>：5V TTL 打到 3.3V MCU 可能烧片，需要电平转换或串限流电阻。</li>
-<li><strong>中断里 printf</strong>：printf 本身又走 UART，又重入 UART 中断，轻则死锁，重则栈溢出；正确做法是中断里只入队，主循环里出队打印。</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：115200bps 下每秒能传多少字节？误差容忍度多少？</strong><br>A：10 位&#x2F;字符（1 起始 + 8 数据 + 1 停止），115200 &#x2F; 10 &#x3D; 11,520 字节&#x2F;秒。波特率偏差需在 ±3.5% 以内，否则靠近帧尾会采样错位。实际多留一倍余量（±1.5%）才可靠。</p>
-<p><strong>Q2：中断和 DMA，什么场景选哪个？</strong><br>A：字符速率低（&lt; 115200）、消息短、调试阶段——中断直接读简单省事。高速（≥ 921600）、高占空比、低功耗——DMA + IDLE 中断最佳，CPU 几乎零干预还能睡眠。折中：中断触发 + FIFO 硬件（部分 MCU 如 STM32G0 自带 8 字节 FIFO）降中断频率。</p>
-<p><strong>Q3：如何保证串口命令不粘包也不丢包？</strong><br>A：应用协议加<strong>帧头 + 长度 + CRC&#x2F;校验</strong>。IDLE 中断做帧切分解决超时场景；固定帧头（如 0xAA55）做帧同步；长度字段限制一次读多少字节；CRC 验证完整性；丢帧就重传或忽略下一条。Modbus RTU 就是经典范例（帧间至少 3.5 字符间隔）。</p>
-<p><strong>Q4：半双工 RS-485 怎么用 UART 控制？</strong><br>A：RS-485 需要一根“方向控制线”（DE&#x2F;RE）。发送前把 DE 拉高启用驱动器，发完最后一位再拉低交出总线。Cortex-M 的 USART 可开“DE 模式”由硬件自动拉高拉低，零软件干预；没有该特性时，要用 TX 完成中断（TC）后延时几 us 再放电平，避免最后一位被截断。</p>
+<h2 id="🔧-嵌入式知识：UART串口编程与缓冲"><a href="#🔧-嵌入式知识：UART串口编程与缓冲" class="headerlink" title="🔧 嵌入式知识：UART串口编程与缓冲"></a>🔧 嵌入式知识：UART串口编程与缓冲</h2><blockquote>
+<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+</blockquote>
+<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-04-27-part1.mp3" type="audio/mpeg">
@@ -1628,13 +1627,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">684k</span>
+    <span title="站点总字数">649k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:27</span>
+    <span title="站点阅读时长">39:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

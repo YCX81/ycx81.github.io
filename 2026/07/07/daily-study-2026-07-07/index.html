@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：图像格式解析(JPEG&#x2F;PNG) · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-06、2026-07-05 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-07T00:02:21.012Z">
+<meta property="article:modified_time" content="2026-07-14T14:41:51.890Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-JPEG-x2F-PNG"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：图像格式解析(JPEG&#x2F;PNG)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%EF%BC%88TJpgDec-%E8%A7%A3%E7%A0%81%E5%88%B0%E5%B8%A7%E7%BC%93%E5%86%B2%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码（TJpgDec 解码到帧缓冲）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-06-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-07-06 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-05-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-07-05 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-03-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-07-03 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 Day+7 复习：2026-06-30 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-JPEG-x2F-PNG"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：图像格式解析(JPEG&#x2F;PNG)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-06-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-07-06 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-05-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-07-05 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-03-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-07-03 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 Day+7 复习：2026-06-30 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -250,14 +250,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>6.6k</span>
+      <span>5.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>24 分钟</span>
+      <span>20 分钟</span>
     </span>
 </div>
 
@@ -270,27 +270,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>图像格式解析(JPEG&#x2F;PNG)</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-06、2026-07-05 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：图像格式解析-JPEG-x2F-PNG"><a href="#🔧-嵌入式知识：图像格式解析-JPEG-x2F-PNG" class="headerlink" title="🔧 嵌入式知识：图像格式解析(JPEG&#x2F;PNG)"></a>🔧 嵌入式知识：图像格式解析(JPEG&#x2F;PNG)</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>图像格式解决“如何把像素数组高效、无损&#x2F;有损地存起来”的问题，三大主流：</p>
-<ul>
-<li><strong>JPEG</strong>（有损）：针对自然照片设计，基于 8×8 分块 DCT、量化表、Zig-Zag、霍夫曼熵编码。量化表决定质量；标准 YCbCr 420 下色度减半。文件特征：SOI（FFD8）开头、EOI（FFD9）结尾，中间由多个 marker 段组成（APP0&#x2F;DQT&#x2F;DHT&#x2F;SOF0&#x2F;SOS 等）。</li>
-<li><strong>PNG</strong>（无损）：基于 DEFLATE（LZ77+Huffman）+ 预测滤波。固定 8B 签名 <code>89 50 4E 47 0D 0A 1A 0A</code>，数据由 chunk 组成（IHDR&#x2F;PLTE&#x2F;IDAT&#x2F;IEND），每个 chunk 有 CRC32 校验。适合图标、UI、带透明度的图像。</li>
-<li><strong>BMP&#x2F;GIF&#x2F;WEBP</strong>：BMP 几乎原始像素，简单但巨大；GIF 256 色、支持动画，现在主要用在 meme；WEBP 是 Google 主推的替代，兼顾有损&#x2F;无损且压缩率高。</li>
-</ul>
-<p>解析 JPEG 的流程：扫 marker → 读量化表 DQT → 读霍夫曼表 DHT → 读帧头 SOF0（拿到宽高、通道）→ 进入 SOS 扫描数据 → 熵解码得到 DCT 系数 → 反量化 → IDCT → 上采样色度 → YCbCr→RGB。PNG 的流程：校签名 → 逐 chunk 校 CRC → 拼 IDAT → DEFLATE 解压 → 按行反滤波（None&#x2F;Sub&#x2F;Up&#x2F;Average&#x2F;Paeth）→ 得到像素矩阵。</p>
-<p>嵌入式端常用现成库：<strong>libjpeg-turbo &#x2F; TJpgDec</strong>（极小，适合 MCU）、<strong>libpng &#x2F; upng &#x2F; lodepng</strong>（单文件实现）。SoC 芯片常带硬件 JPEG 解码器（STM32F7 的 JPEG IP、iMX RT 的 PXP），吞吐可到每秒几十帧 VGA。</p>
-<h3 id="关键代码（TJpgDec-解码到帧缓冲）"><a href="#关键代码（TJpgDec-解码到帧缓冲）" class="headerlink" title="关键代码（TJpgDec 解码到帧缓冲）"></a>关键代码（TJpgDec 解码到帧缓冲）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;tjpgd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> FILE *fp;                        <span class="comment">// 输入源</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> *fb;                     <span class="comment">// 目标 RGB565 帧缓冲</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span>     fb_stride;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入回调：TJpgDec 需要多少字节就读多少</span></span><br><span class="line"><span class="type">static</span> <span class="type">size_t</span> <span class="title function_">in_cb</span><span class="params">(JDEC* jd, <span class="type">uint8_t</span>* buf, <span class="type">size_t</span> len)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (buf) <span class="keyword">return</span> fread(buf, <span class="number">1</span>, len, fp);</span><br><span class="line">    fseek(fp, len, SEEK_CUR); <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出回调：把 8x8 或 16x16 的 MCU 块写入帧缓冲</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">out_cb</span><span class="params">(JDEC* jd, <span class="type">void</span>* bitmap, JRECT* r)</span> &#123;</span><br><span class="line">    <span class="type">uint16_t</span> *p = (<span class="type">uint16_t</span>*)bitmap;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> y = r-&gt;top; y &lt;= r-&gt;bottom; y++) &#123;</span><br><span class="line">        <span class="type">uint16_t</span> *dst = (<span class="type">uint16_t</span>*)(fb + y * fb_stride) + r-&gt;left;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x = r-&gt;left; x &lt;= r-&gt;right; x++) *dst++ = *p++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">jpg_decode</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *path)</span> &#123;</span><br><span class="line">    fp = fopen(path, <span class="string">&quot;rb&quot;</span>);</span><br><span class="line">    <span class="type">uint8_t</span> workbuf[<span class="number">3100</span>];              <span class="comment">// TJpgDec 推荐工作区</span></span><br><span class="line">    JDEC jd;</span><br><span class="line">    <span class="keyword">if</span> (jd_prepare(&amp;jd, in_cb, workbuf, <span class="keyword">sizeof</span> workbuf, <span class="literal">NULL</span>) != JDR_OK) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> jd_decomp(&amp;jd, out_cb, <span class="number">0</span>);   <span class="comment">// scale=0 原尺寸，1/2/3 分别缩小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li><strong>JPEG 无透明度</strong>：需要 α 通道必须用 PNG &#x2F; WEBP；常见的“JPEG 透明背景”其实是背景被编成了纯色块。</li>
-<li><strong>渐进式 JPEG（progressive）</strong>：逐层显示更友好，但解码器内存占用更大，低端 MCU 需用 baseline。</li>
-<li><strong>PNG 的“无损”也有陷阱</strong>：保存过程会重算滤波与压缩，像素矩阵一致但字节流不同；不能用字节比较判断“是否一样的图”。</li>
-<li><strong>颜色空间</strong>：JPEG 内部是 YCbCr，显示器是 RGB；色度采样 4:4:4 &#x2F; 4:2:2 &#x2F; 4:2:0 决定色度分辨率，4:2:0 最省。</li>
-<li><strong>字节序</strong>：JPEG&#x2F;PNG 内的 16&#x2F;32 位字段是大端；在小端 MCU 上必须 swap，写错会得到怪异长度和 CRC 错。</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：为什么 JPEG 压缩率那么高？主要丢了什么？</strong><br>A：丢的是高频分量和人眼不敏感的色度细节——DCT 把 8×8 块拆成频率分量，量化表给高频大除数，高频大量归零，然后 Zig-Zag + 霍夫曼再做熵编码。色度再 4:2:0 下采样一次。整体对平滑区域压得极狠、对锐利边缘（文字、线画）容易出“蚊子噪声”。</p>
-<p><strong>Q2：嵌入式 MCU 上，显示一张 JPEG 和一张 PNG 哪个更快？</strong><br>A：<strong>JPEG 更快</strong>，尤其带硬件解码时。PNG 需要 DEFLATE + 滤波逆运算，纯软件对 MCU 压力大，且内存需求和图像宽度挂钩（必须按行解压）。TJpgDec 在 Cortex-M4 上能 ~10ms 解完 320×240 JPEG，PNG 通常要几十 ms 到百 ms。</p>
-<p><strong>Q3：如何判断一个图片文件的真实格式？只看扩展名够吗？</strong><br>A：不够——扩展名可伪造。应读前几字节（魔数）：JPEG 以 <code>FF D8 FF</code>，PNG 以 <code>89 50 4E 47 0D 0A 1A 0A</code>，GIF 以 <code>GIF87a/GIF89a</code>，WEBP 以 <code>RIFF....WEBP</code>。工程上还要加尺寸、深度等合理性校验，防恶意样本撑爆解码器。</p>
-<p><strong>Q4：PNG 的 5 种滤波模式有什么作用？</strong><br>A：滤波在压缩前对每行像素做可逆预测（None&#x2F;Sub&#x2F;Up&#x2F;Average&#x2F;Paeth），把像素变成“与邻居的差”，这类差值大多落在 0 附近，DEFLATE 压起来更高效。Paeth 在照片类图像上最佳，None 适合已经压缩过的数据。</p>
+<h2 id="🔧-嵌入式知识：图像格式解析-JPEG-x2F-PNG"><a href="#🔧-嵌入式知识：图像格式解析-JPEG-x2F-PNG" class="headerlink" title="🔧 嵌入式知识：图像格式解析(JPEG&#x2F;PNG)"></a>🔧 嵌入式知识：图像格式解析(JPEG&#x2F;PNG)</h2><blockquote>
+<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+</blockquote>
+<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-07-07-part1.mp3" type="audio/mpeg">
@@ -2257,13 +2240,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">684k</span>
+    <span title="站点总字数">649k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:27</span>
+    <span title="站点阅读时长">39:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

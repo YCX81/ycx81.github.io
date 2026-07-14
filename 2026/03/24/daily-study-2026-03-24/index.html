@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-24T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-24T01:32:34.177Z">
+<meta property="article:modified_time" content="2026-07-14T14:41:51.831Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="CAN">
 <meta property="article:tag" content="嵌入式">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E7%B2%BE%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：外设驱动精讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81SPI%EF%BC%88Serial-Peripheral-Interface%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">一、SPI（Serial Peripheral Interface）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#STM32-%E5%85%B8%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">STM32 典型配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">面试要点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81I2C%EF%BC%88Inter-Integrated-Circuit%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">二、I2C（Inter-Integrated Circuit）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%93%E9%94%99%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">易错点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81UART%EF%BC%88Universal-Asynchronous-Receiver-x2F-Transmitter%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">三、UART（Universal Asynchronous Receiver&#x2F;Transmitter）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">面试常见问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81CAN%EF%BC%88Controller-Area-Network%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">四、CAN（Controller Area Network）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%B2%E8%A3%81%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">仲裁机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81DMA%EF%BC%88Direct-Memory-Access%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">五、DMA（Direct Memory Access）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC"><span class="nav-number">1.5.1.</span> <span class="nav-text">核心价值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81ADC%EF%BC%88Analog-to-Digital-Converter%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">六、ADC（Analog-to-Digital Converter）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0"><span class="nav-number">1.6.1.</span> <span class="nav-text">关键参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81Timer%EF%BC%88%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">七、Timer（定时器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#STM32-%E5%AE%9A%E6%97%B6%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">1.7.1.</span> <span class="nav-text">STM32 定时器分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cunder-the-hood%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “under the hood”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cahead-of-the-curve%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “ahead of the curve”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Ca-double-edged-sword%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “a double-edged sword”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cread-between-the-lines%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “read between the lines”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF%E5%A4%8D%E4%B9%A0-%E2%80%94-2026-03-22-%E8%AF%8D%E6%B1%87%EF%BC%88Day-2%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%A4%96%E8%AE%BE%E9%A9%B1%E5%8A%A8%E7%B2%BE%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：外设驱动精讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cunder-the-hood%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “under the hood”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Cahead-of-the-curve%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “ahead of the curve”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Ca-double-edged-sword%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “a double-edged sword”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cread-between-the-lines%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “read between the lines”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF%E5%A4%8D%E4%B9%A0-%E2%80%94-2026-03-22-%E8%AF%8D%E6%B1%87%EF%BC%88Day-2%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">🔁 艾宾浩斯复习 — 2026-03-22 词汇（Day+2）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -192,6 +192,23 @@
     </div>
 
     
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/03/22/daily-study-2026-03-22/" rel="bookmark">
+        <time class="popular-posts-time">2026-03-22</time>
+        <br>
+      每日学习 — 2026-03-22
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
   </aside>
 
 
@@ -256,14 +273,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.2k</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>15 分钟</span>
+      <span>11 分钟</span>
     </span>
 </div>
 
@@ -276,146 +293,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>外设驱动精讲 — SPI &#x2F; I2C &#x2F; UART &#x2F; CAN &#x2F; DMA &#x2F; ADC &#x2F; Timer</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：外设驱动精讲"><a href="#🔧-嵌入式知识：外设驱动精讲" class="headerlink" title="🔧 嵌入式知识：外设驱动精讲"></a>🔧 嵌入式知识：外设驱动精讲</h2><h3 id="一、SPI（Serial-Peripheral-Interface）"><a href="#一、SPI（Serial-Peripheral-Interface）" class="headerlink" title="一、SPI（Serial Peripheral Interface）"></a>一、SPI（Serial Peripheral Interface）</h3><h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>SPI 是一种同步、全双工、主从式串行通信协议，通常有 4 根线：</p>
-<table>
-<thead>
-<tr>
-<th>信号</th>
-<th>方向</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SCLK</td>
-<td>主→从</td>
-<td>时钟信号</td>
-</tr>
-<tr>
-<td>MOSI</td>
-<td>主→从</td>
-<td>主机输出，从机输入</td>
-</tr>
-<tr>
-<td>MISO</td>
-<td>从→主</td>
-<td>主机输入，从机输出</td>
-</tr>
-<tr>
-<td>CS&#x2F;NSS</td>
-<td>主→从</td>
-<td>片选（低有效）</td>
-</tr>
-</tbody></table>
-<p>SPI 支持 4 种工作模式（CPOL × CPHA），最常用的是 Mode 0（CPOL&#x3D;0, CPHA&#x3D;0）和 Mode 3（CPOL&#x3D;1, CPHA&#x3D;1）。</p>
-<h4 id="STM32-典型配置"><a href="#STM32-典型配置" class="headerlink" title="STM32 典型配置"></a>STM32 典型配置</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SPI_HandleTypeDef hspi1;</span><br><span class="line"></span><br><span class="line">hspi1.Instance = SPI1;</span><br><span class="line">hspi1.Init.Mode = SPI_MODE_MASTER;</span><br><span class="line">hspi1.Init.Direction = SPI_DIRECTION_2LINES;</span><br><span class="line">hspi1.Init.DataSize = SPI_DATASIZE_8BIT;</span><br><span class="line">hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;   <span class="comment">// CPOL=0</span></span><br><span class="line">hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;        <span class="comment">// CPHA=0 → Mode 0</span></span><br><span class="line">hspi1.Init.NSS = SPI_NSS_SOFT;</span><br><span class="line">hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;</span><br><span class="line">HAL_SPI_Init(&amp;hspi1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送+接收（全双工）</span></span><br><span class="line">HAL_SPI_TransmitReceive(&amp;hspi1, tx_buf, rx_buf, len, HAL_MAX_DELAY);</span><br></pre></td></tr></table></figure>
-
-<h4 id="面试要点"><a href="#面试要点" class="headerlink" title="面试要点"></a>面试要点</h4><p><strong>Q: SPI 和 I2C 如何选择？</strong></p>
-<blockquote>
-<p>SPI：速度快（数十 MHz）、全双工、无地址开销，适合高速传感器（IMU、ADC、Flash）；I2C：只需 2 根线、支持多主多从、有地址仲裁，适合低速设备（温湿度传感器、EEPROM）。</p>
+<h2 id="🔧-嵌入式知识：外设驱动精讲"><a href="#🔧-嵌入式知识：外设驱动精讲" class="headerlink" title="🔧 嵌入式知识：外设驱动精讲"></a>🔧 嵌入式知识：外设驱动精讲</h2><blockquote>
+<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
 </blockquote>
-<p><strong>Q: 多个 SPI 从设备如何连接？</strong></p>
-<blockquote>
-<p>共用 SCLK&#x2F;MOSI&#x2F;MISO，每个从设备独立 CS 引脚，主机通过拉低对应 CS 选中目标设备。</p>
-</blockquote>
-<hr>
-<h3 id="二、I2C（Inter-Integrated-Circuit）"><a href="#二、I2C（Inter-Integrated-Circuit）" class="headerlink" title="二、I2C（Inter-Integrated Circuit）"></a>二、I2C（Inter-Integrated Circuit）</h3><h4 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h4><p>I2C 是两线式（SCL + SDA）、半双工、支持多主多从的同步串行协议。每个设备有 7 位（或 10 位）地址。通信始终由主机发起，SDA 和 SCL 需要上拉电阻（典型值 4.7 kΩ @ 100 kHz）。</p>
-<p>时序：Start → 地址（7 bit）+ R&#x2F;W → ACK → 数据 → ACK&#x2F;NACK → Stop</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// I2C 写寄存器（HAL）</span></span><br><span class="line"><span class="type">uint8_t</span> buf[<span class="number">2</span>] = &#123;REG_ADDR, data_value&#125;;</span><br><span class="line">HAL_I2C_Master_Transmit(&amp;hi2c1, (DEV_ADDR &lt;&lt; <span class="number">1</span>), buf, <span class="number">2</span>, HAL_MAX_DELAY);</span><br><span class="line"></span><br><span class="line"><span class="comment">// I2C 读寄存器</span></span><br><span class="line">HAL_I2C_Master_Transmit(&amp;hi2c1, (DEV_ADDR &lt;&lt; <span class="number">1</span>), &amp;reg, <span class="number">1</span>, HAL_MAX_DELAY);</span><br><span class="line">HAL_I2C_Master_Receive(&amp;hi2c1, (DEV_ADDR &lt;&lt; <span class="number">1</span>), &amp;rx, <span class="number">1</span>, HAL_MAX_DELAY);</span><br></pre></td></tr></table></figure>
-
-<h4 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h4><ul>
-<li><strong>上拉阻值</strong>：速度越高，阻值越小。Fast-mode（400 kHz）用 2.2 kΩ，标准（100 kHz）用 4.7 kΩ。</li>
-<li><strong>时钟延展（Clock Stretching）</strong>：从设备可拉低 SCL 来暂停传输，主机需支持。</li>
-<li><strong>地址冲突</strong>：同一总线上 I2C 地址必须唯一，有时需要用 ADDR 引脚选择变体地址。</li>
-</ul>
-<hr>
-<h3 id="三、UART（Universal-Asynchronous-Receiver-x2F-Transmitter）"><a href="#三、UART（Universal-Asynchronous-Receiver-x2F-Transmitter）" class="headerlink" title="三、UART（Universal Asynchronous Receiver&#x2F;Transmitter）"></a>三、UART（Universal Asynchronous Receiver&#x2F;Transmitter）</h3><h4 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h4><p>UART 是异步串行协议，无时钟线，靠预设波特率同步。帧格式：1 起始位 + 数据位（5~9 bit）+ 可选奇偶校验位 + 停止位（1&#x2F;1.5&#x2F;2 bit）。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UART DMA 接收（不定长）</span></span><br><span class="line">HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart1, rx_buf, RX_BUF_SIZE);</span><br><span class="line"></span><br><span class="line"><span class="comment">// UART 中断发送</span></span><br><span class="line">HAL_UART_Transmit_IT(&amp;huart1, tx_buf, len);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 波特率计算（STM32）：</span></span><br><span class="line"><span class="comment">// BRR = fCK / (8 * (2 - OVER8) * BaudRate)</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h4><p><strong>Q: UART 和 USART 区别？</strong></p>
-<blockquote>
-<p>USART（Universal Synchronous&#x2F;Asynchronous）比 UART 多一个同步模式（CK 引脚），可用于 SPI-like 同步通信。</p>
-</blockquote>
-<p><strong>Q: 如何实现不定长 UART 接收？</strong></p>
-<blockquote>
-<p>三种方法：① 空闲中断（IDLE Line Detection）+ DMA；② 超时检测；③ 固定帧头帧尾协议。STM32 HAL 的 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 是最优雅的方式。</p>
-</blockquote>
-<hr>
-<h3 id="四、CAN（Controller-Area-Network）"><a href="#四、CAN（Controller-Area-Network）" class="headerlink" title="四、CAN（Controller Area Network）"></a>四、CAN（Controller Area Network）</h3><h4 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h4><p>CAN 是差分串行总线（CAN_H &#x2F; CAN_L），支持多主、非破坏性位仲裁，消息优先级由 ID 决定（ID 越小优先级越高）。</p>
-<p>帧结构（标准帧）：SOF → 11 bit ID → RTR → DLC → 数据（0~8 B）→ CRC → ACK → EOF</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CAN_TxHeaderTypeDef tx_header;</span><br><span class="line"><span class="type">uint8_t</span> tx_data[<span class="number">8</span>];</span><br><span class="line"><span class="type">uint32_t</span> tx_mailbox;</span><br><span class="line"></span><br><span class="line">tx_header.StdId = <span class="number">0x123</span>;       <span class="comment">// 消息 ID</span></span><br><span class="line">tx_header.IDE = CAN_ID_STD;</span><br><span class="line">tx_header.RTR = CAN_RTR_DATA;</span><br><span class="line">tx_header.DLC = <span class="number">8</span>;             <span class="comment">// 数据长度</span></span><br><span class="line"></span><br><span class="line">HAL_CAN_AddTxMessage(&amp;hcan1, &amp;tx_header, tx_data, &amp;tx_mailbox);</span><br></pre></td></tr></table></figure>
-
-<h4 id="仲裁机制"><a href="#仲裁机制" class="headerlink" title="仲裁机制"></a>仲裁机制</h4><p>CAN 总线是”线与”逻辑：显性位（0）覆盖隐性位（1）。多个节点同时发送时，发送隐性位却检测到显性位的节点退出仲裁，ID 最小的帧胜出。</p>
-<hr>
-<h3 id="五、DMA（Direct-Memory-Access）"><a href="#五、DMA（Direct-Memory-Access）" class="headerlink" title="五、DMA（Direct Memory Access）"></a>五、DMA（Direct Memory Access）</h3><h4 id="核心价值"><a href="#核心价值" class="headerlink" title="核心价值"></a>核心价值</h4><p>DMA 控制器在不占用 CPU 的情况下，在外设和内存（或内存与内存）之间传输数据，极大降低 CPU 负载。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPI + DMA 发送</span></span><br><span class="line">HAL_SPI_Transmit_DMA(&amp;hspi1, tx_buf, len);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传输完成回调</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_SPI_TxCpltCallback</span><span class="params">(SPI_HandleTypeDef *hspi)</span> &#123;</span><br><span class="line">    <span class="comment">// DMA 传输完成</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意事项：</strong></p>
-<ul>
-<li><strong>Cache 一致性</strong>：Cortex-M7（有 D-Cache）需在 DMA 传输前后调用 <code>SCB_CleanDCache_by_Addr</code> &#x2F; <code>SCB_InvalidateDCache_by_Addr</code>。</li>
-<li><strong>缓冲区对齐</strong>：DMA 缓冲区通常需 4 字节对齐，部分外设要求更高。</li>
-<li><strong>双缓冲模式</strong>：DMA 完成回调中切换缓冲区，实现 ping-pong 无中断连续传输。</li>
-</ul>
-<hr>
-<h3 id="六、ADC（Analog-to-Digital-Converter）"><a href="#六、ADC（Analog-to-Digital-Converter）" class="headerlink" title="六、ADC（Analog-to-Digital Converter）"></a>六、ADC（Analog-to-Digital Converter）</h3><h4 id="关键参数"><a href="#关键参数" class="headerlink" title="关键参数"></a>关键参数</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>分辨率</td>
-<td>STM32 支持 6&#x2F;8&#x2F;10&#x2F;12 bit</td>
-</tr>
-<tr>
-<td>采样率</td>
-<td>最高可达数 MHz（取决于型号）</td>
-</tr>
-<tr>
-<td>参考电压</td>
-<td>VREF+ 决定满量程，需稳定低噪声</td>
-</tr>
-<tr>
-<td>采样时间</td>
-<td>影响精度，信源阻抗高时需增加采样时间</td>
-</tr>
-</tbody></table>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ADC 单次转换</span></span><br><span class="line">HAL_ADC_Start(&amp;hadc1);</span><br><span class="line">HAL_ADC_PollForConversion(&amp;hadc1, HAL_MAX_DELAY);</span><br><span class="line"><span class="type">uint32_t</span> raw = HAL_ADC_GetValue(&amp;hadc1);</span><br><span class="line"><span class="type">float</span> voltage = raw * <span class="number">3.3f</span> / <span class="number">4095.0f</span>;  <span class="comment">// 12-bit, VREF=3.3V</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ADC + DMA 连续采集</span></span><br><span class="line">HAL_ADC_Start_DMA(&amp;hadc1, (<span class="type">uint32_t</span>*)adc_buf, ADC_BUF_LEN);</span><br></pre></td></tr></table></figure>
-
-<p><strong>面试提问：ADC 读数不稳定怎么办？</strong></p>
-<blockquote>
-<p>① 增加采样时间；② 软件滤波（均值&#x2F;中值&#x2F;IIR）；③ VREF 去耦（100nF + 10μF 电容靠近 VREF 引脚）；④ 避免 ADC 采样与 PWM 开关时刻重叠（用定时器触发 ADC）。</p>
-</blockquote>
-<hr>
-<h3 id="七、Timer（定时器）"><a href="#七、Timer（定时器）" class="headerlink" title="七、Timer（定时器）"></a>七、Timer（定时器）</h3><h4 id="STM32-定时器分类"><a href="#STM32-定时器分类" class="headerlink" title="STM32 定时器分类"></a>STM32 定时器分类</h4><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>代表</th>
-<th>主要功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>基本定时器</td>
-<td>TIM6&#x2F;TIM7</td>
-<td>定时中断、触发 DAC</td>
-</tr>
-<tr>
-<td>通用定时器</td>
-<td>TIM2~TIM5</td>
-<td>输入捕获、输出比较、PWM、编码器</td>
-</tr>
-<tr>
-<td>高级定时器</td>
-<td>TIM1&#x2F;TIM8</td>
-<td>互补 PWM、死区控制、刹车输入</td>
-</tr>
-</tbody></table>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PWM 输出配置</span></span><br><span class="line">TIM_OC_InitTypeDef sConfig;</span><br><span class="line">sConfig.OCMode = TIM_OCMODE_PWM1;</span><br><span class="line">sConfig.Pulse = <span class="number">500</span>;          <span class="comment">// 占空比 = Pulse / Period</span></span><br><span class="line">sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;</span><br><span class="line">HAL_TIM_PWM_ConfigChannel(&amp;htim1, &amp;sConfig, TIM_CHANNEL_1);</span><br><span class="line">HAL_TIM_PWM_Start(&amp;htim1, TIM_CHANNEL_1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改占空比</span></span><br><span class="line">__HAL_TIM_SET_COMPARE(&amp;htim1, TIM_CHANNEL_1, new_duty);</span><br></pre></td></tr></table></figure>
-
-<p><strong>编码器模式：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置为编码器接口模式</span></span><br><span class="line">htim2.Init.Period = <span class="number">0xFFFFFFFF</span>;</span><br><span class="line">TIM_Encoder_InitTypeDef enc = &#123;</span><br><span class="line">    .EncoderMode = TIM_ENCODERMODE_TI12,  <span class="comment">// 四倍频</span></span><br><span class="line">    .IC1Polarity = TIM_ICPOLARITY_RISING,</span><br><span class="line">    .IC2Polarity = TIM_ICPOLARITY_RISING,</span><br><span class="line">&#125;;</span><br><span class="line">HAL_TIM_Encoder_Init(&amp;htim2, &amp;enc);</span><br><span class="line">HAL_TIM_Encoder_Start(&amp;htim2, TIM_CHANNEL_ALL);</span><br><span class="line"><span class="type">int32_t</span> count = (<span class="type">int16_t</span>)__HAL_TIM_GET_COUNTER(&amp;htim2);</span><br></pre></td></tr></table></figure>
-
+<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-03-24-part1.mp3" type="audio/mpeg">
@@ -1451,13 +1332,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">684k</span>
+    <span title="站点总字数">649k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:27</span>
+    <span title="站点阅读时长">39:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

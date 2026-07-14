@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：ARM MPU与内存保护 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-23、2026-04-22 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-24T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-24T00:00:25.372Z">
+<meta property="article:modified_time" content="2026-07-14T14:41:51.849Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AARM-MPU%E4%B8%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：ARM MPU与内存保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-23-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-04-23 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-22-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-04-22 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-17-%E8%AF%8D%E6%B1%87%EF%BC%88100%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+7 复习：2026-04-17 词汇（100词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AARM-MPU%E4%B8%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：ARM MPU与内存保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-23-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-04-23 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-22-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-04-22 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-04-17-%E8%AF%8D%E6%B1%87%EF%BC%88100%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+7 复习：2026-04-17 词汇（100词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -187,51 +187,6 @@
     </div>
 
     
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
-    相关文章
-  </div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/04/23/daily-study-2026-04-23/" rel="bookmark">
-        <time class="popular-posts-time">2026-04-23</time>
-        <br>
-      每日学习 — 2026-04-23
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/04/17/daily-study-2026-04-17/" rel="bookmark">
-        <time class="popular-posts-time">2026-04-17</time>
-        <br>
-      每日学习 — 2026-04-17
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/04/15/daily-study-2026-04-15/" rel="bookmark">
-        <time class="popular-posts-time">2026-04-15</time>
-        <br>
-      每日学习 — 2026-04-15
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/04/22/daily-study-2026-04-22/" rel="bookmark">
-        <time class="popular-posts-time">2026-04-22</time>
-        <br>
-      每日学习 — 2026-04-22
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/04/21/daily-study-2026-04-21/" rel="bookmark">
-        <time class="popular-posts-time">2026-04-21</time>
-        <br>
-      每日学习 — 2026-04-21
-      </a>
-    </li>
-  </ul>
-
-          </div>
-        </div>
   </aside>
 
 
@@ -296,14 +251,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.9k</span>
+      <span>5.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>21 分钟</span>
+      <span>20 分钟</span>
     </span>
 </div>
 
@@ -316,16 +271,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>ARM MPU与内存保护</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-04-23、2026-04-22 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：ARM-MPU与内存保护"><a href="#🔧-嵌入式知识：ARM-MPU与内存保护" class="headerlink" title="🔧 嵌入式知识：ARM MPU与内存保护"></a>🔧 嵌入式知识：ARM MPU与内存保护</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>MPU(内存保护单元)定义内存区域的访问权限（可读&#x2F;可写&#x2F;可执行），防止越界访问。Cortex-M4&#x2F;M7支持8个区域。</p>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* MPU区域结构 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MPU_Region</span> &#123;</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> RBAR;  <span class="comment">// 基地址</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> RASR;  <span class="comment">// 属性和大小</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">configure_mpu</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">/* 使能MPU */</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> *mpu = (<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)<span class="number">0xE000</span>_ED90;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 区域0: Flash只读 */</span></span><br><span class="line">    mpu[<span class="number">0</span>] = <span class="number">0x00000009</span>;  <span class="comment">// 基地址 + 使能</span></span><br><span class="line">    mpu[<span class="number">1</span>] = <span class="number">0x0000039F</span>;  <span class="comment">// 256KB, 只读</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 区域1: RAM可读写 */</span></span><br><span class="line">    mpu[<span class="number">0</span>] = <span class="number">0x20000009</span>;  <span class="comment">// RAM基地址</span></span><br><span class="line">    mpu[<span class="number">1</span>] = <span class="number">0x00000337</span>;  <span class="comment">// 64KB, 可读写</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 区域2: 外设I/O */</span></span><br><span class="line">    mpu[<span class="number">0</span>] = <span class="number">0x40000009</span>;  <span class="comment">// 外设基地址</span></span><br><span class="line">    mpu[<span class="number">1</span>] = <span class="number">0x00000397</span>;  <span class="comment">// 256MB, 可读写</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 使能MPU (HardFault时继续) */</span></span><br><span class="line">    mpu[<span class="number">6</span>] = <span class="number">0x00000007</span>;  <span class="comment">// CTRL</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 故障处理 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">mem_manage_handler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">/* 获取故障地址 */</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> *cfsr = (<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)<span class="number">0xE000</span>_ED28;</span><br><span class="line">    <span class="type">uint32_t</span> fault = *cfsr &amp; <span class="number">0x000000FF</span>;  <span class="comment">// IACCVIOL等标志</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (fault &amp; <span class="number">0x01</span>) &#123;  <span class="comment">// IACCVIOL: 指令访问冲突</span></span><br><span class="line">        <span class="comment">// 处理指令执行冲突</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (fault &amp; <span class="number">0x02</span>) &#123;  <span class="comment">// DACCVIOL: 数据访问冲突</span></span><br><span class="line">        <span class="comment">// 处理数据访问冲突</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 应用隔离示例 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">App</span> &#123;</span></span><br><span class="line">    <span class="type">uint32_t</span> code_start;</span><br><span class="line">    <span class="type">uint32_t</span> code_size;</span><br><span class="line">    <span class="type">uint32_t</span> data_start;</span><br><span class="line">    <span class="type">uint32_t</span> data_size;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup_app_protection</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> App *app)</span> &#123;</span><br><span class="line">    <span class="comment">/* 限制应用只能访问分配的RAM */</span></span><br><span class="line">    <span class="comment">// configure_region(2, app-&gt;data_start, app-&gt;data_size);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 栈检测 */</span></span><br><span class="line"><span class="type">uint32_t</span> stack_guard[<span class="number">32</span>] __attribute__((section(<span class="string">&quot;.stackguard&quot;</span>)));</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">check_stack_overflow</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">extern</span> <span class="type">uint32_t</span> _stack_end;</span><br><span class="line">    <span class="keyword">if</span> ((<span class="type">uint32_t</span>)&amp;_stack_end &lt; (<span class="type">uint32_t</span>)stack_guard + <span class="keyword">sizeof</span>(stack_guard)) &#123;</span><br><span class="line">        <span class="comment">// 栈溢出</span></span><br><span class="line">        hard_fault();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li><strong>MPU大小限制</strong>: 只有8个区域，可能不足</li>
-<li><strong>对齐要求</strong>: 区域大小必须是2的幂，基地址对齐</li>
-<li><strong>HardFault处理</strong>: 违反MPU规则产生硬故障</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: MPU能用几个区域？</strong><br>A: Cortex-M通常8个。区域0优先级最低，区域7最高。</p>
-<p><strong>Q2: 如何用MPU防止栈溢出？</strong><br>A: 在栈下方设置一个只读区域（哨兵区）。栈溢出写入该区域触发MPU异常。</p>
+<h2 id="🔧-嵌入式知识：ARM-MPU与内存保护"><a href="#🔧-嵌入式知识：ARM-MPU与内存保护" class="headerlink" title="🔧 嵌入式知识：ARM MPU与内存保护"></a>🔧 嵌入式知识：ARM MPU与内存保护</h2><blockquote>
+<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+</blockquote>
+<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-04-24-part1.mp3" type="audio/mpeg">
@@ -2278,13 +2227,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">684k</span>
+    <span title="站点总字数">649k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:27</span>
+    <span title="站点阅读时长">39:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
