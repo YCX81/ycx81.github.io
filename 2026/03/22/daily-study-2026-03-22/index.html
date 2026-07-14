@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：volatile 关键字与内存映射 I&#x2F;O · 50 个英语新词 + 语音朗读 · 5 个地道表达">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-22T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-22T08:07:27.798Z">
+<meta property="article:modified_time" content="2026-07-14T14:24:53.232Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9Avolatile-%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%8E%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84-I-x2F-O"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cgo-down-the-rabbit-hole%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “go down the rabbit hole”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Ccut-corners%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “cut corners”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-devil-is-in-the-details%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the devil is in the details”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Chit-the-ground-running%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “hit the ground running”</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9Avolatile%E3%80%81MMIO-%E4%B8%8E%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：volatile、MMIO 与内存屏障</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile-%E7%9C%9F%E6%AD%A3%E4%BF%9D%E8%AF%81%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">volatile 真正保证什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MMIO%E3%80%81%E7%BC%96%E8%AF%91%E5%99%A8%E9%A1%BA%E5%BA%8F%E4%B8%8E%E7%A1%AC%E4%BB%B6%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">MMIO、编译器顺序与硬件顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.3.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cgo-down-the-rabbit-hole%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “go down the rabbit hole”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cback-to-square-one%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “back to square one”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Ccut-corners%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “cut corners”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-devil-is-in-the-details%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the devil is in the details”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Chit-the-ground-running%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “hit the ground running”</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -196,6 +196,13 @@
         <time class="popular-posts-time">2026-03-23</time>
         <br>
       每日学习 — 2026-03-23
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/04/01/daily-study-2026-04-01/" rel="bookmark">
+        <time class="popular-posts-time">2026-04-01</time>
+        <br>
+      每日学习 — 2026-04-01
       </a>
     </li>
   </ul>
@@ -266,7 +273,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
+      <span>2.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -286,35 +293,20 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>volatile 关键字与内存映射 I&#x2F;O</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O"><a href="#🔧-嵌入式知识：volatile-关键字与内存映射-I-x2F-O" class="headerlink" title="🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O"></a>🔧 嵌入式知识：volatile 关键字与内存映射 I&#x2F;O</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><code>volatile</code> 告诉编译器：这个变量可能在程序控制流之外被修改（硬件寄存器、中断、DMA），不要对它做优化（缓存到寄存器、重排序、消除读写）。</p>
-<p>编译器默认假设变量只在当前执行流中改变，所以会：</p>
-<ol>
-<li>把频繁访问的变量缓存在 CPU 寄存器</li>
-<li>消除”看似多余”的读写</li>
-<li>重排序无数据依赖的操作</li>
-</ol>
-<p>加了 <code>volatile</code>，每次都会从内存重新读取&#x2F;写入。</p>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 不加 volatile，编译器可能优化掉循环</span></span><br><span class="line"><span class="type">uint32_t</span> *status = (<span class="type">uint32_t</span> *)<span class="number">0x40021000</span>;</span><br><span class="line"><span class="keyword">while</span> (*status &amp; <span class="number">0x01</span>) &#123;&#125;  <span class="comment">// 可能被优化成无限循环或直接跳过</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 正确写法</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">uint32_t</span> *status = (<span class="keyword">volatile</span> <span class="type">uint32_t</span> *)<span class="number">0x40021000</span>;</span><br><span class="line"><span class="keyword">while</span> (*status &amp; <span class="number">0x01</span>) &#123;&#125;  <span class="comment">// 每次都真正读硬件寄存器</span></span><br></pre></td></tr></table></figure>
+<h2 id="🔧-嵌入式知识：volatile、MMIO-与内存屏障"><a href="#🔧-嵌入式知识：volatile、MMIO-与内存屏障" class="headerlink" title="🔧 嵌入式知识：volatile、MMIO 与内存屏障"></a>🔧 嵌入式知识：volatile、MMIO 与内存屏障</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
+</blockquote>
+<h3 id="volatile-真正保证什么"><a href="#volatile-真正保证什么" class="headerlink" title="volatile 真正保证什么"></a><code>volatile</code> 真正保证什么</h3><p>在 C&#x2F;C++ 中，<code>volatile</code> 告诉编译器：这个对象可能在当前代码路径之外发生变化，对它的访问属于可观察副作用。因此，内存映射寄存器通常通过 <code>volatile</code> 左值读写，CMSIS 也用 <code>__IOM</code>、<code>__IM</code>、<code>__OM</code> 等限定符描述可读写、只读、只写寄存器。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">uint32_t</span> CTRL;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">const</span> <span class="type">uint32_t</span> STATUS;</span><br><span class="line">&#125; <span class="type">device_regs_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEVICE ((device_regs_t *)0x40000000UL)</span></span><br><span class="line"></span><br><span class="line">DEVICE-&gt;CTRL = <span class="number">1U</span>;</span><br><span class="line"><span class="keyword">while</span> ((DEVICE-&gt;STATUS &amp; <span class="number">1U</span>) == <span class="number">0U</span>) &#123; &#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 典型用法：中断标志</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">uint8_t</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ISR_Handler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (!flag) &#123;&#125;  <span class="comment">// 没有 volatile 编译器可能优化掉</span></span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ul>
-<li><strong>volatile ≠ 原子操作</strong>：<code>volatile</code> 只保证不被优化，不保证多核&#x2F;多线程安全</li>
-<li><strong>volatile ≠ 内存屏障</strong>：ARM Cortex-M 还需要 <code>__DSB()</code> &#x2F; <code>__DMB()</code> 保证顺序</li>
-<li><strong>const volatile 合法</strong>：表示”程序不能改，但硬件可能改”（只读状态寄存器）</li>
+<p>它不保证原子性，不建立线程或 ISR 间的同步关系，也不等同于 CPU 内存屏障。GCC 明确指出：volatile 访问之间的顺序点约束，并不会自动把普通内存访问一起排序。因此“把共享变量都加 volatile”不能替代 C11 原子、临界区、RTOS 同步原语或体系结构屏障。</p>
+<h3 id="MMIO、编译器顺序与硬件顺序"><a href="#MMIO、编译器顺序与硬件顺序" class="headerlink" title="MMIO、编译器顺序与硬件顺序"></a>MMIO、编译器顺序与硬件顺序</h3><p>要先区分三层问题：编译器能否省略&#x2F;合并访问，处理器能否重排或缓冲访问，外设是否要求某个完成顺序。<code>volatile</code> 主要解决第一层；后两层要依据具体 Arm 内核、内存属性和外设手册选择 <code>DMB</code>、<code>DSB</code> 或 <code>ISB</code>。它们语义不同：不能为了“保险”在每次寄存器访问后都塞一个 <code>DSB</code>。</p>
+<p>对带缓存的内核，DMA 缓冲区还涉及 cache clean&#x2F;invalidate；屏障本身不会替你把脏 cache line 写回内存。对寄存器位域也要谨慎：编译器可能生成读改写，某些寄存器的读或写 1 清零语义会因此被破坏，优先使用掩码和厂商提供的访问宏。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>任务写普通缓冲区后再写 DMA 启动寄存器，仅把寄存器指针声明为 <code>volatile</code>，能否保证 DMA 一定看到最新缓冲区？不能；还要结合内存属性、缓存一致性要求和平台规定的屏障&#x2F;缓存维护流程。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Volatiles.html">GCC volatile documentation</a></li>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/latest/Core/group__peripheral__gr.html">CMSIS-Core peripheral access</a></li>
 </ul>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: volatile 和 const 能一起用吗？什么场景？</strong></p>
-<blockquote>
-<p>能。<code>const volatile uint32_t *reg = ...</code> 表示只读硬件寄存器，编译器不优化读取但禁止写入。</p>
-</blockquote>
-<p><strong>Q2: 在 RTOS 中，两个任务共享变量只加 volatile 够吗？</strong></p>
-<blockquote>
-<p>不够。<code>volatile</code> 防优化，但不防竞态。需要互斥锁&#x2F;信号量 + <code>volatile</code>。</p>
-</blockquote>
-<p><strong>Q3: DMA 传输完成后读 buffer，需要注意什么？</strong></p>
-<blockquote>
-<p>buffer 要声明 <code>volatile</code> 或者在读之前加 cache invalidate + 内存屏障，防止 CPU 读到旧缓存。</p>
-</blockquote>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-03-22-part1.mp3" type="audio/mpeg">
@@ -1020,13 +1012,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">684k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:50</span>
+    <span title="站点阅读时长">41:27</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

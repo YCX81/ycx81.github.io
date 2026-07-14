@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：中断优先级与 NVIC 深入篇 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-19、2026-06-18 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-20T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-20T00:01:36.879Z">
+<meta property="article:modified_time" content="2026-07-14T14:14:47.353Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E-NVIC-%E6%B7%B1%E5%85%A5%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：中断优先级与 NVIC 深入篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-19-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-19 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-18-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-18 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9ANVIC-%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9A%E6%95%B0%E5%80%BC%E3%80%81%E4%BD%8D%E5%AE%BD%E4%B8%8E%E6%8A%A2%E5%8D%A0"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：NVIC 优先级：数值、位宽与抢占</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%9D%A1%E5%BF%85%E9%A1%BB%E8%AE%B0%E4%BD%8F%E7%9A%84%E8%A7%84%E5%88%99"><span class="nav-number">1.1.</span> <span class="nav-text">三条必须记住的规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A2%E5%8D%A0%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7%E5%88%86%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">抢占与优先级分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E-FreeRTOS-%E9%85%8D%E5%90%88"><span class="nav-number">1.3.</span> <span class="nav-text">与 FreeRTOS 配合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.4.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-19-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-19 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-18-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-18 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,6 +204,20 @@
         <time class="popular-posts-time">2026-06-18</time>
         <br>
       每日学习 — 2026-06-18
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/06/22/daily-study-2026-06-22/" rel="bookmark">
+        <time class="popular-posts-time">2026-06-22</time>
+        <br>
+      每日学习 — 2026-06-22
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/06/27/daily-study-2026-06-27/" rel="bookmark">
+        <time class="popular-posts-time">2026-06-27</time>
+        <br>
+      每日学习 — 2026-06-27
       </a>
     </li>
   </ul>
@@ -274,7 +288,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.3k</span>
+      <span>4.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -294,27 +308,20 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>中断优先级与 NVIC 深入篇</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-19、2026-06-18 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：中断优先级与-NVIC-深入篇"><a href="#🔧-嵌入式知识：中断优先级与-NVIC-深入篇" class="headerlink" title="🔧 嵌入式知识：中断优先级与 NVIC 深入篇"></a>🔧 嵌入式知识：中断优先级与 NVIC 深入篇</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>ARM Cortex-M 的 NVIC（Nested Vectored Interrupt Controller）管理所有中断和异常：</p>
-<ul>
-<li><strong>优先级位宽</strong>：STM32 通常用 4 位（16 级），数字越小优先级越高</li>
-<li><strong>抢占优先级 vs 子优先级</strong>：抢占优先级决定能否中断正在执行的 ISR，子优先级决定同时挂起时的执行顺序</li>
-<li><strong>优先级分组</strong>：<code>NVIC_SetPriorityGrouping()</code> 决定抢占位和子优先级位的划分</li>
-</ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置优先级分组：2 位抢占 + 2 位子优先级</span></span><br><span class="line">HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置中断优先级</span></span><br><span class="line">HAL_NVIC_SetPriority(TIM2_IRQn, <span class="number">1</span>, <span class="number">0</span>);  <span class="comment">// 抢占1, 子优先级0</span></span><br><span class="line">HAL_NVIC_SetPriority(USART1_IRQn, <span class="number">2</span>, <span class="number">0</span>); <span class="comment">// 抢占2, 低于 TIM2</span></span><br><span class="line">HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 最高优先级</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使能中断</span></span><br><span class="line">HAL_NVIC_EnableIRQ(TIM2_IRQn);</span><br></pre></td></tr></table></figure>
+<h2 id="🔧-嵌入式知识：NVIC-优先级：数值、位宽与抢占"><a href="#🔧-嵌入式知识：NVIC-优先级：数值、位宽与抢占" class="headerlink" title="🔧 嵌入式知识：NVIC 优先级：数值、位宽与抢占"></a>🔧 嵌入式知识：NVIC 优先级：数值、位宽与抢占</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
+</blockquote>
+<h3 id="三条必须记住的规则"><a href="#三条必须记住的规则" class="headerlink" title="三条必须记住的规则"></a>三条必须记住的规则</h3><p>第一，Cortex-M 的可配置异常优先级是“数值越小，优先级越高”。第二，芯片只实现优先级字段的高若干位，实际位数由设备头文件中的 <code>__NVIC_PRIO_BITS</code> 描述。第三，CMSIS 的 <code>NVIC_SetPriority()</code> 接收未移位的逻辑优先级，函数内部负责放到寄存器正确位置；不要再手工左移一次。</p>
+<p>上电复位后，可配置中断的默认优先级通常是 0，也就是最高的可配置优先级。工程里应先设置优先级，再清挂起状态并使能中断，而不是依赖默认值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">uart_irq_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    NVIC_DisableIRQ(USART1_IRQn);</span><br><span class="line">    NVIC_ClearPendingIRQ(USART1_IRQn);</span><br><span class="line">    NVIC_SetPriority(USART1_IRQn, <span class="number">5U</span>); <span class="comment">// 逻辑优先级，数字越大越低</span></span><br><span class="line">    NVIC_EnableIRQ(USART1_IRQn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ul>
-<li><strong>BASEPRI 寄存器</strong>：FreeRTOS 用它屏蔽低于阈值的中断，但不影响高优先级中断（如电机控制 ISR）</li>
-<li><strong>零延迟中断</strong>：优先级高于 <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 的中断不受 FreeRTOS 管理，不能调用任何 FreeRTOS API</li>
-<li><strong>尾链（Tail-chaining）</strong>：连续中断之间跳过出栈再入栈的过程，减少延迟</li>
+<h3 id="抢占与优先级分组"><a href="#抢占与优先级分组" class="headerlink" title="抢占与优先级分组"></a>抢占与优先级分组</h3><p>支持优先级分组的内核可用 <code>PRIGROUP</code> 把已实现位划分为抢占优先级和子优先级。抢占字段决定一个异常能否打断另一个；子优先级只在多个异常同时挂起且抢占字段相同时决定先后。是否支持分组、实现几位以及 HAL 如何包装这些字段，都必须查看具体内核和芯片手册，不能把某款 STM32 的“4 位、16 级”推广到所有 Cortex-M。</p>
+<h3 id="与-FreeRTOS-配合"><a href="#与-FreeRTOS-配合" class="headerlink" title="与 FreeRTOS 配合"></a>与 FreeRTOS 配合</h3><p>FreeRTOS 端口通常用 BASEPRI 屏蔽一段较低紧急度的中断。能调用 <code>...FromISR()</code> API 的 ISR 必须满足该端口对最大系统调用中断优先级的约束。这里最容易出错的是把“数值更小”误认为“优先级更低”，或混用已移位与未移位的配置值。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>如果 <code>__NVIC_PRIO_BITS == 4</code>，逻辑优先级 2 比逻辑优先级 10 更紧急。调用 CMSIS API 时传 2，而不是把 2 预先左移成 <code>0x20</code>。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_5/Core/html/group__NVIC__gr.html">CMSIS-Core NVIC API</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.arm.com/community/arm-community-blogs/b/embedded-and-microcontrollers-blog/posts/cutting-through-the-confusion-with-arm-cortex-m-interrupt-priorities">Arm: Cutting through the confusion with interrupt priorities</a></li>
 </ul>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: FreeRTOS 的 <code>FromISR</code> 函数只能在什么优先级的中断中调用？</strong></p>
-<blockquote>
-<p>只能在优先级数值 ≥ <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 的中断中调用。更高优先级（数值更小）的中断是”零延迟中断”，不能调用任何 RTOS API。</p>
-</blockquote>
-<p><strong>Q2: 如何避免中断优先级反转？</strong></p>
-<blockquote>
-<p>确保关键数据的访问使用 <code>taskENTER_CRITICAL()</code>（禁中断）或适当的优先级设计。ISR 应尽量短小，复杂处理通过信号量&#x2F;队列交给任务。</p>
-</blockquote>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-06-20-part1.mp3" type="audio/mpeg">
@@ -1651,13 +1658,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">684k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:50</span>
+    <span title="站点阅读时长">41:27</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

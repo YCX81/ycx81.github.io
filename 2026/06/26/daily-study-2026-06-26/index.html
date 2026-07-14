@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：Flash 编程与磨损均衡 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-22、2026-06-19 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-26T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-26T00:01:23.837Z">
+<meta property="article:modified_time" content="2026-07-14T14:24:53.235Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AFlash-%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%A3%A8%E6%8D%9F%E5%9D%87%E8%A1%A1"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：Flash 编程与磨损均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%A8%E6%8D%9F%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.</span> <span class="nav-text">磨损均衡策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-22-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+4 复习：2026-06-22 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-19-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+7 复习：2026-06-19 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AFlash-%E6%8E%89%E7%94%B5%E5%AE%89%E5%85%A8%E5%AD%98%E5%82%A8%E4%B8%8E%E7%A3%A8%E6%8D%9F%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：Flash 掉电安全存储与磨损管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flash-%E6%9B%B4%E6%96%B0%E4%B8%8D%E6%98%AF%E8%A6%86%E7%9B%96%E4%B8%80%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="nav-number">1.1.</span> <span class="nav-text">Flash 更新不是覆盖一个字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%A8%E6%8D%9F%E7%AE%A1%E7%90%86%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%BE%B9%E7%95%8C"><span class="nav-number">1.2.</span> <span class="nav-text">磨损管理与文件系统边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.3.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-22-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+4 复习：2026-06-22 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-19-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+7 复习：2026-06-19 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -196,13 +196,6 @@
         <time class="popular-posts-time">2026-06-19</time>
         <br>
       每日学习 — 2026-06-19
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/2026/06/22/daily-study-2026-06-22/" rel="bookmark">
-        <time class="popular-posts-time">2026-06-22</time>
-        <br>
-      每日学习 — 2026-06-22
       </a>
     </li>
   </ul>
@@ -273,14 +266,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.3k</span>
+      <span>4.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>16 分钟</span>
+      <span>17 分钟</span>
     </span>
 </div>
 
@@ -293,27 +286,20 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>Flash 编程与磨损均衡</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-22、2026-06-19 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：Flash-编程与磨损均衡"><a href="#🔧-嵌入式知识：Flash-编程与磨损均衡" class="headerlink" title="🔧 嵌入式知识：Flash 编程与磨损均衡"></a>🔧 嵌入式知识：Flash 编程与磨损均衡</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>NOR Flash（MCU 内置）和 NAND Flash（外部存储）是嵌入式系统的主要非易失存储。编程特性：</p>
-<ul>
-<li><strong>擦除粒度</strong>：按扇区&#x2F;块擦除（不能单字节擦），擦除后全 0xFF</li>
-<li><strong>写入限制</strong>：只能 1→0，不能 0→1（必须先擦除）</li>
-<li><strong>擦写寿命</strong>：NOR 约 10 万次，NAND 约 1 万~10 万次</li>
-</ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// STM32 内部 Flash 编程示例</span></span><br><span class="line">HAL_FLASH_Unlock();</span><br><span class="line">FLASH_EraseInitTypeDef erase = &#123;</span><br><span class="line">    .TypeErase = FLASH_TYPEERASE_PAGES,</span><br><span class="line">    .PageAddress = <span class="number">0x0800F800</span>,  <span class="comment">// 最后一页</span></span><br><span class="line">    .NbPages = <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">uint32_t</span> error;</span><br><span class="line">HAL_FLASHEx_Erase(&amp;erase, &amp;error);</span><br><span class="line">HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, <span class="number">0x0800F800</span>, data);</span><br><span class="line">HAL_FLASH_Lock();</span><br></pre></td></tr></table></figure>
+<h2 id="🔧-嵌入式知识：Flash-掉电安全存储与磨损管理"><a href="#🔧-嵌入式知识：Flash-掉电安全存储与磨损管理" class="headerlink" title="🔧 嵌入式知识：Flash 掉电安全存储与磨损管理"></a>🔧 嵌入式知识：Flash 掉电安全存储与磨损管理</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
+</blockquote>
+<h3 id="Flash-更新不是覆盖一个字节"><a href="#Flash-更新不是覆盖一个字节" class="headerlink" title="Flash 更新不是覆盖一个字节"></a>Flash 更新不是覆盖一个字节</h3><p>多数 MCU 内部 Flash 只能把位从 1 编程为 0；要恢复为 1，必须按页或扇区擦除，而且擦写次数有限。直接在原位置“更新结构体”会遇到三个问题：写入粒度&#x2F;对齐限制、掉电造成半写状态、热点地址过早磨损。</p>
+<p>可恢复格式通常采用追加记录或 copy-on-write：新记录包含版本、长度、序号和校验，完整写入后再用一个可原子提交的标记使其生效；启动时扫描并选择最新的完整记录。更新旧页前，先在另一页建立并验证新状态，再切换有效页。具体“原子”粒度必须来自该芯片 Flash 手册，不能把 32 位写入在所有 MCU 上都当成原子。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">record header: magic | schema | sequence | payload_len</span><br><span class="line">payload</span><br><span class="line">integrity check (CRC detects torn/corrupt data; it is not authentication)</span><br><span class="line">commit marker written last</span><br></pre></td></tr></table></figure>
 
-<h3 id="磨损均衡策略"><a href="#磨损均衡策略" class="headerlink" title="磨损均衡策略"></a>磨损均衡策略</h3><ol>
-<li><strong>循环写入</strong>：维护写入指针，依次写入不同扇区，均匀分布擦写次数</li>
-<li><strong>日志结构</strong>：新数据追加写入，旧数据标记无效，满时触发 GC（垃圾回收）</li>
-<li><strong>动态均衡</strong>：监控每个扇区的擦写计数，将热点数据搬移到擦写次数少的扇区</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1: 为什么不能直接覆盖 Flash 中的数据？</strong></p>
-<blockquote>
-<p>Flash 编程只能将 1 变为 0。要将 0 变回 1 必须整扇区擦除。这是 Flash 存储单元的物理特性决定的。</p>
-</blockquote>
-<p><strong>Q2: 如何保证掉电安全的参数存储？</strong></p>
-<blockquote>
-<p>使用双备份策略：两个扇区交替写入，每次写入带 CRC 校验。读取时验证 CRC，选择有效的最新数据。</p>
-</blockquote>
+<h3 id="磨损管理与文件系统边界"><a href="#磨损管理与文件系统边界" class="headerlink" title="磨损管理与文件系统边界"></a>磨损管理与文件系统边界</h3><p>双页 EEPROM emulation 通过页状态和 page transfer 在页之间迁移有效变量，并把写入分散开；真正的耐久度要结合页大小、更新频率、器件额定擦写次数和断电模型估算。littlefs 则用 copy-on-write 元数据、动态 wear leveling 和掉电恢复机制处理块设备，但只有在 <code>sync</code>&#x2F;<code>close</code> 等提交边界完成后，数据才获得相应持久性保证。</p>
+<p>文件系统不能修复不符合约定的块设备驱动。擦除值、编程粒度、读写&#x2F;擦除返回错误、缓存刷写以及掉电时序都必须正确实现。高价值配置还应做 schema 版本迁移、默认值回退和整机随机断电测试；CRC 只能发现错误，若要防篡改需要带密钥的认证机制。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>“写函数返回成功”是否等于断电后一定存在？不一定。要看底层是否已完成编程、缓存是否刷出，以及应用是否跨过了格式定义的提交点。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/littlefs-project/littlefs">littlefs official repository</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/application_note/an4061-eeprom-emulation-in-stm32f0xx-microcontrollers-stmicroelectronics.pdf">ST AN4061: EEPROM emulation</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-06-26-part1.mp3" type="audio/mpeg">
@@ -1649,13 +1635,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">684k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:50</span>
+    <span title="站点阅读时长">41:27</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

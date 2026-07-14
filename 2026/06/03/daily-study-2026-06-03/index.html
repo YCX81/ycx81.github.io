@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：中断优先级与嵌套处理 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-02、2026-06-01 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-03T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-03T00:02:24.494Z">
+<meta property="article:modified_time" content="2026-07-14T14:14:47.357Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E5%B5%8C%E5%A5%97%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：中断优先级与嵌套处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%EF%BC%88NVIC-%E4%BC%98%E5%85%88%E7%BA%A7%E8%AE%BE%E7%BD%AE-ISR-%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码（NVIC 优先级设置 + ISR 安全访问共享数据）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-02-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-02 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-01-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-01 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-05-30 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E6%97%A7%E7%89%88%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：中断优先级旧版内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-02-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-06-02 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-06-01-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-06-01 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-05-30 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,6 +186,30 @@
     </div>
 
     
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/06/05/daily-study-2026-06-05/" rel="bookmark">
+        <time class="popular-posts-time">2026-06-05</time>
+        <br>
+      每日学习 — 2026-06-05
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/06/02/daily-study-2026-06-02/" rel="bookmark">
+        <time class="popular-posts-time">2026-06-02</time>
+        <br>
+      每日学习 — 2026-06-02
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
   </aside>
 
 
@@ -250,14 +274,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.9k</span>
+      <span>4.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>21 分钟</span>
+      <span>18 分钟</span>
     </span>
 </div>
 
@@ -270,35 +294,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>中断优先级与嵌套处理</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-06-02、2026-06-01 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：中断优先级与嵌套处理"><a href="#🔧-嵌入式知识：中断优先级与嵌套处理" class="headerlink" title="🔧 嵌入式知识：中断优先级与嵌套处理"></a>🔧 嵌入式知识：中断优先级与嵌套处理</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>中断优先级决定“谁可以打断谁”，是实时系统最敏感的设计。Cortex-M NVIC（Nested Vectored Interrupt Controller）每个中断 8bit 优先级字段，但实际实现位宽取决于 MCU（常见 4bit，16 级）。NVIC 将 8bit 切成<strong>抢占优先级（Preempt）</strong> 和<strong>子优先级（Sub）</strong> 两部分，由 <code>SCB-&gt;AIRCR.PRIGROUP</code> 决定切分方式：</p>
-<ul>
-<li>PRIGROUP&#x3D;0 → 7bit 抢占 + 1bit 子</li>
-<li>PRIGROUP&#x3D;7 → 0bit 抢占 + 8bit 子（不允许嵌套）</li>
-<li>常用 PRIGROUP&#x3D;4 → 4bit 抢占 + 4bit 子，16 级抢占、16 级子。</li>
-</ul>
-<p><strong>抢占规则</strong>：高抢占优先级可以打断正在执行的低抢占优先级中断，触发“中断嵌套”；同抢占优先级之间不会相互抢占，只按子优先级排队。数值小 &#x3D; 优先级高。</p>
-<p><strong>BASEPRI &#x2F; PRIMASK &#x2F; FAULTMASK</strong> 三把锁：</p>
-<ul>
-<li><code>PRIMASK = 1</code>：屏蔽所有可屏蔽中断（和 CPSID i 等价）。</li>
-<li><code>BASEPRI</code>：屏蔽优先级低于 N 的中断（优先级数值 ≥ N），高于它的中断仍可响应。</li>
-<li><code>FAULTMASK</code>：再狠一级，连 HardFault 之外也不响应。</li>
-</ul>
-<p>RTOS 的惯例：只允许调用“从 ISR 安全的 API”（<code>*FromISR</code>），且这些 API 只允许被优先级 ≥ <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 的 ISR 使用，超出（更高优先级）不能调 RTOS API，因为 RTOS 无法用 BASEPRI 屏蔽它。</p>
-<p><strong>同步考虑</strong>：共享资源要区分线程上下文、ISR 上下文、嵌套 ISR 上下文。线程里关中断用 <code>__disable_irq()</code>；ISR 嵌套时只需关“更低优先级”即可，用 <code>__set_BASEPRI()</code>。</p>
-<h3 id="关键代码（NVIC-优先级设置-ISR-安全访问共享数据）"><a href="#关键代码（NVIC-优先级设置-ISR-安全访问共享数据）" class="headerlink" title="关键代码（NVIC 优先级设置 + ISR 安全访问共享数据）"></a>关键代码（NVIC 优先级设置 + ISR 安全访问共享数据）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1) 设置优先级分组并给每个中断分配抢占 / 子优先级</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">nvic_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);   <span class="comment">// 4bit 抢占 + 4bit 子</span></span><br><span class="line">    HAL_NVIC_SetPriority(SysTick_IRQn,  <span class="number">15</span>, <span class="number">0</span>);           <span class="comment">// 最低</span></span><br><span class="line">    HAL_NVIC_SetPriority(TIM3_IRQn,      <span class="number">5</span>, <span class="number">0</span>);           <span class="comment">// 中等</span></span><br><span class="line">    HAL_NVIC_SetPriority(USART1_IRQn,    <span class="number">4</span>, <span class="number">0</span>);           <span class="comment">// 较高</span></span><br><span class="line">    HAL_NVIC_SetPriority(EXTI0_IRQn,     <span class="number">2</span>, <span class="number">0</span>);           <span class="comment">// 紧急（例如刹车按钮）</span></span><br><span class="line">    HAL_NVIC_EnableIRQ(TIM3_IRQn);</span><br><span class="line">    HAL_NVIC_EnableIRQ(USART1_IRQn);</span><br><span class="line">    HAL_NVIC_EnableIRQ(EXTI0_IRQn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2) 共享数据的原子访问：用 BASEPRI 而非 PRIMASK，保持关键中断响应</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CRITICAL_BEGIN(p)  uint32_t __b = __get_BASEPRI(); __set_BASEPRI((p) &lt;&lt; (8-__NVIC_PRIO_BITS))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CRITICAL_END()     __set_BASEPRI(__b)</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">volatile</span> <span class="type">uint32_t</span> shared_cnt;</span><br><span class="line"><span class="type">void</span> <span class="title function_">thread_update</span><span class="params">(<span class="type">uint32_t</span> delta)</span> &#123;</span><br><span class="line">    CRITICAL_BEGIN(<span class="number">5</span>);        <span class="comment">// 屏蔽 prio ≥5 的中断，但 prio 2/4 仍可打断</span></span><br><span class="line">    shared_cnt += delta;</span><br><span class="line">    CRITICAL_END();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3) 中断里安全唤醒任务（FreeRTOS）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">EXTI0_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_GPIO_EXTI_Callback</span><span class="params">(<span class="type">uint16_t</span> pin)</span> &#123;</span><br><span class="line">    BaseType_t woken = pdFALSE;</span><br><span class="line">    xSemaphoreGiveFromISR(brake_sem, &amp;woken);</span><br><span class="line">    portYIELD_FROM_ISR(woken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li><strong>数值小 &#x3D; 优先级高</strong>：和直觉相反，经常写错造成高优先级中断被低优先级屏蔽。</li>
-<li><strong>抢占优先级相同 ≠ 同时执行</strong>：子优先级决定同时来到的排序，不是并发。</li>
-<li><strong>RTOS API 的优先级门槛</strong>：FreeRTOS 要求 ISR 优先级数值 ≥ <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 才能调 <code>*FromISR</code>，否则断言失败或静默出错。</li>
-<li><strong>PRIMASK 关了所有中断</strong>：长时间 PRIMASK&#x3D;1 会导致 SysTick 丢 tick、DMA 中断被吞；用 BASEPRI 做“选择性屏蔽”更好。</li>
-<li><strong>中断嵌套带来栈压力</strong>：每次进入中断压 8 寄存器（压 16 带 FPU），N 层嵌套就要预留 N×32B 栈空间，否则 HardFault。</li>
-<li><strong>HardFault 优先级</strong>：HardFault &#x2F; NMI 固定为 -1 &#x2F; -2，任何普通中断都不能屏蔽它；但应用代码设置 FAULTMASK 可屏蔽 HardFault（调试用，生产别用）。</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：为什么要中断嵌套？</strong><br>A：实时系统里某些极紧急事件（电机过流、刹车信号）不能等较慢的中断处理完——嵌套允许高优先级打断低优先级 ISR 立即响应。副作用是栈使用增加、代码必须可重入，所以只给真正紧急的外设高抢占级。</p>
-<p><strong>Q2：BASEPRI 和 PRIMASK 的取舍？</strong><br>A：PRIMASK 关“所有”可屏蔽中断，简单但粗暴；BASEPRI 允许只关“比某级更低”的中断，高优先级仍可响应，适合细粒度临界区、SAFETY-关键系统。RTOS 通常用 BASEPRI 做临界区，因为它不想挡掉高优先级的“硬实时”中断。</p>
-<p><strong>Q3：中断响应延迟包括哪些？</strong><br>A：① 硬件检测时间（几十 ns）；② 当前指令完成（最差几十个周期，除非 IT-block）；③ 栈帧压入（12~14 周期 + FPU 另加）；④ 中断向量跳转（取指）；⑤ 若被其他同&#x2F;更高抢占中断抢走则延后。Cortex-M 典型无 tail-chain 约 12 周期，有 tail-chain 只 6 周期。</p>
-<p><strong>Q4：如何调试“偶发性中断丢失”？</strong><br>A：① 看是不是被 PRIMASK&#x2F;BASEPRI 过久屏蔽（抓 DWT trace）；② 优先级配置是否正确；③ 外设标志是否被错误清除位拿来清其他标志；④ ISR 是否复位或重入；⑤ 用 ITM 打点记下每次 ISR 进入&#x2F;退出时间戳，重现时看哪里断了。</p>
+<h2 id="🔧-嵌入式知识：中断优先级旧版内容"><a href="#🔧-嵌入式知识：中断优先级旧版内容" class="headerlink" title="🔧 嵌入式知识：中断优先级旧版内容"></a>🔧 嵌入式知识：中断优先级旧版内容</h2><blockquote>
+<p>本页原技术内容已停止维护并移除，避免同一主题存在多份互相矛盾的版本。</p>
+</blockquote>
+<p>请阅读已按官方资料校订的统一版本：<a href="/2026/06/20/daily-study-2026-06-20/">NVIC 优先级：数值、位宽与抢占</a>。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-06-03-part1.mp3" type="audio/mpeg">
@@ -1950,13 +1949,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">684k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:50</span>
+    <span title="站点阅读时长">41:27</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

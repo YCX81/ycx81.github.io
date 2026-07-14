@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：链接脚本与内存布局 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-05-31、2026-05-30 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-01T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-01T00:02:40.308Z">
+<meta property="article:modified_time" content="2026-07-14T14:24:53.239Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：链接脚本与内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-31-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-05-31 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-05-30 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-05-28 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E6%97%A7%E7%89%88%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：链接脚本与内存布局旧版内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-31-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-05-31 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-30-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-05-30 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-05-28-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-05-28 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -274,14 +274,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.5k</span>
+      <span>4.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>20 分钟</span>
+      <span>17 分钟</span>
     </span>
 </div>
 
@@ -294,24 +294,10 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>链接脚本与内存布局</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-05-31、2026-05-30 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：链接脚本与内存布局"><a href="#🔧-嵌入式知识：链接脚本与内存布局" class="headerlink" title="🔧 嵌入式知识：链接脚本与内存布局"></a>🔧 嵌入式知识：链接脚本与内存布局</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>链接脚本（Linker Script，通常为 .ld 文件）是 GNU ld 链接器的配置文件，用于告诉链接器如何把多个目标文件（.o）中的段（section）放置到最终可执行映像的内存地址空间。嵌入式系统里链接脚本至关重要——它决定了代码烧在 Flash 的哪里、栈放在 SRAM 的哪个位置、中断向量表的起始地址等底层细节。</p>
-<p>链接脚本由三大核心指令组成：MEMORY 块定义物理内存区域（起始地址、长度、属性 rwx），SECTIONS 块定义各段的放置规则（.text 代码段、.data 已初始化数据、.bss 未初始化数据、.rodata 只读常量），PROVIDE&#x2F;ENTRY 导出符号给 C 代码使用（如 _estack 栈顶、_sdata 数据段起始）。</p>
-<p>启动流程的关键一环：从 Flash 拷贝 .data 段到 RAM 是由 startup 汇编代码完成的，它会读取链接脚本导出的 _sidata（Flash 里 .data 的 LMA 加载地址）、_sdata&#x2F;_edata（RAM 里的 VMA 运行地址），循环拷贝；随后把 _sbss 到 _ebss 区间清零（C 标准要求 BSS 默认为 0）；最后跳转到 main()。</p>
-<p>VMA（Virtual Memory Address 运行地址）与 LMA（Load Memory Address 加载地址）的区别是嵌入式开发者必须理解的概念。.text 段 VMA&#x3D;LMA（都在 Flash），.data 段 VMA 在 RAM 但 LMA 在 Flash（AT 指令），这就是 “Flash 映像中为什么能看到 .data 的初始值” 的原因。</p>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">/* STM32F4 Cortex-M4 典型链接脚本 */</span><br><span class="line">ENTRY(Reset_Handler)</span><br><span class="line"></span><br><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 1024K</span><br><span class="line">    RAM   (rwx) : ORIGIN = 0x20000000, LENGTH = 128K</span><br><span class="line">    CCM   (rw)  : ORIGIN = 0x10000000, LENGTH = 64K</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">_estack = ORIGIN(RAM) + LENGTH(RAM);  /* 栈顶指针 */</span><br><span class="line"></span><br><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">    .isr_vector : &#123;</span><br><span class="line">        KEEP(*(.isr_vector))  /* 中断向量表必须在 Flash 开头 */</span><br><span class="line">    &#125; &gt; FLASH</span><br><span class="line"></span><br><span class="line">    .text : &#123;</span><br><span class="line">        *(.text*)</span><br><span class="line">        *(.rodata*)</span><br><span class="line">        _etext = .;</span><br><span class="line">    &#125; &gt; FLASH</span><br><span class="line"></span><br><span class="line">    .data : AT(_etext) &#123;   /* LMA 紧跟 .text 之后 */</span><br><span class="line">        _sdata = .;</span><br><span class="line">        *(.data*)</span><br><span class="line">        _edata = .;</span><br><span class="line">    &#125; &gt; RAM</span><br><span class="line"></span><br><span class="line">    .bss : &#123;</span><br><span class="line">        _sbss = .;</span><br><span class="line">        *(.bss*)</span><br><span class="line">        _ebss = .;</span><br><span class="line">    &#125; &gt; RAM</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 对应 startup 代码 */</span><br><span class="line">Reset_Handler:</span><br><span class="line">    ldr  r0, =_sdata</span><br><span class="line">    ldr  r1, =_edata</span><br><span class="line">    ldr  r2, =_sidata       /* LMA */</span><br><span class="line">copy_data:</span><br><span class="line">    cmp  r0, r1</span><br><span class="line">    bge  clear_bss</span><br><span class="line">    ldr  r3, [r2], #4</span><br><span class="line">    str  r3, [r0], #4</span><br><span class="line">    b    copy_data</span><br></pre></td></tr></table></figure>
-
-<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
-<li>VMA vs LMA：.data 段运行时在 RAM（VMA），但映像里存在 Flash（LMA），启动代码负责拷贝</li>
-<li>KEEP 指令：防止链接器把未被引用的段（如中断向量表）优化掉</li>
-<li>段对齐：. &#x3D; ALIGN(4) 是必需的，Cortex-M 某些访问要求 4 字节对齐，否则 HardFault</li>
-<li><blockquote>
-<p>RAM AT&gt;FLASH 语法：左侧是 VMA，右侧是 LMA，两者可不同</p>
+<h2 id="🔧-嵌入式知识：链接脚本与内存布局旧版内容"><a href="#🔧-嵌入式知识：链接脚本与内存布局旧版内容" class="headerlink" title="🔧 嵌入式知识：链接脚本与内存布局旧版内容"></a>🔧 嵌入式知识：链接脚本与内存布局旧版内容</h2><blockquote>
+<p>本页原技术内容已停止维护并移除，避免同一主题存在多份互相矛盾的版本。</p>
 </blockquote>
-</li>
-</ol>
-<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：为什么需要链接脚本？编译器生成的 .o 直接链接不行吗？</strong><br>A：.o 文件里段的地址是相对的，链接脚本告诉链接器每个段放在物理内存的哪里。嵌入式没有 OS 来加载程序，必须在链接阶段就确定地址。</p>
-<p><strong>Q2：.data 段和 .bss 段的区别？</strong><br>A：.data 存放已初始化且非零的全局&#x2F;静态变量，在 Flash 里有初始值副本，启动时拷贝到 RAM。.bss 存放未初始化或初始化为 0 的变量，Flash 里不占空间，启动时清零。</p>
-<p><strong>Q3：如何把一段代码固定放到 RAM 里执行（如中断处理函数加速）？</strong><br>A：C 代码用 <strong>attribute</strong>((section(“.ram_func”))) 标记，链接脚本中新增 .ram_func 段并设置 &gt;RAM AT&gt;FLASH，启动时一并拷贝。</p>
+<p>请阅读已按官方资料校订的统一版本：<a href="/2026/03/28/daily-study-2026-03-28/">链接脚本、启动流程与 .data&#x2F;.bss</a>。</p>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-06-01-part1.mp3" type="audio/mpeg">
@@ -1963,13 +1949,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">684k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">41:50</span>
+    <span title="站点阅读时长">41:27</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
