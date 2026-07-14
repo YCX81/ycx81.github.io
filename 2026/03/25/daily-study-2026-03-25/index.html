@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：FOC 磁场定向控制 · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &amp; 2026-03-24 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-25T00:19:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.832Z">
+<meta property="article:modified_time" content="2026-07-14T15:23:23.956Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="FOC">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AFOC-%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%90%91%E6%8E%A7%E5%88%B6%EF%BC%88Field-Oriented-Control%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：FOC 磁场定向控制（Field-Oriented Control）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%BB%8A%E6%97%A5%E8%AF%8D%E6%B1%87%EF%BC%8850-%E8%AF%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📚 今日词汇（50 词）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E8%A7%88%E8%A1%A8"><span class="nav-number">2.1.</span> <span class="nav-text">词汇速览表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2026-03-24-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%C2%B7-50%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">2026-03-24 批次（第1天复习 · 50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2026-03-23-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC2%E5%A4%A9%E5%A4%8D%E4%B9%A0-%C2%B7-50%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2026-03-23 批次（第2天复习 · 50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%A0%E8%AF%AD%E5%A4%8D%E4%B9%A0%EF%BC%882026-03-23-amp-2026-03-24-%E6%89%B9%E6%AC%A1%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">习语复习（2026-03-23 &amp; 2026-03-24 批次）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9APMSM-FOC-%E5%9F%BA%E6%9C%AC%E6%8E%A7%E5%88%B6%E9%93%BE%E4%B8%8E%E5%AE%9E%E7%8E%B0%E8%BE%B9%E7%95%8C"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：PMSM FOC 基本控制链与实现边界</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FOC-%E6%98%AF%E4%B8%80%E6%9D%A1%E5%90%8C%E6%AD%A5%E7%9A%84%E9%97%AD%E7%8E%AF%E6%8E%A7%E5%88%B6%E9%93%BE"><span class="nav-number">1.1.</span> <span class="nav-text">FOC 是一条同步的闭环控制链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84%E4%B8%8A%E7%94%B5%E9%AA%8C%E8%AF%81%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">可执行的上电验证顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.3.</span> <span class="nav-text">边界与常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.4.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%BB%8A%E6%97%A5%E8%AF%8D%E6%B1%87%EF%BC%8850-%E8%AF%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📚 今日词汇（50 词）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E8%A7%88%E8%A1%A8"><span class="nav-number">2.1.</span> <span class="nav-text">词汇速览表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2026-03-24-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC1%E5%A4%A9%E5%A4%8D%E4%B9%A0-%C2%B7-50%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">2026-03-24 批次（第1天复习 · 50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2026-03-23-%E6%89%B9%E6%AC%A1%EF%BC%88%E7%AC%AC2%E5%A4%A9%E5%A4%8D%E4%B9%A0-%C2%B7-50%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2026-03-23 批次（第2天复习 · 50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%A0%E8%AF%AD%E5%A4%8D%E4%B9%A0%EF%BC%882026-03-23-amp-2026-03-24-%E6%89%B9%E6%AC%A1%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">习语复习（2026-03-23 &amp; 2026-03-24 批次）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -270,14 +270,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
+      <span>12 分钟</span>
     </span>
 </div>
 
@@ -290,10 +290,22 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>FOC 磁场定向控制</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-03-23 &amp; 2026-03-24 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：FOC-磁场定向控制（Field-Oriented-Control）"><a href="#🔧-嵌入式知识：FOC-磁场定向控制（Field-Oriented-Control）" class="headerlink" title="🔧 嵌入式知识：FOC 磁场定向控制（Field-Oriented Control）"></a>🔧 嵌入式知识：FOC 磁场定向控制（Field-Oriented Control）</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：PMSM-FOC-基本控制链与实现边界"><a href="#🔧-嵌入式知识：PMSM-FOC-基本控制链与实现边界" class="headerlink" title="🔧 嵌入式知识：PMSM FOC 基本控制链与实现边界"></a>🔧 嵌入式知识：PMSM FOC 基本控制链与实现边界</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="FOC-是一条同步的闭环控制链"><a href="#FOC-是一条同步的闭环控制链" class="headerlink" title="FOC 是一条同步的闭环控制链"></a>FOC 是一条同步的闭环控制链</h3><p>以下讨论对象是带转子位置反馈的三相 PMSM。一次典型高频电流环按固定顺序运行：PWM 定时器在确定的采样点触发 ADC，采集两相或三相电流并校正零偏；Clarke 变换得到静止坐标系的 (i_\alpha,i_\beta)；再用转子<strong>电角度</strong>做 Park 变换得到 (i_d,i_q)。两个 PI 调节器把电流误差变成 (v_d,v_q)，经过电压矢量限幅、反 Park 变换和 SVPWM，更新下一周期的比较值。</p>
+<p>对表贴式 PMSM，基速以下常以 (i_d^*&#x3D;0)、(i_q^*) 控制转矩；这不是所有电机和工况的通则。内嵌式 PMSM 的最大转矩每安培、弱磁，以及感应电机的磁链控制，都需要不同的参考值和模型。速度环、位置环应运行得比电流环慢，并输出带斜率和幅值限制的参考量；不能把三个 PI 放在同一频率后只靠“调参数”获得稳定性。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PWM/ADC 同步采样 -&gt; 偏置与量程校正 -&gt; Clarke -&gt; Park(电角度)</span><br><span class="line">-&gt; Id/Iq PI + 抗饱和 -&gt; 电压圆限幅 -&gt; inverse Park -&gt; SVPWM</span><br><span class="line">-&gt; 定时器影子寄存器在安全更新点生效</span><br></pre></td></tr></table></figure>
+
+<p>这是实现结构，不是可直接编译的驱动。变换符号、相序、角度正方向、PWM 极性和电流采样重构方式必须在一个项目内统一；不同库的同名函数不保证采用同一约定。</p>
+<h3 id="可执行的上电验证顺序"><a href="#可执行的上电验证顺序" class="headerlink" title="可执行的上电验证顺序"></a>可执行的上电验证顺序</h3><p>先在禁能功率级时验证 ADC 零偏、增益、相序和母线电压；再用限流、低电压的开环旋转矢量确认电角度方向和极对数；随后只闭合电流环，用小阶跃检查 (i_d&#x2F;i_q) 解耦、饱和恢复和最坏执行时间；最后才加入速度环、位置环与弱磁。每一步都要保留过流、欠压、驱动故障和失速停机路径，并用示波器同时观察 PWM、采样时刻和相电流。</p>
+<p>位置传感器有机械角时，应按极对数换算为电角度并完成零位对齐。无位置传感器方案还依赖观测器的可观测区间；反电动势观测在零速&#x2F;极低速通常没有足够信息，不能把“高速已闭环”推断成“零速可带载启动”。</p>
+<h3 id="边界与常见误区"><a href="#边界与常见误区" class="headerlink" title="边界与常见误区"></a>边界与常见误区</h3><p>提高 PWM 或电流环频率会缩短可用计算窗口并增加开关损耗，不会自动改善控制。PI 输出若在母线电压极限处长期饱和而积分仍累加，会造成解除饱和后的大幅过冲；电压限幅必须与抗积分饱和配套。日志、浮点格式化或阻塞通信也不应进入高频 ISR。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>电机空载能平稳转动，是否足以证明 FOC 实现正确？不足；还必须验证电流采样与角度约定、负载阶跃、限幅恢复、低速启动、故障停机和每周期最坏执行时间。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/user_manual/um2380-stm32-motor-control-sdk-v54-tools-stmicroelectronics.pdf">ST UM2380: STM32 Motor Control SDK v5.4 tools</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ti.com/lit/ug/tiduew0/tiduew0.pdf">TI TIDM-02007: Dual-axis motor drive with sensored FOC</a></li>
+</ul>
 <hr>
 <h2 id="📚-今日词汇（50-词）"><a href="#📚-今日词汇（50-词）" class="headerlink" title="📚 今日词汇（50 词）"></a>📚 今日词汇（50 词）</h2><p><audio controls src="/audio/vocab/2026-03-25-part1.mp3">Part 1 朗读（1-25）</audio></p>
 <p><audio controls src="/audio/vocab/2026-03-25-part2.mp3">Part 2 朗读（26-50）</audio></p>
@@ -960,13 +972,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">651k</span>
+    <span title="站点总字数">655k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:28</span>
+    <span title="站点阅读时长">39:42</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动

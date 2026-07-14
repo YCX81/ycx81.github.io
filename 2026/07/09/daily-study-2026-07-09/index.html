@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：性能分析与优化工具(perf&#x2F;gprof) · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-08、2026-07-05 批次）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-09T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.892Z">
+<meta property="article:modified_time" content="2026-07-14T15:23:23.961Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7-perf-x2F-gprof"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：性能分析与优化工具(perf&#x2F;gprof)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-08-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-07-08 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-05-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+4 复习：2026-07-05 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-02-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+7 复习：2026-07-02 词汇（50词）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E9%87%8F%E4%B8%8E%E8%AF%81%E6%8D%AE%E9%A9%B1%E5%8A%A8%E4%BC%98%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：嵌入式性能测量与证据驱动优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E5%BF%85%E9%A1%BB%E5%85%88%E5%8F%98%E6%88%90%E5%8F%AF%E6%B5%8B%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">性能问题必须先变成可测指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E8%AF%81%E6%8D%AE%E5%88%B0%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">从证据到优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.3.</span> <span class="nav-text">边界与常见误区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.4.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-08-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-07-08 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-05-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+4 复习：2026-07-05 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-7-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-02-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+7 复习：2026-07-02 词汇（50词）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -251,14 +251,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.8k</span>
+      <span>5.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>18 分钟</span>
+      <span>20 分钟</span>
     </span>
 </div>
 
@@ -271,10 +271,23 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>性能分析与优化工具(perf&#x2F;gprof)</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-08、2026-07-05 批次）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：性能分析与优化工具-perf-x2F-gprof"><a href="#🔧-嵌入式知识：性能分析与优化工具-perf-x2F-gprof" class="headerlink" title="🔧 嵌入式知识：性能分析与优化工具(perf&#x2F;gprof)"></a>🔧 嵌入式知识：性能分析与优化工具(perf&#x2F;gprof)</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：嵌入式性能测量与证据驱动优化"><a href="#🔧-嵌入式知识：嵌入式性能测量与证据驱动优化" class="headerlink" title="🔧 嵌入式知识：嵌入式性能测量与证据驱动优化"></a>🔧 嵌入式知识：嵌入式性能测量与证据驱动优化</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="性能问题必须先变成可测指标"><a href="#性能问题必须先变成可测指标" class="headerlink" title="性能问题必须先变成可测指标"></a>性能问题必须先变成可测指标</h3><p>“程序有点慢”无法指导优化。先定义与需求直接对应的指标：中断响应、任务完成时间、截止期违例、周期抖动、吞吐量、CPU 占用、栈&#x2F;堆峰值、Flash&#x2F;RAM、能量或启动时间。测试场景要固定输入、时钟、电源模式、缓存&#x2F;等待状态、编译器与链接选项，并同时记录典型值、分位数和最坏观测值；只报一次平均时间会隐藏长尾延迟。</p>
+<p>在含 DWT 周期计数器的 Cortex-M 目标上，可在短代码段前后读取 <code>DWT-&gt;CYCCNT</code>，用无符号减法处理一次 32 位回绕。启用方式、计数器是否实现、睡眠&#x2F;停机时是否继续计数，以及安全状态下是否可访问，都要查具体内核与芯片文档。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* CMSIS-Core 示意；前提是目标实现并已启用 DWT CYCCNT。 */</span></span><br><span class="line"><span class="type">static</span> <span class="type">uint32_t</span> <span class="title function_">elapsed_cycles</span><span class="params">(<span class="type">uint32_t</span> begin, <span class="type">uint32_t</span> end)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> end - begin; <span class="comment">/* 对不跨越多次回绕的区间成立。 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测量代码要防止编译器把待测计算删除或移出区间，并扣除读计数器本身的开销。分别测冷&#x2F;热 cache、允许&#x2F;屏蔽中断、DMA 竞争和真实数据分布；关闭中断得到的“纯函数周期”不能代表上线后的响应时间。对没有 DWT 的目标，可用硬件定时器、GPIO 配合逻辑分析仪或工具链采样分析，但同样要量化探针开销。</p>
+<h3 id="从证据到优化"><a href="#从证据到优化" class="headerlink" title="从证据到优化"></a>从证据到优化</h3><p>先用周期事件、采样或调用图找到热点，再检查算法复杂度、无谓复制、阻塞 I&#x2F;O、锁竞争和 cache&#x2F;Flash 访问。每次只改一个假设，保存修改前后的同场景数据，并同时检查正确性、代码尺寸、栈和能耗回归。通常算法和数据布局的收益大于手写指令；只有反汇编与周期证明确有必要时才做目标相关微优化。</p>
+<p>发布性能必须用接近发布的构建测量。GCC 的 <code>-O2</code>、<code>-O3</code>、<code>-Os</code>&#x2F;<code>-Oz</code> 和 LTO 会改变内联、布局与可观察性；具体开启哪些 pass 还取决于 GCC 版本和目标。<code>-ffast-math</code> 不是普通的“更快开关”，它允许改变浮点语义，必须通过数值边界测试后单独决策。调试日志、断言和探针也要以受控配置评估，不能为了跑分全部删除诊断能力。</p>
+<h3 id="边界与常见误区"><a href="#边界与常见误区" class="headerlink" title="边界与常见误区"></a>边界与常见误区</h3><p>采样分析能指出热点，但不保证捕获低频长尾；插桩能看到精确事件，却会占用执行时间和带宽。WCET 也不能由一次压力测试证明：带 cache、总线仲裁、DMA 和中断的系统需要更严格的平台模型或保守测量边界。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>某函数从 600 周期降到 400 周期，是否就应合入？不一定；还要确认它处在真实热点、端到端指标改善、结果一致，并且代码尺寸、能耗、栈和最坏延迟没有恶化。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/v6.0.0/Core/structDWT__Type.html">CMSIS-Core 6 DWT register definition</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Learn%20the%20Architecture/Understanding%20Trace.pdf?revision=6b56aa86-4314-49e7-a14d-3ff3e5c8fece">Arm Understanding Trace, version 2.0</a></li>
+<li><a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">GCC optimization options</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-07-09-part1.mp3" type="audio/mpeg">
@@ -1927,13 +1940,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">651k</span>
+    <span title="站点总字数">655k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:28</span>
+    <span title="站点阅读时长">39:42</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
