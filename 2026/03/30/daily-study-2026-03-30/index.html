@@ -28,7 +28,7 @@
 <meta property="og:description" content="今日内容：低功耗设计（Power Modes · DVFS · Race-to-sleep · 功耗测量） · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;23 · 3&#x2F;26 · 3&#x2F;28 · 3&#x2F;29）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-30T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T14:41:51.838Z">
+<meta property="article:modified_time" content="2026-07-14T15:01:19.688Z">
 <meta property="article:author" content="YCX">
 <meta property="article:tag" content="嵌入式">
 <meta property="article:tag" content="英语">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%BD%8E%E5%8A%9F%E8%80%97%E8%AE%BE%E8%AE%A1-Low-Power-Design"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：低功耗设计 Low-Power Design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cburn-the-midnight-oil%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “burn the midnight oil”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cback-to-the-drawing-board%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “back to the drawing board”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Con-the-same-page%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “on the same page”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-ball-is-in-your-court%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the ball is in your court”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cpull-the-plug%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “pull the plug”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-23-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88RTOS-%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;23 词汇 — 第 7 天复习（RTOS 主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-26-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;26 词汇 — 第 4 天复习（通信协议主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-28-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 3&#x2F;28 词汇 — 第 2 天复习（链接脚本主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-29-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 3&#x2F;29 词汇 — 第 1 天复习（调试技术主题）</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9ACortex-M-%E4%BD%8E%E5%8A%9F%E8%80%97%EF%BC%9A%E7%9D%A1%E7%9C%A0%E3%80%81%E5%94%A4%E9%86%92%E4%B8%8E%E6%B5%8B%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：Cortex-M 低功耗：睡眠、唤醒与测量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E%E5%8A%9F%E8%80%97%E4%B8%8D%E6%98%AF%E4%B8%80%E5%8F%A5-WFI"><span class="nav-number">1.1.</span> <span class="nav-text">低功耗不是一句 WFI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E9%87%8F%E4%B8%8E%E5%94%A4%E9%86%92%E8%B7%AF%E5%BE%84"><span class="nav-number">1.2.</span> <span class="nav-text">测量与唤醒路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B5%8B"><span class="nav-number">1.3.</span> <span class="nav-text">自测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%AC-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.</span> <span class="nav-text">💬 地道表达</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%80%9Cburn-the-midnight-oil%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. “burn the midnight oil”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E2%80%9Cback-to-the-drawing-board%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. “back to the drawing board”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E2%80%9Con-the-same-page%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">3. “on the same page”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E2%80%9Cthe-ball-is-in-your-court%E2%80%9D"><span class="nav-number">3.4.</span> <span class="nav-text">4. “the ball is in your court”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E2%80%9Cpull-the-plug%E2%80%9D"><span class="nav-number">3.5.</span> <span class="nav-text">5. “pull the plug”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔄 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-23-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-7-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88RTOS-%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 3&#x2F;23 词汇 — 第 7 天复习（RTOS 主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-26-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-4-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 3&#x2F;26 词汇 — 第 4 天复习（通信协议主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-28-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-2-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 3&#x2F;28 词汇 — 第 2 天复习（链接脚本主题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-3-x2F-29-%E8%AF%8D%E6%B1%87-%E2%80%94-%E7%AC%AC-1-%E5%A4%A9%E5%A4%8D%E4%B9%A0%EF%BC%88%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E4%B8%BB%E9%A2%98%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">📅 3&#x2F;29 词汇 — 第 1 天复习（调试技术主题）</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -251,14 +251,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
+      <span>12 分钟</span>
     </span>
 </div>
 
@@ -271,10 +271,20 @@
     <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>低功耗设计（Power Modes · DVFS · Race-to-sleep · 功耗测量）</strong> · 50 个英语新词 + 5 个地道表达 · Ebbinghaus 复习（3&#x2F;23 · 3&#x2F;26 · 3&#x2F;28 · 3&#x2F;29）</p>
 <span id="more"></span>
 
-<h2 id="🔧-嵌入式知识：低功耗设计-Low-Power-Design"><a href="#🔧-嵌入式知识：低功耗设计-Low-Power-Design" class="headerlink" title="🔧 嵌入式知识：低功耗设计 Low-Power Design"></a>🔧 嵌入式知识：低功耗设计 Low-Power Design</h2><blockquote>
-<p>本节旧版自动生成内容已暂时下线，正在按官方资料重新审查。</p>
+<h2 id="🔧-嵌入式知识：Cortex-M-低功耗：睡眠、唤醒与测量"><a href="#🔧-嵌入式知识：Cortex-M-低功耗：睡眠、唤醒与测量" class="headerlink" title="🔧 嵌入式知识：Cortex-M 低功耗：睡眠、唤醒与测量"></a>🔧 嵌入式知识：Cortex-M 低功耗：睡眠、唤醒与测量</h2><blockquote>
+<p>本节已于 2026-07-14 按官方资料重新校订；旧版自动生成内容已移除。</p>
 </blockquote>
-<p>在校订完成前不展示未经验证的技术结论和示例代码；本页的单词、音频与复习内容仍可正常使用。</p>
+<h3 id="低功耗不是一句-WFI"><a href="#低功耗不是一句-WFI" class="headerlink" title="低功耗不是一句 WFI"></a>低功耗不是一句 <code>WFI</code></h3><p>Cortex-M 的 <code>WFI</code>&#x2F;<code>WFE</code> 只是允许处理器等待的架构指令；真正关闭哪些时钟、电源域和稳压器，以及哪些中断能唤醒，取决于具体 MCU。<code>WFI</code> 等待中断或调试事件，<code>WFE</code> 使用事件寄存器：若事件位已经置 1，它会先清零并立即返回。因此两者不能不加分析地互换。</p>
+<p>功耗设计至少同时考虑四项：睡眠电流、进入&#x2F;退出延迟、状态保持范围、可用唤醒源。最深模式的静态电流最低，却可能丢失 SRAM、像复位一样重新启动，或让某些外设无法唤醒；若系统频繁醒来，恢复时钟和外设的能量反而可能超过节省量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示意：具体低功耗模式和清标志顺序必须查芯片参考手册。</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">idle_once</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    __disable_irq();</span><br><span class="line">    <span class="keyword">if</span> (scheduler_has_no_ready_work()) &#123;</span><br><span class="line">        prepare_device_power_state();</span><br><span class="line">        __DSB();</span><br><span class="line">        __WFI();</span><br><span class="line">        restore_device_power_state();</span><br><span class="line">    &#125;</span><br><span class="line">    __enable_irq();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关中断后重新检查条件，可以避免“检查为空后、执行 WFI 前事件到达”的竞态；挂起的中断仍会使处理器离开 <code>WFI</code>，重新开中断后再进入处理程序。但临界区必须很短，RTOS 应使用其 tickless&#x2F;idle 接口，不要在应用任务里另写一套睡眠调度。</p>
+<h3 id="测量与唤醒路径"><a href="#测量与唤醒路径" class="headerlink" title="测量与唤醒路径"></a>测量与唤醒路径</h3><p>进入前应清理旧的唤醒标志，再配置唤醒源；退出后先确认唤醒原因，再恢复依赖的时钟和外设。GPIO 悬空、调试端口、周期 SysTick、未关闭的传感器或稳压器，常常比 CPU 本身更耗电。用电流仪或分流采样测量“运行—进入—睡眠—唤醒”整段波形，并按实际占空比计算平均能量，而不是只引用数据手册的最低典型值。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>Standby 电流比 Stop 更低，是否一定更省电？不一定；还要比较唤醒频率、恢复时间、状态重建能量和可接受的数据丢失范围。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/main/Core/group__intrinsic__CPU__gr.html">CMSIS-Core WFI&#x2F;WFE intrinsic functions</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/application_note/dm00355687-how-to-wake-up-an-stm32xx-series-microcontroller-from-low-power-mode-with-the-usart-or-the-lpuart-stmicroelectronics.pdf">ST AN4991: Wakeup from low-power mode with USART&#x2F;LPUART</a></li>
+</ul>
 <hr>
 <h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
   <source src="/audio/vocab/2026-03-30-part1.mp3" type="audio/mpeg">
@@ -1784,13 +1794,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">649k</span>
+    <span title="站点总字数">651k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39:19</span>
+    <span title="站点阅读时长">39:28</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
