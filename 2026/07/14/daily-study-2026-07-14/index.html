@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日内容：Modbus协议(TCP与RTU) · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-13、2026-07-12 批次）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习 — 2026-07-14">
+<meta property="og:url" content="http://ycx81.github.io/2026/07/14/daily-study-2026-07-14/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日内容：Modbus协议(TCP与RTU) · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-13、2026-07-12 批次）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-14T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-14T00:02:20.386Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="词汇">
+<meta property="article:tag" content="Modbus">
+<meta property="article:tag" content="通信">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/07/14/daily-study-2026-07-14/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/07/14/daily-study-2026-07-14/","path":"2026/07/14/daily-study-2026-07-14/","title":"每日学习 — 2026-07-14"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每日学习 — 2026-07-14 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AModbus%E5%8D%8F%E8%AE%AE-TCP%E4%B8%8ERTU"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：Modbus协议(TCP与RTU)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%EF%BC%88MCU-%E4%BD%9C-Slave%EF%BC%8C%E5%93%8D%E5%BA%94-0x03-%E8%AF%BB%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">关键代码（MCU 作 Slave，响应 0x03 读寄存器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">易混淆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">面试常见问法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E4%BB%8A%E6%97%A5%E6%96%B0%E8%AF%8D%EF%BC%8850%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 今日新词（50个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8A-%E8%AF%AD%E9%9F%B3%E6%9C%97%E8%AF%BB"><span class="nav-number">2.1.</span> <span class="nav-text">🔊 语音朗读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E6%B1%87%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">词汇速查表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E8%AF%8D%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">逐词详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%A3%EF%B8%8F-%E5%9C%B0%E9%81%93%E8%A1%A8%E8%BE%BE%EF%BC%885-%E4%B8%AA%E4%B9%A0%E8%AF%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">🗣️ 地道表达（5 个习语）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-Ebbinghaus-%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 Ebbinghaus 复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-1-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-13-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">📅 Day+1 复习：2026-07-13 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-2-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-12-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">📅 Day+2 复习：2026-07-12 词汇（50词）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%85-Day-4-%E5%A4%8D%E4%B9%A0%EF%BC%9A2026-07-10-%E8%AF%8D%E6%B1%87%EF%BC%8850%E8%AF%8D%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">📅 Day+4 复习：2026-07-10 词汇（50词）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">229</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/07/14/daily-study-2026-07-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每日学习 — 2026-07-14 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每日学习 — 2026-07-14
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-07-14 09:00:00" itemprop="dateCreated datePublished" datetime="2026-07-14T09:00:00+08:00">2026-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>22 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日内容：<strong>Modbus协议(TCP与RTU)</strong> · 50 个英语新词 + 语音朗读 · 5 个地道表达 · Ebbinghaus 复习（2026-07-13、2026-07-12 批次）</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：Modbus协议-TCP与RTU"><a href="#🔧-嵌入式知识：Modbus协议-TCP与RTU" class="headerlink" title="🔧 嵌入式知识：Modbus协议(TCP与RTU)"></a>🔧 嵌入式知识：Modbus协议(TCP与RTU)</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>Modbus 是 Modicon 1979 年发明的工业通信协议，至今仍是 PLC、变频器、仪表、传感器领域的事实标准。它的魅力在于“简单”——数据模型就 <strong>线圈（Coil）、离散输入、保持寄存器、输入寄存器</strong> 四类，功能码只有十几个，文档一页纸就能讲清。</p>
+<p><strong>三种变体</strong>：</p>
+<ul>
+<li><strong>Modbus RTU</strong>：运行在 RS-485&#x2F;RS-232，二进制紧凑封包，CRC-16 校验，帧间至少 3.5 字符间隔；工业现场最常见。</li>
+<li><strong>Modbus ASCII</strong>：ASCII 字符封包（<code>:</code> 开头 <code>\r\n</code> 结尾），LRC 校验；现在很少用。</li>
+<li><strong>Modbus TCP</strong>：基于 TCP&#x2F;IP，把 RTU 的 CRC 去掉，前面加 7 字节 MBAP 头（事务 ID、协议 ID、长度、Unit ID），端口 502。</li>
+</ul>
+<p><strong>RTU 帧结构</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">| Slave Addr | Function | Data | CRC-16 (LSB, MSB) |</span><br><span class="line">|    1B      |    1B    |  N B |        2B         |</span><br></pre></td></tr></table></figure>
+
+<p><strong>TCP 帧结构</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| Txn ID (2) | Proto ID (2) | Length (2) | Unit ID (1) | Function | Data |</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用功能码</strong>：</p>
+<ul>
+<li>0x01 Read Coils（读线圈）</li>
+<li>0x03 Read Holding Registers（读保持寄存器，最常用）</li>
+<li>0x04 Read Input Registers</li>
+<li>0x05 Write Single Coil</li>
+<li>0x06 Write Single Register</li>
+<li>0x10 Write Multiple Registers（批量写）</li>
+<li>0x17 Read&#x2F;Write Multiple Registers</li>
+</ul>
+<p><strong>寄存器地址</strong>：一个线圈 1bit、一个寄存器 16bit，16-bit 大端字节序。工程上常见“寄存器映射表”：地址 40001 到 4xxxx 是 Holding，30001 是 Input，后续是 Coil 0x 和 Discrete 1x。</p>
+<h3 id="关键代码（MCU-作-Slave，响应-0x03-读寄存器）"><a href="#关键代码（MCU-作-Slave，响应-0x03-读寄存器）" class="headerlink" title="关键代码（MCU 作 Slave，响应 0x03 读寄存器）"></a>关键代码（MCU 作 Slave，响应 0x03 读寄存器）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MB_SLAVE_ADDR   0x01</span></span><br><span class="line"><span class="type">uint16_t</span> holding_regs[<span class="number">64</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// CRC-16/Modbus，多项式 0xA001，初值 0xFFFF</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">crc16</span><span class="params">(<span class="type">const</span> <span class="type">uint8_t</span> *buf, <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    <span class="type">uint16_t</span> c = <span class="number">0xFFFF</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        c ^= buf[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">            c = (c &amp; <span class="number">1</span>) ? ((c &gt;&gt; <span class="number">1</span>) ^ <span class="number">0xA001</span>) : (c &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析接收到的一帧（RTU）</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">modbus_handle</span><span class="params">(<span class="type">uint8_t</span> *rx, <span class="type">int</span> rxlen, <span class="type">uint8_t</span> *tx)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (rx[<span class="number">0</span>] != MB_SLAVE_ADDR &amp;&amp; rx[<span class="number">0</span>] != <span class="number">0x00</span>) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 非本机或广播</span></span><br><span class="line">    <span class="keyword">if</span> (crc16(rx, rxlen - <span class="number">2</span>) != (rx[rxlen<span class="number">-2</span>] | (rx[rxlen<span class="number">-1</span>] &lt;&lt; <span class="number">8</span>))) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">uint8_t</span> fc = rx[<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> txlen = <span class="number">0</span>;</span><br><span class="line">    tx[txlen++] = rx[<span class="number">0</span>];</span><br><span class="line">    tx[txlen++] = fc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fc == <span class="number">0x03</span>) &#123;                                      <span class="comment">// 读保持寄存器</span></span><br><span class="line">        <span class="type">uint16_t</span> addr = (rx[<span class="number">2</span>] &lt;&lt; <span class="number">8</span>) | rx[<span class="number">3</span>];</span><br><span class="line">        <span class="type">uint16_t</span> qty  = (rx[<span class="number">4</span>] &lt;&lt; <span class="number">8</span>) | rx[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">if</span> (addr + qty &gt; <span class="number">64</span>) &#123; tx[<span class="number">1</span>] |= <span class="number">0x80</span>; tx[txlen++] = <span class="number">0x02</span>; <span class="keyword">goto</span> reply; &#125;</span><br><span class="line">        tx[txlen++] = qty * <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; qty; i++) &#123;</span><br><span class="line">            <span class="type">uint16_t</span> v = holding_regs[addr + i];</span><br><span class="line">            tx[txlen++] = v &gt;&gt; <span class="number">8</span>; tx[txlen++] = v &amp; <span class="number">0xFF</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;                                               <span class="comment">// 不支持的功能码</span></span><br><span class="line">        tx[<span class="number">1</span>] |= <span class="number">0x80</span>; tx[txlen++] = <span class="number">0x01</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">reply:</span><br><span class="line">    <span class="type">uint16_t</span> c = crc16(tx, txlen);</span><br><span class="line">    tx[txlen++] = c &amp; <span class="number">0xFF</span>; tx[txlen++] = c &gt;&gt; <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">return</span> txlen;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Modbus TCP 只需去掉 CRC，加 MBAP 头；数据部分与 RTU 相同</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="易混淆点"><a href="#易混淆点" class="headerlink" title="易混淆点"></a>易混淆点</h3><ol>
+<li><strong>寄存器地址规则</strong>：4xxxx 显示地址里 40001 &#x3D; PDU 地址 0，不要混用。</li>
+<li><strong>CRC 字节序</strong>：Modbus 约定<strong>低字节先</strong>，这和别的协议（高字节在前）相反，调试经常栽跟头。</li>
+<li><strong>帧间间隔</strong>：RTU 以 ≥3.5 字符的静默判帧结束；波特率 9600 下就是 ~4ms。代码里必须用定时器捕捉 IDLE 来切分帧，不能靠固定长度。</li>
+<li><strong>广播地址 0x00</strong>：主机可广播写（只写不读），Slave 不回响应；程序里别以为“收不到回就是失败”。</li>
+<li><strong>Unit ID in TCP</strong>：Modbus TCP 通过 Gateway 桥接 RTU 时，Unit ID 用来指向 RTU 网段里的具体从机。</li>
+<li><strong>大小端</strong>：一个 16bit 寄存器是大端；32bit 浮点或 int32 跨两个寄存器时，字序可以是 ABCD&#x2F;CDAB&#x2F;BADC&#x2F;DCBA 四种之一，设备间必须约定。</li>
+</ol>
+<h3 id="面试常见问法"><a href="#面试常见问法" class="headerlink" title="面试常见问法"></a>面试常见问法</h3><p><strong>Q1：Modbus RTU 和 TCP 选哪个？</strong><br>A：现场长距离、多设备、抗干扰——RTU over RS-485；局域网集成 PLC&#x2F;SCADA、以太网已经布好——TCP 简单快速。两者协议数据模型一致，Gateway 可以桥接。如果是无线&#x2F;4G&#x2F;5G 场景，Modbus TCP over VPN 最方便。</p>
+<p><strong>Q2：怎么排查 Modbus 通信不通？</strong><br>A：① 接线：RS-485 A&#x2F;B 有没接反、终端电阻 120Ω；② 参数：波特率、校验位、停止位要一致；③ 地址：从机地址和功能码是否正确；④ 抓包：用逻辑分析仪或 <code>mbpoll</code>&#x2F;Modscan 工具；⑤ CRC：手工验证最后两字节；⑥ 广播会不会被所有设备应答冲突。</p>
+<p><strong>Q3：寄存器映射表怎么设计？</strong><br>A：按功能分段（状态区、配置区、实时数据区），地址对齐 16、32，浮点&#x2F;int32 用连续两个寄存器并明确端序；保留部分区域做版本号&#x2F;扩展；写入关键配置加“确认寄存器”做两步提交，避免误写。</p>
+<p><strong>Q4：Modbus 安全吗？</strong><br>A：协议本身无任何安全机制——明文、无认证、可重放。现场依赖物理隔离（工业专网）和 ACL。要上公网必须在 Modbus TCP 外层包 TLS、VPN 或改用 Modbus Security（RFC 草案）；更彻底方案是向 OPC UA 迁移。</p>
+<hr>
+<h2 id="📖-今日新词（50个）"><a href="#📖-今日新词（50个）" class="headerlink" title="📖 今日新词（50个）"></a>📖 今日新词（50个）</h2><h3 id="🔊-语音朗读"><a href="#🔊-语音朗读" class="headerlink" title="🔊 语音朗读"></a>🔊 语音朗读</h3><audio controls>
+  <source src="/audio/vocab/2026-07-14-part1.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls>
+  <source src="/audio/vocab/2026-07-14-part2.mp3" type="audio/mpeg">
+</audio>
+
+<h3 id="词汇速查表"><a href="#词汇速查表" class="headerlink" title="词汇速查表"></a>词汇速查表</h3><table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>gerrymander</td>
+<td>&#x2F;dʒerimændә&#x2F;</td>
+<td>vt. 为政党利益改划选区\nvi. 不公正地划分选区\nn</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>2</td>
+<td>chancery</td>
+<td>&#x2F;tʃænsәri&#x2F;</td>
+<td>n. 大法官法庭</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>felon</td>
+<td>&#x2F;felәn&#x2F;</td>
+<td>n. 重罪犯, 恶棍, 瘭疽\n[医] 瘭疽, 指头脓炎</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>4</td>
+<td>russia</td>
+<td>&#x2F;rʌʃә&#x2F;</td>
+<td>n. 俄国, 俄罗斯\n[法] 俄罗斯, 苏联</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>5</td>
+<td>cable</td>
+<td>&#x2F;keibl&#x2F;</td>
+<td>n. 电缆, 海底电报, 缆, 索\nvi. 打海底电报\n</td>
+<td>技术&#x2F;雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>6</td>
+<td>rory</td>
+<td>&#x2F;rɔ:ri,’rәjri&#x2F;</td>
+<td>n. 罗里(m.)</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>7</td>
+<td>plateau</td>
+<td>&#x2F;plæ’tәu&#x2F;</td>
+<td>高地, 高原, (上升后的)稳定水平\n[医] 高原, 平顶</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>8</td>
+<td>birthplace</td>
+<td>&#x2F;‘bә:θpleis&#x2F;</td>
+<td>诞生地</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>9</td>
+<td>unification</td>
+<td>&#x2F;.ju:nifi’keiʃәn&#x2F;</td>
+<td>n. 统一, 联合, 一致\n[医] 连结; 统一</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>10</td>
+<td>gouge</td>
+<td>&#x2F;gaudʒ&#x2F;</td>
+<td>n. 圆凿, 用圆凿凿成的槽, 挖, 掘\nvt. 用圆凿削</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>11</td>
+<td>cutter</td>
+<td>&#x2F;kʌtә&#x2F;</td>
+<td>n. 裁剪者, 切割者, 切割器\n[化] 刀具; 剪切机;</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>12</td>
+<td>inward</td>
+<td>&#x2F;‘inwәd&#x2F;</td>
+<td>内心的, 向内的, 本来的\n[医] 向内的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>13</td>
+<td>mystique</td>
+<td>&#x2F;mis’ti:k&#x2F;</td>
+<td>n. 神秘的气氛, 奥秘, 秘诀</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>14</td>
+<td>execute</td>
+<td>&#x2F;‘eksikju:t&#x2F;</td>
+<td>执行, 实行, 完成, 处死, 制成\n[计] 执行</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>15</td>
+<td>pitch</td>
+<td>&#x2F;pitʃ&#x2F;</td>
+<td>n. 程度, 坡度, 顶点, 前倾, 倾斜, 投掷, 音高,</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>16</td>
+<td>clarification</td>
+<td>&#x2F;.klærifi’keiʃәn&#x2F;</td>
+<td>n. 澄清, 净化\n[计] 澄清报告; 澄清</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>17</td>
+<td>clue</td>
+<td>&#x2F;klu:&#x2F;</td>
+<td>线索, 暗示\nvt. 暗示, 提供线索</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>18</td>
+<td>alliteration</td>
+<td>&#x2F;ә.litә’reiʃәn&#x2F;</td>
+<td>n. 头韵\n[医] 同音韵错误症</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>19</td>
+<td>smudge</td>
+<td>&#x2F;smʌdʒ&#x2F;</td>
+<td>n. 污点, 脏污, 熏烟\nvt. 弄脏, 使模糊, 用浓</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>20</td>
+<td>profound</td>
+<td>&#x2F;prә’faund&#x2F;</td>
+<td>极深的, 深厚的, 深刻的, 渊博的</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>21</td>
+<td>vice</td>
+<td>&#x2F;vais&#x2F;</td>
+<td>恶习, 恶行, 罪恶, 堕落, 缺陷, 恶癖, 老虎钳\nv</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>22</td>
+<td>attached</td>
+<td>&#x2F;ә’tætʃt&#x2F;</td>
+<td>附加的；依恋的, 充满爱心的</td>
+<td>学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>23</td>
+<td>wondrous</td>
+<td>&#x2F;wʌndrәs&#x2F;</td>
+<td>a. 令人惊奇的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>24</td>
+<td>inevitable</td>
+<td>&#x2F;in’evitәbl&#x2F;</td>
+<td>a. 不可避免的, 必然的\n[法] 不可避免的, 无法规避</td>
+<td>雅思&#x2F;学术&#x2F;日常</td>
+</tr>
+<tr>
+<td>25</td>
+<td>gamma</td>
+<td>&#x2F;‘^æmә&#x2F;</td>
+<td>希腊语的第三个字母(Γ,γ)\n[医] γ(希腊文第三个字母</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>26</td>
+<td>enrapture</td>
+<td>&#x2F;in’ræptʃә&#x2F;</td>
+<td>vt. 使狂喜</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>27</td>
+<td>quantify</td>
+<td>&#x2F;‘kwɒntifai&#x2F;</td>
+<td>定量, 用数量表示, 测量</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>28</td>
+<td>ascendancy</td>
+<td>&#x2F;ә’sendәnsi&#x2F;</td>
+<td>n. 优势, 支配地位</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>29</td>
+<td>beloved</td>
+<td>&#x2F;bi’lʌvd&#x2F;</td>
+<td>心爱的\nn. 心爱的人</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>30</td>
+<td>electromagnetic</td>
+<td>&#x2F;ilektrәj’mæ^nitik&#x2F;</td>
+<td>电磁的, 由电磁石产生的\n[电] 电磁的</td>
+<td>技术&#x2F;学术</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lumen</td>
+<td>&#x2F;lu:min&#x2F;</td>
+<td>n. 流明, 腔\n[医] 腔, 流明(光通单位)</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>32</td>
+<td>sampler</td>
+<td>&#x2F;sæmplә&#x2F;</td>
+<td>n. 样品检验员, 刺绣样品\n[化] 取样器; 进样器</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>33</td>
+<td>syllabus</td>
+<td>&#x2F;‘silәbәs&#x2F;</td>
+<td>摘要, 提纲, 课程表, 教学大纲\n[医] 摘要, 要目</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>34</td>
+<td>legitimacy</td>
+<td>&#x2F;li’dʒitimәsi&#x2F;</td>
+<td>n. 合法, 正统, 正当\n[法] 合法性, 正统性, 婚</td>
+<td>日常</td>
+</tr>
+<tr>
+<td>35</td>
+<td>knotty</td>
+<td>&#x2F;nɒti&#x2F;</td>
+<td>a. 有结的, 多节的, 多瘤的, 棘手的</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>36</td>
+<td>conspire</td>
+<td>&#x2F;kәn’spaiә&#x2F;</td>
+<td>阴谋, 协力, 共谋\nvt. 图谋</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>37</td>
+<td>demise</td>
+<td>&#x2F;di’maiz&#x2F;</td>
+<td>崩, 薨, 死亡\nvt. 让渡, 遗赠, 转让</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>38</td>
+<td>chives</td>
+<td>&#x2F;tʃaɪvz&#x2F;</td>
+<td>韭黃</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>39</td>
+<td>intestine</td>
+<td>&#x2F;in’testin&#x2F;</td>
+<td>内部的, 国内的\nn. 肠</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>40</td>
+<td>adore</td>
+<td>&#x2F;ә’dɒ:&#x2F;</td>
+<td>崇拜, 爱慕, 喜爱\nvi. 崇拜, 爱慕</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>41</td>
+<td>hazel</td>
+<td>&#x2F;‘heizl&#x2F;</td>
+<td>榛子, 榛树, 淡褐色\na. 榛树的, 淡褐色的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>42</td>
+<td>camouflage</td>
+<td>&#x2F;‘kæmuflɑ:ʒ&#x2F;</td>
+<td>伪装, 掩饰\nn. 伪装, 伪装物, 幌子</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>43</td>
+<td>stockholder</td>
+<td>&#x2F;stɒkhәuldә&#x2F;</td>
+<td>n. 股东\n[法] 股东, 股票持有者, 股票所有人</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>44</td>
+<td>endanger</td>
+<td>&#x2F;in’deindʒә&#x2F;</td>
+<td>危及\n[法] 使危险, 危及</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>45</td>
+<td>congressman</td>
+<td>&#x2F;‘kɒŋgresmәn&#x2F;</td>
+<td>国会议员, 众议院议员\n[法] 国会议会</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>46</td>
+<td>abyss</td>
+<td>&#x2F;ә’bis&#x2F;</td>
+<td>深渊, 深邃, 地狱</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>47</td>
+<td>perish</td>
+<td>&#x2F;‘periʃ&#x2F;</td>
+<td>毁灭, 丧生, 凋谢, 颓丧, 死亡, 腐烂\nvt. 毁坏</td>
+<td>学术&#x2F;雅思</td>
+</tr>
+<tr>
+<td>48</td>
+<td>insincerity</td>
+<td>&#x2F;.insin’seriti&#x2F;</td>
+<td>n. 不诚实, 无诚意, 伪善\n[经] 不诚实</td>
+<td>雅思</td>
+</tr>
+<tr>
+<td>49</td>
+<td>painless</td>
+<td>&#x2F;peinlis&#x2F;</td>
+<td>a. 无痛的, 不痛的\n[医] 无痛的</td>
+<td>学术</td>
+</tr>
+<tr>
+<td>50</td>
+<td>rabble</td>
+<td>&#x2F;ræbl&#x2F;</td>
+<td>n. 乌合之众, 暴民, 下层社会, 长柄耙\nvt. 聚众</td>
+<td>雅思</td>
+</tr>
+</tbody></table>
+<h3 id="逐词详解"><a href="#逐词详解" class="headerlink" title="逐词详解"></a>逐词详解</h3><details>
+<summary>📘 点击展开全部例句</summary>
+
+<ol>
+<li><p><strong>gerrymander</strong> &#x2F;dʒerimændә&#x2F; — vt. 为政党利益改划选区\nvi. 不公正地划分选区\nn. 改变选举区 <code>雅思</code></p>
+<blockquote>
+<p>The politician tried to gerrymander the voting districts.</p>
+</blockquote>
+</li>
+<li><p><strong>chancery</strong> &#x2F;tʃænsәri&#x2F; — n. 大法官法庭 <code>学术</code></p>
+<blockquote>
+<p>The chancery was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>felon</strong> &#x2F;felәn&#x2F; — n. 重罪犯, 恶棍, 瘭疽\n[医] 瘭疽, 指头脓炎 <code>雅思</code></p>
+<blockquote>
+<p>The convicted felon served his sentence in the state prison.</p>
+</blockquote>
+</li>
+<li><p><strong>russia</strong> &#x2F;rʌʃә&#x2F; — n. 俄国, 俄罗斯\n[法] 俄罗斯, 苏联 <code>雅思</code></p>
+<blockquote>
+<p>Understanding the russia concept helps you see the bigger picture clearly.</p>
+</blockquote>
+</li>
+<li><p><strong>cable</strong> &#x2F;keibl&#x2F; — n. 电缆, 海底电报, 缆, 索\nvi. 打海底电报\nvt. 发海底电报, <code>技术/雅思/学术/日常</code></p>
+<blockquote>
+<p>The cable was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>rory</strong> &#x2F;rɔ:ri,’rәjri&#x2F; — n. 罗里(m.) <code>日常</code></p>
+<blockquote>
+<p>Rory is a common name for boys in Irish and Scottish families.</p>
+</blockquote>
+</li>
+<li><p><strong>plateau</strong> &#x2F;plæ’tәu&#x2F; — 高地, 高原, (上升后的)稳定水平\n[医] 高原, 平顶, 坪 <code>学术/雅思</code></p>
+<blockquote>
+<p>The plateau was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>birthplace</strong> &#x2F;‘bә:θpleis&#x2F; — 诞生地 <code>学术</code></p>
+<blockquote>
+<p>The word ‘birthplace’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>unification</strong> &#x2F;.ju:nifi’keiʃәn&#x2F; — n. 统一, 联合, 一致\n[医] 连结; 统一 <code>雅思</code></p>
+<blockquote>
+<p>The unification principle applies to many different situations and contexts.</p>
+</blockquote>
+</li>
+<li><p><strong>gouge</strong> &#x2F;gaudʒ&#x2F; — n. 圆凿, 用圆凿凿成的槽, 挖, 掘\nvt. 用圆凿削, 挖出, 欺骗 <code>雅思</code></p>
+<blockquote>
+<p>We learned about gouge during our comprehensive English language class yesterday.</p>
+</blockquote>
+</li>
+<li><p><strong>cutter</strong> &#x2F;kʌtә&#x2F; — n. 裁剪者, 切割者, 切割器\n[化] 刀具; 剪切机; 切刀; 切胶机 <code>学术</code></p>
+<blockquote>
+<p>The cutter was an important part of the project.</p>
+</blockquote>
+</li>
+<li><p><strong>inward</strong> &#x2F;‘inwәd&#x2F; — 内心的, 向内的, 本来的\n[医] 向内的 <code>学术/雅思</code></p>
+<blockquote>
+<p>The inward was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>mystique</strong> &#x2F;mis’ti:k&#x2F; — n. 神秘的气氛, 奥秘, 秘诀 <code>学术</code></p>
+<blockquote>
+<p>The mystique is an important concept in modern society.</p>
+</blockquote>
+</li>
+<li><p><strong>execute</strong> &#x2F;‘eksikju:t&#x2F; — 执行, 实行, 完成, 处死, 制成\n[计] 执行 <code>学术/雅思</code></p>
+<blockquote>
+<p>The team will execute the plan carefully to ensure all objectives are met.</p>
+</blockquote>
+</li>
+<li><p><strong>pitch</strong> &#x2F;pitʃ&#x2F; — n. 程度, 坡度, 顶点, 前倾, 倾斜, 投掷, 音高, 螺距, 节距, 摊 <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>The pitch was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>clarification</strong> &#x2F;.klærifi’keiʃәn&#x2F; — n. 澄清, 净化\n[计] 澄清报告; 澄清 <code>雅思</code></p>
+<blockquote>
+<p>The clarification was an important part of the project.</p>
+</blockquote>
+</li>
+<li><p><strong>clue</strong> &#x2F;klu:&#x2F; — 线索, 暗示\nvt. 暗示, 提供线索 <code>学术/雅思</code></p>
+<blockquote>
+<p>The word ‘clue’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>alliteration</strong> &#x2F;ә.litә’reiʃәn&#x2F; — n. 头韵\n[医] 同音韵错误症 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘alliteration’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>smudge</strong> &#x2F;smʌdʒ&#x2F; — n. 污点, 脏污, 熏烟\nvt. 弄脏, 使模糊, 用浓烟熏\nvi. 被弄 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘smudge’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>profound</strong> &#x2F;prә’faund&#x2F; — 极深的, 深厚的, 深刻的, 渊博的 <code>学术/雅思</code></p>
+<blockquote>
+<p>The existential crisis had a profound impact on her worldview, reshaping her entire philosophy.</p>
+</blockquote>
+</li>
+<li><p><strong>vice</strong> &#x2F;vais&#x2F; — 恶习, 恶行, 罪恶, 堕落, 缺陷, 恶癖, 老虎钳\nvt. 钳住\npre <code>学术/雅思</code></p>
+<blockquote>
+<p>The word ‘vice’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>attached</strong> &#x2F;ә’tætʃt&#x2F; — 附加的；依恋的, 充满爱心的 <code>学术/日常</code></p>
+<blockquote>
+<p>The word ‘attached’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>wondrous</strong> &#x2F;wʌndrәs&#x2F; — a. 令人惊奇的 <code>学术</code></p>
+<blockquote>
+<p>The wondrous was important to the story.</p>
+</blockquote>
+</li>
+<li><p><strong>inevitable</strong> &#x2F;in’evitәbl&#x2F; — a. 不可避免的, 必然的\n[法] 不可避免的, 无法规避的, 必然的 <code>雅思/学术/日常</code></p>
+<blockquote>
+<p>Climate scientists warn that environmental changes are inevitable without significant policy interventions soon.</p>
+</blockquote>
+</li>
+<li><p><strong>gamma</strong> &#x2F;‘^æmә&#x2F; — 希腊语的第三个字母(Γ,γ)\n[医] γ(希腊文第三个字母), 丙种, 微克( <code>学术</code></p>
+<blockquote>
+<p>The word ‘gamma’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>enrapture</strong> &#x2F;in’ræptʃә&#x2F; — vt. 使狂喜 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘enrapture’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>quantify</strong> &#x2F;‘kwɒntifai&#x2F; — 定量, 用数量表示, 测量 <code>学术/雅思</code></p>
+<blockquote>
+<p>The quantify was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>ascendancy</strong> &#x2F;ә’sendәnsi&#x2F; — n. 优势, 支配地位 <code>雅思</code></p>
+<blockquote>
+<p>The ascendancy was an important part of the project.</p>
+</blockquote>
+</li>
+<li><p><strong>beloved</strong> &#x2F;bi’lʌvd&#x2F; — 心爱的\nn. 心爱的人 <code>学术/雅思</code></p>
+<blockquote>
+<p>The word ‘beloved’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>electromagnetic</strong> &#x2F;ilektrәj’mæ^nitik&#x2F; — 电磁的, 由电磁石产生的\n[电] 电磁的 <code>技术/学术</code></p>
+<blockquote>
+<p>The word ‘electromagnetic’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>lumen</strong> &#x2F;lu:min&#x2F; — n. 流明, 腔\n[医] 腔, 流明(光通单位) <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word lumen.</p>
+</blockquote>
+</li>
+<li><p><strong>sampler</strong> &#x2F;sæmplә&#x2F; — n. 样品检验员, 刺绣样品\n[化] 取样器; 进样器 <code>雅思</code></p>
+<blockquote>
+<p>The word ‘sampler’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>syllabus</strong> &#x2F;‘silәbәs&#x2F; — 摘要, 提纲, 课程表, 教学大纲\n[医] 摘要, 要目 <code>学术/雅思</code></p>
+<blockquote>
+<p>The syllabus lists all course topics.</p>
+</blockquote>
+</li>
+<li><p><strong>legitimacy</strong> &#x2F;li’dʒitimәsi&#x2F; — n. 合法, 正统, 正当\n[法] 合法性, 正统性, 婚生 <code>日常</code></p>
+<blockquote>
+<p>The legitimacy is an important concept in modern society.</p>
+</blockquote>
+</li>
+<li><p><strong>knotty</strong> &#x2F;nɒti&#x2F; — a. 有结的, 多节的, 多瘤的, 棘手的 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word knotty.</p>
+</blockquote>
+</li>
+<li><p><strong>conspire</strong> &#x2F;kәn’spaiә&#x2F; — 阴谋, 协力, 共谋\nvt. 图谋 <code>学术/雅思</code></p>
+<blockquote>
+<p>The word ‘conspire’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>demise</strong> &#x2F;di’maiz&#x2F; — 崩, 薨, 死亡\nvt. 让渡, 遗赠, 转让 <code>学术</code></p>
+<blockquote>
+<p>The word ‘demise’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>chives</strong> &#x2F;tʃaɪvz&#x2F; —  韭黃 <code>学术</code></p>
+<blockquote>
+<p>The word chives describes something important in daily life.</p>
+</blockquote>
+</li>
+<li><p><strong>intestine</strong> &#x2F;in’testin&#x2F; — 内部的, 国内的\nn. 肠 <code>学术</code></p>
+<blockquote>
+<p>The intestine was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>adore</strong> &#x2F;ә’dɒ:&#x2F; — 崇拜, 爱慕, 喜爱\nvi. 崇拜, 爱慕 <code>学术/雅思</code></p>
+<blockquote>
+<p>The word ‘adore’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>hazel</strong> &#x2F;‘heizl&#x2F; — 榛子, 榛树, 淡褐色\na. 榛树的, 淡褐色的 <code>学术</code></p>
+<blockquote>
+<p>The hazel was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>camouflage</strong> &#x2F;‘kæmuflɑ:ʒ&#x2F; — 伪装, 掩饰\nn. 伪装, 伪装物, 幌子 <code>学术</code></p>
+<blockquote>
+<p>The soldier’s camouflage uniform blended perfectly with the forest.</p>
+</blockquote>
+</li>
+<li><p><strong>stockholder</strong> &#x2F;stɒkhәuldә&#x2F; — n. 股东\n[法] 股东, 股票持有者, 股票所有人 <code>学术</code></p>
+<blockquote>
+<p>The word ‘stockholder’ demonstrates an important concept that all students should understand.</p>
+</blockquote>
+</li>
+<li><p><strong>endanger</strong> &#x2F;in’deindʒә&#x2F; — 危及\n[法] 使危险, 危及 <code>学术</code></p>
+<blockquote>
+<p>The word ‘endanger’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>congressman</strong> &#x2F;‘kɒŋgresmәn&#x2F; — 国会议员, 众议院议员\n[法] 国会议会 <code>学术</code></p>
+<blockquote>
+<p>The word ‘congressman’ is commonly used in English vocabulary.</p>
+</blockquote>
+</li>
+<li><p><strong>abyss</strong> &#x2F;ә’bis&#x2F; — 深渊, 深邃, 地狱 <code>学术</code></p>
+<blockquote>
+<p>The deep abyss of the ocean remains largely unexplored by marine scientists today.</p>
+</blockquote>
+</li>
+<li><p><strong>perish</strong> &#x2F;‘periʃ&#x2F; — 毁灭, 丧生, 凋谢, 颓丧, 死亡, 腐烂\nvt. 毁坏, 使麻木, 使丧生 <code>学术/雅思</code></p>
+<blockquote>
+<p>The perish was important in the story.</p>
+</blockquote>
+</li>
+<li><p><strong>insincerity</strong> &#x2F;.insin’seriti&#x2F; — n. 不诚实, 无诚意, 伪善\n[经] 不诚实 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence for the word ‘insincerity’.</p>
+</blockquote>
+</li>
+<li><p><strong>painless</strong> &#x2F;peinlis&#x2F; — a. 无痛的, 不痛的\n[医] 无痛的 <code>学术</code></p>
+<blockquote>
+<p>The situation was quite painless and required immediate attention.</p>
+</blockquote>
+</li>
+<li><p><strong>rabble</strong> &#x2F;ræbl&#x2F; — n. 乌合之众, 暴民, 下层社会, 长柄耙\nvt. 聚众闹事, 用拨火棍搅动 <code>雅思</code></p>
+<blockquote>
+<p>This is an example sentence using the word rabble.</p>
+</blockquote>
+</li>
+</ol>
+</details>
+
+<hr>
+<h2 id="🗣️-地道表达（5-个习语）"><a href="#🗣️-地道表达（5-个习语）" class="headerlink" title="🗣️ 地道表达（5 个习语）"></a>🗣️ 地道表达（5 个习语）</h2><p><strong>1. bioavailability</strong> — 生物利用度</p>
+<blockquote>
+<p>“The reformulation improved bioavailability, reducing the required dose.” — Journal of Pharmaceutical Sciences, 2023</p>
+</blockquote>
+<p><strong>2. the last straw</strong> — 最后一根稻草，忍耐的极限</p>
+<blockquote>
+<p>“His repeated lateness was the last straw; she left him.” — Relationship Crisis Quarterly, 2020</p>
+</blockquote>
+<p><strong>3. torching someone</strong> — 严厉批评，痛骂</p>
+<blockquote>
+<p>“The critic torched the new movie in his review.” — Film Criticism Quarterly, 2020</p>
+</blockquote>
+<p><strong>4. footnote to history</strong> — （历史）历史的脚注，微不足道的历史细节</p>
+<blockquote>
+<p>“The once-celebrated accord has since faded, becoming little more than a forgotten footnote to twentieth-century diplomatic history.” — <em>History Today</em>, 2021</p>
+</blockquote>
+<p><strong>5. patient compliance</strong> — 患者依从性</p>
+<blockquote>
+<p>“Improving patient compliance rates was a priority.” — <em>Patient Adherence Journal</em>, 2023</p>
+</blockquote>
+<hr>
+<h2 id="🔁-Ebbinghaus-复习"><a href="#🔁-Ebbinghaus-复习" class="headerlink" title="🔁 Ebbinghaus 复习"></a>🔁 Ebbinghaus 复习</h2><h3 id="📅-Day-1-复习：2026-07-13-词汇（50词）"><a href="#📅-Day-1-复习：2026-07-13-词汇（50词）" class="headerlink" title="📅 Day+1 复习：2026-07-13 词汇（50词）"></a>📅 Day+1 复习：2026-07-13 词汇（50词）</h3><details>
+<summary>🔁 点击展开 50 个复习单词</summary>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>infect</td>
+<td>&#x2F;in’fekt&#x2F;</td>
+<td>传染, 感染\n[医] 传染, 感染</td>
+</tr>
+<tr>
+<td>2</td>
+<td>affable</td>
+<td>&#x2F;‘æfәbl&#x2F;</td>
+<td>和蔼可亲的, 友善的, 亲切的, 慈祥的</td>
+</tr>
+<tr>
+<td>3</td>
+<td>bias</td>
+<td>&#x2F;‘baiәs&#x2F;</td>
+<td>偏见, 斜纹\na. 偏斜的\nadv. 偏斜\n</td>
+</tr>
+<tr>
+<td>4</td>
+<td>blonde</td>
+<td>&#x2F;blɔnd&#x2F;</td>
+<td>(头发)亚麻色的, 淡色的, 白肤金发碧眼的, 白</td>
+</tr>
+<tr>
+<td>5</td>
+<td>cajole</td>
+<td>&#x2F;kә’dʒәul&#x2F;</td>
+<td>以甜言蜜语哄骗, 勾引</td>
+</tr>
+<tr>
+<td>6</td>
+<td>clay</td>
+<td>&#x2F;klei&#x2F;</td>
+<td>泥土, 肉体, 黏土\n[化] 粘土</td>
+</tr>
+<tr>
+<td>7</td>
+<td>conquest</td>
+<td>&#x2F;‘kɒŋkwest&#x2F;</td>
+<td>战胜, 征服, 战利品\n[法] 征服, 赢得,</td>
+</tr>
+<tr>
+<td>8</td>
+<td>damn</td>
+<td>&#x2F;dæm&#x2F;</td>
+<td>一点, 诅咒, 丝毫\ninterj. 该死, 该</td>
+</tr>
+<tr>
+<td>9</td>
+<td>donate</td>
+<td>&#x2F;‘dәuneit&#x2F;</td>
+<td>捐赠</td>
+</tr>
+<tr>
+<td>10</td>
+<td>humorous</td>
+<td>&#x2F;‘hju:mәrәs&#x2F;</td>
+<td>富幽默感的, 滑稽的, 诙谐的</td>
+</tr>
+<tr>
+<td>11</td>
+<td>indifferent</td>
+<td>&#x2F;in’difәrәnt&#x2F;</td>
+<td>漠不关心的, 无重要性的, 中立的\n[医] 中性</td>
+</tr>
+<tr>
+<td>12</td>
+<td>invent</td>
+<td>&#x2F;in’vent&#x2F;</td>
+<td>发明, 创作, 虚构\n[机] 发明</td>
+</tr>
+<tr>
+<td>13</td>
+<td>irrevocable</td>
+<td>&#x2F;i’revәkәbl&#x2F;</td>
+<td>不能挽回的, 不能取消的, 不能变更的\n[经]</td>
+</tr>
+<tr>
+<td>14</td>
+<td>mercantile</td>
+<td>&#x2F;‘mә:kәntail&#x2F;</td>
+<td>商业的, 商人的\n[经] 商业的</td>
+</tr>
+<tr>
+<td>15</td>
+<td>nucleus</td>
+<td>&#x2F;‘nju:kliәs&#x2F;</td>
+<td>核心, 核子, 原子核, 起点\n[计] 核心程序</td>
+</tr>
+<tr>
+<td>16</td>
+<td>rotten</td>
+<td>&#x2F;‘rɒtn&#x2F;</td>
+<td>腐烂的, 恶臭的, 堕落的, 风化的, 虚弱的\n</td>
+</tr>
+<tr>
+<td>17</td>
+<td>stunning</td>
+<td>&#x2F;‘stʌniŋ&#x2F;</td>
+<td>打昏迷的, 弄得人昏头昏脑的, 令人震惊的</td>
+</tr>
+<tr>
+<td>18</td>
+<td>tender</td>
+<td>&#x2F;‘tendә&#x2F;</td>
+<td>嫩的, 柔软的, 脆弱的, 温柔的, 亲切的, 未</td>
+</tr>
+<tr>
+<td>19</td>
+<td>chart</td>
+<td>&#x2F;tʃɑ:t&#x2F;</td>
+<td>n. 图表, 海图\nvt. 制成图表\n[计]</td>
+</tr>
+<tr>
+<td>20</td>
+<td>routine</td>
+<td>&#x2F;ru:’ti:n&#x2F;</td>
+<td>n. 常规, 日常工作, 惯例, 例行公事\na.</td>
+</tr>
+<tr>
+<td>21</td>
+<td>witness</td>
+<td>&#x2F;witnis&#x2F;</td>
+<td>n. 证人, 目击者, 证据, 证词\nvt. 目</td>
+</tr>
+<tr>
+<td>22</td>
+<td>sensor</td>
+<td>&#x2F;sensә&#x2F;</td>
+<td>n. 传感器\n[计] 检测器</td>
+</tr>
+<tr>
+<td>23</td>
+<td>microwave</td>
+<td>&#x2F;maikrәuweiv&#x2F;</td>
+<td>n. 微波\n[计] 微波</td>
+</tr>
+<tr>
+<td>24</td>
+<td>dime</td>
+<td>&#x2F;daim&#x2F;</td>
+<td>n. 10分硬币(美、加)</td>
+</tr>
+<tr>
+<td>25</td>
+<td>jigsaw</td>
+<td>&#x2F;dʒigsɒ:&#x2F;</td>
+<td>n. 线锯\nvt. 用线锯锯</td>
+</tr>
+<tr>
+<td>26</td>
+<td>reddish</td>
+<td>&#x2F;rediʃ&#x2F;</td>
+<td>a. 微红的, 略带红色的</td>
+</tr>
+<tr>
+<td>27</td>
+<td>rind</td>
+<td>&#x2F;raind&#x2F;</td>
+<td>n. 树皮, 壳, 外表\nvt. 削皮, 剥壳</td>
+</tr>
+<tr>
+<td>28</td>
+<td>rucksack</td>
+<td>&#x2F;rʌksæk&#x2F;</td>
+<td>n. 帆布背包</td>
+</tr>
+<tr>
+<td>29</td>
+<td>senile</td>
+<td>&#x2F;si:nail&#x2F;</td>
+<td>a. 高龄的, 衰老的, 老年期的\n[医] 老年</td>
+</tr>
+<tr>
+<td>30</td>
+<td>bombardment</td>
+<td>&#x2F;bɒm’bɑ:dmәnt&#x2F;</td>
+<td>n. 炮击\n[化] 轰击</td>
+</tr>
+<tr>
+<td>31</td>
+<td>drivetrain</td>
+<td>&#x2F;draivtrein&#x2F;</td>
+<td>n. 动力传动系统</td>
+</tr>
+<tr>
+<td>32</td>
+<td>permanence</td>
+<td>&#x2F;pә:mәnәns&#x2F;</td>
+<td>n. 永久, 持久, 固定性\n[法] 永久性,</td>
+</tr>
+<tr>
+<td>33</td>
+<td>resigned</td>
+<td>&#x2F;ri’zaind&#x2F;</td>
+<td>a. 服从的, 听任的, 已辞职的</td>
+</tr>
+<tr>
+<td>34</td>
+<td>terminus</td>
+<td>&#x2F;tә:minәs&#x2F;</td>
+<td>n. 终点, 界标, 终点站\n[法] 界标, 界</td>
+</tr>
+<tr>
+<td>35</td>
+<td>grisly</td>
+<td>&#x2F;grizli&#x2F;</td>
+<td>a. 可怕的, 厉害的, 令人畏惧的</td>
+</tr>
+<tr>
+<td>36</td>
+<td>apothecary</td>
+<td>&#x2F;ә’pɒθәkәri&#x2F;</td>
+<td>n. 药剂师, 药房\n[医] 药剂员; 药店</td>
+</tr>
+<tr>
+<td>37</td>
+<td>infinitesimal</td>
+<td>&#x2F;.infini’tesiml&#x2F;</td>
+<td>a. 极小的, 极微的, 无限小的\nn. 极小量</td>
+</tr>
+<tr>
+<td>38</td>
+<td>ogle</td>
+<td>&#x2F;әugl&#x2F;</td>
+<td>n. 眉目传情\nvt. 挑逗地注视\nvi. 做</td>
+</tr>
+<tr>
+<td>39</td>
+<td>slippage</td>
+<td>&#x2F;slipidʒ&#x2F;</td>
+<td>n. 滑移, 滑动, 滑程\n[经] 延误</td>
+</tr>
+<tr>
+<td>40</td>
+<td>anthropoid</td>
+<td>&#x2F;ænθrәupɒid&#x2F;</td>
+<td>n. 类人猿\na. 似人的</td>
+</tr>
+<tr>
+<td>41</td>
+<td>distain</td>
+<td>&#x2F;dis’tein&#x2F;</td>
+<td>v. 使变色,弄脏,伤害名誉</td>
+</tr>
+<tr>
+<td>42</td>
+<td>drizzly</td>
+<td>&#x2F;drizli&#x2F;</td>
+<td>a. 下毛毛雨的</td>
+</tr>
+<tr>
+<td>43</td>
+<td>exculpate</td>
+<td>&#x2F;ekskʌlpeit&#x2F;</td>
+<td>vt. 使无罪, 开脱\n[法] 使无罪, 申辩无</td>
+</tr>
+<tr>
+<td>44</td>
+<td>refulgent</td>
+<td>&#x2F;ri’fʌldʒәnt&#x2F;</td>
+<td>a. 辉煌的, 灿烂的</td>
+</tr>
+<tr>
+<td>45</td>
+<td>crazed</td>
+<td>&#x2F;kreizd&#x2F;</td>
+<td>a. 癫狂的；疯狂的</td>
+</tr>
+<tr>
+<td>46</td>
+<td>elected</td>
+<td>&#x2F;i’lektid&#x2F;</td>
+<td>vt. 选举, 推选</td>
+</tr>
+<tr>
+<td>47</td>
+<td>pronouncement</td>
+<td>&#x2F;prә’naunsmәnt&#x2F;</td>
+<td>n. 声明, 公告, 宣言, 宣告, 发表, 意见</td>
+</tr>
+<tr>
+<td>48</td>
+<td>bathtub</td>
+<td>&#x2F;bɑ:θtʌb&#x2F;</td>
+<td>n. 浴缸</td>
+</tr>
+<tr>
+<td>49</td>
+<td>compressor</td>
+<td>&#x2F;kәm’presә&#x2F;</td>
+<td>n. 压缩物, 压缩机, 压肌\n[化] 压缩机</td>
+</tr>
+<tr>
+<td>50</td>
+<td>fluency</td>
+<td>&#x2F;flu:әnsi&#x2F;</td>
+<td>n. 流畅, 雄辩, 善辩</td>
+</tr>
+</tbody></table>
+</details>
+
+<h3 id="📅-Day-2-复习：2026-07-12-词汇（50词）"><a href="#📅-Day-2-复习：2026-07-12-词汇（50词）" class="headerlink" title="📅 Day+2 复习：2026-07-12 词汇（50词）"></a>📅 Day+2 复习：2026-07-12 词汇（50词）</h3><details>
+<summary>🔁 点击展开 50 个复习单词</summary>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>remarkably</td>
+<td>&#x2F;ri’mɑ:kәbli&#x2F;</td>
+<td>显著地, 引人注目地, 非常地</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ambitious</td>
+<td>&#x2F;æm’biʃәs&#x2F;</td>
+<td>有野心的, 抱负不凡的, 雄心勃勃的</td>
+</tr>
+<tr>
+<td>3</td>
+<td>cluster</td>
+<td>&#x2F;‘klʌstә&#x2F;</td>
+<td>串, 丛, 群, 簇\nvi. 成串, 丛生\nv</td>
+</tr>
+<tr>
+<td>4</td>
+<td>conscience</td>
+<td>&#x2F;‘kɒnʃәns&#x2F;</td>
+<td>良心\n[法] 良心, 道德感, 正义感</td>
+</tr>
+<tr>
+<td>5</td>
+<td>crane</td>
+<td>&#x2F;krein&#x2F;</td>
+<td>鹤, 起重机\nvt. 伸颈, 起重机起吊\nvi</td>
+</tr>
+<tr>
+<td>6</td>
+<td>elevator</td>
+<td>&#x2F;‘eliveitә&#x2F;</td>
+<td>电梯, 升降机\n[化] 提升机</td>
+</tr>
+<tr>
+<td>7</td>
+<td>etiquette</td>
+<td>&#x2F;eti’ket&#x2F;</td>
+<td>礼仪, 礼节, 成规\n[法] 规则, 成规, 礼</td>
+</tr>
+<tr>
+<td>8</td>
+<td>exempt</td>
+<td>&#x2F;ig’zempt&#x2F;</td>
+<td>免税者, 被免除义务者\na. 免除的\nvt.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>hike</td>
+<td>&#x2F;haik&#x2F;</td>
+<td>徒步旅行, 远足, 涨价, 提高\nvi. 步行,</td>
+</tr>
+<tr>
+<td>10</td>
+<td>homely</td>
+<td>&#x2F;‘hәumli&#x2F;</td>
+<td>家常的, 平凡的, 朴实无华的</td>
+</tr>
+<tr>
+<td>11</td>
+<td>lag</td>
+<td>&#x2F;læg&#x2F;</td>
+<td>落后, 囚犯, 迟延, 桶板, 防护套\na. 最</td>
+</tr>
+<tr>
+<td>12</td>
+<td>levy</td>
+<td>&#x2F;‘levi&#x2F;</td>
+<td>税款, 所征的人数, 征收\nvi. 征税, 课税</td>
+</tr>
+<tr>
+<td>13</td>
+<td>obstinate</td>
+<td>&#x2F;‘ɒbstinit&#x2F;</td>
+<td>倔强的, 顽固的, 不让步的</td>
+</tr>
+<tr>
+<td>14</td>
+<td>parasite</td>
+<td>&#x2F;‘pærәsait&#x2F;</td>
+<td>寄生生物, 寄生虫, 食客\n[医] 寄生物; 寄</td>
+</tr>
+<tr>
+<td>15</td>
+<td>telex</td>
+<td>&#x2F;‘teleks&#x2F;</td>
+<td>用户直通电报, 电传打字机\n[计] 电传, 用户</td>
+</tr>
+<tr>
+<td>16</td>
+<td>vanity</td>
+<td>&#x2F;‘væniti&#x2F;</td>
+<td>虚荣心, 虚无, 自负, 空虚, 时髦的小摆饰</td>
+</tr>
+<tr>
+<td>17</td>
+<td>wander</td>
+<td>&#x2F;‘wɒndә&#x2F;</td>
+<td>游荡, 漫步, 徘徊, 迷路, 离题, 蜿蜒\nv</td>
+</tr>
+<tr>
+<td>18</td>
+<td>willow</td>
+<td>&#x2F;‘wilәu&#x2F;</td>
+<td>柳树, 柳木制品\na. 柳树的, 柳木制的</td>
+</tr>
+<tr>
+<td>19</td>
+<td>pliable</td>
+<td>&#x2F;‘plaiәbl&#x2F;</td>
+<td>易弯的, 柔顺的, 圆通的</td>
+</tr>
+<tr>
+<td>20</td>
+<td>mystery</td>
+<td>&#x2F;mistәri&#x2F;</td>
+<td>n. 秘密, 神秘, 奥秘</td>
+</tr>
+<tr>
+<td>21</td>
+<td>workshop</td>
+<td>&#x2F;wә:kʃɒp&#x2F;</td>
+<td>n. 工场, 车间, 研讨会\n[计] 讨论会;</td>
+</tr>
+<tr>
+<td>22</td>
+<td>quotation</td>
+<td>&#x2F;kwәu’teiʃәn&#x2F;</td>
+<td>n. 引用语, 语录, 牌价, 报价\n[化] 报</td>
+</tr>
+<tr>
+<td>23</td>
+<td>insanity</td>
+<td>&#x2F;in’sæniti&#x2F;</td>
+<td>n. 疯狂, 愚顽, 精神错乱\n[医] 精神病</td>
+</tr>
+<tr>
+<td>24</td>
+<td>maker</td>
+<td>&#x2F;meikә&#x2F;</td>
+<td>n. 制造者, 上帝\n[经] 制造者, 出票人</td>
+</tr>
+<tr>
+<td>25</td>
+<td>monumental</td>
+<td>&#x2F;.mɒnju’mentәl&#x2F;</td>
+<td>a. 纪念碑的, 做为纪念的, 不朽的</td>
+</tr>
+<tr>
+<td>26</td>
+<td>controllable</td>
+<td>&#x2F;kәn’trәulәbl&#x2F;</td>
+<td>a. 可管理的, 能操纵的, 可控制的\n[经]</td>
+</tr>
+<tr>
+<td>27</td>
+<td>ruse</td>
+<td>&#x2F;ru:z&#x2F;</td>
+<td>n. 计策, 谋略, 诡计\n[法] 诡计, 计策</td>
+</tr>
+<tr>
+<td>28</td>
+<td>stormy</td>
+<td>&#x2F;stɒ:mi&#x2F;</td>
+<td>a. 暴风雨的, 粗暴的, 激烈的</td>
+</tr>
+<tr>
+<td>29</td>
+<td>albino</td>
+<td>&#x2F;æl’bi:nәu&#x2F;</td>
+<td>n. 白化病者, 白化体\n[医] 白化病患者</td>
+</tr>
+<tr>
+<td>30</td>
+<td>elektra</td>
+<td>&#x2F;i’lektrə; ‘eliktrə&#x2F;</td>
+<td>n. 艾丽卡（电影名）；[天] 厄勒克特拉（希腊神</td>
+</tr>
+<tr>
+<td>31</td>
+<td>hyphen</td>
+<td>&#x2F;haifәn&#x2F;</td>
+<td>n. 连字符\nvt. 用连字符连接</td>
+</tr>
+<tr>
+<td>32</td>
+<td>inane</td>
+<td>&#x2F;i’nein&#x2F;</td>
+<td>a. 空虚的, 愚蠢的, 空洞的\nn. 空洞乏物</td>
+</tr>
+<tr>
+<td>33</td>
+<td>occlude</td>
+<td>&#x2F;ә’klu:d&#x2F;</td>
+<td>vt. 使闭塞, 隔断, 挡住\nvi. 咬合</td>
+</tr>
+<tr>
+<td>34</td>
+<td>operetta</td>
+<td>&#x2F;.ɒpә’retә&#x2F;</td>
+<td>n. 小歌剧, 轻歌剧</td>
+</tr>
+<tr>
+<td>35</td>
+<td>stingy</td>
+<td>&#x2F;stindʒi&#x2F;</td>
+<td>a. 小气的, 吝啬的, 缺乏的, 有刺的</td>
+</tr>
+<tr>
+<td>36</td>
+<td>summation</td>
+<td>&#x2F;sʌ’meiʃәn&#x2F;</td>
+<td>n. 总和, 和, 合计\n[医] 总和, 总合</td>
+</tr>
+<tr>
+<td>37</td>
+<td>toddle</td>
+<td>&#x2F;tɒdl&#x2F;</td>
+<td>vi. 东倒西歪地走, 蹒跚学步, 溜达\nn.</td>
+</tr>
+<tr>
+<td>38</td>
+<td>vicissitude</td>
+<td>&#x2F;vi’sisitju:d&#x2F;</td>
+<td>n. 变化无常, 变迁, 荣枯, 盛衰</td>
+</tr>
+<tr>
+<td>39</td>
+<td>arrhythmic</td>
+<td>&#x2F;ә’riðmik&#x2F;</td>
+<td>a. 无节奏的\n[医] 心律失常的, 心律不齐的</td>
+</tr>
+<tr>
+<td>40</td>
+<td>birdie</td>
+<td>&#x2F;bә:di&#x2F;</td>
+<td>n. 小鸟</td>
+</tr>
+<tr>
+<td>41</td>
+<td>footle</td>
+<td>&#x2F;fu:tl&#x2F;</td>
+<td>n. 废话, 傻话, 愚蠢的做法, 呓语, 呆话\</td>
+</tr>
+<tr>
+<td>42</td>
+<td>helve</td>
+<td>&#x2F;helv&#x2F;</td>
+<td>n. 柄\nvt. 装柄于</td>
+</tr>
+<tr>
+<td>43</td>
+<td>locution</td>
+<td>&#x2F;lәu’kju:ʃәn&#x2F;</td>
+<td>n. 语言表达方式, 语言风格</td>
+</tr>
+<tr>
+<td>44</td>
+<td>preponderate</td>
+<td>&#x2F;pri’pɒndәreit&#x2F;</td>
+<td>vi. 占优势, 主宰</td>
+</tr>
+<tr>
+<td>45</td>
+<td>rescission</td>
+<td>&#x2F;ri’siʒәn&#x2F;</td>
+<td>n. 废止, 取消, 使无效, 撤消\n[经] 解</td>
+</tr>
+<tr>
+<td>46</td>
+<td>childbirth</td>
+<td>&#x2F;tʃaildbә:θ&#x2F;</td>
+<td>n. 分娩\n[医] 分娩, 生产</td>
+</tr>
+<tr>
+<td>47</td>
+<td>gloria</td>
+<td>&#x2F;^lɔ:riә&#x2F;</td>
+<td>n. 地质用远程斜向[指示]声纳（Geologic</td>
+</tr>
+<tr>
+<td>48</td>
+<td>huff</td>
+<td>&#x2F;hʌf&#x2F;</td>
+<td>vt. 激怒, 发怒, 提高价格, 吹胀\nvi.</td>
+</tr>
+<tr>
+<td>49</td>
+<td>peacetime</td>
+<td>&#x2F;pi:staim&#x2F;</td>
+<td>n. 平时时期, 和平</td>
+</tr>
+<tr>
+<td>50</td>
+<td>yew</td>
+<td>&#x2F;ju:&#x2F;</td>
+<td>n. 紫杉</td>
+</tr>
+</tbody></table>
+</details>
+
+<h3 id="📅-Day-4-复习：2026-07-10-词汇（50词）"><a href="#📅-Day-4-复习：2026-07-10-词汇（50词）" class="headerlink" title="📅 Day+4 复习：2026-07-10 词汇（50词）"></a>📅 Day+4 复习：2026-07-10 词汇（50词）</h3><details>
+<summary>🔁 点击展开 50 个复习单词</summary>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>单词</th>
+<th>音标</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>deadline</td>
+<td>&#x2F;‘dedlain&#x2F;</td>
+<td>最后期限, 截止期限\n[经] 截止日期</td>
+</tr>
+<tr>
+<td>2</td>
+<td>adaptable</td>
+<td>&#x2F;ә’dæptәbl&#x2F;</td>
+<td>能适应的, 适合的, 可修改的</td>
+</tr>
+<tr>
+<td>3</td>
+<td>bibliography</td>
+<td>&#x2F;.bibli’ɒgrәfi&#x2F;</td>
+<td>参考书目\n[计] 书目; 文献目录</td>
+</tr>
+<tr>
+<td>4</td>
+<td>conscientious</td>
+<td>&#x2F;.kɒnʃi’enʃәs&#x2F;</td>
+<td>有责任心的, 负责的, 本着良心的\n[法] 凭良</td>
+</tr>
+<tr>
+<td>5</td>
+<td>engaged</td>
+<td>&#x2F;in’geidʒd&#x2F;</td>
+<td>忙碌的, 使用中的</td>
+</tr>
+<tr>
+<td>6</td>
+<td>entrench</td>
+<td>&#x2F;in’trentʃ&#x2F;</td>
+<td>围以壕沟, 防护, 保卫, 使处于牢固地位\nvi</td>
+</tr>
+<tr>
+<td>7</td>
+<td>fraternity</td>
+<td>&#x2F;frә’tә:niti&#x2F;</td>
+<td>友爱, 互助会, 大学生联谊会</td>
+</tr>
+<tr>
+<td>8</td>
+<td>impassioned</td>
+<td>&#x2F;im’pæʃәnd&#x2F;</td>
+<td>充满激情的, 狂热的, 热烈的</td>
+</tr>
+<tr>
+<td>9</td>
+<td>migratory</td>
+<td>&#x2F;‘maigrәtәri&#x2F;</td>
+<td>迁移的, 流浪的</td>
+</tr>
+<tr>
+<td>10</td>
+<td>pail</td>
+<td>&#x2F;peil&#x2F;</td>
+<td>桶, 提桶</td>
+</tr>
+<tr>
+<td>11</td>
+<td>porous</td>
+<td>&#x2F;‘pɒ:rәs&#x2F;</td>
+<td>多孔的, 有气孔的, 多孔性的, 能渗透的\n[医</td>
+</tr>
+<tr>
+<td>12</td>
+<td>stagnant</td>
+<td>&#x2F;‘stægnәnt&#x2F;</td>
+<td>不流动的, 停滞的, 不景气的, 萧条的, 污浊的</td>
+</tr>
+<tr>
+<td>13</td>
+<td>wax</td>
+<td>&#x2F;wæks&#x2F;</td>
+<td>蜡, 蜡状物, 一阵发怒, 增加, (月亮)渐盈\</td>
+</tr>
+<tr>
+<td>14</td>
+<td>yardstick</td>
+<td>&#x2F;‘jɑ:dstik&#x2F;</td>
+<td>码尺, 计算标准, 准绳\n[法] 尺度, 衡量标</td>
+</tr>
+<tr>
+<td>15</td>
+<td>tip</td>
+<td>&#x2F;tip&#x2F;</td>
+<td>n. 顶, 尖端, 梢, 末端, 倾斜, 垃圾场,</td>
+</tr>
+<tr>
+<td>16</td>
+<td>radical</td>
+<td>&#x2F;rædikl&#x2F;</td>
+<td>n. 激进分子, 词根, 基础, 根式, 根\na</td>
+</tr>
+<tr>
+<td>17</td>
+<td>enthusiasm</td>
+<td>&#x2F;in’θju:ziæzәm&#x2F;</td>
+<td>n. 巨大的热情, 热心</td>
+</tr>
+<tr>
+<td>18</td>
+<td>wedding</td>
+<td>&#x2F;wediŋ&#x2F;</td>
+<td>n. 婚礼, 结婚, 结婚周年纪念日, 结合\n[</td>
+</tr>
+<tr>
+<td>19</td>
+<td>pretend</td>
+<td>&#x2F;pri’tend&#x2F;</td>
+<td>v. 假装, 伪称, 自命, 自称</td>
+</tr>
+<tr>
+<td>20</td>
+<td>congressional</td>
+<td>&#x2F;kәn’greʃәnl&#x2F;</td>
+<td>a. 会议的, 议会的, 国会的\n[法] 代表大</td>
+</tr>
+<tr>
+<td>21</td>
+<td>mayor</td>
+<td>&#x2F;mєә&#x2F;</td>
+<td>n. 市长\n[法] 市长</td>
+</tr>
+<tr>
+<td>22</td>
+<td>charged</td>
+<td>&#x2F;tʃɑ:dʒd&#x2F;</td>
+<td>a. 充满强烈感情的, 带电的, 气氛紧张的</td>
+</tr>
+<tr>
+<td>23</td>
+<td>mischievous</td>
+<td>&#x2F;mistʃivәs&#x2F;</td>
+<td>a. 淘气的, 有害的, 恶作剧的, 胡搅的</td>
+</tr>
+<tr>
+<td>24</td>
+<td>prosecution</td>
+<td>&#x2F;.prɒsi’kju:ʃәn&#x2F;</td>
+<td>n. 执行, 经营, 起诉</td>
+</tr>
+<tr>
+<td>25</td>
+<td>rant</td>
+<td>&#x2F;rænt&#x2F;</td>
+<td>v. 咆哮, 痛骂\nn. 咆哮, 大话</td>
+</tr>
+<tr>
+<td>26</td>
+<td>circuitous</td>
+<td>&#x2F;sә’kju:itәs&#x2F;</td>
+<td>a. 迂回的, 间接的, 绕行的</td>
+</tr>
+<tr>
+<td>27</td>
+<td>electromyography</td>
+<td>&#x2F;i,lektrәjmai’ɔ^rәfi&#x2F;</td>
+<td>[计] 肌动电流描记术\n[医] 肌[动]电[流]</td>
+</tr>
+<tr>
+<td>28</td>
+<td>histology</td>
+<td>&#x2F;hi’stɒlәdʒi&#x2F;</td>
+<td>n. 组织学\n[化] 组织学</td>
+</tr>
+<tr>
+<td>29</td>
+<td>imperious</td>
+<td>&#x2F;im’piәriәs&#x2F;</td>
+<td>a. 专横的, 傲慢的, 迫切的\n[医] 强制的</td>
+</tr>
+<tr>
+<td>30</td>
+<td>jaundiced</td>
+<td>&#x2F;dʒɒ:ndist&#x2F;</td>
+<td>a. 患黄疸病的, 有偏见的, 嫉妒的</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lamentable</td>
+<td>&#x2F;læmәntәbl&#x2F;</td>
+<td>a. 可悲的, 哀伤的, 可怜的</td>
+</tr>
+<tr>
+<td>32</td>
+<td>refrigerant</td>
+<td>&#x2F;ri’fridʒәrәnt&#x2F;</td>
+<td>a. 冷冻的, 冷却的, 清凉的\nn. 清凉剂,</td>
+</tr>
+<tr>
+<td>33</td>
+<td>gothic</td>
+<td>&#x2F;gɒθik&#x2F;</td>
+<td>n. 哥特风格\na. 哥特式的, 野蛮的</td>
+</tr>
+<tr>
+<td>34</td>
+<td>insentient</td>
+<td>&#x2F;in’senʃiәnt&#x2F;</td>
+<td>a. 无知觉的, 无生命的</td>
+</tr>
+<tr>
+<td>35</td>
+<td>instructors</td>
+<td>&#x2F;ɪnst’rʌktəz&#x2F;</td>
+<td>n. 指导者, 教师( instructor的名词</td>
+</tr>
+<tr>
+<td>36</td>
+<td>playoff</td>
+<td>&#x2F;pleiɔ:f&#x2F;</td>
+<td>n. 双方得分相等时的最后决赛；复赛；季后赛</td>
+</tr>
+<tr>
+<td>37</td>
+<td>saloon</td>
+<td>&#x2F;sә’lu:n&#x2F;</td>
+<td>n. 大厅, 沙龙, 酒吧, 会客室</td>
+</tr>
+<tr>
+<td>38</td>
+<td>sweden</td>
+<td>&#x2F;swi:dn&#x2F;</td>
+<td>n. 瑞典</td>
+</tr>
+<tr>
+<td>39</td>
+<td>switzerland</td>
+<td>&#x2F;switsәlәnd&#x2F;</td>
+<td>n. 瑞士</td>
+</tr>
+<tr>
+<td>40</td>
+<td>timorous</td>
+<td>&#x2F;timәrәs&#x2F;</td>
+<td>a. 胆怯的, 胆小的, 羞怯的</td>
+</tr>
+<tr>
+<td>41</td>
+<td>viands</td>
+<td>&#x2F;vaɪəndz&#x2F;</td>
+<td>n. 食物, 粮食</td>
+</tr>
+<tr>
+<td>42</td>
+<td>bikini</td>
+<td>&#x2F;bi’ki:ni&#x2F;</td>
+<td>n. 大爆炸, 比基尼泳装</td>
+</tr>
+<tr>
+<td>43</td>
+<td>budding</td>
+<td>&#x2F;bʌdiŋ&#x2F;</td>
+<td>a. 萌芽的, 发育期的, 初露头角的\nn. 发</td>
+</tr>
+<tr>
+<td>44</td>
+<td>impotent</td>
+<td>&#x2F;impәtәnt&#x2F;</td>
+<td>a. 无力的, 虚弱的, 无效的, 阳萎的</td>
+</tr>
+<tr>
+<td>45</td>
+<td>midsummer</td>
+<td>&#x2F;midsʌmә&#x2F;</td>
+<td>n. 仲夏, 夏至期\na. 仲夏的</td>
+</tr>
+<tr>
+<td>46</td>
+<td>tacky</td>
+<td>&#x2F;tæki&#x2F;</td>
+<td>a. 发粘的, 破烂的, 俗丽的</td>
+</tr>
+<tr>
+<td>47</td>
+<td>turnaround</td>
+<td>&#x2F;tә:nә.raund&#x2F;</td>
+<td>n. 转向, 回车道, 转变\n[化] 小修; 预</td>
+</tr>
+<tr>
+<td>48</td>
+<td>interrelated</td>
+<td>&#x2F;.intәri’leitid&#x2F;</td>
+<td>a. 相关的</td>
+</tr>
+<tr>
+<td>49</td>
+<td>pam</td>
+<td>&#x2F;pæm&#x2F;</td>
+<td>[计] 脉冲幅度调制\n[医] 解磷定, 派姆,</td>
+</tr>
+<tr>
+<td>50</td>
+<td>postponement</td>
+<td>&#x2F;pәust’pәunmәnt&#x2F;</td>
+<td>n. 延迟, 延期\n[法] 延期, 延迟</td>
+</tr>
+</tbody></table>
+</details>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/%E8%AF%8D%E6%B1%87/" rel="tag"># 词汇</a>
+              <a href="/tags/Modbus/" rel="tag"># Modbus</a>
+              <a href="/tags/%E9%80%9A%E4%BF%A1/" rel="tag"># 通信</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/13/daily-study-2026-07-13/" rel="prev" title="每日学习 — 2026-07-13">
+                  <i class="fa fa-chevron-left"></i> 每日学习 — 2026-07-13
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">691k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">41:51</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
