@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/08/08/daily-study-2026-08-08/
 http://ycx81.github.io/2026/08/07/daily-study-2026-08-07/
 http://ycx81.github.io/2026/08/06/daily-study-2026-08-06/
 http://ycx81.github.io/2026/08/05/daily-study-2026-08-05/
@@ -374,6 +375,9 @@ http://ycx81.github.io/tags/%E6%A0%A1%E5%87%86/
 http://ycx81.github.io/tags/CAN-FD/
 http://ycx81.github.io/tags/%E4%BB%B2%E8%A3%81/
 http://ycx81.github.io/tags/Bit-Timing/
+http://ycx81.github.io/tags/Ethernet/
+http://ycx81.github.io/tags/MAC/
+http://ycx81.github.io/tags/PHY/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
