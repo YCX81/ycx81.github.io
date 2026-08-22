@@ -147838,4 +147838,100 @@
         <tag>AWL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>IELTS 每日学习 — 2026-08-22</title>
+    <url>/2026/08/22/daily-study-2026-08-22/</url>
+    <content><![CDATA[<p>今日主线：IELTS Academic 周末整合复习与主动输出。</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：A-x2F-B-OTA-升级、健康确认与自动恢复"><a href="#🔧-嵌入式知识：A-x2F-B-OTA-升级、健康确认与自动恢复" class="headerlink" title="🔧 嵌入式知识：A/B OTA 升级、健康确认与自动恢复"></a>🔧 嵌入式知识：A/B OTA 升级、健康确认与自动恢复</h2><h3 id="工程问题：新镜像能启动一次，为什么设备仍可能永久变砖"><a href="#工程问题：新镜像能启动一次，为什么设备仍可能永久变砖" class="headerlink" title="工程问题：新镜像能启动一次，为什么设备仍可能永久变砖"></a>工程问题：新镜像能启动一次，为什么设备仍可能永久变砖</h3><p>平台采用 nRF52840 DK、Zephyr 和 MCUboot，内部 Flash 划分 primary/secondary 两个镜像槽，通过 MCUmgr 上传候选镜像。这里的“双槽”不是两个应用任意跳转：MCUboot 的 primary 是当前执行位置，secondary 保存升级候选，bootloader 可按配置执行 swap/overwrite/direct-XIP。具体 trailer、扇区和回退语义必须以 <a href="https://docs.mcuboot.com/design.html">MCUboot 官方设计文档</a>为准。</p>
+<p>下载完成只证明字节到达 secondary；签名通过只证明来源和完整性；成功跳到 <code>main</code> 只证明最短启动路径。驱动初始化、配置迁移、网络、看门狗和业务可能稍后失败。因此升级必须是跨复位的持久化状态机，而不是一个 <code>active_slot</code> 布尔值。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[stable A]</span><br><span class="line">   | 下载到secondary，逐块校验</span><br><span class="line">   v</span><br><span class="line">[downloaded] --整镜像验签/产品/版本/容量--&gt; [verified]</span><br><span class="line">   |                                                  |</span><br><span class="line">   |失败                                              |请求test boot</span><br><span class="line">   v                                                  v</span><br><span class="line">[discard]                                     [pending-test]</span><br><span class="line">                                                      |</span><br><span class="line">                                                  bootloader</span><br><span class="line">                                                      v</span><br><span class="line">                                               [trial B, count+1]</span><br><span class="line">                                                /             \</span><br><span class="line">                                  健康确认+原子提交           崩溃/超限</span><br><span class="line">                                             v                 v</span><br><span class="line">                                      [confirmed B]       [revert A]</span><br></pre></td></tr></table></figure>
+
+<h3 id="MCUboot-的-test、confirm-与-revert"><a href="#MCUboot-的-test、confirm-与-revert" class="headerlink" title="MCUboot 的 test、confirm 与 revert"></a>MCUboot 的 test、confirm 与 revert</h3><p>MCUboot 用镜像 trailer 的 magic、copy-done、image-ok 等信息判断交换状态。test 升级允许新镜像试运行；应用调用确认接口后才永久接受，否则下次启动回退。官方 <a href="https://docs.zephyrproject.org/latest/services/device_mgmt/smp_groups/smp_group_1.html">Zephyr MCUmgr image management</a>也明确把一个 image 的 primary/secondary 两槽和哈希字段对应到 MCUboot。</p>
+<p>不同升级算法的掉电性质不同。swap 要把扇区分步交换并记录进度；overwrite 可恢复能力较弱；direct-XIP 要求镜像能从各自地址执行。槽大小不只是正文，还包含镜像头、TLV、trailer、擦除对齐和增长余量。更换策略后必须重做断电矩阵，不能沿用旧结论。</p>
+<h3 id="应用确认必须晚于真正健康"><a href="#应用确认必须晚于真正健康" class="headerlink" title="应用确认必须晚于真正健康"></a>应用确认必须晚于真正健康</h3><p>Zephyr 应用可在通过本地健康门槛后调用确认。下面代码适用于启用 <code>CONFIG_BOOTLOADER_MCUBOOT=y</code> 的应用；具体 include/API 随 Zephyr 版本核对。确认前先检查镜像是否仍未确认，等待传感器、配置和关键任务稳定窗口，而不是刚进入 main 就确认。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;zephyr/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;zephyr/dfu/mcuboot.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;zephyr/sys/reboot.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">bool</span> <span class="title function_">local_health_ok</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> storage_schema_compatible() &amp;&amp;</span><br><span class="line">           watchdog_window_passed() &amp;&amp;</span><br><span class="line">           actuator_safe_state_verified() &amp;&amp;</span><br><span class="line">           critical_tasks_heartbeat_ok();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">ota_confirm_after_health</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (boot_is_img_confirmed()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int64_t</span> deadline = k_uptime_get() + <span class="number">60000</span>;</span><br><span class="line">    <span class="keyword">while</span> (k_uptime_get() &lt; deadline) {</span><br><span class="line">        <span class="keyword">if</span> (local_health_ok()) {</span><br><span class="line">            <span class="type">int</span> rc = boot_write_img_confirmed();</span><br><span class="line">            <span class="keyword">if</span> (rc == <span class="number">0</span> &amp;&amp; boot_is_img_confirmed()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-2</span>; <span class="comment">/* 写入或读回失败，不伪装成功 */</span></span><br><span class="line">        }</span><br><span class="line">        k_sleep(K_MSEC(<span class="number">250</span>));</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">/* 不确认；由试启动策略在复位后回退 */</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>云端在线不能作为唯一健康条件：离线现场设备可能无谓回滚。可把门槛分为本地安全确认和上线后的服务质量告警。反过来，只检查线程启动也过弱。确认条件要能回答“旧版本删除后，设备是否仍可提供最低安全功能”。</p>
+<h3 id="尝试计数与确认记录的掉电一致性"><a href="#尝试计数与确认记录的掉电一致性" class="headerlink" title="尝试计数与确认记录的掉电一致性"></a>尝试计数与确认记录的掉电一致性</h3><p>尝试次数必须与本次候选镜像绑定，并具有原子提交协议。单个 Flash 字写一半可能变成任意位型；反复改同一字还产生擦写寿命问题。常用方案是两个槽或 append-only 记录：每条包含 magic、镜像哈希前缀、序号、状态、尝试数和 CRC，启动时选择 CRC 正确且序号最新的记录。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> {</span> OTA_STABLE=<span class="number">1</span>, OTA_PENDING=<span class="number">2</span>, OTA_TRIAL=<span class="number">3</span>,</span><br><span class="line">               OTA_CONFIRMED=<span class="number">4</span>, OTA_BAD=<span class="number">5</span> } <span class="type">ota_state_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">uint32_t</span> magic, seq;</span><br><span class="line">    <span class="type">uint8_t</span> image_id[<span class="number">8</span>];</span><br><span class="line">    <span class="type">uint8_t</span> state, attempts;</span><br><span class="line">    <span class="type">uint16_t</span> reserved;</span><br><span class="line">    <span class="type">uint32_t</span> crc;</span><br><span class="line">} <span class="type">ota_record_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">bool</span> <span class="title function_">record_valid</span><span class="params">(<span class="type">const</span> <span class="type">ota_record_t</span> *r)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> r-&gt;magic == <span class="number">0x4F544131</span>U &amp;&amp;</span><br><span class="line">           r-&gt;state &gt;= OTA_STABLE &amp;&amp; r-&gt;state &lt;= OTA_BAD &amp;&amp;</span><br><span class="line">           crc32(r, offsetof(<span class="type">ota_record_t</span>, crc)) == r-&gt;crc;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">choose_latest</span><span class="params">(<span class="type">const</span> <span class="type">ota_record_t</span> a[<span class="number">2</span>])</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">bool</span> va=record_valid(&amp;a[<span class="number">0</span>]), vb=record_valid(&amp;a[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (!va &amp;&amp; !vb) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (!vb) <span class="keyword">return</span> <span class="number">0</span>; <span class="keyword">if</span> (!va) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">int32_t</span>)(a[<span class="number">1</span>].seq-a[<span class="number">0</span>].seq) &gt; <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>写新记录时先擦备用槽、写除 magic 外的内容、校验读回，最后提交 magic；或采用硬件允许的单向位提交。上述结构只是主机可编译的选择逻辑，Flash 写序列要用 nRF NVM 控制器/MCUboot 已实现机制，不能直接把结构体覆盖到 Flash。</p>
+<p>U-Boot 的 <a href="https://docs.u-boot.org/en/latest/api/bootcount.html">boot count limit 官方文档</a>展示了 <code>bootcount</code>、<code>bootlimit</code> 和备用启动命令的同类思想，并特别把 <code>upgrade_available</code> 与持久化计数关联。借鉴概念可以，不能混用两套 bootloader 元数据格式。</p>
+<h3 id="数据迁移决定代码能否真正回滚"><a href="#数据迁移决定代码能否真正回滚" class="headerlink" title="数据迁移决定代码能否真正回滚"></a>数据迁移决定代码能否真正回滚</h3><p>新固件若把共享数据库原地升级到旧固件无法读取的格式，代码回到 A 也会启动失败。安全方案包括向后兼容读取、copy-on-write 双副本、确认后才提交不可逆迁移，或明确禁止代码回退并提供前向恢复镜像。迁移版本必须是健康检查的一部分。</p>
+<p>配置写入也要跨复位可重入。把迁移拆成“准备新副本、校验、切换根指针、延后回收旧副本”，每一步掉电后都能识别。禁止在候选镜像第一次启动时立即擦除旧格式；这相当于在确认前销毁救生艇。</p>
+<h3 id="下载、认证与-anti-rollback-边界"><a href="#下载、认证与-anti-rollback-边界" class="headerlink" title="下载、认证与 anti-rollback 边界"></a>下载、认证与 anti-rollback 边界</h3><p>分块 CRC 用于传输纠错，不能替代整镜像签名。镜像头中的产品、硬件修订、依赖、加载地址、长度和安全版本都要在写入活动路径前验证。MCUboot 的签名工具和镜像格式见 <a href="https://docs.mcuboot.com/imgtool.html">imgtool 官方文档</a>。A/B 提供可恢复性，不自动提供真实性；anti-rollback 也不能只比较普通 Flash 中可被旧软件改写的版本号。</p>
+<p>下载器必须限制 offset+length，防止越过 secondary 破坏 primary、bootloader 或设置区。断点续传日志记录已验证块，而最终仍重新计算全镜像哈希。多个升级请求并发时只允许一个候选事务持有 secondary 所有权。</p>
+<h3 id="可复现实验与通过标准"><a href="#可复现实验与通过标准" class="headerlink" title="可复现实验与通过标准"></a>可复现实验与通过标准</h3><p>准备 nRF52840 DK、Zephyr workspace、MCUboot、<code>smp_svr</code> 样例和串口/BLE MCUmgr。按 <a href="https://docs.zephyrproject.org/latest/samples/subsys/mgmt/mcumgr/smp_svr/README.html">Zephyr SMP server 官方样例</a>用 sysbuild 构建，生成 v1 和 v2 两个有明显版本输出的签名镜像。先烧 v1，上传 v2 为 test，复位观察试启动；v2 延迟六十秒后确认。</p>
+<p>步骤覆盖：完整上传、上传中复位、test 后确认、test 后看门狗复位三次、确认写入时复位、坏签名、错误产品 ID、secondary 超长、离线网络和配置迁移失败。每次记录 MCUboot trailer 状态、启动槽、镜像哈希、尝试数和复位原因。</p>
+<p>通过标准：任何下载中断不破坏 v1；未确认 v2 在策略限定内回退；确认后稳定启动 v2；坏签名永不执行；元数据半写时选择上一条有效记录；迁移失败能回到仍可读数据的 v1；连续一百次随机复位没有不可启动状态。保留串口日志和 Flash trailer 快照，不以“最后能亮灯”代替证据。</p>
+<h3 id="真实故障注入与完整证据链"><a href="#真实故障注入与完整证据链" class="headerlink" title="真实故障注入与完整证据链"></a>真实故障注入与完整证据链</h3><p>注入：把 <code>boot_write_img_confirmed()</code> 移到 main 的第一秒，然后让 v2 在存储迁移后二十秒触发看门狗。现象是设备反复启动 v2 并复位，不再自动回到 v1。假设包括 bootloader 回退失效、看门狗配置错误、应用过早确认。证据是 trailer 的 image-ok 已提交，MCUboot 日志把镜像视为永久；看门狗复位原因稳定存在，而 v1 手动启动正常。</p>
+<p>定位到确认时机早于健康窗口，并且迁移已修改共享数据。修复是把确认移到本地健康状态机末端，迁移采用双副本并在确认后切换；超时返回但不确认。回归在每个健康步骤前后注入复位，未确认失败均回 v1，确认后的 v2 连续运行并通过数据校验。链条完整为：启动循环 → 三个假设 → trailer/复位原因/旧镜像证据 → 过早确认定位 → 延迟确认和可回滚迁移 → 全状态断电回归。</p>
+<h3 id="Bootloader-自身与救援入口"><a href="#Bootloader-自身与救援入口" class="headerlink" title="Bootloader 自身与救援入口"></a>Bootloader 自身与救援入口</h3><p>A/B 只保护应用槽，若更新器能擦到 bootloader、分区表或密钥区，双槽也无能为力。Flash 写接口应以分区对象而非裸地址暴露，bootloader 区由硬件写保护；下载长度在加法前检查溢出，并同时约束镜像正文和 TLV。应用不应拥有改变 primary 选择或信任根的通用权限。</p>
+<p>仍要保留独立救援路径，例如按键进入 MCUboot serial recovery、只读 ROM bootloader 或受保护的最小恢复镜像。救援入口必须在 primary、secondary 和设置区全坏时仍可达，并验证签名与产品身份。生产验收要实际擦坏两个应用头再恢复，而不是把“芯片有 ROM”当作已验证功能。</p>
+<p>日志不能阻塞启动。若网络不可用，bootloader 仍应在有界时间内选择可启动槽；详细遥测由应用稍后上传。启动决策记录使用紧凑原因码、镜像 ID 和状态快照，避免在 bootloader 内引入复杂文件系统。</p>
+<h3 id="擦写寿命与元数据垃圾回收"><a href="#擦写寿命与元数据垃圾回收" class="headerlink" title="擦写寿命与元数据垃圾回收"></a>擦写寿命与元数据垃圾回收</h3><p>每次启动都原地递增 Flash bootcount 会迅速磨损同一页。append-only 记录将多次状态变化摊到整个擦除块，块满后把最新有效记录复制到另一块再擦除旧块。垃圾回收本身也必须掉电安全：新块记录完整并提交后，旧块才可擦除。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">可承受状态写次数 ≈ 擦除寿命 * 每块可容纳记录数 * 轮换块数</span><br><span class="line">预计年写次数 = 每日启动/重试/确认次数 * 365 + 异常上限</span><br></pre></td></tr></table></figure>
+
+<p>看门狗启动循环会放大写入，所以达到 bootlimit 后必须停止继续递增并进入稳定回退/救援。元数据 CRC 只检测随机损坏，不证明记录来自可信软件；若攻击者可任意写 Flash，还需要硬件保护和签名策略。</p>
+<h3 id="版本、依赖与多镜像事务"><a href="#版本、依赖与多镜像事务" class="headerlink" title="版本、依赖与多镜像事务"></a>版本、依赖与多镜像事务</h3><p>含无线核、安全核或 FPGA 的设备可能一次升级多个镜像。逐个标记 confirmed 会产生不兼容组合；应给升级集合一个事务 ID，先验证全部依赖，再按 bootloader 支持的多镜像策略试启动。任一组件失败时回退集合，而非只回退最后一个。</p>
+<p>版本比较也要区分产品版本和安全计数器。语义版本可能允许维护分支降级，anti-rollback 计数器则通常单调增加并存于受保护区域。烧断式计数资源有限，提交时机应在镜像认证和健康确认之后；过早烧写会让失败候选阻断旧的已知良好版本。</p>
+<p>升级服务器下发错误镜像时，设备必须在本地拒绝，不能依赖云端永不犯错。产品 ID、板级修订、最小 bootloader 版本、依赖版本和槽容量都属于镜像合同。失败原因要可观测，以便区分网络重试和不可兼容包。</p>
+<h3 id="状态机不变量与审计方法"><a href="#状态机不变量与审计方法" class="headerlink" title="状态机不变量与审计方法"></a>状态机不变量与审计方法</h3><p>比枚举所有路径更有效的是写不变量：任何时刻至少有一个经认证且数据兼容的启动路径；未确认候选不能销毁最后已知良好版本；半写记录不能比完整旧记录优先；尝试次数只属于同一 image ID；应用确认不能绕过 bootloader 的签名结果。</p>
+<p>把这些不变量编码进主机状态机模型，随机生成下载、写失败、复位和健康结果。每一步加载持久化快照重新构造状态，模拟真正掉电而不是函数内异常返回。发现反例时保存最短事件序列，加入回归。模型通过不等于 Flash 驱动正确，但能提前淘汰状态设计漏洞。</p>
+<p>现场指标至少包括升级成功率、平均下载重试、试启动失败原因、自动回退次数、救援进入次数和元数据剩余寿命。只统计“最新版本占比”会掩盖大量自动回滚和启动延迟。</p>
+<h3 id="练习题与判断标准"><a href="#练习题与判断标准" class="headerlink" title="练习题与判断标准"></a>练习题与判断标准</h3><ol>
+<li>签名正确的镜像能否直接 permanent？不能；真实性不等于运行健康，必须经过试启动门槛。</li>
+<li>为什么单个 <code>active_slot</code> 字不够？答案至少包含半写、尝试次数、候选身份、确认与回退状态。</li>
+<li>网络离线时是否应回滚？应由本地最低健康门槛决定；只回答“必须在线”不合格。</li>
+<li>新版本做不可逆数据库迁移后还能代码回滚吗？通常不能，除非保留兼容副本或旧版可读格式。</li>
+<li>实操提交随机复位点矩阵、trailer 快照、复位原因和最终槽位；任何路径覆盖 bootloader/primary 或出现无救援启动循环均失败。</li>
+</ol>
+<h3 id="官方一手来源"><a href="#官方一手来源" class="headerlink" title="官方一手来源"></a>官方一手来源</h3><ul>
+<li><a href="https://docs.mcuboot.com/design.html">MCUboot Bootloader Design</a></li>
+<li><a href="https://docs.mcuboot.com/imgtool.html">MCUboot imgtool</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/services/device_mgmt/smp_groups/smp_group_1.html">Zephyr MCUmgr image management</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/samples/subsys/mgmt/mcumgr/smp_svr/README.html">Zephyr SMP server sample</a></li>
+<li><a href="https://docs.u-boot.org/en/latest/api/bootcount.html">U-Boot Boot Count Limit</a></li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://docs.mcuboot.com/design.html">MCUboot Bootloader Design</a></li>
+<li><a href="https://docs.mcuboot.com/imgtool.html">MCUboot imgtool</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/services/device_mgmt/smp_groups/smp_group_1.html">Zephyr MCUmgr image management</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/samples/subsys/mgmt/mcumgr/smp_svr/README.html">Zephyr SMP server sample</a></li>
+<li><a href="https://docs.u-boot.org/en/latest/api/bootcount.html">U-Boot Boot Count Limit</a></li>
+</ul>
+<hr>
+<h2 id="📖-IELTS-Academic-新词（0-个）"><a href="#📖-IELTS-Academic-新词（0-个）" class="headerlink" title="📖 IELTS Academic 新词（0 个）"></a>📖 IELTS Academic 新词（0 个）</h2><p>今天是计划复习日，不重复抽取新词。</p>
+<hr>
+<h2 id="🧩-周末整合复习"><a href="#🧩-周末整合复习" class="headerlink" title="🧩 周末整合复习"></a>🧩 周末整合复习</h2><p>本组词来自最近一周。先遮住释义回忆，再完成搭配填空、同义改写和 IELTS 主题造句。</p>
+<p><strong>brief</strong>, <strong>label</strong>, <strong>medical</strong>, <strong>principal</strong>, <strong>complement</strong>, <strong>occupy</strong>, <strong>status</strong>, <strong>text</strong>, <strong>collapse</strong>, <strong>devote</strong>, <strong>equate</strong>, <strong>framework</strong>, <strong>behalf</strong>, <strong>element</strong>, <strong>minimum</strong>, <strong>normal</strong>, <strong>conflict</strong>, <strong>dominate</strong>, <strong>equip</strong>, <strong>sole</strong></p>
+<ol>
+<li>选 5 个词口头解释，不看中文。</li>
+<li>选 3 个词各写一个正确搭配。</li>
+<li>至少用 2 个词改写同一句 IELTS 观点句。</li>
+<li>标记仍不熟的词，下周优先复习。</li>
+</ol>
+<hr>
+<h2 id="🔁-间隔复习"><a href="#🔁-间隔复习" class="headerlink" title="🔁 间隔复习"></a>🔁 间隔复习</h2><h3 id="Day-1-·-2026-08-21"><a href="#Day-1-·-2026-08-21" class="headerlink" title="Day+1 · 2026-08-21"></a>Day+1 · 2026-08-21</h3><p><strong>brief</strong>, <strong>label</strong>, <strong>medical</strong>, <strong>principal</strong></p>
+<h3 id="Day-3-·-2026-08-19"><a href="#Day-3-·-2026-08-19" class="headerlink" title="Day+3 · 2026-08-19"></a>Day+3 · 2026-08-19</h3><p><strong>collapse</strong>, <strong>devote</strong>, <strong>equate</strong>, <strong>framework</strong></p>
+<h3 id="Day-30-·-2026-07-23"><a href="#Day-30-·-2026-07-23" class="headerlink" title="Day+30 · 2026-07-23"></a>Day+30 · 2026-07-23</h3><p><strong>authority</strong>, <strong>contract</strong>, <strong>environment</strong>, <strong>respond</strong></p>
+<hr>
+<p>词表依据：<a href="https://www.wgtn.ac.nz/lals/resources/academicwordlist">Coxhead Academic Word List</a>。</p>
+]]></content>
+      <categories>
+        <category>每日学习</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+        <tag>英语</tag>
+        <tag>OTA</tag>
+        <tag>IELTS</tag>
+        <tag>AWL</tag>
+        <tag>A/B升级</tag>
+        <tag>回滚</tag>
+        <tag>健康检查</tag>
+      </tags>
+  </entry>
 </search>
