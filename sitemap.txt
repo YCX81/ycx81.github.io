@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/09/05/daily-study-2026-09-05/
 http://ycx81.github.io/2026/09/04/daily-study-2026-09-04/
 http://ycx81.github.io/2026/09/03/daily-study-2026-09-03/
 http://ycx81.github.io/2026/09/02/daily-study-2026-09-02/
@@ -424,6 +425,10 @@ http://ycx81.github.io/tags/%E5%B9%B6%E5%8F%91/
 http://ycx81.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/
 http://ycx81.github.io/tags/%E5%AE%B9%E9%87%8F%E8%AE%BE%E8%AE%A1/
 http://ycx81.github.io/tags/%E6%89%80%E6%9C%89%E6%9D%83/
+http://ycx81.github.io/tags/Fault/
+http://ycx81.github.io/tags/reset-reason/
+http://ycx81.github.io/tags/Core-Dump/
+http://ycx81.github.io/tags/%E5%B4%A9%E6%BA%83%E8%AF%8A%E6%96%AD/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
