@@ -149273,4 +149273,159 @@
         <tag>AWL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>IELTS 每日学习 — 2026-09-08</title>
+    <url>/2026/09/08/daily-study-2026-09-08/</url>
+    <content><![CDATA[<p>今日主线：IELTS Academic · AWL Sublist 4,6,8,9 · 4 个新词。</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：Brownout、电源监控与复位主管"><a href="#🔧-嵌入式知识：Brownout、电源监控与复位主管" class="headerlink" title="🔧 嵌入式知识：Brownout、电源监控与复位主管"></a>🔧 嵌入式知识：Brownout、电源监控与复位主管</h2><blockquote>
+<p>平台：NUCLEO-L476RG（STM32L476RG）+ 可调版 TPS389001DSER、R1=127 kΩ/R2=100 kΩ（均为 0.1%）+ 可编程电源、电子负载与四通道示波器。本文把 MCU 的 PVD level 6 当“提前告警”，把独立 supervisor 当“最终复位边界”；Flash 示例使用 STM32L4 双字编程，并要求目标页在供电正常时预擦除。</p>
+</blockquote>
+<h3 id="1-Brownout-不是一个电压点，而是一段失控时间"><a href="#1-Brownout-不是一个电压点，而是一段失控时间" class="headerlink" title="1. Brownout 不是一个电压点，而是一段失控时间"></a>1. Brownout 不是一个电压点，而是一段失控时间</h3><p>电源缓慢下降时，CPU、Flash、外设可能在不同电压先后失去保证。只记录 <code>BORRSTF</code> 不能说明掉电前最后一笔状态是否完整；只靠软件 PVD，也无法保证软件跑飞时仍会复位。因此将事件拆成三条边界：PVD 在 <code>VWARN</code> 产生可用时间，固件立即冻结新事务并提交最小日志；TPS389001 在更低的可调阈值拉低 NRST，防止 MCU 在项目安全下限外继续执行；BOR 是芯片最后防线，而不是业务提交机制。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">VDD  3.3 V ────────\</span><br><span class="line">                    \  PVD(VWARN)       supervisor reset     Flash安全下限</span><br><span class="line">                     \────┬────────────────┬────────────────────┬──→t</span><br><span class="line">                          │关负载/写journal │NRST=0              │禁止执行</span><br><span class="line">                          └──── 可用保持时间 ────┘</span><br><span class="line">示波器：CH1 VDD，CH2 PVD ISR GPIO，CH3 /RESET，CH4 Flash提交 GPIO</span><br></pre></td></tr></table></figure>
+
+<p>TPS3890 提供独立欠压监控、阈值最大 ±1% 精度和由 CT 控制的释放延迟；其阈值、迟滞、输出结构和时间必须按所选料号填写（<a href="https://www.ti.com/lit/ds/symlink/tps3890.pdf">TI TPS3890 datasheet</a>）。这里使用 TI 标为 ACTIVE 的可采购料号 <code>TPS389001DSER</code>，它是可调版，内部下降阈值标称 1.15 V，VDD 接 3.3 V，VDD→R1→SENSE→R2→GND。STM32 使用 <code>PWR_PVDLEVEL_6</code>；HAL 的 <code>LEVEL_7</code> 是外部模拟输入选择，不能拿来表示“第七档约 2.9 V”。</p>
+<h3 id="2-保持电容从能量预算倒推，不凭经验堆料"><a href="#2-保持电容从能量预算倒推，不凭经验堆料" class="headerlink" title="2. 保持电容从能量预算倒推，不凭经验堆料"></a>2. 保持电容从能量预算倒推，不凭经验堆料</h3><p>掉电后近似恒流时，理想电容满足：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Cmin = Iemergency × temergency /</span><br><span class="line">       (VWARN,min − VRESET,max,local − Vnoise − Iemergency×ESR)</span><br></pre></td></tr></table></figure>
+
+<p>本设计采用数据手册保证的 PVD level 6 下降沿最小值 <code>VWARN,min=2.84 V</code>，后文算得本地 supervisor 最高动作点 <code>2.6723 V</code>，另留 100 mV 噪声预算。若紧急模式 20 mA、8 ms、保持电容 ESR 上限 40 mΩ，则 <code>Cmin=0.02×0.008/(2.84−2.6723−0.100−0.0008)≈2.39 mF</code>。3300 µF、−20% 后为 2.64 mF，只能作为首轮样机；低温、老化和 ESR 复测不合格就升到 4700 µF或继续降低紧急电流。软件窗口止于 supervisor 的最早复位，不应错误地一直算到 MCU 绝对最低电压。STM32L476 的供电与 Flash 条件应按数据手册核对（<a href="https://www.st.com/resource/en/datasheet/stm32l476rg.pdf">STM32L476RG datasheet</a>）。</p>
+<p>电源不会总是线性下降。热插拔可能造成 20 µs 凹陷，电池拔出可能近似阶跃，DC/DC 限流可能反复打嗝。保持时间预算应取示波器测得的 <code>PVD边沿→NRST边沿</code>，而不是电源面板的斜率；ESR 造成的瞬时 <code>ΔV=I×ESR</code> 要从可用压差中扣除。</p>
+<h3 id="3-PVD-ISR-只改变系统状态，不在中断里擦-Flash"><a href="#3-PVD-ISR-只改变系统状态，不在中断里擦-Flash" class="headerlink" title="3. PVD ISR 只改变系统状态，不在中断里擦 Flash"></a>3. PVD ISR 只改变系统状态，不在中断里擦 Flash</h3><p>STM32L476 的 PVD 通过 EXTI 产生中断。初始化应同时设置下降沿告警，并在电源重新稳定一段时间后才允许恢复业务。RM0351 给出了 PWR、PVD 与 reset flags 的寄存器定义，应以具体芯片修订版核对位域（<a href="https://www.st.com/resource/en/reference_manual/rm0351-.pdf">ST RM0351</a>）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"stm32l4xx_hal.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">volatile</span> <span class="type">uint32_t</span> power_fail_pending;</span><br><span class="line"><span class="type">static</span> <span class="keyword">volatile</span> <span class="type">uint32_t</span> pvd_tick;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">power_monitor_init</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    PWR_PVDTypeDef p={ .PVDLevel=PWR_PVDLEVEL_6,</span><br><span class="line">                      .Mode=PWR_PVD_MODE_IT_FALLING };</span><br><span class="line">    __HAL_RCC_PWR_CLK_ENABLE();</span><br><span class="line">    HAL_PWR_ConfigPVD(&amp;p);</span><br><span class="line">    HAL_PWR_EnablePVD();</span><br><span class="line">    HAL_NVIC_SetPriority(PVD_PVM_IRQn,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    HAL_NVIC_EnableIRQ(PVD_PVM_IRQn);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_PWR_PVDCallback</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    pvd_tick=HAL_GetTick();</span><br><span class="line">    power_fail_pending=<span class="number">1</span>;</span><br><span class="line">    GPIOA-&gt;BSRR=GPIO_PIN_5;       <span class="comment">/* 示波器时间戳，不等待串口 */</span></span><br><span class="line">    radio_abort_dma();            <span class="comment">/* 必须是有界、无锁操作 */</span></span><br><span class="line">    display_power_off();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">power_fail_service</span><span class="params">(<span class="type">void</span>)</span> {</span><br><span class="line">    <span class="keyword">if</span> (!power_fail_pending) <span class="keyword">return</span>;</span><br><span class="line">    scheduler_freeze_new_work();</span><br><span class="line">    journal_commit_minimal();     <span class="comment">/* 只编程预擦除区域 */</span></span><br><span class="line">    GPIOA-&gt;BSRR=(<span class="type">uint32_t</span>)GPIO_PIN_5&lt;&lt;<span class="number">16</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) __WFI();            <span class="comment">/* 等独立 supervisor 拉复位 */</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>回调里不打印、不拿 RTOS mutex、不等待 DMA 完成，也不调用页擦除。若切断负载的 GPIO 本身挂在 I²C expander 上，就不能把它当紧急动作；关键负载应有 MCU 直控或硬件门控。恢复沿不能立即“续跑”，因为电源在阈值附近振荡会造成多次半事务；系统应由 supervisor 保持 NRST，启动后再连续采样电源良好并重建状态。</p>
+<h3 id="4-Flash-journal-用预擦除槽和最后提交标记"><a href="#4-Flash-journal-用预擦除槽和最后提交标记" class="headerlink" title="4. Flash journal 用预擦除槽和最后提交标记"></a>4. Flash journal 用预擦除槽和最后提交标记</h3><p>STM32L4 Flash 的最小编程单元是 64-bit double word。一个日志槽分成 payload、校验和、commit；所有字段按双字对齐，commit 最后写。启动扫描时只有 commit 正确、版本/序号合理且 CRC 匹配的槽才有效。掉电期间绝不擦页，因为擦除耗时长、峰值电流高且破坏整页旧证据。ST 的 EEPROM emulation 应用笔记专门讨论页状态、wear leveling、掉电恢复与双页交换，量产设计应复用成熟方案而不是无限追加一个地址（<a href="https://www.st.com/resource/en/application_note/an4894-eeprom-emulation-techniques-and-software-for-stm32-microcontrollers-stmicroelectronics.pdf">ST AN4894</a>）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"stm32l4xx_hal.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stddef.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> COMMIT_OK 0xC01117EDC01117EDULL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span>((<span class="title">aligned</span>(8))) {</span></span><br><span class="line">    <span class="type">uint64_t</span> sequence;</span><br><span class="line">    <span class="type">uint64_t</span> state_and_reason;</span><br><span class="line">    <span class="type">uint64_t</span> crc_and_version;</span><br><span class="line">    <span class="type">uint64_t</span> commit;</span><br><span class="line">} <span class="type">pf_slot_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">uint32_t</span> <span class="title function_">flash_dw</span><span class="params">(<span class="type">uint32_t</span> address,<span class="type">uint64_t</span> value)</span> {</span><br><span class="line">    <span class="keyword">return</span> HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD,address,value);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">pf_append</span><span class="params">(<span class="type">uint32_t</span> addr,<span class="type">uint64_t</span> seq,<span class="type">uint32_t</span> state,</span></span><br><span class="line"><span class="params">                   <span class="type">uint16_t</span> reason,<span class="type">uint32_t</span> crc)</span> {</span><br><span class="line">    <span class="comment">/* addr 指向供电正常时已擦除且检查为全 1 的槽 */</span></span><br><span class="line">    <span class="type">uint64_t</span> sv=((<span class="type">uint64_t</span>)state&lt;&lt;<span class="number">32</span>)|reason;</span><br><span class="line">    <span class="type">uint64_t</span> cv=((<span class="type">uint64_t</span>)crc&lt;&lt;<span class="number">32</span>)|<span class="number">1U</span>;</span><br><span class="line">    HAL_FLASH_Unlock();</span><br><span class="line">    <span class="type">uint32_t</span> e=flash_dw(addr+offsetof(<span class="type">pf_slot_t</span>,sequence),seq);</span><br><span class="line">    <span class="keyword">if</span> (!e) e=flash_dw(addr+offsetof(<span class="type">pf_slot_t</span>,state_and_reason),sv);</span><br><span class="line">    <span class="keyword">if</span> (!e) e=flash_dw(addr+offsetof(<span class="type">pf_slot_t</span>,crc_and_version),cv);</span><br><span class="line">    <span class="keyword">if</span> (!e) e=flash_dw(addr+offsetof(<span class="type">pf_slot_t</span>,commit),COMMIT_OK);</span><br><span class="line">    HAL_FLASH_Lock();</span><br><span class="line">    <span class="keyword">return</span> e;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>这段代码刻意没有指定页地址：双 bank 配置、bootloader、链接脚本和器件容量会改变安全区域，必须由 linker symbol 提供并做越界断言。CRC 应覆盖 sequence、state、reason、version，但不覆盖最后 commit。即使 commit 写完，若 CRC 不符仍拒绝。若记录区已满，PVD 路径宁可保存失败计数到备份寄存器，也不能现场擦除；页整理必须在健康供电时完成并预留至少两个空槽。</p>
+<h3 id="5-板上实验要同时测阈值、时间和数据原子性"><a href="#5-板上实验要同时测阈值、时间和数据原子性" class="headerlink" title="5. 板上实验要同时测阈值、时间和数据原子性"></a>5. 板上实验要同时测阈值、时间和数据原子性</h3><p>先禁用 Flash 写，只测电源路径。可编程电源从 3.3 V 以 1 V/s、100 V/s 和输出关闭三种方式下降；每种在 0 ℃、25 ℃、最大负载至少重复 30 次。示波器自动测 PVD GPIO 的本地 VDD、SENSE、NRST 的本地 VDD、两者间隔和最低 VDD。验收要求所有样品 PVD 不低于 2.84 V，supervisor 本地动作不高于 2.6723 V；加入 100 mV 动态噪声仍保持先后次序。项目规定 <code>VSAFE=2.40 V</code>，并约束相关区间 VDD 下降不快于 1 V/ms、资格试验中 SENSE 过阈值到 NRST 不超过 50 µs，因此 NRST 最低应高于后文算出的 <code>2.5615−0.050=2.5115 V</code>，仍高于 VSAFE。输出关闭的无界阶跃不能靠阈值关系保证，必须由保持电容实际波形另行通过。</p>
+<p>再启用 journal，令 state 每 10 ms 递增，随机相位切电 500 次。每次重启导出：RCC reset flags、最后有效 sequence、下一槽原始 32 bytes、CRC 结果和示波器截图编号。通过标准是：要么恢复切电前已提交状态，要么恢复更早一个完整状态；绝不接受字段混合、CRC 错误却被当有效、启动扫描越界。对 20 µs、100 µs、1 ms 的凹陷分别测试：短凹陷可能只触发 PVD 不触发 reset，此时系统也必须以明确策略恢复或完成一次受控重启。</p>
+<p>TPS3890 的 CT 延时要在板上量，不只抄典型值；输出为开漏时还要验证上拉在掉电期间是否存在。NRST 线上电容、调试器和其他器件都可能改变波形。MCU 的 BOR/POR/IWDG 等 reset flags 是 sticky，启动必须先快照再清除，但它们只证明复位来源，不能替代 journal 的提交证据。</p>
+<h3 id="6-阈值误差预算要按最坏方向叠加"><a href="#6-阈值误差预算要按最坏方向叠加" class="headerlink" title="6. 阈值误差预算要按最坏方向叠加"></a>6. 阈值误差预算要按最坏方向叠加</h3><p>要保证软件窗口存在，不能比较两个典型值。STM32L476 数据手册给出 PVD level 6 下降沿 <code>2.84/2.90/2.96 V</code>，所以提前告警只能取最小 2.84 V。TPS389001 的监控电压满足 <code>VMON=VITN×(1+R1/R2)+ISENSE×R1</code>；TI 给出阈值误差最大 ±1%、可调版 SENSE 输入电流最大 100 nA，并建议分压电流至少为输入电流的一百倍。127 kΩ/100 kΩ 在阈值处约 11.5 µA，满足该准则。</p>
+<p>最高 supervisor 阈值采用 <code>VITN=1.15×1.01</code>、<code>R1=127k×1.001</code>、<code>R2=100k×0.999</code>、<code>ISENSE=100 nA</code>，得到 <code>2.6523 V</code>。再把 supervisor 采样点相对 MCU 本地 VDD 的最坏 +20 mV 铜阻/走线差计入，<code>VRESET,max,local=2.6723 V</code>。于是数值不等式为 <code>2.840 &gt; 2.6723+0.100 = 2.7723 V</code>，在预留 100 mV 动态噪声后还有 67.7 mV 确定裕量，而不是两条约 2.9 V 阈值互相重叠。</p>
+<p>反方向也要成立：取 <code>VITN=1.15×0.99</code>、R1 最小、R2 最大、输入电流按零计，监控器最低动作点为 2.5815 V；再扣 20 mV 取样差为本地 2.5615 V。项目规定 VSAFE 为 2.40 V，且通过前述 1 V/ms 与 50 µs 验收限制传播期间最多再跌 50 mV，因此 NRST 仍在至少 2.5115 V 生效。若产品无法限制下降斜率，TI 表中典型传播时间不能被冒充为保证上限，必须改电源路径或提高 supervisor 阈值并重新分配 PVD 窗口。</p>
+<p>量产抽样应在同一波形上测 MCU VDD、SENSE 和 NRST，报告最小窗口而不是平均窗口。改变 R1/R2 会同时影响分压静耗、输入漏电误差与阈值；提高 supervisor 阈值还会缩短软件窗口。SENSE 可按 TI 建议布置小电容抑制瞬态，但它带来的传播变化也必须进入示波器验收，不能只凭直流不等式放行。</p>
+<h3 id="7-启动恢复和磨损同样属于掉电设计"><a href="#7-启动恢复和磨损同样属于掉电设计" class="headerlink" title="7. 启动恢复和磨损同样属于掉电设计"></a>7. 启动恢复和磨损同样属于掉电设计</h3><p>启动扫描先快照 reset flags，再只读 journal；找到最高有效 sequence 后复制到 RAM，业务层完成一致性校验，最后才开放执行器。若记录含“阀门正在移动”，恢复策略可能是回到安全位置，而非继续剩余毫秒数。电源反复打嗝时启动次数很高，每次启动都写记录会加速磨损，因此 boot counter 可先留在备份寄存器并批量落盘。</p>
+<p>写放大和寿命需要算账。若一页耐久预算为一万次，而设备每天真实掉电一百次，单页数月便接近数量级边界。双页轮换、序号、预擦空槽和磨损均衡要按日志频率设计；异常断电记录与普通高频计数最好分区，避免后者拖累关键配置。AN4894 的方法仍需结合目标器件页大小、bank 与中断行为验证，不能从其他 STM32 系列照搬地址。</p>
+<p>恢复测试要加入“电源刚够启动但不够完成启动”的区间。让电源以三角波跨越阈值，确认 supervisor 延时与迟滞使 MCU 要么保持 reset，要么完成一次干净启动；启动代码不得擦页或立刻打开大负载。示波器同时观察启动 GPIO、NRST、VDD，日志记录 boot sequence，检查一次物理抖动是否造成大量重复业务动作。</p>
+<p>还应做电容开路、容量减半和 ESR 人为增大的容差注入，确认系统退化为“本次日志缺失但旧状态完整”，而不是随机执行。若外部 supervisor 未焊或输出开路，启动自检应留下可观测告警；安全关键产品则应增加硬件诊断或冗余，而不能假定独立器件永不失效。</p>
+<h3 id="8-真实故障注入：在告警中错误地擦页"><a href="#8-真实故障注入：在告警中错误地擦页" class="headerlink" title="8. 真实故障注入：在告警中错误地擦页"></a>8. 真实故障注入：在告警中错误地擦页</h3><p>注入版本在 <code>HAL_PWR_PVDCallback</code> 中先调用 Flash page erase，再写 64 bytes。现象是约一成切电后最新配置丢失，少数板启动扫描得到半擦页面；串口只报告 BOR。初始假设包括电容不足、Flash 损坏和解析器 bug。证据链是：CH2 显示 PVD 已触发；CH4 的 erase GPIO 持续到 NRST 之后；VDD 从 PVD 到 supervisor 只有 6.1 ms，而实测最坏页擦除远超预算；原始页中多个旧槽也被破坏。根因为“在不可保证的能量窗口执行破坏性页擦除”，不是 CRC 算法。</p>
+<p>修复是正常供电时双页换代并预擦空槽，PVD 只写一个 32-byte 槽，同时降低时钟、关射频。回归 500 次阶跃切电、500 次阈值附近抖动：所有启动只选择 CRC+commit 有效记录，旧页始终保留一个已确认副本；人为把保持电容减半时允许本次提交失败，但不得损坏上一条记录。这条“失败仍保旧证据”才是系统性质。</p>
+<h3 id="9-练习题与判断标准"><a href="#9-练习题与判断标准" class="headerlink" title="9. 练习题与判断标准"></a>9. 练习题与判断标准</h3><ol>
+<li>3300 µF 一定满足前述 2.39 mF 计算吗？<strong>合格标准</strong>：否；列出负容差、低温、老化、ESR 和电流变化，并要求示波器验证最短 PVD→NRST 时间。</li>
+<li>PVD 和 BOR 谁负责业务状态提交？<strong>合格标准</strong>：PVD只提供提前量，journal协议负责原子性；BOR/supervisor负责阻止规格外执行。</li>
+<li>为什么 commit 最后写仍要 CRC？<strong>合格标准</strong>：commit写入也可能受扰，且 payload可能部分编程；必须同时验证格式、序号、CRC。</li>
+<li>提交一组随机切电报告。<strong>合格标准</strong>：含原始槽、reset flags、四通道波形、阈值分布和500次统计；不能只给“能重启”的视频。</li>
+</ol>
+<h3 id="官方资料"><a href="#官方资料" class="headerlink" title="官方资料"></a>官方资料</h3><ul>
+<li><a href="https://www.ti.com/lit/ds/symlink/tps3890.pdf">TI TPS3890：Low-quiescent-current supervisor datasheet</a></li>
+<li><a href="https://www.st.com/resource/en/reference_manual/rm0351-.pdf">ST RM0351：STM32L47x/48x reference manual</a></li>
+<li><a href="https://www.st.com/resource/en/datasheet/stm32l476rg.pdf">ST STM32L476RG datasheet：电压与 Flash 工作边界</a></li>
+<li><a href="https://www.st.com/resource/en/application_note/an4894-eeprom-emulation-techniques-and-software-for-stm32-microcontrollers-stmicroelectronics.pdf">ST AN4894：EEPROM emulation 与掉电恢复</a></li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://www.ti.com/lit/ds/symlink/tps3890.pdf">TI TPS3890：Low-quiescent-current supervisor datasheet</a></li>
+<li><a href="https://www.st.com/resource/en/reference_manual/rm0351-.pdf">ST RM0351：STM32L47x/48x reference manual</a></li>
+<li><a href="https://www.st.com/resource/en/datasheet/stm32l476rg.pdf">ST STM32L476RG datasheet：电压与 Flash 工作边界</a></li>
+<li><a href="https://www.st.com/resource/en/application_note/an4894-eeprom-emulation-techniques-and-software-for-stm32-microcontrollers-stmicroelectronics.pdf">ST AN4894：EEPROM emulation 与掉电恢复</a></li>
+</ul>
+<hr>
+<h2 id="📖-IELTS-Academic-新词（4-个）"><a href="#📖-IELTS-Academic-新词（4-个）" class="headerlink" title="📖 IELTS Academic 新词（4 个）"></a>📖 IELTS Academic 新词（4 个）</h2><p>本组按 AWL 高频子表推进，并刻意打散相同首字母，避免相似词互相干扰。</p>
+<h3 id="🔊-跟读"><a href="#🔊-跟读" class="headerlink" title="🔊 跟读"></a>🔊 跟读</h3><p><audio controls="" src="/audio/vocab/2026-09-08-part1.mp3"></audio></p>
+<p><audio controls="" src="/audio/vocab/2026-09-08-part2.mp3"></audio></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Word</th>
+<th>音标</th>
+<th>核心义</th>
+<th>词族</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>found</strong></td>
+<td>/faund/</td>
+<td>建立；创办</td>
+<td>find, dp, founded, founding</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>inhibit</strong></td>
+<td>/in’hibit/</td>
+<td>抑制；阻碍</td>
+<td>inhibited, inhibits, inhibiting</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>resolve</strong></td>
+<td>/ri’zɒlv/</td>
+<td>解决；下定决心</td>
+<td>resolved, resolving, resolves</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>theme</strong></td>
+<td>/θi:m/</td>
+<td>主题；主旨</td>
+<td>themes</td>
+</tr>
+</tbody></table>
+<h3 id="搭配与语境"><a href="#搭配与语境" class="headerlink" title="搭配与语境"></a>搭配与语境</h3><ul>
+<li><strong>found</strong> · found an organisation / newly founded<ul>
+<li>The charity was founded to improve literacy in disadvantaged communities.</li>
+</ul>
+</li>
+<li><strong>inhibit</strong> · inhibit growth / inhibit innovation<ul>
+<li>Excessive regulation may inhibit innovation in emerging industries.</li>
+</ul>
+</li>
+<li><strong>resolve</strong> · resolve a conflict / resolve an issue<ul>
+<li>Mediation helped the two groups resolve the dispute.</li>
+</ul>
+</li>
+<li><strong>theme</strong> · central theme / recurring theme<ul>
+<li>Social inequality is a recurring theme in contemporary research on public health.</li>
+</ul>
+</li>
+</ul>
+<h3 id="主动回忆"><a href="#主动回忆" class="headerlink" title="主动回忆"></a>主动回忆</h3><ol>
+<li>遮住中文，口头解释每个词。</li>
+<li>从中选 3 个词，各写一句与 IELTS 常见议题有关的句子。</li>
+<li>检查词形和搭配，不追求堆砌生僻词。</li>
+</ol>
+<details>
+<summary>展开英文释义</summary>
+
+<ul>
+<li><strong>found</strong> — to establish an organisation, institution, or settlement</li>
+<li><strong>inhibit</strong> — to prevent or slow down an action, process, or development</li>
+<li><strong>resolve</strong> — to find a solution to a problem or make a firm decision</li>
+<li><strong>theme</strong> — the central subject or recurring idea in a text, discussion, or study</li>
+</ul>
+</details>
+
+<hr>
+<h2 id="🔁-间隔复习"><a href="#🔁-间隔复习" class="headerlink" title="🔁 间隔复习"></a>🔁 间隔复习</h2><h3 id="Day-1-·-2026-09-07"><a href="#Day-1-·-2026-09-07" class="headerlink" title="Day+1 · 2026-09-07"></a>Day+1 · 2026-09-07</h3><p><strong>hence</strong>, <strong>infrastructure</strong>, <strong>scheme</strong>, <strong>trace</strong></p>
+<h3 id="Day-7-·-2026-09-01"><a href="#Day-7-·-2026-09-01" class="headerlink" title="Day+7 · 2026-09-01"></a>Day+7 · 2026-09-01</h3><p><strong>chemical</strong>, <strong>design</strong>, <strong>guideline</strong>, <strong>trend</strong></p>
+<h3 id="Day-14-·-2026-08-25"><a href="#Day-14-·-2026-08-25" class="headerlink" title="Day+14 · 2026-08-25"></a>Day+14 · 2026-08-25</h3><p><strong>highlight</strong>, <strong>impose</strong>, <strong>predominant</strong>, <strong>substitute</strong></p>
+<hr>
+<p>词表依据：<a href="https://www.wgtn.ac.nz/lals/resources/academicwordlist">Coxhead Academic Word List</a>。</p>
+]]></content>
+      <categories>
+        <category>每日学习</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+        <tag>英语</tag>
+        <tag>IELTS</tag>
+        <tag>AWL</tag>
+        <tag>Brownout</tag>
+        <tag>BOR</tag>
+        <tag>电源监控</tag>
+        <tag>复位主管</tag>
+      </tags>
+  </entry>
 </search>
