@@ -150766,4 +150766,155 @@
         <tag>AWL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>IELTS 每日学习 — 2026-10-06</title>
+    <url>/2026/10/06/daily-study-2026-10-06/</url>
+    <content><![CDATA[<p>今日主线：IELTS Academic · AWL Sublist 2,3,10 · 4 个新词。</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：嵌入式威胁建模与攻击面"><a href="#🔧-嵌入式知识：嵌入式威胁建模与攻击面" class="headerlink" title="🔧 嵌入式知识：嵌入式威胁建模与攻击面"></a>🔧 嵌入式知识：嵌入式威胁建模与攻击面</h2><h3 id="从产品资产而不是漏洞清单开始"><a href="#从产品资产而不是漏洞清单开始" class="headerlink" title="从产品资产而不是漏洞清单开始"></a>从产品资产而不是漏洞清单开始</h3><p>本文以计划中的 STM32U575 工业振动节点为具体对象：MCU 运行安全启动与 OTA，外接 QSPI Flash，BLE 用于现场维护，RS-485 接 PLC，SWD 与 UART 只应在制造/维修阶段开放，云端管理设备证书与更新。目标板、射频、调试器和云服务本次均未使用；本次已执行证据仅是 macOS Darwin arm64、Python 3.14.0 的确定性威胁模型 oracle，不能证明芯片安全状态、无线协议栈或产品渗透测试结果。</p>
+<p>资产是需要保护且损失会造成业务后果的对象，包括固件完整性、设备私钥、传感数据真实性、执行器授权、可用性和安全日志。威胁是某主体利用条件使资产受损的可能路径；漏洞是路径中的可利用弱点；风险是后果与发生可能性的决策表达。攻击面是攻击者可与系统交互或影响系统的入口、状态与生命周期过程，不等于 TCP 端口数量。暴露的 SWD、恢复按键、工厂命令、二维码、外部 Flash、无线配对、解析器、供应链构建、退役设备都属于攻击面。</p>
+<p><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling Project</a>提出“我们在构建什么、哪里可能出错、如何处置、是否做得足够好”的循环。它强调模型服务于设计，而 STRIDE 只是提醒 spoofing、tampering、repudiation、information disclosure、denial of service、elevation of privilege 六类问题的助记法，不会自动给出风险等级。STRIDE 与 attack tree 相邻：前者按威胁性质提示遗漏，后者从攻击目标向所需步骤分解 AND/OR 路径；与 FMEA 的差别是攻击者具有意图、会适应防御，失效概率表不能替代对抗分析。</p>
+<h3 id="数据流、信任边界和主体"><a href="#数据流、信任边界和主体" class="headerlink" title="数据流、信任边界和主体"></a>数据流、信任边界和主体</h3><p>Data-flow diagram 的节点至少区分 process、store、external entity 和 asset，边说明协议、方向、身份、权限和数据。Trust boundary 是一侧的身份或控制假设不能直接延伸到另一侧的位置，例如 BLE 无线到设备、普通世界到 TrustZone 安全世界、工厂站到 HSM、设备到云。加密通道不消除边界：TLS 能保护传输机密性与完整性，但端点授权、证书生命周期、解析器和已解密数据仍可能失败。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">UNTRUSTED BLE ──auth/encrypt──&gt; normal-world parser</span><br><span class="line">       │                              │ validated command</span><br><span class="line">       │                              ▼</span><br><span class="line"> physical jam                 secure service ──&gt; key store</span><br><span class="line">                                      │ signed manifest</span><br><span class="line">factory station ──HSM identity──&gt; boot/OTA state ──&gt; QSPI image</span><br></pre></td></tr></table></figure>
+
+<p>主体是能发起动作的身份，如设备、维修员、租户服务或工厂站；身份认证回答“是谁”，授权回答“允许做什么”，审计回答“后来如何证明做过什么”。把“已登录”当管理员授权会越权。安全域是隔离执行和数据的机制边界，TrustZone、MPU、进程和容器的保证不同；隔离只有在启动配置、内存属性、DMA、异常入口和调用参数全部正确时成立。</p>
+<h3 id="生命周期与成立条件"><a href="#生命周期与成立条件" class="headerlink" title="生命周期与成立条件"></a>生命周期与成立条件</h3><p><a href="https://csrc.nist.gov/pubs/ir/8259/r1/final">NISTIR 8259 Rev.1</a>面向 IoT 制造商的基础网络安全活动，要求先理解客户与风险，再定义能力、沟通和支持；<a href="https://csrc.nist.gov/pubs/ir/8259/a/final">NISTIR 8259A</a>给出设备识别、配置、数据保护、接口逻辑访问、软件更新、状态感知等核心能力。它们是通用基线，不替代工业 IEC 62443、医疗或汽车强制要求。能力存在也不表示正确实现，例如“支持更新”若不验证签名、允许回滚或更新失败变砖，反而扩大攻击面。</p>
+<p>威胁模型要覆盖设计、制造、运输、首次 claim、正常运行、维修、所有权转移和退役。制造时 SWD 合法，出厂后同一入口可能成为提权路径；维修解锁需要时间窗、授权、审计和重新锁定。退役若只删除云记录而设备仍保存租户证书，会泄露资产。Assumption 是推理公理，如“攻击者可物理接触 10 分钟但不能开封安全元件”；必须有范围、依据、负责人和失效时的处置。把假设藏在备注里会让风险数字伪精确。</p>
+<p>Attack path 需要从 entry 沿可达状态到 asset。缓解措施应打断路径中的明确条件：安全启动阻止未授权镜像，不阻止合法旧镜像回滚；接口认证阻止匿名命令，不阻止被盗维修凭据；rate limit 减少在线猜测，不阻止射频干扰。Defense in depth 指独立失效模式的多层控制，不是同一库函数调用两遍。若两个“独立”检查共享同一可篡改配置，它们是共同原因。</p>
+<h3 id="风险处置与验证证据"><a href="#风险处置与验证证据" class="headerlink" title="风险处置与验证证据"></a>风险处置与验证证据</h3><p>Risk treatment 有 avoid、mitigate、transfer、accept。Accept 不是“暂时不修”，而是授权角色基于残余后果、假设和监测做出的有时限决定。Residual risk 是实施控制后仍存在的风险；必须记录未覆盖路径和复审触发器。严重度和可能性常是有序等级，不宜相乘冒充物理概率。优先级还要考虑攻击前置条件、可扩展性、检测机会、供应链传播和安全后果。</p>
+<p>控制与 verification 要绑定。安全启动用负向签名、版本回滚、掉电和 key revocation 测试；调试锁用上电、低功耗唤醒、故障注入和量产读回检查；解析器用 fuzz/sanitizer 与目标机回放；权限用跨租户、过期凭据和并发撤销测试。测试环境必须绑定固件、芯片生命周期位和配置摘要。扫描器“0 个高危”只表示其规则和可见面未发现，不是攻击面闭合。</p>
+<p><a href="https://www.psacertified.org/app/uploads/2020/10/PSA_Certified_Threat_Model_and_Security_Goals_RC3.pdf">PSA Certified Platform Threat Model and Security Goals</a>给出平台资产、攻击者能力、范围排除与安全目标的参考边界，但只有采用其假设和实现要求时才可映射；本文 STM32U5 计划仍需检查 ST 的具体 TrustZone、RDP 与 debug authentication 实现，不能从参考模型推导芯片已安全。</p>
+<h3 id="本次已执行的可复现实验"><a href="#本次已执行的可复现实验" class="headerlink" title="本次已执行的可复现实验"></a>本次已执行的可复现实验</h3><p><code>staging/deep_batch_am/threat_surface_lab.py</code> 用 exact node kind/trust/version、带认证和加密布尔值的数据流，以及 threat 的 asset、entry、STRIDE、assumption、mitigation、verification、residual 字段建立模型。统一状态验证器要求 <code>threat.asset</code> 真正指向 <code>kind=ASSET</code> 的节点，并令 threat ID 在整个模型唯一；load、live gate、publish 与 restore 共用该域，不能让内存里的坏状态绕过恢复门。发布门还要求每个 UNTRUSTED entry 至少被一个威胁覆盖，且每条 threat 的 entry 必须沿实际有向 flow 可达其 asset；verification/residual 不得为 NONE/UNKNOWN。</p>
+<p>revision 在 live load 时必须是 exact non-bool successor，但持久状态可以是任意大于零、已完整发布的合法 revision；restore 不伪造一次“从零到当前”的 load，而是验证 revision 2 的完整状态与 publication digest 后直接安装。因此 fresh 进程可精确恢复 revision 2，重复 ID、非资产 target、publication 篡改在各入口均原子拒绝。所有失败前后 snapshot byte-identical，64 KiB 是包含 publication 的整个持久域上限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m py_compile staging/deep_batch_am/threat_surface_lab.py</span><br><span class="line">PYTHONHASHSEED=19 python3 staging/deep_batch_am/threat_surface_lab.py</span><br><span class="line">PYTHONHASHSEED=73 python3 staging/deep_batch_am/threat_surface_lab.py</span><br></pre></td></tr></table></figure>
+
+<p>两次返回码 0、stderr 为空、stdout byte-identical；完整 stdout：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">THREAT_SURFACE_ORACLE PASS</span><br><span class="line">{"checks":8,"publication":{"model_sha256":"bd2f1f1cd5c5308f383f57338133d18091e68ef7ecda9399dcfd9e9ab87cc9af","report":{"crossings":2,"flows":2,"nodes":3,"threats":1},"revision":2},"restore":"fresh_revision_2_exact","seed_independent":true}</span><br></pre></td></tr></table></figure>
+
+<p>stdout SHA-256 为 <code>7cf398bf4f871297dcf7eff5eb950fbfe31b946fd6e8b8ffb14505ae8d8696aa</code>。host oracle 不执行 STRIDE 自动风险判断，也不证明控制在 MCU 上有效。</p>
+<h3 id="计划中的目标板故障注入实验"><a href="#计划中的目标板故障注入实验" class="headerlink" title="计划中的目标板故障注入实验"></a>计划中的目标板故障注入实验</h3><p>准备：STM32U575 样机、隔离 SWD、BLE sniffer、可控 OTA 服务、电源毛刺设备和冻结固件；先记录安全生命周期、option bytes、固件与模型 revision。步骤：正常签名更新建立基线；分别注入错误签名、合法旧版本、更新写入中掉电、未授权 BLE 命令、重放维修 token、复位期间 SWD 连接和高频请求。观测 boot reason、debug 状态、认证判决、写入分区、速率限制与安全日志。通过标准：任何未授权镜像都不执行，旧版本按 anti-rollback 拒绝，掉电回到已认证槽，跨租户命令无副作用，日志绑定版本且过载不绕过授权。</p>
+<p>故障闭环：现象是“BLE 命令已认证”却能在设备 claim 前执行擦除。假设是默认工厂角色过宽、状态机缺 owner 条件或解析器混淆命令。证据显示签名有效，但 authorization 只检查厂商 key，未检查 lifecycle=CLAIMED。定位为认证与授权混淆。修复为命令策略同时绑定主体、lifecycle、操作和 nonce；回归覆盖未 claim、已 claim、转移中、过期 token、重放、掉电恢复和撤销窗口，并更新 attack path 与 residual risk。</p>
+<h3 id="练习与验收答案"><a href="#练习与验收答案" class="headerlink" title="练习与验收答案"></a>练习与验收答案</h3><ol>
+<li>TLS 是否移除无线信任边界？否；它保护通道，端点授权、解析和 DoS 仍跨边界。</li>
+<li>STRIDE 数量能否作为风险分数？不能；类别数不代表后果或可行性。</li>
+<li>关闭端口是否等于缩小全部攻击面？否；物理、供应链、恢复和生命周期入口仍在。</li>
+<li>机器验收：删除 untrusted-entry coverage、verification/residual 门、exact revision、publication binding 或失败原子性之一，相应 hostile/pseudo-state 必须失败。</li>
+</ol>
+<h3 id="物理攻击、供应链与资源耗尽的边界"><a href="#物理攻击、供应链与资源耗尽的边界" class="headerlink" title="物理攻击、供应链与资源耗尽的边界"></a>物理攻击、供应链与资源耗尽的边界</h3><p>Remote、adjacent、local 与 physical attacker 的能力不同。物理可达并不自动等于能解封装读 key，但可接触测试点、替换 Flash、控制电源和时钟；模型应列出时间、工具、是否可破坏性开封和攻击是否需隐蔽。Fault injection 用电压、时钟、光或电磁扰动改变执行，不等于普通软件输入 fuzz；防护要用冗余检查、控制流完整性、传感器和失败安全状态，并在目标芯片上测试。侧信道从功耗、时序或电磁泄露秘密，常数时间软件只处理部分时序路径，不覆盖缓存、总线或模拟泄露。</p>
+<p>Supply-chain threat 包括构建机、依赖、签名服务、代工测试脚本、器件替换和物流。SBOM 说明组成，不证明组成可信；reproducible build 帮助比较产物，不证明源代码无后门；code signing 证明授权 key 签过字节，不证明签名者判断正确。需要把 source review、依赖来源、构建隔离、artifact provenance、签名授权和入厂检查连成证据链。第三方 blob 无源码时，必须记录更新责任、接口权限和失效隔离。</p>
+<p>DoS 在嵌入式中常先耗尽 RAM、Flash endurance、battery、radio airtime、任务时间或 watchdog budget。Rate limit 需要按身份和资源分层；全局限流可能让一个攻击者饿死所有租户。失败日志本身也可写爆 Flash，因此要有 bounded ring、聚合、远端导出与关键事件保留策略。Watchdog 只能从死锁复位；若攻击请求每次都在 deadline 内完成却持续占满 CPU，它不会触发。安全控制必须进入 worst-case execution、队列和能量预算。</p>
+<p>Privacy threat 也不是“已加密”就结束。稳定 BLE 地址、证书 subject、流量长度和更新时间可形成跟踪；调试日志可能包含 token、位置和传感原始数据。Data minimization 要说明采集目的、保留时间、访问和删除，设备 factory reset、所有权转移与云备份的删除语义要一致。匿名化若仍有稳定组合特征可能被重新识别。</p>
+<p>模型维护触发器包括新接口、固件/bootloader、芯片 revision、云权限、制造流程、漏洞情报、现场异常和假设失效。Diff 不能只比较 threat 行数；要比较资产、边界、flow、版本与 verification。每个 accepted residual risk 应有到期日和 owner。模型若无法回答“哪一版产品、哪个模式、什么攻击能力、哪条证据”，就不能支持发布决策。</p>
+<h3 id="官方一手资料"><a href="#官方一手资料" class="headerlink" title="官方一手资料"></a>官方一手资料</h3><ul>
+<li><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling Project</a></li>
+<li><a href="https://csrc.nist.gov/pubs/ir/8259/r1/final">NISTIR 8259 Rev.1</a></li>
+<li><a href="https://csrc.nist.gov/pubs/ir/8259/a/final">NISTIR 8259A</a></li>
+<li><a href="https://www.psacertified.org/app/uploads/2020/10/PSA_Certified_Threat_Model_and_Security_Goals_RC3.pdf">PSA Certified Platform Threat Model and Security Goals</a></li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling Project</a></li>
+<li><a href="https://csrc.nist.gov/pubs/ir/8259/r1/final">NISTIR 8259 Rev.1</a></li>
+<li><a href="https://csrc.nist.gov/pubs/ir/8259/a/final">NISTIR 8259A</a></li>
+<li><a href="https://www.psacertified.org/app/uploads/2020/10/PSA_Certified_Threat_Model_and_Security_Goals_RC3.pdf">PSA Certified Platform Threat Model and Security Goals</a></li>
+</ul>
+<hr>
+<h2 id="📖-IELTS-Academic-新词（4-个）"><a href="#📖-IELTS-Academic-新词（4-个）" class="headerlink" title="📖 IELTS Academic 新词（4 个）"></a>📖 IELTS Academic 新词（4 个）</h2><p>本组按 AWL 高频子表推进，并刻意打散相同首字母，避免相似词互相干扰。</p>
+<h3 id="🔊-跟读"><a href="#🔊-跟读" class="headerlink" title="🔊 跟读"></a>🔊 跟读</h3><p><audio controls="" src="/audio/vocab/2026-10-06-part1.mp3"></audio></p>
+<p><audio controls="" src="/audio/vocab/2026-10-06-part2.mp3"></audio></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Word</th>
+<th>音标</th>
+<th>核心义</th>
+<th>词族</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>compute</strong></td>
+<td>/kәm’pju:t/</td>
+<td>计算</td>
+<td>computed, computing, computes</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>depress</strong></td>
+<td>/di’pres/</td>
+<td>使降低；使沮丧</td>
+<td>depressed, depresses, depressing</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>link</strong></td>
+<td>/liŋk/</td>
+<td>联系；连接</td>
+<td>linked, links, linking</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>secure</strong></td>
+<td>/si’kjuә/</td>
+<td>安全的；获得；确保</td>
+<td>secured, securing, secures</td>
+</tr>
+</tbody></table>
+<h3 id="搭配与语境"><a href="#搭配与语境" class="headerlink" title="搭配与语境"></a>搭配与语境</h3><ul>
+<li><strong>compute</strong> · compute a value / computing resources<ul>
+<li>The model computes the likely cost under several scenarios.</li>
+</ul>
+</li>
+<li><strong>depress</strong> · depress wages / depressed demand<ul>
+<li>High interest rates may depress investment in new housing.</li>
+</ul>
+</li>
+<li><strong>link</strong> · a link between / closely linked<ul>
+<li>Research shows a strong link between poverty and poor health.</li>
+</ul>
+</li>
+<li><strong>secure</strong> · secure funding / ensure secure access<ul>
+<li>The organisation secured funding for a three-year project.</li>
+</ul>
+</li>
+</ul>
+<h3 id="主动回忆"><a href="#主动回忆" class="headerlink" title="主动回忆"></a>主动回忆</h3><ol>
+<li>遮住中文，口头解释每个词。</li>
+<li>从中选 3 个词，各写一句与 IELTS 常见议题有关的句子。</li>
+<li>检查词形和搭配，不追求堆砌生僻词。</li>
+</ol>
+<details>
+<summary>展开英文释义</summary>
+
+<ul>
+<li><strong>compute</strong> — to calculate a result using numbers or a computer</li>
+<li><strong>depress</strong> — to reduce a level or make someone feel deeply unhappy</li>
+<li><strong>link</strong> — a relationship between things; to connect them</li>
+<li><strong>secure</strong> — safe from harm; to obtain or make certain</li>
+</ul>
+</details>
+
+<hr>
+<h2 id="🔁-间隔复习"><a href="#🔁-间隔复习" class="headerlink" title="🔁 间隔复习"></a>🔁 间隔复习</h2><h3 id="Day-1-·-2026-10-05"><a href="#Day-1-·-2026-10-05" class="headerlink" title="Day+1 · 2026-10-05"></a>Day+1 · 2026-10-05</h3><p><strong>impact</strong>, <strong>locate</strong>, <strong>reinforce</strong>, <strong>thereby</strong></p>
+<h3 id="Day-7-·-2026-09-29"><a href="#Day-7-·-2026-09-29" class="headerlink" title="Day+7 · 2026-09-29"></a>Day+7 · 2026-09-29</h3><p><strong>contribute</strong>, <strong>draft</strong>, <strong>philosophy</strong>, <strong>revise</strong></p>
+<h3 id="Day-14-·-2026-09-22"><a href="#Day-14-·-2026-09-22" class="headerlink" title="Day+14 · 2026-09-22"></a>Day+14 · 2026-09-22</h3><p><strong>converse</strong>, <strong>enormous</strong>, <strong>publish</strong>, <strong>terminate</strong></p>
+<hr>
+<p>词表依据：<a href="https://www.wgtn.ac.nz/lals/resources/academicwordlist">Coxhead Academic Word List</a>。</p>
+]]></content>
+      <categories>
+        <category>每日学习</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+        <tag>英语</tag>
+        <tag>IELTS</tag>
+        <tag>AWL</tag>
+        <tag>威胁建模</tag>
+        <tag>攻击面</tag>
+        <tag>STRIDE</tag>
+        <tag>IoT 安全</tag>
+        <tag>安全设计</tag>
+      </tags>
+  </entry>
 </search>

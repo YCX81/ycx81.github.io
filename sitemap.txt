@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/10/06/daily-study-2026-10-06/
 http://ycx81.github.io/2026/10/04/daily-study-2026-10-04/
 http://ycx81.github.io/2026/10/03/daily-study-2026-10-03/
 http://ycx81.github.io/2026/10/02/daily-study-2026-10-02/
@@ -460,6 +461,11 @@ http://ycx81.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/
 http://ycx81.github.io/tags/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/
 http://ycx81.github.io/tags/HIL/
 http://ycx81.github.io/tags/Renode/
+http://ycx81.github.io/tags/%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1/
+http://ycx81.github.io/tags/%E6%94%BB%E5%87%BB%E9%9D%A2/
+http://ycx81.github.io/tags/STRIDE/
+http://ycx81.github.io/tags/IoT-%E5%AE%89%E5%85%A8/
+http://ycx81.github.io/tags/%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
