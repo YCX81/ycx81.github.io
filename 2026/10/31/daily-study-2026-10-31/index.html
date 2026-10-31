@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ycx81.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus","order":-2}}},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今日主线：IELTS Academic 周末整合复习与主动输出。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IELTS 每日学习 — 2026-10-31">
+<meta property="og:url" content="http://ycx81.github.io/2026/10/31/daily-study-2026-10-31/index.html">
+<meta property="og:site_name" content="YCX-Blog">
+<meta property="og:description" content="今日主线：IELTS Academic 周末整合复习与主动输出。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-31T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-31T00:00:05.615Z">
+<meta property="article:author" content="YCX">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="英语">
+<meta property="article:tag" content="IELTS">
+<meta property="article:tag" content="AWL">
+<meta property="article:tag" content="QSPI">
+<meta property="article:tag" content="OSPI">
+<meta property="article:tag" content="XIP">
+<meta property="article:tag" content="Cache Coherency">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://ycx81.github.io/2026/10/31/daily-study-2026-10-31/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://ycx81.github.io/2026/10/31/daily-study-2026-10-31/","path":"2026/10/31/daily-study-2026-10-31/","title":"IELTS 每日学习 — 2026-10-31"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>IELTS 每日学习 — 2026-10-31 | YCX-Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YCX-Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">YCX的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9F%A5%E8%AF%86%EF%BC%9AQSPI-x2F-OSPI-XIP%E3%80%81%E5%8D%8F%E8%AE%AE%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">🔧 嵌入式知识：QSPI&#x2F;OSPI XIP、协议模式与缓存一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98%EF%BC%9AFlash-%E5%B7%B2%E5%86%99%E5%AF%B9%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88-CPU-%E4%BB%8D%E6%89%A7%E8%A1%8C%E6%97%A7%E4%BB%A3%E7%A0%81%EF%BC%8C%E7%94%9A%E8%87%B3%E4%B8%8B%E4%B8%80%E6%AC%A1%E5%A4%8D%E4%BD%8D%E5%B0%B1%E5%86%8D%E4%B9%9F%E8%AF%BB%E4%B8%8D%E5%88%B0"><span class="nav-number">1.1.</span> <span class="nav-text">工程问题：Flash 已写对，为什么 CPU 仍执行旧代码，甚至下一次复位就再也读不到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QSPI%E3%80%81OSPI%E3%80%81%E5%8D%8F%E8%AE%AE%E5%AE%BD%E5%BA%A6%E5%92%8C-DTR-%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">QSPI、OSPI、协议宽度和 DTR 分别是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dummy-cycle-%E4%B8%8D%E6%98%AF%E5%8F%AF%E9%9A%8F%E6%84%8F%E8%B0%83%E7%9A%84%E5%BB%B6%E8%BF%9F%EF%BC%8Cmode-%E4%B9%9F%E4%B8%8D%E6%98%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E5%8D%95%E6%96%B9%E9%9D%A2%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">dummy cycle 不是可随意调的延迟，mode 也不是控制器单方面属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indirect%E3%80%81automatic-polling%E3%80%81memory-mapped-%E4%B8%8E-XIP-%E7%9A%84%E8%BE%B9%E7%95%8C"><span class="nav-number">1.4.</span> <span class="nav-text">indirect、automatic-polling、memory-mapped 与 XIP 的边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XIP-%E6%9B%B4%E6%96%B0%E4%B8%BA%E4%BD%95%E4%BC%9A%E8%87%AA%E9%94%81%EF%BC%9A%E4%BB%A3%E7%A0%81%E3%80%81vector%E3%80%81%E5%B8%B8%E9%87%8F%E5%92%8C%E5%B9%B6%E5%8F%91-master-%E9%83%BD%E6%98%AF%E8%AF%BB%E8%80%85"><span class="nav-number">1.5.</span> <span class="nav-text">XIP 更新为何会自锁：代码、vector、常量和并发 master 都是读者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%B1%82%E2%80%9C%E6%97%A7%E4%BB%A3%E7%A0%81%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%9AFlash%E3%80%81%E6%8E%A7%E5%88%B6%E5%99%A8%E5%92%8C-CPU-%E5%90%84%E8%87%AA%E5%8F%AF%E8%83%BD%E6%AD%A3%E7%A1%AE"><span class="nav-number">1.6.</span> <span class="nav-text">三层“旧代码”问题：Flash、控制器和 CPU 各自可能正确</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E3%80%81%E5%AE%B9%E9%87%8F%E3%80%81alignment-%E4%B8%8E-MPU-%E5%B1%9E%E6%80%A7%E5%BF%85%E9%A1%BB%E5%9C%A8%E8%BF%9B%E5%85%A5%E7%A1%AC%E4%BB%B6%E5%89%8D%E8%AF%81%E6%98%8E"><span class="nav-number">1.7.</span> <span class="nav-text">地址、容量、alignment 与 MPU 属性必须在进入硬件前证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0%E9%AA%A8%E6%9E%B6%EF%BC%9A%E6%8A%8A%E6%9B%B4%E6%96%B0%E5%99%A8%E7%9A%84%E4%BE%9D%E8%B5%96%E9%97%AD%E5%8C%85%E6%94%BE%E8%BF%9B-SRAM"><span class="nav-number">1.8.</span> <span class="nav-text">更新实现骨架：把更新器的依赖闭包放进 SRAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%AC%A1%E5%B7%B2%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%8E%B0%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.9.</span> <span class="nav-text">本次已执行的可复现实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E4%B8%8E%E5%AE%9A%E4%BD%8D%E9%97%AD%E7%8E%AF"><span class="nav-number">1.10.</span> <span class="nav-text">故障注入与定位闭环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%9D%BF%E8%AE%A1%E5%88%92%E5%AE%9E%E9%AA%8C%E4%B8%8E%E9%80%9A%E8%BF%87%E6%A0%87%E5%87%86%EF%BC%88%E6%9C%AC%E6%AC%A1%E6%9C%AA%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.11.</span> <span class="nav-text">目标板计划实验与通过标准（本次未执行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E4%B8%8E%E5%8F%AF%E5%88%A4%E5%AE%9A%E7%AD%94%E6%A1%88"><span class="nav-number">1.12.</span> <span class="nav-text">练习与可判定答案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E4%B8%80%E6%89%8B%E6%9D%A5%E6%BA%90"><span class="nav-number">1.13.</span> <span class="nav-text">官方一手来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.14.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-IELTS-Academic-%E6%96%B0%E8%AF%8D%EF%BC%880-%E4%B8%AA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">📖 IELTS Academic 新词（0 个）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A9-%E5%91%A8%E6%9C%AB%E6%95%B4%E5%90%88%E5%A4%8D%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">🧩 周末整合复习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%81-%E9%97%B4%E9%9A%94%E5%A4%8D%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">🔁 间隔复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day-1-%C2%B7-2026-10-30"><span class="nav-number">4.1.</span> <span class="nav-text">Day+1 · 2026-10-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day-3-%C2%B7-2026-10-28"><span class="nav-number">4.2.</span> <span class="nav-text">Day+3 · 2026-10-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day-30-%C2%B7-2026-10-01"><span class="nav-number">4.3.</span> <span class="nav-text">Day+30 · 2026-10-01</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YCX"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">YCX</p>
+  <div class="site-description" itemprop="description">YCX的个人博客，每日(不一定)更新</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">299</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/10/17/daily-study-2026-10-17/" rel="bookmark">
+        <time class="popular-posts-time">2026-10-17</time>
+        <br>
+      IELTS 每日学习 — 2026-10-17
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2026/08/08/daily-study-2026-08-08/" rel="bookmark">
+        <time class="popular-posts-time">2026-08-08</time>
+        <br>
+      IELTS 每日学习 — 2026-08-08
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://ycx81.github.io/2026/10/31/daily-study-2026-10-31/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="YCX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YCX-Blog">
+      <meta itemprop="description" content="YCX的个人博客，每日(不一定)更新">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="IELTS 每日学习 — 2026-10-31 | YCX-Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IELTS 每日学习 — 2026-10-31
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-10-31 09:00:00" itemprop="dateCreated datePublished" datetime="2026-10-31T09:00:00+08:00">2026-10-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">每日学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>25 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今日主线：IELTS Academic 周末整合复习与主动输出。</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：QSPI-x2F-OSPI-XIP、协议模式与缓存一致性"><a href="#🔧-嵌入式知识：QSPI-x2F-OSPI-XIP、协议模式与缓存一致性" class="headerlink" title="🔧 嵌入式知识：QSPI/OSPI XIP、协议模式与缓存一致性"></a>🔧 嵌入式知识：QSPI/OSPI XIP、协议模式与缓存一致性</h2><h3 id="工程问题：Flash-已写对，为什么-CPU-仍执行旧代码，甚至下一次复位就再也读不到"><a href="#工程问题：Flash-已写对，为什么-CPU-仍执行旧代码，甚至下一次复位就再也读不到" class="headerlink" title="工程问题：Flash 已写对，为什么 CPU 仍执行旧代码，甚至下一次复位就再也读不到"></a>工程问题：Flash 已写对，为什么 CPU 仍执行旧代码，甚至下一次复位就再也读不到</h3><p>本文固定平台为 <strong>STM32H735G‑DK（STM32H735IGK6）+ 板载 Macronix MX25LM51245G 512 Mbit OctaFlash + STM32CubeH7 v1.12.1 的 <code>Applications/ExtMem_CodeExecution/ExtMem_Boot</code> build target</strong>。板级器件与连线边界来自 <a target="_blank" rel="noopener" href="https://www.st.com/resource/en/user_manual/um2679-discovery-kit-with-stm32h735ig-mcu-stmicroelectronics.pdf">UM2679 Rev.7</a>，控制器语义固定到 <a target="_blank" rel="noopener" href="https://www.st.com/resource/en/reference_manual/dm00603761.pdf">RM0468 Rev.3 的 OCTOSPI 章节</a>。根仓固定 commit <code>f5c0b7a2b1f6eb26fde150f72edb2d7deb647066</code>，其中 STM32H735G‑DK BSP gitlink 固定为 <code>4d2e91db442e525b8b879fba260fc3c6369a87d5</code>、MX25LM51245G component 固定为 <code>e7f45cee910535311a590890d0fffe9eded935fe</code>、HAL driver 固定为 <code>57ed86b4c358e2333a71fd895b17f1ccdb68739e</code>。本次主机证据环境为 macOS Darwin arm64、Python 3.14.0。</p>
+<p>本次未连接 STM32H735G‑DK、示波器、逻辑分析仪或调试器，也未在 Cortex‑M7 上执行外部 Flash 代码。因此 <code>WIP</code> 时长、DQS 眼图、ABORT 完成条件、I-cache 失效效果和实际 XIP 指令流全部属于计划验证。正文中的 transcript 只来自确定性主机合同模型。</p>
+<p>真实事故常有两个阶段：<strong>OTA（over-the-air update，在线远程更新）</strong>先从 SRAM 驱动擦写外部 NOR，indirect read 校验新镜像正确；跳转后 CPU 却继续运行旧函数。工程师再按 reset，bootloader 甚至读不到 <strong>JEDEC ID</strong>——由串行 NOR 标准命令返回的制造商/器件识别 byte。ID 可确认当前总线能读到哪类器件，却不是防伪认证。第一个现象通常被归咎于“Flash 写坏”，第二个被归咎于“板子偶发死机”。更有解释力的因果模型要同时区分：</p>
+<ol>
+<li>Flash 阵列里真正存的 bit；</li>
+<li>Flash 此刻解释的串行协议模式；</li>
+<li>OCTOSPI 控制器此刻生成的 transaction 格式；</li>
+<li>控制器 memory-mapped prefetch/buffer 的旧副本；</li>
+<li>Cortex‑M7 I-cache/D-cache 与流水线已经取得的旧指令或数据；</li>
+<li>正在执行 update 的代码、vector、ISR 和常量位于哪种存储器；这里 <strong>vector table</strong> 把异常号映射到 handler 地址，<strong>ISR（interrupt service routine）</strong>是异步中断到来时执行的 handler；</li>
+<li>哪个 generation 拥有更新窗口，以及是否还有其他 bus master 访问映射区。</li>
+</ol>
+<p>只验证第 1 项不能推出其余六项一致。</p>
+<h3 id="QSPI、OSPI、协议宽度和-DTR-分别是什么"><a href="#QSPI、OSPI、协议宽度和-DTR-分别是什么" class="headerlink" title="QSPI、OSPI、协议宽度和 DTR 分别是什么"></a>QSPI、OSPI、协议宽度和 DTR 分别是什么</h3><p><strong>SPI</strong> 的经典事务用一根数据输出和一根数据输入；<strong>Dual/Quad/Octal SPI</strong> 允许某些 phase 使用 2/4/8 根双向 I/O。这里的 QSPI/OSPI 常同时指控制器类别与总线宽度，命名容易误导。一个 read transaction 通常由以下 phase 组成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CS# low</span><br><span class="line">  -&gt; instruction/opcode</span><br><span class="line">  -&gt; address</span><br><span class="line">  -&gt; alternate bytes 或 mode bits（如果该命令需要）</span><br><span class="line">  -&gt; dummy cycles（Flash内部取数、总线换向和采样留出的时钟）</span><br><span class="line">  -&gt; data</span><br><span class="line">CS# high</span><br></pre></td></tr></table></figure>
+
+<p><strong>opcode</strong> 是选择 Flash 操作的命令编码；<strong>instruction phase</strong> 是把该编码送出的总线阶段。两者相关但不是一个概念：控制器还需知道该 phase 用几根线、每边沿是否传数据。<code>1-1-4</code> 表示 instruction/address/data 分别用 1/1/4 线；<code>1-4-4</code> 不是“所有阶段四线”；八线 DTR 常写成 <code>8D-8D-8D</code>。具体记法不是寄存器值，最终要映射到 <code>IMODE/ADMODE/DMODE</code>、DTR enable、DQS 等控制字段。</p>
+<p><strong>STR（single transfer rate）</strong>每个时钟周期只在一个有效边沿传输；<strong>DTR（double transfer rate）</strong>在两个边沿都传输。DTR 提高单位频率的 bit rate，也缩小采样裕量。<strong>DQS（data strobe）</strong>是 Flash 随数据提供或用于对齐的采样参考；它不是普通 data line，也不等于 MCU 内部 delay block。本文不是抽象地挑一个 <code>OPI_DTR_6</code>，而是把 operational tuple 锁到一个可静态复核的 build：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">build target = STM32H735G-DK/Applications/ExtMem_CodeExecution/ExtMem_Boot</span><br><span class="line">OCTOSPI kernel clock = PLL2R 200 MHz</span><br><span class="line">ClockPrescaler = 2  -&gt; serial clock = 100 MHz</span><br><span class="line">read opcode = 0xEE11, instruction/address/data = 8D/8D/8D</span><br><span class="line">address = 32 bit, DQS = enabled</span><br><span class="line">MX25LM51245G CR2 address 0x00000300 bits[2:0] = 0x07 = 6 dummy cycles</span><br><span class="line">HAL OSPI_RegularCmdTypeDef.DummyCycles = 6 full clock cycles before data</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/STM32CubeH7/blob/f5c0b7a2b1f6eb26fde150f72edb2d7deb647066/Projects/STM32H735G-DK/Applications/ExtMem_CodeExecution/ExtMem_Boot/Inc/mx25lm51245g_conf.h">固定 build 的 <code>mx25lm51245g_conf.h</code></a>把 <code>CONF_OSPI_DUMMY_CYCLES</code> 设为 <code>MX25LM51245G_CR2_DC_6_CYCLES</code>；<a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32h735g-dk-bsp/blob/4d2e91db442e525b8b879fba260fc3c6369a87d5/stm32h735g_discovery_ospi.c">固定 BSP driver</a>生成 200 MHz kernel clock 并使用 prescaler 2；<a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/e7f45cee910535311a590890d0fffe9eded935fe/mx25lm51245g.c">固定 component driver</a>把 DTR read 的 <code>DummyCycles</code> 设为 6、DQS enable。HAL 字段的“一周期”含义来自 <a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32h7xx-hal-driver/blob/57ed86b4c358e2333a71fd895b17f1ccdb68739e/Inc/stm32h7xx_hal_ospi.h">固定 <code>stm32h7xx_hal_ospi.h</code></a>：它是 data phase 前插入的 dummy <strong>clock cycles</strong>，不是 DTR edge 数，也不是 byte 数。目标实物仍必须 read back CR2/OCTOSPI registers 并测眼图；源码闭合只证明配置意图一致。</p>
+<p><a target="_blank" rel="noopener" href="https://www.macronix.com/en-us/products/NOR-Flash/Pages/OctaFlash.aspx">Macronix 官方 OctaFlash 产品页</a>列出 MX25LM51245G 的 8 I/O、DTR、hardware reset、suspend/resume 与频率能力。产品页说明“器件有什么能力”，不证明本板在最高频率、全部温压下有 margin，也不证明 boot ROM 理解运行时留下的 octal mode。</p>
+<h3 id="dummy-cycle-不是可随意调的延迟，mode-也不是控制器单方面属性"><a href="#dummy-cycle-不是可随意调的延迟，mode-也不是控制器单方面属性" class="headerlink" title="dummy cycle 不是可随意调的延迟，mode 也不是控制器单方面属性"></a>dummy cycle 不是可随意调的延迟，mode 也不是控制器单方面属性</h3><p><strong>dummy cycle</strong> 是没有有效 payload 的完整时钟间隔。Flash 利用它完成阵列访问，接收端利用它安排方向转换和采样；所需数值随 opcode、频率、STR/DTR、配置寄存器和器件 speed grade 变化。DTR 每个 full cycle 有两个 data edge，但 <code>HAL ... DummyCycles=6</code> 仍表示六个 clock cycle；若把它误算成六个 edge、十二个 cycle 或六个 byte，controller 与 CR2 会分裂。少一个周期可能把 mode bit 或无效 bit 当作数据，多一个周期可能整体错位。低频“读起来正确”不能证明 100 MHz 设置正确，因为内部访问时间相对时钟周期的预算改变了。</p>
+<p>Flash 的 protocol mode 可来自 volatile configuration register、nonvolatile configuration register、特殊 enter/exit 命令、reset pin 或 power cycle。<strong>volatile</strong> 表示掉电后不保证保持；<strong>nonvolatile</strong> 表示器件把设置保存到非易失单元，但写入次数、保护和复位语义要看 datasheet。控制器寄存器通常是 MCU reset domain 的状态。两边 reset source 不同，就可能产生：Flash 回到 <code>1-1-1 SPI</code>，OCTOSPI 仍按 <code>8D-8D-8D</code> 发；或者 watchdog 只复位 CPU/控制器，而 Flash 仍留在 octal mode。这个错误不是“频率不稳”，而是双方从第一 bit 就采用不同语法。</p>
+<p>可靠 recovery 不能直接重发 operational read，也不能在 WIP timeout 后把 payload 标成失败：timeout 只说明 host 的等待预算耗尽，器件可能尚未写、写完、随后写完，甚至留下部分/失败状态，结果是 <code>UNKNOWN</code>。恢复必须先作废旧 generation，把 controller 与 Flash 都带回已知 reset-state SPI，满足 <code>tRST</code>（复位后重新接受命令所需时间），再在一个<strong>总 deadline</strong>内依次验证：</p>
+<ol>
+<li><code>RDID 0x9F</code> 返回 <code>C2 85 3A</code>。这三个 byte 分别是 Macronix manufacturer、memory type、density，来自 <a target="_blank" rel="noopener" href="https://www.macronix.com/Lists/Datasheet/Attachments/8729/MX25LM51245G%2C%203V%2C%20512Mb%2C%20v1.1.pdf">MX25LM51245G Rev.1.1 数据手册的 ID Definitions</a>；ID 证明 decode path/器件类别，不证明镜像可信。</li>
+<li>status/security readback 显示 <code>WIP=0</code>，且 program/erase failure 位没有宣告错误；仍 busy 或 failure 必须保持 recovery，不得重开 XIP。</li>
+<li>对被冻结的 update span 做 indirect readback，并与 old/new payload 分类：全 new 才是 <code>VERIFIED_NEW</code>，全 old 是 <code>VERIFIED_OLD</code>，混合结果进入镜像校验/擦除恢复而非猜测。</li>
+<li>累计 <code>reset + tRST + ID + status + readback + reconfigure</code> 时间未超过 recovery deadline，最后才写 CR2 与 OCTOSPI tuple、重开 memory map。</li>
+</ol>
+<p>主机 lab 的 <code>hardware_reset_flash_only()</code> 故意只改 Flash，随后 fetch 得到 <code>XIP_PROTOCOL_DECODE_MISMATCH</code>。完整恢复 fixture 在 1000 us deadline 内用 500 us 验证 <code>C2853A/status-ready/readback</code>；另一用例让 WIP 在 timeout 后晚完成，host 仍保持 <code>UNKNOWN</code>，直到 readback 把它分类为 <code>VERIFIED_NEW</code>。101 us 超过 100 us 总 deadline 会在读 ID 阶段 fail。模型没有真的读取 JEDEC 电平，不能升级成板级证据。</p>
+<h3 id="indirect、automatic-polling、memory-mapped-与-XIP-的边界"><a href="#indirect、automatic-polling、memory-mapped-与-XIP-的边界" class="headerlink" title="indirect、automatic-polling、memory-mapped 与 XIP 的边界"></a>indirect、automatic-polling、memory-mapped 与 XIP 的边界</h3><p><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/application_note/an5050-octospi-interface-on-stm32-microcontrollers-stmicroelectronics.pdf">ST AN5050 Rev.14</a>把 OCTOSPI/HSPI/XSPI 操作分为 indirect、automatic status-polling 与 memory-mapped 等模式：</p>
+<ul>
+<li><strong>indirect mode</strong> 由软件明确配置一次 command，通过 data register/DMA 发送或接收有限长度数据。它适合读 ID、写 enable、page program、erase 等离散操作。</li>
+<li><strong>automatic status-polling</strong> 让控制器反复读取 status register，按 mask/match 判断 <strong>WIP（write in progress，内部 program/erase 尚忙）</strong>等状态并置 flag。它减少 CPU 轮询开销，但 mask、match、interval 与 timeout 配错仍会误判。</li>
+<li><strong>memory-mapped mode</strong> 把一段 AHB/AXI 地址请求转换为串行 transaction，使 CPU、DMA 或其他 master 像访问内存一样发 read。AHB/AXI 是 Arm 系统互连协议；<strong>master</strong> 是能主动发起地址事务的总线参与者，OCTOSPI 在这条路径上表现为被访问的 slave/target。memory mapping 是地址转换与事务生成机制，不会把 NOR 变成 SRAM。</li>
+<li><strong>XIP（execute in place）</strong>是 CPU 直接从该映射区取指执行。memory-mapped data read 不等于 XIP；XIP 额外依赖 executable MPU attribute、vector、I-cache、异常路径和最坏延迟。</li>
+</ul>
+<p>NOR 的 program/erase 仍受介质语义约束。erase 把一个 erase sector 的 bit 恢复到 <code>1</code>；page program 只能把 bit 从 <code>1</code> 写成 <code>0</code>，不能不擦除就把 <code>0</code> 变回 <code>1</code>。<strong>page</strong> 是一次 program 不能跨越的边界，典型为 256 byte；<strong>sector</strong> 是最小 erase 单位，通常远大于 page。实际值必须来自 MX25LM51245G 数据手册/BSP component，不能只凭“常见值”。本文 host model 为了构造可判定反例固定 <code>page=256, sector=4096</code>，并明确这是模型参数，不声称 sector 取值覆盖该器件所有 erase opcode。</p>
+<p>若向 page 尾地址 255 写两个 byte，很多器件会在 page 内 wrap 或只写部分，而不是自然进入下一 page。安全 API 应在提交前证明 <code>start/page == (end-1)/page</code>，然后由上层拆分。若旧 bit 为 0、新 bit 为 1，应返回 <code>ERASE_REQUIRED</code>，而不是把 readback mismatch 当传输噪声。</p>
+<h3 id="XIP-更新为何会自锁：代码、vector、常量和并发-master-都是读者"><a href="#XIP-更新为何会自锁：代码、vector、常量和并发-master-都是读者" class="headerlink" title="XIP 更新为何会自锁：代码、vector、常量和并发 master 都是读者"></a>XIP 更新为何会自锁：代码、vector、常量和并发 master 都是读者</h3><p>当 Flash 忙于 program/erase 时，同一 bank/器件的普通 read 可能不可用或返回受限状态。MX25LM51245G 的 suspend/resume 是明确命令状态，不意味着任意 read-while-write；是否可在另一 bank 并发读要以器件架构为准。若 update 函数从外部 Flash 取下一条指令，CPU 为了完成“让 Flash 恢复可读”的代码反而需要先读 Flash，形成循环等待。</p>
+<p>把一个函数标记到 SRAM 仍可能不够：</p>
+<ul>
+<li>vector table 若仍指向 OSPI，任何中断入口都会读 Flash；</li>
+<li>ISR 在 SRAM，但它引用的 literal pool、<code>const</code> table、logging format string 在 OSPI；</li>
+<li>veneer/trampoline 或库函数仍由 linker 放在 OSPI；</li>
+<li>DMA2D、LTDC、另一个 bus master 仍从 memory-mapped 窗口取资源；</li>
+<li>speculative fetch、prefetch 或 debugger memory window 仍有 outstanding read；</li>
+<li>MPU 属性和 linker symbol 与运行时地址不一致。</li>
+</ul>
+<p>因此 <strong>quiescent</strong> 要定义成“所有可能访问该映射区的 master 都已停在可证明边界，且 OCTOSPI ABORT/disable 已完成”，不是“主任务决定不读”。这里 <strong>ABORT request</strong> 只是要求控制器终止当前 functional mode/transaction；提交请求后 <code>BUSY</code> 仍可为 1，完成 flag/callback 也尚未来。本文合同要求三项同时成立：<code>active_readers==0</code>、OCTOSPI <code>BUSY==0</code>、ABORT completion flag/callback 已观察到；次序是阻止新 reader、排空已有 reader、发 ABORT、带 deadline 等 BUSY/complete，再关闭 memory map。只写 ABORT bit 或只看到 reader count 为零都不能进入 indirect mode。<strong>owner</strong> 是谁被允许改变 Flash/controller 状态；update generation 活跃时，其他模块不能重新开启 memory mapping。host lab 分别让“request 后立刻 confirm”返回 <code>busy=1, abort_complete=0</code>，以及让一个 active reader 阻止 ABORT completion，最后只有 <code>BUSY0+ABORT_COMPLETE1</code> 才通过。</p>
+<p>一个窄化状态机如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">RESET_SPI</span><br><span class="line">  -&gt; 双方以1-1-1确认ID/状态</span><br><span class="line">  -&gt; CONFIGURED_OPI_DTR</span><br><span class="line">  -&gt; MMAP_ACTIVE</span><br><span class="line"></span><br><span class="line">更新：</span><br><span class="line">MMAP_ACTIVE</span><br><span class="line">	  -&gt; 阻止新读者/把代码、vector、数据搬到SRAM</span><br><span class="line">	  -&gt; REQUEST_EXIT_MMAP</span><br><span class="line">	  -&gt; 等active_reader=0</span><br><span class="line">	  -&gt; 发ABORT并等待BUSY=0与ABORT_COMPLETE=1</span><br><span class="line">	  -&gt; INDIRECT</span><br><span class="line">  -&gt; WREN(write enable，置写使能锁存) + erase/program</span><br><span class="line">	  -&gt; WIP_POLL（有最大deadline）</span><br><span class="line">	  -&gt; token冻结完整[update_start, update_end)</span><br><span class="line">	  -&gt; phase 0 CONTROLLER_PREFETCH：对同一完整span确认controller buffer/prefetch失效</span><br><span class="line">	  -&gt; phase 1 CPU_ICACHE：只允许随后对同一完整span确认I-cache维护</span><br><span class="line">	  -&gt; phase 2 DSB_ISB：只允许随后执行DSB/ISB并进入COMPLETE</span><br><span class="line">	  -&gt; phase 3 COMPLETE：只有此时才释放token</span><br><span class="line">  -&gt; 重新配置相同read protocol</span><br><span class="line">  -&gt; MMAP_ACTIVE</span><br><span class="line"></span><br><span class="line">任一timeout</span><br><span class="line">  -&gt; write outcome=UNKNOWN，不提前判old/new</span><br><span class="line">  -&gt; generation作废</span><br><span class="line">  -&gt; 双方reset到SPI</span><br><span class="line">  -&gt; 总deadline内读ID、status、完整span readback并分类</span><br><span class="line">  -&gt; VERIFIED_OLD/NEW后重新配置；混合/超时保持安全恢复</span><br></pre></td></tr></table></figure>
+
+<h3 id="三层“旧代码”问题：Flash、控制器和-CPU-各自可能正确"><a href="#三层“旧代码”问题：Flash、控制器和-CPU-各自可能正确" class="headerlink" title="三层“旧代码”问题：Flash、控制器和 CPU 各自可能正确"></a>三层“旧代码”问题：Flash、控制器和 CPU 各自可能正确</h3><p>假设 external NOR 地址 <code>A</code> 原来是指令字节 <code>10 20 30 40</code>，program 后阵列为 <code>00 20 30 40</code>。indirect read 绕开或刷新了 memory-mapped buffer，所以校验新值正确；但 OCTOSPI prefetch 仍保存含 <code>A</code> 的旧 burst，CPU I-cache 又保存旧 instruction line。此时每一层都在兑现自己的缓存语义，并没有一个神秘“缓存错乱”。错的是软件没有定义更新后的统一观察点。</p>
+<p><strong>prefetch</strong> 是控制器提前抓取后续串行数据以隐藏 latency；<strong>I-cache</strong> 缓存 CPU 指令；<strong>D-cache</strong> 缓存 data load/store；<strong>branch predictor</strong>可能保存分支方向或目标信息；<strong>DSB（data synchronization barrier）</strong>等待先前显式内存事务达到要求的完成点；<strong>ISB（instruction synchronization barrier）</strong>清空流水线，使后续指令在新 context 下重新取。它们解决不同问题，不能互换：<code>volatile</code> 只影响编译器对特定访问的优化，不清任何硬件 cache；只清 D-cache 也不能让旧 I-cache 指令消失。</p>
+<p><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/latest/Core/group__Dcache__functions__m7.html">CMSIS‑Core Cortex‑M7 D-cache API</a>与 <a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/latest/Core/group__Icache__functions__m7.html">I-cache API</a>提供按地址/全局维护接口。按地址操作必须扩大到完整 cache line，并避免把邻居对象的 dirty data 一起丢失。若更新的是将执行代码，安全顺序通常需要：program/erase WIP 完成 → 停止/清控制器 memory-mapped buffer → 使目标 data view 一致 → invalidate 对应 I-cache → DSB → ISB → 再跳转。精确 helper 是否已经包含 barrier、OCTOSPI buffer 如何清，必须审查固定 RM/HAL/BSP 源码，不能复制一条跨芯片“万能顺序”。</p>
+<p>这里有两个容易混为一谈的 span。<strong>frozen update span</strong> 是 token 中不可变的半开区间 <code>[start,end)</code>；每个 controller/I-cache/barrier confirmation API 都必须收到完全相同的逻辑 span，不能 program 16 byte 却只同步前 4 byte。<strong>maintenance span</strong> 是实现内部按 cache-line 边界向下/向上扩大的物理范围，可以比 frozen span 大，但不得缩小。</p>
+<p>三个完成 bit 还不够：bitmask <code>controller=1, icache=1, barrier=1</code>不能证明发生顺序，调用者可以先 barrier、再 I-cache、最后 controller，仍拼出全 1；重复某一步也可能被当作幂等成功。本文改用 ordinal phase：WIP completion 只进入 <code>CONTROLLER_PREFETCH</code>，成功后唯一下一态是 <code>CPU_ICACHE</code>，再到 <code>DSB_ISB</code>，最后 <code>COMPLETE</code>。每个 API 先核对完整 span 和当前 phase；乱序或重复不产生状态推进。token 从 WIP 到 <code>COMPLETE</code> 全程活跃，只有 <code>confirm_update_synced()</code> 才释放。hostile 序列依次尝试 barrier→I-cache→controller：前两步都因 <code>actual=CONTROLLER_PREFETCH</code>失败；controller成功后再重复 controller，又因 <code>actual=CPU_ICACHE</code>失败。partial span 与 early release 仍分别失败，构成“范围、顺序、唯一完成”三个独立不变量。</p>
+<h3 id="地址、容量、alignment-与-MPU-属性必须在进入硬件前证明"><a href="#地址、容量、alignment-与-MPU-属性必须在进入硬件前证明" class="headerlink" title="地址、容量、alignment 与 MPU 属性必须在进入硬件前证明"></a>地址、容量、alignment 与 MPU 属性必须在进入硬件前证明</h3><p>memory-mapped window 往往大于实际 Flash 容量。<code>DEVSIZE</code>、address byte 数和 Flash density 任一错误，都可能让高地址 alias 到低地址。安全 span 检查应使用半开区间 <code>[address,address+length)</code>，先证明 <code>address &lt;= 2^32-length</code>，再证明 <code>end &lt;= actual_capacity</code>；不能先用 32 位算 <code>end</code> 再比较，因为它可能 wrap。host lab 用 <code>2^32-128 + 256</code> 验证 overflow 被拒绝，也拒绝 Python 的 <code>True</code> 冒充地址 1。</p>
+<p><strong>alignment</strong> 是地址满足访问宽度/cache line/page/sector边界；这些边界不是一个数。CPU 32-bit load 可能要求 4-byte 对齐，cache maintenance 按 32-byte line 扩展，page program 按 256-byte 拆分，sector erase 又要求 erase-size 对齐。API 应分别命名 <code>cpu_access_alignment</code>、<code>cache_line</code>、<code>page_size</code>、<code>erase_size</code>，不能共用一个 <code>FLASH_ALIGNMENT</code>。</p>
+<p><strong>MPU（memory protection unit）</strong>为地址区间设置 memory type、cacheability、shareability、executable 与访问权限。把 XIP window 标成 Device memory 可能禁止正常取指；把 update region 永久 executable 又增加攻击面。产品通常把 active image 映射为 read-only executable，把 inactive slot 映射为 non-executable data，在校验签名并原子切换 boot metadata 后才改变角色。<strong>secure boot</strong>验证镜像来源与完整性；<strong>cache coherency</strong>保证 CPU 观察到刚写入的 byte。前者不能替代后者，后者也不判断代码是否可信。</p>
+<h3 id="更新实现骨架：把更新器的依赖闭包放进-SRAM"><a href="#更新实现骨架：把更新器的依赖闭包放进-SRAM" class="headerlink" title="更新实现骨架：把更新器的依赖闭包放进 SRAM"></a>更新实现骨架：把更新器的依赖闭包放进 SRAM</h3><p>下面是<strong>目标 C 设计骨架，不是本次编译或板级运行 transcript</strong>。<code>RAMFUNC</code> 必须通过 linker map file（链接器给出的 symbol 到地址清单）和运行时地址检查证明生效；所有被调用函数、常量和异常路径都属于依赖闭包。<strong>BSP（board support package）</strong>是把 HAL/driver 与具体开发板连线、器件和初始化绑定的支持层。本文只以固定 <code>ExtMem_CodeExecution/ExtMem_Boot</code>、BSP/component/HAL gitlink 组合为 tuple 来源；同仓库的 standalone <code>OSPI_NOR_MemoryMapped_DTR</code> 示例使用不同 prescaler/dummy 常量，不能混成同一个配置证据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stddef.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAMFUNC __attribute__((section(<span class="string">".ramfunc"</span>), noinline))</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">xip_update_contract</span> {</span></span><br><span class="line">    <span class="type">uint32_t</span> generation;</span><br><span class="line">    <span class="type">uintptr_t</span> flash_addr;</span><br><span class="line">    <span class="type">size_t</span> length;</span><br><span class="line">    <span class="type">uint8_t</span> readers_quiescent;</span><br><span class="line">    <span class="type">uint8_t</span> ospi_busy_zero;</span><br><span class="line">    <span class="type">uint8_t</span> abort_complete;</span><br><span class="line">    <span class="type">uint8_t</span> vector_in_sram;</span><br><span class="line">    <span class="type">uint8_t</span> sync_phase; <span class="comment">/* 0=controller, 1=icache, 2=dsb_isb, 3=complete */</span></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">RAMFUNC <span class="type">int</span> <span class="title function_">xip_program_page</span><span class="params">(<span class="keyword">struct</span> xip_update_contract *c,</span></span><br><span class="line"><span class="params">                             <span class="type">const</span> <span class="type">uint8_t</span> *sram_payload)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (!c || !sram_payload || !c-&gt;readers_quiescent ||</span><br><span class="line">        !c-&gt;ospi_busy_zero || !c-&gt;abort_complete || !c-&gt;vector_in_sram)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (c-&gt;length == <span class="number">0</span> || c-&gt;length &gt; <span class="number">256</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">    <span class="keyword">if</span> ((c-&gt;flash_addr &amp; <span class="number">255u</span>) + c-&gt;length &gt; <span class="number">256u</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-3</span>;</span><br><span class="line">    <span class="comment">/* token冻结[flash_addr, flash_addr+length)；WIP完成后仍不释放。</span></span><br><span class="line"><span class="comment">       phase必须严格controller-&gt;I-cache-&gt;DSB/ISB-&gt;complete；每步都核对</span></span><br><span class="line"><span class="comment">       同一span，乱序/重复拒绝，phase==3后才释放token并恢复固定tuple。 */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><strong>dependency closure</strong> 是从 update entry 可达的一切代码和只读数据集合。验收不能只 <code>nm</code> 看 entry symbol；还要审查 linker map、relocation/call graph，并在 OSPI 禁读期间触发允许的中断。若无法证明 ISR 全部在 SRAM，安全选择是只保留 SRAM 中的最小 watchdog/power-fail 路径并屏蔽其他中断，但屏蔽时长又必须满足系统 real-time 与 watchdog 约束。</p>
+<h3 id="本次已执行的可复现实验"><a href="#本次已执行的可复现实验" class="headerlink" title="本次已执行的可复现实验"></a>本次已执行的可复现实验</h3><p>实验文件为 <code>scripts/labs/qspi_ospi_xip_cache_fault_lab.py</code>。模型维护 Flash array、固定 build protocol tuple、controller protocol、16-byte prefetch、4-byte instruction cache、active reader、BUSY/ABORT completion、WIP、带完整 span 的 update token、严格 ordinal sync phase、reset recovery deadline 与 generation。它用真实 byte 的 <code>1→0</code> 关系判定 program；WIP timeout 会留下 <code>UNKNOWN</code>，不会用一个 <code>write_ok</code> 布尔值冒充 NOR 语义。</p>
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 scripts/labs/qspi_ospi_xip_cache_fault_lab.py</span><br></pre></td></tr></table></figure>
+
+<p>完整 stdout，退出码 0：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">MODEL xip_update_v2 build=H735_EXTMEM_DOPI_100MHZ sck_hz=100000000 protocol=8D-8D-8D dummy=6cycles cr2=0x07</span><br><span class="line">PASS coherent_update old=10203040 new=00203040 busy_us=800 sync=controller-prefetch,icache,dsb-isb token_release=after-all</span><br><span class="line">FAULT skipped_view_sync flash=00203040 fetched=10203040 stale_layers=prefetch+icache</span><br><span class="line">FAULT abort_request_not_completion detected=XIP_ABORT_NOT_COMPLETE:busy=1:abort_complete=0 reader_guard=XIP_MMAP_READERS_ACTIVE:1 final=BUSY0+ABORT_COMPLETE1</span><br><span class="line">FAULT dummy_cycle_split detected=XIP_PROTOCOL_SPLIT tuple_guard=XIP_PROTOCOL_BUILD_TUPLE binding=build+100MHz+CR2-0x07+HAL-6-full-cycles</span><br><span class="line">FAULT update_code_not_in_sram detected=XIP_UPDATE_EXECUTION_REGION:OSPI</span><br><span class="line">FAULT vector_not_in_sram detected=XIP_VECTOR_REGION:OSPI</span><br><span class="line">FAULT update_ownership detected=XIP_UPDATE_STATE:WIP</span><br><span class="line">FAULT frozen_span detected=XIP_SYNC_SPAN_MISMATCH:expected=0-16:got=0-4 early_release=XIP_SYNC_INCOMPLETE:controller=1:icache=0:barrier=0:phase=CPU_ICACHE final_token=RELEASED</span><br><span class="line">HOSTILE sync_order barrier_first=XIP_SYNC_ORDER:attempt=DSB_ISB:expected=DSB_ISB:actual=CONTROLLER_PREFETCH icache_first=XIP_SYNC_ORDER:attempt=CPU_ICACHE:expected=CPU_ICACHE:actual=CONTROLLER_PREFETCH duplicate=XIP_SYNC_ORDER:attempt=CONTROLLER_PREFETCH:expected=CONTROLLER_PREFETCH:actual=CPU_ICACHE</span><br><span class="line">HOSTILE cross_page rejected=XIP_PAGE_PROGRAM_CROSS_BOUNDARY</span><br><span class="line">FAULT zero_to_one_without_erase detected=XIP_PROGRAM_REQUIRES_ERASE:0</span><br><span class="line">FAULT asymmetric_reset detected=XIP_PROTOCOL_DECODE_MISMATCH recovery=jedec-c2853a,status-ready,readback-10203040,elapsed-500us/deadline-1000us</span><br><span class="line">FAULT wip_timeout detected=XIP_WIP_TIMEOUT:busy=1001:timeout=1000:outcome=UNKNOWN recovery_outcome=VERIFIED_NEW readback=00 stale=XIP_STALE_GENERATION:0:1</span><br><span class="line">HOSTILE recovery_deadline rejected=XIP_RECOVERY_DEADLINE:elapsed=101:deadline=100</span><br><span class="line">HOSTILE u32_span rejected=XIP_U32_SPAN_OVERFLOW</span><br><span class="line">HOSTILE bool_as_int rejected=XIP_INT_TYPE:address</span><br><span class="line">HOSTILE nonfinite_time rejected=XIP_NONFINITE:busy_us</span><br><span class="line">HOSTILE invalid_range rejected=XIP_INT_RANGE:dummy_cycles</span><br><span class="line">PASS assertions=39</span><br></pre></td></tr></table></figure>
+
+<p>同一命令随后在独立进程双跑，要求 exit 0、stderr 为空、stdout byte-identical；冻结检查还会逐字节比较正文 transcript。host model 不模拟 instruction pipeline、真实 cache line size、DQS、OCTOSPI flag 或器件 program time。</p>
+<h3 id="故障注入与定位闭环"><a href="#故障注入与定位闭环" class="headerlink" title="故障注入与定位闭环"></a>故障注入与定位闭环</h3><p>第一条故障先 fetch <code>10203040</code>，完成合法 <code>1→0</code> program 后通过 test-only backdoor 跳过 view sync。现象是 Flash array=<code>00203040</code>，CPU fetch=<code>10203040</code>。初始假设“program 失败”被 array 证据否定；证据又指出 stale layers=<code>prefetch+icache</code>，定位到映射读取路径。修复是 token 冻结完整 update span，WIP 完成后按 ordinal phase依次确认 controller prefetch、I-cache、DSB/ISB；任何 partial span、提前 release、乱序或重复都失败，到 <code>COMPLETE</code> 才恢复 memory map。敌意序列 barrier→I-cache→controller 的前两步没有推进 phase，controller完成后重复 controller 也被拒绝；正确序列回归得到 fetch=<code>00203040</code>。</p>
+<p>第二条故障只 reset Flash，不 reset controller。现象是下一次 fetch 无法解码；证据显示双方 protocol tuple 不相等，定位到 reset domain/模式交接，而非信号随机错误。修复是 fail closed 回到双方已知 SPI，在总 deadline 中核对 <code>C2853A</code>、WIP/failure status和冻结 span readback，再共同进入固定 <code>100 MHz + CR2 0x07 + HAL DummyCycles 6</code> tuple。回归记录 500/1000 us；101/100 us 的敌意恢复在 ID 阶段超时。</p>
+<p>第三条故障令 WIP busy 1001 us、deadline 1000 us。timeout 后 outcome 明确是 <code>UNKNOWN</code>，模型再注入“器件在 host timeout 后完成 program”；只有 reset-state readback=<code>00</code> 才把结果分类为 <code>VERIFIED_NEW</code>。generation 从 0 升到 1，迟到 completion 得到 <code>XIP_STALE_GENERATION:0:1</code>。这闭合了“超时 → 未知结果 → 作废生命周期 → 双方复位 → ID/status/readback → 重新配置”的路径，避免把 timeout 误记为失败或旧 ISR 把新 update 标完成。</p>
+<p>第四条故障在发出 ABORT request 后立刻检查 quiescent。<code>BUSY=1, ABORT_COMPLETE=0</code> 直接否定“写 ABORT bit 即已退出”；另一个 active reader 又否定“controller flag 足够”。修复链必须同时排空 reader 并等待硬件 BUSY/complete。第五条故障把 controller dummy 改成 8，既得到 protocol split，又由 build tuple validator 证明该数值与 100 MHz/CR2 0x07/HAL 6-cycle 固定来源不一致。</p>
+<p>其余敌意案例覆盖跨 page、未擦除的 <code>0→1</code>、同 Flash 执行器/vector、32 位 span wrap、<code>bool</code> 地址和无限时间。每个错误在硬件副作用前被分类；这只证明软件 guard，不证明真实硬件没有其他 fault。</p>
+<h3 id="目标板计划实验与通过标准（本次未执行）"><a href="#目标板计划实验与通过标准（本次未执行）" class="headerlink" title="目标板计划实验与通过标准（本次未执行）"></a>目标板计划实验与通过标准（本次未执行）</h3><p>准备 STM32H735G‑DK、STM32CubeH7 v1.12.1 固定 root/BSP/component/HAL commits、ST‑LINK、8 通道逻辑分析仪/高速示波器、可恢复的 A/B 测试镜像。先构建固定 <a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/STM32CubeH7/tree/f5c0b7a2b1f6eb26fde150f72edb2d7deb647066/Projects/STM32H735G-DK/Applications/ExtMem_CodeExecution/ExtMem_Boot"><code>ExtMem_CodeExecution/ExtMem_Boot</code></a>，保存 map file、编译选项和 binary hash，再加入 fault variants；不把使用不同 dummy/prescaler 的 standalone example 混入证据。</p>
+<ol>
+<li>抓 CS#/CLK/DQS/IO0..7，对照 <code>0xEE11</code>、32-bit address、6 个 full dummy clocks 与 data phase；同时 dump OCTOSPI clock/prescaler、CR2 0x300 与 status。通过：SCK 实测 100 MHz，controller dummy=6、CR2 code=0x07、DQS enable；冷启动、watchdog/software reset 后先在 reset-state SPI 读到 <code>C2 85 3A</code>，再进入同一 tuple。</li>
+<li>在 25/50/100% 目标频率、最低/最高供电与温度边界扫 delay tap。用固定种子的 <strong>PRBS（pseudo-random binary sequence）</strong>产生 address/data，便于复跑并比全零更容易暴露粘连。通过：indirect 与 mapped read 全一致，记录连续通过窗口和中心 margin；单点 PASS 不算调谐证据。</li>
+<li>把 update entry、全部 callee、vector 和常量链接到 SRAM，由 map-file 自动审计；更新时让 debugger 不打开 OSPI memory window。通过：退出 mmap 时先阻止 reader，ABORT request 后观察 BUSY→0 与 completion flag/callback；program/erase WIP 期间无外部 Flash read transaction，未迁移依赖会确定性触发 fault variant。</li>
+<li>先 populate I-cache/controller prefetch，再更新 4 KiB 函数区。分别传 partial span、缺 controller 清理、缺 I-cache invalidate、缺 DSB/ISB、提前释放 token，以及 barrier→I-cache→controller、重复 controller/I-cache/barrier 的乱序。通过：所有 maintenance API 的逻辑 span 与 update token 完全一致，内部才按 cache line 扩大；phase 只允许 controller→I-cache→DSB/ISB→complete，任何乱序/重复均不推进；fault variants 稳定拒绝或读到旧 generation，完整序列十万次都取到新 generation；保存 <strong>ETM（Embedded Trace Macrocell，处理器指令流硬件跟踪）</strong>或 logic-analyzer trace。</li>
+<li>在 update 的 WREN、program、WIP timeout、cache sync、metadata commit 各阶段 reset，并分别注入 late-complete/未完成/混合 readback。通过：timeout 初始只报告 unknown；在总 deadline 内验证 ID、WIP/P_FAIL/E_FAIL 与整个 update span，分类 old/new 后才选择 A/B 已签名镜像；任何 mode split、status failure、mixed readback 或 deadline miss 都保持安全恢复，而不是无限 <strong>HardFault（Cortex‑M 对无法归入更具体异常的严重 fault）</strong> reset loop。</li>
+</ol>
+<h3 id="练习与可判定答案"><a href="#练习与可判定答案" class="headerlink" title="练习与可判定答案"></a>练习与可判定答案</h3><ol>
+<li><strong><code>8-8-8</code> 与 DTR 是同一属性吗？本文固定 tuple 还缺哪些字段？</strong> 答：不是。前者描述各 transaction phase 的 I/O 线宽，DTR 描述每时钟两个边沿传输；本文还绑定 build target、100 MHz、opcode 0xEE11、32-bit address、DQS、CR2 code 0x07 与 HAL 6 个 full clock cycles。</li>
+<li><strong>indirect read 新值正确为何不能证明 XIP 新值？</strong> 答：两条路径可能经过不同 controller buffer，且 XIP 还会命中 I-cache/流水线；必须验证 Flash、controller mapped view 与 CPU instruction view。</li>
+<li><strong>为什么 <code>volatile</code> 指针不能修复旧代码？</strong> 答：它约束编译器执行访问，不会失效 OCTOSPI prefetch 或 I-cache，也不会执行 DSB/ISB。</li>
+<li><strong>update 函数已在 SRAM，仍可能死锁的三个原因是什么？</strong> 答案至少包含：vector/ISR 或 callee/const 仍在 OSPI、其他 bus master 在读 mapped window、退出 mmap 尚未 quiescent。只答“cache”不合格。</li>
+<li><strong>跨 256-byte page 的 300-byte payload 应如何处理？</strong> 答：先做无回绕 span 检查，按当前 page 剩余空间拆分为多个 page program，每次 WREN/program/WIP/错误检查；不能假设器件自动跨页。</li>
+<li><strong>secure boot 与 cache coherency 的关系？</strong> 答：secure boot回答“镜像是否可信/完整”，coherency 回答“处理器看到哪一版 byte”；两者互不替代，必须都闭合。</li>
+<li><strong>发出 ABORT request 后为何不能马上 program？</strong> 答：request 不是 completion；还需所有 reader 归零，并看到 OCTOSPI BUSY=0 与 ABORT completion，三项共同证明 mapped transaction 静止。</li>
+<li><strong>program 16 byte 后只 invalidate 命中的 4-byte instruction 是否足够？</strong> 答：不足。token 冻结整个 16-byte逻辑 span，controller/I-cache/barrier confirmation都必须绑定完整 span；实现内部可扩大到 cache line，不能缩小。</li>
+<li><strong>WIP timeout 能否直接选择旧镜像？</strong> 答：不能，结果是 unknown。必须 reset 到已知 SPI，在总 deadline 内验证 JEDEC ID、status 与完整 span readback，再分类 VERIFIED_OLD/NEW；混合结果保持 fail closed。</li>
+<li><strong>三个 sync-done bit 最终都是 1，为什么仍不足？</strong> 答：bitmask只证明集合，不证明次序或唯一执行；barrier先执行、controller后清理也能得到全 1，却没有建立正确观察点。要用 ordinal phase强制 controller→I-cache→DSB/ISB→complete，并让每步乱序/重复都失败且不推进。</li>
+</ol>
+<h3 id="官方一手来源"><a href="#官方一手来源" class="headerlink" title="官方一手来源"></a>官方一手来源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/user_manual/um2679-discovery-kit-with-stm32h735ig-mcu-stmicroelectronics.pdf">ST UM2679 Rev.7：STM32H735G‑DK 与板载 Octo‑SPI Flash</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/reference_manual/dm00603761.pdf">ST RM0468 Rev.3：STM32H723/733/725/735 OCTOSPI 寄存器、BUSY/ABORT 与模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/application_note/an5050-octospi-interface-on-stm32-microcontrollers-stmicroelectronics.pdf">ST AN5050 Rev.14：Octo/Hexadeca/XSPI 模式与 memory-mapped/XIP 示例</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/STM32CubeH7/tree/f5c0b7a2b1f6eb26fde150f72edb2d7deb647066/Projects/STM32H735G-DK/Applications/ExtMem_CodeExecution/ExtMem_Boot">STM32CubeH7 v1.12.1 固定 ExtMem Boot build 与 CR2 6-cycle config</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32h735g-dk-bsp/blob/4d2e91db442e525b8b879fba260fc3c6369a87d5/stm32h735g_discovery_ospi.c">STM32H735G-DK BSP 固定 commit：200 MHz kernel、prescaler 2、DOPI 配置与 readback</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/e7f45cee910535311a590890d0fffe9eded935fe/mx25lm51245g.c">MX25LM51245G component 固定 commit：DTR read、DQS 与 DummyCycles 6</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32h7xx-hal-driver/blob/57ed86b4c358e2333a71fd895b17f1ccdb68739e/Inc/stm32h7xx_hal_ospi.h">ST HAL OSPI 固定 header：DummyCycles 字段语义</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.macronix.com/Lists/Datasheet/Attachments/8729/MX25LM51245G%2C%203V%2C%20512Mb%2C%20v1.1.pdf">Macronix MX25LM51245G Rev.1.1 数据手册：ID、CR2、DTR 与状态语义</a></li>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/latest/Core/group__Dcache__functions__m7.html">Arm CMSIS‑Core Cortex‑M7 D-cache maintenance API</a></li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/user_manual/um2679-discovery-kit-with-stm32h735ig-mcu-stmicroelectronics.pdf">ST UM2679 Rev.7：STM32H735G‑DK 与板载 Octo‑SPI Flash</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/reference_manual/dm00603761.pdf">ST RM0468 Rev.3：STM32H723/733/725/735 OCTOSPI 寄存器、BUSY/ABORT 与模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/application_note/an5050-octospi-interface-on-stm32-microcontrollers-stmicroelectronics.pdf">ST AN5050 Rev.14：Octo/Hexadeca/XSPI 模式与 memory-mapped/XIP 示例</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/STM32CubeH7/tree/f5c0b7a2b1f6eb26fde150f72edb2d7deb647066/Projects/STM32H735G-DK/Applications/ExtMem_CodeExecution/ExtMem_Boot">STM32CubeH7 v1.12.1 固定 ExtMem Boot build 与 CR2 6-cycle config</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32h735g-dk-bsp/blob/4d2e91db442e525b8b879fba260fc3c6369a87d5/stm32h735g_discovery_ospi.c">STM32H735G-DK BSP 固定 commit：200 MHz kernel、prescaler 2、DOPI 配置与 readback</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/e7f45cee910535311a590890d0fffe9eded935fe/mx25lm51245g.c">MX25LM51245G component 固定 commit：DTR read、DQS 与 DummyCycles 6</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32h7xx-hal-driver/blob/57ed86b4c358e2333a71fd895b17f1ccdb68739e/Inc/stm32h7xx_hal_ospi.h">ST HAL OSPI 固定 header：DummyCycles 字段语义</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.macronix.com/Lists/Datasheet/Attachments/8729/MX25LM51245G%2C%203V%2C%20512Mb%2C%20v1.1.pdf">Macronix MX25LM51245G Rev.1.1 数据手册：ID、CR2、DTR 与状态语义</a></li>
+<li><a target="_blank" rel="noopener" href="https://arm-software.github.io/CMSIS_6/latest/Core/group__Dcache__functions__m7.html">Arm CMSIS‑Core Cortex‑M7 D-cache maintenance API</a></li>
+</ul>
+<hr>
+<h2 id="📖-IELTS-Academic-新词（0-个）"><a href="#📖-IELTS-Academic-新词（0-个）" class="headerlink" title="📖 IELTS Academic 新词（0 个）"></a>📖 IELTS Academic 新词（0 个）</h2><p>今天是计划复习日，不重复抽取新词。</p>
+<hr>
+<h2 id="🧩-周末整合复习"><a href="#🧩-周末整合复习" class="headerlink" title="🧩 周末整合复习"></a>🧩 周末整合复习</h2><p>本组词来自最近一周。先遮住释义回忆，再完成搭配填空、同义改写和 IELTS 主题造句。</p>
+<p><strong>appreciate</strong>, <strong>controversy</strong>, <strong>select</strong>, <strong>vehicle</strong>, <strong>conduct</strong>, <strong>forthcoming</strong>, <strong>isolate</strong>, <strong>virtual</strong>, <strong>academy</strong>, <strong>conclude</strong>, <strong>facilitate</strong>, <strong>parameter</strong>, <strong>acquire</strong>, <strong>feature</strong>, <strong>predict</strong>, <strong>survey</strong>, <strong>achieve</strong>, <strong>conform</strong>, <strong>implement</strong>, <strong>objective</strong></p>
+<ol>
+<li>选 5 个词口头解释，不看中文。</li>
+<li>选 3 个词各写一个正确搭配。</li>
+<li>至少用 2 个词改写同一句 IELTS 观点句。</li>
+<li>标记仍不熟的词，下周优先复习。</li>
+</ol>
+<hr>
+<h2 id="🔁-间隔复习"><a href="#🔁-间隔复习" class="headerlink" title="🔁 间隔复习"></a>🔁 间隔复习</h2><h3 id="Day-1-·-2026-10-30"><a href="#Day-1-·-2026-10-30" class="headerlink" title="Day+1 · 2026-10-30"></a>Day+1 · 2026-10-30</h3><p><strong>appreciate</strong>, <strong>controversy</strong>, <strong>select</strong>, <strong>vehicle</strong></p>
+<h3 id="Day-3-·-2026-10-28"><a href="#Day-3-·-2026-10-28" class="headerlink" title="Day+3 · 2026-10-28"></a>Day+3 · 2026-10-28</h3><p><strong>academy</strong>, <strong>conclude</strong>, <strong>facilitate</strong>, <strong>parameter</strong></p>
+<h3 id="Day-30-·-2026-10-01"><a href="#Day-30-·-2026-10-01" class="headerlink" title="Day+30 · 2026-10-01"></a>Day+30 · 2026-10-01</h3><p><strong>bulk</strong>, <strong>internal</strong>, <strong>symbol</strong>, <strong>task</strong></p>
+<hr>
+<p>词表依据：<a target="_blank" rel="noopener" href="https://www.wgtn.ac.nz/lals/resources/academicwordlist">Coxhead Academic Word List</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+              <a href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag"># 英语</a>
+              <a href="/tags/IELTS/" rel="tag"># IELTS</a>
+              <a href="/tags/AWL/" rel="tag"># AWL</a>
+              <a href="/tags/QSPI/" rel="tag"># QSPI</a>
+              <a href="/tags/OSPI/" rel="tag"># OSPI</a>
+              <a href="/tags/XIP/" rel="tag"># XIP</a>
+              <a href="/tags/Cache-Coherency/" rel="tag"># Cache Coherency</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/10/25/daily-study-2026-10-25/" rel="prev" title="IELTS 每日学习 — 2026-10-25">
+                  <i class="fa fa-chevron-left"></i> IELTS 每日学习 — 2026-10-25
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YCX</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">799k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">48:26</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
