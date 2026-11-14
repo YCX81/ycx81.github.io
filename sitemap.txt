@@ -1,3 +1,4 @@
+http://ycx81.github.io/2026/11/14/daily-study-2026-11-14/
 http://ycx81.github.io/2026/11/08/daily-study-2026-11-08/
 http://ycx81.github.io/2026/11/07/daily-study-2026-11-07/
 http://ycx81.github.io/2026/11/01/daily-study-2026-11-01/
@@ -492,6 +493,9 @@ http://ycx81.github.io/tags/Wi-Fi/
 http://ycx81.github.io/tags/%E6%BC%AB%E6%B8%B8/
 http://ycx81.github.io/tags/%E7%9C%81%E7%94%B5/
 http://ycx81.github.io/tags/WPA3/
+http://ycx81.github.io/tags/%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/
+http://ycx81.github.io/tags/effective-type/
+http://ycx81.github.io/tags/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA/
 http://ycx81.github.io/categories/%E9%9A%8F%E7%AC%94/
 http://ycx81.github.io/categories/%E7%BC%96%E7%A8%8B/
 http://ycx81.github.io/categories/%E6%97%A5%E8%AE%B0/
