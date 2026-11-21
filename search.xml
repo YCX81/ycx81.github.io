@@ -152150,4 +152150,161 @@
         <tag>AWL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>IELTS 每日学习 — 2026-11-21</title>
+    <url>/2026/11/21/daily-study-2026-11-21/</url>
+    <content><![CDATA[<p>今日主线：IELTS Academic 周末整合复习与主动输出。</p>
+<span id="more"></span>
+
+<h2 id="🔧-嵌入式知识：RTOS-tick、timeout-与绝对-deadline"><a href="#🔧-嵌入式知识：RTOS-tick、timeout-与绝对-deadline" class="headerlink" title="🔧 嵌入式知识：RTOS tick、timeout 与绝对 deadline"></a>🔧 嵌入式知识：RTOS tick、timeout 与绝对 deadline</h2><h3 id="从“偶尔晚几十毫秒”的现场故障开始"><a href="#从“偶尔晚几十毫秒”的现场故障开始" class="headerlink" title="从“偶尔晚几十毫秒”的现场故障开始"></a>从“偶尔晚几十毫秒”的现场故障开始</h3><p>设想一条传感器链：采样任务每 10 ms 读取一次 ADC，处理任务必须在请求进入系统后的 80 ms 内给出控制量。台架连续运行一小时完全正常，设备运行约五十天后却突然把一批请求判成“早已超时”；另一个版本没有突然失效，却会每天比外部基准慢几秒。两种现象通常不是晶振这一项就能解释：前者可能把回绕后的 32 位 tick 当普通整数比较，后者可能在每轮工作结束后重新做相对 delay，把执行时间永久累加到周期里。</p>
+<p>本文先冻结适用平台：目标路径是 <strong>NUCLEO-H743ZI2（STM32H743ZI）+ CMSIS-RTX 5.9.1 的原生 CMSIS-RTOS2 接口，GNU Arm Embedded 12.3.1，内核 tick 配置为 1000 Hz，<code>osKernelGetTickCount()</code> 为 32 位滚动计数</strong>。<a href="https://arm-software.github.io/CMSIS-RTX/latest/index.html">CMSIS-RTX 5.9.1 Overview</a>给出版本与原生接口定位；CMSIS-RTOS2 的 <a href="https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__Wait.html">Generic Wait Functions</a>明确说明 <code>osDelay(1)</code> 的实际等待可能比一个 tick 短，而 <code>osDelayUntil()</code> 处理 32 位溢出但单次未来间隔最多是 <code>2^31-1</code> tick。目标板实验在本文中标成“计划验证”，没有伪装成已经烧板执行。真正执行过的是 macOS Darwin arm64、Python 3.14.0 上的确定性契约实验。</p>
+<p>这里的结论分四层：CMSIS、Zephyr、FreeRTOS 文档写明的是 <strong>API 规范或实现文档保证</strong>；STM32 定时器频率和低功耗时钟是 <strong>芯片/板级配置</strong>；本文的 64 位 deadline ledger 是 <strong>应用设计</strong>；“必须严格早于 deadline 才算成功”是本文控制链的 <strong>业务契约</strong>，不是所有 RTOS 自动采用的定义。把这四层混写，往往正是时间故障难以闭环的起点。</p>
+<h3 id="先把五种“时间”分开"><a href="#先把五种“时间”分开" class="headerlink" title="先把五种“时间”分开"></a>先把五种“时间”分开</h3><p><strong>硬件 cycle</strong> 是某个计数器的最小递增单位。它可能来自 CPU、通用定时器或低功耗计时器；频率可能固定，也可能随时钟树改变。<strong>tick</strong> 是内核用于超时和调度记账的离散单位；1 kHz tick 表示一 tick 名义上为 1 ms，却不表示每 1 ms 一定执行一次目标任务。<strong>单调时间</strong>只承诺不后退，适合衡量持续时间。<strong>墙上时间</strong>表示日期和时刻，会被 RTC 校准、NTP、时区或人工设置改变，适合日志和日历，不适合判断一段操作是否耗尽预算。<strong>CPU 运行时间</strong>只累计线程真正占用处理器的时间，也不能替代端到端延迟。</p>
+<p>相邻概念必须继续拆开：</p>
+<ul>
+<li><strong>resolution（分辨率）</strong>是最小可表达步长，例如 1 ms；<strong>accuracy（准确度）</strong>是相对真实时间的误差；<strong>precision（精密度）</strong>描述重复测量的离散程度。高分辨率计数器仍可能频率错误，准确却低分辨率的 RTC 也测不出微秒级抖动。</li>
+<li><strong>release time（释放时刻）</strong>是一个周期实例允许开始的时刻；<strong>deadline（截止时刻）</strong>是它必须完成的时刻；<strong>period（周期）</strong>是相邻释放时刻的间隔。周期等于 deadline 只是常见特例，不是定义。</li>
+<li><strong>jitter（抖动）</strong>是实际释放、开始或完成时刻相对目标时刻的变化；必须注明测的是哪一个点。GPIO 在任务入口翻转得到的是开始抖动，不是 ADC 硬件采样抖动。</li>
+<li><strong>WCET（最坏情况执行时间）</strong>是在写清处理器、cache、输入域、抢占和测量方法后，对一段工作的上界。一次观测到的最大值只是样本最大值，不能自动升级为 WCET 证明。</li>
+<li><strong>timeout（超时量）</strong>常表示“最多再等多久”；<strong>absolute deadline（绝对截止点）</strong>表示“单调时间到哪里为止”。前者是时长，后者是时刻，量纲虽然都能写 tick，却不能互换。</li>
+</ul>
+<p>CMSIS 的 <a href="https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__KernelCtrl.html">Kernel Information and Control</a>同时提供 kernel tick 与 system timer。system timer 可给出 tick 以下的短时测量，但它仍是滚动计数，频率由 <code>osKernelGetSysTimerFreq()</code> 给出。它不因名字里有 timer 就自动成为 UTC，也不自动具有跨休眠连续性；这些都要由具体 port 与板级时钟证明。</p>
+<h3 id="tick-是区间边界，不是一把连续直尺"><a href="#tick-是区间边界，不是一把连续直尺" class="headerlink" title="tick 是区间边界，不是一把连续直尺"></a>tick 是区间边界，不是一把连续直尺</h3><p>假设 tick 周期为 <code>T_tick</code>，调用 <code>osDelay(N)</code> 时当前相位为 <code>φ</code>，其中 <code>0 &lt;= φ &lt; T_tick</code>。忽略调度延迟，等到第 N 个边界的时间近似为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">delay_wall = N × T_tick - φ</span><br><span class="line">0 &lt; delay_wall &lt;= N × T_tick</span><br><span class="line"></span><br><span class="line">wakeup_to_run = timer_expiry</span><br><span class="line">              + interrupt_latency</span><br><span class="line">              + scheduler_latency</span><br><span class="line">              + higher_priority_interference</span><br></pre></td></tr></table></figure>
+
+<p>因此 <code>osDelay(1)</code> 不是“精确睡 1 ms”。若调用发生在下一个 tick 边界前一瞬，线程几乎立刻从 BLOCKED 变为 READY；它何时真正 RUNNING，还取决于更高优先级任务、中断屏蔽和调度器。CMSIS 官方文档明确写出这一点。若设备要求“至少保持复位脚低 1 ms”，不能直接把 <code>osDelay(1)</code> 当物理最短脉宽；单位向上取整只解决离散表示，调用相位还需要额外一 tick 的覆盖，或改由硬件定时器产生波形。</p>
+<p>毫秒转 tick 必须先说明要回答哪个问题。下面的 ceiling 只回答“这个持续时间需要多少个完整 tick <strong>单位</strong>表示”，适合构造不短于请求值的离散预算或绝对时刻增量：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ticks = ceil(duration_seconds × tick_hz)</span><br><span class="line">      = ceil(duration_us × tick_hz / 1_000_000)</span><br></pre></td></tr></table></figure>
+
+<p>它不证明 <code>osDelay(ticks)</code> 的物理等待至少等于原持续时间，因为前式仍有相位 <code>φ</code>。若必须用这种相对 tick API 保证任意相位下的物理最短等待，需满足 <code>(N-1)×T_tick &gt;= duration</code>，所以窄化策略为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">unit_ticks = ceil(duration / T_tick)</span><br><span class="line">minimum_relative_delay_ticks = unit_ticks + 1</span><br></pre></td></tr></table></figure>
+
+<p>在 1 kHz 下，1 µs 量化为 1 tick 单位，但物理最短等待要请求 2 tick；1001 µs 量化为 2 tick 单位，但物理最短等待要请求 3 tick。这里额外一 tick 覆盖调用相位，不是 rounding 的另一种写法。若不能接受多出的量化延迟，就使用硬件比较事件或读高分辨率单调计数器，而不是宣称 <code>ceil</code> 已解决相位。</p>
+<p>先乘后加会有整数溢出风险；先除又会丢失余数。工程实现应使用内核转换宏，或在足够宽的整数里做 checked arithmetic，再确认 <code>unit_ticks+1</code> 也不碰 <code>forever</code> 保留值和半范围上限。0 tick 不是“等待一个最小单位”：在 CMSIS 中 <code>osDelay(0)</code> 是参数错误；在其他 API 中 0 常表示不等待。调用者必须遵从具体接口，而不是凭经验迁移。</p>
+<p>提高 tick rate 只能缩小量化误差，不会自动降低 ISR 阻塞和调度干扰；代价还可能是更多定时中断与功耗。Zephyr 的 <a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">Kernel Timing</a>进一步区分 cycle、64 位内部 uptime tick 与 <code>k_timeout_t</code>，并说明 timeout 最终在插入队列时转换成 tick。该文档还指出默认 timeout 表示宽度可配置，长 uptime 与非 tick 单位的回绕语义需要特别处理。这是 Zephyr 的设计，不应倒推成 RTX 或 FreeRTOS 的内部实现。</p>
+<h3 id="32-位回绕为什么需要“半范围”前提"><a href="#32-位回绕为什么需要“半范围”前提" class="headerlink" title="32 位回绕为什么需要“半范围”前提"></a>32 位回绕为什么需要“半范围”前提</h3><p>1000 Hz 的 32 位 tick 约 <code>2^32 / 1000 / 86400 = 49.71</code> 天回绕一次。若起点为 <code>0xfffffff8</code>，向前 20 tick 的 deadline 投影是 <code>0x0000000c</code>。普通比较 <code>now &gt;= deadline</code> 在起点就得到真，错误地宣告超时。</p>
+<p>模 <code>2^32</code> 差值能表达环上的前向距离，但同一对数值存在两个方向。<code>0</code> 到 <code>0x80000000</code> 顺时针、逆时针都是半圈，无法仅凭两端判断谁先谁后。因此 32 位序关系只有在以下不变量同时成立时才有意义：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">0 &lt; intended_forward_interval &lt; 2^31</span><br><span class="line">采样与使用不会跨过一个未被记录的完整回绕</span><br><span class="line">两个端点属于同一个已证明的时间窗口</span><br></pre></td></tr></table></figure>
+
+<p>在这个前提下，可把 <code>distance = (deadline - now) mod 2^32</code> 解释为：<code>0 &lt; distance &lt; 2^31</code> 表示 now 严格早于 deadline；<code>distance == 0</code> 表示相等；<code>distance == 2^31</code> 必须拒绝，因为方向歧义。这里的“半范围”是应用数学前提，不是把 <code>uint32_t</code> 强转 <code>int32_t</code> 的许可证。C 在无符号值超出目标有符号类型范围时的转换结果与实现有关；可移植代码应优先使用 RTOS 已定义的 deadline API，或维护受同步保护的 64 位单调扩展。</p>
+<p>CMSIS 文档明确承诺 <code>osDelayUntil()</code> 处理 tick 溢出，并把最大 delay 限为 <code>2^31-1</code>。这意味着下面的周期骨架可以跨一次正常回绕；它不意味着把任意古老的 32 位 tick 存到闪存、几个月后再取出仍能判序，也不意味着任务可以漏掉多次回绕后凭低 32 位恢复 epoch。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 目标板集成骨架；本次未在 STM32H743 上编译或执行。 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"cmsis_os2.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">sample_thread</span><span class="params">(<span class="type">void</span> *argument)</span></span><br><span class="line">{</span><br><span class="line">    (<span class="type">void</span>)argument;</span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> period = <span class="number">10U</span>;       <span class="comment">/* 1 kHz tick 下名义 10 ms */</span></span><br><span class="line">    <span class="type">uint32_t</span> next = osKernelGetTickCount();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) {</span><br><span class="line">        next += period;                <span class="comment">/* 相位基准，不用完成时刻重置 */</span></span><br><span class="line">        sample_and_publish();          <span class="comment">/* 项目函数：必须有执行上界 */</span></span><br><span class="line">        osStatus_t st = osDelayUntil(next);</span><br><span class="line">        <span class="keyword">if</span> (st != osOK) {</span><br><span class="line">            record_timing_fault(st, next);</span><br><span class="line">            enter_safe_state();        <span class="comment">/* 不能把 out-of-bounds 当普通抖动 */</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>这段骨架仍不完整：它需要在工作开始和结束记录时间，定义 overrun 后跳过、追赶还是重新定相；还需要确认 <code>period &lt; 2^31</code>，并确认目标配置确实是 1 kHz。它只展示 API 正确方向，不能把未定义的项目函数冒充可直接编译的完整固件。</p>
+<h3 id="相对-delay、周期释放与过载策略"><a href="#相对-delay、周期释放与过载策略" class="headerlink" title="相对 delay、周期释放与过载策略"></a>相对 delay、周期释放与过载策略</h3><p>若每轮执行 <code>C_i</code> tick，然后相对等待 <code>P</code> tick，第 i+1 次开始近似为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">S_(i+1) = S_i + C_i + P + scheduling_interference_i</span><br></pre></td></tr></table></figure>
+
+<p>执行时间和干扰被永久积累，这叫 <strong>drift（漂移）</strong>：相位相对理想基准不断偏移。绝对周期以锚点 <code>A</code> 生成 <code>R_k = A + kP</code>，本轮运行多久不会改变未来释放网格。FreeRTOS 的 <a href="https://www.freertos.org/Documentation/02-Kernel/04-API-references/02-Task-control/02-vTaskDelayUntil"><code>vTaskDelayUntil()</code></a>正是以前一唤醒时刻为基准的周期 API；它与 CMSIS <code>osDelayUntil()</code> 名字相近，参数与迟到行为仍必须分别查文档。</p>
+<p>绝对周期并没有消灭过载。若一轮在下一个释放点之后才结束，需要显式选策略：</p>
+<ul>
+<li><strong>catch up（追赶）</strong>：立即运行欠下的实例。只适合每个实例都不可丢且系统证明能清空积压，否则会形成 CPU 风暴。</li>
+<li><strong>skip（跳过）</strong>：丢弃已经越过的释放实例，转向“不早于当前完成时刻”的第一个释放点。适合只需要最新样本的控制链，但要记录丢样与数据年龄。</li>
+<li><strong>rephase（重新定相）</strong>：以当前时刻建立新锚点。能停止追赶，却改变与其他任务/外设的相位关系，必须作为受控降级而非静默行为。</li>
+</ul>
+<p>本文 host oracle 对 10 tick 周期、执行序列 <code>3,4,15,2</code> 使用 skip：相对开始点为 <code>0,13,27,52</code>；绝对开始点为 <code>0,10,20,40</code>，严格 deadline miss 一次，并跳过释放点 30 一次。这里必须分开两个等号：旧实例的完成判据是 <code>finish &lt; deadline</code>，所以 <code>finish==10</code> 已算旧实例 miss；新实例的 release 判据是 <code>start &gt;= release</code>，所以同一个时刻 10 又允许新实例开始。执行序列 <code>[10,1]</code> 因而从 <code>0,10</code> 开始，记录一次旧实例 strict miss，却不跳过时刻 10 的新释放。把“旧 deadline 等号失败”错误复用成“下一 release 必须严格晚于 finish”，会把新实例误推到 20。如果硬件协议把完成边界包含在合法窗口，则业务应选非严格 deadline 并在一处定义；不能一层用 <code>&lt;</code>、另一层用 <code>&lt;=</code>。</p>
+<h3 id="timeout-必须在入口冻结为同一个绝对-deadline"><a href="#timeout-必须在入口冻结为同一个绝对-deadline" class="headerlink" title="timeout 必须在入口冻结为同一个绝对 deadline"></a>timeout 必须在入口冻结为同一个绝对 deadline</h3><p>设一次请求的入口时间为 <code>t0</code>，预算为 <code>B</code>，则只创建一次 <code>D = checked_add(t0, B)</code>。之后每层得到的是同一个 D 或不可伪造的 token，剩余预算为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">remaining(now, D) = max(0, D - now)</span><br><span class="line">strict_admission: worst_case_service &lt; remaining</span><br></pre></td></tr></table></figure>
+
+<p>严格小于是为了保证服务最坏完成点仍早于 D。若 <code>worst_case_service == remaining</code>，理想无干扰模型也只能刚好落在 D，本文契约判定拒绝。排队、锁、总线与外设各重新给 100 ms 的做法称为 <strong>timeout reset</strong>：每层都局部没超时，端到端却可能用掉 400 ms。无关通知造成的 spurious wakeup 也有同样问题；等待循环若每次醒来重新使用原 timeout，外部持续扰动就能无限延后失败。</p>
+<p>下面是项目级 64 位 deadline 封装的核心形状。它不是 CMSIS 标准 API，也不是本次目标板已编译证据。<code>monotonic_ticks64()</code> 必须由一个能证明 epoch 捕获的服务实现；CMSIS 文档给出的简单高低字示例要求每个回绕周期内至少被调用足够次数，不能在系统睡过多个回绕后凭空恢复。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 目标固件设计骨架；需要项目错误码、锁和单调时钟实现。 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">uint32_t</span> request_id;</span><br><span class="line">    <span class="type">uint32_t</span> generation;</span><br><span class="line">    <span class="type">uint64_t</span> start;</span><br><span class="line">    <span class="type">uint64_t</span> deadline;</span><br><span class="line">} <span class="type">deadline_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">bool</span> <span class="title function_">deadline_open</span><span class="params">(<span class="type">deadline_t</span> *out, <span class="type">uint32_t</span> id,</span></span><br><span class="line"><span class="params">                          <span class="type">uint32_t</span> generation, <span class="type">uint64_t</span> now,</span></span><br><span class="line"><span class="params">                          <span class="type">uint64_t</span> budget)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (out == <span class="literal">NULL</span> || budget == <span class="number">0U</span> || budget &gt;= (UINT64_C(<span class="number">1</span>) &lt;&lt; <span class="number">31</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (now &gt; UINT64_MAX - budget) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    *out = (<span class="type">deadline_t</span>){ id, generation, now, now + budget };</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">bool</span> <span class="title function_">admit_strict</span><span class="params">(<span class="type">const</span> <span class="type">deadline_t</span> *d, <span class="type">uint64_t</span> now, <span class="type">uint64_t</span> wcet)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (d == <span class="literal">NULL</span> || d-&gt;deadline &lt; d-&gt;start || now &lt; d-&gt;start) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (now &gt;= d-&gt;deadline) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> wcet &lt; (d-&gt;deadline - now);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>真实并发系统还要把 <code>request_id + generation</code> 与队列项一起冻结。只传 deadline 数值，旧请求的迟到回调可能误完成一个恰好复用相同槽位的新请求。超时返回也只表示等待者停止等待，不证明 DMA、外设或远端事务已经 quiescent（不会继续访问）。取消协议必须另有“请求取消 → 硬件停止/确认 → 资源回收”闭环。</p>
+<h3 id="tickless-idle、低功耗与墙钟跳变"><a href="#tickless-idle、低功耗与墙钟跳变" class="headerlink" title="tickless idle、低功耗与墙钟跳变"></a>tickless idle、低功耗与墙钟跳变</h3><p><strong>tickless idle</strong> 是没有近期内核事件时停止周期 tick 中断，并安排一次更远的唤醒；它不是冻结逻辑时间。CMSIS 的 <code>osKernelSuspend()</code> 返回可睡 tick 数，<code>osKernelResume(sleep_ticks)</code> 用实际睡眠量推进内核。若低功耗计时器频率不准、宽度不足、唤醒延迟未计入，补偿值就会错。测试必须覆盖最长睡眠、定时器回绕、早醒和晚醒，而不是只测 WFI 一秒。</p>
+<p>DVFS（动态电压频率调整）会改变某些硬件 cycle 的频率；tick 是否保持 1 kHz 取决于定时器时钟域和 port 更新逻辑。Zephyr 文档要求运行期系统定时器频率变化时更新内核频率信息，并指出该全局模式不等于每核独立频率支持。因而“读 cycle 差再除以启动时频率”只在频率冻结或记录了每段转换时成立。</p>
+<p>墙钟回拨一小时不应让一个 80 ms 请求多活一小时；墙钟快进也不应把所有在途请求瞬间判死。正确数据流是：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">RTC/NTP/wall clock ──&gt; 日历触发、展示、跨设备日志关联</span><br><span class="line">monotonic/tick      ──&gt; timeout、deadline、退避、持续时间</span><br><span class="line">hardware timestamp ──&gt; 高速边沿/采样时刻（再校准到共同时间域）</span><br></pre></td></tr></table></figure>
+
+<p>跨设备 deadline 不能直接交换本地单调 tick，因为两个 epoch 与频率不同。要么在入口设备内保留预算并传相对“剩余上界”加网络误差预算，要么先建立有误差界的时钟同步，并把同步失效纳入拒绝条件。</p>
+<h3 id="本次已执行的确定性主机实验"><a href="#本次已执行的确定性主机实验" class="headerlink" title="本次已执行的确定性主机实验"></a>本次已执行的确定性主机实验</h3><p>实验文件为 <code>scripts/labs/rtos_timeout_deadline_fault_lab.py</code>。它用 64 位单调真值维护请求，用 32 位投影专门演示回绕；同时锁定相对/绝对周期、旧实例 deadline 与新实例 release 的独立等号语义、spurious notification 重置、单位 ceiling 与物理最短相位覆盖、半范围歧义、伪造 token、旧 generation 与墙钟回拨。它不模拟 RTX 调度器、SysTick、STM32 低功耗计时器，也不构成目标板 WCET 证据。</p>
+<p>准备条件只有仓库内该脚本与 Python 3.14.0。命令从仓库根目录执行；本次独立执行两遍并逐字节比较 stdout，二者退出码都为 0。完整稳定输出如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">$ python3 scripts/labs/rtos_timeout_deadline_fault_lab.py</span><br><span class="line">HOST_CONTRACT=rtos-time-v1 tick_bits=32 half_range=2147483648 strict_deadline=true</span><br><span class="line">WRAP start32=4294967288 deadline32=12 now32=5 remaining=7 naive_start_expired=true</span><br><span class="line">STRICT equality=EXPIRED remaining_one_wcet_one=REJECT</span><br><span class="line">PERIOD relative_starts=0,13,27,52 absolute_starts=0,10,20,40 skipped=1 strict_misses=1</span><br><span class="line">EQUALITY execution=10,1 starts=0,10 prior_strict_misses=1 release_equal_allowed=true skipped=0</span><br><span class="line">WAIT_LOOP absolute_end=100 reset_relative_end=190 spurious_notifications=3</span><br><span class="line">QUANTIZATION one_us=1ticks 1001us=2ticks physical_min_delay=2ticks,3ticks phase_margin=1tick oversized=REJECT</span><br><span class="line">PHASE tick_ns=1000000 phase_ns=999999 unit_delay_ns=1,1000001 minimum_delay_ns=1000001,2000001</span><br><span class="line">HOSTILE bool_delta=REJECT half_range=REJECT forged_token=REJECT stale_token=REJECT</span><br><span class="line">CLOCK wall_step=-3600 monotonic_elapsed=25 decision_source=MONOTONIC</span><br><span class="line">SUMMARY=PASS checks=9</span><br></pre></td></tr></table></figure>
+
+<p>通过标准不是“脚本能打印 PASS”，而是：两次输出完全相同；<code>now32=5</code> 时剩余量必须为 7；deadline 相等和“余 1、WCET 1”都必须拒绝；相对周期产生漂移而绝对周期记录一次跳过；<code>[10,1]</code> 必须允许时刻 10 的新 release 且只记录旧实例 miss；1 µs/1001 µs 的单位量化为 1/2 tick，而物理最短相对等待必须为 2/3 tick；当调用发生在距下一个 tick 仅 1 ns 的相位时，单位请求的实际延迟可短至 1 ns，而加一 tick 后分别至少为 1000001/2000001 ns；重置 timeout 的错误模型到 190 才结束；<code>bool</code>、半范围、非规范 token 与旧代次全部 fail closed。任何一项变化都视为回归失败。</p>
+<h3 id="目标板计划验证：把-API-保证落到示波器证据"><a href="#目标板计划验证：把-API-保证落到示波器证据" class="headerlink" title="目标板计划验证：把 API 保证落到示波器证据"></a>目标板计划验证：把 API 保证落到示波器证据</h3><p>本节是计划，尚未执行。准备 NUCLEO-H743ZI2、CMSIS-RTOS2/RTX5 工程、逻辑分析仪，并固定编译器、优化级别、tick 频率和低功耗时钟源。一个 GPIO 在定时器比较事件处翻转，另一个在采样任务真正进入时翻转；UART 只在低优先级日志任务输出，避免测量路径改变高优先级时序。</p>
+<p>步骤与判据：</p>
+<ol>
+<li>启动时打印 <code>osKernelGetInfo()</code>、<code>osKernelGetTickFreq()</code> 与构建哈希。若 tick 不等于 1000 Hz，停止测试，不能把脚本里的 1 tick 当 1 ms。</li>
+<li>让周期任务以 <code>osDelayUntil()</code> 运行十万轮，记录目标释放、GPIO 实际开始与完成。通过条件是相位误差不单调累积，开始/完成 jitter 的最大值落在已批准预算内。</li>
+<li>人工把 tick 初始状态或测试 hook 推到 <code>0xfffffff0</code> 附近，跨回绕执行周期与请求 deadline。通过条件是没有突然提前 timeout，且所有间隔小于 <code>2^31</code>。</li>
+<li>注入一次 15 ms 计算到 10 ms 周期，检查固件按约定跳过并递增 overrun 计数，而不是连续补跑或悄悄重定相；再注入恰好 10 ms，要求旧实例 strict miss，但新实例可在同一时刻 10 开始而不计 skip。</li>
+<li>在等待循环每 30 ms 注入无关通知。通过条件是从请求入口起 100 ms 到期，不得因三次通知延到 190 ms。</li>
+<li>进入最长允许 tickless idle，并用独立示波器/RTC 计量睡眠。通过条件是恢复后的 tick 与外部持续时间误差在晶振和唤醒预算内，过期 timer 不丢失。</li>
+<li>把 wall clock 回拨一小时。通过条件是请求 deadline 与周期相位均不受影响，只有带 UTC 的日志字段变化。</li>
+</ol>
+<p>只有这些目标证据完成，才能声称该板级 port 满足项目时序假设。主机实验只能证明应用契约在列出的离散案例中自洽。</p>
+<h3 id="故障注入与定位闭环"><a href="#故障注入与定位闭环" class="headerlink" title="故障注入与定位闭环"></a>故障注入与定位闭环</h3><p><strong>现象</strong>：设备运行约 49.7 天后，一进入请求处理就报 timeout；较短运行中看不到问题。</p>
+<p><strong>假设</strong>：应用把滚动的 <code>uint32_t now</code> 与 <code>deadline</code> 做普通大小比较，deadline 已跨回绕变小。备选假设包括 tickless 补偿丢 tick、墙钟校时和任务被高优先级线程饿死。</p>
+<p><strong>证据</strong>：记录请求入口的 64 位扩展时间、<code>now32</code>、<code>deadline32</code>、预算和错误分支。故障时看到 <code>start32=4294967288</code>、<code>deadline32=12</code>，普通表达式在入口已经认为 <code>4294967288 &gt;= 12</code>；同一时刻模前向距离为 20，主机 oracle 也复现 <code>naive_start_expired=true</code>。禁止只看一条“timeout”日志，因为它不能排除调度延迟。</p>
+<p><strong>定位</strong>：静态搜索所有 <code>now &gt;= deadline</code>、<code>deadline - now</code>、毫秒乘 tick 频率和每轮重置 timeout 的调用点；对每处标注使用的时间域、位宽、最大跨度和等号语义。确认问题发生在应用比较，而不是 RTX 的 <code>osDelayUntil()</code>。</p>
+<p><strong>修复</strong>：周期任务改用内核绝对周期 API；端到端请求在入口创建 64 位单调 deadline token；所有下游只计算剩余预算，严格相等视为过期；无法证明 epoch 或跨度时拒绝，而不是猜测。取消与硬件 quiescent 另建状态机。</p>
+<p><strong>回归</strong>：先执行本文主机脚本双跑；再跑目标板回绕、过载、spurious notification、tickless 与 wall-clock-step 测试。持续监控 <code>deadline_miss_total</code>、<code>overrun_total</code>、最大开始/完成 jitter、tickless 补偿误差以及最小剩余预算。若只有错误消失却没有覆盖回绕前后和相等边界，闭环仍未完成。</p>
+<h3 id="失效边界与工程收束"><a href="#失效边界与工程收束" class="headerlink" title="失效边界与工程收束"></a>失效边界与工程收束</h3><ul>
+<li>32 位半范围比较只覆盖已证明的小于 <code>2^31</code> 的单次窗口；跨多次回绕、掉电保存后的旧 tick、不同设备 epoch 都不成立。</li>
+<li>64 位计数器不是自动安全。读取若在 32 位 MCU 上会撕裂，需要内核提供原子快照或短临界区；高字扩展若错过完整回绕仍会别名。</li>
+<li>timeout 到期说明等待 API 返回失败，不说明被等待硬件停止。资源回收必须等 quiescent 证据。</li>
+<li><code>READY</code> 不等于 <code>RUNNING</code>，timer expiry 不等于任务完成。实时验收应测端到端完成点。</li>
+<li>tickless、DVFS、调试器暂停、深睡复位时钟都可能改变时间连续性；每种电源状态都要列入时钟契约。</li>
+<li><code>forever</code> 是特殊策略值，不应参与普通加减；0 是立即尝试、参数错误还是立即到期取决于 API。</li>
+<li>绝对 deadline 只能阻止预算被重置，不能凭空制造 CPU、总线或外设容量。准入仍需 WCET、阻塞和干扰上界。</li>
+</ul>
+<h3 id="练习与可判定答案"><a href="#练习与可判定答案" class="headerlink" title="练习与可判定答案"></a>练习与可判定答案</h3><ol>
+<li><strong>1 kHz、32 位 tick 多久回绕？为什么安全 horizon 不是 49.7 天？</strong> 回绕约 49.71 天；仅凭两个低 32 位端点判序的无歧义前向范围必须小于半圈，即约 24.85 天，并且不能漏掉完整回绕。</li>
+<li><strong>任务每轮计算 3 ms 后 <code>osDelay(10)</code>，周期是否为 10 ms？</strong> 否。忽略干扰也约为 13 ms，并持续漂移；应以绝对释放基准运行并定义 overrun 策略。</li>
+<li><strong>剩余 5 tick、服务 WCET 5 tick，在本文严格契约下能否准入？</strong> 不能。完成最早只能等于 deadline，而本文要求严格早于。</li>
+<li><strong>等待 100 ms，30/60/90 ms 收到无关通知；每次重新等待 100 ms 会怎样？</strong> 最终可拖到 190 ms。正确做法是入口冻结 deadline，每次只等待 remaining。</li>
+<li><strong>wall clock 回拨后是否应延长 SPI 请求 deadline？</strong> 不应。持续时间使用单调域；墙钟只影响日历/显示语义。</li>
+<li><strong>验收任务</strong>：修改主机脚本，让 <code>before_u32(0, 2^31)</code> 返回任意布尔而不是拒绝。测试必须失败，因为半圈方向无法由两个投影端点唯一确定。</li>
+<li><strong>目标板验收</strong>：在回绕前 16 tick 创建 20 tick deadline，要求入口不超时、回绕后第 13 tick 尚余 7、相等时过期；同时示波器证明周期相位不累计漂移。</li>
+<li><strong>1 kHz 下把 1 µs 向上量化为 1 tick，能否据此调用 <code>osDelay(1)</code> 保证至少 1 µs？</strong> 不能。调用可能紧邻 tick 边界；对任意相位的物理最短保证需 2 tick，或使用高分辨率硬件计时。</li>
+<li><strong>周期实例恰在 t=10 完成，deadline=10，下一实例 release=10，结果是什么？</strong> 旧实例在严格契约下 miss；新实例在 t=10 已可释放，不能因此误跳到 t=20。</li>
+</ol>
+<h3 id="官方一手来源"><a href="#官方一手来源" class="headerlink" title="官方一手来源"></a>官方一手来源</h3><ul>
+<li><a href="https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__Wait.html">Arm CMSIS-RTOS2 Generic Wait Functions：osDelay 与 osDelayUntil</a></li>
+<li><a href="https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__KernelCtrl.html">Arm CMSIS-RTOS2 Kernel Information and Control：tick、system timer 与 tickless</a></li>
+<li><a href="https://arm-software.github.io/CMSIS-RTX/latest/index.html">Arm CMSIS-RTX 5.9.1 Overview</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">Zephyr Project Kernel Timing</a></li>
+<li><a href="https://www.freertos.org/Documentation/02-Kernel/04-API-references/02-Task-control/02-vTaskDelayUntil">FreeRTOS vTaskDelayUntil API</a></li>
+<li><a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">ISO/IEC WG14 N1570 C11 委员会草案：整数转换与无符号算术</a></li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__Wait.html">Arm CMSIS-RTOS2 Generic Wait Functions：osDelay 与 osDelayUntil</a></li>
+<li><a href="https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__KernelCtrl.html">Arm CMSIS-RTOS2 Kernel Information and Control：tick、system timer 与 tickless</a></li>
+<li><a href="https://arm-software.github.io/CMSIS-RTX/latest/index.html">Arm CMSIS-RTX 5.9.1 Overview</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">Zephyr Project Kernel Timing</a></li>
+<li><a href="https://www.freertos.org/Documentation/02-Kernel/04-API-references/02-Task-control/02-vTaskDelayUntil">FreeRTOS vTaskDelayUntil API</a></li>
+<li><a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">ISO/IEC WG14 N1570 C11 委员会草案：整数转换与无符号算术</a></li>
+</ul>
+<hr>
+<h2 id="📖-IELTS-Academic-新词（0-个）"><a href="#📖-IELTS-Academic-新词（0-个）" class="headerlink" title="📖 IELTS Academic 新词（0 个）"></a>📖 IELTS Academic 新词（0 个）</h2><p>今天是计划复习日，不重复抽取新词。</p>
+<hr>
+<h2 id="🧩-周末整合复习"><a href="#🧩-周末整合复习" class="headerlink" title="🧩 周末整合复习"></a>🧩 周末整合复习</h2><p>本组词来自最近一周。先遮住释义回忆，再完成搭配填空、同义改写和 IELTS 主题造句。</p>
+<p><strong>ambiguous</strong>, <strong>overseas</strong>, <strong>prime</strong>, <strong>visible</strong>, <strong>apparent</strong>, <strong>classic</strong>, <strong>ensure</strong>, <strong>vision</strong>, <strong>convert</strong>, <strong>deviate</strong>, <strong>nuclear</strong>, <strong>style</strong>, <strong>assemble</strong>, <strong>incidence</strong>, <strong>modify</strong>, <strong>physical</strong>, <strong>energy</strong>, <strong>guarantee</strong>, <strong>interval</strong>, <strong>rely</strong></p>
+<ol>
+<li>选 5 个词口头解释，不看中文。</li>
+<li>选 3 个词各写一个正确搭配。</li>
+<li>至少用 2 个词改写同一句 IELTS 观点句。</li>
+<li>标记仍不熟的词，下周优先复习。</li>
+</ol>
+<hr>
+<h2 id="🔁-间隔复习"><a href="#🔁-间隔复习" class="headerlink" title="🔁 间隔复习"></a>🔁 间隔复习</h2><h3 id="Day-1-·-2026-11-20"><a href="#Day-1-·-2026-11-20" class="headerlink" title="Day+1 · 2026-11-20"></a>Day+1 · 2026-11-20</h3><p><strong>ambiguous</strong>, <strong>overseas</strong>, <strong>prime</strong>, <strong>visible</strong></p>
+<h3 id="Day-3-·-2026-11-18"><a href="#Day-3-·-2026-11-18" class="headerlink" title="Day+3 · 2026-11-18"></a>Day+3 · 2026-11-18</h3><p><strong>convert</strong>, <strong>deviate</strong>, <strong>nuclear</strong>, <strong>style</strong></p>
+<h3 id="Day-30-·-2026-10-22"><a href="#Day-30-·-2026-10-22" class="headerlink" title="Day+30 · 2026-10-22"></a>Day+30 · 2026-10-22</h3><p><strong>approximate</strong>, <strong>distort</strong>, <strong>inevitable</strong>, <strong>tense</strong></p>
+<hr>
+<p>词表依据：<a href="https://www.wgtn.ac.nz/lals/resources/academicwordlist">Coxhead Academic Word List</a>。</p>
+]]></content>
+      <categories>
+        <category>每日学习</category>
+      </categories>
+      <tags>
+        <tag>嵌入式</tag>
+        <tag>RTOS</tag>
+        <tag>英语</tag>
+        <tag>IELTS</tag>
+        <tag>AWL</tag>
+        <tag>tick</tag>
+        <tag>timeout</tag>
+        <tag>deadline</tag>
+      </tags>
+  </entry>
 </search>
